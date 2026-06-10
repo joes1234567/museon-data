@@ -264,7 +264,7 @@
 <body>
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v0.8</div>
+  <div class="hero-tag">系統規劃文件 v0.9</div>
   <h1>白老師國際語言中心<br><span>智慧營運系統</span>規劃</h1>
   <p class="hero-sub">從諮詢到結業，整合教務、財務、AI 輔助與 MUSEON 智能對接的五階段導入計畫</p>
   <div class="hero-meta">
@@ -564,7 +564,7 @@
         <span class="phase-subtitle">應運系統 API 串接 · 4 個模組</span>
       </div>
       <p style="font-size:13px; color:var(--slate); margin-bottom:18px;">
-        透過應運系統開放 API，MUSEON 智能助理可直接讀取四大業務模組資料，提供主管即時問答、異常預警與跨部門報告整合。<strong>資料仍由應運系統管理，MUSEON 負責讀取與智能分析。</strong>
+        透過應運系統開放專屬 API，MUSEON 智能助理可直接對四大業務模組進行<strong>讀取、新增、修改、查詢與軟刪除</strong>操作，提供主管即時問答、異常預警、跨部門報告整合與自動化行政執行。<strong>資料由應運系統管理，MUSEON 以服務帳號（MUSEON_SVC）串接，所有操作受權限取最小值機制約束，並留有操作日誌。</strong>
       </p>
       <div class="module-grid">
         <div class="module-card">
@@ -753,6 +753,8 @@
           <li>總務模組 API 串接</li>
           <li>客服模組 API 串接</li>
           <li>行銷模組 API 串接</li>
+          <li>系統操作（新增/修改/查詢/軟刪除）</li>
+          <li>權限取最小值控管機制</li>
           <li>跨模組智能問答</li>
           <li>異常預警自動通知</li>
         </ul>
@@ -766,7 +768,8 @@
           <li>AI 口說練習模組</li>
           <li>學習歷程摘要 AI</li>
           <li>行政資料檢查 AI</li>
-          <li>家長查詢 AI 助理</li>
+          <li>家長 App AI 個人化推播接通</li>
+          <li>出席異常 / 學習里程碑主動通報</li>
         </ul>
       </div>
     </div>
@@ -838,8 +841,8 @@
       <div class="pain-card">
         <div class="pain-icon pi-blue">🤝</div>
         <div>
-          <div class="pain-title">AI 初期只讀、不改</div>
-          <div class="pain-desc">先把資料做穩，AI 只用來摘要與輔助，不直接修改核心業務資料，確保安全。</div>
+          <div class="pain-title">AI 操作有邊界、有日誌</div>
+          <div class="pain-desc">Phase 4 起 MUSEON 可執行新增、修改、查詢、軟刪除，但受「權限取最小值」機制約束，高風險操作須人工確認，所有動作留有日誌，責任清楚可追溯。</div>
         </div>
       </div>
       <div class="pain-card">
@@ -855,7 +858,7 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.8</p>
+  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.9</p>
   <p style="margin-top: 8px;">本文件為系統規劃說明文件，供雙方確認業務範疇與導入方向。</p>
 </div>
 
