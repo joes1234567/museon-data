@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>擺渡人文蔬食料理 — 系統需求訪談會議記錄</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: #f5f5f0; color: #2c2c2c; line-height: 1.7; }
+  .container { max-width: 860px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); padding: 52px 60px; }
+  h1 { font-size: 1.7rem; font-weight: 700; color: #1a1a1a; border-bottom: 3px solid #4a7c59; padding-bottom: 14px; margin-bottom: 8px; }
+  .meta { font-size: 0.85rem; color: #666; margin-bottom: 36px; }
+  .meta span { margin-right: 20px; }
+  h2 { font-size: 1.1rem; font-weight: 700; color: #4a7c59; margin: 36px 0 14px; border-left: 4px solid #4a7c59; padding-left: 12px; }
+  h3 { font-size: 0.97rem; font-weight: 700; color: #2c2c2c; margin: 22px 0 10px; }
+  p { margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 20px; font-size: 0.9rem; }
+  th { background: #4a7c59; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
+  td { padding: 9px 12px; border-bottom: 1px solid #e8e8e3; }
+  tr:nth-child(even) td { background: #f8f8f5; }
+  .tag-done { color: #2e7d32; font-weight: 600; }
+  .tag-no { color: #c62828; font-weight: 600; }
+  .tag-wait { color: #e65100; font-weight: 600; }
+  blockquote { border-left: 3px solid #bbb; padding: 10px 16px; color: #555; font-style: italic; background: #fafaf7; margin: 14px 0; border-radius: 0 4px 4px 0; }
+  ul { padding-left: 22px; margin-bottom: 12px; }
+  li { margin-bottom: 6px; }
+  .risk-box { background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 16px 20px; margin: 14px 0; }
+  .risk-box h3 { color: #bf8000; margin-top: 0; }
+  .action-box { background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 6px; padding: 16px 20px; margin: 14px 0; }
+  .action-box h3 { color: #2e7d32; margin-top: 0; }
+  .speech-box { background: #f3f3f3; border-radius: 6px; padding: 14px 18px; font-size: 0.92rem; color: #444; border: 1px solid #ddd; margin: 10px 0; }
+  hr { border: none; border-top: 1px solid #e8e8e3; margin: 28px 0; }
+  .footer { font-size: 0.78rem; color: #aaa; text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #eee; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>擺渡人文蔬食料理 — 系統需求訪談會議記錄</h1>
+  <div class="meta">
+    <span>📅 日期：2026-06-10</span>
+    <span>👥 參與者：J（四維，系統顧問）、云亭（餐廳管理員）</span>
+    <span>📝 記錄形式：語音轉寫整理</span>
+  </div>
+
+  <h2>一、會議背景</h2>
+  <p>徐主任（餐廳老闆）透過白老師補習班系統合作，提出希望導入餐廳系統的需求。J 代表四維公司與云亭進行需求訪談，釐清實際狀況與可行範疇。</p>
+
+  <h2>二、現況確認</h2>
+  <table>
+    <thead><tr><th>項目</th><th>現況</th></tr></thead>
+    <tbody>
+      <tr><td>現有 POS 系統</td><td>ICF（已使用數年，員工熟悉，1 個月可上手）</td></tr>
+      <tr><td>月費支出</td><td>約 NT$3,000+；含 LINE Pay/刷卡約 NT$6,000/月</td></tr>
+      <tr><td>帳務處理</td><td>全人工，半個月處理一次，月結報表給股東</td></tr>
+      <tr><td>排班方式</td><td>外場 Excel、內場手寫，ICF 有打卡功能</td></tr>
+      <tr><td>進銷存</td><td>無系統，食材成本全人工計算，誤差高</td></tr>
+      <tr><td>行銷</td><td>已有專職人員負責拍片發文</td></tr>
+      <tr><td>新店規劃</td><td>預計 11 月遷入新地點（1F 兩個店面 + 2F 宴會廳 + 3F 另一部門）</td></tr>
+    </tbody>
+  </table>
+
+  <h3>部門結構（新地點）</h3>
+  <ul>
+    <li>1F：餐廳 + 吉拿棒（兩台 POS 分開結帳）</li>
+    <li>2F：宴會廳</li>
+    <li>3F：枋寮（業態待確認）</li>
+  </ul>
+
+  <h2>三、核心討論與共識</h2>
+
+  <h3>3.1 徐主任原始需求 vs 實際可行性</h3>
+  <table>
+    <thead><tr><th>主任提出的需求</th><th>云亭評估</th><th>結論</th></tr></thead>
+    <tbody>
+      <tr><td>全面取代 ICF（點餐 + 後台）</td><td>高風險，開店期同時換系統 = 天下大亂</td><td><span class="tag-no">不建議，v1 不做</span></td></tr>
+      <tr><td>導入 AI 數位員工</td><td>單店規模，工讀生即可替代，ROI 不足</td><td><span class="tag-wait">暫緩，多店後再評估</span></td></tr>
+      <tr><td>送餐機器人</td><td>動線不符，與人文禪風定位違和</td><td><span class="tag-no">不建議</span></td></tr>
+      <tr><td>後台會計優化</td><td>明確痛點，人工作帳耗時且誤差多</td><td><span class="tag-done">✅ v1 優先做</span></td></tr>
+      <tr><td>進銷存 / 食材成本計算</td><td>明確痛點，目前完全沒有系統</td><td><span class="tag-done">✅ v1 優先做</span></td></tr>
+      <tr><td>排班電子化</td><td>現況散落 Excel + 手寫，整合需求明確</td><td><span class="tag-done">✅ v1 優先做</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>3.2 雙方共識結論</h3>
+  <ol style="padding-left:22px; margin-bottom:12px;">
+    <li style="margin-bottom:6px;"><strong>v1 範圍</strong>：後台管理系統（會計 + 進銷存 + 排班），<strong>不動 ICF</strong></li>
+    <li style="margin-bottom:6px;"><strong>資料橋接方式</strong>：從 ICF 匯出 CSV 後手動上傳，不串 API</li>
+    <li style="margin-bottom:6px;"><strong>部門分帳</strong>：餐廳 / 吉拿棒 / 宴會廳各自獨立損益</li>
+    <li style="margin-bottom:6px;"><strong>AI 數位員工</strong>：系統建置後期才評估，不在 v1 範圍</li>
+    <li style="margin-bottom:6px;"><strong>導入策略</strong>：先穩定內部（後台系統），再評估對外（線上點餐/訂位）</li>
+  </ol>
+
+  <h3>3.3 主要操作者</h3>
+  <p><strong>云亭</strong>——店內所有電腦相關事務唯一負責人，系統主要操作者。</p>
+
+  <h2>四、風險提示</h2>
+  <div class="risk-box">
+    <h3>⚠️ 云亭特別要求納入報告</h3>
+    <blockquote>主任是視覺型決策者，單純介紹功能他會覺得「看起來都很棒為什麼不用」，需要清楚的風險對比才能讓他理解不可行性。</blockquote>
+    <h3 style="margin-top:14px;">主要風險點</h3>
+    <ul>
+      <li>11 月前換地點＋換系統＋員工學習 = 三重壓力</li>
+      <li>客製系統買斷後仍有第三方服務月費（如支付、掃碼點餐），未必比 ICF 便宜</li>
+      <li>ICF 已有數年資料，移轉需驗證，有資料風險</li>
+      <li>餐廳員工電腦程度偏低，學習新系統需時間</li>
+    </ul>
+  </div>
+
+  <h2>五、行動項目</h2>
+  <div class="action-box">
+    <table style="margin:0;">
+      <thead><tr><th>項目</th><th>負責人</th><th>時間</th></tr></thead>
+      <tbody>
+        <tr><td>產出系統規劃報告（含風險評估、費用估算）</td><td>J（四維）</td><td>禮拜日前</td></tr>
+        <tr><td>報告先交云亭，不直接給徐主任</td><td>J</td><td>—</td></tr>
+        <tr><td>云亭與店長內部對齊口徑後，再呈報主任</td><td>云亭 + 店長</td><td>—</td></tr>
+        <tr><td>週五遇到徐主任時的回應口徑</td><td>J</td><td>禮拜五</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>週五遇到徐主任的標準回應</h3>
+  <div class="speech-box">
+    「餐廳系統比較複雜，正在整理相關資訊和評估，過幾天會提供給餐廳那邊。」
+  </div>
+
+  <h2>六、後續評估項目（v2）</h2>
+  <ul>
+    <li>ICF 加購線上掃碼點餐、線上訂位功能（成本較低，不需客製）</li>
+    <li>新店穩定 6 個月後，重新評估是否需要取代 ICF</li>
+    <li>多店擴張時再評估 AI 數位員工的導入必要性</li>
+  </ul>
+
+  <hr>
+  <p style="font-size:0.88rem; color:#666;">完整系統架構文件請參閱：<strong>arch_擺渡人文蔬食料理_20260611.html</strong></p>
+
+  <div class="footer">本記錄依語音逐字稿整理，關鍵決策已與原文對齊。</div>
+</div>
+</body>
+</html>
