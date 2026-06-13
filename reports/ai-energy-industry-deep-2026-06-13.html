@@ -6,19 +6,19 @@
 <title>AI × 能源產業深度分析 — 2026-06-13</title>
 <style>
   :root {
-    --bg: #0e1117;
-    --surface: #161b27;
-    --surface2: #1e2535;
-    --border: #2a3347;
-    --accent: #3b82f6;
-    --accent2: #6366f1;
-    --accent3: #10b981;
-    --warn: #f59e0b;
-    --danger: #ef4444;
-    --text: #e2e8f0;
-    --text-dim: #94a3b8;
-    --text-muted: #64748b;
-    --chain-color: #3b82f6;
+    --bg: #f5f7ff;
+    --surface: #ffffff;
+    --surface2: #f0f4ff;
+    --border: #dde3f0;
+    --accent: #4f72f5;
+    --accent2: #7c3aed;
+    --accent3: #059669;
+    --warn: #d97706;
+    --danger: #dc2626;
+    --text: #1e293b;
+    --text-dim: #475569;
+    --text-muted: #94a3b8;
+    --chain-color: #4f72f5;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,14 +27,14 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'SF Pro Text', -apple-system, 'Noto Sans TC', sans-serif;
-    font-size: 15px;
-    line-height: 1.75;
+    font-size: 17px;
+    line-height: 1.8;
     padding: 0;
   }
 
   /* ── Header ── */
   .hero {
-    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+    background: linear-gradient(135deg, #eef2ff 0%, #f5f0ff 50%, #eef2ff 100%);
     border-bottom: 1px solid var(--border);
     padding: 56px 40px 40px;
     text-align: center;
@@ -44,32 +44,33 @@
   .hero::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%);
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,0.08) 0%, transparent 70%);
   }
   .hero-tag {
     display: inline-block;
-    background: rgba(99,102,241,0.2);
-    border: 1px solid rgba(99,102,241,0.4);
-    color: #a5b4fc;
-    font-size: 12px;
+    background: rgba(79,114,245,0.12);
+    border: 1px solid rgba(79,114,245,0.35);
+    color: #4f72f5;
+    font-size: 13px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 4px 14px;
+    padding: 5px 16px;
     border-radius: 20px;
     margin-bottom: 20px;
     position: relative;
+    font-weight: 600;
   }
   .hero h1 {
-    font-size: 32px;
+    font-size: 38px;
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: #f1f5f9;
-    margin-bottom: 12px;
+    color: #1e1b4b;
+    margin-bottom: 14px;
     position: relative;
   }
   .hero-sub {
     color: var(--text-dim);
-    font-size: 15px;
+    font-size: 17px;
     position: relative;
   }
   .hero-meta {
@@ -83,12 +84,12 @@
     text-align: center;
   }
   .hero-meta-item .num {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
-    color: #a5b4fc;
+    color: #4f72f5;
   }
   .hero-meta-item .label {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -119,12 +120,12 @@
     flex-shrink: 0;
   }
   .section-title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
-    color: #f1f5f9;
+    color: #1e1b4b;
   }
   .section-sub {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
     margin-top: 2px;
   }
@@ -133,12 +134,13 @@
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
+    border-radius: 14px;
+    padding: 26px;
     margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(79,114,245,0.06);
   }
   .card-title {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--text-dim);
     text-transform: uppercase;
@@ -196,12 +198,12 @@
     margin-bottom: 4px;
   }
   .chain-step-content {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--text);
-    font-weight: 500;
+    font-weight: 600;
   }
   .chain-step-desc {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--text-dim);
     margin-top: 4px;
   }
@@ -221,44 +223,44 @@
 
   /* ── Insight box ── */
   .insight {
-    background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(59,130,246,0.08));
-    border: 1px solid rgba(99,102,241,0.3);
-    border-radius: 10px;
-    padding: 18px 20px;
+    background: linear-gradient(135deg, rgba(79,114,245,0.07), rgba(124,58,237,0.05));
+    border: 1px solid rgba(79,114,245,0.25);
+    border-radius: 12px;
+    padding: 20px 24px;
     margin: 20px 0;
   }
   .insight-label {
-    font-size: 11px;
-    color: #a5b4fc;
+    font-size: 12px;
+    color: #4f72f5;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .insight p {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.8;
   }
 
   /* ── Warning box ── */
   .warn-box {
-    background: rgba(245,158,11,0.1);
-    border: 1px solid rgba(245,158,11,0.3);
-    border-radius: 10px;
-    padding: 16px 20px;
+    background: rgba(217,119,6,0.07);
+    border: 1px solid rgba(217,119,6,0.25);
+    border-radius: 12px;
+    padding: 18px 22px;
     margin: 16px 0;
   }
   .warn-box .warn-label {
-    font-size: 11px;
-    color: #fbbf24;
+    font-size: 12px;
+    color: #d97706;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .warn-box p {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--text-dim);
   }
 
@@ -266,28 +268,29 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 15px;
     margin: 16px 0;
   }
   th {
     background: var(--surface2);
     color: var(--text-dim);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    padding: 10px 14px;
+    padding: 12px 16px;
     text-align: left;
     border-bottom: 1px solid var(--border);
   }
   td {
-    padding: 10px 14px;
-    border-bottom: 1px solid rgba(42,51,71,0.5);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
     color: var(--text);
     vertical-align: top;
+    font-size: 15px;
   }
   tr:last-child td { border-bottom: none; }
-  tr:hover td { background: rgba(255,255,255,0.02); }
+  tr:hover td { background: rgba(79,114,245,0.04); }
 
   /* ── Grids ── */
   .two-col {
@@ -307,23 +310,24 @@
     font-weight: 600;
     white-space: nowrap;
   }
-  .badge-red { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
-  .badge-yellow { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
-  .badge-green { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
-  .badge-blue { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+  .badge-red { background: rgba(220,38,38,0.1); color: #dc2626; border: 1px solid rgba(220,38,38,0.25); }
+  .badge-yellow { background: rgba(217,119,6,0.1); color: #d97706; border: 1px solid rgba(217,119,6,0.25); }
+  .badge-green { background: rgba(5,150,105,0.1); color: #059669; border: 1px solid rgba(5,150,105,0.25); }
+  .badge-blue { background: rgba(79,114,245,0.1); color: #4f72f5; border: 1px solid rgba(79,114,245,0.25); }
 
   /* ── Synthesis section ── */
   .synthesis {
-    background: linear-gradient(135deg, #0f172a, #1e1b4b);
-    border: 1px solid rgba(99,102,241,0.3);
+    background: linear-gradient(135deg, #eef2ff, #f5f0ff);
+    border: 1px solid rgba(124,58,237,0.2);
     border-radius: 16px;
     padding: 32px;
     margin: 40px 0;
+    box-shadow: 0 4px 16px rgba(124,58,237,0.08);
   }
   .synthesis-title {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
-    color: #c7d2fe;
+    color: #4c1d95;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -358,12 +362,12 @@
   }
   .action-body strong {
     display: block;
-    font-size: 14px;
-    color: #f1f5f9;
+    font-size: 16px;
+    color: var(--text);
     margin-bottom: 4px;
   }
   .action-body span {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--text-dim);
   }
 
@@ -378,41 +382,43 @@
   .toc {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
+    border-radius: 14px;
+    padding: 22px 26px;
     margin: 32px 0;
+    box-shadow: 0 2px 8px rgba(79,114,245,0.05);
   }
   .toc-title {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   .toc a {
     display: block;
     color: var(--accent);
     text-decoration: none;
-    font-size: 14px;
-    padding: 5px 0;
-    border-bottom: 1px solid rgba(42,51,71,0.5);
+    font-size: 16px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
   }
   .toc a:last-child { border-bottom: none; }
-  .toc a:hover { color: #93c5fd; }
+  .toc a:hover { color: #7c3aed; }
 
   /* ── P ── */
-  p { margin-bottom: 12px; font-size: 14px; }
+  p { margin-bottom: 14px; font-size: 16px; }
   p:last-child { margin-bottom: 0; }
-  strong { color: #f1f5f9; }
+  strong { color: #1e1b4b; }
 
   /* ── Footer ── */
   .footer {
     border-top: 1px solid var(--border);
-    padding: 24px;
+    padding: 28px;
     text-align: center;
     color: var(--text-muted);
-    font-size: 12px;
+    font-size: 14px;
+    background: var(--surface);
   }
 </style>
 </head>
