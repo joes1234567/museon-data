@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保險業務員管理系統 — 智慧基本功訓練與紅綠燈追蹤系統規劃</title>
+<style>
+  :root {
+    --blue: #1a4a8a;
+    --blue-light: #2d6abf;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --ink: #0f1a2a;
+    --slate: #4A5A6E;
+    --mist: #8898A8;
+    --border: #DCE2EA;
+    --parchment: #F5F7FA;
+    --snow: #FBFCFE;
+    --success: #2D8A6E;
+    --warning: #B8923A;
+    --danger: #C4402A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #071628 0%, #0d2a4a 55%, #1a3a6a 100%);
+    color: #fff;
+    padding: 64px 40px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,74,138,0.35) 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 50%, rgba(42,122,110,0.15) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(45,106,191,0.28);
+    border: 1px solid rgba(45,106,191,0.55);
+    color: #7ab0f0;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .hero h1 span { color: #7ab0f0; }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.58);
+    position: relative;
+    max-width: 560px;
+    margin: 0 auto 36px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .hero-meta-num { font-size: 30px; font-weight: 700; color: #7ab0f0; }
+  .hero-meta-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+  /* LAYOUT */
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--blue-light); font-weight: 600; margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(21px, 3vw, 29px); font-weight: 700;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.3;
+  }
+  .section-desc {
+    color: var(--slate); font-size: 15px; max-width: 600px; margin-bottom: 40px;
+  }
+
+  /* PAIN POINTS */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .pain-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+  .pain-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+  .pain-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pi-red { background: #FEF0EC; }
+  .pi-orange { background: #FFF5E6; }
+  .pi-blue { background: #EBF1FB; }
+  .pain-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--ink); }
+  .pain-desc { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+  /* FLOW */
+  .flow-wrapper {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px 28px; overflow-x: auto;
+  }
+  .flow-row {
+    display: flex; align-items: center; gap: 0;
+    flex-wrap: nowrap; min-width: 760px;
+  }
+  .flow-step {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; flex: 1; min-width: 76px;
+  }
+  .flow-circle {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .flow-step-label { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.4; }
+  .flow-arrow { color: var(--mist); font-size: 16px; flex-shrink: 0; padding: 0 2px; margin-bottom: 22px; }
+
+  .bg-blue  { background: #EBF1FB; }
+  .bg-teal  { background: #E6F4F2; }
+  .bg-green { background: #E8F5F0; }
+  .bg-gold  { background: #FBF4E6; }
+  .bg-ember { background: #FEF0EC; }
+  .bg-purple { background: #F0EBF8; }
+  .bg-red   { background: #FDEAEA; }
+
+  /* ROLE CARDS */
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    margin-bottom: 40px;
+  }
+  .role-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 14px; padding: 26px;
+  }
+  .role-badge {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 3px 12px; border-radius: 12px; margin-bottom: 14px;
+  }
+  .rb-agent  { background: #EBF1FB; color: #1a4a8a; border: 1px solid #b8d0f0; }
+  .rb-mgr    { background: #E8F5F0; color: #2D8A6E; border: 1px solid #b2ddd4; }
+  .rb-admin  { background: #FBF4E6; color: #B8923A; border: 1px solid #dfc990; }
+  .role-name { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .role-desc { font-size: 13px; color: var(--slate); margin-bottom: 14px; }
+  .role-features { list-style: none; }
+  .role-features li {
+    font-size: 13px; color: var(--slate); padding: 4px 0;
+    display: flex; gap: 8px; align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+  }
+  .role-features li:last-child { border-bottom: none; }
+  .role-features li::before { content: '✓'; color: var(--success); font-weight: 700; flex-shrink: 0; }
+
+  /* PHASES */
+  .phase-block { margin-bottom: 44px; }
+  .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .phase-badge {
+    padding: 4px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  }
+  .pb-1 { background: #E8F5F0; color: #2D8A6E; border: 1px solid #b2ddd4; }
+  .pb-2 { background: #EBF1FB; color: #1a4a8a; border: 1px solid #b8d0f0; }
+  .pb-3 { background: #FBF4E6; color: #B8923A; border: 1px solid #dfc990; }
+  .phase-title { font-size: 17px; font-weight: 700; color: var(--ink); }
+  .phase-subtitle { font-size: 13px; color: var(--mist); margin-left: auto; }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+  }
+  .module-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px;
+  }
+  .module-num { font-size: 10px; font-weight: 700; color: var(--mist); margin-bottom: 5px; letter-spacing: 1px; }
+  .module-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .module-desc { font-size: 12px; color: var(--slate); line-height: 1.6; }
+  .module-tag {
+    display: inline-block; font-size: 10px; padding: 2px 8px;
+    border-radius: 10px; margin-top: 10px; font-weight: 600;
+  }
+  .t-core   { background: #E8F5F0; color: #2D8A6E; }
+  .t-data   { background: #EBF1FB; color: #1a4a8a; }
+  .t-mgr    { background: #FBF4E6; color: #B8923A; }
+  .t-ai     { background: #F0EBF8; color: #6A4A9A; }
+  .t-notify { background: #FEF0EC; color: #C4402A; }
+
+  /* TRAFFIC LIGHT DEMO */
+  .traffic-demo {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px; margin-bottom: 24px;
+  }
+  .traffic-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .traffic-item {
+    flex: 1; min-width: 160px; background: var(--parchment);
+    border-radius: 12px; padding: 20px 18px; text-align: center;
+    border: 2px solid var(--border);
+  }
+  .ti-green  { border-color: #2D8A6E; background: #E8F5F0; }
+  .ti-yellow { border-color: #B8923A; background: #FBF4E6; }
+  .ti-red    { border-color: #C4402A; background: #FEF0EC; }
+  .traffic-dot {
+    width: 32px; height: 32px; border-radius: 50%;
+    margin: 0 auto 10px;
+  }
+  .td-green  { background: #2D8A6E; }
+  .td-yellow { background: #B8923A; }
+  .td-red    { background: #C4402A; }
+  .traffic-label { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .traffic-range { font-size: 12px; color: var(--slate); }
+  .traffic-desc  { font-size: 12px; color: var(--slate); margin-top: 6px; }
+
+  /* ROADMAP */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+  }
+  .roadmap-phase { padding: 28px 22px; border-right: 1px solid var(--border); }
+  .roadmap-phase:last-child { border-right: none; }
+  .rp-active   { background: linear-gradient(135deg, #E8F5F0 0%, #F4FAF8 100%); }
+  .rp-upcoming { background: var(--snow); }
+  .rp-future   { background: var(--parchment); }
+  .roadmap-phase-num { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+  .rp-active   .roadmap-phase-num { color: #2D8A6E; }
+  .rp-upcoming .roadmap-phase-num { color: #1a4a8a; }
+  .rp-future   .roadmap-phase-num { color: var(--gold); }
+  .roadmap-phase-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .roadmap-period { font-size: 12px; color: var(--mist); margin-bottom: 16px; }
+  .roadmap-items { list-style: none; }
+  .roadmap-items li {
+    font-size: 13px; color: var(--slate); padding: 4px 0;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .roadmap-items li::before { content: '✓'; color: #2D8A6E; font-weight: 700; flex-shrink: 0; }
+  .rp-upcoming .roadmap-items li::before { content: '○'; color: #1a4a8a; }
+  .rp-future   .roadmap-items li::before { content: '◇'; color: var(--gold); }
+
+  /* VALUE */
+  .value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .value-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 26px 20px; text-align: center;
+  }
+  .value-icon { font-size: 26px; margin-bottom: 10px; }
+  .value-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .value-text { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+  /* PRICING */
+  .price-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .price-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px 22px;
+  }
+  .price-card.featured {
+    border-color: var(--blue-light);
+    box-shadow: 0 4px 20px rgba(26,74,138,0.12);
+  }
+  .price-phase { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--mist); text-transform: uppercase; margin-bottom: 8px; }
+  .price-title { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .price-amount { font-size: 28px; font-weight: 700; color: var(--blue-light); margin: 12px 0 4px; }
+  .price-period { font-size: 12px; color: var(--mist); margin-bottom: 16px; }
+  .price-items { list-style: none; }
+  .price-items li {
+    font-size: 13px; color: var(--slate); padding: 5px 0;
+    display: flex; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .price-items li:last-child { border-bottom: none; }
+  .price-items li::before { content: '·'; color: var(--blue-light); font-weight: 700; flex-shrink: 0; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 32px 24px; font-size: 13px;
+  }
+  .footer strong { color: rgba(255,255,255,0.75); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 20px; }
+    section { padding: 40px 0; }
+    .hero-meta { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">系統規劃提案 v1.0 · 2026-06-13</div>
+  <h1>保險業務員<br><span>基本功訓練與績效追蹤</span>管理系統</h1>
+  <p class="hero-sub">從每日回報到 FYC 追蹤，以紅綠燈計分機制驅動業務成長，打造主管看得懂、業務員做得到的數位管理系統</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">9</span>
+      <span class="hero-meta-label">核心模組</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">3</span>
+      <span class="hero-meta-label">用戶角色</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">30–40</span>
+      <span class="hero-meta-label">使用人數</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">3</span>
+      <span class="hero-meta-label">開發階段</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="container">
+    <div class="section-label">現況痛點</div>
+    <h2 class="section-title">傳統管理方式的五大問題</h2>
+    <p class="section-desc">業務員的基本功訓練缺乏數位化紀錄，主管無法即時掌握每位業務員的執行狀況，問題往往在月底才浮現。</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon pi-red">📋</div>
+        <div>
+          <div class="pain-title">每日回報靠人工</div>
+          <div class="pain-desc">業務員每天的拜訪、電話、開發等基本功全靠紙本或 LINE 回報，資料零散、查詢困難、無法匯總。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-red">📊</div>
+        <div>
+          <div class="pain-title">績效判斷主觀</div>
+          <div class="pain-desc">主管評估業務員表現缺乏客觀數據，難以公平判斷誰在認真執行基本功、誰只是在說說而已。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">⏰</div>
+        <div>
+          <div class="pain-title">主管審核耗時</div>
+          <div class="pain-desc">主管每天要逐一確認業務員提交的回報，既費時又容易漏看，問題發現時已是一週後。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">🎯</div>
+        <div>
+          <div class="pain-title">FYC 目標難追蹤</div>
+          <div class="pain-desc">每位業務員的 FYC（首年佣金）達成率缺乏系統化追蹤，季末才發現有人嚴重落後已來不及輔導。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">📷</div>
+        <div>
+          <div class="pain-title">憑證難以存查</div>
+          <div class="pain-desc">業務員的實際行動（拜訪照片、活動簽到等）無處上傳，主管無法驗證執行品質，稽核困難。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">📈</div>
+        <div>
+          <div class="pain-title">趨勢看不見</div>
+          <div class="pain-desc">缺乏歷史數據分析，不知道哪個月業績好是因為季節因素還是基本功確實做到位，難以複製成功。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAILY FLOW -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">每日業務流程</div>
+    <h2 class="section-title">業務員一天的數位閉環</h2>
+    <p class="section-desc">從早上任務確認到晚上主管審核，每個環節都在系統內完成，全程留下數位足跡。</p>
+    <div class="flow-wrapper">
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">📋</div>
+          <div class="flow-step-label">查看<br>今日任務</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-teal">🚀</div>
+          <div class="flow-step-label">執行<br>基本功</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-green">📷</div>
+          <div class="flow-step-label">上傳<br>憑證照片</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-gold">📝</div>
+          <div class="flow-step-label">填寫<br>每日回報</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-purple">🚦</div>
+          <div class="flow-step-label">系統<br>計分更新</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-ember">👀</div>
+          <div class="flow-step-label">主管<br>審核確認</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">📊</div>
+          <div class="flow-step-label">週報<br>FYC 進度</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAFFIC LIGHT -->
+<section>
+  <div class="container">
+    <div class="section-label">核心機制</div>
+    <h2 class="section-title">紅綠燈計分機制</h2>
+    <p class="section-desc">以客觀數據驅動的三色績效評估，讓每位業務員清楚知道自己的狀態，主管一眼看出誰需要協助。</p>
+    <div class="traffic-demo">
+      <div class="traffic-row">
+        <div class="traffic-item ti-green">
+          <div class="traffic-dot td-green"></div>
+          <div class="traffic-label">綠燈</div>
+          <div class="traffic-range">達標 80% 以上</div>
+          <div class="traffic-desc">基本功執行到位，持續保持，主管無需介入</div>
+        </div>
+        <div class="traffic-item ti-yellow">
+          <div class="traffic-dot td-yellow"></div>
+          <div class="traffic-label">黃燈</div>
+          <div class="traffic-range">達標 50–79%</div>
+          <div class="traffic-desc">注意執行落差，主管啟動關懷對話，協助找出卡點</div>
+        </div>
+        <div class="traffic-item ti-red">
+          <div class="traffic-dot td-red"></div>
+          <div class="traffic-label">紅燈</div>
+          <div class="traffic-range">達標 50% 以下</div>
+          <div class="traffic-desc">需立即輔導介入，列入本週重點追蹤名單</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:var(--slate);">
+      計分依據：每日回報完成率 × 任務類型權重（拜訪 / 電話 / 送件 / 活動）× 照片憑證上傳率，加權計算後每日自動更新。
+    </p>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">角色與權限</div>
+    <h2 class="section-title">三種使用者角色，各司其職</h2>
+    <p class="section-desc">依職責設計操作介面與資料可見範圍，業務員看自己的，主管看全團隊，管理員管系統設定。</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <span class="role-badge rb-agent">業務員</span>
+        <div class="role-name">保險業務員</div>
+        <div class="role-desc">日常使用者，手機優先，操作簡單直覺</div>
+        <ul class="role-features">
+          <li>查看今日任務清單與執行重點</li>
+          <li>填寫每日基本功回報表單</li>
+          <li>上傳拜訪照片與憑證</li>
+          <li>查看個人紅綠燈分數與趨勢</li>
+          <li>查看個人 FYC 進度與目標差距</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <span class="role-badge rb-mgr">主管</span>
+        <div class="role-name">業務主管</div>
+        <div class="role-desc">監控全團隊，一鍵審核，數據驅動輔導</div>
+        <ul class="role-features">
+          <li>全團隊紅綠燈狀態總覽</li>
+          <li>審核業務員每日回報</li>
+          <li>設定每週任務目標與標準</li>
+          <li>查看個別業務員詳細紀錄</li>
+          <li>匯出週報 / 月報至 Excel</li>
+          <li>FYC 全團隊達成率追蹤</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <span class="role-badge rb-admin">管理員</span>
+        <div class="role-name">系統管理員</div>
+        <div class="role-desc">系統設定與維護，權限最高</div>
+        <ul class="role-features">
+          <li>新增 / 停用帳號</li>
+          <li>設定計分規則與任務類型</li>
+          <li>查看完整稽核日誌</li>
+          <li>管理系統參數與通知設定</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section>
+  <div class="container">
+    <div class="section-label">系統模組架構</div>
+    <h2 class="section-title">9 個核心模組，分三階段導入</h2>
+    <p class="section-desc">v1 先建立完整運作核心，v2 加入 LINE 通知自動化，v3 開通趨勢分析智能功能。每階段上線即可獨立運作。</p>
+
+    <!-- v1 -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-badge pb-1">v1 核心版</span>
+        <span class="phase-title">業務管理全循環</span>
+        <span class="phase-subtitle">第 1–8 週上線 · 9 個模組</span>
+      </div>
+      <p style="font-size:13px; color:var(--slate); margin-bottom:18px;">
+        Web 系統，手機優先設計，適配 iOS / Android 瀏覽器。純 Web，無需下載 App，掃碼即可使用。
+      </p>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-num">MOD 01</div>
+          <div class="module-name">帳號與權限管理</div>
+          <div class="module-desc">三角色權限體系（業務員 / 主管 / 管理員），各自資料可見範圍精細控管，操作全程留痕。</div>
+          <span class="module-tag t-core">核心基礎</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 02</div>
+          <div class="module-name">任務設定系統</div>
+          <div class="module-desc">主管設定每週基本功任務類型（拜訪件數、電話量、送件數等）與達標標準，自動分派給業務員。</div>
+          <span class="module-tag t-mgr">主管設定</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 03</div>
+          <div class="module-name">每日回報系統</div>
+          <div class="module-desc">業務員手機填寫每日執行回報，支援照片上傳（拜訪 / 活動 / 送件憑證），格式化儲存便於後續分析。</div>
+          <span class="module-tag t-core">核心功能</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 04</div>
+          <div class="module-name">紅綠燈計分引擎</div>
+          <div class="module-desc">根據任務完成率 × 類型權重自動計算三色狀態，每日更新，主管與業務員即時可見。</div>
+          <span class="module-tag t-data">智能評分</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 05</div>
+          <div class="module-name">主管審核流程</div>
+          <div class="module-desc">主管批量審核每日回報，可標注、退回補充或通過，支援批次操作節省審核時間。</div>
+          <span class="module-tag t-mgr">主管工具</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 06</div>
+          <div class="module-name">每週檢核系統</div>
+          <div class="module-desc">每週自動生成個人基本功週報，支援主管與業務員 1on1 教練對話使用，週績效歷史留存。</div>
+          <span class="module-tag t-mgr">管理工具</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 07</div>
+          <div class="module-name">FYC 追蹤系統</div>
+          <div class="module-desc">設定年度 FYC 目標，系統自動計算達成率、差距值與預估完成時間，每週更新進度。</div>
+          <span class="module-tag t-data">業績追蹤</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 08</div>
+          <div class="module-name">報表與 Excel 匯出</div>
+          <div class="module-desc">個人週報 / 月報、全團隊績效報表，一鍵匯出標準格式 Excel，供主管用於上級呈報。</div>
+          <span class="module-tag t-data">資料匯出</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 09</div>
+          <div class="module-name">稽核紀錄</div>
+          <div class="module-desc">所有帳號操作、資料修改、回報提交全程記錄時間戳與操作人，系統管理員可查閱完整歷程。</div>
+          <span class="module-tag t-core">合規稽核</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- v2 -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-badge pb-2">v2 通知版</span>
+        <span class="phase-title">LINE 推播自動化</span>
+        <span class="phase-subtitle">v1 上線後追加 · 預估 3–4 週</span>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-num">ADD 01</div>
+          <div class="module-name">LINE 推播通知</div>
+          <div class="module-desc">每日提醒業務員填報、任務超時提醒、紅燈警示自動推播到 LINE，主管重要通知同步發送。</div>
+          <span class="module-tag t-notify">推播通知</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">ADD 02</div>
+          <div class="module-name">自動週報推送</div>
+          <div class="module-desc">每週一自動產生上週績效週報，推播至業務員與主管 LINE，無需手動查詢，資訊主動送達。</div>
+          <span class="module-tag t-notify">推播通知</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- v3 -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-badge pb-3">v3 分析版</span>
+        <span class="phase-title">趨勢分析與智能洞察</span>
+        <span class="phase-subtitle">v2 上線後追加 · 預估 4–5 週</span>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-num">ADD 03</div>
+          <div class="module-name">歷史趨勢分析</div>
+          <div class="module-desc">業務員個人與全團隊基本功執行趨勢，月對月比較、旺季規律識別，幫助主管制定有依據的輔導策略。</div>
+          <span class="module-tag t-ai">智能分析</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">ADD 04</div>
+          <div class="module-name">預測與預警</div>
+          <div class="module-desc">根據當前基本功執行趨勢，預測業務員本月是否有機會達標 FYC，提前 2 週發出警示供主管介入。</div>
+          <span class="module-tag t-ai">智能分析</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">開發時程</div>
+    <h2 class="section-title">三個版本，循序導入</h2>
+    <p class="section-desc">v1 先讓系統跑起來，累積真實數據後再加通知和分析，降低一次性導入的風險。</p>
+    <div class="roadmap">
+      <div class="roadmap-phase rp-active">
+        <div class="roadmap-phase-num">v1 · 第 1–8 週</div>
+        <div class="roadmap-phase-title">核心系統上線</div>
+        <div class="roadmap-period">建置期 2 個月</div>
+        <ul class="roadmap-items">
+          <li>三角色帳號與權限</li>
+          <li>任務設定與每日回報</li>
+          <li>照片上傳功能</li>
+          <li>紅綠燈計分引擎</li>
+          <li>主管審核流程</li>
+          <li>週檢核 + FYC 追蹤</li>
+          <li>報表 Excel 匯出</li>
+          <li>稽核紀錄</li>
+        </ul>
+      </div>
+      <div class="roadmap-phase rp-upcoming">
+        <div class="roadmap-phase-num">v2 · v1 上線後追加</div>
+        <div class="roadmap-phase-title">通知自動化</div>
+        <div class="roadmap-period">追加 3–4 週</div>
+        <ul class="roadmap-items">
+          <li>LINE Bot 串接</li>
+          <li>每日提醒推播</li>
+          <li>紅燈自動警示</li>
+          <li>自動週報推送</li>
+        </ul>
+      </div>
+      <div class="roadmap-phase rp-future">
+        <div class="roadmap-phase-num">v3 · v2 穩定後追加</div>
+        <div class="roadmap-phase-title">智能趨勢分析</div>
+        <div class="roadmap-period">追加 4–5 週</div>
+        <ul class="roadmap-items">
+          <li>歷史趨勢圖表</li>
+          <li>月對月比較分析</li>
+          <li>FYC 達標預測</li>
+          <li>提前預警機制</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE -->
+<section>
+  <div class="container">
+    <div class="section-label">系統價值</div>
+    <h2 class="section-title">對業務團隊的具體改變</h2>
+    <p class="section-desc">不是為了管控而管控，而是讓每個人都能清楚看見自己的狀態，主動調整。</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">🎯</div>
+        <div class="value-title">目標透明化</div>
+        <div class="value-text">每位業務員清楚知道本週目標、目前完成幾成、距離達標還差多少，不用等月底才發現落後。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">⚡</div>
+        <div class="value-title">主管效率 3× 提升</div>
+        <div class="value-text">批量審核取代逐一翻 LINE 訊息，紅燈業務員一眼識別，主管把時間花在真正需要輔導的人身上。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📐</div>
+        <div class="value-title">公平客觀評估</div>
+        <div class="value-text">計分基於系統數據而非主管印象，業務員對考核結果有依據可查，減少人為爭議與信任損耗。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔒</div>
+        <div class="value-title">執行留有憑證</div>
+        <div class="value-text">照片上傳 + 稽核紀錄讓每次執行有跡可查，既保護業務員的努力，也建立合規的管理文件。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📈</div>
+        <div class="value-title">FYC 預測介入</div>
+        <div class="value-text">v3 上線後，系統提前 2 週預告誰可能達不到 FYC 目標，主管提前介入輔導，不再等到季末懊悔。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📱</div>
+        <div class="value-title">手機直接使用</div>
+        <div class="value-text">純 Web 系統，掃碼即用，不需要下載 App，業務員外出時隨時可以填報，降低使用阻力。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">費用方案</div>
+    <h2 class="section-title">彈性的三版本導入方案</h2>
+    <p class="section-desc">建議從 v1 開始，實際使用 1 個月後確認需求再追加後續版本，降低一次性投入風險。</p>
+    <div class="price-wrap">
+      <div class="price-card featured">
+        <div class="price-phase">推薦起點</div>
+        <div class="price-title">v1 核心版</div>
+        <div class="price-amount">依報價確認</div>
+        <div class="price-period">一次性開發費 · 含 2 個月建置</div>
+        <ul class="price-items">
+          <li>9 個核心功能模組全數上線</li>
+          <li>三角色帳號與權限管理</li>
+          <li>每日回報 + 照片上傳</li>
+          <li>紅綠燈計分機制</li>
+          <li>主管審核 + FYC 追蹤</li>
+          <li>週報 + Excel 匯出</li>
+          <li>30–40 人使用規模</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-phase">v1 完成後追加</div>
+        <div class="price-title">v2 通知版</div>
+        <div class="price-amount">加購方案</div>
+        <div class="price-period">3–4 週追加開發</div>
+        <ul class="price-items">
+          <li>LINE Bot 串接設定</li>
+          <li>每日填報提醒推播</li>
+          <li>紅燈業務員自動警示</li>
+          <li>週報自動推送到 LINE</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-phase">v2 完成後追加</div>
+        <div class="price-title">v3 分析版</div>
+        <div class="price-amount">加購方案</div>
+        <div class="price-period">4–5 週追加開發</div>
+        <ul class="price-items">
+          <li>歷史趨勢圖表儀表板</li>
+          <li>月對月基本功比較</li>
+          <li>FYC 達成率預測模型</li>
+          <li>提前 2 週預警機制</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top: 28px; background: var(--parchment); border-radius: 12px; padding: 20px 24px; border: 1px solid var(--border);">
+      <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">📌 月維護費（v1 上線後）</div>
+      <div style="font-size: 13px; color: var(--slate); line-height: 1.7;">
+        含主機費用、系統監控、一般 Bug 修復。主機費可選擇由貴方直接開設帳號（推薦）或由我方代管後轉嫁。新功能需求另行報價。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>保險業務員基本功訓練與績效追蹤管理系統</strong> · 系統規劃提案 v1.0<br>
+  建置團隊：YSI-AI · 文件生成日期：2026-06-13
+</div>
+
+</body>
+</html>
