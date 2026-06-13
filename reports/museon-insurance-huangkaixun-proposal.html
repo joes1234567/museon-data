@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSEON × 保險團隊 — 數位同事方案提案</title>
+<style>
+  :root {
+    --jade: #1a6b3c;
+    --jade-light: #2d9a5c;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --ink: #0f1a12;
+    --slate: #4A5A4E;
+    --mist: #8898A0;
+    --border: #DDE4DC;
+    --parchment: #F5F8F5;
+    --snow: #FBFDFB;
+    --red: #c0392b;
+    --yellow: #e67e22;
+    --green: #27ae60;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 18px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #080f09 0%, #0d2612 40%, #12391e 70%, #1a5a30 100%);
+    color: #fff;
+    padding: 72px 40px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(26,107,60,0.32) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 40%, rgba(42,122,110,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba(184,146,58,0.08) 0%, transparent 50%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(45,154,92,0.20);
+    border: 1px solid rgba(45,154,92,0.45);
+    color: #6ddb96;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    position: relative;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .hero h1 span { color: #5ecf85; }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.60);
+    position: relative;
+    max-width: 560px;
+    margin: 0 auto 44px;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-meta-item {
+    text-align: center;
+  }
+  .hero-meta-item .val {
+    font-size: 26px;
+    font-weight: 800;
+    color: #5ecf85;
+    display: block;
+  }
+  .hero-meta-item .lbl {
+    font-size: 12px;
+    color: rgba(255,255,255,0.50);
+    letter-spacing: 1px;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  section { padding: 56px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--jade-light);
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  h2 em { font-style: normal; color: var(--jade); }
+  .section-desc {
+    font-size: 16px;
+    color: var(--slate);
+    max-width: 620px;
+    margin-bottom: 40px;
+  }
+
+  /* PAIN CARDS */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .pain-card {
+    background: var(--snow);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pain-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #c0392b, #e74c3c);
+  }
+  .pain-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .pain-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .pain-card p {
+    font-size: 14px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  .pain-card .hidden-cost {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #c0392b;
+    font-weight: 600;
+    background: rgba(192,57,43,0.07);
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+
+  /* SOLUTION FLOW */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    background: var(--snow);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .flow-step {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .flow-step:last-child { border-right: none; }
+  .flow-num {
+    width: 32px; height: 32px;
+    background: var(--jade);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .flow-step h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .flow-step p {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  .flow-arrow {
+    position: absolute;
+    right: -14px; top: 50%;
+    transform: translateY(-50%);
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 26px; height: 26px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    z-index: 2;
+    color: var(--jade);
+    font-weight: 700;
+  }
+
+  /* TRAFFIC LIGHT */
+  .light-demo {
+    background: #0d1f12;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .light-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+  .light-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    box-shadow: 0 0 12px currentColor;
+  }
+  .light-dot.red { background: #e74c3c; color: #e74c3c; }
+  .light-dot.yellow { background: #f39c12; color: #f39c12; }
+  .light-dot.green { background: #2ecc71; color: #2ecc71; }
+  .light-card h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .light-card p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+  /* ROLE CARDS */
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .role-card {
+    background: var(--snow);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+  }
+  .role-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .role-badge.manager { background: rgba(26,107,60,0.12); color: var(--jade); }
+  .role-badge.agent { background: rgba(42,122,110,0.12); color: var(--teal); }
+  .role-badge.museon { background: rgba(184,146,58,0.12); color: var(--gold); }
+  .role-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+  .role-list { list-style: none; }
+  .role-list li {
+    font-size: 14px;
+    color: var(--slate);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .role-list li:last-child { border-bottom: none; }
+  .role-list li::before { content: '→'; color: var(--jade-light); flex-shrink: 0; }
+
+  /* STAGES */
+  .stage-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 640px) { .stage-wrap { grid-template-columns: 1fr; } }
+  .stage-card {
+    background: var(--snow);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stage-card.recommended::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--jade), var(--teal));
+  }
+  .stage-card.future::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), #d4a541);
+  }
+  .stage-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .stage-card.recommended .stage-label { color: var(--jade-light); }
+  .stage-card.future .stage-label { color: var(--gold); }
+  .stage-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .stage-card .trigger {
+    font-size: 13px;
+    color: var(--mist);
+    margin-bottom: 16px;
+  }
+  .stage-features {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  .stage-features li {
+    font-size: 14px;
+    color: var(--slate);
+    padding: 5px 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .stage-features li::before { content: '✓'; color: var(--jade-light); flex-shrink: 0; font-weight: 700; }
+  .stage-features li.dim::before { content: '○'; color: var(--border); }
+  .stage-features li.dim { color: var(--mist); }
+  .stage-price {
+    background: var(--parchment);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--slate);
+  }
+  .stage-price strong { font-size: 20px; font-weight: 800; color: var(--ink); }
+
+  /* OBJECTION */
+  .obj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 640px) { .obj-grid { grid-template-columns: 1fr; } }
+  .obj-card {
+    background: var(--snow);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .obj-q {
+    background: rgba(192,57,43,0.08);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #c0392b;
+    font-weight: 600;
+    grid-column: 1 / -1;
+  }
+  .obj-a-icon {
+    color: var(--jade-light);
+    font-size: 18px;
+    margin-top: 2px;
+  }
+  .obj-a {
+    font-size: 14px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  /* NEXT STEP */
+  .next-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 640px) { .next-grid { grid-template-columns: 1fr; } }
+  .next-card {
+    background: var(--snow);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .next-card .day {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--jade-light);
+    margin-bottom: 8px;
+  }
+  .next-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .next-card p { font-size: 13px; color: var(--slate); line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    background: #080f09;
+    color: rgba(255,255,255,0.40);
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 13px;
+  }
+  footer strong { color: rgba(255,255,255,0.70); }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(26,107,60,0.06), rgba(42,122,110,0.04));
+    border: 1px solid rgba(26,107,60,0.20);
+    border-radius: 14px;
+    padding: 28px;
+    margin-top: 32px;
+  }
+  .highlight-box h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--jade);
+    margin-bottom: 12px;
+  }
+  .highlight-box p {
+    font-size: 15px;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+
+  /* SAVINGS TABLE */
+  .savings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 15px;
+  }
+  .savings-table th {
+    background: var(--jade);
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .savings-table th:first-child { border-radius: 8px 0 0 0; }
+  .savings-table th:last-child { border-radius: 0 8px 0 0; }
+  .savings-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--slate);
+  }
+  .savings-table tr:last-child td { border-bottom: none; }
+  .savings-table tr:nth-child(even) td { background: var(--parchment); }
+  .savings-table .highlight-cell {
+    font-weight: 700;
+    color: var(--jade);
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 48px 20px 44px; }
+    section { padding: 40px 0; }
+    .flow-grid { grid-template-columns: 1fr; }
+    .flow-step { border-right: none; border-bottom: 1px solid var(--border); }
+    .flow-step:last-child { border-bottom: none; }
+    .flow-arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-tag">MUSEON × 保險業務管理</div>
+    <h1>15 人的主管，<br><span>如何看清楚每一個人？</span></h1>
+    <p class="hero-sub">
+      Excel 看不出誰快沉了。LINE 群組消息淹沒警訊。<br>
+      MUSEON 數位同事，讓你的現有資料開口說話。
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="val">3 min</span>
+        <span class="lbl">每日業務回報</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="val">即時</span>
+        <span class="lbl">紅黃綠燈判定</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="val">0</span>
+        <span class="lbl">額外系統要登入</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN SECTION -->
+<section>
+  <div class="container">
+    <div class="section-label">真實痛點</div>
+    <h2>主管每天<em>看不見</em>的三件事</h2>
+    <p class="section-desc">
+      這不是管理能力的問題，是資訊工具跟不上。Excel 只會記錄，不會警告你。
+    </p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-icon">📋</span>
+        <h3>誰在敷衍填報</h3>
+        <p>
+          業代每天填一樣的數字、或者乾脆空白——你要逐行比對才看得出來，等你發現已經晚了兩週。
+        </p>
+        <div class="hidden-cost">⚠ 隱性代價：掉隊人員提早 2 週沒人知道</div>
+      </div>
+
+      <div class="pain-card">
+        <span class="pain-icon">💬</span>
+        <h3>LINE 群組的消息沒有結構</h3>
+        <p>
+          「今天見了 3 個客戶」「成交一張」——這些訊息零散，不能統計、不能比較、不能趨勢。月底要整理時要回翻幾百則。
+        </p>
+        <div class="hidden-cost">⚠ 隱性代價：主管每週多花 4–6 小時人工整理</div>
+      </div>
+
+      <div class="pain-card">
+        <span class="pain-icon">🔕</span>
+        <h3>沉默的人你不知道</h3>
+        <p>
+          連續三天沒動靜、見面數突然掉一半、進度條停住了——這些訊號埋在 Excel 裡，沒有人提醒你，你要自己去找。
+        </p>
+        <div class="hidden-cost">⚠ 隱性代價：問題變大了才介入，挽救成本是 3 倍</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section>
+  <div class="container">
+    <div class="section-label">MUSEON 數位同事</div>
+    <h2>給你一個<em>會分析的助理</em>，而不是另一套要填的系統</h2>
+    <p class="section-desc">
+      現有的資料（Excel、LINE 截圖、CIN 匯出）直接丟給 MUSEON——它負責整理、計算、告訴你誰是紅燈。
+    </p>
+
+    <div class="flow-grid">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <h3>資料進來</h3>
+        <p>把現有的 Excel 表或 LINE 回報截圖丟給 MUSEON。不需要重新建立任何格式。</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <h3>AI 自動整理</h3>
+        <p>MUSEON 讀懂資料，自動算出每個人的進度分數、填報品質、異常訊號。</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <h3>你看儀表板</h3>
+        <p>紅黃綠燈一眼看到。誰掉隊、誰沉默、誰需要你今天去問——不用再翻資料。</p>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <h3>主管報告自動生成</h3>
+        <p>週報、月報、個人明細——MUSEON 直接寫好，你確認就好，不需要自己做 PPT。</p>
+      </div>
+    </div>
+
+    <!-- Traffic light demo -->
+    <div class="light-demo">
+      <div class="light-card">
+        <div class="light-dot red"></div>
+        <h3>紅燈</h3>
+        <p>連續未填 ≥ 2 天，或本週進度低於目標 40%。今天就要主動去問。</p>
+      </div>
+      <div class="light-card">
+        <div class="light-dot yellow"></div>
+        <h3>黃燈</h3>
+        <p>填報趨勢下滑，或見面數突然比上週少一半。注意觀察，準備介入。</p>
+      </div>
+      <div class="light-card">
+        <div class="light-dot green"></div>
+        <h3>綠燈</h3>
+        <p>填報穩定，進度在軌。主管可以放心，把注意力放在紅燈人員上。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section>
+  <div class="container">
+    <div class="section-label">三個角色，各自得到什麼</div>
+    <h2>不是為了管理而管理，<em>是為了讓每個人變好</em></h2>
+    <p class="section-desc">
+      好的系統讓業代感覺在玩遊戲，讓主任知道自己在哪裡，讓主管一眼看到全局。
+    </p>
+
+    <div class="role-grid">
+      <div class="role-card">
+        <span class="role-badge manager">主管</span>
+        <h3>你的視角：全局 × 預警</h3>
+        <ul class="role-list">
+          <li>開儀表板，紅燈人員優先排序</li>
+          <li>一鍵看任何人的歷史記錄</li>
+          <li>週報月報自動生成，不用手做</li>
+          <li>MUSEON 主動告訴你「誰可能快掉了」</li>
+          <li>團隊整體趨勢分析（季節、週期規律）</li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <span class="role-badge agent">業代 / 主任</span>
+        <h3>他們的視角：清楚 × 有動力</h3>
+        <ul class="role-list">
+          <li>看自己在隊伍裡排第幾名</li>
+          <li>進度條、積分、個人 FYC 追蹤</li>
+          <li>知道今天要衝什麼才能保住綠燈</li>
+          <li>月底自動得到個人績效摘要</li>
+          <li>填報提醒（LINE 推播），不用靠記憶</li>
+        </ul>
+      </div>
+
+      <div class="role-card">
+        <span class="role-badge museon">MUSEON</span>
+        <h3>AI 做什麼：統計 × 洞察</h3>
+        <ul class="role-list">
+          <li>讀資料、整理數字、生成紅黃綠燈判定</li>
+          <li>分析填報品質（不只看結果，也看行為）</li>
+          <li>用自然語言寫主管報告初稿</li>
+          <li>學習團隊節奏，3 個月後給出預測</li>
+          <li>即時回答「這個客戶的進度怎樣？」</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGES -->
+<section>
+  <div class="container">
+    <div class="section-label">兩階段走法</div>
+    <h2>不逼你一次到位，<em>先驗證，再投資</em></h2>
+    <p class="section-desc">
+      15 人的團隊，現在習慣還在養成——先用數位同事拿到價值，等時機成熟再上完整系統。
+    </p>
+
+    <div class="stage-wrap">
+      <div class="stage-card recommended">
+        <div class="stage-label">現在 ✦ 推薦</div>
+        <h3>階段一：數位同事</h3>
+        <p class="trigger">適用時機：15 人以下，習慣養成中，不想多一套要登入的系統</p>
+        <ul class="stage-features">
+          <li>丟現有資料（Excel / LINE）→ AI 整理</li>
+          <li>紅黃綠燈自動判定</li>
+          <li>主管報告自動生成（週 / 月）</li>
+          <li>自然語言問答（「這週誰最危險？」）</li>
+          <li>填報趨勢分析 + 異常警示</li>
+          <li class="dim">每日業務日報系統（業代自填）</li>
+          <li class="dim">完整計分引擎 + 排行榜</li>
+          <li class="dim">CIN 系統整合</li>
+        </ul>
+        <div class="stage-price">
+          月費 <strong>NT$9,200</strong>（含 Claude AI + MUSEON 服務）<br>
+          <span style="font-size:12px;color:var(--mist);">主機費另計約 NT$1,000/月</span>
+        </div>
+      </div>
+
+      <div class="stage-card future">
+        <div class="stage-label">未來 — 當團隊到 30 人以上</div>
+        <h3>階段二：完整績效系統</h3>
+        <p class="trigger">適用時機：團隊規模擴大，填報習慣已建立，需要標準化管理</p>
+        <ul class="stage-features">
+          <li>每日業務日報（業代自填，3 分鐘）</li>
+          <li>完整計分引擎 + 排行榜 + 進度條</li>
+          <li>主管儀表板 + 審核工作台</li>
+          <li>CIN 系統整合（減少重複登打）</li>
+          <li>FYC 追蹤 + 獎勵機制設定</li>
+          <li>LINE 推播（未填提醒 / 主管週報）</li>
+          <li>完整稽核記錄</li>
+        </ul>
+        <div class="stage-price">
+          建置費 <strong>NT$220,000</strong>（一次性）<br>
+          <span style="font-size:12px;color:var(--mist);">+ 維護費 NT$5,000–8,000/月</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>關鍵洞察：不要等到 30 人才開始</h3>
+      <p>
+        階段一的真正價值不只是「省事」——是 MUSEON 開始學習你們團隊的節奏。
+        3 個月後，它知道誰通常週五填報、誰的績效在月中會下沉、什麼時候是團隊低潮期。
+        這些學習是你在階段二導入完整系統時最值錢的資產，不是從零開始。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SAVINGS -->
+<section>
+  <div class="container">
+    <div class="section-label">效益計算</div>
+    <h2>主管每個月<em>省下來的時間</em></h2>
+    <p class="section-desc">
+      不是估計，是根據你們的實際狀況——Excel 整理 + LINE 回翻 + 手動做報表——算出來的。
+    </p>
+
+    <table class="savings-table">
+      <thead>
+        <tr>
+          <th>現在要花的時間</th>
+          <th>每週</th>
+          <th>MUSEON 後</th>
+          <th>省下</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>整理 Excel、比對填報狀況</td>
+          <td>3–4 小時</td>
+          <td>自動完成</td>
+          <td class="highlight-cell">3–4 小時</td>
+        </tr>
+        <tr>
+          <td>回翻 LINE 群組統計</td>
+          <td>1–2 小時</td>
+          <td>自動統計</td>
+          <td class="highlight-cell">1–2 小時</td>
+        </tr>
+        <tr>
+          <td>手動做週報 / 月報</td>
+          <td>2–3 小時</td>
+          <td>AI 生成初稿</td>
+          <td class="highlight-cell">2–2.5 小時</td>
+        </tr>
+        <tr>
+          <td>追問沒填的人（電話 / 訊息）</td>
+          <td>1–2 小時</td>
+          <td>自動 LINE 推播</td>
+          <td class="highlight-cell">1–1.5 小時</td>
+        </tr>
+        <tr>
+          <td><strong>合計</strong></td>
+          <td><strong>7–11 小時</strong></td>
+          <td></td>
+          <td class="highlight-cell" style="font-size:17px;"><strong>每週 7–11 小時</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:16px;font-size:13px;color:var(--mist);">
+      以主管時薪 NT$500 估算 → 每月節省人力價值約 <strong style="color:var(--jade);">NT$14,000–22,000</strong>。
+      月費 NT$9,200 等於正報酬。
+    </p>
+  </div>
+</section>
+
+<!-- OBJECTIONS -->
+<section>
+  <div class="container">
+    <div class="section-label">常見顧慮</div>
+    <h2>你可能會問的問題，<em>直接回答</em></h2>
+
+    <div class="obj-grid">
+      <div class="obj-card">
+        <div class="obj-q">業務員已經要填 CIN，再多一套不是更累？</div>
+        <div class="obj-a-icon">✓</div>
+        <div class="obj-a">
+          階段一的數位同事不需要業務員多登入任何系統。
+          你把資料給 MUSEON，它負責分析。業務員用原有流程，主管得到新洞察。
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-q">現在 15 人，感覺規模不夠？</div>
+        <div class="obj-a-icon">✓</div>
+        <div class="obj-a">
+          完整系統確實適合 30 人以上——但數位同事從 1 人就能用。
+          15 人的主管，每週省 7–11 小時整理工作，已經夠值回票價。
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-q">FYC 佣金計算很複雜，能算嗎？</div>
+        <div class="obj-a-icon">✓</div>
+        <div class="obj-a">
+          階段一先不碰自動換算——你手動輸入 FYC 數字，MUSEON 負責追蹤和趨勢分析。
+          自動換算是階段二的議題，需要另開一次需求討論。
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-q">如果試了不合用怎麼辦？</div>
+        <div class="obj-a-icon">✓</div>
+        <div class="obj-a">
+          階段一沒有建置費，月費制隨時可以停。
+          風險就是一個月 NT$9,200——比雇一個助理的十分之一還低。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEP -->
+<section>
+  <div class="container">
+    <div class="section-label">下一步</div>
+    <h2>三步驟，從<em>驗證到決策</em></h2>
+
+    <div class="next-grid">
+      <div class="next-card">
+        <div class="day">週一</div>
+        <h3>實測一次</h3>
+        <p>
+          把你們現有的業務資料丟給 MUSEON，現場看它怎麼整理、判定紅黃綠燈、生成報告。
+          這是決策依據，不是簡報展示。
+        </p>
+      </div>
+      <div class="next-card">
+        <div class="day">測試後</div>
+        <h3>確認值不值得</h3>
+        <p>
+          看完實際輸出，你自己判斷：省下來的時間值不值 NT$9,200/月。
+          沒有壓力，不需要當場決定。
+        </p>
+      </div>
+      <div class="next-card">
+        <div class="day">決定後</div>
+        <h3>最快 1 週上線</h3>
+        <p>
+          階段一不需要開發，環境設定好就能用。
+          你的資料格式我們幫你接，不需要你改現有流程。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <strong>MUSEON</strong> — 為決策者設計的 AI 工作夥伴
+    <br><br>
+    本提案為 2026/06/13 會議後客製版本 · 保密文件，僅供黃愷訢參考
+  </p>
+</footer>
+
+</body>
+</html>
