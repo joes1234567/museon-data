@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保險業務員績效管理系統 — 系統規劃提案 v3</title>
+<style>
+  :root {
+    --jade: #1a6b3c;
+    --jade-light: #2d9a5c;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --ink: #0f1a12;
+    --slate: #4A5A4E;
+    --mist: #8898A0;
+    --border: #DDE4DC;
+    --parchment: #F5F8F5;
+    --snow: #FBFDFB;
+    --success: #2D8A6E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #080f09 0%, #0d2612 40%, #12391e 70%, #1a5a30 100%);
+    color: #fff;
+    padding: 72px 40px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(26,107,60,0.32) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 40%, rgba(42,122,110,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba(184,146,58,0.08) 0%, transparent 50%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(45,154,92,0.20);
+    border: 1px solid rgba(45,154,92,0.45);
+    color: #6ddb96;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 4.5vw, 46px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    position: relative;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .hero h1 span { color: #5ecf85; }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.55);
+    position: relative;
+    max-width: 580px;
+    margin: 0 auto 44px;
+    line-height: 1.7;
+  }
+  .hero-divider {
+    width: 48px; height: 2px;
+    background: linear-gradient(90deg, transparent, #5ecf85, transparent);
+    margin: 0 auto 36px;
+    position: relative;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .hero-meta-num { font-size: 34px; font-weight: 800; color: #5ecf85; letter-spacing: -1px; }
+  .hero-meta-label { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* LAYOUT */
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  section { padding: 64px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .bg-snow { background: var(--snow); }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--jade); font-weight: 700; margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(22px, 3vw, 30px); font-weight: 700;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.3;
+  }
+  .section-desc {
+    color: var(--slate); font-size: 15px; max-width: 640px; margin-bottom: 40px; line-height: 1.7;
+  }
+
+  /* PAIN POINTS */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 14px;
+  }
+  .pain-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 14px; padding: 22px;
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .pain-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .pain-icon {
+    width: 42px; height: 42px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0;
+  }
+  .pi-red { background: #FEF0EC; }
+  .pi-orange { background: #FFF5E6; }
+  .pi-blue { background: #EBF4F8; }
+  .pi-green { background: #E8F5EE; }
+  .pain-title { font-weight: 700; font-size: 14px; margin-bottom: 5px; color: var(--ink); }
+  .pain-desc { font-size: 13px; color: var(--slate); line-height: 1.65; }
+
+  /* FLOW */
+  .flow-wrapper {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px 28px; overflow-x: auto;
+  }
+  .flow-row {
+    display: flex; align-items: center; gap: 0;
+    flex-wrap: nowrap; min-width: 720px;
+  }
+  .flow-step {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; flex: 1; min-width: 80px;
+  }
+  .flow-circle {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+    border: 2px solid rgba(0,0,0,0.04);
+  }
+  .flow-step-label { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.4; }
+  .flow-arrow { color: var(--mist); font-size: 18px; flex-shrink: 0; padding: 0 2px; margin-bottom: 24px; }
+
+  .bg-blue { background: #EBF4F8; }
+  .bg-teal { background: #E6F4F2; }
+  .bg-green { background: #E8F5EE; }
+  .bg-gold { background: #FBF4E6; }
+  .bg-ember { background: #FEF0EC; }
+  .bg-purple { background: #F0EBF8; }
+  .bg-lime { background: #F0F8E8; }
+
+  /* TRAFFIC LIGHT */
+  .traffic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .traffic-card {
+    border-radius: 16px; padding: 26px;
+    border: 2px solid transparent;
+  }
+  .tc-green { background: #E8F5EE; border-color: #a8d8bc; }
+  .tc-yellow { background: #FFFDF0; border-color: #e0ce80; }
+  .tc-red { background: #FFF0F0; border-color: #f0a8a8; }
+  .traffic-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    display: inline-block; margin-right: 8px; vertical-align: middle;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+  }
+  .dot-green { background: #22c55e; }
+  .dot-yellow { background: #eab308; }
+  .dot-red { background: #ef4444; }
+  .traffic-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+  .tc-green .traffic-title { color: #1a6b3c; }
+  .tc-yellow .traffic-title { color: #92400e; }
+  .tc-red .traffic-title { color: #b91c1c; }
+  .traffic-condition { font-size: 13px; color: var(--slate); line-height: 1.8; }
+  .traffic-action { font-size: 12px; margin-top: 12px; padding: 8px 14px; border-radius: 8px; font-weight: 600; display: inline-block; }
+  .tc-green .traffic-action { background: rgba(26,107,60,0.1); color: #1a6b3c; }
+  .tc-yellow .traffic-action { background: rgba(234,179,8,0.12); color: #92400e; }
+  .tc-red .traffic-action { background: rgba(239,68,68,0.1); color: #b91c1c; }
+
+  /* FUNCTION AREA */
+  .func-area { margin-bottom: 48px; }
+  .func-header {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+    padding-bottom: 16px; border-bottom: 2px solid var(--border);
+  }
+  .func-icon {
+    width: 46px; height: 46px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 21px; flex-shrink: 0;
+  }
+  .fi-green { background: #E8F5EE; }
+  .fi-blue { background: #EBF4F8; }
+  .fi-gold { background: #FBF4E6; }
+  .func-title-group { flex: 1; }
+  .func-area-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+  .func-area-desc { font-size: 13px; color: var(--mist); margin-top: 2px; }
+  .func-modules-count {
+    font-size: 12px; font-weight: 600; color: var(--jade);
+    background: #E8F5EE; border: 1px solid #a8d8bc;
+    padding: 4px 14px; border-radius: 20px;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .module-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+    position: relative; transition: box-shadow 0.2s;
+  }
+  .module-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
+  .module-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 9px; }
+  .module-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .phase-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 9px;
+    border-radius: 10px; white-space: nowrap; flex-shrink: 0; margin-left: 8px;
+  }
+  .pt-1 { background: #E8F5EE; color: #1a6b3c; border: 1px solid #c2deca; }
+  .pt-2 { background: #EBF4F8; color: #2A6A8A; border: 1px solid #b8d5e8; }
+  .pt-3 { background: #FBF4E6; color: #B8923A; border: 1px solid #e0ceA0; }
+  .module-value {
+    font-size: 13px; color: var(--jade); font-weight: 600;
+    margin-bottom: 7px; line-height: 1.5;
+  }
+  .module-detail { font-size: 12px; color: var(--slate); line-height: 1.65; }
+  .module-note {
+    font-size: 11px; color: var(--mist); margin-top: 10px;
+    padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5;
+  }
+
+  /* ROLE CARDS */
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 16px;
+  }
+  .role-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px;
+  }
+  .role-header { display: flex; align-items: center; gap: 13px; margin-bottom: 18px; }
+  .role-icon {
+    width: 50px; height: 50px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 23px;
+  }
+  .ri-green { background: #E8F5EE; }
+  .ri-blue { background: #EBF4F8; }
+  .ri-purple { background: #F0EBF8; }
+  .role-name { font-size: 17px; font-weight: 700; color: var(--ink); }
+  .role-desc { font-size: 12px; color: var(--mist); margin-top: 3px; }
+  .role-features { list-style: none; }
+  .role-features li {
+    font-size: 13px; color: var(--slate); padding: 6px 0;
+    display: flex; gap: 9px; align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+  }
+  .role-features li:last-child { border-bottom: none; }
+  .role-features li::before { content: '✓'; color: var(--jade); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  /* TIMELINE STRIP */
+  .timeline-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; margin-bottom: 0;
+  }
+  .ts-phase {
+    padding: 22px 18px;
+    border-right: 1px solid var(--border);
+  }
+  .ts-phase:last-child { border-right: none; }
+  .ts-p1 { background: linear-gradient(160deg, #E8F5EE, #F4FAF6); }
+  .ts-p2 { background: #FAFCFF; }
+  .ts-p3 { background: #FFFDF5; }
+  .ts-p4 { background: #FAF8FF; }
+  .ts-num { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+  .ts-p1 .ts-num { color: #1a6b3c; }
+  .ts-p2 .ts-num { color: #2A6A8A; }
+  .ts-p3 .ts-num { color: #B8923A; }
+  .ts-p4 .ts-num { color: #6A4A9A; }
+  .ts-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .ts-period { font-size: 12px; color: var(--mist); margin-bottom: 12px; }
+  .ts-milestone {
+    font-size: 12px; padding: 8px 12px; border-radius: 8px;
+    line-height: 1.6; font-weight: 600;
+  }
+  .ts-p1 .ts-milestone { background: rgba(26,107,60,0.09); color: #1a6b3c; }
+  .ts-p2 .ts-milestone { background: rgba(42,106,138,0.09); color: #2A6A8A; }
+  .ts-p3 .ts-milestone { background: rgba(184,146,58,0.09); color: #B8923A; }
+  .ts-p4 .ts-milestone { background: rgba(106,74,154,0.09); color: #6A4A9A; }
+  .ts-list { list-style: none; margin-top: 10px; }
+  .ts-list li { font-size: 12px; color: var(--slate); padding: 2px 0; display: flex; gap: 6px; }
+  .ts-list li::before { content: '·'; color: var(--mist); }
+
+  /* VALUE CARDS */
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 14px;
+  }
+  .value-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 13px; padding: 24px;
+    border-left: 4px solid var(--jade);
+    transition: box-shadow 0.2s;
+  }
+  .value-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .value-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 7px; }
+  .value-desc { font-size: 13px; color: var(--slate); line-height: 1.65; }
+
+  /* ROI */
+  .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 32px; }
+  .roi-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px 20px; text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .roi-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .roi-num { font-size: 38px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px; }
+  .roi-unit { font-size: 12px; color: var(--mist); margin-bottom: 9px; text-transform: uppercase; letter-spacing: 1px; }
+  .roi-label { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .roi-detail { font-size: 12px; color: var(--slate); line-height: 1.55; }
+
+  /* PRICING */
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .price-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 18px; padding: 32px 26px;
+    position: relative;
+  }
+  .price-card.featured {
+    border-color: var(--jade);
+    box-shadow: 0 0 0 1px var(--jade), 0 8px 32px rgba(26,107,60,0.1);
+  }
+  .price-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--jade); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    padding: 4px 16px; border-radius: 20px; white-space: nowrap;
+  }
+  .price-label { font-size: 11px; color: var(--mist); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
+  .price-amount { font-size: 40px; font-weight: 800; color: var(--ink); line-height: 1.1; margin-bottom: 4px; }
+  .price-currency { font-size: 18px; color: var(--mist); font-weight: 400; }
+  .price-period { font-size: 13px; color: var(--slate); margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .price-items { list-style: none; }
+  .price-items li { font-size: 13px; color: var(--slate); padding: 6px 0; display: flex; gap: 9px; border-bottom: 1px solid var(--border); }
+  .price-items li:last-child { border-bottom: none; }
+  .price-items li::before { content: '✓'; color: var(--jade); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .price-note { font-size: 12px; color: var(--mist); margin-top: 16px; line-height: 1.6; padding-top: 14px; border-top: 1px solid var(--border); }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%);
+    border: 1px solid #a8d8bc; border-radius: 14px;
+    padding: 28px 32px; margin-top: 20px;
+  }
+  .highlight-box h3 { font-size: 16px; font-weight: 700; color: #1a6b3c; margin-bottom: 8px; }
+  .highlight-box p { font-size: 14px; color: var(--slate); line-height: 1.7; }
+
+  /* COST TABLE */
+  .cost-table {
+    width: 100%; border-collapse: collapse;
+    background: var(--snow); border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .cost-table th {
+    background: #f0f6f2; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px; color: var(--jade);
+    padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .cost-table td { padding: 13px 18px; font-size: 13px; color: var(--slate); border-bottom: 1px solid var(--border); vertical-align: top; }
+  .cost-table tr:last-child td { border-bottom: none; }
+  .cost-table tr:hover td { background: #f8fbf9; }
+  .cost-total td { background: #E8F5EE !important; font-weight: 700; color: var(--jade) !important; font-size: 15px !important; }
+  .cost-nt { font-weight: 600; color: var(--ink); font-size: 14px; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink); color: rgba(255,255,255,0.4);
+    text-align: center; padding: 36px 24px; font-size: 13px; line-height: 1.8;
+  }
+  .footer strong { color: rgba(255,255,255,0.75); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 44px 20px 40px; }
+    section { padding: 44px 0; }
+    .timeline-strip { grid-template-columns: 1fr 1fr; }
+    .timeline-strip .ts-phase:nth-child(2) { border-right: none; }
+    .timeline-strip .ts-phase:nth-child(3) { border-top: 1px solid var(--border); }
+    .hero-meta { gap: 28px; }
+    .hero-meta-num { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">系統規劃提案 · 2026</div>
+  <h1>保險業務員<br><span>績效遊戲化管理系統</span></h1>
+  <p class="hero-sub">整合每日日報、自動計分、紅綠燈儀表板與主管審核——讓 30–40 位業務員的活躍度一眼看清，不再靠 LINE 群組追蹤。</p>
+  <div class="hero-divider"></div>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">9</span>
+      <span class="hero-meta-label">核心功能模組</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">3</span>
+      <span class="hero-meta-label">角色權限層</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">8 週</span>
+      <span class="hero-meta-label">v1 上線目標</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">NT$190K</span>
+      <span class="hero-meta-label">v1 完整報價</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="container">
+    <div class="section-label">現況痛點</div>
+    <h2 class="section-title">主管每天要解決的五個問題</h2>
+    <p class="section-desc">這套系統針對保險業務團隊管理中最耗主管時間、最難量化、最容易引發爭議的環節，進行系統性解決。</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon pi-red">💬</div>
+        <div>
+          <div class="pain-title">業績回報靠 LINE 群組</div>
+          <div class="pain-desc">每天業務員在群組回報，資料分散、難以彙整，主管想統計要自己手動抄；超過一週就找不到記錄。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-red">📊</div>
+        <div>
+          <div class="pain-title">無法即時掌握業務員活躍度</div>
+          <div class="pain-desc">誰在動、誰在躺，主管要一個個問才知道。等到月底才發現有人已掉隊，補救代價高。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">🧮</div>
+        <div>
+          <div class="pain-title">FYC 計算靠人工</div>
+          <div class="pain-desc">保費收入、件數、FYC 換算各家公司標準不同，用 Excel 手動計算容易出錯，一有爭議要翻數據翻很久。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">🏆</div>
+        <div>
+          <div class="pain-title">競賽激勵效果短暫</div>
+          <div class="pain-desc">月底前才衝，平時無感；排名不透明，業務員不知道自己距目標差多少，缺乏持續動力。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">📋</div>
+        <div>
+          <div class="pain-title">稽核紀錄難以提交</div>
+          <div class="pain-desc">公司要求留存業務活動紀錄，但 LINE 截圖不符合正式格式，每季整理一次就要耗掉大半天。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="bg-snow">
+  <div class="container">
+    <div class="section-label">每日業務流程</div>
+    <h2 class="section-title">從業務員填報到主管掌握，全程數位化</h2>
+    <p class="section-desc">系統串接完整的業務管理週期，每個環節的資料自動流轉，主管只需在關鍵節點做最終確認。</p>
+    <div class="flow-wrapper">
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">🔑</div>
+          <div class="flow-step-label">業務員<br>登入</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-green">📝</div>
+          <div class="flow-step-label">填寫<br>日報</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-teal">⚡</div>
+          <div class="flow-step-label">系統<br>自動計分</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-lime">🚦</div>
+          <div class="flow-step-label">紅綠燈<br>判定</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-gold">👁️</div>
+          <div class="flow-step-label">主管<br>審核</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">📈</div>
+          <div class="flow-step-label">週報<br>統計</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-ember">🏅</div>
+          <div class="flow-step-label">月結<br>排名</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-purple">📤</div>
+          <div class="flow-step-label">匯出<br>稽核</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAFFIC LIGHT -->
+<section>
+  <div class="container">
+    <div class="section-label">紅綠燈績效機制</div>
+    <h2 class="section-title">三色判定，主管一眼看清誰需要介入</h2>
+    <p class="section-desc">每日根據業務員的任務完成率、FYC 進度與活躍天數自動判定燈號，不需主管逐一追問。</p>
+    <div class="traffic-grid">
+      <div class="traffic-card tc-green">
+        <div class="traffic-title">
+          <span class="traffic-dot dot-green"></span>綠燈 — 正常運作
+        </div>
+        <div class="traffic-condition">
+          本週任務完成率 ≥ 80%<br>
+          本月 FYC 進度 ≥ 月目標 70%<br>
+          連續活躍天數 ≥ 4 天/週
+        </div>
+        <div class="traffic-action">系統自動確認，無需介入</div>
+      </div>
+      <div class="traffic-card tc-yellow">
+        <div class="traffic-title">
+          <span class="traffic-dot dot-yellow"></span>黃燈 — 需要關注
+        </div>
+        <div class="traffic-condition">
+          本週任務完成率 50–79%<br>
+          本月 FYC 進度 40–69%<br>
+          連續 2–3 天未填日報
+        </div>
+        <div class="traffic-action">系統提醒主管，建議主動關心</div>
+      </div>
+      <div class="traffic-card tc-red">
+        <div class="traffic-title">
+          <span class="traffic-dot dot-red"></span>紅燈 — 需要介入
+        </div>
+        <div class="traffic-condition">
+          本週任務完成率 &lt; 50%<br>
+          本月 FYC 進度 &lt; 40%<br>
+          連續 4 天以上未回報
+        </div>
+        <div class="traffic-action">主管儀表板置頂警示，需本週約談</div>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <h3>燈號閾值可客製化</h3>
+      <p>紅綠燈的觸發條件由管理員在後台自由設定，不同季節、不同競賽週期可隨時調整——系統邏輯不變，數字按需求改。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section class="bg-snow">
+  <div class="container">
+    <div class="section-label">角色與權限</div>
+    <h2 class="section-title">三層角色，各看各的、各管各的</h2>
+    <p class="section-desc">每個角色只看到自己需要的資料，不同層級的操作權限清晰隔離，不會誤看到不該看的資訊。</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-header">
+          <div class="role-icon ri-green">👤</div>
+          <div>
+            <div class="role-name">業務員</div>
+            <div class="role-desc">每日填報、查看個人進度</div>
+          </div>
+        </div>
+        <ul class="role-features">
+          <li>每日業務日報填寫（見面數、電話數、成交件數）</li>
+          <li>查看個人 FYC 累計與月目標進度條</li>
+          <li>查看個人排名與積分變化</li>
+          <li>查看自己的紅綠燈狀態</li>
+          <li>個人歷史紀錄查詢（任意月份）</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-header">
+          <div class="role-icon ri-blue">👔</div>
+          <div>
+            <div class="role-name">主管 / 單位長</div>
+            <div class="role-desc">審核、監控、介入</div>
+          </div>
+        </div>
+        <ul class="role-features">
+          <li>查看所轄業務員紅綠燈儀表板（紅燈自動置頂）</li>
+          <li>批次審核業務員日報或單筆備註</li>
+          <li>查看團隊 FYC 彙整與週/月報</li>
+          <li>一鍵匯出 Excel 報表</li>
+          <li>設定個別業務員月目標</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-header">
+          <div class="role-icon ri-purple">⚙️</div>
+          <div>
+            <div class="role-name">系統管理員</div>
+            <div class="role-desc">帳號管理、規則設定</div>
+          </div>
+        </div>
+        <ul class="role-features">
+          <li>開通 / 停用業務員帳號</li>
+          <li>設定紅綠燈觸發條件</li>
+          <li>設定計分規則與 FYC 換算公式</li>
+          <li>稽核紀錄匯出（符合監理格式）</li>
+          <li>系統公告與通知管理</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section>
+  <div class="container">
+    <div class="section-label">系統功能全景</div>
+    <h2 class="section-title">三大區塊，9 個功能模組</h2>
+    <p class="section-desc">按業務場景分組——每個模組解決一個具體的管理問題。括號內的版本標示是交付時間，不是重要性排序。</p>
+
+    <!-- AREA 1 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-green">📝</div>
+        <div class="func-title-group">
+          <div class="func-area-name">業務活動記錄</div>
+          <div class="func-area-desc">每日填報與自動計分的核心引擎</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">每日業務日報</div>
+            <span class="phase-tag pt-1">v1</span>
+          </div>
+          <div class="module-value">業務員每天 3 分鐘填完，主管即時看到</div>
+          <div class="module-detail">見面數、電話數、成交件數、保費金額，欄位依業務類型自訂。填完自動計算當日積分，不用再抄 LINE。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">計分引擎</div>
+            <span class="phase-tag pt-1">v1</span>
+          </div>
+          <div class="module-value">規則透明，業務員填完就知道今天得幾分</div>
+          <div class="module-detail">管理員設定積分規則（見面 1 分、成交 10 分等），系統自動套用。規則改變時歷史紀錄不受影響，不會有爭議。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">FYC 追蹤模組</div>
+            <span class="phase-tag pt-1">v1</span>
+          </div>
+          <div class="module-value">從保費金額自動換算 FYC，不用手動算</div>
+          <div class="module-detail">支援多家保險公司的 FYC 換算比率分別設定，月目標進度條即時顯示。歷史資料可回溯任意月份。</div>
+          <div class="module-note">支援多公司比率分別設定，擴充性高</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 2 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-blue">🚦</div>
+        <div class="func-title-group">
+          <div class="func-area-name">績效監控與管理</div>
+          <div class="func-area-desc">主管儀表板與紅綠燈自動判定</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">主管儀表板</div>
+            <span class="phase-tag pt-1">v1</span>
+          </div>
+          <div class="module-value">30–40 人的狀態一屏看完，紅燈自動置頂</div>
+          <div class="module-detail">業務員清單 + 紅綠燈色塊，點任一人直接進入詳情。紅燈業務員自動排最前面，不用逐一查找。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">即時排名榜</div>
+            <span class="phase-tag pt-1">v1</span>
+          </div>
+          <div class="module-value">即時排名，讓業務員自己看到差距</div>
+          <div class="module-detail">月累積 FYC 排名、本週積分排名兩種榜單。業務員登入就看到自己排第幾，距目標還差多少，不需要等月底公布。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">主管審核工作台</div>
+            <span class="phase-tag pt-1">v1</span>
+          </div>
+          <div class="module-value">批次確認，不用一筆一筆翻</div>
+          <div class="module-detail">待審核日報清單，可批次確認或單筆備註。已審核 / 待審核狀態一目了然，主管每天 5 分鐘處理完畢。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 3 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gold">📤</div>
+        <div class="func-title-group">
+          <div class="func-area-name">報表與稽核</div>
+          <div class="func-area-desc">數據匯出與合規記錄管理</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">Excel 報表匯出</div>
+            <span class="phase-tag pt-1">v1</span>
+          </div>
+          <div class="module-value">想要什麼格式就出什麼格式</div>
+          <div class="module-detail">週報、月報、個人詳細報表三種模板，一鍵下載。欄位格式與公司內部報告欄位一致，不用再手動整理。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">稽核紀錄</div>
+            <span class="phase-tag pt-1">v1</span>
+          </div>
+          <div class="module-value">每筆操作自動留存，符合監理要求</div>
+          <div class="module-detail">業務員填報、主管審核、管理員修改，所有操作帶時間戳記錄。季度稽核直接匯出，不需要再整理 LINE 截圖。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">帳號與權限管理</div>
+            <span class="phase-tag pt-1">v1</span>
+          </div>
+          <div class="module-value">業務員進出，一鍵開關</div>
+          <div class="module-detail">新人加入開帳號、離職停用帳號，操作不超過 1 分鐘。三層角色權限獨立，不會誤看到不該看的資料。</div>
+          <div class="module-note">v2 可串接 LINE Login 免帳號密碼</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="bg-snow">
+  <div class="container">
+    <div class="section-label">交付時程</div>
+    <h2 class="section-title">分三版本交付，v1 八週上線</h2>
+    <p class="section-desc">v1 完整可用，v2 / v3 是加值擴充，每版本都可獨立交付——客戶用完 v1 再決定要不要繼續。</p>
+    <div class="timeline-strip">
+      <div class="ts-phase ts-p1">
+        <div class="ts-num">第 1–2 週</div>
+        <div class="ts-name">架構建立</div>
+        <div class="ts-period">v1 奠基期</div>
+        <div class="ts-milestone">帳號 / 權限 / 基礎框架</div>
+        <ul class="ts-list">
+          <li>三層角色帳號系統</li>
+          <li>資料庫架構設計</li>
+          <li>登入 / 安全機制</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p2">
+        <div class="ts-num">第 3–4 週</div>
+        <div class="ts-name">核心功能</div>
+        <div class="ts-period">v1 主體期</div>
+        <div class="ts-milestone">日報 + 計分 + FYC</div>
+        <ul class="ts-list">
+          <li>業務日報填寫介面</li>
+          <li>計分引擎與規則設定</li>
+          <li>FYC 換算與目標追蹤</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p3">
+        <div class="ts-num">第 5–6 週</div>
+        <div class="ts-name">管理介面</div>
+        <div class="ts-period">v1 完工期</div>
+        <div class="ts-milestone">儀表板 + 排名 + 匯出</div>
+        <ul class="ts-list">
+          <li>紅綠燈儀表板</li>
+          <li>主管審核工作台</li>
+          <li>排名榜 + Excel 匯出</li>
+          <li>稽核紀錄模組</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p4">
+        <div class="ts-num">第 7–8 週</div>
+        <div class="ts-name">驗收上線</div>
+        <div class="ts-period">v1 交付期</div>
+        <div class="ts-milestone">測試 + 部署 + 驗收</div>
+        <ul class="ts-list">
+          <li>全流程 QA 測試</li>
+          <li>主機部署 + 域名設定</li>
+          <li>業務員使用教學</li>
+          <li>v1 驗收確認</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 14px; padding: 22px;">
+        <div style="font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #B8923A; text-transform: uppercase; margin-bottom: 7px;">v2 — 加值擴充</div>
+        <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 9px;">LINE 推播整合</div>
+        <div style="font-size: 13px; color: var(--slate); line-height: 1.65;">紅燈業務員自動觸發 LINE 提醒、每日日報填報提示、週報自動發送主管——不需業務員主動查系統。</div>
+      </div>
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 14px; padding: 22px;">
+        <div style="font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #6A4A9A; text-transform: uppercase; margin-bottom: 7px;">v3 — 策略工具</div>
+        <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 9px;">趨勢分析與預測</div>
+        <div style="font-size: 13px; color: var(--slate); line-height: 1.65;">業務員活躍度趨勢圖、季度 FYC 預測、高風險離職預警——讓管理決策從被動救火變主動佈局。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <div class="container">
+    <div class="section-label">費用方案</div>
+    <h2 class="section-title">透明報價，按版本交付</h2>
+    <p class="section-desc">v1 完整可用，可獨立簽約；v2 / v3 等 v1 上線一個月後，確認需求再談。</p>
+    <div class="price-grid">
+      <div class="price-card featured">
+        <div class="price-badge">建議方案</div>
+        <div class="price-label">v1 核心系統</div>
+        <div class="price-amount"><span class="price-currency">NT$</span>190,000</div>
+        <div class="price-period">8 週交付 · 主機費另計（客戶自付，約 NT$400–800/月）</div>
+        <ul class="price-items">
+          <li>9 個核心功能模組全部包含</li>
+          <li>三層角色帳號系統</li>
+          <li>紅綠燈儀表板 + 計分引擎</li>
+          <li>Excel 報表匯出 + 稽核紀錄</li>
+          <li>上線後 30 天維運支援</li>
+        </ul>
+        <div class="price-note">主機費建議客戶自行開通 AWS / GCP 帳號，費用直接由客戶支付，不含在本報價內。</div>
+      </div>
+      <div class="price-card">
+        <div class="price-label">月維護費</div>
+        <div class="price-amount"><span class="price-currency">NT$</span>依需求</div>
+        <div class="price-period">每月 · v1 上線後起算</div>
+        <ul class="price-items">
+          <li>系統維運與監控</li>
+          <li>Bug 修復與安全更新</li>
+          <li>每月一次需求微調（&lt; 4hr）</li>
+          <li>使用者帳號異動協助</li>
+        </ul>
+        <div class="price-note">v2 / v3 擴充功能另外估價，v1 上線滿一個月後視使用狀況討論。</div>
+      </div>
+    </div>
+
+    <!-- COST TABLE -->
+    <div style="margin-top: 32px;">
+      <div class="section-label" style="margin-bottom: 14px;">開發成本明細</div>
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>說明</th>
+            <th style="text-align: right;">費用</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AI 工具費用</td>
+            <td>Cursor + Claude API（開發期 2 個月）</td>
+            <td style="text-align: right;" class="cost-nt">NT$5,000–8,000</td>
+          </tr>
+          <tr>
+            <td>AI 規劃師</td>
+            <td>需求分析 + Prompt 架構（約 50 小時）</td>
+            <td style="text-align: right;" class="cost-nt">NT$50,000</td>
+          </tr>
+          <tr>
+            <td>PM</td>
+            <td>專案管理 + 進度協調（約 70 小時）</td>
+            <td style="text-align: right;" class="cost-nt">NT$42,000</td>
+          </tr>
+          <tr>
+            <td>QA / 驗收</td>
+            <td>功能測試 + 驗收協助（約 50 小時）</td>
+            <td style="text-align: right;" class="cost-nt">NT$20,000</td>
+          </tr>
+          <tr>
+            <td>AI 系統支援</td>
+            <td>MUSEON 智慧系統使用費</td>
+            <td style="text-align: right;" class="cost-nt">NT$30,000</td>
+          </tr>
+          <tr class="cost-total">
+            <td colspan="2"><strong>合計成本</strong></td>
+            <td style="text-align: right;"><strong>NT$147,000–150,000</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size: 12px; color: var(--mist); margin-top: 12px; line-height: 1.7;">
+        報價 NT$190,000（毛利約 22%）· 主機費由客戶自行負擔，不含在上表成本內。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="bg-snow">
+  <div class="container">
+    <div class="section-label">投資回報</div>
+    <h2 class="section-title">省下的時間和避免的損耗，具體可算</h2>
+    <p class="section-desc">以 35 位業務員、2 位主管的規模估算，系統帶來的效益是可量化的。</p>
+    <div class="roi-grid">
+      <div class="roi-card">
+        <div class="roi-num">2hr</div>
+        <div class="roi-unit">每日節省</div>
+        <div class="roi-label">主管追蹤時間</div>
+        <div class="roi-detail">原本逐一追問 + 手動彙整，系統上線後看儀表板 5 分鐘搞定</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">35×</div>
+        <div class="roi-unit">業務員</div>
+        <div class="roi-label">每日填報省 10 分鐘</div>
+        <div class="roi-detail">不用找 LINE 群組、不用格式整理，結構化表單 3 分鐘填完</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">0</div>
+        <div class="roi-unit">爭議件數</div>
+        <div class="roi-label">FYC 計算爭議</div>
+        <div class="roi-detail">規則透明、紀錄留存，「我記得不一樣」從此消失</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">早 2週</div>
+        <div class="roi-unit">掉隊偵測</div>
+        <div class="roi-label">紅燈業務員發現時間</div>
+        <div class="roi-detail">原本月底才發現，現在第三天就亮燈，救援成本差十倍</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section>
+  <div class="container">
+    <div class="section-label">系統價值</div>
+    <h2 class="section-title">六個你今天沒有、有了之後不想失去的能力</h2>
+    <p class="section-desc">這不是「有了更好」的加值功能——這是解決現在每天都在發生的管理損耗。</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-title">每日活躍度即時可見</div>
+        <div class="value-desc">30–40 人的狀態不再靠記憶和問卷，主管登入直接看到誰在動、誰在躺。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">FYC 自動換算，零爭議</div>
+        <div class="value-desc">保費金額進去，FYC 自動出來，規則透明可查，月底結算不再有「我記得不一樣」的討論。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">紅燈業務員早發現早介入</div>
+        <div class="value-desc">連續三天沒填報自動亮紅燈，主管不用每天追問，系統替你看。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">排名激勵持續在線</div>
+        <div class="value-desc">業務員隨時可查自己排第幾、距目標差多少，不用等月底公布才有壓力感。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">稽核紀錄零整理成本</div>
+        <div class="value-desc">每筆操作自動帶時間戳留存，季度提交直接匯出，不再需要整理 LINE 截圖。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">數據支撐策略決策</div>
+        <div class="value-desc">季度 FYC 趨勢、各業務員成長曲線——從「感覺誰表現好」到「數據顯示誰在成長」。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>保險業務員績效遊戲化管理系統</strong> · 系統規劃提案 v3.0 · 2026<br>
+  由 MUSEON 智慧系統規劃團隊製作 · 如有修改需求請直接提出
+</div>
+
+</body>
+</html>
