@@ -240,6 +240,29 @@
     }
     .module-icf-note strong { font-weight: 600; }
 
+    /* ── FEATURE TIERS ── */
+    .feature-tiers { display: flex; flex-direction: column; gap: 14px; }
+    .tier-block { border-radius: 8px; padding: 12px 14px; }
+    .tier-block.core  { background: #f0fdf4; border-left: 3px solid #16a34a; }
+    .tier-block.plus  { background: #fffbeb; border-left: 3px solid #d97706; }
+    .tier-block.v2    { background: #eff6ff; border-left: 3px solid #3b82f6; }
+    .tier-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+      margin-bottom: 8px; text-transform: uppercase;
+    }
+    .tier-block.core .tier-label  { color: #16a34a; }
+    .tier-block.plus .tier-label  { color: #d97706; }
+    .tier-block.v2   .tier-label  { color: #3b82f6; }
+    .tier-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .tier-list li {
+      font-size: 13px; color: #374151;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .tier-list li::before { font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .tier-block.core .tier-list li::before  { content: '✓'; color: #16a34a; }
+    .tier-block.plus .tier-list li::before  { content: '★'; color: #d97706; }
+    .tier-block.v2   .tier-list li::before  { content: '◎'; color: #3b82f6; }
+
     /* ── TIMELINE ── */
     .timeline {
       position: relative;
@@ -543,16 +566,31 @@
           <span class="module-phase-badge phase-1">第一階段</span>
         </div>
         <div class="module-body">
-          <ul class="feature-list">
-            <li>每日收支自動記錄</li>
-            <li>ICF 銷售數據一鍵匯入</li>
-            <li>多部門帳戶獨立（餐廳 / 吉拿棒 / 宴會廳）</li>
-            <li>月結財務報表自動產出</li>
-            <li>股東報告格式化輸出</li>
-            <li>多公司架構支援（因應未來三個獨立實體）</li>
-            <li>基礎稅務試算</li>
-            <li>與進銷存食材成本自動勾稽</li>
-          </ul>
+          <div class="feature-tiers">
+            <div class="tier-block core">
+              <div class="tier-label">🟢 核心 — v1 交付</div>
+              <ul class="tier-list">
+                <li>每日收支自動記錄</li>
+                <li>ICF 銷售數據一鍵匯入，自動分類入帳</li>
+                <li>多部門帳戶獨立（餐廳 / 吉拿棒 / 宴會廳）</li>
+                <li>月結財務報表自動產出，可匯出 Excel</li>
+                <li>與進銷存食材成本自動勾稽</li>
+              </ul>
+            </div>
+            <div class="tier-block plus">
+              <div class="tier-label">🟡 加值 — 讓業主眼睛一亮</div>
+              <ul class="tier-list">
+                <li>股東報告格式化輸出（一鍵產出，鎖定不可修改）</li>
+              </ul>
+            </div>
+            <div class="tier-block v2">
+              <div class="tier-label">🔵 v2 評估 — 未來可延伸</div>
+              <ul class="tier-list">
+                <li>多公司架構支援（因應未來三個獨立實體）</li>
+                <li>基礎稅務試算</li>
+              </ul>
+            </div>
+          </div>
           <div class="module-icf-note">
             <strong>與 ICF 整合：</strong>從 ICF 後台匯出銷售 CSV，系統自動讀取並分類入帳，不需重複人工輸入。
           </div>
@@ -570,16 +608,31 @@
           <span class="module-phase-badge phase-1">第一階段</span>
         </div>
         <div class="module-body">
-          <ul class="feature-list">
-            <li>每日進貨記錄（廠商 / 品項 / 數量 / 單價）</li>
-            <li>庫存即時追蹤</li>
-            <li>依菜單自動計算食材耗用</li>
-            <li>每道菜毛利率即時呈現</li>
-            <li>低庫存自動預警</li>
-            <li>廠商採購歷史查詢</li>
-            <li>多部門食材分開管理</li>
-            <li>月度食材成本報表</li>
-          </ul>
+          <div class="feature-tiers">
+            <div class="tier-block core">
+              <div class="tier-label">🟢 核心 — v1 交付</div>
+              <ul class="tier-list">
+                <li>每日進貨記錄（廠商 / 品項 / 數量 / 單價）</li>
+                <li>庫存即時追蹤</li>
+                <li>依菜單食材配方自動計算耗用量</li>
+                <li>每道菜毛利率即時呈現</li>
+                <li>月度食材成本報表</li>
+              </ul>
+            </div>
+            <div class="tier-block plus">
+              <div class="tier-label">🟡 加值 — 讓業主眼睛一亮</div>
+              <ul class="tier-list">
+                <li>低庫存自動預警（低於安全庫存自動通知）</li>
+                <li>廠商採購歷史查詢（比價 / 追溯）</li>
+              </ul>
+            </div>
+            <div class="tier-block v2">
+              <div class="tier-label">🔵 v2 評估 — 未來可延伸</div>
+              <ul class="tier-list">
+                <li>多部門食材分開管理（餐廳 / 吉拿棒 / 宴會廳各自獨立）</li>
+              </ul>
+            </div>
+          </div>
           <div class="module-icf-note">
             <strong>與 ICF 整合：</strong>ICF 銷售數量 × 菜單食材配方 = 理論耗用量，系統自動比對實際進貨，偵測異常損耗。
           </div>
@@ -597,16 +650,31 @@
           <span class="module-phase-badge phase-2">第二階段</span>
         </div>
         <div class="module-body">
-          <ul class="feature-list">
-            <li>統一排班介面（取代 Excel + 手寫）</li>
-            <li>ICF 打卡記錄自動匯入</li>
-            <li>排班 vs 實際出勤差異比對</li>
-            <li>每月工時自動加總</li>
-            <li>假日 / 加班費自動計算</li>
-            <li>員工班表自助查詢（LINE 通知）</li>
-            <li>多部門人力分配統計</li>
-            <li>人力成本 vs 營業額比率分析</li>
-          </ul>
+          <div class="feature-tiers">
+            <div class="tier-block core">
+              <div class="tier-label">🟢 核心 — v1 交付</div>
+              <ul class="tier-list">
+                <li>統一排班介面（取代 Excel + 手寫）</li>
+                <li>ICF 打卡記錄自動匯入</li>
+                <li>排班 vs 實際出勤差異比對</li>
+                <li>每月工時自動加總</li>
+              </ul>
+            </div>
+            <div class="tier-block plus">
+              <div class="tier-label">🟡 加值 — 讓業主眼睛一亮</div>
+              <ul class="tier-list">
+                <li>假日 / 加班費自動計算（含勞基法規則）</li>
+                <li>員工班表自助查詢（LINE Bot 推播，月費約 $200–800 TWD）</li>
+              </ul>
+            </div>
+            <div class="tier-block v2">
+              <div class="tier-label">🔵 v2 評估 — 未來可延伸</div>
+              <ul class="tier-list">
+                <li>多部門人力分配統計</li>
+                <li>人力成本 vs 營業額比率分析</li>
+              </ul>
+            </div>
+          </div>
           <div class="module-icf-note">
             <strong>與 ICF 整合：</strong>直接讀取 ICF 打卡紀錄，不需員工另外操作任何新系統，零學習障礙。
           </div>
