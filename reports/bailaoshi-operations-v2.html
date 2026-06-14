@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 智慧營運系統規劃 v0.13</title>
+<title>白老師國際語言中心 — 智慧營運系統規劃 v0.14</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -322,7 +322,7 @@
 <body>
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v0.13 — 含獨立營運機制區</div>
+  <div class="hero-tag">系統規劃文件 v0.14 — 新增薪資發放機制</div>
   <h1>白老師國際語言中心<br><span>智慧營運系統</span>規劃</h1>
   <p class="hero-sub">從諮詢到結業，整合教務、財務、AI 輔助與 MUSEON 智能對接的五階段導入計畫</p>
   <div class="hero-meta">
@@ -622,6 +622,85 @@
             帳單狀態需至少支援：<strong>未開立 → 已開立 → 部分繳款 → 全額結清</strong>。欠費超過期限需自動觸發提醒通知，不靠人工檢查。
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- 薪資機制 -->
+    <div style="margin-top: 36px; margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <div style="width: 38px; height: 38px; background: #EBF4F8; border-radius: 10px; display:flex; align-items:center; justify-content:center; font-size:18px;">💼</div>
+        <div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink);">薪資發放機制</div>
+          <div style="font-size: 11px; color: var(--mist);">三個交叉變數同時計算——系統設計難度最高的節點</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 18px;">
+
+        <!-- 鐘點費計算 -->
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">📊 鐘點費計算邏輯</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">依班級人數計費</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">1–10 人一種費率，人數區間不同費率不同，非固定時薪</div>
+            </div>
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">底薪保障機制</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">鐘點合計 &lt; 底薪 → 發底薪<br>鐘點合計 &gt; 底薪 → 發實際鐘點合計</div>
+            </div>
+            <div style="padding: 10px 12px; background: #EBF4F8; border-radius: 8px; border: 1px solid #b2d0df;">
+              <div style="font-size: 11px; color: #2A6A8A; line-height: 1.5;">
+                ⚠️ 同一老師的表格需列出：各班名稱 × 上課時數 × 適用費率，才能正確計算
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 跨校區薪資攤算 -->
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">🏫 跨校區薪資攤算</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">按時數比例分攤</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">漢口 6h、頭家 10h、惠文 2h → 各分校依比例負擔薪資，全部由加保校支付再內部轉帳</div>
+            </div>
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">勞健保獨立歸屬</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">勞健保費用歸「加保分校」支付，與薪資攤算邏輯分開處理</div>
+            </div>
+            <div style="padding: 10px 12px; background: linear-gradient(135deg, #FEF8F6 0%, #FDF4F0 100%); border: 1px solid #e8b8a0; border-radius: 8px;">
+              <div style="font-size: 11px; color: var(--ember); font-weight: 600; margin-bottom: 3px;">設計重點</div>
+              <div style="font-size: 11px; color: var(--slate); line-height: 1.5;">薪資結果 = 鐘點費 × N 個校區攤算，每月牽涉跨校 AP 拆帳，需系統自動計算，不靠手動</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 發薪時間 -->
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">📅 發薪流程（每月兩次）</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: #EBF4F8; display:flex; align-items:center; justify-content:center; font-size: 13px; font-weight: 700; color: #2A6A8A; flex-shrink: 0;">10</div>
+              <div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink);">每月 10 號 — 匯款</div>
+                <div style="font-size: 11px; color: var(--mist); margin-top: 2px; line-height: 1.5;">薪資匯入銀行，同步扣除勞健保自付額</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: #E8F5F0; display:flex; align-items:center; justify-content:center; font-size: 13px; font-weight: 700; color: #2D8A6E; flex-shrink: 0;">20</div>
+              <div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink);">每月 20 號 — 現金補足</div>
+                <div style="font-size: 11px; color: var(--mist); margin-top: 2px; line-height: 1.5;">剩餘差額（如有）以現金補發</div>
+              </div>
+            </div>
+            <div style="margin-top: 4px; padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 11px; color: var(--slate); line-height: 1.5;">
+                系統每月需自動產製薪資明細表，列出各班上課時數、人數費率、校區攤算比例，供行政核對與老師確認
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1150,8 +1229,8 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.13</p>
-  <p style="margin-top: 8px;">v0.13 新增獨立「營運機制」區：費用五種、折扣規則、帳單制度，含三機制交叉複雜場景說明</p>
+  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.14</p>
+  <p style="margin-top: 8px;">v0.14 新增「薪資發放機制」：鐘點費計算、跨校區攤算、勞健保歸屬、每月兩次發薪流程</p>
 </div>
 
 </body>
