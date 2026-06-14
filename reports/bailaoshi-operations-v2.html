@@ -853,6 +853,62 @@
       </div>
     </div>
 
+    <!-- 餐點代訂機制 -->
+    <div style="margin-top: 36px; margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <div style="width: 38px; height: 38px; background: #FFF3E0; border-radius: 10px; display:flex; align-items:center; justify-content:center; font-size:18px;">🍱</div>
+        <div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink);">餐點代訂機制</div>
+          <div style="font-size: 11px; color: var(--mist);">儲值金預充、老師確認才扣款、請假自動不扣——與帳單系統分離獨立運作</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 18px;">
+
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">💳 儲值金預充（像悠遊卡）</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">家長先儲值</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">家長在 App 預充金額（例如 1,000 元），掛在家長虛擬帳戶，不是每次個別付款</div>
+            </div>
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">低餘額自動提醒</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">儲值金不足時，系統主動推通知提醒家長補充，不漏餐也不欠費</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">✅ 老師確認才扣款</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">老師點確認才觸發</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">當天有吃飯，老師在 App 點「有吃飯」，系統才自動從家長儲值金扣款</div>
+            </div>
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">請假自動不扣</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">請假不送餐，儲值金保留不動，不需人工退費或對帳</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">🔀 與帳單系統分離</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">兩個系統獨立</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">餐點代訂與學費帳單系統分開，餐費收入另行計入公司營收，不混入學費帳單</div>
+            </div>
+            <div style="padding: 10px 12px; background: linear-gradient(135deg, #FEF8F6 0%, #FDF4F0 100%); border: 1px solid #e8b8a0; border-radius: 8px;">
+              <div style="font-size: 11px; color: var(--ember); font-weight: 600; margin-bottom: 3px;">設計重點</div>
+              <div style="font-size: 11px; color: var(--slate); line-height: 1.5;">餐點是獨立模組，日後可接第三方供應商對接或換廠商，不影響主系統運作</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- 機制交叉說明 -->
     <div style="background: linear-gradient(135deg, #12121A 0%, #1e2840 100%); border-radius: 14px; padding: 24px 28px; color: #fff;">
       <div style="font-size: 13px; font-weight: 700; color: #E0714D; margin-bottom: 8px;">四機制交叉場景（最複雜的帳單案例）</div>
