@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>擺渡人文蔬食料理 — 智慧營運管理系統規劃</title>
+<style>
+  :root {
+    --jade: #1a6b3c;
+    --jade-light: #2d9a5c;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --ink: #0f1a12;
+    --slate: #4A5A4E;
+    --mist: #8898A0;
+    --border: #DDE4DC;
+    --parchment: #F5F8F5;
+    --snow: #FBFDFB;
+    --success: #2D8A6E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a1a0e 0%, #12391e 60%, #1a5a30 100%);
+    color: #fff;
+    padding: 64px 40px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,107,60,0.28) 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 50%, rgba(42,122,110,0.15) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(45,154,92,0.25);
+    border: 1px solid rgba(45,154,92,0.5);
+    color: #5ecf85;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #5ecf85; }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    max-width: 540px;
+    margin: 0 auto 36px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .hero-meta-num { font-size: 30px; font-weight: 700; color: #5ecf85; }
+  .hero-meta-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+  /* LAYOUT */
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--jade); font-weight: 600; margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(21px, 3vw, 29px); font-weight: 700;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.3;
+  }
+  .section-desc {
+    color: var(--slate); font-size: 15px; max-width: 640px; margin-bottom: 40px;
+  }
+
+  /* PAIN POINTS */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .pain-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+  .pain-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+  .pain-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pi-red { background: #FEF0EC; }
+  .pi-orange { background: #FFF5E6; }
+  .pi-blue { background: #EBF4F8; }
+  .pi-green { background: #E8F5EE; }
+  .pain-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--ink); }
+  .pain-desc { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+  /* FLOW */
+  .flow-wrapper {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px 28px; overflow-x: auto;
+  }
+  .flow-row {
+    display: flex; align-items: center; gap: 0;
+    flex-wrap: nowrap; min-width: 680px;
+  }
+  .flow-step {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; flex: 1; min-width: 76px;
+  }
+  .flow-circle {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0;
+  }
+  .flow-step-label { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.4; }
+  .flow-arrow { color: var(--mist); font-size: 16px; flex-shrink: 0; padding: 0 2px; margin-bottom: 22px; }
+
+  .bg-blue { background: #EBF4F8; }
+  .bg-teal { background: #E6F4F2; }
+  .bg-green { background: #E8F5EE; }
+  .bg-gold { background: #FBF4E6; }
+  .bg-ember { background: #FEF0EC; }
+  .bg-purple { background: #F0EBF8; }
+  .bg-lime { background: #F0F8E8; }
+
+  /* FUNCTION AREA */
+  .func-area { margin-bottom: 44px; }
+  .func-header {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+    padding-bottom: 16px; border-bottom: 2px solid var(--border);
+  }
+  .func-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .fi-green { background: #E8F5EE; }
+  .fi-blue { background: #EBF4F8; }
+  .fi-purple { background: #F0EBF8; }
+  .fi-gold { background: #FBF4E6; }
+  .fi-gray { background: #F0F0F0; }
+  .func-title-group { flex: 1; }
+  .func-area-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+  .func-area-desc { font-size: 13px; color: var(--mist); margin-top: 2px; }
+  .func-modules-count {
+    font-size: 12px; font-weight: 600; color: var(--mist);
+    background: var(--parchment); border: 1px solid var(--border);
+    padding: 4px 14px; border-radius: 20px;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+  }
+  .module-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px;
+    position: relative;
+  }
+  .module-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.06); }
+  .module-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .module-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .phase-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 9px;
+    border-radius: 10px; white-space: nowrap; flex-shrink: 0; margin-left: 8px;
+  }
+  .pt-1 { background: #E8F5EE; color: #1a6b3c; border: 1px solid #c2deca; }
+  .pt-2 { background: #EBF4F8; color: #2A6A8A; border: 1px solid #b8d5e8; }
+  .pt-3 { background: #FBF4E6; color: #B8923A; border: 1px solid #e0ceA0; }
+  .pt-pause { background: #F5F5F5; color: #888; border: 1px solid #ddd; }
+  .module-value {
+    font-size: 13px; color: var(--jade); font-weight: 600;
+    margin-bottom: 6px; line-height: 1.5;
+  }
+  .module-detail { font-size: 12px; color: var(--slate); line-height: 1.6; }
+  .module-note {
+    font-size: 11px; color: var(--mist); margin-top: 10px;
+    padding-top: 10px; border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+
+  /* SCOPE TABLE */
+  .scope-table { width: 100%; border-collapse: collapse; margin-bottom: 0; }
+  .scope-table th { background: var(--ink); color: #fff; padding: 10px 16px; text-align: left; font-size: 13px; font-weight: 600; }
+  .scope-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--slate); }
+  .scope-table tr:last-child td { border-bottom: none; }
+  .scope-in { color: #1a6b3c; font-weight: 600; }
+  .scope-out { color: #c0392b; font-weight: 600; }
+  .scope-later { color: #B8923A; font-weight: 600; }
+
+  /* TIMELINE STRIP */
+  .timeline-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+  }
+  .ts-phase {
+    padding: 20px 18px;
+    border-right: 1px solid var(--border);
+  }
+  .ts-phase:last-child { border-right: none; }
+  .ts-p1 { background: linear-gradient(135deg, #E8F5EE, #F4FAF6); }
+  .ts-p2 { background: #FAFCFF; }
+  .ts-p3 { background: #FFFDF5; }
+  .ts-num { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .ts-p1 .ts-num { color: #1a6b3c; }
+  .ts-p2 .ts-num { color: #2A6A8A; }
+  .ts-p3 .ts-num { color: #B8923A; }
+  .ts-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .ts-period { font-size: 12px; color: var(--mist); margin-bottom: 12px; }
+  .ts-milestone {
+    font-size: 12px;
+    padding: 8px 12px; border-radius: 8px;
+    line-height: 1.6; font-weight: 600;
+  }
+  .ts-p1 .ts-milestone { background: rgba(26,107,60,0.08); color: #1a6b3c; }
+  .ts-p2 .ts-milestone { background: rgba(42,106,138,0.08); color: #2A6A8A; }
+  .ts-p3 .ts-milestone { background: rgba(184,146,58,0.08); color: #B8923A; }
+  .ts-list { list-style: none; margin-top: 10px; }
+  .ts-list li { font-size: 12px; color: var(--slate); padding: 2px 0; display: flex; gap: 6px; }
+  .ts-list li::before { content: '·'; color: var(--mist); }
+
+  /* RISK TABLE */
+  .risk-table { width: 100%; border-collapse: collapse; }
+  .risk-table th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-size: 13px; }
+  .risk-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--slate); vertical-align: top; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-high { background: #FFF5F5; }
+  .risk-mid { background: #FFFBF0; }
+  .risk-low { background: #F5FFF8; }
+  .risk-label { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  .rl-high { background: #FEE2E2; color: #B91C1C; }
+  .rl-mid { background: #FEF3C7; color: #92400E; }
+  .rl-low { background: #D1FAE5; color: #065F46; }
+
+  /* PRICE BOX */
+  .price-box {
+    background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%);
+    border: 1px solid #a8d8bc; border-radius: 14px;
+    padding: 32px 36px; text-align: center; margin-bottom: 20px;
+  }
+  .price-range { font-size: 36px; font-weight: 800; color: #1a6b3c; margin: 8px 0 4px; }
+  .price-unit { font-size: 14px; color: var(--slate); margin-bottom: 14px; }
+  .price-breakdown {
+    display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+    padding-top: 16px; border-top: 1px solid #c2deca;
+  }
+  .price-item { font-size: 13px; color: var(--slate); }
+  .price-item strong { color: var(--ink); }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%);
+    border: 1px solid #a8d8bc; border-radius: 14px;
+    padding: 24px 28px; margin-bottom: 20px;
+  }
+  .highlight-box h3 { font-size: 16px; font-weight: 700; color: #1a6b3c; margin-bottom: 8px; }
+  .highlight-box p { font-size: 14px; color: var(--slate); line-height: 1.7; }
+
+  .warn-box {
+    background: #FFFBF0; border: 1px solid #F6D860;
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .warn-box strong { color: #92400E; }
+  .warn-box p { font-size: 13px; color: #78530A; margin-top: 6px; }
+
+  /* USER ROLES */
+  .role-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px; margin-bottom: 0;
+  }
+  .role-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px;
+  }
+  .role-icon { font-size: 22px; margin-bottom: 8px; }
+  .role-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .role-desc { font-size: 12px; color: var(--mist); margin-bottom: 8px; }
+  .role-perms { list-style: none; }
+  .role-perms li { font-size: 12px; color: var(--slate); padding: 2px 0; display: flex; gap: 6px; }
+  .role-perms li::before { content: '·'; color: var(--jade); font-weight: 700; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 32px 24px; font-size: 13px;
+  }
+  .footer strong { color: rgba(255,255,255,0.75); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 20px; }
+    section { padding: 40px 0; }
+    .timeline-strip { grid-template-columns: 1fr; }
+    .ts-phase { border-right: none; border-bottom: 1px solid var(--border); }
+    .ts-phase:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">系統規劃文件 v2.0 · 2026-06-14</div>
+  <h1>擺渡人文蔬食料理<br><span>智慧營運管理系統</span>規劃</h1>
+  <p class="hero-sub">整合記帳、進銷存、排班三大核心模組，讓云亭從「每月半個月算帳」升級為「報表自動跑出來」</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">3</span>
+      <span class="hero-meta-label">優先功能模組</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">3</span>
+      <span class="hero-meta-label">部門分帳（餐廳/吉拿棒/宴）</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">2</span>
+      <span class="hero-meta-label">交付階段</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">P1</span>
+      <span class="hero-meta-label">11月前可用</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="container">
+    <div class="section-label">現況痛點</div>
+    <h2 class="section-title">云亭每個月承擔的三大負擔</h2>
+    <p class="section-desc">這套系統針對擺渡人日常營運中最耗時、最依賴記憶、最容易出錯的三條線，進行系統性解決。</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon pi-red">📊</div>
+        <div>
+          <div class="pain-title">帳務每月半個月在算</div>
+          <div class="pain-desc">收入、費用、部門分帳全靠手工 Excel，每月結帳要花半個月，容易出錯且難以追溯。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">🥦</div>
+        <div>
+          <div class="pain-title">食材成本只能估，不能算</div>
+          <div class="pain-desc">進貨記在紙本、消耗用猜的，每道菜的真實成本說不清楚，高成本食材找不到、也無法控制。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">🗓️</div>
+        <div>
+          <div class="pain-title">排班散落 Excel + 手寫</div>
+          <div class="pain-desc">班表用 Excel 管、打卡在 ICF、薪資又要重算一次。三份資料對不起來，每次出勤確認就是一場折磨。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">完整業務流程</div>
+    <h2 class="section-title">從食材採購到月結報表，全程數位化</h2>
+    <p class="section-desc">系統串接擺渡人完整的營運生命週期，每個環節的資料自動流轉，云亭只需在關鍵節點做最終確認。</p>
+    <div class="flow-wrapper">
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-circle bg-green">🛒</div>
+          <div class="flow-step-label">食材<br>採購</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-teal">📦</div>
+          <div class="flow-step-label">庫存<br>更新</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">🍽️</div>
+          <div class="flow-step-label">ICF<br>結帳</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-lime">📥</div>
+          <div class="flow-step-label">銷售<br>匯入</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-gold">🧮</div>
+          <div class="flow-step-label">成本<br>推算</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-ember">📋</div>
+          <div class="flow-step-label">部門<br>分帳</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-purple">📈</div>
+          <div class="flow-step-label">月結<br>報表</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCTION AREAS -->
+<section>
+  <div class="container">
+    <div class="section-label">系統功能全景</div>
+    <h2 class="section-title">三大模組，解決最痛的三條線</h2>
+    <p class="section-desc">按云亭的業務場景分組——每個模組解決一個具體的日常問題。第一階段全部完成，點餐整合列第二階段評估。</p>
+
+    <!-- AREA 1: 記帳財務 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-green">💰</div>
+        <div class="func-title-group">
+          <div class="func-area-name">記帳與財務報表</div>
+          <div class="func-area-desc">取代手工 Excel，月結報表自動跑出來</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">ICF 銷售匯入</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">每日結帳不用重 key 一次</div>
+          <div class="module-detail">上傳 ICF 匯出的 CSV，系統自動解析寫入帳務，按部門（餐廳/吉拿棒/宴會廳）自動分帳。匯入格式異常時顯示錯誤明細，不寫入資料庫。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">費用錄入與部門分帳</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">三個部門各自損益，一眼看清</div>
+          <div class="module-detail">採購、薪資、水電、雜費按部門錄入。每筆費用有分類標籤，月底自動彙整成各部門損益表，不再靠 Excel 手動加總。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">月結報表輸出</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">一鍵產出股東/店長用的報表</div>
+          <div class="module-detail">指定月份，系統產出各部門收入/成本/毛利報表，可匯出 Excel 格式。已鎖定月報不可修改，防止事後竄改帳務。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 2: 進銷存 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-blue">🥗</div>
+        <div class="func-title-group">
+          <div class="func-area-name">進銷存與食材成本</div>
+          <div class="func-area-desc">食材買了多少、用了多少、成本多少，全部看得到</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">食材與採購管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">進貨記一次，庫存自動更新</div>
+          <div class="module-detail">建立食材品項（名稱、單位、成本價），錄入採購單後庫存即時更新。歷史進貨紀錄可追溯，供應商比價也有依據。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">BOM 食材配方設定</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">每道菜對應多少食材，系統記住</div>
+          <div class="module-detail">為每道菜建立食材清單（BOM），結合 ICF 銷售數據，系統自動推算這個月各食材消耗量與成本，不再靠感覺猜。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">成本分析報告</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">高成本食材自動排名，一眼看出問題</div>
+          <div class="module-detail">月底自動計算食材消耗排行、毛利率最低的品項，讓云亭能判斷哪些菜需要調價或調整食材比例。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 3: 排班 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-purple">👥</div>
+        <div class="func-title-group">
+          <div class="func-area-name">排班與出勤管理</div>
+          <div class="func-area-desc">班表、打卡、薪資三合一，停止用 Excel 追人</div>
+        </div>
+        <div class="func-modules-count">2 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">班表管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">排班、調整、通知——一個介面完成</div>
+          <div class="module-detail">電子化週/月班表，臨時請假、補班直接在系統操作。員工可查看個人班表（唯讀），不需要每次傳 LINE 確認。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">打卡匯入與出勤核算</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">從 ICF 打卡到薪資，自動算清楚</div>
+          <div class="module-detail">上傳 ICF 打卡 CSV，系統比對班表計算出勤差異。工時自動累計，薪資預估一鍵產出——有異議 30 秒查清楚，不用翻 LINE 記錄。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 4: 點餐（暫緩） -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gray">🍱</div>
+        <div class="func-title-group">
+          <div class="func-area-name">點餐系統整合</div>
+          <div class="func-area-desc">第二階段評估——11月前不建議動 ICF</div>
+        </div>
+        <div class="func-modules-count">暫緩評估</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">取代 ICF POS</div>
+            <span class="phase-tag pt-pause">暫緩</span>
+          </div>
+          <div class="module-value">11月搬新址前不動，穩字當頭</div>
+          <div class="module-detail">ICF 現行月費 NT$3,000-6,000，系統穩定運作，換地點同期切換 POS 風險極高。建議新址穩定後 3-6 個月再評估是否取代。</div>
+          <div class="module-note">⚠ v2 評估條件：新店運營穩定、ICF 費用持續上漲、或多店整合需求出現時，再啟動評估。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">線上掃碼點餐/訂位</div>
+            <span class="phase-tag pt-pause">暫緩</span>
+          </div>
+          <div class="module-value">ICF 本身有此模組，先用既有的</div>
+          <div class="module-detail">ICF 已有線上點餐與掃碼功能，若有需要可直接加購，不需要另外開發。客製版本需串接第三方支付，增加維護成本。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- USERS -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">使用者角色</div>
+    <h2 class="section-title">四個角色，各自只看到需要的資訊</h2>
+    <p class="section-desc">系統按角色設計不同的存取權限，云亭全功能，員工只看班表。</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-icon">👩‍💼</div>
+        <div class="role-name">后台管理員（云亭）</div>
+        <div class="role-desc">系統唯一主要操作者</div>
+        <ul class="role-perms">
+          <li>所有後台功能完整讀寫</li>
+          <li>匯入 ICF 銷售/打卡資料</li>
+          <li>進貨錄入、費用記帳</li>
+          <li>排班建立與調整</li>
+          <li>月結報表產出</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">👔</div>
+        <div class="role-name">店長</div>
+        <div class="role-desc">查閱報表、審核班表</div>
+        <ul class="role-perms">
+          <li>每日/每週銷售摘要</li>
+          <li>班表審核</li>
+          <li>費用查閱</li>
+          <li>部門損益報表（唯讀）</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">💼</div>
+        <div class="role-name">老闆/股東（徐主任）</div>
+        <div class="role-desc">月報查看</div>
+        <ul class="role-perms">
+          <li>月度損益報表（唯讀）</li>
+          <li>各部門分帳摘要</li>
+          <li>Excel 匯出</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">👨‍🍳</div>
+        <div class="role-name">員工</div>
+        <div class="role-desc">班表確認</div>
+        <ul class="role-perms">
+          <li>個人班表查看（唯讀）</li>
+          <li>出勤紀錄查詢</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section>
+  <div class="container">
+    <div class="section-label">範圍邊界</div>
+    <h2 class="section-title">做什麼、不做什麼、之後再說什麼</h2>
+    <p class="section-desc">清楚的邊界讓開發可預測、不走歪。以下是 v1 的範圍共識。</p>
+    <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;">
+      <table class="scope-table">
+        <thead>
+          <tr>
+            <th>狀態</th>
+            <th>功能</th>
+            <th>說明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="scope-in">✅ v1 做</span></td>
+            <td>記帳（ICF 匯入 + 費用錄入 + 月結報表）</td>
+            <td>解決每月半個月算帳的核心痛點</td>
+          </tr>
+          <tr>
+            <td><span class="scope-in">✅ v1 做</span></td>
+            <td>進銷存（食材、採購、BOM、成本分析）</td>
+            <td>讓食材成本從「估算」變成「實算」</td>
+          </tr>
+          <tr>
+            <td><span class="scope-in">✅ v1 做</span></td>
+            <td>排班（班表管理 + ICF 打卡匯入 + 出勤核算）</td>
+            <td>三份資料合一，薪資計算自動化</td>
+          </tr>
+          <tr>
+            <td><span class="scope-in">✅ v1 做</span></td>
+            <td>部門分帳（餐廳/吉拿棒/宴會廳各自損益）</td>
+            <td>三個業態分開看，決策有依據</td>
+          </tr>
+          <tr>
+            <td><span class="scope-out">❌ v1 不做</span></td>
+            <td>取代 ICF 點餐系統</td>
+            <td>11月搬新址期間切換 POS 風險極高，ICF 現行穩定</td>
+          </tr>
+          <tr>
+            <td><span class="scope-out">❌ v1 不做</span></td>
+            <td>線上掃碼點餐/訂位</td>
+            <td>ICF 已有此模組，直接加購即可，不需重複開發</td>
+          </tr>
+          <tr>
+            <td><span class="scope-out">❌ v1 不做</span></td>
+            <td>AI 數位員工 / 送餐機器人</td>
+            <td>單店規模、員工少，ROI 不足；禪風空間也不適合機器人</td>
+          </tr>
+          <tr>
+            <td><span class="scope-later">🔮 v2 評估</span></td>
+            <td>取代 ICF 點餐（完整成本效益試算後決定）</td>
+            <td>前提：新店穩定 + ICF 費用持續上漲 + 多店整合需求</td>
+          </tr>
+          <tr>
+            <td><span class="scope-later">🔮 v2 評估</span></td>
+            <td>多店整合報表</td>
+            <td>若徐主任擴展第二家店時啟動</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- RISK -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">風險評估</div>
+    <h2 class="section-title">兩軌並行，先穩後換</h2>
+    <p class="section-desc">核心建議：這套系統和 ICF 並存，不是取代 ICF，是補 ICF 的後台空缺。</p>
+
+    <div class="highlight-box" style="margin-bottom: 24px;">
+      <h3>最低風險路線：兩軌並行</h3>
+      <p>ICF 繼續跑點餐結帳 → 每日 CSV 匯出 → 上傳到新系統 → 自動產生帳務與成本分析。<br>
+      這樣 11月搬新址也不受影響，新系統上線不影響現有收款流程，員工學習成本最低。</p>
+    </div>
+
+    <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;">
+      <table class="risk-table">
+        <thead>
+          <tr>
+            <th>風險項目</th>
+            <th>等級</th>
+            <th>說明</th>
+            <th>對策</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="risk-high">
+            <td>11月搬新址同期換 POS</td>
+            <td><span class="risk-label rl-high">高</span></td>
+            <td>換地點 + 換系統同步進行，任何問題直接影響收款</td>
+            <td>v1 不動 ICF，搬完穩定後再評估</td>
+          </tr>
+          <tr class="risk-mid">
+            <td>BOM 資料建立不完整</td>
+            <td><span class="risk-label rl-mid">中</span></td>
+            <td>如果菜單對應食材沒有建好，成本分析就不準確</td>
+            <td>Phase 1 初期先建主力菜色 BOM，其餘逐步補齊</td>
+          </tr>
+          <tr class="risk-mid">
+            <td>ICF CSV 格式變更</td>
+            <td><span class="risk-label rl-mid">中</span></td>
+            <td>ICF 更新版本可能改變匯出格式，導致匯入失敗</td>
+            <td>匯入模組設計格式版本控制，異常自動提示</td>
+          </tr>
+          <tr class="risk-low">
+            <td>員工接受度</td>
+            <td><span class="risk-label rl-low">低</span></td>
+            <td>員工普遍不熟電腦，但班表查看是手機介面</td>
+            <td>員工端只需查看班表，UI 極簡，學習成本極低</td>
+          </tr>
+          <tr class="risk-low">
+            <td>主要操作者離職（云亭）</td>
+            <td><span class="risk-label rl-low">低</span></td>
+            <td>系統高度依賴云亭操作，接班人需要培訓</td>
+            <td>所有操作留存紀錄，新人可查歷史記錄重現流程</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+  <div class="container">
+    <div class="section-label">導入時間軸</div>
+    <h2 class="section-title">三階段，11月前核心上線</h2>
+    <p class="section-desc">以搬新址（11月）為硬截點，確保新地點開張時帳務系統已穩定運行。</p>
+    <div class="timeline-strip">
+      <div class="ts-phase ts-p1">
+        <div class="ts-num">Phase 1</div>
+        <div class="ts-name">核心建置</div>
+        <div class="ts-period">第 1-2 個月</div>
+        <div class="ts-milestone">記帳 + 進銷存 + 排班</div>
+        <ul class="ts-list">
+          <li>ICF 銷售/打卡匯入</li>
+          <li>費用錄入與部門分帳</li>
+          <li>食材/採購/BOM 建立</li>
+          <li>班表管理與出勤核算</li>
+          <li>基礎月結報表</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p2">
+        <div class="ts-num">Phase 2</div>
+        <div class="ts-name">穩定優化</div>
+        <div class="ts-period">第 3-4 個月</div>
+        <div class="ts-milestone">資料沉澱，報表深化</div>
+        <ul class="ts-list">
+          <li>BOM 資料補齊完善</li>
+          <li>成本分析報告調優</li>
+          <li>Excel 報表格式微調</li>
+          <li>操作流程文件化</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p3">
+        <div class="ts-num">Phase 3</div>
+        <div class="ts-name">v2 評估</div>
+        <div class="ts-period">新址穩定後 3-6 個月</div>
+        <div class="ts-milestone">點餐整合評估</div>
+        <ul class="ts-list">
+          <li>ICF 費用效益重新試算</li>
+          <li>是否取代 POS 決策</li>
+          <li>多店整合需求評估</li>
+          <li>線上訂位/點餐方案選型</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">費用框架</div>
+    <h2 class="section-title">Phase 1 費用估算</h2>
+    <p class="section-desc">以下為規劃參考數字，實際報價需確認人力成本基礎與開發規格後定案。</p>
+
+    <div class="warn-box">
+      <strong>⚠ 提醒：買斷 ≠ 零月費</strong>
+      <p>系統上線後仍有主機費（約 NT$500-1,500/月）、必要時的維護費用。請在向徐主任說明時同步說明這部分，避免後續認知落差。</p>
+    </div>
+
+    <div class="price-box">
+      <div style="font-size: 13px; color: var(--slate); margin-bottom: 4px;">Phase 1 開發費用（記帳 + 進銷存 + 排班）</div>
+      <div class="price-range">NT$ 120,000 – 200,000</div>
+      <div class="price-unit">一次性買斷，依功能細節與人力成本確認後調整</div>
+      <div class="price-breakdown">
+        <div class="price-item"><strong>主機費</strong> NT$500-1,500/月</div>
+        <div class="price-item"><strong>維護合約</strong> 選配</div>
+        <div class="price-item"><strong>ICF 月費</strong> 繼續維持（不取代）</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>對比現況成本：值不值得？</h3>
+      <p>云亭每月花半個月（約 15 個工作天）在手工帳務。若以一個月可回收 10 天的行政時間來算，三個月內人力節省的成本已接近系統開發費用。這還不算食材成本分析帶來的浪費控制效益。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>擺渡人文蔬食料理 — 智慧營運管理系統規劃 v2.0</strong><br>
+  2026-06-14 · 供內部討論用途，不含正式開發費用與合約條款
+</div>
+
+</body>
+</html>
