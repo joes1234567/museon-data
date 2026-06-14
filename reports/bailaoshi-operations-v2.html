@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 智慧營運系統規劃 v0.17</title>
+<title>白老師國際語言中心 — 智慧營運系統規劃 v0.18</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -150,30 +150,6 @@
   .bg-gold { background: #FBF4E6; }
   .bg-ember { background: #FEF0EC; }
   .bg-purple { background: #F0EBF8; }
-
-  /* FEE BOX */
-  .fee-box {
-    margin-top: 28px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-  }
-  .fee-card {
-    background: var(--snow); border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px;
-  }
-  .fee-card-title {
-    font-size: 12px; font-weight: 700; color: var(--ember);
-    letter-spacing: 1px; text-transform: uppercase;
-    margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
-  }
-  .fee-item {
-    display: flex; align-items: flex-start; gap: 8px;
-    font-size: 13px; color: var(--slate); padding: 3px 0;
-    line-height: 1.5;
-  }
-  .fee-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--ember); flex-shrink: 0; margin-top: 7px; }
-  .fee-note { font-size: 11px; color: var(--mist); margin-top: 2px; }
 
   /* COMPLEXITY BOX */
   .complexity-box {
@@ -364,9 +340,10 @@
 </style>
 </head>
 <body>
+
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v0.17 — 整合四大營運機制 + 情境回報</div>
+  <div class="hero-tag">系統規劃文件 v0.18 — 業主簡報版：結構優化，情境優先</div>
   <h1>白老師國際語言中心<br><span>智慧營運系統</span>規劃</h1>
   <p class="hero-sub">從諮詢到結業，整合教務、財務、AI 輔助與 MUSEON 智能對接的五階段導入計畫</p>
   <div class="hero-meta">
@@ -442,8 +419,112 @@
   </div>
 </section>
 
-<!-- FLOW（修正版） -->
+<!-- SCENARIO（前移：痛點之後立即呈現解方效果） -->
 <section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">情境回報</div>
+    <h2 class="section-title">上線後，日子真正會改變什麼？</h2>
+    <p class="section-desc">四個真實場景，對照上線前後的落差，讓系統的價值不只停在功能清單上。<span style="font-size: 12px; color: var(--mist); display: block; margin-top: 6px;">＊效益數字為估算值，實際依操作情況調整。</span></p>
+    <div class="scenario-grid">
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="scenario-emoji">💰</div>
+          <div class="scenario-title">每月發薪日</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row">
+            <span class="scenario-tag st-before">現在</span>
+            <div class="scenario-text">行政手動比對三校區出勤表、計算各班鐘點費、拆算每位老師的分校薪資，容易出錯、耗時超過半天。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-after">上線後</span>
+            <div class="scenario-text">系統自動匯總出勤紀錄，依人數區間計算鐘點費、跨校比例攤算、底薪保障對比，一鍵產出發薪明細。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-save">效益</span>
+            <div class="scenario-text">行政每月省 4–6 小時計算工時，錯誤申訴歸零，老師對薪資組成一目瞭然。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="scenario-emoji">👨‍👩‍👧</div>
+          <div class="scenario-title">家長詢問帳單</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row">
+            <span class="scenario-tag st-before">現在</span>
+            <div class="scenario-text">家長打電話或傳 LINE 詢問繳費狀況，行政翻 Excel、找帳本，有時要隔天才能回覆。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-after">上線後</span>
+            <div class="scenario-text">家長透過 Line@ 一句話詢問，AI 從身份綁定資料庫抓出本期帳單、折扣明細、繳費狀態，即時回覆。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-save">效益</span>
+            <div class="scenario-text">行政接聽帳單相關來電量減少，家長滿意度提升，催費流程也從電話改為系統自動提醒。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="scenario-emoji">📝</div>
+          <div class="scenario-title">新生報名建檔</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row">
+            <span class="scenario-tag st-before">現在</span>
+            <div class="scenario-text">紙本資料轉 Excel、再轉帳單系統、再通知老師分班，同一份資料被重複鍵入三次，出錯率高。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-after">上線後</span>
+            <div class="scenario-text">一次建檔，學生 ID 終身唯一，帳單、課表、出勤、老師通知全部自動串通，資料不重複。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-save">效益</span>
+            <div class="scenario-text">報名流程從 30 分鐘縮短至 10 分鐘內，資料錯誤率大幅下降，新生入班體驗更順暢。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="scenario-emoji">📊</div>
+          <div class="scenario-title">主管掌握訊息全貌</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row">
+            <span class="scenario-tag st-before">現在</span>
+            <div class="scenario-text">家長、老師訊息混在多個 LINE 群，主管無法快速判斷哪些是客訴、哪些還沒人回、今天要處理幾件。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-after">上線後</span>
+            <div class="scenario-text">AI 自動分類路由訊息，主管儀表板顯示：未回覆數、客訴標記、今日待辦清單，重要訊息即時推送給對應人員。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-save">效益</span>
+            <div class="scenario-text">主管每天花在「翻訊息」的時間減少，客訴回應時效提升，不再因訊息漏接引發家長不滿。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="scenario-banner">
+      <div class="scenario-banner-icon">🚀</div>
+      <div class="scenario-banner-text">
+        <div class="scenario-banner-title">這四個場景只是開始</div>
+        <div class="scenario-banner-desc">系統設計時預留 AI 擴充能力。當資料積累到一定量，主動預警（缺席異常、帳單逾期、老師鐘點超時）都可以逐步啟用，讓系統從「被動查詢」進化到「主動預警」。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section>
   <div class="container">
     <div class="section-label">完整業務流程</div>
     <h2 class="section-title">完整招生順序：六步驟全程數位化</h2>
@@ -527,40 +608,11 @@
         </div>
       </div>
     </div>
-
-    <!-- 費用結構 -->
-    <div class="fee-box">
-      <div class="fee-card">
-        <div class="fee-card-title">💰 費用五種</div>
-        <div class="fee-item"><div class="fee-dot"></div><div>學費<span class="fee-note">（主要收入）</span></div></div>
-        <div class="fee-item"><div class="fee-dot"></div><div>講義費</div></div>
-        <div class="fee-item"><div class="fee-dot"></div><div>註冊費<span class="fee-note">（終身一次，不重複收）</span></div></div>
-        <div class="fee-item"><div class="fee-dot"></div><div>教材費</div></div>
-        <div class="fee-item"><div class="fee-dot"></div><div>其他費用<span class="fee-note">（視課程另議）</span></div></div>
-      </div>
-      <div class="fee-card">
-        <div class="fee-card-title">🏷️ 折扣機制</div>
-        <div class="fee-item"><div class="fee-dot"></div><div>教職人員：<strong>九折</strong></div></div>
-        <div class="fee-item"><div class="fee-dot"></div><div>第二個孩子：<strong>另有減免</strong><span class="fee-note">（條件待確認）</span></div></div>
-        <div style="margin-top: 10px; font-size: 11px; color: var(--mist); background: #F7F5F0; border-radius: 6px; padding: 8px 10px; line-height: 1.5;">
-          ⚠️ 折扣條件需進入「定價規則引擎」設定，確保帳單自動套用，不靠人工判斷
-        </div>
-      </div>
-      <div class="fee-card">
-        <div class="fee-card-title">🗓️ 帳單規則</div>
-        <div class="fee-item"><div class="fee-dot"></div><div>每期開帳<span class="fee-note">（學期制）</span></div></div>
-        <div class="fee-item"><div class="fee-dot"></div><div>暑期大金額可分期繳納</div></div>
-        <div class="fee-item"><div class="fee-dot"></div><div>支援部分繳款追蹤</div></div>
-        <div style="margin-top: 10px; font-size: 11px; color: var(--mist); background: #F7F5F0; border-radius: 6px; padding: 8px 10px; line-height: 1.5;">
-          系統需支援同一帳單多次部分付款紀錄，直到全額結清
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <!-- OPERATIONS MECHANICS -->
-<section>
+<section style="background: var(--snow);">
   <div class="container">
     <div class="section-label">營運機制</div>
     <h2 class="section-title">四大核心機制：費用、折扣、帳單、薪資與班級</h2>
@@ -680,7 +732,6 @@
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 18px;">
 
-        <!-- 鐘點費計算 -->
         <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
           <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">📊 鐘點費計算邏輯</div>
           <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -700,7 +751,6 @@
           </div>
         </div>
 
-        <!-- 跨校區薪資攤算 -->
         <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
           <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">🏫 跨校區薪資攤算</div>
           <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -719,7 +769,6 @@
           </div>
         </div>
 
-        <!-- 發薪時間 -->
         <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
           <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">📅 發薪流程（每月兩次）</div>
           <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -820,8 +869,49 @@
   </div>
 </section>
 
-<!-- MODULES -->
+<!-- VALUE（前移：讓業主在看技術細節前先理解系統帶來的改變） -->
 <section>
+  <div class="container">
+    <div class="section-label">系統價值</div>
+    <h2 class="section-title">這套系統帶來的六個核心改變</h2>
+    <p class="section-desc">不只是工具的更換，而是讓行政團隊從繁瑣事務中解放，把時間還給學生服務。</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">⏱️</div>
+        <div class="value-title">行政時間大幅縮減</div>
+        <div class="value-text">建檔、帳單、通知全部系統化，每期報名行政耗時預估縮減 60% 以上。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🗂️</div>
+        <div class="value-title">資料一次建立多處使用</div>
+        <div class="value-text">學生建檔後全系統共用，不再重複輸入，不再資料不同步。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">💰</div>
+        <div class="value-title">帳務清晰不漏收</div>
+        <div class="value-text">五種費用自動計算、折扣精確套用、分期追蹤到底，財務狀況隨時掌握不遺漏。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📊</div>
+        <div class="value-title">招生決策有數據支撐</div>
+        <div class="value-text">試聽來源、轉換率、未成交原因都有紀錄，招生策略不再只靠直覺。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔔</div>
+        <div class="value-title">通知不再依賴 LINE 群</div>
+        <div class="value-text">繳費提醒、缺席通知、補課安排全部系統化發送，不再怕訊息漏接。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤖</div>
+        <div class="value-title">未來接 AI，資料已就位</div>
+        <div class="value-text">系統設計預留 AI 串接能力，等資料積累後，AI 輔助功能可隨時擴充。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section style="background: var(--snow);">
   <div class="container">
     <div class="section-label">系統模組架構</div>
     <h2 class="section-title">25 個核心模組，分五階段導入</h2>
@@ -1103,47 +1193,6 @@
   </div>
 </section>
 
-<!-- DATA LAYER -->
-<section style="background: var(--snow);">
-  <div class="container">
-    <div class="section-label">資料架構</div>
-    <h2 class="section-title">14 個核心主資料實體</h2>
-    <p class="section-desc">這是整套系統的數據地基。資料一次建立後，所有模組共用同一份，不再有資料孤島、不再重複輸入。</p>
-    <div class="data-group">
-      <div class="data-category">
-        <div class="data-cat-title">👥 人員資料</div>
-        <div class="data-item">學生（ID 終身不變）</div>
-        <div class="data-item">家長</div>
-        <div class="data-item">老師（跨校區）</div>
-        <div class="data-item">員工</div>
-      </div>
-      <div class="data-category">
-        <div class="data-cat-title">🏫 場域資料</div>
-        <div class="data-item">分校（勞健保加保單位）</div>
-        <div class="data-item">教室</div>
-      </div>
-      <div class="data-category">
-        <div class="data-cat-title">📚 教學營運</div>
-        <div class="data-item">課程</div>
-        <div class="data-item">班級（年度班名更新）</div>
-        <div class="data-item">期別</div>
-      </div>
-      <div class="data-category">
-        <div class="data-cat-title">📐 營運規則</div>
-        <div class="data-item">定價費用結構（五種費用）</div>
-        <div class="data-item">折扣條件組合</div>
-        <div class="data-item">行事曆例外日</div>
-      </div>
-      <div class="data-category">
-        <div class="data-cat-title">🔗 流程關聯</div>
-        <div class="data-item">試聽 / 測驗諮詢紀錄</div>
-        <div class="data-item">報名就讀紀錄（多對多）</div>
-        <div class="data-item">帳號權限角色</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ROADMAP -->
 <section>
   <div class="container">
@@ -1219,48 +1268,48 @@
   </div>
 </section>
 
-<!-- VALUE -->
+<!-- DATA LAYER（技術附錄，按需翻閱） -->
 <section style="background: var(--snow);">
   <div class="container">
-    <div class="section-label">系統價值</div>
-    <h2 class="section-title">這套系統帶來的六個核心改變</h2>
-    <p class="section-desc">不只是工具的更換，而是讓行政團隊從繁瑣事務中解放，把時間還給學生服務。</p>
-    <div class="value-grid">
-      <div class="value-card">
-        <div class="value-icon">⏱️</div>
-        <div class="value-title">行政時間大幅縮減</div>
-        <div class="value-text">建檔、帳單、通知全部系統化，每期報名行政耗時預估縮減 60% 以上。</div>
+    <div class="section-label">資料架構</div>
+    <h2 class="section-title">核心資料架構</h2>
+    <p class="section-desc">這是整套系統的數據地基——14 個主資料實體，建好後所有模組共用同一份，不再有資料孤島。<span style="font-size: 12px; color: var(--mist); display: block; margin-top: 6px;">技術細節，開會時按需翻閱即可。</span></p>
+    <div class="data-group">
+      <div class="data-category">
+        <div class="data-cat-title">👥 人員資料</div>
+        <div class="data-item">學生（ID 終身不變）</div>
+        <div class="data-item">家長</div>
+        <div class="data-item">老師（跨校區）</div>
+        <div class="data-item">員工</div>
       </div>
-      <div class="value-card">
-        <div class="value-icon">🗂️</div>
-        <div class="value-title">資料一次建立多處使用</div>
-        <div class="value-text">學生建檔後全系統共用，不再重複輸入，不再資料不同步。</div>
+      <div class="data-category">
+        <div class="data-cat-title">🏫 場域資料</div>
+        <div class="data-item">分校（勞健保加保單位）</div>
+        <div class="data-item">教室</div>
       </div>
-      <div class="value-card">
-        <div class="value-icon">💰</div>
-        <div class="value-title">帳務清晰不漏收</div>
-        <div class="value-text">五種費用自動計算、折扣精確套用、分期追蹤到底，財務狀況隨時掌握不遺漏。</div>
+      <div class="data-category">
+        <div class="data-cat-title">📚 教學營運</div>
+        <div class="data-item">課程</div>
+        <div class="data-item">班級（年度班名更新）</div>
+        <div class="data-item">期別</div>
       </div>
-      <div class="value-card">
-        <div class="value-icon">📊</div>
-        <div class="value-title">招生決策有數據支撐</div>
-        <div class="value-text">試聽來源、轉換率、未成交原因都有紀錄，招生策略不再只靠直覺。</div>
+      <div class="data-category">
+        <div class="data-cat-title">📐 營運規則</div>
+        <div class="data-item">定價費用結構（五種費用）</div>
+        <div class="data-item">折扣條件組合</div>
+        <div class="data-item">行事曆例外日</div>
       </div>
-      <div class="value-card">
-        <div class="value-icon">🔔</div>
-        <div class="value-title">通知不再依賴 LINE 群</div>
-        <div class="value-text">繳費提醒、缺席通知、補課安排全部系統化發送，不再怕訊息漏接。</div>
-      </div>
-      <div class="value-card">
-        <div class="value-icon">🤖</div>
-        <div class="value-title">未來接 AI，資料已就位</div>
-        <div class="value-text">系統設計預留 AI 串接能力，等資料積累後，AI 輔助功能可隨時擴充。</div>
+      <div class="data-category">
+        <div class="data-cat-title">🔗 流程關聯</div>
+        <div class="data-item">試聽 / 測驗諮詢紀錄</div>
+        <div class="data-item">報名就讀紀錄（多對多）</div>
+        <div class="data-item">帳號權限角色</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DESIGN PRINCIPLES -->
+<!-- DESIGN PRINCIPLES（壓軸：建立信任感） -->
 <section>
   <div class="container">
     <div class="section-label">設計原則</div>
@@ -1299,114 +1348,10 @@
   </div>
 </section>
 
-<!-- SCENARIO -->
-<section>
-  <div class="container">
-    <div class="section-label">情境回報</div>
-    <h2 class="section-title">上線後，日子真正會改變什麼？</h2>
-    <p class="section-desc">四個真實場景，對照上線前後的落差，讓系統的價值不只停在功能清單上。</p>
-    <div class="scenario-grid">
-
-      <div class="scenario-card">
-        <div class="scenario-header">
-          <div class="scenario-emoji">💰</div>
-          <div class="scenario-title">每月發薪日</div>
-        </div>
-        <div class="scenario-body">
-          <div class="scenario-row">
-            <span class="scenario-tag st-before">現在</span>
-            <div class="scenario-text">行政手動比對三校區出勤表、計算各班鐘點費、拆算每位老師的分校薪資，容易出錯、耗時超過半天。</div>
-          </div>
-          <div class="scenario-row">
-            <span class="scenario-tag st-after">上線後</span>
-            <div class="scenario-text">系統自動匯總出勤紀錄，依人數區間計算鐘點費、跨校比例攤算、底薪保障對比，一鍵產出發薪明細。</div>
-          </div>
-          <div class="scenario-row">
-            <span class="scenario-tag st-save">效益</span>
-            <div class="scenario-text">行政每月省 4–6 小時計算工時，錯誤申訴歸零，老師對薪資組成一目瞭然。</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-header">
-          <div class="scenario-emoji">👨‍👩‍👧</div>
-          <div class="scenario-title">家長詢問帳單</div>
-        </div>
-        <div class="scenario-body">
-          <div class="scenario-row">
-            <span class="scenario-tag st-before">現在</span>
-            <div class="scenario-text">家長打電話或傳 LINE 詢問繳費狀況，行政翻 Excel、找帳本，有時要隔天才能回覆。</div>
-          </div>
-          <div class="scenario-row">
-            <span class="scenario-tag st-after">上線後</span>
-            <div class="scenario-text">家長透過 Line@ 一句話詢問，AI 從身份綁定資料庫抓出本期帳單、折扣明細、繳費狀態，即時回覆。</div>
-          </div>
-          <div class="scenario-row">
-            <span class="scenario-tag st-save">效益</span>
-            <div class="scenario-text">行政接聽帳單相關來電量減少，家長滿意度提升，催費流程也從電話改為系統自動提醒。</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-header">
-          <div class="scenario-emoji">📝</div>
-          <div class="scenario-title">新生報名建檔</div>
-        </div>
-        <div class="scenario-body">
-          <div class="scenario-row">
-            <span class="scenario-tag st-before">現在</span>
-            <div class="scenario-text">紙本資料轉 Excel、再轉帳單系統、再通知老師分班，同一份資料被重複鍵入三次，出錯率高。</div>
-          </div>
-          <div class="scenario-row">
-            <span class="scenario-tag st-after">上線後</span>
-            <div class="scenario-text">一次建檔，學生 ID 終身唯一，帳單、課表、出勤、老師通知全部自動串通，資料不重複。</div>
-          </div>
-          <div class="scenario-row">
-            <span class="scenario-tag st-save">效益</span>
-            <div class="scenario-text">報名流程從 30 分鐘縮短至 10 分鐘內，資料錯誤率大幅下降，新生入班體驗更順暢。</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="scenario-card">
-        <div class="scenario-header">
-          <div class="scenario-emoji">📊</div>
-          <div class="scenario-title">主管掌握訊息全貌</div>
-        </div>
-        <div class="scenario-body">
-          <div class="scenario-row">
-            <span class="scenario-tag st-before">現在</span>
-            <div class="scenario-text">家長、老師訊息混在多個 LINE 群，主管無法快速判斷哪些是客訴、哪些還沒人回、今天要處理幾件。</div>
-          </div>
-          <div class="scenario-row">
-            <span class="scenario-tag st-after">上線後</span>
-            <div class="scenario-text">AI 自動分類路由訊息，主管儀表板顯示：未回覆數、客訴標記、今日待辦清單，重要訊息即時推送給對應人員。</div>
-          </div>
-          <div class="scenario-row">
-            <span class="scenario-tag st-save">效益</span>
-            <div class="scenario-text">主管每天花在「翻訊息」的時間減少，客訴回應時效提升，不再因訊息漏接引發家長不滿。</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="scenario-banner">
-      <div class="scenario-banner-icon">🚀</div>
-      <div class="scenario-banner-text">
-        <div class="scenario-banner-title">這四個場景只是開始</div>
-        <div class="scenario-banner-desc">系統設計時預留 AI 擴充能力。當資料積累到一定量，主動預警（缺席異常、帳單逾期、老師鐘點超時）都可以逐步啟用，讓系統從「被動查詢」進化到「主動預警」。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.17</p>
-  <p style="margin-top: 8px;">v0.17 新增「情境回報」四場景：發薪自動化、家長帳單即時查、報名建檔一次到位、主管訊息儀表板</p>
+  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.18</p>
+  <p style="margin-top: 8px;">v0.18 結構優化：情境回報前移至痛點之後、六個核心改變前移至模組之前、流程頁重複費用卡移除、資料架構移至最後技術附錄</p>
 </div>
 
 </body>
