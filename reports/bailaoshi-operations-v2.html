@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 智慧營運系統規劃 v0.16</title>
+<title>白老師國際語言中心 — 智慧營運系統規劃 v0.17</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -306,6 +306,50 @@
   .value-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
   .value-text { font-size: 13px; color: var(--slate); line-height: 1.6; }
 
+  /* SCENARIO */
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .scenario-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+  }
+  .scenario-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .scenario-header {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 10px; align-items: center;
+  }
+  .scenario-emoji { font-size: 20px; }
+  .scenario-title { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .scenario-body { padding: 18px 20px; }
+  .scenario-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0;
+  }
+  .scenario-row + .scenario-row { border-top: 1px dashed #E8E6E0; }
+  .scenario-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    padding: 3px 8px; border-radius: 8px; flex-shrink: 0; margin-top: 1px;
+    white-space: nowrap;
+  }
+  .st-before { background: #FEF0EC; color: #C4502A; }
+  .st-after  { background: #E8F5F0; color: #2D8A6E; }
+  .st-save   { background: #EBF4F8; color: #2A6A8A; }
+  .scenario-text { font-size: 13px; color: var(--slate); line-height: 1.6; }
+  .scenario-banner {
+    margin-top: 32px;
+    background: linear-gradient(135deg, #12121A 0%, #1e2840 100%);
+    border-radius: 14px; padding: 28px 32px;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+  .scenario-banner-icon { font-size: 36px; flex-shrink: 0; }
+  .scenario-banner-text { flex: 1; min-width: 200px; }
+  .scenario-banner-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .scenario-banner-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
   /* FOOTER */
   .footer {
     background: var(--ink); color: rgba(255,255,255,0.45);
@@ -322,7 +366,7 @@
 <body>
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v0.16 — 整合四大營運機制</div>
+  <div class="hero-tag">系統規劃文件 v0.17 — 整合四大營運機制 + 情境回報</div>
   <h1>白老師國際語言中心<br><span>智慧營運系統</span>規劃</h1>
   <p class="hero-sub">從諮詢到結業，整合教務、財務、AI 輔助與 MUSEON 智能對接的五階段導入計畫</p>
   <div class="hero-meta">
@@ -1255,10 +1299,114 @@
   </div>
 </section>
 
+<!-- SCENARIO -->
+<section>
+  <div class="container">
+    <div class="section-label">情境回報</div>
+    <h2 class="section-title">上線後，日子真正會改變什麼？</h2>
+    <p class="section-desc">四個真實場景，對照上線前後的落差，讓系統的價值不只停在功能清單上。</p>
+    <div class="scenario-grid">
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="scenario-emoji">💰</div>
+          <div class="scenario-title">每月發薪日</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row">
+            <span class="scenario-tag st-before">現在</span>
+            <div class="scenario-text">行政手動比對三校區出勤表、計算各班鐘點費、拆算每位老師的分校薪資，容易出錯、耗時超過半天。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-after">上線後</span>
+            <div class="scenario-text">系統自動匯總出勤紀錄，依人數區間計算鐘點費、跨校比例攤算、底薪保障對比，一鍵產出發薪明細。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-save">效益</span>
+            <div class="scenario-text">行政每月省 4–6 小時計算工時，錯誤申訴歸零，老師對薪資組成一目瞭然。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="scenario-emoji">👨‍👩‍👧</div>
+          <div class="scenario-title">家長詢問帳單</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row">
+            <span class="scenario-tag st-before">現在</span>
+            <div class="scenario-text">家長打電話或傳 LINE 詢問繳費狀況，行政翻 Excel、找帳本，有時要隔天才能回覆。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-after">上線後</span>
+            <div class="scenario-text">家長透過 Line@ 一句話詢問，AI 從身份綁定資料庫抓出本期帳單、折扣明細、繳費狀態，即時回覆。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-save">效益</span>
+            <div class="scenario-text">行政接聽帳單相關來電量減少，家長滿意度提升，催費流程也從電話改為系統自動提醒。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="scenario-emoji">📝</div>
+          <div class="scenario-title">新生報名建檔</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row">
+            <span class="scenario-tag st-before">現在</span>
+            <div class="scenario-text">紙本資料轉 Excel、再轉帳單系統、再通知老師分班，同一份資料被重複鍵入三次，出錯率高。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-after">上線後</span>
+            <div class="scenario-text">一次建檔，學生 ID 終身唯一，帳單、課表、出勤、老師通知全部自動串通，資料不重複。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-save">效益</span>
+            <div class="scenario-text">報名流程從 30 分鐘縮短至 10 分鐘內，資料錯誤率大幅下降，新生入班體驗更順暢。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <div class="scenario-emoji">📊</div>
+          <div class="scenario-title">主管掌握訊息全貌</div>
+        </div>
+        <div class="scenario-body">
+          <div class="scenario-row">
+            <span class="scenario-tag st-before">現在</span>
+            <div class="scenario-text">家長、老師訊息混在多個 LINE 群，主管無法快速判斷哪些是客訴、哪些還沒人回、今天要處理幾件。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-after">上線後</span>
+            <div class="scenario-text">AI 自動分類路由訊息，主管儀表板顯示：未回覆數、客訴標記、今日待辦清單，重要訊息即時推送給對應人員。</div>
+          </div>
+          <div class="scenario-row">
+            <span class="scenario-tag st-save">效益</span>
+            <div class="scenario-text">主管每天花在「翻訊息」的時間減少，客訴回應時效提升，不再因訊息漏接引發家長不滿。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="scenario-banner">
+      <div class="scenario-banner-icon">🚀</div>
+      <div class="scenario-banner-text">
+        <div class="scenario-banner-title">這四個場景只是開始</div>
+        <div class="scenario-banner-desc">系統設計時預留 AI 擴充能力。當資料積累到一定量，主動預警（缺席異常、帳單逾期、老師鐘點超時）都可以逐步啟用，讓系統從「被動查詢」進化到「主動預警」。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.16</p>
-  <p style="margin-top: 8px;">v0.16 整合四大營運機制：費用折扣帳單、薪資跨校區攤算、班級升級多對多關係，移除重複複雜節點彙整區塊</p>
+  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.17</p>
+  <p style="margin-top: 8px;">v0.17 新增「情境回報」四場景：發薪自動化、家長帳單即時查、報名建檔一次到位、主管訊息儀表板</p>
 </div>
 
 </body>
