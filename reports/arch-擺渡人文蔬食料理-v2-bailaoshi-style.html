@@ -30,9 +30,6 @@
   .tag-v2 { background: #e3f2fd; color: #1565c0; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
   .tag-no { background: #fce4ec; color: #c62828; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
   .warn-box { background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 14px 18px; margin: 14px 0; font-size: 0.9rem; }
-  .price-box { background: #e8f5e9; border: 2px solid #81c784; border-radius: 8px; padding: 20px 24px; margin: 14px 0; text-align: center; }
-  .price-range { font-size: 1.6rem; font-weight: 700; color: #2e7d32; margin: 8px 0; }
-  .price-note { font-size: 0.82rem; color: #666; margin-top: 8px; }
   .risk-a { border-left: 4px solid #43a047; padding: 14px 18px; background: #f1f8f2; border-radius: 0 6px 6px 0; margin: 10px 0; }
   .risk-b { border-left: 4px solid #ef5350; padding: 14px 18px; background: #fff5f5; border-radius: 0 6px 6px 0; margin: 10px 0; }
   .conclusion-box { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 6px; padding: 14px 18px; margin: 14px 0; font-size: 0.92rem; }
@@ -43,38 +40,18 @@
   .toc ol { margin: 0; font-size: 0.86rem; color: #3b6e94; }
   .toc a { color: #3b6e94; text-decoration: none; }
   .toc a:hover { text-decoration: underline; }
-  /* 三層功能分層 */
   .tier-grid { display: grid; gap: 16px; margin: 16px 0; }
   .tier-card { border-radius: 8px; padding: 18px 20px; }
   .tier-green { background: #e8f5e9; border-left: 5px solid #43a047; }
   .tier-yellow { background: #fff8e1; border-left: 5px solid #ffa726; }
-  .tier-blue { background: #e3f2fd; border-left: 5px solid #1976d2; }
   .tier-header { font-weight: 700; font-size: 0.97rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
   .tier-green .tier-header { color: #2e7d32; }
   .tier-yellow .tier-header { color: #e65100; }
-  .tier-blue .tier-header { color: #1565c0; }
   .tier-badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; }
   .tier-green .tier-badge { background: #43a047; color: #fff; }
   .tier-yellow .tier-badge { background: #ffa726; color: #fff; }
-  .tier-blue .tier-badge { background: #1976d2; color: #fff; }
   .tier-card ul { padding-left: 18px; margin: 0; font-size: 0.9rem; }
   .tier-card li { margin-bottom: 6px; }
-  /* 三階段費用 */
-  .phase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 16px 0; }
-  .phase-card { border-radius: 8px; padding: 18px 16px; text-align: center; }
-  .phase-card.p1 { background: #e8f5e9; border: 2px solid #81c784; }
-  .phase-card.p2 { background: #fff8e1; border: 2px solid #ffd54f; }
-  .phase-card.p3 { background: #e3f2fd; border: 2px solid #90caf9; }
-  .phase-label { font-size: 0.8rem; font-weight: 700; margin-bottom: 6px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
-  .phase-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-  .p1 .phase-name { color: #2e7d32; }
-  .p2 .phase-name { color: #e65100; }
-  .p3 .phase-name { color: #1565c0; }
-  .phase-price { font-size: 1.3rem; font-weight: 700; margin: 6px 0; }
-  .p1 .phase-price { color: #2e7d32; }
-  .p2 .phase-price { color: #e65100; }
-  .p3 .phase-price { color: #1565c0; }
-  .phase-desc { font-size: 0.8rem; color: #666; margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -82,9 +59,9 @@
 
   <h1>擺渡人文蔬食料理 — 營運管理系統規劃文件</h1>
   <div class="doc-meta">
-    <span>版本：v3.0</span>
+    <span>版本：v2.0</span>
     <span>日期：2026-06-14</span>
-    <span>用途：系統規劃評估，供內部討論，不含開發費用與合約條款</span>
+    <span>用途：系統規劃評估，供內部討論</span>
   </div>
 
   <div class="toc">
@@ -92,7 +69,7 @@
     <ol>
       <li><a href="#s1">專案摘要</a></li>
       <li><a href="#s2">功能需求</a></li>
-      <li><a href="#s2b">系統功能分層（核心 / 加值 / v2評估）</a></li>
+      <li><a href="#s2b">系統功能清單（核心 / 加值）</a></li>
       <li><a href="#s3">系統架構</a></li>
       <li><a href="#s4">資料庫設計</a></li>
       <li><a href="#s5">API 設計大綱</a></li>
@@ -176,13 +153,13 @@
     </tbody>
   </table>
 
-  <!-- ②b 功能分層 -->
-  <h2 id="s2b"><span class="section-num">②+</span> 系統功能分層（核心 / 加值 / v2 評估）</h2>
-  <p style="font-size:0.88rem; color:#555; margin-bottom:14px;">依交付優先級與業主感受拆分為三層，避免功能清單一次呈現造成腦補高報價。</p>
+  <!-- ②b 功能清單 -->
+  <h2 id="s2b"><span class="section-num">②+</span> 系統功能清單（核心 / 加值）</h2>
+  <p style="font-size:0.88rem; color:#555; margin-bottom:14px;">以下功能全數納入本次建置範圍，依交付順序分為兩層。</p>
 
   <div class="tier-grid">
     <div class="tier-card tier-green">
-      <div class="tier-header">🟢 綠·v1 核心層 <span class="tier-badge">v1 確定交付</span></div>
+      <div class="tier-header">🟢 核心功能層 <span class="tier-badge">Phase 1 交付</span></div>
       <ul>
         <li>ICF 銷售數據匯入（每日結帳核心）</li>
         <li>部門分帳會計（餐廳 / 吉拿棒 / 宴會廳）</li>
@@ -196,7 +173,7 @@
     </div>
 
     <div class="tier-card tier-yellow">
-      <div class="tier-header">🟡 黃·v1 加值層 <span class="tier-badge">v1 上線時一起交付</span></div>
+      <div class="tier-header">🟡 加值功能層 <span class="tier-badge">Phase 2 交付</span></div>
       <ul>
         <li>LINE 班表通知（讓員工收到班表推播）
           <div class="warn-box" style="margin:8px 0 2px; font-size:0.82rem;">
@@ -205,9 +182,14 @@
         </li>
         <li>低庫存預警（食材低於閾值自動提示）</li>
         <li>加班費自動計算（出勤差異比對班表）</li>
-        <li>相關報表（一鍵 PDF/Excel 自動產出）</li>
+        <li>相關報表輸出（損益、成本、出勤等整合報表）</li>
+        <li>第三方支付費用記錄（LINE Pay / 信用卡手續費自動拆帳入費用分錄）</li>
       </ul>
     </div>
+  </div>
+
+  <div class="warn-box" style="margin-top:14px; font-size:0.88rem;">
+    💳 <strong>第三方支付月費說明</strong>：現行透過 ICF 收取 LINE Pay 及信用卡付款，手續費約為交易金額 1.5%，每月約 NT$2,000–3,000（依實際刷卡量浮動）。此費用由 ICF 代扣，建議系統自動將此項列入每月費用分錄，供損益表呈現。
   </div>
 
   <!-- ③ -->
@@ -247,7 +229,7 @@
       <tr><td>組織</td><td>部門管理</td><td>餐廳/吉拿棒/宴會廳設定</td></tr>
       <tr><td>組織</td><td>員工管理</td><td>員工基本資料、角色</td></tr>
       <tr><td>會計</td><td>收入管理</td><td>每日銷售錄入（含 ICF 匯入）</td></tr>
-      <tr><td>會計</td><td>費用管理</td><td>採購、薪資、水電、雜費</td></tr>
+      <tr><td>會計</td><td>費用管理</td><td>採購、薪資、水電、雜費、第三方支付手續費</td></tr>
       <tr><td>會計</td><td>報表引擎</td><td>月報、部門損益、現金流</td></tr>
       <tr><td>進銷存</td><td>食材管理</td><td>品項、單位、成本價</td></tr>
       <tr><td>進銷存</td><td>採購管理</td><td>採購單、進貨紀錄</td></tr>
@@ -262,7 +244,7 @@
   <ol>
     <li style="margin-bottom:8px;"><strong>每日結帳流程</strong><br>ICF 匯出 CSV → 管理員上傳 → 匯入服務解析 → 寫入收入模組 → 自動分配到各部門帳</li>
     <li style="margin-bottom:8px;"><strong>食材成本追蹤</strong><br>銷售數據 → 對應菜單 BOM → 計算食材消耗 → 更新庫存 → 產出成本差異報告</li>
-    <li><strong>月結報表</strong><br>收入（ICF 匯入）+ 費用（手動錄入）+ 薪資（打卡計算）→ 損益表 → PDF/Excel 輸出</li>
+    <li><strong>月結報表</strong><br>收入（ICF 匯入）+ 費用（手動錄入 + 第三方支付手續費）+ 薪資（打卡計算）→ 損益表 → PDF/Excel 輸出</li>
   </ol>
 
   <!-- ④ -->
@@ -286,7 +268,7 @@
       <tr><td>MenuItemBOM</td><td>品項食材配方</td><td>菜色對應食材用量</td></tr>
       <tr><td>SalesImport</td><td>銷售匯入批次</td><td>ICF CSV 匯入批次</td></tr>
       <tr><td>SalesRecord</td><td>銷售紀錄</td><td>單筆交易</td></tr>
-      <tr><td>Expense</td><td>費用單</td><td>非採購費用（水電/薪資等）</td></tr>
+      <tr><td>Expense</td><td>費用單</td><td>非採購費用（水電/薪資/第三方支付手續費等）</td></tr>
       <tr><td>MonthlyReport</td><td>月報</td><td>已鎖定的月度結算</td></tr>
     </tbody>
   </table>
@@ -322,7 +304,7 @@ source          VARCHAR(20)   -- icf_import / manual
 -- expenses
 id              PK
 department_id   FK → departments
-category        VARCHAR(50)   -- ingredients/staff/utilities/misc
+category        VARCHAR(50)   -- ingredients/staff/utilities/payment_fee/misc
 amount          DECIMAL(10,2)
 expense_date    DATE  -- INDEX
 description     TEXT
@@ -352,7 +334,7 @@ status        VARCHAR(20)   -- scheduled/confirmed/absent</pre>
       <tr><td><code>/inventory/purchases</code></td><td>GET/POST</td><td>採購單</td></tr>
       <tr><td><code>/sales/import</code></td><td>POST</td><td>上傳 ICF 銷售 CSV</td></tr>
       <tr><td><code>/sales/daily</code></td><td>GET</td><td>每日銷售摘要（可篩選部門/日期）</td></tr>
-      <tr><td><code>/expenses</code></td><td>GET/POST</td><td>費用錄入與查詢</td></tr>
+      <tr><td><code>/expenses</code></td><td>GET/POST</td><td>費用錄入與查詢（含第三方支付手續費）</td></tr>
       <tr><td><code>/reports/monthly</code></td><td>GET</td><td>月度損益報表</td></tr>
       <tr><td><code>/reports/department</code></td><td>GET</td><td>部門別損益</td></tr>
       <tr><td><code>/reports/cost-analysis</code></td><td>GET</td><td>食材消耗成本分析</td></tr>
@@ -474,7 +456,7 @@ status        VARCHAR(20)   -- scheduled/confirmed/absent</pre>
         <tr><td>導入風險</td><td>低 — 點餐系統不動，後台系統獨立上線，互不影響</td></tr>
         <tr><td>上線時程</td><td>可控 — 後台系統 2–3 個月可完成 v1</td></tr>
         <tr><td>員工學習成本</td><td>低 — 點餐流程不變，只有管理員需學新後台</td></tr>
-        <tr><td>月費</td><td>ICF 約 NT$6,000/月 + 新系統主機費約 NT$1,000–2,000/月</td></tr>
+        <tr><td>月費</td><td>ICF 約 NT$6,000/月（含第三方支付）+ 新系統主機費約 NT$1,000–2,000/月</td></tr>
         <tr><td>開新店時</td><td>後台系統可直接延伸，資料已在同一平台</td></tr>
         <tr><td>主要風險</td><td>兩套系統並存，ICF 銷售資料需定期手動匯出（每日或週期性）</td></tr>
       </tbody>
@@ -508,29 +490,14 @@ status        VARCHAR(20)   -- scheduled/confirmed/absent</pre>
     <tbody>
       <tr><td>系統名稱</td><td>ICF（ich/iif，實際名稱待確認）</td></tr>
       <tr><td>使用年資</td><td>數年，員工已熟悉</td></tr>
-      <tr><td>月費</td><td>約 NT$3,000+（不含金流手續費）</td></tr>
-      <tr><td>總月費（含 LINE Pay/刷卡）</td><td>約 NT$6,000</td></tr>
+      <tr><td>月費（系統費）</td><td>約 NT$3,000+/月</td></tr>
+      <tr><td>第三方支付手續費（LINE Pay / 信用卡）</td><td>約 NT$2,000–3,000/月（依交易量，約銷售額 1.5%）</td></tr>
+      <tr><td>總月費（含金流）</td><td>約 NT$5,000–6,000/月</td></tr>
       <tr><td>匯出功能</td><td>可匯出銷售 CSV、打卡 CSV</td></tr>
       <tr><td>涵蓋功能</td><td>點餐、出餐、基礎帳務、打卡</td></tr>
       <tr><td>缺少功能</td><td>後台會計、進銷存、排班整合、部門損益分析</td></tr>
     </tbody>
   </table>
-
-  <h3 style="margin-top:24px;">第三方支付費用說明</h3>
-  <div class="warn-box">
-    <strong>⚠️ 第三方支付為依交易量計費的浮動費用，非買斷項目</strong><br><br>
-    目前 ICF 月費約 NT$6,000 已含金流手續費（LINE Pay + 信用卡），以下為費率拆解供參考：
-  </div>
-  <table>
-    <thead><tr><th>支付方式</th><th>費率</th><th>費用說明</th></tr></thead>
-    <tbody>
-      <tr><td>LINE Pay</td><td>約 2.5%/筆</td><td>依 LINE Pay 商業帳號費率，免月費方案</td></tr>
-      <tr><td>信用卡刷卡</td><td>約 1.5–2.5%（依發卡行）</td><td>Visa/Mastercard 一般商戶費率，需透過收單機構申請</td></tr>
-      <tr><td>現金</td><td>無手續費</td><td>現金交易無手續費，但需人工對帳</td></tr>
-      <tr><td>月均合計（估算）</td><td>—</td><td>依業績 NT$50 萬/月估算，手續費約 NT$1,250–12,500（依支付比例）</td></tr>
-    </tbody>
-  </table>
-  <p style="font-size:0.85rem; color:#666;">此費用目前由 ICF 平台代為收單。若未來評估自建支付串接，手續費結構不變，但需額外申請收單帳號（審核週期約 1–2 個月）。</p>
 
   <div class="footer">本文件由 MUSEON 系統依訪談記錄自動生成，供評估用途。所有假設項目已標記，可依實際情況修正。</div>
 </div>
