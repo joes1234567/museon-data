@@ -1,509 +1,812 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>擺渡人文蔬食料理 — 營運管理系統規劃文件</title>
+<title>擺渡人文蔬食料理 — 智慧營運管理系統規劃</title>
 <style>
+  :root {
+    --jade: #1a6b3c;
+    --jade-light: #2d9a5c;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --ink: #0f1a12;
+    --slate: #4A5A4E;
+    --mist: #8898A0;
+    --border: #DDE4DC;
+    --parchment: #F5F8F5;
+    --snow: #FBFDFB;
+    --success: #2D8A6E;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: #f5f5f0; color: #2c2c2c; line-height: 1.7; }
-  .container { max-width: 920px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); padding: 52px 60px; }
-  h1 { font-size: 1.7rem; font-weight: 700; color: #1a1a1a; border-bottom: 3px solid #3b6e94; padding-bottom: 14px; margin-bottom: 8px; }
-  .doc-meta { font-size: 0.82rem; color: #888; margin-bottom: 36px; }
-  .doc-meta span { margin-right: 20px; }
-  h2 { font-size: 1.08rem; font-weight: 700; color: #3b6e94; margin: 38px 0 14px; border-left: 4px solid #3b6e94; padding-left: 12px; }
-  h3 { font-size: 0.95rem; font-weight: 700; color: #1a1a1a; margin: 20px 0 8px; }
-  p { margin-bottom: 12px; font-size: 0.93rem; }
-  table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 0.88rem; }
-  th { background: #3b6e94; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
-  td { padding: 9px 12px; border-bottom: 1px solid #e8e8e3; vertical-align: top; }
-  tr:nth-child(even) td { background: #f7fafc; }
-  ul { padding-left: 22px; margin-bottom: 12px; font-size: 0.92rem; }
-  ol { padding-left: 22px; margin-bottom: 12px; font-size: 0.92rem; }
-  li { margin-bottom: 5px; }
-  code, pre { font-family: "Menlo", "Consolas", monospace; font-size: 0.83rem; }
-  pre { background: #f0f4f8; border-radius: 6px; padding: 16px 18px; overflow-x: auto; margin: 12px 0 18px; border: 1px solid #d8e3ec; white-space: pre; }
-  .in-scope { color: #2e7d32; font-weight: 600; }
-  .out-scope { color: #c62828; font-weight: 600; }
-  .section-num { display: inline-block; background: #3b6e94; color: #fff; border-radius: 4px; font-size: 0.78rem; padding: 2px 8px; margin-right: 6px; vertical-align: middle; }
-  .tag-v1 { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
-  .tag-v2 { background: #e3f2fd; color: #1565c0; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
-  .tag-no { background: #fce4ec; color: #c62828; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
-  .warn-box { background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 14px 18px; margin: 14px 0; font-size: 0.9rem; }
-  .risk-a { border-left: 4px solid #43a047; padding: 14px 18px; background: #f1f8f2; border-radius: 0 6px 6px 0; margin: 10px 0; }
-  .risk-b { border-left: 4px solid #ef5350; padding: 14px 18px; background: #fff5f5; border-radius: 0 6px 6px 0; margin: 10px 0; }
-  .conclusion-box { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 6px; padding: 14px 18px; margin: 14px 0; font-size: 0.92rem; }
-  hr { border: none; border-top: 1px solid #e8e8e3; margin: 28px 0; }
-  .footer { font-size: 0.78rem; color: #aaa; text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #eee; }
-  .toc { background: #f7fafc; border: 1px solid #d8e3ec; border-radius: 6px; padding: 18px 22px; margin-bottom: 32px; }
-  .toc h3 { font-size: 0.88rem; color: #3b6e94; margin-bottom: 10px; }
-  .toc ol { margin: 0; font-size: 0.86rem; color: #3b6e94; }
-  .toc a { color: #3b6e94; text-decoration: none; }
-  .toc a:hover { text-decoration: underline; }
-  .tier-grid { display: grid; gap: 16px; margin: 16px 0; }
-  .tier-card { border-radius: 8px; padding: 18px 20px; }
-  .tier-green { background: #e8f5e9; border-left: 5px solid #43a047; }
-  .tier-yellow { background: #fff8e1; border-left: 5px solid #ffa726; }
-  .tier-header { font-weight: 700; font-size: 0.97rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-  .tier-green .tier-header { color: #2e7d32; }
-  .tier-yellow .tier-header { color: #e65100; }
-  .tier-badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; }
-  .tier-green .tier-badge { background: #43a047; color: #fff; }
-  .tier-yellow .tier-badge { background: #ffa726; color: #fff; }
-  .tier-card ul { padding-left: 18px; margin: 0; font-size: 0.9rem; }
-  .tier-card li { margin-bottom: 6px; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a1a0e 0%, #12391e 60%, #1a5a30 100%);
+    color: #fff;
+    padding: 64px 40px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,107,60,0.28) 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 50%, rgba(42,122,110,0.15) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(45,154,92,0.25);
+    border: 1px solid rgba(45,154,92,0.5);
+    color: #5ecf85;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #5ecf85; }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    max-width: 560px;
+    margin: 0 auto 36px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .hero-meta-num { font-size: 30px; font-weight: 700; color: #5ecf85; }
+  .hero-meta-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+  /* LAYOUT */
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--jade); font-weight: 600; margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(21px, 3vw, 29px); font-weight: 700;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.3;
+  }
+  .section-desc {
+    color: var(--slate); font-size: 15px; max-width: 640px; margin-bottom: 40px;
+  }
+
+  /* PAIN POINTS */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .pain-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+  .pain-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+  .pain-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pi-red { background: #FEF0EC; }
+  .pi-orange { background: #FFF5E6; }
+  .pi-blue { background: #EBF4F8; }
+  .pi-green { background: #E8F5EE; }
+  .pain-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--ink); }
+  .pain-desc { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+  /* FLOW */
+  .flow-wrapper {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px 28px; overflow-x: auto;
+  }
+  .flow-row {
+    display: flex; align-items: center; gap: 0;
+    flex-wrap: nowrap; min-width: 760px;
+  }
+  .flow-step {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; flex: 1; min-width: 76px;
+  }
+  .flow-circle {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0;
+  }
+  .flow-step-label { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.4; }
+  .flow-arrow { color: var(--mist); font-size: 16px; flex-shrink: 0; padding: 0 2px; margin-bottom: 22px; }
+
+  .bg-blue { background: #EBF4F8; }
+  .bg-teal { background: #E6F4F2; }
+  .bg-green { background: #E8F5EE; }
+  .bg-gold { background: #FBF4E6; }
+  .bg-ember { background: #FEF0EC; }
+  .bg-purple { background: #F0EBF8; }
+  .bg-lime { background: #F0F8E8; }
+
+  /* PHASES */
+  .phase-block { margin-bottom: 44px; }
+  .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .phase-badge {
+    padding: 4px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  }
+  .pb-1 { background: #E8F5EE; color: #1a6b3c; border: 1px solid #a8d8bc; }
+  .pb-2 { background: #EBF4F8; color: #2A6A8A; border: 1px solid #b2d0df; }
+  .pb-3 { background: #FBF4E6; color: #B8923A; border: 1px solid #dfc990; }
+  .pb-4 { background: #F0EBF8; color: #6A4A9A; border: 1px solid #c9b8e8; }
+  .t-dispatch { background: #E6F4F2; color: #2A7A6E; }
+  .phase-title { font-size: 17px; font-weight: 700; color: var(--ink); }
+  .phase-subtitle { font-size: 13px; color: var(--mist); margin-left: auto; }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+  }
+  .module-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px;
+  }
+  .module-num { font-size: 10px; font-weight: 700; color: var(--mist); margin-bottom: 5px; letter-spacing: 1px; }
+  .module-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .module-desc { font-size: 12px; color: var(--slate); line-height: 1.6; }
+  .module-tag {
+    display: inline-block; font-size: 10px; padding: 2px 8px;
+    border-radius: 10px; margin-top: 10px; font-weight: 600;
+  }
+  .t-core { background: #E8F5EE; color: #1a6b3c; }
+  .t-fin { background: #FBF4E6; color: #B8923A; }
+  .t-hr { background: #EBF4F8; color: #2A6A8A; }
+  .t-smart { background: #F0EBF8; color: #6A4A9A; }
+  .t-svc { background: #FEF0EC; color: #C4502A; }
+
+  /* DATA LAYER */
+  .data-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 14px;
+  }
+  .data-category {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 16px;
+  }
+  .data-cat-title {
+    font-size: 11px; font-weight: 700; color: var(--jade);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .data-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--slate); padding: 3px 0;
+  }
+  .data-item::before {
+    content: ''; width: 5px; height: 5px;
+    border-radius: 50%; background: var(--mist); flex-shrink: 0;
+  }
+
+  /* ROADMAP */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+  }
+  .roadmap-phase { padding: 28px 22px; border-right: 1px solid var(--border); }
+  .roadmap-phase:last-child { border-right: none; }
+  .rp-active { background: linear-gradient(135deg, #E8F5EE 0%, #F4FAF6 100%); }
+  .rp-upcoming { background: var(--snow); }
+  .rp-future { background: var(--parchment); }
+  .rp-expand { background: #FAF6FF; }
+  .roadmap-phase-num { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+  .rp-active .roadmap-phase-num { color: #1a6b3c; }
+  .rp-upcoming .roadmap-phase-num { color: #2A6A8A; }
+  .rp-future .roadmap-phase-num { color: var(--gold); }
+  .rp-expand .roadmap-phase-num { color: #6A4A9A; }
+  .roadmap-phase-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .roadmap-period { font-size: 12px; color: var(--mist); margin-bottom: 16px; }
+  .roadmap-items { list-style: none; }
+  .roadmap-items li {
+    font-size: 13px; color: var(--slate); padding: 4px 0;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .roadmap-items li::before { content: '✓'; color: #1a6b3c; font-weight: 700; flex-shrink: 0; }
+  .rp-upcoming .roadmap-items li::before { content: '○'; color: #2A6A8A; }
+  .rp-future .roadmap-items li::before { content: '◇'; color: var(--gold); }
+  .rp-expand .roadmap-items li::before { content: '◎'; color: #6A4A9A; }
+
+  /* VALUE */
+  .value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .value-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 26px 20px; text-align: center;
+  }
+  .value-icon { font-size: 26px; margin-bottom: 10px; }
+  .value-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .value-text { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+  /* RISK TABLE */
+  .risk-table { width: 100%; border-collapse: collapse; margin-bottom: 0; }
+  .risk-table th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-size: 13px; }
+  .risk-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--slate); vertical-align: top; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-high { background: #FFF5F5; }
+  .risk-mid { background: #FFFBF0; }
+  .risk-low { background: #F5FFF8; }
+  .risk-label { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  .rl-high { background: #FEE2E2; color: #B91C1C; }
+  .rl-mid { background: #FEF3C7; color: #92400E; }
+  .rl-low { background: #D1FAE5; color: #065F46; }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%);
+    border: 1px solid #a8d8bc; border-radius: 14px;
+    padding: 28px 32px;
+  }
+  .highlight-box h3 { font-size: 17px; font-weight: 700; color: #1a6b3c; margin-bottom: 10px; }
+  .highlight-box p { font-size: 14px; color: var(--slate); }
+
+  /* SCOPE */
+  .scope-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .scope-col {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 26px;
+  }
+  .scope-col h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; }
+  .scope-col.col-in h3 { color: var(--jade); }
+  .scope-col.col-out h3 { color: #C4502A; }
+  .scope-list { list-style: none; }
+  .scope-list li { font-size: 13px; color: var(--slate); padding: 6px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.6; }
+  .col-in .scope-list li::before { content: '✅'; flex-shrink: 0; }
+  .col-out .scope-list li::before { content: '❌'; flex-shrink: 0; }
+  .scope-list li strong { color: var(--ink); }
+
+  /* INFO NOTE */
+  .info-note {
+    background: #FBF4E6; border: 1px solid #dfc990; border-radius: 12px;
+    padding: 18px 22px; font-size: 13px; color: var(--slate); line-height: 1.7;
+    margin-top: 20px;
+  }
+  .info-note strong { color: #8a6d1f; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 32px 24px; font-size: 13px;
+  }
+  .footer strong { color: rgba(255,255,255,0.75); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 20px; }
+    section { padding: 40px 0; }
+  }
 </style>
 </head>
 <body>
-<div class="container">
 
-  <h1>擺渡人文蔬食料理 — 營運管理系統規劃文件</h1>
-  <div class="doc-meta">
-    <span>版本：v2.0</span>
-    <span>日期：2026-06-14</span>
-    <span>用途：系統規劃評估，供內部討論</span>
-  </div>
-
-  <div class="toc">
-    <h3>目錄</h3>
-    <ol>
-      <li><a href="#s1">專案摘要</a></li>
-      <li><a href="#s2">功能需求</a></li>
-      <li><a href="#s2b">系統功能清單（核心 / 加值）</a></li>
-      <li><a href="#s3">系統架構</a></li>
-      <li><a href="#s4">資料庫設計</a></li>
-      <li><a href="#s5">API 設計大綱</a></li>
-      <li><a href="#s6">AI 模組</a></li>
-      <li><a href="#s7">安全性要點</a></li>
-      <li><a href="#s8">非功能需求</a></li>
-      <li><a href="#s9">v1 優先範圍 vs 先不做</a></li>
-      <li><a href="#s10">風險評估與建議</a></li>
-    </ol>
-  </div>
-
-  <!-- ① -->
-  <h2 id="s1"><span class="section-num">①</span> 專案摘要</h2>
-  <p>為擺渡人文蔬食料理建立後台管理系統，解決帳務手工耗時、食材成本難追蹤、排班散落 Excel 三大痛點，並為未來線上點餐/訂位預留擴充接口。</p>
-
-  <h3>使用者角色</h3>
-  <table>
-    <thead><tr><th>角色</th><th>描述</th><th>主要操作</th></tr></thead>
-    <tbody>
-      <tr><td>後台管理員（云亭）</td><td>系統唯一主要操作者</td><td>所有後台功能</td></tr>
-      <tr><td>店長</td><td>查閱報表、審核資料</td><td>報表、審批</td></tr>
-      <tr><td>老闆/股東</td><td>月報查看</td><td>報表輸出</td></tr>
-      <tr><td>員工</td><td>班表確認</td><td>查看班表（唯讀）</td></tr>
-    </tbody>
-  </table>
-
-  <h3>目標與範圍邊界</h3>
-  <ul>
-    <li><span class="in-scope">✅ 在範圍內</span>：後台帳務、進銷存、排班、ICF 資料橋接、部門損益分離</li>
-    <li><span class="in-scope">✅ 在範圍內</span>：多部門帳號分開（餐廳 / 吉拿棒 / 宴會廳）</li>
-    <li><span class="out-scope">❌ 不在此次範圍</span>：取代 ICF 點餐系統（v1 不做）</li>
-    <li><span class="out-scope">❌ 不在此次範圍</span>：線上掃碼點餐、線上訂位（v2 評估）</li>
-    <li><span class="out-scope">❌ 不在此次範圍</span>：AI 數位員工（現階段規模不需要）</li>
-    <li><span class="out-scope">❌ 不在此次範圍</span>：多公司整合架構（聚焦單一餐廳，未來擴張再評估）</li>
-    <li><span class="out-scope">❌ 不在此次範圍</span>：稅務試算（記帳系統範疇，非會計申報系統）</li>
-  </ul>
-
-  <h3>規模假設（可被推翻）</h3>
-  <ul>
-    <li>日常操作人數：1–3 人</li>
-    <li>每日交易筆數：&lt; 500 筆</li>
-    <li>員工人數：10–30 人</li>
-    <li>部門數：3（餐廳 / 吉拿棒 / 宴會廳）</li>
-    <li>資料量：輕量級，不需分散式架構</li>
-  </ul>
-
-  <!-- ② -->
-  <h2 id="s2"><span class="section-num">②</span> 功能需求</h2>
-
-  <h3>User Stories</h3>
-  <h3 style="color:#555; font-weight:500; margin-top:14px;">後台管理員（云亭）</h3>
-  <ul>
-    <li>身為管理員，我需要從 ICF 匯入銷售數據，以便不用重複 key 資料</li>
-    <li>身為管理員，我需要錄入每日進貨與費用，以便計算當日真實成本</li>
-    <li>身為管理員，我需要按部門查看損益，以便釐清餐廳與吉拿棒分別賺賠多少</li>
-    <li>身為管理員，我需要設定員工班表，以便取代現有 Excel 排班</li>
-    <li>身為管理員，我需要匯入 ICF 打卡記錄，以便計算出勤與薪資</li>
-    <li>身為管理員，我需要產出月結報表，以便每月交給股東查閱</li>
-    <li>身為管理員，我需要查看食材消耗排行，以便找出高成本食材</li>
-  </ul>
-  <h3 style="color:#555; font-weight:500; margin-top:14px;">店長</h3>
-  <ul>
-    <li>身為店長，我需要查看每日/每週銷售摘要，以便掌握營運狀況</li>
-    <li>身為店長，我需要審核班表，以便確認人力配置合理</li>
-  </ul>
-  <h3 style="color:#555; font-weight:500; margin-top:14px;">老闆/股東</h3>
-  <ul>
-    <li>身為股東，我需要匯出月度損益報表（PDF/Excel），以便定期審閱財務</li>
-  </ul>
-
-  <h3>BDD 情境大綱</h3>
-  <table>
-    <thead><tr><th>功能</th><th>情境</th><th>摘要</th></tr></thead>
-    <tbody>
-      <tr><td>ICF 銷售匯入</td><td>正常匯入</td><td>上傳 ICF 匯出的 CSV，系統自動解析並寫入帳務</td></tr>
-      <tr><td>ICF 銷售匯入</td><td>格式異常</td><td>欄位不符時顯示錯誤明細，不寫入資料庫</td></tr>
-      <tr><td>進貨錄入</td><td>新增進貨單</td><td>填入食材、數量、單價，系統更新庫存並產生費用分錄</td></tr>
-      <tr><td>進銷存成本</td><td>計算食材成耗</td><td>系統依銷售品項對應 BOM，推算食材消耗量與成本</td></tr>
-      <tr><td>排班管理</td><td>建立週班表</td><td>管理員拖拉員工到班次，系統計算預估人力成本</td></tr>
-      <tr><td>打卡匯入</td><td>匯入出勤記錄</td><td>上傳 ICF 打卡 CSV，系統比對班表計算出勤差異</td></tr>
-      <tr><td>月結報表</td><td>產出部門損益</td><td>指定月份，系統產出各部門收入/成本/毛利報表</td></tr>
-      <tr><td>部門分帳</td><td>切換部門視角</td><td>管理員選擇「餐廳」或「吉拿棒」，所有數字獨立呈現</td></tr>
-    </tbody>
-  </table>
-
-  <!-- ②b 功能清單 -->
-  <h2 id="s2b"><span class="section-num">②+</span> 系統功能清單（核心 / 加值）</h2>
-  <p style="font-size:0.88rem; color:#555; margin-bottom:14px;">以下功能全數納入本次建置範圍，依交付順序分為兩層。</p>
-
-  <div class="tier-grid">
-    <div class="tier-card tier-green">
-      <div class="tier-header">🟢 核心功能層 <span class="tier-badge">Phase 1 交付</span></div>
-      <ul>
-        <li>ICF 銷售數據匯入（每日結帳核心）</li>
-        <li>部門分帳會計（餐廳 / 吉拿棒 / 宴會廳）</li>
-        <li>費用錄入與月結報表</li>
-        <li>食材進貨與成本計算（BOM 對應）</li>
-        <li>排班管理（取代 Excel 班表）</li>
-        <li>出勤匯入與薪資計算</li>
-        <li>相關報表輸出（損益 / 出勤 / 成本 Excel 匯出）</li>
-        <li>MUSEON AI 智能助理（基礎配置）</li>
-      </ul>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">系統規劃文件 v2.0</div>
+  <h1>擺渡人文蔬食料理<br><span>智慧營運管理系統</span>規劃</h1>
+  <p class="hero-sub">從帳務止血到部門損益透明，整合記帳、進銷存、排班與 ICF 資料橋接的營運後台系統</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">13</span>
+      <span class="hero-meta-label">系統功能</span>
     </div>
-
-    <div class="tier-card tier-yellow">
-      <div class="tier-header">🟡 加值功能層 <span class="tier-badge">Phase 2 交付</span></div>
-      <ul>
-        <li>LINE 班表通知（讓員工收到班表推播）
-          <div class="warn-box" style="margin:8px 0 2px; font-size:0.82rem;">
-            ⚠️ <strong>LINE Bot 月費說明</strong>：LINE Notify 已於 2025 年停用。目前需申請 LINE Bot，月費約 NT$200–800（依訊息量計費，一般用量約 200 元）。
-          </div>
-        </li>
-        <li>低庫存預警（食材低於閾值自動提示）</li>
-        <li>加班費自動計算（出勤差異比對班表）</li>
-        <li>相關報表輸出（損益、成本、出勤等整合報表）</li>
-        <li>第三方支付費用記錄（LINE Pay / 信用卡手續費自動拆帳入費用分錄）</li>
-      </ul>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">15</span>
+      <span class="hero-meta-label">主資料實體</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">3</span>
+      <span class="hero-meta-label">營運部門</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">1</span>
+      <span class="hero-meta-label">ICF 資料橋接</span>
     </div>
   </div>
-
-  <div class="warn-box" style="margin-top:14px; font-size:0.88rem;">
-    💳 <strong>第三方支付月費說明</strong>：現行透過 ICF 收取 LINE Pay 及信用卡付款，手續費約為交易金額 1.5%，每月約 NT$2,000–3,000（依實際刷卡量浮動）。此費用由 ICF 代扣，建議系統自動將此項列入每月費用分錄，供損益表呈現。
-  </div>
-
-  <!-- ③ -->
-  <h2 id="s3"><span class="section-num">③</span> 系統架構</h2>
-
-  <h3>分層架構</h3>
-  <pre>┌─────────────────────────────────────────────┐
-│  Client Layer（瀏覽器 / 平板）               │
-│  Web App（Vue.js / React）                   │
-│  響應式設計，支援桌機與 iPad                  │
-└────────────────────┬────────────────────────┘
-                     │ HTTPS
-┌────────────────────▼────────────────────────┐
-│  API Layer（REST API）                       │
-│  FastAPI（Python）或 Express（Node.js）       │
-│  JWT 身份驗證、RBAC 權限控管                  │
-└────────────────────┬────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────┐
-│  Service Layer（業務邏輯）                   │
-│  會計服務 / 進銷存服務 / 排班服務 / 匯入服務  │
-└────────────────────┬────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────┐
-│  Data Layer                                  │
-│  PostgreSQL（主資料庫）                       │
-│  Redis（Session / 暫存，可選）                │
-└─────────────────────────────────────────────┘
-
-外部整合：
-  ICF POS ──(CSV 匯出)──► 匯入服務 ──► 資料庫</pre>
-
-  <h3>模組拆分</h3>
-  <table>
-    <thead><tr><th>Domain</th><th>Module</th><th>說明</th></tr></thead>
-    <tbody>
-      <tr><td>組織</td><td>部門管理</td><td>餐廳/吉拿棒/宴會廳設定</td></tr>
-      <tr><td>組織</td><td>員工管理</td><td>員工基本資料、角色</td></tr>
-      <tr><td>會計</td><td>收入管理</td><td>每日銷售錄入（含 ICF 匯入）</td></tr>
-      <tr><td>會計</td><td>費用管理</td><td>採購、薪資、水電、雜費、第三方支付手續費</td></tr>
-      <tr><td>會計</td><td>報表引擎</td><td>月報、部門損益、現金流</td></tr>
-      <tr><td>進銷存</td><td>食材管理</td><td>品項、單位、成本價</td></tr>
-      <tr><td>進銷存</td><td>採購管理</td><td>採購單、進貨紀錄</td></tr>
-      <tr><td>進銷存</td><td>成本計算</td><td>BOM 對應、消耗推算</td></tr>
-      <tr><td>排班</td><td>班表管理</td><td>週/月班表</td></tr>
-      <tr><td>排班</td><td>出勤管理</td><td>打卡匯入、差異計算</td></tr>
-      <tr><td>整合</td><td>ICF 橋接</td><td>CSV 解析、格式轉換、資料寫入</td></tr>
-    </tbody>
-  </table>
-
-  <h3>主要資料流</h3>
-  <ol>
-    <li style="margin-bottom:8px;"><strong>每日結帳流程</strong><br>ICF 匯出 CSV → 管理員上傳 → 匯入服務解析 → 寫入收入模組 → 自動分配到各部門帳</li>
-    <li style="margin-bottom:8px;"><strong>食材成本追蹤</strong><br>銷售數據 → 對應菜單 BOM → 計算食材消耗 → 更新庫存 → 產出成本差異報告</li>
-    <li><strong>月結報表</strong><br>收入（ICF 匯入）+ 費用（手動錄入 + 第三方支付手續費）+ 薪資（打卡計算）→ 損益表 → PDF/Excel 輸出</li>
-  </ol>
-
-  <!-- ④ -->
-  <h2 id="s4"><span class="section-num">④</span> 資料庫設計</h2>
-
-  <h3>核心實體</h3>
-  <table>
-    <thead><tr><th>Entity</th><th>中文名</th><th>說明</th></tr></thead>
-    <tbody>
-      <tr><td>Department</td><td>部門</td><td>餐廳/吉拿棒/宴會廳</td></tr>
-      <tr><td>User</td><td>系統使用者</td><td>管理員/店長/股東</td></tr>
-      <tr><td>Employee</td><td>員工</td><td>餐廳員工資料</td></tr>
-      <tr><td>Shift</td><td>班次定義</td><td>早班/晚班/大夜等</td></tr>
-      <tr><td>ScheduleEntry</td><td>排班記錄</td><td>員工-日期-班次</td></tr>
-      <tr><td>AttendanceRecord</td><td>出勤記錄</td><td>ICF 打卡匯入</td></tr>
-      <tr><td>Ingredient</td><td>食材</td><td>品項、單位、成本價</td></tr>
-      <tr><td>PurchaseOrder</td><td>採購單</td><td>進貨批次</td></tr>
-      <tr><td>PurchaseItem</td><td>採購明細</td><td>採購單內各食材數量</td></tr>
-      <tr><td>InventorySnapshot</td><td>庫存快照</td><td>週期性盤點記錄</td></tr>
-      <tr><td>MenuItem</td><td>菜單品項</td><td>餐廳販售品項</td></tr>
-      <tr><td>MenuItemBOM</td><td>品項食材配方</td><td>菜色對應食材用量</td></tr>
-      <tr><td>SalesImport</td><td>銷售匯入批次</td><td>ICF CSV 匯入批次</td></tr>
-      <tr><td>SalesRecord</td><td>銷售紀錄</td><td>單筆交易</td></tr>
-      <tr><td>Expense</td><td>費用單</td><td>非採購費用（水電/薪資/第三方支付手續費等）</td></tr>
-      <tr><td>MonthlyReport</td><td>月報</td><td>已鎖定的月度結算</td></tr>
-    </tbody>
-  </table>
-
-  <h3>主要關聯</h3>
-  <ul>
-    <li>Department 1-N SalesRecord（每筆銷售屬於一個部門）</li>
-    <li>Department 1-N Expense（每筆費用屬於一個部門）</li>
-    <li>Employee N-N Shift（透過 ScheduleEntry 建立多對多）</li>
-    <li>PurchaseOrder 1-N PurchaseItem（一張採購單含多項食材）</li>
-    <li>MenuItem 1-N MenuItemBOM（一道菜對應多種食材用量）</li>
-    <li>SalesImport 1-N SalesRecord（一次匯入含多筆銷售）</li>
-  </ul>
-
-  <h3>關鍵資料表草圖</h3>
-  <pre>-- departments
-id          PK
-name        VARCHAR(50)   -- 餐廳、吉拿棒、宴會廳
-code        VARCHAR(20)   -- UNIQUE
-created_at  TIMESTAMP
-
--- sales_records
-id              PK
-department_id   FK → departments
-import_batch_id FK → sales_imports
-transaction_at  TIMESTAMP  -- INDEX
-amount          DECIMAL(10,2)
-payment_method  VARCHAR(20)   -- cash/card/line_pay
-item_name       VARCHAR(100)
-quantity        INTEGER
-source          VARCHAR(20)   -- icf_import / manual
-
--- expenses
-id              PK
-department_id   FK → departments
-category        VARCHAR(50)   -- ingredients/staff/utilities/payment_fee/misc
-amount          DECIMAL(10,2)
-expense_date    DATE  -- INDEX
-description     TEXT
-created_by      FK → users
-
--- schedule_entries
-id            PK
-employee_id   FK → employees
-shift_id      FK → shifts
-work_date     DATE  -- INDEX
-department_id FK → departments
-status        VARCHAR(20)   -- scheduled/confirmed/absent</pre>
-
-  <!-- ⑤ -->
-  <h2 id="s5"><span class="section-num">⑤</span> API 設計大綱</h2>
-  <table>
-    <thead><tr><th>路徑</th><th>方法</th><th>用途</th></tr></thead>
-    <tbody>
-      <tr><td><code>/auth/login</code></td><td>POST</td><td>登入取得 JWT</td></tr>
-      <tr><td><code>/auth/logout</code></td><td>POST</td><td>登出</td></tr>
-      <tr><td><code>/departments</code></td><td>GET/POST</td><td>查詢/新增部門</td></tr>
-      <tr><td><code>/employees</code></td><td>GET/POST/PUT</td><td>員工 CRUD</td></tr>
-      <tr><td><code>/schedules</code></td><td>GET/POST</td><td>查詢/建立班表</td></tr>
-      <tr><td><code>/schedules/{id}</code></td><td>PUT/DELETE</td><td>修改/刪除班次</td></tr>
-      <tr><td><code>/attendance/import</code></td><td>POST</td><td>上傳 ICF 打卡 CSV</td></tr>
-      <tr><td><code>/inventory/ingredients</code></td><td>GET/POST/PUT</td><td>食材管理</td></tr>
-      <tr><td><code>/inventory/purchases</code></td><td>GET/POST</td><td>採購單</td></tr>
-      <tr><td><code>/sales/import</code></td><td>POST</td><td>上傳 ICF 銷售 CSV</td></tr>
-      <tr><td><code>/sales/daily</code></td><td>GET</td><td>每日銷售摘要（可篩選部門/日期）</td></tr>
-      <tr><td><code>/expenses</code></td><td>GET/POST</td><td>費用錄入與查詢（含第三方支付手續費）</td></tr>
-      <tr><td><code>/reports/monthly</code></td><td>GET</td><td>月度損益報表</td></tr>
-      <tr><td><code>/reports/department</code></td><td>GET</td><td>部門別損益</td></tr>
-      <tr><td><code>/reports/cost-analysis</code></td><td>GET</td><td>食材消耗成本分析</td></tr>
-      <tr><td><code>/reports/export</code></td><td>POST</td><td>匯出 Excel/PDF</td></tr>
-    </tbody>
-  </table>
-  <p style="font-size:0.85rem; color:#666;">此系統為內部使用，不對外開放公開 API，無需 API Key 設計（v2 若有線上點餐才需要）。</p>
-
-  <!-- ⑥ -->
-  <h2 id="s6"><span class="section-num">⑥</span> AI 模組</h2>
-  <div class="warn-box">
-    <strong>v1：不建議導入</strong><br>
-    訪談中確認：餐廳規模為單店，日常工作重複性高但量不大，AI 數位員工的導入成本（學習成本、維護費）高於收益。
-  </div>
-
-  <h3>v2 可評估的 AI 應用場景（僅供未來參考）</h3>
-  <table>
-    <thead><tr><th>場景</th><th>說明</th><th>前提</th></tr></thead>
-    <tbody>
-      <tr><td>食材消耗預測</td><td>依過去銷售預測下週採購量</td><td>需累積 6 個月以上銷售數據</td></tr>
-      <tr><td>異常費用偵測</td><td>自動標記異常高額費用</td><td>需建立費用基準線</td></tr>
-      <tr><td>月報敘述生成</td><td>自動撰寫數字背後的文字說明</td><td>數據穩定後才有意義</td></tr>
-    </tbody>
-  </table>
-
-  <!-- ⑦ -->
-  <h2 id="s7"><span class="section-num">⑦</span> 安全性要點</h2>
-
-  <h3>身份驗證</h3>
-  <ul>
-    <li>JWT Token（登入有效期 8 小時，適合餐廳班次）</li>
-    <li>密碼 bcrypt hash 儲存</li>
-  </ul>
-
-  <h3>權限模型（RBAC）</h3>
-  <table>
-    <thead><tr><th>角色</th><th>權限</th></tr></thead>
-    <tbody>
-      <tr><td>admin（云亭）</td><td>全功能讀寫</td></tr>
-      <tr><td>manager（店長）</td><td>報表讀取、班表審核、費用審核</td></tr>
-      <tr><td>owner（股東）</td><td>報表讀取（唯讀）</td></tr>
-      <tr><td>staff（員工）</td><td>個人班表查看（唯讀）</td></tr>
-    </tbody>
-  </table>
-
-  <h3>稽核要求</h3>
-  <ul>
-    <li>所有資料變更記錄操作者與時間戳</li>
-    <li>已鎖定月報不可修改（防止事後竄改帳務）</li>
-    <li>匯入批次保留原始 CSV 檔案</li>
-  </ul>
-
-  <h3>資料安全</h3>
-  <ul>
-    <li>HTTPS 強制（Let's Encrypt 或自購憑證）</li>
-    <li>不儲存 ICF 系統帳密（CSV 手動匯出方式，不串 API）</li>
-    <li>員工薪資資料限 admin/manager 存取</li>
-  </ul>
-
-  <!-- ⑧ -->
-  <h2 id="s8"><span class="section-num">⑧</span> 非功能需求</h2>
-  <table>
-    <thead><tr><th>項目</th><th>目標</th></tr></thead>
-    <tbody>
-      <tr><td>頁面載入</td><td>&lt; 2 秒（一般報表）</td></tr>
-      <tr><td>同時使用者</td><td>≤ 10 人（小型餐廳不需高並行設計）</td></tr>
-      <tr><td>可用性</td><td>99%（月停機 &lt; 7 小時即可，非金融系統）</td></tr>
-      <tr><td>備份</td><td>每日自動備份至異地，保留 30 天</td></tr>
-      <tr><td>擴充性</td><td>模組化設計，v2 新增線上點餐時不需重寫核心</td></tr>
-    </tbody>
-  </table>
-  <h3>監控告警（最基本需求）</h3>
-  <ul>
-    <li>服務停止自動通知（Email/LINE）</li>
-    <li>硬碟空間 &gt; 80% 告警</li>
-  </ul>
-
-  <!-- ⑨ -->
-  <h2 id="s9"><span class="section-num">⑨</span> v1 優先範圍 vs 先不做</h2>
-
-  <h3>v1 必做（目標：11 月前可用）</h3>
-  <ol>
-    <li><strong>ICF 銷售數據匯入</strong> — 每日結帳核心，解決重複 key 資料問題</li>
-    <li><strong>部門分帳會計</strong> — 餐廳 vs 吉拿棒 vs 宴會廳分開損益</li>
-    <li><strong>費用錄入與月結報表</strong> — 取代手工 Excel 帳務</li>
-    <li><strong>食材成本計算</strong> — 進貨錄入 + ICF 銷售對應 → 自動計算食材消耗成本</li>
-    <li><strong>排班管理</strong> — 電子化班表，取代手寫 + Excel</li>
-    <li><strong>出勤匯入</strong> — 從 ICF 打卡記錄計算出勤</li>
-    <li><strong>相關報表輸出</strong> — 損益 / 出勤 / 成本等 Excel 格式供店長、股東查閱</li>
-  </ol>
-
-  <h3>v1 先不做（理由）</h3>
-  <table>
-    <thead><tr><th>功能</th><th>理由</th></tr></thead>
-    <tbody>
-      <tr><td>取代 ICF 點餐系統</td><td>換地點同期切換 POS，風險極高；ICF 已穩定運作，月費 NT$3,000 合理</td></tr>
-      <tr><td>線上掃碼點餐</td><td>需串接第三方支付，增加月費成本；建議 ICF 加購此功能（已有此模組）</td></tr>
-      <tr><td>線上訂位</td><td>同上，非緊急痛點</td></tr>
-      <tr><td>AI 數位員工</td><td>單店規模，ROI 不足；未來多店擴張時再評估</td></tr>
-      <tr><td>送餐機器人</td><td>空間動線不符，與餐廳人文禪風定位衝突</td></tr>
-      <tr><td>稅務試算輔助</td><td>屬會計系統範疇；本系統定位為記帳系統，稅務申報由會計師處理，不在建置範圍</td></tr>
-      <tr><td>多公司整合架構</td><td>目前聚焦單一餐廳（擺渡），待未來業務擴張至多點後再評估</td></tr>
-    </tbody>
-  </table>
-
-  <h3>v2 預期（新店穩定後 3–6 個月）</h3>
-  <ul>
-    <li>評估是否以客製系統取代 ICF（需完整成本效益試算）</li>
-    <li>線上訂位串接</li>
-  </ul>
-
-  <!-- ⑩ -->
-  <h2 id="s10"><span class="section-num">⑩</span> 風險評估與建議</h2>
-  <div class="warn-box">⚠️ 此段為核心參考內容，建議向徐主任說明時重點呈現</div>
-
-  <h3 style="margin-top:18px;">方案 A：維持 ICF + 新增後台系統（本文件建議方案）</h3>
-  <div class="risk-a">
-    <table style="margin:0;">
-      <thead><tr><th>面向</th><th>評估</th></tr></thead>
-      <tbody>
-        <tr><td>導入風險</td><td>低 — 點餐系統不動，後台系統獨立上線，互不影響</td></tr>
-        <tr><td>上線時程</td><td>可控 — 後台系統 2–3 個月可完成 v1</td></tr>
-        <tr><td>員工學習成本</td><td>低 — 點餐流程不變，只有管理員需學新後台</td></tr>
-        <tr><td>月費</td><td>ICF 約 NT$6,000/月（含第三方支付）+ 新系統主機費約 NT$1,000–2,000/月</td></tr>
-        <tr><td>開新店時</td><td>後台系統可直接延伸，資料已在同一平台</td></tr>
-        <tr><td>主要風險</td><td>兩套系統並存，ICF 銷售資料需定期手動匯出（每日或週期性）</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3 style="margin-top:18px;">方案 B：完整取代 ICF（不建議，尤其在新店開幕前）</h3>
-  <div class="risk-b">
-    <table style="margin:0;">
-      <thead><tr><th>面向</th><th>評估</th></tr></thead>
-      <tbody>
-        <tr><td>導入風險</td><td><strong>高</strong> — 同期換系統、換地點，雙重混亂</td></tr>
-        <tr><td>上線時程</td><td>11 月前完成完整系統極具挑戰，任何延遲影響開業</td></tr>
-        <tr><td>員工學習成本</td><td><strong>高</strong> — 現場員工電腦程度偏低，1 個月學習期保守估計</td></tr>
-        <tr><td>月費</td><td>客製系統維護費 + 第三方支付費，加總未必比 ICF 便宜</td></tr>
-        <tr><td>主要風險</td><td>開幕期間系統不穩定 → 直接影響來客體驗與收入</td></tr>
-        <tr><td>資料風險</td><td>ICF 數年累積資料移轉，需完整比對驗證</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="conclusion-box">
-    <strong>建議結論</strong>：採方案 A — 先建後台（會計 + 進銷存 + 排班），維持 ICF 點餐系統不動。待新店穩定營運 6 個月後，再評估是否有換 POS 的必要性。
-  </div>
-
-  <hr>
-
-  <h2>附錄：ICF 現況整理</h2>
-  <table>
-    <thead><tr><th>項目</th><th>現況</th></tr></thead>
-    <tbody>
-      <tr><td>系統名稱</td><td>ICF（ich/iif，實際名稱待確認）</td></tr>
-      <tr><td>使用年資</td><td>數年，員工已熟悉</td></tr>
-      <tr><td>月費（系統費）</td><td>約 NT$3,000+/月</td></tr>
-      <tr><td>第三方支付手續費（LINE Pay / 信用卡）</td><td>約 NT$2,000–3,000/月（依交易量，約銷售額 1.5%）</td></tr>
-      <tr><td>總月費（含金流）</td><td>約 NT$5,000–6,000/月</td></tr>
-      <tr><td>匯出功能</td><td>可匯出銷售 CSV、打卡 CSV</td></tr>
-      <tr><td>涵蓋功能</td><td>點餐、出餐、基礎帳務、打卡</td></tr>
-      <tr><td>缺少功能</td><td>後台會計、進銷存、排班整合、部門損益分析</td></tr>
-    </tbody>
-  </table>
-
-  <div class="footer">本文件由 MUSEON 系統依訪談記錄自動生成，供評估用途。所有假設項目已標記，可依實際情況修正。</div>
 </div>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="container">
+    <div class="section-label">現況痛點</div>
+    <h2 class="section-title">云亭每天承擔的六大營運負擔</h2>
+    <p class="section-desc">這套系統針對擺渡日常營運中最耗時、最依賴手工、最容易出錯的環節，進行系統性解決——帳務、成本、排班一次接通。</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon pi-red">💸</div>
+        <div>
+          <div class="pain-title">帳務全手工，重複 key 資料</div>
+          <div class="pain-desc">ICF 銷售數據要人工抄進 Excel，每日結帳耗時，數字一錯整月對不上。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">🥬</div>
+        <div>
+          <div class="pain-title">食材成本黑箱</div>
+          <div class="pain-desc">進貨、消耗、毛利對不起來，不知道哪一道菜其實在賠錢、哪項食材成本失控。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">🗓️</div>
+        <div>
+          <div class="pain-title">排班散落 Excel</div>
+          <div class="pain-desc">三個部門班表各自為政，人力成本看不清，臨時調班全靠記憶與通訊軟體。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">📊</div>
+        <div>
+          <div class="pain-title">部門損益不分</div>
+          <div class="pain-desc">餐廳、吉拿棒、宴會廳的收支混在一起，到底哪條線賺、哪條線賠，無從判斷。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">⏱️</div>
+        <div>
+          <div class="pain-title">出勤薪資手算</div>
+          <div class="pain-desc">ICF 打卡記錄要人工比對班表，差異靠肉眼抓，薪資估算慢且容易出錯。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-green">📑</div>
+        <div>
+          <div class="pain-title">月報手工拼湊</div>
+          <div class="pain-desc">每月給股東的損益報表靠人工整理，慢、易錯，數字基礎也難追溯。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">完整業務流程</div>
+    <h2 class="section-title">從每日結帳到月結報表，全程數位化</h2>
+    <p class="section-desc">系統串接擺渡完整的營運資料鏈，每個環節自動流轉，云亭只需確認關鍵決策點，不再重複 key 資料。</p>
+    <div class="flow-wrapper">
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">🧾</div>
+          <div class="flow-step-label">ICF<br>銷售匯出</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-green">⬆️</div>
+          <div class="flow-step-label">CSV<br>上傳</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-teal">⚙️</div>
+          <div class="flow-step-label">自動<br>解析入帳</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-lime">🏷️</div>
+          <div class="flow-step-label">部門<br>分帳</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-gold">🥬</div>
+          <div class="flow-step-label">BOM<br>成本推算</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-ember">📦</div>
+          <div class="flow-step-label">庫存<br>更新</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-purple">📍</div>
+          <div class="flow-step-label">出勤<br>打卡匯入</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">💰</div>
+          <div class="flow-step-label">薪資<br>計算</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-green">📊</div>
+          <div class="flow-step-label">月結<br>報表</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section>
+  <div class="container">
+    <div class="section-label">系統功能架構</div>
+    <h2 class="section-title">13 項功能，全數納入本次建置</h2>
+    <p class="section-desc">所有功能都是要做的，依交付順序分兩層：核心層先上線解決日常痛點，加值層緊接著補上讓營運更省力。</p>
+
+    <!-- 核心層 -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-badge pb-1">核心功能層</span>
+        <span class="phase-title">日常營運骨幹</span>
+        <span class="phase-subtitle">優先交付 · 8 項功能 · 目標 11 月前可用</span>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-num">CORE 01</div>
+          <div class="module-name">ICF 銷售數據匯入</div>
+          <div class="module-desc">上傳 ICF 匯出的 CSV，系統自動解析寫入帳務，格式異常時顯示明細不入庫，徹底取代重複 key 資料。</div>
+          <span class="module-tag t-core">每日結帳核心</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">CORE 02</div>
+          <div class="module-name">部門分帳會計</div>
+          <div class="module-desc">餐廳 / 吉拿棒 / 宴會廳收支獨立呈現，一鍵切換部門視角，清楚看出每條線賺賠。</div>
+          <span class="module-tag t-fin">財務核心</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">CORE 03</div>
+          <div class="module-name">費用錄入與月結報表</div>
+          <div class="module-desc">採購、薪資、水電、雜費按部門彙整損益，月結一鍵產出且鎖定不可修改，取代手工 Excel。</div>
+          <span class="module-tag t-fin">財務核心</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">CORE 04</div>
+          <div class="module-name">食材進貨與成本計算</div>
+          <div class="module-desc">建品項、錄採購單、庫存即時更新；BOM 食材配方結合 ICF 銷售自動推算耗用與成本。</div>
+          <span class="module-tag t-core">進銷存核心</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">CORE 05</div>
+          <div class="module-name">排班管理</div>
+          <div class="module-desc">三部門統一電子化班表，拖拉建立班次，系統即時計算預估人力成本，取代手寫與 Excel。</div>
+          <span class="module-tag t-hr">人資核心</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">CORE 06</div>
+          <div class="module-name">出勤匯入與薪資計算</div>
+          <div class="module-desc">上傳 ICF 打卡 CSV，系統自動比對班表算出勤差異與薪資預估，不再肉眼核對。</div>
+          <span class="module-tag t-hr">人資核心</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">CORE 07</div>
+          <div class="module-name">相關報表輸出</div>
+          <div class="module-desc">損益 / 出勤 / 成本等報表一鍵產出，可匯出 PDF / Excel，供店長與股東定期查閱。</div>
+          <span class="module-tag t-fin">財務核心</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">CORE 08</div>
+          <div class="module-name">MUSEON AI 智能助理</div>
+          <div class="module-desc">基礎配置，協助查詢數據、產生月報文字摘要、回答營運問題，隨數據累積持續強化。</div>
+          <span class="module-tag t-smart">智慧核心</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 加值層 -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-badge pb-3">加值功能層</span>
+        <span class="phase-title">讓營運更省力</span>
+        <span class="phase-subtitle">核心穩定後緊接導入 · 5 項功能</span>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-num">PLUS 01</div>
+          <div class="module-name">LINE 班表通知</div>
+          <div class="module-desc">班表確定後自動推播給員工，減少臨時詢問。需透過 LINE Bot（月費約 NT$200–800，依訊息量計）。</div>
+          <span class="module-tag t-hr">員工服務</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">PLUS 02</div>
+          <div class="module-name">低庫存預警</div>
+          <div class="module-desc">食材低於警戒閾值自動提示補貨，避免缺料停菜或臨時高價補貨。</div>
+          <span class="module-tag t-core">進銷存</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">PLUS 03</div>
+          <div class="module-name">加班費自動計算</div>
+          <div class="module-desc">出勤差異比對班表，假日 / 加班時數自動換算費用，減少人工核算誤差。</div>
+          <span class="module-tag t-hr">人資</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">PLUS 04</div>
+          <div class="module-name">第三方支付費用記錄</div>
+          <div class="module-desc">LINE Pay / 信用卡手續費自動拆帳入費用分錄，月損益表完整呈現金流真實成本。</div>
+          <span class="module-tag t-fin">財務</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">PLUS 05</div>
+          <div class="module-name">食材消耗排行分析</div>
+          <div class="module-desc">食材消耗排行 + 毛利率最低品項自動標出，找出高成本食材與賠錢菜色。</div>
+          <span class="module-tag t-core">進銷存</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 核心差異化 -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">核心差異化價值</div>
+    <h2 class="section-title">這套系統真正解決的四件事</h2>
+    <p class="section-desc">不是把功能堆多，而是把擺渡最痛、最重複、最看不清的環節，變成可查詢、可追溯、可交接的數位機制。</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">🏷️</div>
+        <div class="value-title">部門損益分得清</div>
+        <div class="value-text">餐廳、吉拿棒、宴會廳各自獨立帳，第一次能明確回答「哪條線在賺、哪條線在賠」。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🥬</div>
+        <div class="value-title">食材成本算得出</div>
+        <div class="value-text">BOM 配方 × ICF 銷售自動推算耗用，毛利最低的菜色一眼標出，成本不再黑箱。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔗</div>
+        <div class="value-title">ICF 資料免重 key</div>
+        <div class="value-text">點餐系統不動，只把 ICF 匯出的 CSV 自動接進後台，零風險、零雙系統混亂。</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤖</div>
+        <div class="value-title">AI 助理隨數據成長</div>
+        <div class="value-text">MUSEON 基礎配置先上線，數據累積後逐步開出消耗預測、異常費用偵測、月報生成。</div>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top:32px;">
+      <h3>系統定位一句話</h3>
+      <p>把擺渡的帳務、成本、排班從「云亭一個人腦袋 + 散落 Excel」，轉化為可查詢、可交接、可複製的數位後台——維持 ICF 點餐不動，只補上它缺的那塊。</p>
+    </div>
+  </div>
+</section>
+
+<!-- DATA LAYER -->
+<section>
+  <div class="container">
+    <div class="section-label">資料架構</div>
+    <h2 class="section-title">15 個主資料實體，支撐全流程</h2>
+    <p class="section-desc">輕量級設計，不需分散式架構。每張表預留部門欄位，未來若擴點可延伸，不需重寫底層。</p>
+    <div class="data-group">
+      <div class="data-category">
+        <div class="data-cat-title">組織</div>
+        <div class="data-item">部門（餐廳/吉拿棒/宴會廳）</div>
+        <div class="data-item">系統使用者（角色）</div>
+        <div class="data-item">員工基本資料</div>
+      </div>
+      <div class="data-category">
+        <div class="data-cat-title">會計</div>
+        <div class="data-item">銷售匯入批次</div>
+        <div class="data-item">銷售紀錄（單筆交易）</div>
+        <div class="data-item">費用單（含支付手續費）</div>
+        <div class="data-item">月報（已鎖定結算）</div>
+      </div>
+      <div class="data-category">
+        <div class="data-cat-title">進銷存</div>
+        <div class="data-item">食材（品項/成本價）</div>
+        <div class="data-item">採購單</div>
+        <div class="data-item">採購明細</div>
+        <div class="data-item">庫存快照</div>
+      </div>
+      <div class="data-category">
+        <div class="data-cat-title">菜單 / 配方</div>
+        <div class="data-item">菜單品項</div>
+        <div class="data-item">品項食材配方（BOM）</div>
+      </div>
+      <div class="data-category">
+        <div class="data-cat-title">排班 / 出勤</div>
+        <div class="data-item">班次定義</div>
+        <div class="data-item">排班記錄</div>
+        <div class="data-item">出勤記錄（打卡匯入）</div>
+      </div>
+    </div>
+    <div class="info-note">
+      🔌 <strong>技術骨架</strong>：Web App（Vue/React）+ REST API（FastAPI/Express）+ PostgreSQL；JWT 身份驗證、RBAC 四級權限（管理員 / 店長 / 股東 / 員工）。外部僅以 CSV 與 ICF 橋接，<strong>不串 ICF API、不存其帳密</strong>，降低整合風險。
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">導入路線圖</div>
+    <h2 class="section-title">兩階段交付，11 月前核心可用</h2>
+    <p class="section-desc">每個階段都有明確驗收標準，不需等全部完成才有價值。核心層先讓日常營運跑起來，加值層緊接著補上。</p>
+    <div class="roadmap">
+      <div class="roadmap-phase rp-active">
+        <div class="roadmap-phase-num">Phase 1</div>
+        <div class="roadmap-phase-title">核心交付</div>
+        <div class="roadmap-period">目標 11 月前 · 驗收：每日結帳免重 key</div>
+        <ul class="roadmap-items">
+          <li>ICF 銷售匯入 + 部門分帳</li>
+          <li>費用錄入與月結報表</li>
+          <li>食材進貨與 BOM 成本計算</li>
+          <li>排班管理</li>
+          <li>出勤匯入與薪資計算</li>
+          <li>相關報表輸出 + AI 助理基礎</li>
+        </ul>
+      </div>
+      <div class="roadmap-phase rp-upcoming">
+        <div class="roadmap-phase-num">Phase 2</div>
+        <div class="roadmap-phase-title">加值補強</div>
+        <div class="roadmap-period">核心穩定後 · 驗收：人工核算量再降</div>
+        <ul class="roadmap-items">
+          <li>LINE 班表通知</li>
+          <li>低庫存預警</li>
+          <li>加班費自動計算</li>
+          <li>第三方支付費用記錄</li>
+          <li>食材消耗排行分析</li>
+        </ul>
+      </div>
+      <div class="roadmap-phase rp-future">
+        <div class="roadmap-phase-num">未來評估</div>
+        <div class="roadmap-phase-title">v2 再議</div>
+        <div class="roadmap-period">新店穩定營運 6 個月後</div>
+        <ul class="roadmap-items">
+          <li>線上掃碼點餐 / 訂位</li>
+          <li>評估是否客製取代 ICF</li>
+          <li>食材消耗 AI 預測</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 核心建議 方案 A vs B -->
+<section>
+  <div class="container">
+    <div class="section-label">核心建議</div>
+    <h2 class="section-title">維持 ICF + 新增後台，而非整套取代</h2>
+    <p class="section-desc">這是向徐主任說明時最該重點呈現的一段——換地點本身已是風險，不該同期再換掉穩定運作的點餐系統。</p>
+    <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 24px;">
+      <table class="risk-table">
+        <tr><th>面向</th><th>方案 A：ICF + 後台（建議）</th><th>方案 B：完整取代 ICF（不建議）</th></tr>
+        <tr class="risk-low">
+          <td><strong>導入風險</strong></td>
+          <td>低 — 點餐不動，後台獨立上線，互不影響</td>
+          <td><span class="risk-label rl-high">高</span> 同期換系統又換地點，雙重混亂</td>
+        </tr>
+        <tr class="risk-mid">
+          <td><strong>上線時程</strong></td>
+          <td>可控 — 後台 2–3 個月完成核心</td>
+          <td>11 月前完成整套極具挑戰，延遲即影響開業</td>
+        </tr>
+        <tr class="risk-mid">
+          <td><strong>員工學習成本</strong></td>
+          <td>低 — 點餐流程不變，只有管理員學新後台</td>
+          <td><span class="risk-label rl-high">高</span> 現場員工需 1 個月學習期</td>
+        </tr>
+        <tr class="risk-high">
+          <td><strong>開幕期穩定度</strong></td>
+          <td>不受影響 — ICF 久經運作</td>
+          <td>系統不穩直接衝擊來客體驗與收入</td>
+        </tr>
+        <tr class="risk-low">
+          <td><strong>主要代價</strong></td>
+          <td>兩套並存，ICF 銷售需定期手動匯出 CSV</td>
+          <td>數年累積資料移轉，需完整比對驗證</td>
+        </tr>
+      </table>
+    </div>
+    <div class="highlight-box">
+      <h3>建議結論</h3>
+      <p>採方案 A — 先建後台（記帳 + 進銷存 + 排班），維持 ICF 點餐系統不動。待新店穩定營運 6 個月後，再評估是否有換 POS 的必要性。換地點與換系統，不要在同一時間發生。</p>
+    </div>
+    <div class="info-note">
+      💳 <strong>第三方支付開銷說明</strong>：現行透過 ICF 收取 LINE Pay / 信用卡付款，手續費約交易金額 1.5%，每月約 NT$2,000–3,000（依刷卡量浮動），由 ICF 代扣。系統會自動把此項列入每月費用分錄，讓損益表反映真實金流成本——這是「第三方支付費用記錄」功能要接的資料來源。
+    </div>
+  </div>
+</section>
+
+<!-- 範圍邊界 -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">範圍邊界</div>
+    <h2 class="section-title">這次做什麼、先不做什麼</h2>
+    <p class="section-desc">範圍講清楚，雙方對齊期待。先不做的不是做不到，是現階段 ROI 不足或定位不符。</p>
+    <div class="scope-grid">
+      <div class="scope-col col-in">
+        <h3>✅ 本次建置範圍</h3>
+        <ul class="scope-list">
+          <li>後台記帳、進銷存、排班三大模組</li>
+          <li>ICF 銷售 / 打卡 CSV 資料橋接</li>
+          <li><strong>部門損益分離</strong>（餐廳 / 吉拿棒 / 宴會廳）</li>
+          <li>多部門帳號分開管理</li>
+          <li>相關報表輸出（損益 / 出勤 / 成本）</li>
+          <li>第三方支付費用自動入帳</li>
+          <li>MUSEON AI 助理基礎配置</li>
+        </ul>
+      </div>
+      <div class="scope-col col-out">
+        <h3>❌ 此次先不做</h3>
+        <ul class="scope-list">
+          <li><strong>取代 ICF 點餐系統</strong> — ICF 已穩定，換系統風險高</li>
+          <li>線上掃碼點餐 / 線上訂位 — 建議 ICF 加購（已有模組）</li>
+          <li><strong>稅務試算</strong> — 屬會計系統範疇；本系統定位記帳，稅務由會計師處理</li>
+          <li><strong>多公司整合架構</strong> — 聚焦單一餐廳，未來擴張再評估</li>
+          <li>AI 數位員工 — 單店規模 ROI 不足</li>
+          <li>送餐機器人 — 動線與人文禪風定位衝突</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 風險評估 -->
+<section>
+  <div class="container">
+    <div class="section-label">風險評估</div>
+    <h2 class="section-title">誠實面對阻力，提前設計因應</h2>
+    <p class="section-desc">把可能卡關的點先攤開，並準備好對策——這比假裝沒有風險更能讓業主放心。</p>
+    <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;">
+      <table class="risk-table">
+        <tr><th>風險</th><th>機率</th><th>因應方案</th></tr>
+        <tr class="risk-mid">
+          <td><strong>ICF 資料需定期手動匯出</strong></td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>設計極簡上傳流程，固定每日 / 週期匯出；格式異常即時提示，不寫入錯誤資料</td>
+        </tr>
+        <tr class="risk-mid">
+          <td><strong>BOM 配方建檔耗時</strong></td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>先建主力菜色，逐步補齊；未建配方的品項以平均成本估算，不卡上線</td>
+        </tr>
+        <tr class="risk-low">
+          <td><strong>現場員工電腦程度不一</strong></td>
+          <td><span class="risk-label rl-low">低</span></td>
+          <td>員工端只開「班表查看」唯讀權限，操作極簡；複雜功能集中在管理員後台</td>
+        </tr>
+        <tr class="risk-low">
+          <td><strong>LINE Bot 月費</strong></td>
+          <td><span class="risk-label rl-low">低</span></td>
+          <td>屬加值層，可待核心穩定後再評估啟用；NT$200–800/月，依實際訊息量計</td>
+        </tr>
+        <tr class="risk-low">
+          <td><strong>開幕期人力吃緊無暇學新系統</strong></td>
+          <td><span class="risk-label rl-low">低</span></td>
+          <td>後台只有云亭一人主要操作，與現場出餐流程脫鉤，不佔用開幕現場人力</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>擺渡人文蔬食料理 · 智慧營運管理系統規劃</strong>
+  <br>v2.0 · 2026-06-14 · 供內部評估與向徐主任說明用 · 機密文件
+</div>
+
 </body>
 </html>
