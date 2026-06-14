@@ -103,6 +103,8 @@
     <li><span class="out-scope">❌ 不在此次範圍</span>：取代 ICF 點餐系統（v1 不做）</li>
     <li><span class="out-scope">❌ 不在此次範圍</span>：線上掃碼點餐、線上訂位（v2 評估）</li>
     <li><span class="out-scope">❌ 不在此次範圍</span>：AI 數位員工（現階段規模不需要）</li>
+    <li><span class="out-scope">❌ 不在此次範圍</span>：多公司整合架構（聚焦單一餐廳，未來擴張再評估）</li>
+    <li><span class="out-scope">❌ 不在此次範圍</span>：稅務試算（記帳系統範疇，非會計申報系統）</li>
   </ul>
 
   <h3>規模假設（可被推翻）</h3>
@@ -167,7 +169,7 @@
         <li>食材進貨與成本計算（BOM 對應）</li>
         <li>排班管理（取代 Excel 班表）</li>
         <li>出勤匯入與薪資計算</li>
-        <li>基礎報表輸出（Excel 供股東查閱）</li>
+        <li>相關報表輸出（損益 / 出勤 / 成本 Excel 匯出）</li>
         <li>MUSEON AI 智能助理（基礎配置）</li>
       </ul>
     </div>
@@ -423,7 +425,7 @@ status        VARCHAR(20)   -- scheduled/confirmed/absent</pre>
     <li><strong>食材成本計算</strong> — 進貨錄入 + ICF 銷售對應 → 自動計算食材消耗成本</li>
     <li><strong>排班管理</strong> — 電子化班表，取代手寫 + Excel</li>
     <li><strong>出勤匯入</strong> — 從 ICF 打卡記錄計算出勤</li>
-    <li><strong>基礎報表輸出</strong> — Excel 格式供股東/店長使用</li>
+    <li><strong>相關報表輸出</strong> — 損益 / 出勤 / 成本等 Excel 格式供店長、股東查閱</li>
   </ol>
 
   <h3>v1 先不做（理由）</h3>
@@ -435,6 +437,8 @@ status        VARCHAR(20)   -- scheduled/confirmed/absent</pre>
       <tr><td>線上訂位</td><td>同上，非緊急痛點</td></tr>
       <tr><td>AI 數位員工</td><td>單店規模，ROI 不足；未來多店擴張時再評估</td></tr>
       <tr><td>送餐機器人</td><td>空間動線不符，與餐廳人文禪風定位衝突</td></tr>
+      <tr><td>稅務試算輔助</td><td>屬會計系統範疇；本系統定位為記帳系統，稅務申報由會計師處理，不在建置範圍</td></tr>
+      <tr><td>多公司整合架構</td><td>目前聚焦單一餐廳（擺渡），待未來業務擴張至多點後再評估</td></tr>
     </tbody>
   </table>
 
