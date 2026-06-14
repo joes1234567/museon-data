@@ -209,6 +209,24 @@
     line-height: 1.5;
   }
 
+  /* FEATURE LAYERS */
+  .feature-layer { margin-bottom: 16px; border-radius: 12px; padding: 20px 24px; border: 1px solid; }
+  .feature-layer.core { background: #f0fdf4; border-color: #bbf7d0; }
+  .feature-layer.addon { background: #fff7ed; border-color: #fed7aa; }
+  .feature-layer.v2 { background: #eff6ff; border-color: #bfdbfe; }
+  .fl-badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-bottom: 10px; }
+  .fl-badge.core { background: #166534; color: #fff; }
+  .fl-badge.addon { background: #92400e; color: #fff; }
+  .fl-badge.v2 { background: #0c4a6e; color: #fff; }
+  .fl-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .fl-subtitle { font-size: 12px; color: var(--mist); margin-bottom: 12px; }
+  .fl-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .fl-chip { font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+  .feature-layer.core .fl-chip { background: #dcfce7; color: #166534; }
+  .feature-layer.addon .fl-chip { background: #fed7aa; color: #92400e; }
+  .feature-layer.v2 .fl-chip { background: #dbeafe; color: #0c4a6e; }
+  .fl-note { margin-top: 12px; padding: 8px 12px; border-radius: 8px; font-size: 12px; }
+  .feature-layer.addon .fl-note { background: #fff0e0; color: #92400e; }
   /* SCOPE TABLE */
   .scope-table { width: 100%; border-collapse: collapse; margin-bottom: 0; }
   .scope-table th { background: var(--ink); color: #fff; padding: 10px 16px; text-align: left; font-size: 13px; font-weight: 600; }
@@ -579,6 +597,52 @@
   </div>
 </section>
 
+<!-- FEATURE LAYERS -->
+<section>
+  <div class="container">
+    <div class="section-label">功能分層</div>
+    <h2 class="section-title">系統功能分層</h2>
+    <p class="section-desc">三層清楚分開——業主知道買到什麼、加值是什麼、未來還能長什麼。</p>
+
+    <div class="feature-layer core">
+      <span class="fl-badge core">第一層 · 綠 · 核心</span>
+      <div class="fl-title">v1 確定交付——開幕前必須有的基本功能</div>
+      <div class="fl-chips">
+        <span class="fl-chip">記帳（ICF 匯入）</span>
+        <span class="fl-chip">費用錄入與部門分帳</span>
+        <span class="fl-chip">月結報表</span>
+        <span class="fl-chip">進銷存（食材/採購/BOM）</span>
+        <span class="fl-chip">成本分析</span>
+        <span class="fl-chip">排班管理</span>
+        <span class="fl-chip">打卡出勤核算</span>
+      </div>
+    </div>
+
+    <div class="feature-layer addon">
+      <span class="fl-badge addon">第二層 · 黃 · 加值</span>
+      <div class="fl-title">讓業主眼睛一亮——v1 一起交付，展示系統智慧</div>
+      <div class="fl-chips">
+        <span class="fl-chip">LINE Bot 班表通知</span>
+        <span class="fl-chip">低庫存自動預警</span>
+        <span class="fl-chip">加班費自動計算</span>
+        <span class="fl-chip">股東報告格式化輸出</span>
+      </div>
+      <div class="fl-note">⚠️ LINE 班表通知：LINE Notify 已於 2025 年停用，需改走 LINE Bot（約 NT$200–800/月，依訊息量）。費用說明見下方。</div>
+    </div>
+
+    <div class="feature-layer v2" style="margin-bottom: 0;">
+      <span class="fl-badge v2">第三層 · 藍 · v2 評估</span>
+      <div class="fl-title">佈局未來——新址穩定後再啟動評估，不佔 v1 預算</div>
+      <div class="fl-chips">
+        <span class="fl-chip">多公司架構支援</span>
+        <span class="fl-chip">股東報告整合</span>
+        <span class="fl-chip">稅務試算</span>
+        <span class="fl-chip">取代 ICF POS 評估</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- USERS -->
 <section style="background: var(--snow);">
   <div class="container">
@@ -902,6 +966,30 @@
     <div class="highlight-box">
       <h3>對比現況成本：值不值得？</h3>
       <p>云亭每月花半個月（約 15 個工作天）在手工帳務。若以一個月可回收 10 天的行政時間來算，三個月內人力節省的成本已接近系統開發費用。這還不算食材成本分析帶來的浪費控制效益。</p>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <h3 style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 16px;">三階段投入計畫</h3>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 18px;">
+          <div style="font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #166534; margin-bottom: 6px;">PHASE 1</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">核心建置</div>
+          <div style="font-size: 20px; font-weight: 800; color: #166534; margin-bottom: 8px;">NT$ 12–20 萬</div>
+          <div style="font-size: 12px; color: var(--slate); line-height: 1.6;">記帳 + 進銷存 + 排班<br>一次性買斷<br>+ 第一層功能全交付</div>
+        </div>
+        <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px; padding: 18px;">
+          <div style="font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #92400e; margin-bottom: 6px;">PHASE 2</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">加值功能上線</div>
+          <div style="font-size: 20px; font-weight: 800; color: #92400e; margin-bottom: 8px;">NT$ 200–800/月</div>
+          <div style="font-size: 12px; color: var(--slate); line-height: 1.6;">LINE Bot 班表通知月費<br>（依訊息量浮動）<br>+ 主機費 NT$500–1,500/月</div>
+        </div>
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 18px;">
+          <div style="font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #0c4a6e; margin-bottom: 6px;">PHASE 3</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">v2 評估</div>
+          <div style="font-size: 20px; font-weight: 800; color: #0c4a6e; margin-bottom: 8px;">另行報價</div>
+          <div style="font-size: 12px; color: var(--slate); line-height: 1.6;">新址穩定後啟動<br>多公司架構 / 稅務試算<br>依需求範圍再估</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
