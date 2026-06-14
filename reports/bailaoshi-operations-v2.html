@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 智慧營運系統規劃 v0.14</title>
+<title>白老師國際語言中心 — 智慧營運系統規劃 v0.16</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -322,7 +322,7 @@
 <body>
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v0.14 — 新增薪資發放機制</div>
+  <div class="hero-tag">系統規劃文件 v0.16 — 整合四大營運機制</div>
   <h1>白老師國際語言中心<br><span>智慧營運系統</span>規劃</h1>
   <p class="hero-sub">從諮詢到結業，整合教務、財務、AI 輔助與 MUSEON 智能對接的五階段導入計畫</p>
   <div class="hero-meta">
@@ -519,8 +519,8 @@
 <section>
   <div class="container">
     <div class="section-label">營運機制</div>
-    <h2 class="section-title">費用結構、折扣規則與帳單制度</h2>
-    <p class="section-desc">系統需支援以下三大機制的精確計算與追蹤，任一環節設計不當都會造成後續帳務混亂。</p>
+    <h2 class="section-title">四大核心機制：費用、折扣、帳單、薪資與班級</h2>
+    <p class="section-desc">系統需支援以下四大機制的精確計算與追蹤，任一環節設計不當都會造成後續帳務或人事管理的混亂。</p>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 32px;">
 
@@ -704,16 +704,73 @@
       </div>
     </div>
 
+    <!-- 班級升級機制 -->
+    <div style="margin-top: 36px; margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <div style="width: 38px; height: 38px; background: #F0EBF8; border-radius: 10px; display:flex; align-items:center; justify-content:center; font-size:18px;">🎓</div>
+        <div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink);">班級升級機制</div>
+          <div style="font-size: 11px; color: var(--mist);">多對多關係、永久學籍、年度班名更新——資料庫設計的核心挑戰</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 18px;">
+
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">🪪 學生 ID 永久不變</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">終身唯一識別碼</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">無論轉班、停課、復學、多少年後回來，歷史紀錄完整保留，不重建學籍</div>
+            </div>
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">班名可更新，學籍不重建</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">「英A班」每年更名為「英A108班」，但學生 ID 不跟著換，歷史不斷層</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">🗂️ 年度班名更新規則</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">每年產生新班級實體</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">年度更新後建立新班級紀錄，不覆蓋舊班，保留完整歷年班級可查詢</div>
+            </div>
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">升班批次作業</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">學年結束後批次將學生移至新年度班級，需支援例外（留班、跳班）處理</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">🔗 多班同時就讀（多對多）</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="padding: 10px 12px; background: var(--parchment); border-radius: 8px;">
+              <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">一人多班設計</div>
+              <div style="font-size: 11px; color: var(--mist); line-height: 1.5;">同一個學生可同時報讀英文班 + 數學班 + 暑期密集班，帳單分開、出席分別記錄</div>
+            </div>
+            <div style="padding: 10px 12px; background: linear-gradient(135deg, #FEF8F6 0%, #FDF4F0 100%); border: 1px solid #e8b8a0; border-radius: 8px;">
+              <div style="font-size: 11px; color: var(--ember); font-weight: 600; margin-bottom: 3px;">設計重點</div>
+              <div style="font-size: 11px; color: var(--slate); line-height: 1.5;">Student ↔ 就讀紀錄 ↔ 班級 為多對多關係，不能簡化為一對一，否則多班報名無法正確處理</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- 機制交叉說明 -->
     <div style="background: linear-gradient(135deg, #12121A 0%, #1e2840 100%); border-radius: 14px; padding: 24px 28px; color: #fff;">
-      <div style="font-size: 13px; font-weight: 700; color: #E0714D; margin-bottom: 8px;">三機制交叉場景（最複雜的帳單案例）</div>
+      <div style="font-size: 13px; font-weight: 700; color: #E0714D; margin-bottom: 8px;">四機制交叉場景（最複雜的帳單案例）</div>
       <div style="font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.8;">
-        教職員家長的第二個孩子，暑期報兩個班：
-        <span style="color: #E0714D;">學費 × 九折</span> ＋
-        <span style="color: #E0714D;">第二孩減免</span> ＋
-        <span style="color: #E0714D;">暑期分兩期繳</span> ＋
-        <span style="color: #E0714D;">兩個班共用一張帳單 vs. 分開開立</span> ——
-        這種情境系統必須能正確自動處理，否則行政要手動算。
+        教職員家長的第二個孩子，同時就讀英文班和數學班，暑期報名：
+        <span style="color: #E0714D;">學費 × 九折</span>（折扣機制）＋
+        <span style="color: #E0714D;">第二孩減免</span>（折扣疊加）＋
+        <span style="color: #E0714D;">暑期分兩期繳</span>（帳單規則）＋
+        <span style="color: #E0714D;">兩班帳單是否合併</span>（多班就讀）＋
+        <span style="color: #E0714D;">兩個班名同年更新但學籍不動</span>（班級升級）——
+        五個條件同時成立，系統必須自動正確處理，否則行政要手動算。
       </div>
     </div>
   </div>
@@ -725,35 +782,6 @@
     <div class="section-label">系統模組架構</div>
     <h2 class="section-title">25 個核心模組，分五階段導入</h2>
     <p class="section-desc">核心優先、往外擴展、痛點為先——每個階段上線即可解決現有業務問題，不等全部完成才有價值。</p>
-
-    <!-- 三大複雜節點 -->
-    <div class="complexity-box">
-      <div class="complexity-title">⚠️ 系統三大複雜節點（需優先規劃）</div>
-      <div class="complexity-sub">以下三塊是整套系統技術難度最高的區域，需在設計初期就確認邏輯，避免後期反工</div>
-      <div class="complexity-grid">
-        <div class="complexity-item">
-          <div class="complexity-item-title">1. 薪資計算（最難）</div>
-          <div class="complexity-item-desc">
-            老師跨校區任課，薪資依<strong>時數比例攤分至各分校</strong>；勞健保歸加保分校；鐘點費依<strong>班級人數</strong>計算，而非固定時薪。三個變數交叉，手動計算幾乎必錯。
-          </div>
-          <span class="complexity-badge">MOD 16 高風險節點</span>
-        </div>
-        <div class="complexity-item">
-          <div class="complexity-item-title">2. 帳單折扣組合</div>
-          <div class="complexity-item-desc">
-            五種費用 × 多種折扣條件（教職員、第二孩）× 暑期特殊方案，組合超過五種以上。帳單引擎必須能處理<strong>同一帳單同時套用多項折扣</strong>，且每種費用折扣規則可能不同。
-          </div>
-          <span class="complexity-badge">MOD 10 + MOD 11 關鍵</span>
-        </div>
-        <div class="complexity-item">
-          <div class="complexity-item-title">3. 班級升級機制</div>
-          <div class="complexity-item-desc">
-            學生 ID 永久不變、班名每年度更新（如「英A班」→「英A108班」）；同一個學生可<strong>同時在多個班</strong>就讀。系統需支援學生與班級多對多關係，且歷史班級可查詢不丟失。
-          </div>
-          <span class="complexity-badge">MOD 03 + MOD 06 核心設計</span>
-        </div>
-      </div>
-    </div>
 
     <!-- Phase 1 -->
     <div class="phase-block">
@@ -1229,8 +1257,8 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.14</p>
-  <p style="margin-top: 8px;">v0.14 新增「薪資發放機制」：鐘點費計算、跨校區攤算、勞健保歸屬、每月兩次發薪流程</p>
+  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.16</p>
+  <p style="margin-top: 8px;">v0.16 整合四大營運機制：費用折扣帳單、薪資跨校區攤算、班級升級多對多關係，移除重複複雜節點彙整區塊</p>
 </div>
 
 </body>
