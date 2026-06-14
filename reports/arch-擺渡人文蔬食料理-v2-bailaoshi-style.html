@@ -82,9 +82,9 @@
 
   <h1>擺渡人文蔬食料理 — 營運管理系統規劃文件</h1>
   <div class="doc-meta">
-    <span>版本：v2.0</span>
+    <span>版本：v3.0</span>
     <span>日期：2026-06-14</span>
-    <span>用途：系統規劃評估，供內部討論</span>
+    <span>用途：系統規劃評估，供內部討論，不含開發費用與合約條款</span>
   </div>
 
   <div class="toc">
@@ -92,7 +92,7 @@
     <ol>
       <li><a href="#s1">專案摘要</a></li>
       <li><a href="#s2">功能需求</a></li>
-      <li><a href="#s2b">系統功能分層（核心 / 加值）</a></li>
+      <li><a href="#s2b">系統功能分層（核心 / 加值 / v2評估）</a></li>
       <li><a href="#s3">系統架構</a></li>
       <li><a href="#s4">資料庫設計</a></li>
       <li><a href="#s5">API 設計大綱</a></li>
@@ -177,8 +177,8 @@
   </table>
 
   <!-- ②b 功能分層 -->
-  <h2 id="s2b"><span class="section-num">②+</span> 系統功能分層（核心 / 加值）</h2>
-  <p style="font-size:0.88rem; color:#555; margin-bottom:14px;">依交付時序分為兩層，以下所有功能均在規劃範圍內，分批交付。</p>
+  <h2 id="s2b"><span class="section-num">②+</span> 系統功能分層（核心 / 加值 / v2 評估）</h2>
+  <p style="font-size:0.88rem; color:#555; margin-bottom:14px;">依交付優先級與業主感受拆分為三層，避免功能清單一次呈現造成腦補高報價。</p>
 
   <div class="tier-grid">
     <div class="tier-card tier-green">
@@ -200,12 +200,12 @@
       <ul>
         <li>LINE 班表通知（讓員工收到班表推播）
           <div class="warn-box" style="margin:8px 0 2px; font-size:0.82rem;">
-            ⚠️ <strong>LINE Bot 月費說明</strong>：LINE Notify 已於 2025 年停用。目前需申請 LINE Bot，月費約 NT$200–800（依訊息量計費，一般用量約 200 元）。此為加值選項，v1 上線後再決定是否開通。
+            ⚠️ <strong>LINE Bot 月費說明</strong>：LINE Notify 已於 2025 年停用。目前需申請 LINE Bot，月費約 NT$200–800（依訊息量計費，一般用量約 200 元）。
           </div>
         </li>
         <li>低庫存預警（食材低於閾值自動提示）</li>
         <li>加班費自動計算（出勤差異比對班表）</li>
-        <li>相關報表輸出（一鍵 PDF/Excel 自動產出）</li>
+        <li>相關報表（一鍵 PDF/Excel 自動產出）</li>
       </ul>
     </div>
   </div>
@@ -519,18 +519,18 @@ status        VARCHAR(20)   -- scheduled/confirmed/absent</pre>
   <h3 style="margin-top:24px;">第三方支付費用說明</h3>
   <div class="warn-box">
     <strong>⚠️ 第三方支付為依交易量計費的浮動費用，非買斷項目</strong><br><br>
-    目前 ICF 月費約 NT$6,000 已包含金流手續費（LINE Pay + 刷卡），以下為費率拆解供參考：
+    目前 ICF 月費約 NT$6,000 已含金流手續費（LINE Pay + 信用卡），以下為費率拆解供參考：
   </div>
   <table>
     <thead><tr><th>支付方式</th><th>費率</th><th>費用說明</th></tr></thead>
     <tbody>
-      <tr><td>LINE Pay</td><td>約 2.5%/筆</td><td>依 LINE Pay 商業帳號費率，月費另計約 NT$0（免月費方案）</td></tr>
+      <tr><td>LINE Pay</td><td>約 2.5%/筆</td><td>依 LINE Pay 商業帳號費率，免月費方案</td></tr>
       <tr><td>信用卡刷卡</td><td>約 1.5–2.5%（依發卡行）</td><td>Visa/Mastercard 一般商戶費率，需透過收單機構申請</td></tr>
       <tr><td>現金</td><td>無手續費</td><td>現金交易無手續費，但需人工對帳</td></tr>
       <tr><td>月均合計（估算）</td><td>—</td><td>依業績 NT$50 萬/月估算，手續費約 NT$1,250–12,500（依支付比例）</td></tr>
     </tbody>
   </table>
-  <p style="font-size:0.85rem; color:#666;">此費用目前由 ICF 平台代為收單，若未來評估自建支付串接，手續費結構不變，但需額外申請收單帳號（審核週期約 1–2 個月）。</p>
+  <p style="font-size:0.85rem; color:#666;">此費用目前由 ICF 平台代為收單。若未來評估自建支付串接，手續費結構不變，但需額外申請收單帳號（審核週期約 1–2 個月）。</p>
 
   <div class="footer">本文件由 MUSEON 系統依訪談記錄自動生成，供評估用途。所有假設項目已標記，可依實際情況修正。</div>
 </div>
