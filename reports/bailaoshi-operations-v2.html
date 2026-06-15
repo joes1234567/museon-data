@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 智慧營運系統規劃 v0.20</title>
+<title>白老師國際語言中心 — 智慧營運系統規劃 v0.21</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -343,12 +343,12 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v0.20 — 業主簡報版：結構優化，情境優先</div>
+  <div class="hero-tag">系統規劃文件 v0.21 — 業主簡報版：結構優化，情境優先</div>
   <h1>白老師國際語言中心<br><span>智慧營運系統</span>規劃</h1>
   <p class="hero-sub">從諮詢到結業，整合教務、財務、AI 輔助與 MUSEON 智能對接的五階段導入計畫</p>
   <div class="hero-meta">
     <div class="hero-meta-item">
-      <span class="hero-meta-num">26</span>
+      <span class="hero-meta-num">28</span>
       <span class="hero-meta-label">核心模組</span>
     </div>
     <div class="hero-meta-item">
@@ -991,7 +991,7 @@
 <section style="background: var(--snow);">
   <div class="container">
     <div class="section-label">系統模組架構</div>
-    <h2 class="section-title">26 個核心模組，分五階段導入</h2>
+    <h2 class="section-title">28 個核心模組，分五階段導入</h2>
     <p class="section-desc">核心優先、往外擴展、痛點為先——每個階段上線即可解決現有業務問題，不等全部完成才有價值。</p>
 
     <!-- Phase 1 -->
@@ -1103,8 +1103,8 @@
         </div>
         <div class="module-card">
           <div class="module-num">MOD 12</div>
-          <div class="module-name">通知模組</div>
-          <div class="module-desc">繳費提醒、缺席通知、補課安排、停補課公告，預留 LINE、Email、App 推播串接。<strong>吃藥提醒</strong>：安親班學生若有服藥需求，家長可在 App 設定提醒時間與藥物說明，系統在指定時間通知老師提醒學生服藥，並記錄執行紀錄。</div>
+          <div class="module-name">統一通知 Bus</div>
+          <div class="module-desc">所有模組（帳單、出缺席、吃藥、補課影片、活動…）觸發的通知，統一寫入<strong>通知資料表</strong>，再由本模組統一派送至 LINE、Email 或 App 推播。好處：擴充新通知場景時只需新增觸發，不改派送邏輯；換通知渠道（LINE→App）只改這一處。支援情境：繳費提醒、缺席通知、吃藥提醒、補課影片上架、活動報名確認、停補課公告。</div>
           <span class="module-tag t-svc">溝通服務</span>
         </div>
       </div>
@@ -1115,7 +1115,7 @@
       <div class="phase-header">
         <span class="phase-badge pb-3">第三階段</span>
         <span class="phase-title">業務擴展</span>
-        <span class="phase-subtitle">行銷部 · 人資 · 國際部延伸 · 家長端 · 活動管理 · 7 個模組</span>
+        <span class="phase-subtitle">行銷部 · 人資 · 國際部延伸 · 家長端 · 活動管理 · 9 個模組</span>
       </div>
       <p style="font-size:13px; color:var(--slate); margin-bottom:18px;">
         本階段所有模組由 <span style="color:#2A6A8A; font-weight:700;">營運系統負責建置與維護</span>，包含家長 App 殼層（查成績、出席、繳費）；Phase 5 開通後由 <span style="color:#C4502A; font-weight:700;">MUSEON 負責</span>加上 AI 個人化推播功能。
@@ -1163,6 +1163,18 @@
           <div class="module-name">活動管理</div>
           <div class="module-desc">全校型活動（演講比賽、聖誕節、萬聖節、成果發表等）從建立到報到一站管理：建立活動名稱、時間、地點、說明與適用年齡層；家長 App 線上報名、名額控管、報名成功通知；後台統計報名人數（依班級 / 年級 / 學生）、老師查看自己班上報名狀態；<strong>QR Code 電子報到</strong>取代紙本簽到。</div>
           <span class="module-tag t-svc">加值服務</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 27</div>
+          <div class="module-name">吃藥管理</div>
+          <div class="module-desc">安親班學生服藥需求的獨立管理模組。家長在 App 建立服藥資料（藥名、劑量、用藥時間、備注），系統在指定時間透過統一通知 Bus（MOD 12）通知老師，老師確認執行後記錄。<br><strong>獨立資料表</strong>：藥品資料、用藥排程、服藥執行紀錄、家長授權紀錄，約 3–4 張，與通知表分離，擴充或調整服藥規則不影響通知派送邏輯。</div>
+          <span class="module-tag t-svc">安親照護</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 28</div>
+          <div class="module-name">補課影片管理</div>
+          <div class="module-desc">老師上傳補課錄影後，系統自動比對缺席名單，將影片分發給需補課的學員，並透過統一通知 Bus（MOD 12）推播「你有新的補課影片」；家長與學生在 App 內可查看歷史影片列表，老師後台可追蹤觀看狀態。<strong>QR Code 掃描</strong>可作為實體補課到場確認的備用方式。</div>
+          <span class="module-tag t-svc">教學服務</span>
         </div>
       </div>
     </div>
@@ -1321,6 +1333,8 @@
           <li>招生行銷管理</li>
           <li>活動管理 + QR Code 報到</li>
           <li>家長 App 建殼上線</li>
+          <li>吃藥管理（獨立資料表）</li>
+          <li>補課影片管理</li>
         </ul>
       </div>
       <div class="roadmap-phase rp-future" style="background: linear-gradient(135deg, #F5F0FC 0%, #F9F6FE 100%);">
@@ -1434,8 +1448,8 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.20</p>
-  <p style="margin-top: 8px;">v0.20 補充：新增活動管理模組（MOD 26，含 QR Code 電子報到）、吃藥提醒功能加入通知模組與家長 App、家長 App 納入活動通知報名</p>
+  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.21</p>
+  <p style="margin-top: 8px;">v0.21 更新：吃藥管理升格為獨立模組 MOD 27（3–4 張獨立資料表）、新增補課影片管理 MOD 28、通知模組 MOD 12 重構為統一通知 Bus 架構（所有模組通知統一路由派送），共 28 個模組</p>
 </div>
 
 </body>
