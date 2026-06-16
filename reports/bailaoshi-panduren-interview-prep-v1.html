@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>擺渡人文蔬食料理｜需求訪談報告 v1</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: #f0f2f0; color: #2c2c2c; line-height: 1.75; }
+  .container { max-width: 960px; margin: 40px auto 60px; background: #fff; border-radius: 10px; box-shadow: 0 2px 20px rgba(0,0,0,0.09); padding: 56px 64px; }
+
+  /* ── Header ── */
+  .doc-header { border-bottom: 3px solid #4a7c59; padding-bottom: 20px; margin-bottom: 10px; }
+  .doc-header h1 { font-size: 1.65rem; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .doc-header .subtitle { font-size: 1.0rem; color: #4a7c59; font-weight: 600; margin-bottom: 14px; }
+  .doc-meta { display: flex; flex-wrap: wrap; gap: 6px 24px; font-size: 0.82rem; color: #777; margin-top: 10px; }
+  .doc-meta span::before { content: "▸ "; color: #4a7c59; }
+
+  /* ── TOC ── */
+  .toc { background: #f4f8f5; border: 1px solid #c8ddc9; border-radius: 8px; padding: 20px 24px; margin: 28px 0 36px; }
+  .toc h3 { font-size: 0.85rem; font-weight: 700; color: #4a7c59; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .toc ol { padding-left: 18px; font-size: 0.87rem; }
+  .toc li { margin-bottom: 5px; }
+  .toc a { color: #2d6640; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* ── Section headings ── */
+  h2 { font-size: 1.05rem; font-weight: 700; color: #4a7c59; margin: 42px 0 16px; border-left: 4px solid #4a7c59; padding-left: 14px; }
+  h3 { font-size: 0.95rem; font-weight: 700; color: #1a1a1a; margin: 24px 0 10px; }
+  p { margin-bottom: 13px; font-size: 0.93rem; }
+  ul { padding-left: 22px; margin-bottom: 13px; font-size: 0.92rem; }
+  ol { padding-left: 22px; margin-bottom: 13px; font-size: 0.92rem; }
+  li { margin-bottom: 6px; }
+  hr { border: none; border-top: 1px solid #e4e8e4; margin: 32px 0; }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 0.88rem; }
+  th { background: #4a7c59; color: #fff; padding: 10px 13px; text-align: left; font-weight: 600; }
+  td { padding: 9px 13px; border-bottom: 1px solid #e4e8e0; vertical-align: top; }
+  tr:nth-child(even) td { background: #f7faf7; }
+
+  /* ── Status tags ── */
+  .tag { display: inline-block; padding: 2px 9px; border-radius: 4px; font-size: 0.78rem; font-weight: 700; margin: 1px 2px; }
+  .tag-go    { background: #e8f5e9; color: #2e7d32; }
+  .tag-no    { background: #fce4ec; color: #c62828; }
+  .tag-later { background: #fff8e1; color: #e65100; }
+  .tag-p1 { background: #4a7c59; color: #fff; }
+  .tag-p2 { background: #a5c0a5; color: #fff; }
+  .tag-p3 { background: #d0e0d0; color: #555; }
+  .star-3 { color: #e65100; font-weight: 700; }
+  .star-2 { color: #888; }
+
+  /* ── Callout boxes ── */
+  .callout { border-radius: 7px; padding: 16px 20px; margin: 16px 0; font-size: 0.91rem; }
+  .callout-info  { background: #e8f5e9; border-left: 5px solid #43a047; }
+  .callout-warn  { background: #fff8e1; border-left: 5px solid #ffa726; }
+  .callout-risk  { background: #fce4ec; border-left: 5px solid #ef5350; }
+  .callout-blue  { background: #e3f2fd; border-left: 5px solid #1976d2; }
+  .callout-title { font-weight: 700; margin-bottom: 6px; }
+  .callout-info  .callout-title { color: #2e7d32; }
+  .callout-warn  .callout-title { color: #e65100; }
+  .callout-risk  .callout-title { color: #c62828; }
+  .callout-blue  .callout-title { color: #1565c0; }
+
+  /* ── Phase cards ── */
+  .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+  .phase-card { border-radius: 8px; padding: 18px 16px; text-align: center; }
+  .phase-card.p1 { background: #e8f5e9; border: 2px solid #81c784; }
+  .phase-card.p2 { background: #fff8e1; border: 2px solid #ffd54f; }
+  .phase-card.p3 { background: #e3f2fd; border: 2px solid #90caf9; }
+  .phase-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; color: #888; margin-bottom: 6px; text-transform: uppercase; }
+  .phase-name { font-size: 1.0rem; font-weight: 700; margin-bottom: 8px; }
+  .p1 .phase-name { color: #2e7d32; }
+  .p2 .phase-name { color: #e65100; }
+  .p3 .phase-name { color: #1565c0; }
+  .phase-items { font-size: 0.82rem; color: #555; text-align: left; padding-left: 12px; }
+  .phase-items li { margin-bottom: 4px; }
+  @media (max-width: 680px) {
+    .phase-grid { grid-template-columns: 1fr; }
+    .container { padding: 28px 20px; }
+  }
+
+  /* ── Agenda ── */
+  .agenda-row { display: grid; grid-template-columns: 120px 1fr; gap: 0; border-bottom: 1px solid #e4e8e0; }
+  .agenda-row:first-child { border-top: 1px solid #e4e8e0; }
+  .agenda-time { background: #f4f8f5; padding: 10px 12px; font-size: 0.85rem; font-weight: 700; color: #4a7c59; border-right: 1px solid #e4e8e0; }
+  .agenda-body { padding: 10px 14px; font-size: 0.88rem; }
+  .agenda-body strong { color: #4a7c59; }
+
+  /* ── Footer ── */
+  .footer { font-size: 0.76rem; color: #bbb; text-align: center; margin-top: 48px; padding-top: 18px; border-top: 1px solid #eee; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ── HEADER ── -->
+  <div class="doc-header">
+    <h1>擺渡人文蔬食料理</h1>
+    <div class="subtitle">需求訪談報告 v1 ｜第一次訪談摘要 ＋ 第二次訪談準備</div>
+    <div class="doc-meta">
+      <span>整理日期：2026-06-16</span>
+      <span>第一次訪談：2026-06-10</span>
+      <span>受訪者：云亭（現場運營負責人）</span>
+      <span>訪談者：J（四維 AI 系統顧問）</span>
+      <span>報告流程：J → 云亭 → 店長 → 徐主任</span>
+    </div>
+  </div>
+
+  <!-- ── TOC ── -->
+  <div class="toc">
+    <h3>目錄</h3>
+    <ol>
+      <li><a href="#s1">第一次訪談重點摘要</a></li>
+      <li><a href="#s2">現況系統全景</a></li>
+      <li><a href="#s3">云亭的判斷：可行 vs 不可行</a></li>
+      <li><a href="#s4">新地點業務結構（尚待確認）</a></li>
+      <li><a href="#s5">已達成共識的方向</a></li>
+      <li><a href="#s6">第二次訪談必談問題清單</a></li>
+      <li><a href="#s7">建議議程（第二次）</a></li>
+      <li><a href="#s8">向徐主任報告的必要元素</a></li>
+      <li><a href="#s9">政治面注意事項</a></li>
+    </ol>
+  </div>
+
+  <!-- ═══ SECTION 1 ═══ -->
+  <h2 id="s1">一、第一次訪談重點摘要</h2>
+
+  <p>這次訪談的關鍵發現是：<strong>云亭和 J 之前完全不知道對方的存在，也都不清楚徐主任真正的需求是什麼</strong>。雙方透過這次訪談，把訊息拼在一起，共同梳理出一個理性的方向。</p>
+
+  <div class="callout callout-warn">
+    <div class="callout-title">⚠️ 源頭問題</div>
+    案子由徐主任引薦，但主任的指示非常模糊——「點餐、會計、行政全部打包」，邊界不清。云亭的原話：「我根本不知道他要做什麼」。這是後續所有討論的起點。
+  </div>
+
+  <!-- ═══ SECTION 2 ═══ -->
+  <h2 id="s2">二、現況系統全景</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>功能模組</th>
+        <th>現況</th>
+        <th>問題 / 痛點</th>
+        <th>現況費用</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>點餐 / 結帳 POS</strong></td>
+        <td>iif 系統（已使用多年）</td>
+        <td>穩定，員工已熟悉。換系統 = 世界大亂</td>
+        <td>月費 ~3,000 元（含刷卡、Line Pay）</td>
+      </tr>
+      <tr>
+        <td><strong>線上掃碼點餐 / 訂位</strong></td>
+        <td>iif 可加購</td>
+        <td>目前未啟用，是選配功能</td>
+        <td>另計幾千元/月，總計 ~6,000 元/月</td>
+      </tr>
+      <tr>
+        <td><strong>排班管理</strong></td>
+        <td>外場 Excel、內場手寫</td>
+        <td>兩套未整合，與 iif 打卡資料脫節</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>會計結帳</strong></td>
+        <td>完全人工</td>
+        <td><strong>每月耗費半個月人力</strong>，誤差多，需產出股東報表</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>進銷存 / 食材成本</strong></td>
+        <td>完全人工計算</td>
+        <td><strong>最明顯痛點</strong>，誤差大、時間成本高</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>行銷內容</strong></td>
+        <td>已有專人負責拍影片、發文</td>
+        <td>無需 AI 介入</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══ SECTION 3 ═══ -->
+  <h2 id="s3">三、云亭的判斷：可行 vs 不可行</h2>
+
+  <h3>✅ 可行（有明確痛點，值得投入）</h3>
+
+  <div class="phase-grid">
+    <div class="phase-card p1">
+      <div class="phase-label">優先 P1</div>
+      <div class="phase-name">會計系統</div>
+      <ul class="phase-items">
+        <li>每月結帳耗費半個月人力</li>
+        <li>誤差多</li>
+        <li>需產出股東報表</li>
+        <li>目前完全人工，改善空間最大</li>
+      </ul>
+    </div>
+    <div class="phase-card p1">
+      <div class="phase-label">優先 P1</div>
+      <div class="phase-name">進銷存 / 食材成本</div>
+      <ul class="phase-items">
+        <li>全靠人工估算，誤差大</li>
+        <li>可從 iif 匯出銷售資料</li>
+        <li>AI 分析食材消耗、成本排行</li>
+        <li>云亭有嘗試過但缺工具</li>
+      </ul>
+    </div>
+    <div class="phase-card p2">
+      <div class="phase-label">次優先 P2</div>
+      <div class="phase-name">排班整合</div>
+      <ul class="phase-items">
+        <li>Excel + 手寫兩套未合一</li>
+        <li>iif 有打卡資料可對接</li>
+        <li>整合後可減少管理誤差</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>❌ 不可行 / 時機未到</h3>
+  <ul>
+    <li><span class="tag tag-no">不可行</span> <strong>替換現有 iif POS</strong>：穩定使用多年、所有資料都在裡面，新地點開幕期強行切換風險極高（云亭原話：「世界大亂」）</li>
+    <li><span class="tag tag-later">等規模</span> <strong>數位同事（AI 員工）</strong>：單一店面、店員電腦能力有限（全店只有 2-3 人懂電腦）、ROI 低，等規模擴大到 2-3 間再評估</li>
+    <li><span class="tag tag-no">不適合</span> <strong>送餐機器人</strong>：餐廳走禪風人文路線、動線窄、擋路，「跑一台送餐機器人，很違和」</li>
+  </ul>
+
+  <!-- ═══ SECTION 4 ═══ -->
+  <h2 id="s4">四、新地點業務結構（⚠️ 尚待確認）</h2>
+
+  <div class="callout callout-risk">
+    <div class="callout-title">🚨 核心卡點：公司結構未定案</div>
+    主任還在考慮三種方案，而<strong>系統架構取決於這個選擇</strong>。這件事不釐清，任何系統設計都可能白做。
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>方案</th><th>說明</th><th>對系統的影響</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>方案 A</strong><br>1 間公司</td>
+        <td>全部在同一法人下，三個部門同帳</td>
+        <td>帳務可集中管理，系統設計最簡單</td>
+      </tr>
+      <tr>
+        <td><strong>方案 B</strong><br>3 間公司</td>
+        <td>餐廳、炸物（吉拿棒）、宴會廳分別獨立法人</td>
+        <td>每家公司需獨立帳務，系統最複雜</td>
+      </tr>
+      <tr>
+        <td><strong>方案 C</strong><br>1 公司拆 3 帳</td>
+        <td>同一法人下，三個部門分開帳目計算</td>
+        <td>帳務分拆邏輯需特別設計</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>新地點空間配置</h3>
+  <ul>
+    <li><strong>一樓</strong>：兩個部門並存 ── 餐廳 ＋ 炸物（吉拿棒），分兩台 POS 結帳</li>
+    <li><strong>二樓</strong>：宴會廳</li>
+    <li><strong>三樓</strong>：枋寮（另一個部門）</li>
+  </ul>
+
+  <div class="callout callout-warn">
+    <div class="callout-title">💡 稅務節點</div>
+    主任曾提到「3,000 萬稅務門檻」的節稅需求，帳務設計必須考慮這個約束。具體需求在第二次訪談確認。
+  </div>
+
+  <!-- ═══ SECTION 5 ═══ -->
+  <h2 id="s5">五、已達成共識的方向</h2>
+
+  <div class="callout callout-info">
+    <div class="callout-title">✅ 雙方確認的六點共識</div>
+  </div>
+
+  <ol>
+    <li><strong>系統範疇</strong>：先做會計、進銷存、排班三個後勤模組；點餐系統（POS）現階段不動</li>
+    <li><strong>導入順序</strong>：先穩定內部後勤 → 再考慮線上點餐等對外功能</li>
+    <li><strong>過渡方式</strong>：新舊系統並行，不一刀切換，分階段導入</li>
+    <li><strong>數位同事</strong>：排到最後——等「靠系統真的解決不了」的時候再引進</li>
+    <li><strong>費用透明</strong>：買斷 ≠ 零月費，必須清楚列出第三方服務延伸費用（金流手續費、訂位服務費等）</li>
+    <li><strong>11 月時限</strong>：先啟動後勤內部模組，點餐系統（外部）不趕這個時間點</li>
+  </ol>
+
+  <!-- ═══ SECTION 6 ═══ -->
+  <h2 id="s6">六、第二次訪談必談問題清單</h2>
+
+  <h3>6.1 業務結構【最優先——不確認無法動工】</h3>
+  <table>
+    <thead><tr><th>問題</th><th>重要性</th><th>備注</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>公司結構決定了嗎？（1 公司 / 3 公司 / 拆 3 帳）</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>決定整個系統架構，沒有這個什麼都沒辦法設計</td>
+      </tr>
+      <tr>
+        <td>各部門帳目如何拆分？（餐廳、炸物、宴會廳分別獨立結算？）</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>連帶影響 POS 設計和報表格式</td>
+      </tr>
+      <tr>
+        <td>3,000 萬稅務門檻的具體需求是什麼？</td>
+        <td><span class="star-3">★★</span></td>
+        <td>帳務分拆邏輯的限制條件</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.2 現況操作細節【系統設計地基】</h3>
+  <table>
+    <thead><tr><th>問題</th><th>重要性</th><th>備注</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>每月會計結帳的完整流程？（步驟、人員、工具）</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>要知道半個月在做什麼，才能知道哪些可以自動化</td>
+      </tr>
+      <tr>
+        <td>需要產出哪些報表給股東 / 老闆？（格式、頻率、欄位）</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>輸出格式決定系統的報表模組怎麼設計</td>
+      </tr>
+      <tr>
+        <td>iif 匯出的資料格式？（CSV / Excel？能匯哪些欄位？）</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>這是進銷存分析的資料來源，格式決定串接難度</td>
+      </tr>
+      <tr>
+        <td>進貨資料現在怎麼記錄？有沒有固定格式？</td>
+        <td><span class="star-2">★★</span></td>
+        <td>進銷存需要進貨 + 銷貨兩端的資料才能算庫存</td>
+      </tr>
+      <tr>
+        <td>排班表整合哪些資訊？（人員、時段、部門分開？）</td>
+        <td><span class="star-2">★★</span></td>
+        <td>新地點有三個部門，排班邏輯可能不同</td>
+      </tr>
+      <tr>
+        <td>iif 的打卡資料可以匯出嗎？格式為何？</td>
+        <td><span class="star-2">★★</span></td>
+        <td>排班整合依賴這個</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.3 新地點時程與限制</h3>
+  <table>
+    <thead><tr><th>問題</th><th>重要性</th><th>備注</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>新地點預計開幕日期？</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>決定系統開發的時間壓力</td>
+      </tr>
+      <tr>
+        <td>11 月時限，指的是 POS 還是後勤系統上線？</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>主任可能沒區分這兩件事，需要釐清</td>
+      </tr>
+      <tr>
+        <td>可接受的新舊並行期有多長？</td>
+        <td><span class="star-2">★★</span></td>
+        <td>影響導入計畫的緩衝空間</td>
+      </tr>
+      <tr>
+        <td>什麼時間點可以開始員工培訓？</td>
+        <td><span class="star-2">★★</span></td>
+        <td>店員電腦能力有限，培訓需要時間</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.4 決策關係人確認</h3>
+  <table>
+    <thead><tr><th>問題</th><th>重要性</th><th>備注</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>店長是誰？這次能讓店長一起參與嗎？</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>云亭說需要跟店長對齊口徑，愈早讓店長進場愈好</td>
+      </tr>
+      <tr>
+        <td>主任有沒有指定要整合哪些現有系統？</td>
+        <td><span class="star-2">★★</span></td>
+        <td>確認主任的隱藏需求</td>
+      </tr>
+      <tr>
+        <td>有沒有其他 stakeholder（財務、採購）需要納入？</td>
+        <td><span class="star-2">★</span></td>
+        <td>未來報表的使用者</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.5 預算框架</h3>
+  <table>
+    <thead><tr><th>問題</th><th>重要性</th><th>備注</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>主任對系統建置的預算預期是多少？</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>決定系統規模和功能範疇</td>
+      </tr>
+      <tr>
+        <td>可接受的每月維護費用上限？（現在 iif 總費用 ~6,000 元/月）</td>
+        <td><span class="star-3">★★★</span></td>
+        <td>這是比較基準線</td>
+      </tr>
+      <tr>
+        <td>買斷費用由誰拍板？決策流程是什麼？</td>
+        <td><span class="star-2">★★</span></td>
+        <td>避免後期拖延</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══ SECTION 7 ═══ -->
+  <h2 id="s7">七、建議議程（第二次訪談）</h2>
+
+  <p>建議邀請：<strong>云亭 ＋ 店長</strong>（讓店長第二次就出席，直接在場內統一口徑）</p>
+
+  <div style="margin: 16px 0;">
+    <div class="agenda-row">
+      <div class="agenda-time">0–10 分鐘</div>
+      <div class="agenda-body"><strong>業務結構決策</strong>——公司架構、帳務拆分、稅務需求（★★★ 最優先，未確認前其他問題沒有意義）</div>
+    </div>
+    <div class="agenda-row">
+      <div class="agenda-time">10–25 分鐘</div>
+      <div class="agenda-body"><strong>現有流程細節</strong>——會計作帳步驟、iif 匯出格式、進貨紀錄方式、排班現況</div>
+    </div>
+    <div class="agenda-row">
+      <div class="agenda-time">25–35 分鐘</div>
+      <div class="agenda-body"><strong>新地點時程與限制</strong>——開幕日期、11 月時限定義、並行期長度</div>
+    </div>
+    <div class="agenda-row">
+      <div class="agenda-time">35–45 分鐘</div>
+      <div class="agenda-body"><strong>預算框架</strong>——建置預算預期、月維護費上限、決策流程</div>
+    </div>
+    <div class="agenda-row">
+      <div class="agenda-time">45–50 分鐘</div>
+      <div class="agenda-body"><strong>確認下一步</strong>——報告內容符合云亭向主任報告的需求嗎？還需要哪些補充？</div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 8 ═══ -->
+  <h2 id="s8">八、向徐主任報告的必要元素</h2>
+
+  <p>根據云亭明確提出的需求，給主任的報告必須包含以下內容（缺一不可）：</p>
+
+  <div class="callout callout-blue">
+    <div class="callout-title">📋 主任報告必備元素（云亭的需求）</div>
+    <ol style="margin-top: 8px; padding-left: 20px;">
+      <li style="margin-bottom: 8px;"><strong>功能說明</strong>：會計、進銷存、排班、（點餐）四模組，清楚列出每個做什麼</li>
+      <li style="margin-bottom: 8px;"><strong>費用對比表</strong>：自建系統 vs 繼續用 iif，一次性費用 ＋ 每月經常費用全部攤開，讓主任清楚看到差異</li>
+      <li style="margin-bottom: 8px;"><strong>風險評估</strong>（云亭強調這是重點）：
+        <ul style="margin-top: 6px;">
+          <li>開幕期強行切換的具體風險</li>
+          <li>導入時間軸的現實限制（開發時間 + 人員適應）</li>
+          <li>人員適應挑戰（店內僅 2-3 人懂電腦，學習曲線真實存在）</li>
+        </ul>
+      </li>
+      <li style="margin-bottom: 8px;"><strong>第三方服務費明細</strong>：買斷 ≠ 零月費（用發票機買斷但還是要付月費這個比喻跟主任解釋），避免誤解</li>
+      <li style="margin-bottom: 0;"><strong>建議導入順序</strong>：後勤內部先行（P1）→ 對外功能（P2）→ 數位同事排最後（P3）</li>
+    </ol>
+  </div>
+
+  <div class="callout callout-warn">
+    <div class="callout-title">💡 主任是視覺型決策者</div>
+    報告要有圖表和數字對比，不要只有文字說明。風險評估要量化（例如：開幕期切換系統預估增加 X 週的適應混亂期）。單純說「行不通」他不會聽，要讓他看到數字和比較。
+  </div>
+
+  <!-- ═══ SECTION 9 ═══ -->
+  <h2 id="s9">九、政治面注意事項</h2>
+
+  <div class="callout callout-risk">
+    <div class="callout-title">🚨 主任性格提醒</div>
+    <ul style="margin-top: 8px;">
+      <li>主任是最終決策者，但平常不管、要管的時候很難回頭</li>
+      <li>容易「一頭熱」——看到新科技就想導入（送餐機器人、全套 AI 系統）</li>
+      <li>他可能認為「AI 系統 = 任何系統都能做」，需要用具體數字和風險矩陣打破這個假設</li>
+    </ul>
+  </div>
+
+  <h3>報告傳遞流程（重要，請勿跳步）</h3>
+  <div style="display: flex; align-items: center; gap: 12px; margin: 14px 0 20px; flex-wrap: wrap; font-size: 0.9rem;">
+    <div style="background: #4a7c59; color: #fff; padding: 8px 16px; border-radius: 6px; font-weight: 700;">J 產報告</div>
+    <div style="color: #888; font-size: 1.2rem;">→</div>
+    <div style="background: #e8f5e9; border: 2px solid #4a7c59; padding: 8px 16px; border-radius: 6px; font-weight: 700; color: #2e7d32;">先給云亭</div>
+    <div style="color: #888; font-size: 1.2rem;">→</div>
+    <div style="background: #fff8e1; border: 2px solid #ffa726; padding: 8px 16px; border-radius: 6px; font-weight: 700; color: #e65100;">云亭 ＋ 店長對內對齊</div>
+    <div style="color: #888; font-size: 1.2rem;">→</div>
+    <div style="background: #fce4ec; border: 2px solid #ef5350; padding: 8px 16px; border-radius: 6px; font-weight: 700; color: #c62828;">再給徐主任</div>
+  </div>
+  <p style="font-size: 0.88rem; color: #666;">⚠️ 如果繞過云亭直接給主任，主任容易自己解讀、反而更容易罵人、口徑也會錯亂。</p>
+
+  <h3>J 在白老師那邊遇到主任時的統一說詞</h3>
+  <div class="callout callout-blue">
+    <div class="callout-title">📢 建議說法（中立、無攻擊性）</div>
+    「餐廳系統比較複雜，我還在整合資訊和做評估，需要一點時間。資料整理好之後會給餐廳那邊。」<br><br>
+    <span style="font-size: 0.85rem; color: #666;">（不要主動說給誰、幾天內完成——讓云亭和店長統一口徑後再定）</span>
+  </div>
+
+  <hr>
+
+  <div class="footer">
+    擺渡人文蔬食料理｜需求訪談報告 v1 ｜整理：MUSEON 四維 AI 顧問系統 ｜ 2026-06-16<br>
+    本報告為內部工作文件，報告流程：J → 云亭（先對內對齊）→ 店長 → 徐主任
+  </div>
+
+</div>
+</body>
+</html>
