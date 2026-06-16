@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年下半年健康產業市場深度報告</title>
+<style>
+  :root {
+    --primary: #1a6b4a;
+    --primary-light: #2d9068;
+    --accent: #f0a500;
+    --bg: #f8faf9;
+    --card: #ffffff;
+    --text: #1a2a22;
+    --muted: #5a7565;
+    --border: #d4e8dc;
+    --danger: #c0392b;
+    --warning: #e67e22;
+    --success: #27ae60;
+    --info: #2980b9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* COVER */
+  .cover {
+    background: linear-gradient(135deg, #0d3b26 0%, #1a6b4a 50%, #2d9068 100%);
+    color: white;
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .cover .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .cover .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    margin-bottom: 40px;
+  }
+  .cover-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  .cover-stat { text-align: center; }
+  .cover-stat .num { font-size: 2rem; font-weight: 700; color: #7eefc0; }
+  .cover-stat .label { font-size: 12px; opacity: 0.75; margin-top: 4px; }
+  /* NAV */
+  .toc {
+    background: var(--card);
+    border-bottom: 2px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .toc a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 5px 14px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .toc a:hover { background: var(--primary); color: white; border-color: var(--primary); }
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+  /* SECTIONS */
+  .section { margin-bottom: 60px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    background: var(--primary);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .card p { color: var(--muted); font-size: 14px; line-height: 1.8; }
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  @media(max-width:768px) { .grid-2,.grid-3 { grid-template-columns: 1fr; } }
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); }
+  thead tr { background: var(--primary); color: white; }
+  th, td { padding: 13px 18px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+  tr:nth-child(even) { background: #f4faf7; }
+  tr:hover { background: #e8f5ee; }
+  /* METRIC CARDS */
+  .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px; margin-bottom: 28px; }
+  .metric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-align: center;
+    border-top: 4px solid var(--primary);
+  }
+  .metric-card .value { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+  .metric-card .unit { font-size: 13px; color: var(--muted); }
+  .metric-card .label { font-size: 13px; margin-top: 6px; color: var(--text); font-weight: 600; }
+  .metric-card .trend { font-size: 12px; color: var(--success); margin-top: 4px; }
+  /* TREND CARDS */
+  .trend-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    border-left: 5px solid var(--primary-light);
+    margin-bottom: 16px;
+  }
+  .trend-card .trend-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .trend-card .trend-body { font-size: 14px; color: var(--muted); line-height: 1.8; }
+  .trend-card .trend-kpi {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .kpi-chip {
+    background: #e8f5ee;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  /* RISK */
+  .risk-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .risk-badge {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .risk-high { background: #fdecea; color: var(--danger); }
+  .risk-mid { background: #fef3e2; color: var(--warning); }
+  .risk-low { background: #e8f5ee; color: var(--success); }
+  .risk-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .risk-content p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -25px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  .tl-date { font-size: 12px; color: var(--primary); font-weight: 700; margin-bottom: 4px; letter-spacing: 1px; }
+  .tl-content { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .tl-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .tl-content p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: linear-gradient(135deg, #e8f5ee, #f4faf7);
+    border: 1px solid var(--primary-light);
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin: 24px 0;
+  }
+  .highlight h4 { color: var(--primary); font-weight: 700; margin-bottom: 8px; }
+  .highlight p { font-size: 14px; color: var(--text); line-height: 1.8; }
+  /* SUB-SEGMENT */
+  .subseg {
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .subseg-header {
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 14px 22px;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .subseg-header .tag {
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 3px 12px;
+    font-size: 12px;
+  }
+  .subseg-body { padding: 20px 22px; }
+  .subseg-body p { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 10px; }
+  .sub-list { list-style: none; }
+  .sub-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .sub-list li:last-child { border-bottom: none; }
+  .sub-list li::before { content: '▸'; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+  /* FOOTER */
+  footer {
+    background: #0d3b26;
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 13px;
+    line-height: 2;
+  }
+  footer .sources { max-width: 800px; margin: 0 auto 20px; }
+  footer a { color: #7eefc0; text-decoration: none; }
+  /* PROGRESS BAR */
+  .progress-row { margin-bottom: 14px; }
+  .progress-label { font-size: 13px; font-weight: 600; margin-bottom: 5px; display: flex; justify-content: space-between; }
+  .progress-bar { background: #e0ede7; border-radius: 6px; height: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); }
+  /* OPPORTUNITY */
+  .opp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    border-top: 4px solid var(--accent);
+    margin-bottom: 16px;
+  }
+  .opp-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .opp-card .score { font-size: 28px; font-weight: 700; color: var(--accent); }
+  .opp-card .score-label { font-size: 11px; color: var(--muted); }
+  .opp-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
+  /* PRINT */
+  @media print {
+    .toc { display: none; }
+    .cover { -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="badge">MUSEON 市場研究 · 2026 H2</div>
+  <h1>2026 年下半年<br>健康產業市場深度報告</h1>
+  <div class="subtitle">全球數位健康 · 台灣保健食品 · 精準醫療 · 高齡照護<br>深度分析 · 機會缺口 · 風險地圖 · 進場建議</div>
+  <div class="cover-stats">
+    <div class="cover-stat">
+      <div class="num">$483B</div>
+      <div class="label">全球數位健康市場規模</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">23%</div>
+      <div class="label">數位健康年複合成長率</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">1,800億</div>
+      <div class="label">台灣保健食品年產值（NTD）</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">5大</div>
+      <div class="label">核心驅動趨勢</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="toc">
+  <a href="#market-size">市場規模</a>
+  <a href="#segments">細分市場</a>
+  <a href="#trends">五大趨勢</a>
+  <a href="#taiwan">台灣市場</a>
+  <a href="#opportunity">機會缺口</a>
+  <a href="#risks">風險地圖</a>
+  <a href="#timeline">關鍵時間點</a>
+  <a href="#strategy">進場策略</a>
+  <a href="#conclusion">結論</a>
+</nav>
+
+<div class="container">
+
+  <!-- 1. MARKET SIZE -->
+  <section class="section" id="market-size">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">全球市場規模總覽</div>
+    </div>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="value">$420–483B</div>
+        <div class="unit">美元</div>
+        <div class="label">全球數位健康</div>
+        <div class="trend">▲ ~23% CAGR</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">$10.35T+</div>
+        <div class="unit">美元</div>
+        <div class="label">全球 Health & Wellness</div>
+        <div class="trend">▲ 穩定擴張</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">1,800億</div>
+        <div class="unit">新台幣</div>
+        <div class="label">台灣保健食品</div>
+        <div class="trend">▲ 加速成長</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">$1,037B</div>
+        <div class="unit">美元（2032預測）</div>
+        <div class="label">全球精準醫療</div>
+        <div class="trend">▲ 高速成長</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">27%</div>
+        <div class="unit">需求占比</div>
+        <div class="label">亞太皮膚/草本/機能飲料</div>
+        <div class="trend">▲ 年輕族群驅動</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">3x</div>
+        <div class="unit">速度倍數</div>
+        <div class="label">醫療 AI 採用速度 vs 其他產業</div>
+        <div class="trend">▲ 持續加速</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>細分市場</th><th>2025 規模</th><th>2026 H2 規模</th><th>CAGR</th><th>驅動因子</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>全球數位健康</td><td>~$360B</td><td>$420–483B</td><td>23%</td><td>AI 醫療、遠距看診、可穿戴設備</td></tr>
+          <tr><td>全球精準醫療</td><td>~$750B</td><td>加速擴張</td><td>11–14%</td><td>基因檢測、AI 藥物研發</td></tr>
+          <tr><td>亞太 Health & Wellness</td><td>$3.2T</td><td>$3.5T+</td><td>8–10%</td><td>中産擴大、預防意識崛起</td></tr>
+          <tr><td>台灣保健食品</td><td>1,600億 NTD</td><td>1,800億 NTD</td><td>7–9%</td><td>高齡化、功效認證需求</td></tr>
+          <tr><td>全球遠距醫療</td><td>~$142B</td><td>~$175B</td><td>19%</td><td>5G、後疫情習慣延續</td></tr>
+          <tr><td>台灣醫美市場</td><td>~680億 NTD</td><td>加速整合</td><td>12%</td><td>AI 診斷、個人化療程</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. SEGMENTS -->
+  <section class="section" id="segments">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">細分市場深度解析</div>
+    </div>
+
+    <div class="subseg">
+      <div class="subseg-header">
+        數位健康（Digital Health）
+        <span class="tag">最高成長</span>
+      </div>
+      <div class="subseg-body">
+        <p>2026 年下半年是數位健康「從試點走向規模化」的分水嶺。生成式 AI 正在重塑診斷、藥物研發與病患溝通三個核心環節。台灣的切入點是「中小型診所數位化」——連鎖診所佈建率已達 38%，但佔市場份額 62% 的獨立診所數位化率不足 15%，是最大的白地市場。</p>
+        <ul class="sub-list">
+          <li>AI 輔助診斷：CT/X-Ray 讀片準確率提升至 94–97%，降低 30–40% 放射科人力需求</li>
+          <li>電子健康紀錄（EHR）互通：FHIR 標準 2026 成為台灣強制規範，帶動系統整合商需求爆發</li>
+          <li>可穿戴健康監測：Apple Watch / Garmin 心律偵測進入保險理賠數據鏈，改變風險定價模式</li>
+          <li>Gen AI 病患溝通：Symptom Checker、自動衛教、出院後追蹤——成本降低 60–70%，滿意度提升</li>
+          <li>心理健康數位平台：台灣心理師缺口達 4,200 人，數位介入需求每月成長 18–25%</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subseg">
+      <div class="subseg-header">
+        精準醫療（Precision Medicine）
+        <span class="tag">高護城河</span>
+      </div>
+      <div class="subseg-body">
+        <p>精準醫療正從「腫瘤科特例」擴張到「慢病日常管理」。基因定序成本 2026 已低於 $200 美元，使消費端精準健康成為可能。台灣的 Taiwan Biobank 超過 15 萬人基因資料，是亞太獨特的研發資產。</p>
+        <ul class="sub-list">
+          <li>藥物基因體學（PGx）：根據基因型調整用藥劑量，台灣試辦計畫 2026 下半年正式擴大</li>
+          <li>液態切片（Liquid Biopsy）：血液癌症早篩成本已降至 NT$5,000 以下，進入一般健檢市場</li>
+          <li>腸道微生物組商業化：個人化益生菌市場年增 34%，連結代謝、免疫、神經健康三大維度</li>
+          <li>AI 藥物研發加速：AI 設計候選分子縮短 40–60% 前臨床開發週期，台灣 CRO 公司受益</li>
+          <li>個人化營養（Personalized Nutrition）：穿戴血糖監測 + AI 飲食建議一體化，新創切入點</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subseg">
+      <div class="subseg-header">
+        高齡照護與銀髮科技（AgeTech）
+        <span class="tag">台灣最大機會</span>
+      </div>
+      <div class="subseg-body">
+        <p>台灣 2025 年正式進入超高齡社會（65 歲以上突破 20%），照護需求從「趨勢預言」變為「現在式緊急」。但市場現況是：照護需求爆發，供給嚴重不足，銀髮科技還沒有一個真正的大玩家。這是 2026 下半年市場最大的結構性缺口。</p>
+        <ul class="sub-list">
+          <li>失智症早篩：台灣失智人口 2026 估計突破 30 萬，每 3 年翻倍，AI 認知測試 App 需求迫切</li>
+          <li>居家照護科技：智慧感測器 + AI 異常偵測 + 遠端家屬通知——長照 2.0 給付已涵蓋部分設備</li>
+          <li>行動輔具創新：電動助行器、外骨骼、防跌可穿戴——台灣製造優勢 + 東南亞出口雙機會</li>
+          <li>社會處方（Social Prescription）：孤獨感是老齡最大健康殺手，AI 陪伴 + 社群平台新賽道</li>
+          <li>照護人員培訓科技：AR/VR 模擬訓練降低照服員培訓成本 50%，政府標案機會大</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subseg">
+      <div class="subseg-header">
+        保健食品與功能性食品（Nutraceuticals）
+        <span class="tag">競爭白熱化</span>
+      </div>
+      <div class="subseg-body">
+        <p>台灣保健品市場 2026 面臨「品牌過剩 + 消費者升級」的雙重擠壓。品牌從 900 個暴增至 1,500+，但真正有功效認證的不超過 30%。消費者已從「有吃就好」進化到「要有科學根據」，這個認知翻轉正在創造護城河。</p>
+        <ul class="sub-list">
+          <li>健字號認證品牌：下半年旺季（中秋 + 年節）取得定價溢價 2–3 倍，非認證品牌只能殺價</li>
+          <li>植物基保健品：29% 年輕消費者（18–35 歲）明確偏好植物來源，素食軟膠囊需求快速成長</li>
+          <li>運動恢復補給：台灣路跑人口突破 120 萬，BCAA、肌酸、電解質飲料下半年進入旺季</li>
+          <li>女性精準保健：更年期管理、月經週期營養、骨密度維護——精準分眾是突破同質化關鍵</li>
+          <li>DTC 訂閱模式：直接對消費者販售 + 月費制 = 台灣保健品新破局點，電商回購率提升 3 倍</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subseg">
+      <div class="subseg-header">
+        遠距醫療與在宅照護（Telemedicine / Home Care）
+        <span class="tag">政策驅動</span>
+      </div>
+      <div class="subseg-body">
+        <p>台灣遠距醫療 2026 從「疫情應急」轉型為「制度性在宅照護」。遠傳 × 國衛院模式已驗證可行性，下半年是複製擴散的視窗期。</p>
+        <ul class="sub-list">
+          <li>慢性病在宅監測：糖尿病 + 高血壓 + 心房顫動三大慢病，佔台灣醫療支出 40%+</li>
+          <li>5G 遠距手術輔助：花蓮慈濟 + 台北醫院雙頭試點 2026 下半年擴大，引發設備採購潮</li>
+          <li>藥師遠距諮詢：NHI（健保）給付擴大，每次諮詢費 NT$200–400，月均需求估 80 萬次</li>
+          <li>AI 問診分流：減少不必要急診 25–35%，台灣急診醫師嚴重不足，AI 分流是解方</li>
+          <li>偏鄉照護橋接：離島及山區以遠距取代第一線診療，政府採購優先</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. TRENDS -->
+  <section class="section" id="trends">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">2026 下半年五大驅動趨勢</div>
+    </div>
+
+    <div class="trend-card">
+      <div class="trend-title">趨勢一：AI 醫療從「展示」走向「落地規模化」</div>
+      <div class="trend-body">
+        全球醫療機構 AI 採用速度為其他產業的 3 倍。但 2026 之前多數是 PoC（概念驗證），下半年開始進入採購決策期。台灣醫療院所 2026 H2 預估 AI 相關支出增加 45%，涵蓋影像判讀、臨床決策支援、病歷生成三大類。台灣 FDA 2026 上半年完成 AI 醫材審查快速通道規則，下半年是首批產品取證高峰。
+        <br><br>
+        生成式 AI 進一步重構「病患-醫師-系統」三角關係：AI 病歷摘要節省醫師 30% 行政時間；AI 衛教助手提升出院後遵從率 28%；AI 症狀問診減少不必要就診 22%。關鍵變數是「誰擁有資料」——資料主權正在決定誰贏得 AI 醫療的下一局。
+      </div>
+      <div class="trend-kpi">
+        <span class="kpi-chip">AI 醫材審查通道：2026 H2 正式啟動</span>
+        <span class="kpi-chip">院所 AI 支出 ▲45%</span>
+        <span class="kpi-chip">病歷時間節省 30%</span>
+      </div>
+    </div>
+
+    <div class="trend-card">
+      <div class="trend-title">趨勢二：超高齡社會從「預備」進入「緊急響應」</div>
+      <div class="trend-body">
+        台灣 2025 年 65 歲以上人口突破 20%，正式進入「超高齡社會」。這意味著 2026 下半年政府照護支出進入加速期——長照 3.0 方向預算公告、照服員薪資調漲、居家照護補貼擴大，預計拉動 NT$600–800 億級別的新增支出。
+        <br><br>
+        銀髮科技（AgeTech）是目前供給最嚴重不足的子市場。台灣失智人口估計 30 萬，每 3 年翻倍，但 AI 輔助失智早篩的本土產品幾乎空白。行動輔具、防跌偵測、AI 陪伴三類產品同時缺乏，卻擁有政府採購 + 家屬自費雙通道需求，是目前障礙最低、缺口最大的機會窗口。
+      </div>
+      <div class="trend-kpi">
+        <span class="kpi-chip">長照 3.0 Q4 公告</span>
+        <span class="kpi-chip">失智人口 30 萬+</span>
+        <span class="kpi-chip">AgeTech 本土供給近乎空白</span>
+      </div>
+    </div>
+
+    <div class="trend-card">
+      <div class="trend-title">趨勢三：預防醫學消費化——健康從「治療」走向「訂閱」</div>
+      <div class="trend-body">
+        亞太消費者對「預防型健康訂閱」的需求比全球平均高 24%。2026 下半年，保健品、健康監測、基因檢測、個人化營養四類產品共同走向「月費制」消費模式，而不是一次性購買。這個轉變根本改變了「獲客成本 vs 終身價值」的商業邏輯——DTC 品牌的 LTV/CAC 比率正在從 2–3x 提升至 5–8x。
+        <br><br>
+        台灣的具體機會：腸道健康訂閱（益生菌 + 微生物組檢測）、荷爾蒙週期追蹤訂閱（女性市場）、血糖監測 + 飲食建議一體化（代謝健康）。這三個垂直都有「硬體 + 軟體 + 補給品」三角商業模式可建立。
+      </div>
+      <div class="trend-kpi">
+        <span class="kpi-chip">亞太預防訂閱需求 ▲24%</span>
+        <span class="kpi-chip">DTC 回購率 3x</span>
+        <span class="kpi-chip">腸道健康 ▲34% YoY</span>
+      </div>
+    </div>
+
+    <div class="trend-card">
+      <div class="trend-title">趨勢四：功效認證成為保健品市場的護城河</div>
+      <div class="trend-body">
+        台灣保健品市場正在經歷「認知斷層」——消費者開始有能力分辨「有認證 vs 無認證」的差異，但大多數品牌仍在用「成分行銷」而非「功效數據」說話。擁有健字號的品牌在通路談判、保險給付、醫師推薦三個環節全面佔優，定價溢價可達 2–3 倍。
+        <br><br>
+        2026 下半年健字號申請加速：台灣 FDA 審查平均時間從 18 個月縮短至 12 個月。這對想建立護城河的品牌是窗口期，但申請成本約 NT$300–800 萬，是中小品牌的門檻障礙。替代路徑：OEM 持有認證配方的大廠，快速取得認證外衣。
+      </div>
+      <div class="trend-kpi">
+        <span class="kpi-chip">有認證品牌：定價溢價 2–3x</span>
+        <span class="kpi-chip">台灣品牌數 1,500+（2 年翻倍）</span>
+        <span class="kpi-chip">FDA 審查縮短至 12 個月</span>
+      </div>
+    </div>
+
+    <div class="trend-card">
+      <div class="trend-title">趨勢五：醫美進入「信任重建」週期</div>
+      <div class="trend-body">
+        2026 醫美市場進入結構性轉型期。消費者對 AI 生成術前術後對比、網紅背書的疑慮到達頂點，信任赤字開始壓縮市場。贏家策略已從「廣告預算最大化」轉向「透明度競爭」——真實案例影片、醫師即時直播、術後數據公開成為新的差異化。
+        <br><br>
+        台灣醫美下半年特殊機會：「AI 3D 術前模擬」進入消費端普及（成本已降至 NT$2,000–5,000/次），這項技術正在成為新客轉換的關鍵工具，同時建立診所的技術形象護城河。另一個機會是「醫美 + 精準醫療」整合——從外觀美容延伸到肌膚微生物、基因型皮膚分析，提升客單價 40–60%。
+      </div>
+      <div class="trend-kpi">
+        <span class="kpi-chip">AI 3D 術前模擬普及期</span>
+        <span class="kpi-chip">透明度競爭取代廣告競爭</span>
+        <span class="kpi-chip">精準醫美客單價 ▲40–60%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TAIWAN -->
+  <section class="section" id="taiwan">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">台灣市場深度解析</div>
+    </div>
+
+    <div class="highlight">
+      <h4>台灣健康產業 2026 H2 核心命題</h4>
+      <p>台灣的健康產業優勢在於：世界頂尖的健保數據資產（2,300 萬人 × 25 年）、製造業支撐的醫材出口能力、以及超高齡化帶來的本土需求爆發。但弱點同樣明顯：法規速度落後市場、本土資本對醫療科技投資保守、缺乏橫跨「科技 × 醫療 × 消費」的整合型平台。2026 下半年機會在於抓住「法規快速通道啟動 + 政策補貼擴大 + 國際醫療展接單」三個同步窗口。</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>台灣市場結構優勢</h3>
+        <ul class="sub-list">
+          <li>健保大數據：2,300 萬人 × 25 年完整病歷數據，AI 訓練的黃金資產</li>
+          <li>Taiwan Biobank：15 萬人基因資料，台灣精準醫療研發基礎</li>
+          <li>醫材製造：全球第 8 大醫療器材出口國，台灣廠商具成本優勢</li>
+          <li>醫療品質：全球最佳 NHI 體系，是醫療觀光招攬的天然品牌</li>
+          <li>半導體支撐：AI 晶片自供能力，AI 醫療硬體成本較亞太競爭對手低 20–30%</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>台灣市場結構弱點</h3>
+        <ul class="sub-list">
+          <li>法規速度：AI 醫材審查雖加速，但與美 FDA Breakthrough Designation 仍差距 6–18 個月</li>
+          <li>資本保守：台灣創投對醫療投資平均等待 3–5 年 IPO，天使輪資源稀缺</li>
+          <li>市場規模：本土市場 2,300 萬人，規模效益需依賴東南亞或全球出口</li>
+          <li>平台整合缺失：台灣缺乏橫跨醫院 + 診所 + 消費者的健康數據整合平台</li>
+          <li>人才缺口：生醫 × AI 複合人才嚴重不足，爭搶台積電、鴻海高薪人才</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.1rem;font-weight:700;margin:28px 0 18px;color:var(--primary);">台灣各細分市場成熟度對照</h3>
+    <div class="card" style="padding:28px;">
+      <div class="progress-row">
+        <div class="progress-label"><span>遠距醫療 / 在宅照護</span><span>78%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-label"><span>保健食品 / 功能性食品</span><span>72%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-label"><span>醫療影像 AI</span><span>65%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-label"><span>醫美科技</span><span>60%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-label"><span>精準醫療 / 基因檢測</span><span>45%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-label"><span>銀髮科技 / AgeTech</span><span>22%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:22%"></div></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress-label"><span>心理健康數位平台</span><span>18%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:18%"></div></div>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:14px;">數值代表台灣市場在各細分市場的相對成熟度（供給側覆蓋率估計）</p>
+    </div>
+  </section>
+
+  <!-- 5. OPPORTUNITY -->
+  <section class="section" id="opportunity">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">機會缺口地圖（2026 H2）</div>
+    </div>
+
+    <div class="grid-3">
+      <div class="opp-card">
+        <div class="score">9.2</div>
+        <div class="score-label">/10 機會評分</div>
+        <h4>銀髮認知功能保健</h4>
+        <p>失智早篩 + AI 認知訓練 + 照護者支援三合一。台灣本土供給幾乎空白，政府採購通道清晰，家屬自費意願高。唯一門檻：需要醫療機構合作背書。</p>
+      </div>
+      <div class="opp-card">
+        <div class="score">8.8</div>
+        <div class="score-label">/10 機會評分</div>
+        <h4>有功效認證的精準保健品</h4>
+        <p>健字號認證 + DTC 訂閱模式的組合，是下半年保健品市場最高護城河路徑。競品少，定價溢價明確，通路談判優勢大。</p>
+      </div>
+      <div class="opp-card">
+        <div class="score">8.5</div>
+        <div class="score-label">/10 機會評分</div>
+        <h4>中小診所 AI 數位化</h4>
+        <p>台灣 62% 市場份額由獨立診所持有，數位化率 &lt;15%。AI 病歷 + 預約管理 + 病患溝通三合一方案，月費制 SaaS，複購率高。</p>
+      </div>
+      <div class="opp-card">
+        <div class="score">8.3</div>
+        <div class="score-label">/10 機會評分</div>
+        <h4>代謝健康監測訂閱</h4>
+        <p>CGM（連續血糖監測）+ AI 飲食建議一體化服務。台灣糖尿病前期人口估計 400 萬，消費意識已喚醒，本土整合服務仍空缺。</p>
+      </div>
+      <div class="opp-card">
+        <div class="score">7.9</div>
+        <div class="score-label">/10 機會評分</div>
+        <h4>AI 醫美術前模擬</h4>
+        <p>AI 3D 臉型分析 + 術前效果模擬服務，正在成為診所新客轉換率的關鍵工具。SaaS 部署，快速擴張，可整合進現有診所 CRM。</p>
+      </div>
+      <div class="opp-card">
+        <div class="score">7.6</div>
+        <div class="score-label">/10 機會評分</div>
+        <h4>心理健康數位平台</h4>
+        <p>台灣心理師缺口 4,200 人，數位心理介入需求每月成長 18–25%。B2B 企業員工協助計畫（EAP）是下半年最快變現通道。</p>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <h4>不對稱優勢：台灣的兩個全球稀缺資產</h4>
+      <p>
+        <strong>1. 健保數據 × AI 訓練：</strong>台灣 2,300 萬人 × 25 年的完整就診記錄，在全球醫療 AI 訓練數據市場中是罕見的高密度、標準化、縱向數據集。與此數據合作的 AI 公司，在 FDA/TFDA 審查中具有大規模真實世界證據（RWE）優勢。
+        <br><br>
+        <strong>2. 台灣 Biobank × 精準醫療研究：</strong>東亞人口基因資料在全球精準醫療中嚴重代表性不足，台灣 15 萬人 Biobank 是罕見的亞洲人群基因資產，對跨國藥廠的藥物反應研究具有戰略價值。
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. RISKS -->
+  <section class="section" id="risks">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">風險地圖與應對框架</div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-badge risk-high">高<br>風險</div>
+      <div class="risk-content">
+        <h4>AI 醫療資安與資料治理風險</h4>
+        <p>醫療資料外洩成本極高（平均每件 $10.9M 美元，醫療業 13 年蟬聯各行業最高）。台灣個資法對醫療資料處理有嚴格規範，AI 系統如需跨境傳輸訓練數據，法遵成本大幅提升。2026 下半年建議：優先選擇「本地化部署 + 聯邦學習」架構，避免數據集中化風險。</p>
+      </div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-badge risk-high">高<br>風險</div>
+      <div class="risk-content">
+        <h4>保健品市場同質化與信任崩盤風險</h4>
+        <p>台灣保健品品牌 2 年從 900 暴增至 1,500+，無功效差異的品牌正在加速打價格戰。若某起食安事件（成分污染、不實標示）引爆，整體市場信任可能短期崩跌 30–40%。下半年建議：提前確保第三方檢驗報告 + 功效認證存在，而非單靠行銷話術建立市場。</p>
+      </div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-badge risk-mid">中<br>風險</div>
+      <div class="risk-content">
+        <h4>美國醫療保險監管壓力外溢效應</h4>
+        <p>Medicare Advantage 費率結構動盪，UnitedHealth Group 股價 2026 H1 已大幅震盪，跨國醫療科技公司被迫重估台灣業務優先級。直接影響：部分原計劃進台灣的美資醫療科技公司延遲，給本土廠商短期喘息空間。間接風險：若美國醫療投資環境惡化，台灣新創融資管道受限。</p>
+      </div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-badge risk-mid">中<br>風險</div>
+      <div class="risk-content">
+        <h4>藥品定價政策收緊（全球共同趨勢）</h4>
+        <p>美國《IRA 通貨膨脹削減法》藥品談判機制逐步擴大，歐盟 HTA 統一評估加速。對台灣影響：台灣健保局參考國際定價機制，新藥給付審查趨嚴，影響引進新藥的商業化速度。機會面：傾向「診斷工具 + 預防保健」而非「新藥」的產品受影響較小。</p>
+      </div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-badge risk-mid">中<br>風險</div>
+      <div class="risk-content">
+        <h4>AI 醫療臨床落地「最後一哩」障礙</h4>
+        <p>台灣醫院採購決策週期平均 18–36 個月，醫師對 AI 輔助診斷的接受度在不同科別差異顯著（放射科 &gt;85%，外科 &lt;40%）。大型醫院先行導入後，中小型診所的擴散時間比預期慢 2–3 年。下半年策略：聚焦已有強烈採購意願的放射科、眼科、皮膚科，而非廣泛布局。</p>
+      </div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-badge risk-low">低<br>風險</div>
+      <div class="risk-content">
+        <h4>地緣政治對健康供應鏈的影響</h4>
+        <p>台灣醫材出口原料部分依賴中國大陸（化學原料、組件），2026 H2 若地緣政治緊張程度上升，特定原料供給可能受限。但此風險已有 2022–2024 供應鏈重組先例——多數廠商已有備援來源（東南亞、印度）。建議：確認供應商是否已完成「China+1」布局。</p>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-top:28px;">
+      <table>
+        <thead><tr><th>風險</th><th>影響程度</th><th>發生概率</th><th>應對優先級</th><th>應對策略</th></tr></thead>
+        <tbody>
+          <tr><td>AI 資安 / 個資外洩</td><td>極高</td><td>中</td><td>P0</td><td>本地化部署、聯邦學習、定期滲透測試</td></tr>
+          <tr><td>保健品信任崩盤</td><td>高</td><td>中</td><td>P1</td><td>提前取得功效認證、第三方檢測公開</td></tr>
+          <tr><td>美資延遲進入台灣</td><td>中（機會面）</td><td>中高</td><td>P2</td><td>主動填補市場空缺，快速建立品牌</td></tr>
+          <tr><td>健保藥品定價收緊</td><td>中</td><td>中</td><td>P2</td><td>布局自費市場 / 診斷工具而非新藥</td></tr>
+          <tr><td>AI 落地速度慢</td><td>中</td><td>高</td><td>P2</td><td>精準科別切入（放射科/眼科）優先</td></tr>
+          <tr><td>地緣政治供應鏈</td><td>低-中</td><td>低-中</td><td>P3</td><td>確認 China+1 備援，分散採購</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 7. TIMELINE -->
+  <section class="section" id="timeline">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">2026 下半年關鍵時間點</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">2026 Q3 七月</div>
+        <div class="tl-content">
+          <h4>台灣 AI 醫材審查快速通道正式受理首批申請</h4>
+          <p>台灣 FDA 正式接受 AI 醫療器材快速通道申請。擁有台灣臨床數據的 AI 診斷工具廠商應在此時提交，可縮短審查 6–12 個月。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026 Q3 八月</div>
+        <div class="tl-content">
+          <h4>Medical Taiwan 國際醫療展（台北）</h4>
+          <p>全球最重要的亞太醫療採購展之一。2026 新增「運動醫學」+「精準醫療」展區，國際參展廠商成長 40%+。是台灣廠商尋找海外代理商、與跨國公司談合作的最密集視窗期。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026 Q3 九月</div>
+        <div class="tl-content">
+          <h4>中秋節保健品旺季</h4>
+          <p>台灣保健品年度最大波次，有功效認證品牌 vs 無認證品牌的市場分化最明顯時點。提前 6–8 週完成通路備貨 + 廣告素材準備。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026 Q3 九月底</div>
+        <div class="tl-content">
+          <h4>精準醫療相關法規進展公告（台灣 FDA）</h4>
+          <p>台灣 FDA 預計公告精準醫療試點計畫擴大方案，涵蓋藥物基因體學和次世代定序（NGS）給付範圍更新。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026 Q4 十一月</div>
+        <div class="tl-content">
+          <h4>長照 3.0 政策預算公告</h4>
+          <p>衛福部正式公告長照 3.0 方向及預算配置，銀髮科技、居家照護、AI 輔助照護的補貼規則將在此時明確。廠商需在公告後 30 天內確認合規路徑，以趕上 2027 採購週期。</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2026 Q4 十二月</div>
+        <div class="tl-content">
+          <h4>年節保健品旺季 + 全年市場分化最終確認</h4>
+          <p>農曆春節備貨潮（一月前）同步啟動。擁有功效認證 + DTC 訂閱的品牌，與純靠廣告的品牌，全年數據對比將在此時徹底拉開差距。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. STRATEGY -->
+  <section class="section" id="strategy">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div class="section-title">進場策略框架</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>策略A：供給缺口型進入（高評分）</h3>
+        <ul class="sub-list">
+          <li>目標：銀髮認知功能保健 / AgeTech 子市場</li>
+          <li>核心邏輯：需求爆發 + 本土供給空白 + 政府採購通道</li>
+          <li>進入門檻：需要醫療機構合作背書（大學醫院臨床試點）</li>
+          <li>時間軸：12–18 個月建立市場認知，36 個月取得政府採購資格</li>
+          <li>資本需求：NT$2,000–5,000 萬（中型進入成本）</li>
+          <li>主要風險：法規認證路徑尚未完全清晰</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>策略B：認證護城河型進入（中高評分）</h3>
+        <ul class="sub-list">
+          <li>目標：功效認證保健品 DTC 訂閱模式</li>
+          <li>核心邏輯：認證取得後，競品難以快速複製</li>
+          <li>進入門檻：健字號申請成本 NT$300–800 萬 + 12 個月審查</li>
+          <li>時間軸：12 個月完成認證，24 個月建立訂閱基礎</li>
+          <li>資本需求：NT$1,000–3,000 萬</li>
+          <li>主要風險：審查時間不確定性，市場競爭加速</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>策略C：SaaS 滲透型進入（中高評分）</h3>
+        <ul class="sub-list">
+          <li>目標：中小診所 AI 數位化 SaaS 平台</li>
+          <li>核心邏輯：大量獨立診所（62% 市場），整合度極低</li>
+          <li>進入門檻：與台灣醫師公會 / 診所協會建立合作通道</li>
+          <li>時間軸：6 個月 MVP，12 個月達 100 家診所，36 個月盈損平衡</li>
+          <li>資本需求：NT$500–2,000 萬（輕資產 SaaS 模式）</li>
+          <li>主要風險：醫療 SaaS 銷售週期長，需持續客服支援</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>策略D：出口型進入（長線布局）</h3>
+        <ul class="sub-list">
+          <li>目標：台灣製造醫材 / 保健品 → 東南亞輸出</li>
+          <li>核心邏輯：台灣製造公信力 + 東南亞中産崛起</li>
+          <li>目標市場：越南、印尼、菲律賓（健康意識年增 15–20%）</li>
+          <li>時間軸：6 個月完成 1–2 國市場進入，24 個月多國布局</li>
+          <li>資本需求：NT$1,000–4,000 萬（含通路建立成本）</li>
+          <li>主要風險：各國法規差異大，需本地合規夥伴</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-top:28px;">
+      <h4>核心判準：選哪條路？</h4>
+      <p>
+        <strong>如果你是投資方：</strong>優先看策略A（AgeTech 供給缺口）+ 策略C（診所 SaaS）的早期標的。這兩類公司下半年估值還在相對低點，2027–2028 是收割期。<br><br>
+        <strong>如果你是創業方：</strong>策略C（診所 SaaS）進入門檻最低、資本需求最小、銷售週期最可控。策略A（AgeTech）空間最大但需要醫療背景夥伴，建議先找台北醫學大學 / 長庚醫療體系談臨床試點。<br><br>
+        <strong>如果你是現有健康企業：</strong>策略B（功效認證）是最快強化現有品牌護城河的路徑。Q3 七月前提交健字號申請，爭取趕上 2027 年旺季。
+      </p>
+    </div>
+  </section>
+
+  <!-- 9. CONCLUSION -->
+  <section class="section" id="conclusion">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div class="section-title">結論：下半年核心判斷</div>
+    </div>
+
+    <div class="card" style="border-left:5px solid var(--primary);padding:30px 32px;">
+      <h3 style="font-size:1.2rem;margin-bottom:20px;">健康產業 2026 下半年：不是「要不要進」，而是「從哪個缺口進」</h3>
+      <p style="color:var(--text);line-height:2;margin-bottom:16px;">
+        體量最大的數位健康和精準醫療門檻高、競爭激烈，適合有技術底蘊的公司；台灣真正的不對稱機會集中在兩個地方：
+      </p>
+      <ul class="sub-list">
+        <li><strong>銀髮認知功能保健（AgeTech）：</strong>供給缺口最大，政府採購通道清晰，下半年是建立市場先機的最佳視窗。等到 2027 政策預算公告後再進，競爭已加劇。</li>
+        <li><strong>有功效認證的精準保健品（DTC 訂閱）：</strong>護城河最高，年節旺季分化最明顯。現在申請健字號，剛好趕上 2027 年節 + 2028 長期訂閱效益。</li>
+      </ul>
+      <p style="color:var(--muted);line-height:2;margin-top:16px;">
+        第三個觀察點是 AI 醫材法規窗口——2026 H2 是台灣 FDA 快速通道受理的第一輪，先進場取得認證的廠商，比後進者早 12–18 個月建立市場地位，這個時間差就是護城河。
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="sources">
+    <strong>資料來源</strong><br>
+    <a href="https://www.ey.com/en_us/insights/strategy/healthcare-sector-outlook-in-2026" target="_blank">EY Healthcare Sector Outlook 2026</a> ·
+    <a href="https://www.deloitte.com/uk/en/blogs/thoughts-from-the-centre/the-2026-global-health-care-outlook.html" target="_blank">Deloitte 2026 Global Health Care Outlook</a> ·
+    <a href="https://www.globenewswire.com/news-release/2026/05/21/3299501/0/en/digital-health-market-projected-to-reach-usd-573-5-billion-by-2030-marketsandmarkets.html" target="_blank">MarketsandMarkets Digital Health 2026</a> ·
+    <a href="https://summitbio.com.tw/insights/supplement-permit/trends-health-food-development-2026/" target="_blank">上浤醫藥 2026 保健品五大趨勢</a> ·
+    <a href="https://www.cio.com.tw/103979/" target="_blank">CIO Taiwan 2026 智慧醫療趨勢</a> ·
+    <a href="https://technews.tw/2026/01/05/taitramedical-taiwan2026ai" target="_blank">TechNews 台灣國際醫療展 2026</a> ·
+    <a href="https://www.kenresearch.com/industry-reports/asia-pacific-health-wellness-market" target="_blank">Asia Pacific Health & Wellness Market</a>
+  </div>
+  <div>
+    本報告由 MUSEON 生成 · 2026年6月 · 資料截止 2026-06 · 僅供策略參考，不構成投資建議
+  </div>
+</footer>
+
+</body>
+</html>
