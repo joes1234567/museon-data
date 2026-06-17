@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>擺渡人文蔬食料理｜品牌連鎖發展攻略</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: #f2f1ed;
+    color: #1a1a1a;
+    padding: 32px 16px 80px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .page { max-width: 820px; margin: 0 auto; }
+  .cover {
+    background: linear-gradient(145deg, #1e3d1b 0%, #2d5a27 50%, #3d7a35 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 48px 44px 40px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: "";
+    position: absolute; right: -60px; top: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .cover .tag { font-size: 11px; letter-spacing: 3px; opacity: 0.65; margin-bottom: 14px; text-transform: uppercase; }
+  .cover h1 { font-size: 28px; font-weight: 800; line-height: 1.25; margin-bottom: 8px; }
+  .cover .sub { font-size: 13px; opacity: 0.75; margin-bottom: 20px; }
+  .cover .kv {
+    background: rgba(255,255,255,0.1);
+    border-left: 4px solid #a8d5a0;
+    padding: 14px 20px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px; font-weight: 600; line-height: 1.7;
+  }
+  .toc-bar {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    font-size: 12px; color: #555;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .toc-bar a { color: #2d5a27; text-decoration: none; font-weight: 600; white-space: nowrap; }
+  .toc-sep { color: #ccc; }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    margin-bottom: 20px;
+  }
+  .card-head {
+    padding: 16px 24px 14px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .card-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .card-head h2 { font-size: 15px; font-weight: 700; }
+  .card-head .card-no { font-size: 11px; color: #888; font-weight: 400; margin-left: 4px; }
+  .card-body { padding: 20px 24px 22px; }
+  .diag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media(max-width:600px){ .diag-grid { grid-template-columns: 1fr; } }
+  .diag-box { border-radius: 8px; padding: 16px 18px; }
+  .diag-box.wrong { background: #fff5f5; border: 1px solid #fdb5b5; }
+  .diag-box.right { background: #f0f9f0; border: 1px solid #90d090; }
+  .diag-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
+  .diag-label.red { color: #c0392b; }
+  .diag-label.green { color: #2d7a27; }
+  .diag-item { font-size: 13px; line-height: 1.8; color: #333; }
+  .rc-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 12px 0; border-bottom: 1px solid #f5f5f5;
+  }
+  .rc-row:last-child { border-bottom: none; }
+  .rc-icon { font-size: 20px; flex-shrink: 0; width: 32px; text-align: center; margin-top: 2px; }
+  .rc-content .rc-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .rc-content .rc-desc { font-size: 13px; color: #555; }
+  .rc-badge {
+    display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px;
+    border-radius: 20px; margin-left: 6px; vertical-align: middle;
+  }
+  .rc-badge.red { background: #fde8e8; color: #c0392b; }
+  .rc-badge.green { background: #e8f5e8; color: #2d7a27; }
+  .rc-badge.orange { background: #fff3e0; color: #d35400; }
+  .sol-block { margin-bottom: 18px; }
+  .sol-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .sol-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; color: #fff;
+    background: #4a8c3f; flex-shrink: 0;
+  }
+  .sol-title { font-size: 14px; font-weight: 700; }
+  .sol-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .meta-pill { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+  .meta-pill.time { background: #e8f4ff; color: #1a6bb5; }
+  .meta-pill.cost { background: #fff8e0; color: #b07d00; }
+  .meta-pill.owner { background: #f0e8ff; color: #6a3ab5; }
+  .meta-pill.effort { background: #e8fde8; color: #2d7a27; }
+  .meta-pill.warn { background: #fff3e0; color: #d35400; }
+  .sol-detail {
+    background: #fafafa; border-radius: 8px; padding: 12px 16px;
+    font-size: 13px; color: #444; border-left: 3px solid #c8e6c0;
+  }
+  .sol-detail ul { list-style: none; }
+  .sol-detail ul li { padding-left: 14px; position: relative; margin-bottom: 3px; }
+  .sol-detail ul li::before { content: "•"; position: absolute; left: 0; color: #4a8c3f; }
+  .sol-detail .highlight { color: #c0392b; font-weight: 700; }
+  .sol-detail .good { color: #2d7a27; font-weight: 700; }
+  .sol-divider { border: none; border-top: 1px solid #eee; margin: 16px 0; }
+  .rm-stage {
+    display: flex; gap: 0; margin-bottom: 12px;
+    border-radius: 10px; overflow: hidden; border: 1px solid #e0e0e0;
+  }
+  .rm-num {
+    flex-shrink: 0; width: 52px;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center;
+    font-size: 22px; font-weight: 800; color: #fff;
+    background: #4a8c3f; padding: 12px 0; gap: 4px;
+  }
+  .rm-num.active { background: #c0392b; }
+  .rm-num .rm-phase { font-size: 9px; letter-spacing: 1px; opacity: 0.8; }
+  .rm-body { flex: 1; padding: 14px 18px; background: #fafafa; }
+  .rm-body.active-bg { background: #fff8f8; }
+  .rm-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+  .rm-name { font-size: 14px; font-weight: 700; }
+  .rm-when { font-size: 12px; color: #888; }
+  .rm-now { font-size: 10px; background: #c0392b; color: #fff; padding: 2px 8px; border-radius: 20px; font-weight: 700; }
+  .rm-goal { font-size: 12px; color: #666; font-style: italic; margin-bottom: 8px; }
+  .rm-items { list-style: none; }
+  .rm-items li { font-size: 12px; color: #444; padding-left: 14px; position: relative; line-height: 1.7; }
+  .rm-items li::before { content: "▸"; position: absolute; left: 0; color: #4a8c3f; font-size: 10px; top: 3px; }
+  .rm-items li.warn { color: #c0392b; font-weight: 600; }
+  .rm-items li.warn::before { color: #c0392b; }
+  .rm-resource {
+    margin-top: 8px; background: #f0f7ee; border-radius: 6px;
+    padding: 6px 12px; font-size: 11px; color: #4a6640;
+  }
+  .cost-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .cost-table th {
+    background: #2d5a27; color: #fff; padding: 10px 14px;
+    text-align: left; font-size: 12px; font-weight: 700;
+  }
+  .cost-table td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .cost-table tr:nth-child(even) td { background: #fafafa; }
+  .cost-table td.label { font-weight: 700; }
+  .cost-table td.num-bad { color: #c0392b; font-weight: 700; }
+  .cost-table td.num-good { color: #2d7a27; font-weight: 700; }
+  .cost-table tr.total td { background: #f0f7ee; font-weight: 700; font-size: 14px; }
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width:560px){ .risk-grid { grid-template-columns: 1fr; } }
+  .risk-card { border-radius: 8px; padding: 16px; }
+  .risk-card.now { background: #fff5f5; border: 1.5px solid #f5b5b5; }
+  .risk-card.later { background: #f0f9f0; border: 1.5px solid #90d090; }
+  .risk-card .risk-head { font-size: 12px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .risk-card ul { list-style: none; }
+  .risk-card ul li { font-size: 12px; padding-left: 16px; position: relative; margin-bottom: 5px; line-height: 1.6; color: #444; }
+  .risk-card.now ul li::before { content: "✗"; position: absolute; left: 0; color: #c0392b; font-weight: 700; }
+  .risk-card.later ul li::before { content: "✓"; position: absolute; left: 0; color: #2d7a27; font-weight: 700; }
+  .ref-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .ref-card { background: #fafafa; border-radius: 10px; padding: 18px; border: 1px solid #e8e8e8; }
+  .ref-brand { font-size: 15px; font-weight: 800; margin-bottom: 4px; color: #1a3a16; }
+  .ref-tag { font-size: 11px; color: #888; margin-bottom: 8px; }
+  .ref-lesson { font-size: 12px; color: #555; line-height: 1.7; }
+  .ref-lesson .key { font-weight: 700; color: #2d7a27; }
+  .ref-badge {
+    display: inline-block; font-size: 10px; padding: 2px 8px;
+    border-radius: 20px; background: #e0f0e0; color: #2d7a27;
+    font-weight: 700; margin-bottom: 8px;
+  }
+  .qa-item { margin-bottom: 16px; }
+  .qa-q {
+    background: #f5f5f5; border-radius: 8px;
+    padding: 12px 16px; font-size: 13px; font-weight: 700;
+    margin-bottom: 8px; display: flex; gap: 10px;
+  }
+  .qa-q .q-icon { color: #c0392b; font-size: 16px; flex-shrink: 0; }
+  .qa-a {
+    background: #f0f9f0; border-left: 3px solid #4a8c3f;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px; font-size: 13px; color: #333; line-height: 1.8;
+  }
+  .qa-a strong { color: #2d5a27; }
+  .action-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .action-table th {
+    background: #2d5a27; color: #fff;
+    padding: 9px 12px; text-align: left; font-size: 11px;
+  }
+  .action-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .action-table tr:nth-child(even) td { background: #fafafa; }
+  .a-priority.high { color: #c0392b; font-weight: 700; }
+  .a-priority.med { color: #d35400; font-weight: 700; }
+  .a-priority.low { color: #2d7a27; }
+  .closing {
+    background: linear-gradient(135deg, #1e3d1b 0%, #3d7a35 100%);
+    color: #fff; padding: 32px 36px; border-radius: 12px;
+    text-align: center; margin-top: 0;
+  }
+  .closing .big { font-size: 18px; font-weight: 700; margin-bottom: 10px; line-height: 1.5; }
+  .closing .small { font-size: 13px; opacity: 0.75; line-height: 1.8; }
+  .footer { text-align: center; font-size: 11px; color: #aaa; margin-top: 14px; }
+  .sep { border: none; border-top: 1px solid #ebebeb; margin: 6px 0 14px; }
+  .note { font-size: 12px; color: #888; font-style: italic; margin-top: 8px; }
+  .summary-box {
+    background: #f0f7ee; border-radius: 8px; padding: 14px 18px;
+    margin-top: 14px; font-size: 13px; color: #333; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+  <div class="tag">擺渡人文蔬食料理｜決策者攻略手冊 · 完整版</div>
+  <h1>從一家店，走向全台最強素食品牌</h1>
+  <div class="sub">完整診斷 · 解法清單 · 成本試算 · 風險評估 · 參考模式 · 行動清單　｜ 2026 / 06 / 17</div>
+  <div class="kv">
+    打造連鎖品牌，需要五個階段。現在在第一階段——<br>
+    地基沒打好，每一層都是風險。但只要走對順序，每一步都是複利。
+  </div>
+</div>
+
+<div class="toc-bar">
+  跳至：
+  <a href="#s1">01 診斷</a><span class="toc-sep">·</span>
+  <a href="#s2">02 解法</a><span class="toc-sep">·</span>
+  <a href="#s3">03 路線圖</a><span class="toc-sep">·</span>
+  <a href="#s4">04 成本試算</a><span class="toc-sep">·</span>
+  <a href="#s5">05 風險評估</a><span class="toc-sep">·</span>
+  <a href="#s6">06 參考模式</a><span class="toc-sep">·</span>
+  <a href="#s7">07 Q&amp;A</a><span class="toc-sep">·</span>
+  <a href="#s8">08 立即行動</a>
+</div>
+
+<!-- S1 -->
+<div class="card" id="s1">
+  <div class="card-head">
+    <div class="card-icon" style="background:#fdecea;">&#128300;</div>
+    <h2>01 診斷：真實問題 vs 表象問題</h2>
+  </div>
+  <div class="card-body">
+    <div class="diag-grid">
+      <div class="diag-box wrong">
+        <div class="diag-label red">&#10060; 表象認知（主任視角）</div>
+        <div class="diag-item">
+          刷卡等很久 → <strong>「系統爛，要換系統」</strong><br><br>
+          補習班系統很好用 → <strong>「餐廳也做一套」</strong><br><br>
+          想要科技感 → <strong>「掃碼點餐、送餐機器人、AI」</strong><br><br>
+          結論：工具問題，換工具就好
+        </div>
+      </div>
+      <div class="diag-box right">
+        <div class="diag-label green">&#10004; 真實診斷（兩次深訪後）</div>
+        <div class="diag-item">
+          刷卡慢 → <strong>網路頻寬不足</strong>（非系統問題）<br><br>
+          現有 iCHEF 是業界穩定前段 → <strong>不需要換</strong><br><br>
+          核心痛點：<strong>人力不足、SOP 未建立、管理角色未分工</strong><br><br>
+          結論：人的問題，換工具沒用
+        </div>
+      </div>
+    </div>
+    <div class="sep" style="margin-top:18px;"></div>
+    <div style="font-size:13px; font-weight:700; margin-bottom:12px;">五大根因分析</div>
+    <div class="rc-row">
+      <div class="rc-icon">&#128246;</div>
+      <div class="rc-content">
+        <div class="rc-title">根因一：網路帶寬不足 <span class="rc-badge red">立即可解</span></div>
+        <div class="rc-desc">一樓兩個店面 + 二樓宴會廳 + 員工手機 + YouTube 音樂 + POS 刷卡機，共用一條家用寬頻。客人一多，刷卡機必斷線。這與系統好壞無關。</div>
+      </div>
+    </div>
+    <div class="rc-row">
+      <div class="rc-icon">&#128100;</div>
+      <div class="rc-content">
+        <div class="rc-title">根因二：核心人力嚴重集中 <span class="rc-badge red">最高優先</span></div>
+        <div class="rc-desc">云婷一人身兼：外場訓練 + 成本計算 + 菜單管理 + 行政記帳 + 系統維護 + 行銷策劃。她是「店內的人形營運系統」。解法是培養幹部，讓她能抽身做規劃。</div>
+      </div>
+    </div>
+    <div class="rc-row">
+      <div class="rc-icon">&#128203;</div>
+      <div class="rc-content">
+        <div class="rc-title">根因三：SOP 尚未建立 <span class="rc-badge orange">進行中</span></div>
+        <div class="rc-desc">廚房抓菜憑感覺（「兩把菜、幾顆紅蘿蔔」），外場培訓靠言傳。云婷已在努力植入 SOP，但基礎尚不穩定。沒有 SOP，系統無從複製，AI 也無從訓練。</div>
+      </div>
+    </div>
+    <div class="rc-row">
+      <div class="rc-icon">&#127959;</div>
+      <div class="rc-content">
+        <div class="rc-title">根因四：時機點不對（遷店在即）<span class="rc-badge orange">節點風險</span></div>
+        <div class="rc-desc">11-12 月即將遷至新址。新店動線、座位數、部門拆分都未定案。現在做的系統，搬過去後可能要重做。花兩次錢、冒兩倍混亂，是現在動工最大的代價。</div>
+      </div>
+    </div>
+    <div class="rc-row">
+      <div class="rc-icon">&#128202;</div>
+      <div class="rc-content">
+        <div class="rc-title">根因五：規模尚未到達系統化門檻 <span class="rc-badge green">等待時機</span></div>
+        <div class="rc-desc">進銷存幾個月才算一次，排班 Excel 就夠用，記帳靠人工但量不大。大型系統的月費會超過它帶來的效益。需等到多店、多人、資料量大時才值得投資。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S2 -->
+<div class="card" id="s2">
+  <div class="card-head">
+    <div class="card-icon" style="background:#e8f5e8;">&#128295;</div>
+    <h2>02 解法清單：每個問題的具體方案</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="sol-block">
+      <div class="sol-head">
+        <div class="sol-num">1</div>
+        <div class="sol-title">解決刷卡慢：升級為商業用分線網路</div>
+      </div>
+      <div class="sol-meta">
+        <span class="meta-pill time">&#8987; 立即可做（1-2週）</span>
+        <span class="meta-pill cost">&#128176; 月費增加約 800-1,200元</span>
+        <span class="meta-pill owner">&#128100; 負責：云婷</span>
+        <span class="meta-pill effort">&#9989; 難度：低</span>
+      </div>
+      <div class="sol-detail">
+        <ul>
+          <li>向中華電信申請獨立商業光纖，專供 POS 刷卡機與內部系統使用</li>
+          <li>原有網路維持供客人及員工個人用途（YouTube 音樂等）</li>
+          <li>刷卡機、出餐機、iPad 等接商業線，完全隔離客人流量干擾</li>
+          <li>遷新店時一併規劃整棟網路架構（一、二、三樓各自分線）</li>
+        </ul>
+        <div style="margin-top:8px;">
+          <span class="highlight">預期效果：</span>刷卡慢立即消除，費用遠低於任何系統。<br>
+          <span class="good">補充：</span>iCHEF 為業界穩定前段，適合非電腦族——不需要換，只需要給它夠用的網路。
+        </div>
+      </div>
+    </div>
+    <hr class="sol-divider">
+
+    <div class="sol-block">
+      <div class="sol-head">
+        <div class="sol-num">2</div>
+        <div class="sol-title">解決管理集中：培養現場幹部，讓云婷能抽身</div>
+      </div>
+      <div class="sol-meta">
+        <span class="meta-pill time">&#8987; 3-6 個月</span>
+        <span class="meta-pill cost">&#128176; 薪資結構調整（內部）</span>
+        <span class="meta-pill owner">&#128100; 負責：店長 + 云婷</span>
+        <span class="meta-pill effort">&#9989; 難度：中</span>
+      </div>
+      <div class="sol-detail">
+        <ul>
+          <li><strong>外場：</strong>指定資深員工 1 名為外場副主任，負責日常督導與訓練新人</li>
+          <li><strong>廚房：</strong>建立菜單克數標準（從「兩把菜」→「120g」），讓廚師照 SOP 抓料</li>
+          <li><strong>關帳流程：</strong>設計 1 頁關帳確認單，讓非云婷的人也能獨立完成</li>
+          <li><strong>云婷的角色轉移：</strong>從「現場執行」→「幕後規劃」，專注 SOP 設計與成本控管</li>
+        </ul>
+        <div style="margin-top:8px;">
+          <span class="highlight">核心邏輯：</span>「先讓人會跑，再讓系統幫人跑。」云婷的時間成本是全店最貴的資源，應用在規劃層。
+        </div>
+      </div>
+    </div>
+    <hr class="sol-divider">
+
+    <div class="sol-block">
+      <div class="sol-head">
+        <div class="sol-num">3</div>
+        <div class="sol-title">解決財務不透明：建立每月一頁財務報表</div>
+      </div>
+      <div class="sol-meta">
+        <span class="meta-pill time">&#8987; 2 週內</span>
+        <span class="meta-pill cost">&#128176; 零費用（用既有 POS 數據）</span>
+        <span class="meta-pill owner">&#128100; 負責：云婷</span>
+        <span class="meta-pill effort">&#9989; 難度：低</span>
+      </div>
+      <div class="sol-detail">
+        <ul>
+          <li>從 iCHEF 匯出銷售數據（CSV），製作固定格式月報表</li>
+          <li>報表內容：月營收 / 餐點銷售排行 / 食材耗損估算 / 人力成本比例</li>
+          <li>固定每月 1 日前產出，讓主任每月看到清楚數字</li>
+        </ul>
+        <div style="margin-top:8px;">
+          <span class="good">好處：</span>不需要新系統，零費用，但能讓主任看到「數字透明」，感受到進展。
+        </div>
+      </div>
+    </div>
+    <hr class="sol-divider">
+
+    <div class="sol-block">
+      <div class="sol-head">
+        <div class="sol-num">4</div>
+        <div class="sol-title">後勤輕量化（搬新店穩定後）：進銷存 + 會計工具</div>
+      </div>
+      <div class="sol-meta">
+        <span class="meta-pill time">&#8987; 新店穩定後 6-12 個月</span>
+        <span class="meta-pill cost">&#128176; 月費約 1,500-3,000元</span>
+        <span class="meta-pill owner">&#128100; 負責：云婷評估決定</span>
+        <span class="meta-pill warn">&#9888; 前提：SOP 已穩定</span>
+      </div>
+      <div class="sol-detail">
+        <ul>
+          <li>導入輕量後勤工具（評估：好幫手、Airtable 客製化、或91APP後台）</li>
+          <li>前提：新店 SOP 已跑穩至少 3 個月，主要操作人確定</li>
+          <li>邏輯：iCHEF 匯出數據 → 倒入工具自動運算成本 → 產出月報，不取代 iCHEF</li>
+          <li>會計帳量若變大，評估請兼職會計（月費約 3,000 元）比買系統更靈活</li>
+        </ul>
+      </div>
+    </div>
+    <hr class="sol-divider">
+
+    <div class="sol-block">
+      <div class="sol-head">
+        <div class="sol-num">5</div>
+        <div class="sol-title">AI 數位員工（長期）：等 SOP 穩定、資料積累後才有效益</div>
+      </div>
+      <div class="sol-meta">
+        <span class="meta-pill time">&#8987; 新店穩定 18 個月後（約 2028）</span>
+        <span class="meta-pill cost">&#128176; 月費 3,000-15,000元（視範疇）</span>
+        <span class="meta-pill owner">&#128100; 屆時重新評估</span>
+        <span class="meta-pill warn">&#9888; 難度：高（需資料基礎）</span>
+      </div>
+      <div class="sol-detail">
+        <ul>
+          <li>AI 不是裝上就能用——需要「訓練」，前提是店內已有穩定流程與資料</li>
+          <li>適合場景：AI 分析銷售報表 / 食材耗損提醒 / 客服訂位助理</li>
+          <li>現在 SOP 還在建立中，AI 會跟著「變來變去」，等同養了一直要重訓的員工</li>
+          <li><strong>正確順序：</strong>建立 SOP → 資料結構化 → 系統化 → AI 才有材料產生效益</li>
+        </ul>
+        <div style="margin-top:8px;">
+          <span class="highlight">核心提示：</span>AI 是放大器，放大的是「已存在的優點」，不能創造還不存在的流程。
+        </div>
+      </div>
+    </div>
+    <p class="note">* 以上方案可單獨採行，效益和條件各自獨立，不需全部一起做。</p>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="card" id="s3">
+  <div class="card-head">
+    <div class="card-icon" style="background:#e8f0ff;">&#128506;</div>
+    <h2>03 五階段路線圖：從地基到連鎖</h2>
+  </div>
+  <div class="card-body">
+    <div class="rm-stage">
+      <div class="rm-num active">1<div class="rm-phase">NOW</div></div>
+      <div class="rm-body active-bg">
+        <div class="rm-top">
+          <span class="rm-name">地基建設期</span>
+          <span class="rm-when">現在 → 新店穩定後 1 年</span>
+          <span class="rm-now">&#128205; 您現在在這裡</span>
+        </div>
+        <div class="rm-goal">目標：讓店不靠單一人撐住，SOP 能複製給下一個人</div>
+        <ul class="rm-items">
+          <li>培養可帶人的外場幹部，讓云婷從現場執行轉向幕後規劃</li>
+          <li>建立廚房食材克數標準，外場接待、結帳、開關店 SOP</li>
+          <li>每月財務報表格式定案（POS 匯出 → Excel → 月報）</li>
+          <li>申請獨立商業網路（治本解決刷卡慢）</li>
+          <li>新店網路架構提前規劃（一二三樓分線）</li>
+          <li class="warn">&#9888; 此階段不建議導入新系統，現有工具已足夠</li>
+        </ul>
+        <div class="rm-resource">需要的資源：幹部人選（內部晉升）+ 云婷的時間 + 商業網路費（月+1,000元）</div>
+      </div>
+    </div>
+    <div class="rm-stage">
+      <div class="rm-num">2</div>
+      <div class="rm-body">
+        <div class="rm-top">
+          <span class="rm-name">後勤整理期</span>
+          <span class="rm-when">新店穩定後 6-12 個月</span>
+        </div>
+        <div class="rm-goal">目標：資料不再靠人工拼湊，主任每月看到清楚數字</div>
+        <ul class="rm-items">
+          <li>導入輕量後勤工具（會計、成本計算、進銷存）</li>
+          <li>整理 POS 匯出格式，建立財務報表標準</li>
+          <li>SOP 已穩定後，系統才有東西可以跑，不會「導入就要改」</li>
+          <li>評估是否加購 iCHEF 模組（掃碼點餐、線上訂位）</li>
+        </ul>
+        <div class="rm-resource">需要的資源：輕量 SaaS 工具（月費 1,500-3,000）+ 云婷或兼職行政</div>
+      </div>
+    </div>
+    <div class="rm-stage">
+      <div class="rm-num">3</div>
+      <div class="rm-body">
+        <div class="rm-top">
+          <span class="rm-name">系統化期</span>
+          <span class="rm-when">第 2 階段完成後</span>
+        </div>
+        <div class="rm-goal">目標：後台不再靠 Excel 硬撐，多人協作不出錯</div>
+        <ul class="rm-items">
+          <li>客製化後台系統（會計 + 進銷存 + 排班 + 報表整合）</li>
+          <li>掃碼點餐、線上訂位正式上線（此時客群已積累，值得投入）</li>
+          <li>一樓餐廳 / 吉拿棒 / 三樓宴會廳分帳系統建立</li>
+        </ul>
+        <div class="rm-resource">需要的資源：系統建置費（一次性 20-40 萬）+ 維護費 + 1 名後台負責人</div>
+      </div>
+    </div>
+    <div class="rm-stage">
+      <div class="rm-num">4</div>
+      <div class="rm-body">
+        <div class="rm-top">
+          <span class="rm-name">連鎖複製期</span>
+          <span class="rm-when">有第二店需求時</span>
+        </div>
+        <div class="rm-goal">目標：一套系統管多店，品牌複製不依賴創辦人</div>
+        <ul class="rm-items">
+          <li>跨店管理後台（庫存、財務、人員統一管理）</li>
+          <li>統一品牌 SOP 手冊（新人 3 天上手標準）</li>
+          <li>加盟或直營模式評估（稅務結構規劃）</li>
+        </ul>
+        <div class="rm-resource">需要的資源：多店管理系統（月費）+ 品牌顧問 + 法律稅務規劃</div>
+      </div>
+    </div>
+    <div class="rm-stage">
+      <div class="rm-num">5</div>
+      <div class="rm-body">
+        <div class="rm-top">
+          <span class="rm-name">AI 數位員工期</span>
+          <span class="rm-when">系統穩定後（約 2028+）</span>
+        </div>
+        <div class="rm-goal">目標：讓數據自己說話，降低人工判斷成本</div>
+        <ul class="rm-items">
+          <li>AI 銷售報表分析、食材耗損分析、異常警報</li>
+          <li>AI 客服、線上訂位助理（處理重複性詢問）</li>
+          <li>AI 輔助主管做營運決策（成本趨勢、菜單優化建議）</li>
+          <li>資料積累 2-3 年後，AI 才有材料產生真正效益</li>
+        </ul>
+        <div class="rm-resource">需要的資源：AI 平台訂閱（月費）+ 資料整合工程師 + 訓練期 2-3 個月</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="card" id="s4">
+  <div class="card-head">
+    <div class="card-icon" style="background:#fff8e0;">&#128176;</div>
+    <h2>04 成本試算：現在換 vs 等穩定再換</h2>
+  </div>
+  <div class="card-body">
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>比較項目</th>
+          <th>現在換系統（方案 A）</th>
+          <th>等新店穩定後（方案 B）</th>
+          <th>評估</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">客製化系統建置費</td>
+          <td class="num-bad">20-40 萬（舊址）<br><small>＋搬遷後重做 20-30 萬</small></td>
+          <td class="num-good">20-40 萬（新址一次到位）</td>
+          <td>現在建，搬後重做＝花兩次</td>
+        </tr>
+        <tr>
+          <td class="label">導入混亂期</td>
+          <td class="num-bad">搬遷前 + 搬遷後<br>雙重混亂期</td>
+          <td class="num-good">只有一次混亂期<br>（新店穩定後集中處理）</td>
+          <td>方案 B 風險明顯較低</td>
+        </tr>
+        <tr>
+          <td class="label">解決刷卡慢</td>
+          <td class="num-bad">未解決<br>（換系統解決不了網路）</td>
+          <td class="num-good">申請商業網路<br>月費 +800-1,200 元</td>
+          <td>方案 B 直接治本</td>
+        </tr>
+        <tr>
+          <td class="label">人員教育成本</td>
+          <td class="num-bad">遷店過渡期學新系統<br>＝最壞時間點</td>
+          <td class="num-good">新店穩定後學<br>＝最好時間點</td>
+          <td>時機決定成效</td>
+        </tr>
+        <tr>
+          <td class="label">系統報廢風險</td>
+          <td class="num-bad">高：新址格局未定<br>現在做的可能不合用</td>
+          <td class="num-good">低：以新址實際需求設計</td>
+          <td>方案 B 浪費率低</td>
+        </tr>
+        <tr class="total">
+          <td>整體評估</td>
+          <td class="num-bad">高成本 · 高風險 · 低效益</td>
+          <td class="num-good">低成本 · 低風險 · 高效益</td>
+          <td>&#9989; 建議選方案 B</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">* 客製化系統報價需詳細需求確認，以上為市場參考區間。</p>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="card" id="s5">
+  <div class="card-head">
+    <div class="card-icon" style="background:#fdecea;">&#9888;</div>
+    <h2>05 風險評估：現在強行導入的代價</h2>
+  </div>
+  <div class="card-body">
+    <div class="risk-grid">
+      <div class="risk-card now">
+        <div class="risk-head">&#128308; 現在強行導入的風險</div>
+        <ul>
+          <li>員工正在培訓，同時學新系統，注意力分散，兩件事都做不好</li>
+          <li>11-12 月遷店在即，新址格局未定，現在做的系統搬過去可能不合用</li>
+          <li>云婷卡在現場，無法兼顧系統導入培訓，落地成本由她一人承擔</li>
+          <li>iCHEF 資料庫切換有遷移風險，歷史資料可能流失</li>
+          <li>員工數位素養低，學習曲線長，前 3 個月服務品質可能下降</li>
+          <li>費用花兩次（舊址 + 新址），效益未達預期卻已花出</li>
+        </ul>
+      </div>
+      <div class="risk-card later">
+        <div class="risk-head">&#128994; 等新店穩定後的優勢</div>
+        <ul>
+          <li>新店動線、座位、部門拆分確定後，一次設計到位</li>
+          <li>SOP 已建立，系統才有東西可以跑，不會「系統等人」</li>
+          <li>幹部已培養，有人可負責系統操作與維護</li>
+          <li>以新址實際需求為規格，不會白建</li>
+          <li>資料積累夠多（1 年以上），財務報表才有比較基礎</li>
+          <li>連鎖目標更清晰後，系統一次性設計支援多店</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="card" id="s6">
+  <div class="card-head">
+    <div class="card-icon" style="background:#f0e8ff;">&#128218;</div>
+    <h2>06 參考模式：走過這條路的成功品牌</h2>
+  </div>
+  <div class="card-body">
+    <div class="ref-cards">
+      <div class="ref-card">
+        <div class="ref-brand">瓦城泰統集團</div>
+        <div class="ref-tag">台灣餐飲連鎖標竿</div>
+        <div class="ref-badge">先 SOP 後系統</div>
+        <div class="ref-lesson">
+          創辦人花了<span class="key">整整 5 年</span>建立廚房 SOP 和食材標準化，才開始展店。「每道菜每個動作都要可以教會一個完全不懂的人」——這才是連鎖的地基。系統是後來為了管理多店才導入，不是一開始就有。
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-brand">路易莎咖啡</div>
+        <div class="ref-tag">台灣咖啡連鎖第一</div>
+        <div class="ref-badge">先穩定再複製</div>
+        <div class="ref-lesson">
+          展店加速前，先用<span class="key">直營店驗證 SOP</span>，確認每家店都能跑出同樣品質後才開放加盟。現在超過 500 店的管理系統，是建立在「人人照 SOP」的基礎上才有意義，而不是反過來用系統強迫 SOP。
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-brand">大戶屋</div>
+        <div class="ref-tag">日式定食連鎖</div>
+        <div class="ref-badge">SOP 可視化典範</div>
+        <div class="ref-lesson">
+          廚房裡每道菜都有<span class="key">精確的克數、溫度、時間</span>標準——這正是「可以訓練 AI」的前提。但這份標準是花了數年人工校準才完成的。在此之前，「幾把菜、幾顆紅蘿蔔」的模糊量感，任何系統都管不了。
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-brand">麥當勞</div>
+        <div class="ref-tag">全球連鎖 SOP 極致</div>
+        <div class="ref-badge">地基決定上限</div>
+        <div class="ref-lesson">
+          麥當勞的 AI 點餐之所以有效，是因為背後有<span class="key"> 70 年的 SOP 積累</span>。AI 放大的是「已存在的優點」，不能創造還不存在的流程。擺渡的 AI 時代，要等到 SOP 夠成熟那一天。
+        </div>
+      </div>
+    </div>
+    <div class="summary-box">
+      <strong>共同規律：</strong>沒有一個連鎖品牌是「先買系統，再建 SOP」——順序都是相反的。系統是「把已經跑通的流程自動化」，不是「幫你想清楚流程」。擺渡現在最珍貴的資產，是云婷五年來建立的那些經驗——把它固化成 SOP，才是真正的競爭壁壘。
+    </div>
+  </div>
+</div>
+
+<!-- S7 -->
+<div class="card" id="s7">
+  <div class="card-head">
+    <div class="card-icon" style="background:#fff3e0;">&#10067;</div>
+    <h2>07 主任可能的問題與解答</h2>
+  </div>
+  <div class="card-body">
+    <div class="qa-item">
+      <div class="qa-q"><span class="q-icon">Q</span>「刷卡那麼慢，換一套新系統不就解決了？」</div>
+      <div class="qa-a">刷卡慢的原因是<strong>網路頻寬不足</strong>，不是 POS 系統的問題。多台設備共用一條家用寬頻，尖峰時段必塞車。解法是申請獨立商業網路，費用遠低於換系統，而且立即見效。換再好的系統，如果網路還是同一條，刷卡依然會慢。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><span class="q-icon">Q</span>「補習班用 AI 系統很好，餐廳也做一套不就好了？」</div>
+      <div class="qa-a">補習班系統和餐廳系統是完全不同的領域。更重要的是，補習班系統成功的前提是<strong>有穩定的 SOP 和專屬操作人員</strong>。擺渡目前管理人力高度集中在一人，現在導入等同於讓她再多擔一份系統維護工作，反而增加負擔。先把地基建好，才能讓系統發揮效益。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><span class="q-icon">Q</span>「掃碼點餐、送餐機器人這些現代化的東西，餐廳不需要嗎？」</div>
+      <div class="qa-a">需要，但時機要對。目前客群中家庭聚餐族偏多，連掃官方 Line 都要教，強行導入只會讓服務員花更多時間解說。送餐機器人也需要寬敞走道動線，且更適合簡單化餐點而非創意料理。建議等新店開張、年輕客群累積後再評估。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><span class="q-icon">Q</span>「等太久了，競爭對手都在導入科技，我們是不是落後？」</div>
+      <div class="qa-a">競爭優勢不來自「有沒有系統」，而來自<strong>「系統有沒有真的發揮作用」</strong>。許多餐廳砸錢買了系統，結果員工不會用、老闆看不懂數字，系統成了擺設。擺渡真正的競爭力是料理品質和多年累積的默契——把它固化成 SOP，比花錢買一個用不好的系統更有競爭力。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><span class="q-icon">Q</span>「那現在到底要花什麼錢、做什麼事？」</div>
+      <div class="qa-a">現在立即可以做、費用低、效益高的有三件：<strong>①</strong> 申請獨立商業網路（解決刷卡慢，月費約 +1,000 元）、<strong>②</strong> 建立固定格式的月財務報表（零費用，讓數字透明）、<strong>③</strong> 指定一名外場幹部開始培訓（內部晉升）。這三件事做好，就是在為連鎖品牌打最重要的地基。</div>
+    </div>
+  </div>
+</div>
+
+<!-- S8 -->
+<div class="card" id="s8">
+  <div class="card-head">
+    <div class="card-icon" style="background:#e8fde8;">&#9989;</div>
+    <h2>08 立即行動清單</h2>
+  </div>
+  <div class="card-body">
+    <table class="action-table">
+      <thead>
+        <tr><th>優先度</th><th>行動</th><th>負責人</th><th>時限</th><th>預估費用</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="a-priority high">最高</span></td>
+          <td>申請獨立商業網路（POS 專線）</td>
+          <td>云婷</td><td>2 週內</td><td>月費 +800-1,200</td>
+        </tr>
+        <tr>
+          <td><span class="a-priority high">最高</span></td>
+          <td>指定外場幹部 1 名，啟動培訓計畫</td>
+          <td>店長 + 云婷</td><td>本月內</td><td>薪資調整（內部）</td>
+        </tr>
+        <tr>
+          <td><span class="a-priority high">高</span></td>
+          <td>建立每月財務報表格式（iCHEF 匯出版）</td>
+          <td>云婷</td><td>2 週內</td><td>零費用</td>
+        </tr>
+        <tr>
+          <td><span class="a-priority med">中</span></td>
+          <td>新店網路規劃（一二三樓分線需求確認）</td>
+          <td>云婷 + 裝修方</td><td>搬遷前 2 個月</td><td>裝修一起做</td>
+        </tr>
+        <tr>
+          <td><span class="a-priority med">中</span></td>
+          <td>廚房食材克數標準化（前 10 道主菜）</td>
+          <td>主廚 + 云婷</td><td>3 個月內</td><td>零費用</td>
+        </tr>
+        <tr>
+          <td><span class="a-priority low">長期</span></td>
+          <td>新店穩定後評估後勤輕量工具（會計/進銷存）</td>
+          <td>云婷</td><td>新店 +6 個月</td><td>月費 1,500-3,000</td>
+        </tr>
+        <tr>
+          <td><span class="a-priority low">長期</span></td>
+          <td>第二店計畫啟動時，評估客製化連鎖管理系統</td>
+          <td>徐主任 + 云婷</td><td>視展店時間</td><td>20-40 萬（一次性）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="closing">
+  <div class="big">「要跑得快，先把鞋帶綁好。」</div>
+  <div class="small">
+    全台最強素食品牌，不是一步跳到 AI，<br>
+    而是每一個階段走穩，讓後面的每一步都成為複利。<br><br>
+    現在最快到達連鎖品牌的路，是先把第一階段走好。
+  </div>
+</div>
+
+<div class="footer">本攻略由四維數位策略顧問提供｜2026 / 06 / 17｜如有問題歡迎聯繫</div>
+
+</div>
+</body>
+</html>
