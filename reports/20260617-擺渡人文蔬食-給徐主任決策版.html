@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>擺渡人文蔬食料理｜品牌連鎖發展路線圖</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    padding: 32px 16px 60px;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #2d5a27 0%, #4a8c3f 100%);
+    color: #fff;
+    padding: 40px 40px 32px;
+  }
+  .header .brand { font-size: 13px; letter-spacing: 3px; opacity: 0.75; margin-bottom: 10px; text-transform: uppercase; }
+  .header h1 { font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 6px; }
+  .header .subtitle { font-size: 14px; opacity: 0.8; }
+
+  /* Core message */
+  .core-message {
+    background: #f0f7ee;
+    border-left: 5px solid #4a8c3f;
+    margin: 28px 32px;
+    padding: 20px 24px;
+    border-radius: 0 8px 8px 0;
+  }
+  .core-message .label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #4a8c3f; margin-bottom: 10px; }
+  .core-message p { font-size: 16px; line-height: 1.8; color: #1a3a16; font-weight: 500; }
+
+  /* Section */
+  .section { padding: 24px 32px 8px; }
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4a8c3f;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #e0ede0;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  .section p { font-size: 14px; line-height: 1.9; color: #333; margin-bottom: 10px; }
+
+  /* Step list */
+  .step-list { list-style: none; margin: 8px 0 16px; }
+  .step-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  .step-badge {
+    flex-shrink: 0;
+    background: #4a8c3f;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 3px;
+    white-space: nowrap;
+  }
+  .step-badge.current { background: #c0392b; }
+
+  .location-badge {
+    display: inline-block;
+    background: #fff3cd;
+    border: 1px solid #f0c040;
+    color: #856404;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin: 4px 0 8px;
+  }
+
+  /* Problem box */
+  .problem-box {
+    background: #fef9f0;
+    border: 1px solid #f0d080;
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin: 10px 0 16px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #4a3800;
+  }
+  .problem-box .highlight { font-weight: 700; color: #c0392b; }
+  .problem-box .solution { color: #2d5a27; font-weight: 600; }
+
+  /* Cost banner */
+  .cost-banner {
+    background: #fff0f0;
+    border: 1.5px solid #e74c3c;
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin: 8px 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #c0392b;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  /* Roadmap */
+  .roadmap { margin: 12px 0 20px; }
+  .stage {
+    display: flex;
+    gap: 0;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+  }
+  .stage-num {
+    flex-shrink: 0;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    background: #4a8c3f;
+    writing-mode: horizontal-tb;
+  }
+  .stage-num.current { background: #c0392b; }
+  .stage-body { flex: 1; padding: 14px 18px; background: #fafafa; }
+  .stage-body.current-bg { background: #fff8f8; }
+  .stage-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .stage-name { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+  .stage-period { font-size: 12px; color: #888; }
+  .stage-badge-here {
+    font-size: 11px;
+    background: #c0392b;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+  .stage-goal { font-size: 12px; color: #555; margin-bottom: 8px; font-style: italic; }
+  .stage-items { list-style: none; }
+  .stage-items li {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+    padding-left: 14px;
+    position: relative;
+  }
+  .stage-items li::before { content: "•"; position: absolute; left: 0; color: #4a8c3f; }
+  .stage-items li.warn { color: #c0392b; font-weight: 600; }
+  .stage-items li.warn::before { color: #c0392b; }
+
+  /* Action cards */
+  .actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 12px 0 20px; }
+  .action-card {
+    background: #f0f7ee;
+    border: 1px solid #c8e6c0;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .action-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #4a8c3f;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+  }
+  .action-title { font-size: 14px; font-weight: 700; color: #1a3a16; margin-bottom: 6px; }
+  .action-desc { font-size: 12px; color: #4a6640; line-height: 1.6; }
+
+  /* Closing */
+  .closing {
+    background: linear-gradient(135deg, #2d5a27 0%, #4a8c3f 100%);
+    color: #fff;
+    padding: 28px 32px;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.9;
+    letter-spacing: 0.5px;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #aaa;
+    padding: 16px 32px 20px;
+    border-top: 1px solid #eee;
+  }
+
+  hr.divider { border: none; border-top: 1px solid #e8e8e8; margin: 8px 32px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">擺渡人文蔬食料理</div>
+    <h1>品牌連鎖發展路線圖</h1>
+    <div class="subtitle">決策者專用報告｜2026 / 06 / 17</div>
+  </div>
+
+  <!-- Core message -->
+  <div class="core-message">
+    <div class="label">▌ 給主任的核心訊息</div>
+    <p>「打造全台最強素食品牌，需要走五個階段。<br>現在在第一階段——地基沒打好，往後每一層都是風險。」</p>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-title">一、你的目標 → 倒推需要什麼</div>
+    <p>終點：<strong>全台最強素食品牌／連鎖體系</strong><br>要做到連鎖，必須依序具備：</p>
+    <ul class="step-list">
+      <li><span class="step-badge current">第 1 步</span>可以複製的 SOP 與管理制度　← <strong>現在最優先</strong></li>
+      <li><span class="step-badge">第 2 步</span>不依賴單一人就能跑的現場</li>
+      <li><span class="step-badge">第 3 步</span>穩定可信的財務與成本數據</li>
+      <li><span class="step-badge">第 4 步</span>後台系統（多店管理的前提）</li>
+      <li><span class="step-badge">第 5 步</span>AI 數位員工（大量數據後才有意義）</li>
+    </ul>
+    <div class="location-badge">📍 目前擺渡正處於第 1 步，SOP 與管理架構尚在建立中</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-title">二、現在的真實問題是什麼？</div>
+    <div class="problem-box">
+      主任觀察到「刷卡等太久」→ 判斷「系統不好，要換系統」<br><br>
+      <span class="highlight">真實原因：</span>刷卡慢 = <strong>網路頻寬不足</strong>，多設備同時使用（員工、POS、YouTube 音樂）導致網路塞車<br><br>
+      <span class="solution">解法：申請獨立商業用網路，費用遠低於換系統</span><br><br>
+      現用 POS 系統（iCHEF）為業界穩定性前段，特別適合非電腦族操作，唯一缺點是月費偏高<br><br>
+      <strong>結論：刷卡慢是網路問題，不是系統問題。換系統無法解決這個問題。</strong>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-title">三、若現在強行導入新系統，代價是什麼？</div>
+    <div class="cost-banner">📌 現在換 = 花兩次錢，冒兩倍風險，且目前系統問題根本不在這裡</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-title">四、通往品牌連鎖的五階段路線圖</div>
+    <div class="roadmap">
+
+      <div class="stage">
+        <div class="stage-num current">1</div>
+        <div class="stage-body current-bg">
+          <div class="stage-header">
+            <span class="stage-name">地基建設期</span>
+            <span class="stage-period">現在 ～ 新店穩定後 1 年</span>
+            <span class="stage-badge-here">📍 現在所在位置</span>
+          </div>
+          <div class="stage-goal">目標：讓店不靠單一人撐住</div>
+          <ul class="stage-items">
+            <li>培養可帶人的現場幹部</li>
+            <li>建立外場、廚房基本 SOP</li>
+            <li>讓「核心營運角色」逐步退到幕後做整體規劃</li>
+            <li>升級網路（治本解決刷卡慢）</li>
+            <li>優化現有 Excel 財務表單</li>
+            <li class="warn">⚠️ 此階段不建議導入新系統</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num">2</div>
+        <div class="stage-body">
+          <div class="stage-header">
+            <span class="stage-name">後勤整理期</span>
+            <span class="stage-period">新店穩定後 6–12 個月</span>
+          </div>
+          <div class="stage-goal">目標：資料不再靠人工拼湊</div>
+          <ul class="stage-items">
+            <li>導入後勤輕量工具（會計、成本計算、進銷存）</li>
+            <li>整理 POS 匯出格式，建立財務報表標準</li>
+            <li>此時 SOP 已穩，系統才有東西可以跑</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num">3</div>
+        <div class="stage-body">
+          <div class="stage-header">
+            <span class="stage-name">系統化期</span>
+            <span class="stage-period">第 2 階段完成後</span>
+          </div>
+          <div class="stage-goal">目標：後台不再靠 Excel 硬撐</div>
+          <ul class="stage-items">
+            <li>評估是否升級或更換 POS 系統</li>
+            <li>導入掃碼點餐、線上訂位（此時客群已積累，值得導入）</li>
+            <li>建立跨部門報表系統</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num">4</div>
+        <div class="stage-body">
+          <div class="stage-header">
+            <span class="stage-name">連鎖複製期</span>
+            <span class="stage-period">有第二店需求時</span>
+          </div>
+          <div class="stage-goal">目標：一套系統管多店</div>
+          <ul class="stage-items">
+            <li>客製化跨店管理系統</li>
+            <li>統一品牌 SOP、成本管控</li>
+            <li>這是連鎖化的真正前提</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-num">5</div>
+        <div class="stage-body">
+          <div class="stage-header">
+            <span class="stage-name">AI 數位員工</span>
+            <span class="stage-period">系統穩定後</span>
+          </div>
+          <div class="stage-goal">目標：讓數據說話，降低人工判斷成本</div>
+          <ul class="stage-items">
+            <li>AI 銷售報表分析、食材耗損分析</li>
+            <li>AI 客服、訂位助理</li>
+            <li>AI 輔助主管做營運決策</li>
+            <li>此時資料已積累 2–3 年，AI 才有材料產生真正效益</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Section 5 -->
+  <div class="section">
+    <div class="section-title">五、現在立即可做的 3 件事</div>
+    <div class="actions">
+      <div class="action-card">
+        <div class="action-num">1</div>
+        <div class="action-title">升級網路</div>
+        <div class="action-desc">解決刷卡慢的根本問題，費用遠低於換系統，效果立竿見影</div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">2</div>
+        <div class="action-title">建立每月財務報表格式</div>
+        <div class="action-desc">讓主任每月都能看到清楚的數字，感受到營運透明度</div>
+      </div>
+      <div class="action-card">
+        <div class="action-num">3</div>
+        <div class="action-title">確定新店網路規劃</div>
+        <div class="action-desc">遷移前提前部署獨立商業網路，避免搬過去後重蹈覆轍</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    「要跑得快，先把鞋帶綁好。」<br>
+    現在最快到達連鎖品牌的路，是先把第一階段走穩。
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">本報告由四維數位策略顧問提供｜2026 / 06 / 17</div>
+
+</div>
+</body>
+</html>
