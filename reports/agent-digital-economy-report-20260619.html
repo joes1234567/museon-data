@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>數字 Agent 經濟體：深度報告 2026</title>
+<style>
+  :root {
+    --bg: #0a0d14;
+    --bg2: #111520;
+    --bg3: #161b28;
+    --border: #1e2738;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --accent3: #10b981;
+    --accent4: #f59e0b;
+    --accent5: #ef4444;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0a0d14 0%, #0f1629 50%, #080d1a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.3);
+    color: #60a5fa;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 54px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text2);
+    max-width: 600px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--text3);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* ── SECTION ── */
+  .section { margin-top: 60px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--text3);
+    margin-top: 2px;
+  }
+
+  /* ── STAT GRID ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--accent); }
+  .stat-val {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .stat-val.blue { color: #60a5fa; }
+  .stat-val.green { color: #34d399; }
+  .stat-val.purple { color: #a78bfa; }
+  .stat-val.amber { color: #fbbf24; }
+  .stat-val.red { color: #f87171; }
+  .stat-label { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+  .stat-source { font-size: 11px; color: var(--text3); }
+
+  /* ── PROSE ── */
+  .prose { color: var(--text2); line-height: 1.8; }
+  .prose p { margin-bottom: 16px; }
+  .prose strong { color: var(--text); }
+  .prose h3 { color: var(--text); font-size: 16px; font-weight: 600; margin: 24px 0 10px; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-body { color: var(--text2); font-size: 14px; line-height: 1.7; }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; margin: 20px 0; border-radius: 12px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: var(--bg3);
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--text2);
+    border-bottom: 1px solid var(--border);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  td strong { color: var(--text); }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .badge-blue { background: rgba(59,130,246,0.2); color: #60a5fa; }
+  .badge-green { background: rgba(16,185,129,0.2); color: #34d399; }
+  .badge-purple { background: rgba(139,92,246,0.2); color: #a78bfa; }
+  .badge-amber { background: rgba(245,158,11,0.2); color: #fbbf24; }
+  .badge-red { background: rgba(239,68,68,0.2); color: #f87171; }
+
+  /* ── TIMELINE ── */
+  .timeline { margin: 24px 0; }
+  .tl-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    bottom: -20px;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item:last-child::before { display: none; }
+  .tl-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--bg3);
+    border: 2px solid var(--accent);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .tl-content { flex: 1; }
+  .tl-date { font-size: 12px; color: var(--text3); margin-bottom: 4px; }
+  .tl-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .tl-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-left: 3px solid;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .callout-blue { background: rgba(59,130,246,0.08); border-color: #3b82f6; color: #93c5fd; }
+  .callout-green { background: rgba(16,185,129,0.08); border-color: #10b981; color: #6ee7b7; }
+  .callout-amber { background: rgba(245,158,11,0.08); border-color: #f59e0b; color: #fcd34d; }
+  .callout-red { background: rgba(239,68,68,0.08); border-color: #ef4444; color: #fca5a5; }
+
+  /* ── PLAYER GRID ── */
+  .player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .player-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .player-cat {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 10px;
+  }
+  .player-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .player-card p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* ── FORECAST CHART ── */
+  .forecast-bar { margin: 20px 0; }
+  .fb-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .fb-year { width: 44px; color: var(--text3); text-align: right; flex-shrink: 0; }
+  .fb-track { flex: 1; background: var(--bg3); border-radius: 4px; height: 22px; overflow: hidden; }
+  .fb-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 600; color: white; transition: width 0.5s; }
+  .fb-val { width: 80px; color: var(--text2); flex-shrink: 0; }
+
+  /* ── PROTOCOL STACK ── */
+  .stack { margin: 20px 0; }
+  .stack-row {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .stack-layer {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .stack-content h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .stack-content p { font-size: 13px; color: var(--text2); }
+
+  /* ── RISK MATRIX ── */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .risk-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .risk-level {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .risk-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .risk-item h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .risk-item p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+  /* ── SOURCES ── */
+  .sources { margin-top: 60px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .sources h3 { font-size: 14px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+  .source-list { columns: 2; column-gap: 32px; }
+  .source-item { font-size: 12px; color: var(--text3); break-inside: avoid; margin-bottom: 8px; }
+  .source-item a { color: var(--text3); text-decoration: none; }
+  .source-item a:hover { color: var(--accent); }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 40px;
+    padding: 20px 40px;
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+    font-size: 12px;
+    color: var(--text3);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 20px 30px; }
+    .page { padding: 0 20px 60px; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .source-list { columns: 1; }
+    .risk-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">深度研究報告 · 2026</div>
+    <h1>數字 Agent 經濟體</h1>
+    <p class="hero-sub">當 AI 開始自主交易、雇用彼此、並產生真實經濟價值——一個由算法驅動的平行市場正在形成。</p>
+    <div class="hero-meta">
+      <span>📅 2026 年 6 月 19 日</span>
+      <span>📊 Market Size · Protocols · Players · Regulation</span>
+      <span>🔍 資料來源：BCC Research · McKinsey · IMF · Coinbase · Anthropic</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ── EXECUTIVE SUMMARY ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">✦</div>
+      <div>
+        <div class="section-title">執行摘要</div>
+        <div class="section-desc">三句話版本</div>
+      </div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">2025 年市場規模</div>
+        <div class="stat-val blue">$79 億</div>
+        <div class="stat-source">BCC / MarketsandMarkets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">2030 年預測</div>
+        <div class="stat-val green">$483–526 億</div>
+        <div class="stat-source">CAGR 43.3%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">x402 已結算（2026/4）</div>
+        <div class="stat-val purple">$5,000 萬</div>
+        <div class="stat-source">5,000 萬筆交易</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">長期潛在貢獻</div>
+        <div class="stat-val amber">$2.9 兆</div>
+        <div class="stat-source">McKinsey / 年度 GDP 影響</div>
+      </div>
+    </div>
+    <div class="callout callout-blue">
+      <strong>核心命題：</strong>Agent 不再只是工具，它們正在成為經濟主體——購買算力、出售服務、代理交易、雇用其他 Agent。支撐這一切的基礎設施（x402 協議、MCP 支付、Agent 錢包）在 2025–2026 年密集落地，標誌著 AI 從「成本中心」向「價值創造節點」的轉型拐點。
+    </div>
+  </div>
+
+  <!-- ── 1. 市場規模 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <div>
+        <div class="section-title">市場規模與成長軌跡</div>
+        <div class="section-desc">多機構預測交叉驗證</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>AI Agent 市場正處於指數增長早期。2025 年全球市場規模約 <strong>$79 億美元</strong>，主流機構預測到 2030 年將達 <strong>$483–526 億</strong>，CAGR 超過 43%。更長期的 Precedence Research 預測，到 2035 年可觸及 <strong>$2,947 億</strong>。</p>
+      <p>然而，Lightspeed Venture Partners 提出一個反直覺的觀察：市場中存在 <strong>$19.9 兆的未被捕獲價值</strong>——95% 的生成式 AI pilot 無法產出可衡量的商業回報。這意味著當前 $79 億的市場規模，距離真實的潛在天花板仍相差 3 個數量級。</p>
+    </div>
+
+    <div class="forecast-bar">
+      <div class="fb-row">
+        <div class="fb-year">2025</div>
+        <div class="fb-track">
+          <div class="fb-fill" style="width:8%; background: linear-gradient(90deg, #3b82f6, #6366f1);">$79億</div>
+        </div>
+        <div class="fb-val">$79 億</div>
+      </div>
+      <div class="fb-row">
+        <div class="fb-year">2026</div>
+        <div class="fb-track">
+          <div class="fb-fill" style="width:12%; background: linear-gradient(90deg, #3b82f6, #6366f1);">$115億</div>
+        </div>
+        <div class="fb-val">$115 億</div>
+      </div>
+      <div class="fb-row">
+        <div class="fb-year">2028</div>
+        <div class="fb-track">
+          <div class="fb-fill" style="width:26%; background: linear-gradient(90deg, #6366f1, #8b5cf6);">$240億</div>
+        </div>
+        <div class="fb-val">$240 億</div>
+      </div>
+      <div class="fb-row">
+        <div class="fb-year">2030</div>
+        <div class="fb-track">
+          <div class="fb-fill" style="width:52%; background: linear-gradient(90deg, #8b5cf6, #a855f7);">$526億</div>
+        </div>
+        <div class="fb-val">$483–526 億</div>
+      </div>
+      <div class="fb-row">
+        <div class="fb-year">2035</div>
+        <div class="fb-track">
+          <div class="fb-fill" style="width:100%; background: linear-gradient(90deg, #a855f7, #ec4899);">$2,947億</div>
+        </div>
+        <div class="fb-val">$2,947 億</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>研究機構</th>
+            <th>2025 基準</th>
+            <th>2030 預測</th>
+            <th>CAGR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>BCC Research</strong></td><td>$80 億</td><td>$483 億</td><td>43.3%</td></tr>
+          <tr><td><strong>MarketsandMarkets</strong></td><td>$78.4 億</td><td>$526.2 億</td><td>—</td></tr>
+          <tr><td><strong>Precedence Research</strong></td><td>$79.2 億</td><td>—</td><td>—</td></tr>
+          <tr><td><strong>Grand View Research</strong></td><td>$76.3 億</td><td>—</td><td>—</td></tr>
+          <tr><td><strong>eMarketer</strong></td><td>—</td><td>$209 億（零售 2026）</td><td>近 4× YoY</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 2. 基礎設施協議 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <div>
+        <div class="section-title">基礎設施協議層</div>
+        <div class="section-desc">Agent 交易的底層語言</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>Agent 經濟體的運作需要一套共同語言——不只是 AI 模型，更需要支付協議、溝通標準、身份驗證框架。2025–2026 年，這個基礎設施層從零開始密集建設。</p>
+    </div>
+
+    <div class="stack">
+      <div class="stack-row">
+        <div class="stack-layer" style="background: rgba(239,68,68,0.2); color: #f87171;">支付層</div>
+        <div class="stack-content">
+          <h4>x402 協議（HTTP 402 復活）</h4>
+          <p>2025 年 5 月由 Coinbase + Cloudflare 聯合發佈。Server 回傳 HTTP 402 → Agent 讀取付款指示 → 簽署 USDC 交易 → 重發請求。支援 Base、Ethereum、Polygon、Solana 等多鏈。2025 年 9 月成立 x402 基金會，<strong>Google、Visa、AWS、Circle、Anthropic</strong> 全部加入。截至 2026 年 4 月：累積 <strong>5,000 萬筆交易、$5,000 萬結算額</strong>；單月成長率 2025 年 9–10 月達 +2,000%。</p>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-layer" style="background: rgba(59,130,246,0.2); color: #60a5fa;">工具層</div>
+        <div class="stack-content">
+          <h4>MCP（Model Context Protocol）</h4>
+          <p>Anthropic 2024 年 11 月發佈，解決 Agent 縱向使用工具的標準化問題。SDK 下載量從 2024/11 的 10 萬次/月 → 2025 年底 <strong>9,700 萬次/月</strong>。2025 年 10 月 MCP 微支付交易量單月暴增 <strong>35,000%</strong>，突破 100 萬筆。2025 年 12 月，MCP 捐給 Linux Foundation Agentic AI Foundation，OpenAI、Google、Microsoft 全部簽署。</p>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-layer" style="background: rgba(139,92,246,0.2); color: #a78bfa;">協調層</div>
+        <div class="stack-content">
+          <h4>A2A（Agent-to-Agent Protocol）</h4>
+          <p>Google 2025 年 4 月發佈，解決 Agent 橫向協調問題——任務委派、狀態同步、sub-agent 管理。同樣捐入 Linux Foundation，與 MCP 形成縱橫雙軸的 Agent 通訊標準。</p>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-layer" style="background: rgba(16,185,129,0.2); color: #34d399;">商業層</div>
+        <div class="stack-content">
+          <h4>ACP / UCP（商業交易協議）</h4>
+          <p>IBM + Linux Foundation 的 ACP（Agent Commerce Protocol）處理 Agent 間的採購、訂單、帳單。Google UCP（Universal Commerce Protocol）專為 Google 商業生態設計。這一層讓 Agent 從「使用服務」升級為「自主完成商業行為」。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-green">
+      <strong>關鍵洞察：</strong>MCP + A2A + x402 的三協議組合，等同於 Agent 世界的 HTTP + TCP/IP + 信用卡網路。這三者在 2025 年內相繼成熟，標誌著 Agent 經濟的「基礎設施就緒」時刻到來。
+    </div>
+  </div>
+
+  <!-- ── 3. 交易解剖 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <div>
+        <div class="section-title">Agent 交易解剖</div>
+        <div class="section-desc">他們需要什麼、想要什麼、渴望什麼</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>維度</th>
+            <th>具體內容</th>
+            <th>代表性案例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-blue">需要</span><br><small>功能性需求</small></td>
+            <td>算力（GPU 租用）、記憶體存儲、工具 API 調用、支付軌道、身份驗證、資料來源</td>
+            <td>Agent 在 io.net 自主競價 GPU；透過 x402 直接購買 CoinGecko 即時數據</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple">想要</span><br><small>效率驅動需求</small></td>
+            <td>任務分包網路、聲譽積累系統、最低成本算力路由、預測性資源預訂</td>
+            <td>Orchestrator Agent 自動分包給 sub-agent；Salesforce AgentExchange 累積評分</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-amber">渴望</span><br><small>自主性邊界</small></td>
+            <td>完全自主執行（無人類干預）、持久身份（跨 session 記憶）、物理世界延伸（機器人控制）、資本積累能力</td>
+            <td>Anthropic Project Deal：Agent 獨立完成「買賣滑雪板」全流程；AWS AgentCore Payments：Agent 在執行中自主支付</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">可交換</span><br><small>Agent 互換商品</small></td>
+            <td>算力時間、工具調用權、標記數據、任務勞動力、聲譽背書、人類時間（RentAHuman）</td>
+            <td>x402 穩定幣微支付；Nevermined MCP 工具按調用計費（最低 $0.001/次）</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">對人創造</span><br><small>人類可見價值</small></td>
+            <td>$2.9 兆 GDP 年貢獻（McKinsey）、醫療診斷錯誤 -30%、個人投資自主化、供應鏈效率 +30%</td>
+            <td>Amazon 多 Agent 供應鏈當日送達提升 30%；Robinhood AI Agent 代理交易</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h3>算力市場的結構性轉變</h3>
+      <p>GPU 市場正從「人類採購決策」轉向「Agent 自動競價」。io.net 聚合 300,000+ GPU，遍佈 55 個國家，宣稱比 AWS 便宜 70%。H200 定價約 $6.50/小時，入門 GPU $0.23/小時。AI 推理服務提供商在 2025 年從 27 家增至約 90 家，形成實質性競爭市場。這意味著 Agent 有越來越多的選擇——而且它們會自動選擇最便宜的選項。</p>
+      <h3>Agent 雇用人類：逆轉現象</h3>
+      <p>RentAHuman（2025 年）提供了一個反直覺的案例：AI Agent 雇用人類來完成那些 AI 做不好的任務（如實體驗證、情感處理、法律責任）。這不是比喻——平台真實存在，Agent 以加密貨幣支付人類服務費。未來，「AI 雇主、人類員工」可能不再是科幻情節。</p>
+    </div>
+  </div>
+
+  <!-- ── 4. 真實案例 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <div>
+        <div class="section-title">真實交易案例研究</div>
+        <div class="section-desc">不是 Demo，是真實發生的</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧪 Anthropic Project Deal（2025/12 → 2026/4 公佈）</div>
+      <div class="card-body">
+        <p>Anthropic 在舊金山辦公室進行的內部實驗：69 名員工，每人 $100 預算，運行一週。所有交易由 Claude Agent 代替員工完成——像 Craigslist，但人類完全不介入。</p>
+        <br>
+        <p><strong>結果：186 筆交易、總值超過 $4,000。</strong>成交商品包括：滑雪板、實驗室培育紅寶石、折疊自行車、狗托管時間、19 顆乒乓球。Opus 4.5 比 Sonnet 每位用戶多完成約 2 筆交易。46% 用戶表示願意為此服務付費。</p>
+        <br>
+        <p>重要性：這是 Agent 完成從「意圖理解」到「支付完成」完整交易閉環的首個大規模驗證。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🏦 Coinbase for Agents（2026/6/11 上線）</div>
+      <div class="card-body">
+        <p>讓 ChatGPT、Claude 等 AI 直接連結用戶的 Coinbase 帳號，代理執行現貨和衍生品交易、電商支付。底層使用 x402 協議，Agent 間支付無需人類中間確認。用戶可設定花費上限或在沙盒環境測試。這是首個主流金融機構將 Agent 直接整合進帳戶體系的正式產品。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🛒 主流電商 Agent 支付生態（2025–2026）</div>
+      <div class="card-body">
+        <p><strong>ChatGPT Instant Checkout（OpenAI + Stripe）：</strong>Stripe Shared Payment Token（SPT）機制——買家存儲支付方式 → AI 平台發行限定範圍 SPT → 限定商家/金額/時效。</p>
+        <br>
+        <p><strong>Mastercard Agent Pay：</strong>2025/9 Citi/US Bank 首發，11 月全美推廣，與 Microsoft Copilot Checkout 協作。已覆蓋澳洲、美國、印度。</p>
+        <br>
+        <p><strong>Visa Intelligent Commerce：</strong>100+ 合作夥伴，毫秒級即時風險評分，自動批准/拒絕/標記 Agent 交易。2025 年假期季完成數百筆，預計 2026 年假期季達<strong>數百萬筆</strong>。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🚚 Amazon 多 Agent 供應鏈（持續運行）</div>
+      <div class="card-body">
+        <p>多 Agent 協調系統將當日送達提升 30%，服務成本連續三年下降。Orchestrator Agent 負責任務分解和調度，各功能 sub-agent 負責庫存、路由、支付的獨立執行。這是 Agent 協作創造可量化商業價值的大規模實證。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. 主要玩家 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <div>
+        <div class="section-title">主要玩家生態圖</div>
+        <div class="section-desc">誰在建構這個市場的哪一層</div>
+      </div>
+    </div>
+
+    <div class="player-grid">
+      <div class="player-card">
+        <div class="player-cat">🧠 基礎模型層</div>
+        <h4>Anthropic · OpenAI · Google</h4>
+        <p>提供 Agent 大腦。同時也是協議制定者——MCP（Anthropic）、A2A（Google）已成為業界標準。</p>
+      </div>
+      <div class="player-card">
+        <div class="player-cat">💳 支付基礎設施</div>
+        <h4>Coinbase · Stripe · Circle</h4>
+        <p>Coinbase 主導 x402 + AgentKit + Agentic Wallets。Stripe Shared Payment Token。Circle 提供 USDC 穩定幣軌道。</p>
+      </div>
+      <div class="player-card">
+        <div class="player-cat">☁️ 雲端運行時</div>
+        <h4>AWS · Microsoft · Google Cloud</h4>
+        <p>AWS Bedrock AgentCore（GA 2025/10）提供沙盒、MCP Gateway、AgentCore Payments。Azure 擁有 11,000+ 模型市場。</p>
+      </div>
+      <div class="player-card">
+        <div class="player-cat">🏦 支付網絡</div>
+        <h4>Visa · Mastercard</h4>
+        <p>Visa Intelligent Commerce：毫秒級 Agent 交易風控。Mastercard Agent Pay：全球推廣，橋接傳統金融與 Agent 支付。</p>
+      </div>
+      <div class="player-card">
+        <div class="player-cat">⚡ 算力市場</div>
+        <h4>io.net · Vast.ai · Hyperbolic</h4>
+        <p>io.net：300,000+ GPU，55 國，比 AWS 便宜 70%。形成 Agent 自動競價的去中心化算力市場。</p>
+      </div>
+      <div class="player-card">
+        <div class="player-cat">🛒 應用市場</div>
+        <h4>Salesforce AgentExchange · Microsoft Azure Marketplace</h4>
+        <p>AgentExchange：200+ 啟動合作夥伴。Azure：4,000+ AI 應用。提供 Agent 的分發和聲譽積累軌道。</p>
+      </div>
+      <div class="player-card">
+        <div class="player-cat">🔧 MCP 貨幣化中間件</div>
+        <h4>Nevermined · Masumi · Radius</h4>
+        <p>為 MCP 工具提供按調用計費能力，最低 $0.001/次。填補 MCP 本身無支付機制的空白。</p>
+      </div>
+      <div class="player-card">
+        <div class="player-cat">⚖️ 標準治理</div>
+        <h4>Linux Foundation Agentic AI Foundation</h4>
+        <p>2025/12 接管 MCP + A2A。OpenAI、Google、Microsoft、Anthropic 全部簽署。提供中立的協議治理框架。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. 商業模式 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">6</div>
+      <div>
+        <div class="section-title">Agent 經濟的商業模式</div>
+        <div class="section-desc">價值如何創造、如何被捕獲、如何分配</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <h3>四種主流變現模式</h3>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>模式</th>
+            <th>定義</th>
+            <th>適用場景</th>
+            <th>代表案例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Intelligence-as-a-Service</strong></td>
+            <td>按使用量付費，每次工具調用或 API 請求計費</td>
+            <td>工具類 MCP 服務、算力租用</td>
+            <td>Nevermined MCP：$0.001/調用</td>
+          </tr>
+          <tr>
+            <td><strong>Zero Marginal Cost</strong></td>
+            <td>邊際成本趨近零的數位服務無限複製</td>
+            <td>數據產品、分析報告</td>
+            <td>CoinGecko 透過 x402 出售即時數據</td>
+          </tr>
+          <tr>
+            <td><strong>Value-Based Pricing</strong></td>
+            <td>客戶為結果付費，而非為時間或資源付費</td>
+            <td>高附加值的 Autonomous Agent 任務</td>
+            <td>Sierra ARR $1.5 億；Fortune 50 按案例付費</td>
+          </tr>
+          <tr>
+            <td><strong>訂閱 + 超量混合</strong></td>
+            <td>基礎訂閱保底 + 超量使用計費</td>
+            <td>企業級 Agent 平台</td>
+            <td>Salesforce AgentExchange；AWS Bedrock</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h3>資本集中度警告</h3>
+      <p>融資數據顯示一個高度集中的市場結構：</p>
+      <p>Top 10 交易捕獲 2024 年 <strong>73%</strong>、2025 年 <strong>70%</strong>、2026 年上半年 <strong>78%</strong> 的總融資額。2026 年 Q1–Q2 Agentic AI 公司共融資 <strong>$26.6 億</strong>（44 輪），較 2025 年同期 $10.9 億翻倍以上。Series A 平均規模從 2025 上半年的 $8,200 萬跳升至下半年的 <strong>$1.55 億</strong>。</p>
+      <p>代表性估值：Sierra（覆蓋近半 Fortune 50 的企業 Agent 平台）ARR $1.5 億，Series C 估值 <strong>$15 億</strong>。</p>
+    </div>
+
+    <div class="callout callout-amber">
+      <strong>潛在定價崩潰風險：</strong>當算力市場完全由 Agent 自動競價後，邊際成本的極速趨近零可能導致 Intelligence-as-a-Service 的定價發現機制失效——類似 2010 年代廣告 RTB 市場的定價崩潰。這是 37% Agent 工具存在安全漏洞之外另一個被低估的系統性風險。
+    </div>
+  </div>
+
+  <!-- ── 7. 監管格局 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">7</div>
+      <div>
+        <div class="section-title">監管格局</div>
+        <div class="section-desc">誰在試圖管住它、管什麼</div>
+      </div>
+    </div>
+
+    <div class="callout callout-red">
+      <strong>根本性監管困境（IMF 2026/4）：</strong>現有支付基礎設施建立在「確定性」（deterministic）假設上，法律和合規框架基於可預測的規則。而 AI Agent 是「概率性」（probabilistic）的——同樣的輸入可能產出不同結果。這個本質矛盾意味著任何試圖用現有框架管理 Agent 支付的嘗試，都是在用農業時代的土地法管理互聯網。
+    </div>
+
+    <div class="risk-grid">
+      <div class="risk-item">
+        <div class="risk-level"><span class="risk-dot" style="background:#ef4444;"></span><span style="color:#f87171;">高風險 / 積極監管</span></div>
+        <h4>金融穩定委員會（FSB）</h4>
+        <p>建議將 AI Agent 視為「合成員工」，適用同等問責框架；強制高額交易人工審批；要求緊急停止開關。</p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level"><span class="risk-dot" style="background:#f59e0b;"></span><span style="color:#fbbf24;">分析 / 預警</span></div>
+        <h4>IMF</h4>
+        <p>2026/4 報告：身份驗證複雜化、詐騙和網路攻擊風險上升、算力集中少數大公司引發系統性風險。尚未提出具體規則，但已發出最高警告。</p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level"><span class="risk-dot" style="background:#10b981;"></span><span style="color:#34d399;">領先 / 框架性</span></div>
+        <h4>新加坡（2026/1）</h4>
+        <p>全球首個針對 Agentic AI 的國家治理框架。四維度：風險邊界、人類問責、技術控制、終端用戶責任。原則性框架，不是規則性監管。</p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level"><span class="risk-dot" style="background:#3b82f6;"></span><span style="color:#60a5fa;">標準化進行中</span></div>
+        <h4>美國</h4>
+        <p>2025/12 行政令 → 2026 年立法建議，主要目標是防止各州監管碎片化、建立聯邦統一框架。進展緩慢，監管空窗期仍存在。</p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level"><span class="risk-dot" style="background:#8b5cf6;"></span><span style="color:#a78bfa;">適用性存疑</span></div>
+        <h4>EU AI Act</h4>
+        <p>在 Agentic AI 大規模商業化之前制定，風險分類假設 AI 輔助人類決策——不適用於「Agent 自主執行、無人監督」的情境。存在明顯的覆蓋缺口。</p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-level"><span class="risk-dot" style="background:#10b981;"></span><span style="color:#34d399;">業界自律</span></div>
+        <h4>Visa 即時風控</h4>
+        <p>開發毫秒級 Agent 交易即時評分系統，自動批准/拒絕/標記。在監管框架尚未成熟前，業界率先構建技術性防護。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 8. 時間軸 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">8</div>
+      <div>
+        <div class="section-title">關鍵里程碑時間軸</div>
+        <div class="section-desc">從協議誕生到真實交易</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">11</div>
+        <div class="tl-content">
+          <div class="tl-date">2024 年 11 月</div>
+          <div class="tl-title">MCP 誕生（Anthropic）</div>
+          <div class="tl-desc">Model Context Protocol 發佈，解決 Agent 標準化使用工具的問題。SDK 下載量啟動，10 萬/月。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">05</div>
+        <div class="tl-content">
+          <div class="tl-date">2025 年 5 月</div>
+          <div class="tl-title">x402 協議發佈（Coinbase + Cloudflare）</div>
+          <div class="tl-desc">HTTP 402 支付標準復活，Agent 間直接 USDC 支付的技術基礎就位。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">09</div>
+        <div class="tl-content">
+          <div class="tl-date">2025 年 9 月</div>
+          <div class="tl-title">x402 基金會成立；Mastercard Agent Pay 首發</div>
+          <div class="tl-desc">Google、Visa、AWS、Anthropic 加入 x402 基金會。Mastercard Agent Pay 在 Citi/US Bank 上線。x402 單月交易 46,000 → 930,000 筆（+2,000%）。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">10</div>
+        <div class="tl-content">
+          <div class="tl-date">2025 年 10 月</div>
+          <div class="tl-title">MCP 微支付暴增；AWS Bedrock AgentCore GA</div>
+          <div class="tl-desc">MCP 微支付單月 +35,000%，突破 100 萬筆。AWS AgentCore 正式 GA，提供 Agent 運行時 + MCP Gateway。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">12</div>
+        <div class="tl-content">
+          <div class="tl-date">2025 年 12 月</div>
+          <div class="tl-title">MCP + A2A 捐給 Linux Foundation；Anthropic Project Deal</div>
+          <div class="tl-desc">OpenAI、Google、Microsoft、Anthropic 全部簽署 Agentic AI Foundation。Anthropic 內部實驗驗證 Agent 完整交易閉環（186 筆 / $4,000）。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">04</div>
+        <div class="tl-content">
+          <div class="tl-date">2026 年 4 月</div>
+          <div class="tl-title">x402 累積 $5,000 萬；IMF 報告發佈</div>
+          <div class="tl-desc">x402 協議累積結算 $5,000 萬 / 5,000 萬筆。IMF 發佈《Agentic AI 如何重塑支付》，發出系統性風險警告。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">06</div>
+        <div class="tl-content">
+          <div class="tl-date">2026 年 6 月</div>
+          <div class="tl-title">Coinbase for Agents 上線</div>
+          <div class="tl-desc">首個讓 AI Agent 直接管理用戶真實帳戶進行交易的主流金融平台產品。Agent 經濟進入普通消費者視野。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 9. 三大信號 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">9</div>
+      <div>
+        <div class="section-title">值得持續關注的三個信號</div>
+        <div class="section-desc">未來 12-24 個月的結構性指標</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔴 信號一：x402 的月交易量突破 10 億筆</div>
+      <div class="card-body">
+        從 2025/9 的 46,000 筆到 2025/10 的 930,000 筆，再到 2026/4 累積 5,000 萬筆。下一個閾值是「單月 10 億筆」——這將意味著 Agent 間支付已達到人類刷卡日常使用的量級。一旦越過這個門檻，監管壓力將急劇升高，傳統支付業者的市場份額開始受到真實威脅。
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🟡 信號二：第一起 Agent 誤操作重大金融損失案例</div>
+      <div class="card-body">
+        IMF 和 FSB 都預警了這個「概率性錯誤 + 高頻交易 = 系統性損失」的風險。第一起有記錄的重大誤操作（例如：Agent 因 prompt injection 導致錯誤交易，金額超過 $100 萬）將觸發跨國監管協調、業界技術升級，並可能短期抑制整個市場的 Agent 部署速度。37% 工具存在安全漏洞這個數字，讓這個信號不是「如果」而是「何時」。
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🟢 信號三：非加密原生的 Agent 支付標準出現</div>
+      <div class="card-body">
+        x402 目前依賴 USDC/穩定幣，限制了非加密用戶的進入。Visa Intelligent Commerce 和 Mastercard Agent Pay 在嘗試橋接傳統金融，但尚未形成統一標準。一旦有一個「Agent 可用、無需加密帳戶、支援法幣直接結算」的主流支付標準出現，Agentic Commerce 的滲透率將從「科技早期採用者」擴散至普通消費者——這是市場從 $79 億跨越到 $526 億的關鍵觸媒。
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="sources">
+    <h3>資料來源</h3>
+    <div class="source-list">
+      <div class="source-item">BCC Research — AI Agents Market $80B→$483B · finance.yahoo.com</div>
+      <div class="source-item">MarketsandMarkets — AI Agents $78.4B→$526.2B · marketsandmarkets.com</div>
+      <div class="source-item">Precedence Research — AI Agents Market Report · precedenceresearch.com</div>
+      <div class="source-item">Grand View Research — AI Agents Market · grandviewresearch.com</div>
+      <div class="source-item">Lightspeed VP — $19T Problem · lsvp.com</div>
+      <div class="source-item">McKinsey — AI Agent GDP $2.9T · mckinsey.com</div>
+      <div class="source-item">Nevermined — 55 AI Agent Market Statistics · nevermined.ai</div>
+      <div class="source-item">Cobo — What is x402 · cobo.com</div>
+      <div class="source-item">Allium — x402 Explained · allium.so</div>
+      <div class="source-item">Alchemy — x402 Guide · alchemy.com</div>
+      <div class="source-item">AWS — x402 and Agentic Commerce · aws.amazon.com</div>
+      <div class="source-item">x402 Foundation + arXiv Paper · arxiv.org/pdf/2603.01179</div>
+      <div class="source-item">Nevermined — MCP Micropayments Statistics · nevermined.ai</div>
+      <div class="source-item">MCP First Anniversary · blog.modelcontextprotocol.io</div>
+      <div class="source-item">DigitalApplied — AI Agent Protocol Ecosystem Map 2026 · digitalapplied.com</div>
+      <div class="source-item">Coinbase AgentKit · coinbase.com/developer-platform</div>
+      <div class="source-item">Coinbase Agentic Wallets · coinbase.com/developer-platform</div>
+      <div class="source-item">Coinbase for Agents — The Block · theblock.co</div>
+      <div class="source-item">AWS Bedrock AgentCore · aws.amazon.com/bedrock/agentcore</div>
+      <div class="source-item">AWS AgentCore Payments · aws.amazon.com</div>
+      <div class="source-item">Rye.com — Agentic Commerce Landscape 2026 · rye.com</div>
+      <div class="source-item">Stactize — AI Agent Marketplaces · stactize.com</div>
+      <div class="source-item">Anthropic Project Deal · anthropic.com/features/project-deal</div>
+      <div class="source-item">TechCrunch — Anthropic Agent Marketplace · techcrunch.com</div>
+      <div class="source-item">PYMNTS — Anthropic Marketplace Bots · pymnts.com</div>
+      <div class="source-item">IMF — How Agentic AI Will Reshape Payments · imf.org</div>
+      <div class="source-item">FSB Agentic AI Regulation · intellectia.ai</div>
+      <div class="source-item">Fenwick — Is 2026 the Year of Agentic Payments · fenwick.com</div>
+      <div class="source-item">Reed Smith — Regulators and Agentic AI · reedsmith.com</div>
+      <div class="source-item">Zylos Research — Inference Economics 2026 · zylos.ai</div>
+      <div class="source-item">Thunder Compute — GPU Rental Market Trends · thundercompute.com</div>
+      <div class="source-item">Hyperbolic — GPU Marketplace Landscape · hyperbolic.ai</div>
+      <div class="source-item">AI Funding Tracker — Top AI Agent Startups 2026 · aifundingtracker.com</div>
+      <div class="source-item">New Market Pitch — Agentic AI Funding Trends · newmarketpitch.com</div>
+      <div class="source-item">CNBC — Robinhood AI Agent · cnbc.com</div>
+      <div class="source-item">Commercetools — AI Trends Agentic Commerce · commercetools.com</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  數字 Agent 經濟體深度報告 · 由 MUSEON 研究引擎生成 · 2026 年 6 月 19 日<br>
+  資料截止：2026 年 6 月 · 部分預測數字來自第三方研究機構，僅供參考
+</div>
+
+</body>
+</html>
