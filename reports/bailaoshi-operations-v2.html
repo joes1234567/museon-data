@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 智慧營運系統規劃 v0.22</title>
+<title>白老師國際語言中心 — 智慧營運系統規劃 v0.23</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -343,12 +343,12 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v0.22 — 技能樹架構版：四層依賴 + 完整模組清單</div>
+  <div class="hero-tag">系統規劃文件 v0.23 — 技能樹架構版：四層依賴 + 教師行為積分系統 + 學生/家長雙端</div>
   <h1>白老師國際語言中心<br><span>智慧營運系統</span>規劃</h1>
   <p class="hero-sub">從諮詢到結業，整合教務、財務、AI 輔助與 MUSEON 智能對接的五階段導入計畫</p>
   <div class="hero-meta">
     <div class="hero-meta-item">
-      <span class="hero-meta-num">33</span>
+      <span class="hero-meta-num">35</span>
       <span class="hero-meta-label">核心模組</span>
     </div>
     <div class="hero-meta-item">
@@ -1075,13 +1075,15 @@
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 8px;">
           <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 33</span> 外師管理（外籍/外聘）</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 34</span> 教師培訓管理</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 35</span> 教師行為積分系統</div>
           <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 28</span> 補課影片管理</div>
-          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 18</span> 行銷追蹤</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 18</span> 行銷追蹤/CRM</div>
           <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 31</span> 家長同意書管理</div>
           <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 32</span> 教材發放紀錄</div>
           <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 15/13</span> 財務對帳/餐點代訂</div>
           <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 26</span> 活動管理</div>
-          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 17</span> 學習歷程/成績</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 17</span> 學習歷程/成績/家長會談</div>
           <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 19–25</span> AI 智慧模組</div>
         </div>
       </div>
@@ -1104,7 +1106,7 @@
 <section style="background: var(--snow);">
   <div class="container">
     <div class="section-label">系統模組架構</div>
-    <h2 class="section-title">33 個核心模組，分五階段導入</h2>
+    <h2 class="section-title">35 個核心模組，分五階段導入</h2>
     <p class="section-desc">核心優先、往外擴展、痛點為先——每個階段上線即可解決現有業務問題，不等全部完成才有價值。</p>
 
     <!-- Phase 1 -->
@@ -1191,7 +1193,7 @@
         <div class="module-card">
           <div class="module-num">MOD 05</div>
           <div class="module-name">試聽／諮詢管理</div>
-          <div class="module-desc">追蹤試聽來源、接待紀錄、結果與未成交原因，掌握招生轉換率。含測驗分班紀錄（測驗日期、結果、建議班別）。</div>
+          <div class="module-desc">追蹤試聽來源、接待紀錄、結果與未成交原因，掌握招生轉換率。含測驗分班紀錄（測驗日期、結果、建議班別）。<br><strong>【預約子模組】</strong>官網/LINE/App 入口、行政與老師可開放預約時段、家長自選時段、預約提醒、到場/未到/取消紀錄、預約來源追蹤。</div>
           <span class="module-tag t-svc">招生服務</span>
         </div>
         <div class="module-card">
@@ -1240,7 +1242,7 @@
       <div class="phase-header">
         <span class="phase-badge pb-3">第三階段</span>
         <span class="phase-title">業務擴展</span>
-        <span class="phase-subtitle">行銷部 · 人資 · 國際部延伸 · 家長端 · 活動管理 · 12 個模組</span>
+        <span class="phase-subtitle">行銷部 · 人資 · 教師培訓 · 家長/學生雙端 · 活動管理 · 14 個模組</span>
       </div>
       <p style="font-size:13px; color:var(--slate); margin-bottom:18px;">
         本階段所有模組由 <span style="color:#2A6A8A; font-weight:700;">營運系統負責建置與維護</span>，包含家長 App 殼層（查成績、出席、繳費）；Phase 5 開通後由 <span style="color:#C4502A; font-weight:700;">MUSEON 負責</span>加上 AI 個人化推播功能。
@@ -1268,20 +1270,20 @@
         <div class="module-card">
           <div class="module-num">MOD 17</div>
           <div class="module-name">學習歷程／成績</div>
-          <div class="module-desc">學生學習紀錄、老師評語與考試成績管理，家長查詢時一目了然。</div>
+          <div class="module-desc">學生學習紀錄、老師評語與考試成績管理，家長查詢時一目了然。<br><strong>【家長一對一會談子模組】</strong>老師開放會談時段、家長線上預約、會談前系統自動產製「學生學習摘要」供老師參考、會談後追蹤事項、家長端可查看摘要紀錄。</div>
           <span class="module-tag t-svc">教學服務</span>
         </div>
         <div class="module-card">
           <div class="module-num">MOD 18</div>
           <div class="module-name">招生／行銷追蹤</div>
-          <div class="module-desc">試聽來源分析、說明會報名、各管道成交率、活動場次管理，讓行銷策略有數據支撐。</div>
+          <div class="module-desc">試聽來源分析、說明會報名、各管道成交率、活動場次管理，讓行銷策略有數據支撐。<br><strong>【潛在客戶 CRM 子模組】</strong>名單狀態流程管理：新名單 → 已聯絡 → 已預約 → 已試聽 → 已入班 / 未成交 / 待追蹤；支援離校生回流與舊生再行銷。行銷不只看數據，能真正追名單。</div>
           <span class="module-tag t-svc">行銷</span>
         </div>
         <div class="module-card">
           <div class="module-num">MOD 23</div>
-          <div class="module-name">家長 App</div>
-          <div class="module-desc">家長專屬 App，查成績、看出席、繳費提醒、活動通知與報名、吃藥提醒設定一站搞定。Phase 3 建立殼層與基本資料讀取；AI 個人化推播功能於 Phase 5 接通。</div>
-          <span class="module-tag t-svc">家長端</span>
+          <div class="module-name">家長 / 學生 App</div>
+          <div class="module-desc">雙入口設計，依登入身份切換功能：<br><strong>家長端</strong>：查成績、看出席、繳費提醒、活動報名、吃藥設定；<strong>資訊搜尋</strong>（通知/班級公告/作業/活動/制服攜帶物快速查詢）；<strong>對話式留言</strong>（類 LINE 介面，家長 ↔ 老師 / 行政，未回覆提醒，客訴標記，主管可檢視高風險訊息）。<br><strong>學生端</strong>（高中生自行登入）：今日課程、作業、補課影片、AI 口說練習、學習任務、成績回饋。Phase 3 建立殼層與基本資料讀取；AI 個人化推播於 Phase 5 接通。</div>
+          <span class="module-tag t-svc">家長/學生端</span>
         </div>
         <div class="module-card">
           <div class="module-num">MOD 26</div>
@@ -1319,6 +1321,19 @@
           <div class="module-desc">支援兩種教師類型，以 <code>type</code> 欄位分流、共用排班架構：<br><strong>外籍老師</strong>——工作證效期追蹤、效期前 N 天自動提醒、合法課時上限管控；<br><strong>外聘兼職（本國籍）</strong>——勞健保投保門檻判定、鐘點費申報欄位差異。<br>新增第三種類型不需改架構。<strong>動工前請確認：外籍 vs 外聘目前各佔多少？</strong>此決定影響哪個欄位先建置。</div>
           <span class="module-tag t-hr">人資</span>
           <span class="module-tag t-warn" style="margin-left:4px;">雙類型設計</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 34</div>
+          <div class="module-name">教師培訓管理</div>
+          <div class="module-desc">將新人訓練與在職培訓系統化，解決「依賴主管人工帶、紙本資料沒有追蹤」的痛點：<br>· 訓練課程建立（教學 SOP / 培訓影片 / 紙本 checklist 數位化）<br>· 測驗與申論題（含 AI 初步批改）<br>· 主管審核與簽核流程<br>· 老師培訓進度 + 通過/未通過狀態<br>· 新人 onboarding 任務清單<br>· 教師能力紀錄（可作為未來薪資或升遷的客觀依據）</div>
+          <span class="module-tag t-hr">人資</span>
+        </div>
+        <div class="module-card highlight">
+          <div class="module-num">MOD 35 ⚠️</div>
+          <div class="module-name">教師行為積分系統</div>
+          <div class="module-desc">整合三個子功能，底層共用 <code>teacher_activity_log</code> 資料表，避免資料散落三處：<br><strong>【每日任務回報】</strong>：每日任務清單、五感恩回報、下班前提醒推播、未完成任務提醒、任務完成率報表；AI 初步篩查回報內容是否空泛，再交主管確認。<br><strong>【會議出席連動】</strong>：週一/週五例行會議建立、QR Code 報到/離場簽退、出席/缺席/遲到早退紀錄、出席率統計、不混入正常打卡。<br><strong>【能量存摺（積分）】</strong>：培訓完成、任務回報、會議出席等行為自動換算積分，個人積分紀錄、團隊排行，可與獎金或內部激勵制度連動。</div>
+          <span class="module-tag t-hr">人資</span>
+          <span class="module-tag t-warn" style="margin-left:4px;">三合一設計</span>
         </div>
       </div>
     </div>
@@ -1475,15 +1490,17 @@
           <li>餐點代訂流程</li>
           <li>財務對帳報表</li>
           <li>跨校區薪資計算</li>
-          <li>學習歷程成績</li>
-          <li>招生行銷管理</li>
+          <li>學習歷程成績 + 家長一對一會談</li>
+          <li>招生行銷 + 潛在客戶 CRM</li>
           <li>活動管理 + QR Code 報到</li>
-          <li>家長 App 建殼上線</li>
+          <li>家長/學生 App 建殼上線</li>
           <li>吃藥管理（獨立資料表）</li>
           <li>補課影片管理</li>
           <li>家長同意書電子簽署</li>
           <li>教材發放紀錄</li>
           <li>外師管理（外籍 / 外聘兩種）</li>
+          <li>教師培訓管理（數位化 SOP）</li>
+          <li>教師行為積分系統（任務/會議/積分）</li>
         </ul>
       </div>
       <div class="roadmap-phase rp-future" style="background: linear-gradient(135deg, #F5F0FC 0%, #F9F6FE 100%);">
@@ -1597,8 +1614,8 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.22</p>
-  <p style="margin-top: 8px;">v0.22 更新：新增「模組技能樹」章節（L0 底層基礎 / L1 安全責任 / L2 核心營運 / L3 功能擴充四層依賴架構）、新增 MOD 29 學生健康與過敏紀錄、MOD 30 接送授權管理、MOD 31 家長同意書管理、MOD 32 教材發放紀錄、MOD 33 外師管理（外籍 / 外聘兩種），共 33 個模組</p>
+  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.23</p>
+  <p style="margin-top: 8px;">v0.23 更新：新增 MOD 34 教師培訓管理、MOD 35 教師行為積分系統（每日任務/會議出席/能量存摺三合一，共用 teacher_activity_log）；MOD 23 擴充為家長/學生雙端 App（含搜尋、對話式留言、學生入口）；MOD 05 加入預約子模組；MOD 17 加入家長一對一會談；MOD 18 加入潛在客戶 CRM 狀態流程；共 35 個模組</p>
 </div>
 
 </body>
