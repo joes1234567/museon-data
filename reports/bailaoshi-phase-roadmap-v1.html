@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 系統導入分期藍圖 v1.1</title>
+<title>白老師國際語言中心 — 系統導入分期藍圖 v1.2</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -383,7 +383,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統導入規劃 v1.1 — 完整七階段版</div>
+  <div class="hero-tag">系統導入規劃 v1.2 — L0 五模組確認版</div>
   <h1>白老師國際語言中心<br><span>系統導入分期藍圖</span></h1>
   <p class="hero-sub">以「功能單位」為導入單位，從地基到 AI 智慧輔助七階段漸進，每期都有可驗收交付物，業主決定深度與節奏。</p>
   <div class="hero-meta">
@@ -400,7 +400,7 @@
       <span class="hero-meta-label">系統模組</span>
     </div>
     <div class="hero-meta-item">
-      <span class="hero-meta-value">v1.1</span>
+      <span class="hero-meta-value">v1.2</span>
       <span class="hero-meta-label">文件版本</span>
     </div>
   </div>
@@ -412,7 +412,7 @@
   <div class="notice">
     <strong>本文件用途</strong>：這份分期藍圖是系統導入的<strong>決策依據</strong>，說明「先做什麼、後做什麼、每期業主能拿到什麼」。<br>
     模組細節請參考《智慧營運系統規劃 v0.23》；本文件聚焦在導入順序與交付物定義。<br>
-    <strong>v1.1 更新</strong>：補入 P5 MUSEON API 串接（4 個 API 模組）、P6 AI 智慧輔助（5 個 AI 模組）、MOD 24 知識庫建置；共 44 個模組全覆蓋。
+    <strong>v1.2 更新</strong>：L0 確認為 5 個模組（加入 MOD 01 人員基礎資料）；MOD 03 課程與班級管理確認歸 P1 核心業務；MOD 33 教職員建檔確認歸 P1 師資人資基礎，作為 person 表的職務延伸。
   </div>
 
   <!-- UNIT OVERVIEW -->
@@ -430,7 +430,7 @@
     <tbody>
       <tr>
         <td><strong>L0 系統底層</strong></td>
-        <td>RBAC 權限、學年期別、學生永久 ID、分校基礎資料</td>
+        <td>RBAC 權限、學年期別、學生永久 ID、分校基礎資料、<strong>人員基礎資料（學生/家長/老師/員工）</strong></td>
         <td><span class="phase-pill pill-p0">P0 前提</span></td>
         <td>❌ 不可跳過</td>
       </tr>
@@ -560,13 +560,14 @@
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">🏗️</div>
-              <div class="unit-name">L0 系統底層 <span class="mod-count">4 模組</span></div>
+              <div class="unit-name">L0 系統底層 <span class="mod-count">5 模組</span></div>
             </div>
             <div class="unit-scope">
               <span>MOD 14 — RBAC 角色權限管理</span>
               <span>MOD 04 — 學年期別設定</span>
-              <span>MOD 01 — 學生永久 ID</span>
+              <span>MOD 01a — 學生永久 ID</span>
               <span>MOD 02 — 分校基礎資料</span>
+              <span>MOD 01b — 人員基礎資料（學生/家長/老師/員工 — person 主表，所有模組的人員掛載點）</span>
             </div>
           </div>
         </div>
@@ -596,10 +597,9 @@
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">📚</div>
-              <div class="unit-name">課程與教學 <span class="mod-count">5 模組</span></div>
+              <div class="unit-name">課程與教學 <span class="mod-count">4 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>MOD 01 — 人員資料管理（學生/家長/老師/員工）</span>
               <span>MOD 03 — 課程與班級管理（多班並存、班名年度更新）</span>
               <span class="warn">⚠️ 複雜節點</span>
               <span>MOD 06 — 報名/就讀管理（一人多班，多對多關係）</span>
@@ -892,7 +892,7 @@
   <!-- SUMMARY NOTE -->
   <div class="notice" style="border-left-color: var(--teal);">
     <strong>完整系統總覽（44 個模組）</strong><br>
-    L0 底層 4 個 → P1 核心 9 個（含 MOD 24 知識庫）→ P2 財務+安全 9 個 → P3 深化內部 9 個 → P4 對外前台 4 個 → P5 API 串接 4 個 → P6 AI 輔助 5 個<br><br>
+    L0 底層 5 個 → P1 核心 8 個（含 MOD 24 知識庫）→ P2 財務+安全 9 個 → P3 深化內部 9 個 → P4 對外前台 4 個 → P5 API 串接 4 個 → P6 AI 輔助 5 個<br><br>
     <strong>業主決策框架</strong>：P0–P2 是必做核心（22 個模組）；P3–P4 各子單位可由業主排序；P5–P6 依業主數位化成熟度推進，不影響 P1–P4 的正常上線。<br>
     MOD 24 知識庫建議在 P1 就同步啟動——它是 P6 AI 品質的前置條件，越早啟動等於為未來 AI 儲值。
   </div>
@@ -902,7 +902,7 @@
 <footer>
   <p>白老師國際語言中心 — 系統導入分期藍圖 v1.1 &nbsp;|&nbsp; 本文件為業主決策依據，請搭配《智慧營運系統規劃 v0.23》使用</p>
   <p style="margin-top:8px;"><a href="bailaoshi-operations-v2.html">← 回到完整模組清單 v0.23</a></p>
-  <p style="margin-top:6px; font-size:12px; color: #b0b0b8;">v1.1 更新：補入 P5 MUSEON API 串接（API 01–04）、P6 AI 智慧輔助（MOD 19/20/21/22/25）、MOD 24 知識庫明確列入 P1；共 44 個模組全覆蓋</p>
+  <p style="margin-top:6px; font-size:12px; color: #b0b0b8;">v1.2 更新：L0 確認 5 個模組（加入 MOD 01b 人員基礎資料）；MOD 03 確認歸 P1；MOD 33 確認歸 P1 師資人資基礎</p>
 </footer>
 
 </body>
