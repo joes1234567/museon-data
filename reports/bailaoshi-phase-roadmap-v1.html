@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>白老師國際語言中心 — 系統導入分期藍圖 v1.0</title>
+<style>
+  :root {
+    --ember: #C4502A;
+    --ember-light: #E0714D;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --ink: #12121A;
+    --slate: #5A5A6E;
+    --mist: #9898A8;
+    --border: #E2E0DA;
+    --parchment: #F7F5F0;
+    --snow: #FDFCFA;
+    --success: #2D8A6E;
+    --p0: #8B5CF6;
+    --p1: #C4502A;
+    --p2: #B8923A;
+    --p3: #2A7A6E;
+    --p4: #5A5A6E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #12121A 0%, #1e2840 60%, #2A3A5A 100%);
+    color: #fff;
+    padding: 64px 40px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(196,80,42,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 50%, rgba(42,122,110,0.12) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(196,80,42,0.25);
+    border: 1px solid rgba(196,80,42,0.5);
+    color: #E0714D;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #E0714D; }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    max-width: 580px;
+    margin: 0 auto 36px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .hero-meta-value { font-size: 28px; font-weight: 700; color: #E0714D; }
+  .hero-meta-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+  /* LAYOUT */
+  .container { max-width: 960px; margin: 0 auto; padding: 48px 24px; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--mist);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* NOTICE BOX */
+  .notice {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+    font-size: 14px;
+    color: var(--slate);
+    line-height: 1.8;
+  }
+  .notice strong { color: var(--ink); }
+
+  /* PHASE TIMELINE */
+  .timeline { position: relative; margin-bottom: 56px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--border) 0%, transparent 100%);
+  }
+
+  .phase-block {
+    position: relative;
+    padding-left: 72px;
+    margin-bottom: 40px;
+  }
+  .phase-dot {
+    position: absolute;
+    left: 18px;
+    top: 6px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px currentColor;
+    z-index: 1;
+  }
+  .phase-block.p0 .phase-dot { color: var(--p0); background: var(--p0); }
+  .phase-block.p1 .phase-dot { color: var(--p1); background: var(--p1); }
+  .phase-block.p2 .phase-dot { color: var(--p2); background: var(--p2); }
+  .phase-block.p3 .phase-dot { color: var(--p3); background: var(--p3); }
+  .phase-block.p4 .phase-dot { color: var(--p4); background: var(--p4); }
+
+  .phase-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .phase-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .p0 .phase-badge { background: rgba(139,92,246,0.12); color: var(--p0); }
+  .p1 .phase-badge { background: rgba(196,80,42,0.12); color: var(--p1); }
+  .p2 .phase-badge { background: rgba(184,146,58,0.12); color: var(--p2); }
+  .p3 .phase-badge { background: rgba(42,122,110,0.12); color: var(--p3); }
+  .p4 .phase-badge { background: rgba(90,90,110,0.1); color: var(--p4); }
+
+  .phase-title-wrap {}
+  .phase-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .phase-desc { font-size: 13px; color: var(--slate); }
+
+  .phase-constraint {
+    background: var(--parchment);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--slate);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .phase-constraint .label { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+  /* UNIT LIST */
+  .unit-list { display: flex; flex-direction: column; gap: 12px; }
+  .unit-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    background: var(--snow);
+  }
+  .unit-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .unit-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .p0 .unit-icon { background: rgba(139,92,246,0.1); }
+  .p1 .unit-icon { background: rgba(196,80,42,0.1); }
+  .p2 .unit-icon { background: rgba(184,146,58,0.1); }
+  .p3 .unit-icon { background: rgba(42,122,110,0.1); }
+  .p4 .unit-icon { background: rgba(90,90,110,0.08); }
+
+  .unit-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .unit-scope {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  .unit-scope span {
+    display: inline-block;
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-size: 12px;
+    margin: 2px 3px 2px 0;
+    color: var(--slate);
+  }
+
+  /* DELIVERABLE */
+  .deliverable {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .deliverable-label {
+    font-weight: 600;
+    color: var(--success);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .deliverable-text { color: var(--slate); line-height: 1.7; }
+
+  /* UNIT OVERVIEW TABLE */
+  .overview-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 48px;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .overview-table th {
+    background: var(--ink);
+    color: rgba(255,255,255,0.8);
+    padding: 14px 18px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .overview-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .overview-table tr:last-child td { border-bottom: none; }
+  .overview-table tr:hover td { background: var(--parchment); }
+  .phase-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+  .pill-p0 { background: rgba(139,92,246,0.12); color: var(--p0); }
+  .pill-p1 { background: rgba(196,80,42,0.12); color: var(--p1); }
+  .pill-p2 { background: rgba(184,146,58,0.12); color: var(--p2); }
+  .pill-p3 { background: rgba(42,122,110,0.12); color: var(--p3); }
+  .pill-p4 { background: rgba(90,90,110,0.10); color: var(--p4); }
+
+  /* DEPENDENCY NOTE */
+  .dep-note {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+    font-size: 14px;
+  }
+  .dep-note h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: var(--ink); }
+  .dep-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--slate);
+  }
+  .dep-row:last-child { border-bottom: none; }
+  .dep-arrow { color: var(--mist); font-size: 16px; flex-shrink: 0; padding-top: 1px; }
+  .dep-row strong { color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--mist);
+  }
+  footer a { color: var(--ember-light); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">系統導入規劃</div>
+  <h1>白老師國際語言中心<br><span>系統導入分期藍圖</span></h1>
+  <p class="hero-sub">以「功能單位」為單位逐期導入，確保每期都有可驗收的交付物，降低整體導入風險。</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-value">5</span>
+      <span class="hero-meta-label">導入階段</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-value">9</span>
+      <span class="hero-meta-label">功能單位</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-value">35+</span>
+      <span class="hero-meta-label">系統模組</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-value">v1.0</span>
+      <span class="hero-meta-label">文件版本</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- NOTICE -->
+  <div class="notice">
+    <strong>本文件用途</strong>：這份分期藍圖是系統導入的<strong>決策依據</strong>，說明「先做什麼、後做什麼、每期業主能拿到什麼」。
+    模組細節請參考《智慧營運系統規劃 v0.23》；本文件聚焦在導入順序與交付物定義。
+  </div>
+
+  <!-- UNIT OVERVIEW -->
+  <div class="section-title">功能單位總覽</div>
+
+  <table class="overview-table">
+    <thead>
+      <tr>
+        <th>功能單位</th>
+        <th>包含模組範疇</th>
+        <th>導入階段</th>
+        <th>是否可選</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>L0 系統底層</strong></td>
+        <td>RBAC 權限、學年期別、學生永久 ID、分校基礎資料</td>
+        <td><span class="phase-pill pill-p0">P0 前提</span></td>
+        <td>❌ 不可跳過</td>
+      </tr>
+      <tr>
+        <td><strong>1. 課程與教學</strong></td>
+        <td>班級管理、排課、出缺席、補課影片、學習歷程、AI 口說練習</td>
+        <td><span class="phase-pill pill-p1">P1 核心</span></td>
+        <td>❌ 必做（核心業務）</td>
+      </tr>
+      <tr>
+        <td><strong>2. 師資與人資基礎</strong></td>
+        <td>排班打卡、薪資計算、外師合規管理</td>
+        <td><span class="phase-pill pill-p1">P1 核心</span></td>
+        <td>❌ 必做（財務前置）</td>
+      </tr>
+      <tr>
+        <td><strong>3. 財務</strong></td>
+        <td>帳單收費、繳費紀錄、學費優惠折抵規則</td>
+        <td><span class="phase-pill pill-p2">P2 財務</span></td>
+        <td>❌ 必做（法律義務）</td>
+      </tr>
+      <tr>
+        <td><strong>4. 學生安全照顧</strong></td>
+        <td>健康過敏紀錄、吃藥管理、接送授權、家長同意書</td>
+        <td><span class="phase-pill pill-p2">P2 財務</span></td>
+        <td>⚠️ 強烈建議（法律風險）</td>
+      </tr>
+      <tr>
+        <td><strong>5. 招生與 CRM</strong></td>
+        <td>潛在客戶管理、預約系統、試聽/諮詢、說明會、轉介追蹤</td>
+        <td><span class="phase-pill pill-p3">P3 深化</span></td>
+        <td>✅ 業主決定批次</td>
+      </tr>
+      <tr>
+        <td><strong>6. 行政</strong></td>
+        <td>教材發放、文件管理、活動管理、場地設備</td>
+        <td><span class="phase-pill pill-p3">P3 深化</span></td>
+        <td>✅ 業主決定批次</td>
+      </tr>
+      <tr>
+        <td><strong>7. 師資進階培訓</strong></td>
+        <td>教師培訓系統（SOP/測驗/審核）、教師行為積分系統（日常任務/會議出席/能量存摺）</td>
+        <td><span class="phase-pill pill-p3">P3 深化</span></td>
+        <td>✅ 業主決定批次</td>
+      </tr>
+      <tr>
+        <td><strong>8. 家長/學生前台</strong></td>
+        <td>雙端 App（搜尋/對話/學生入口）、通知系統、一對一會談管理</td>
+        <td><span class="phase-pill pill-p4">P4 前台</span></td>
+        <td>✅ 業主決定批次</td>
+      </tr>
+      <tr>
+        <td><strong>9. 行銷</strong></td>
+        <td>口碑來源追蹤、活動報名、對外知識庫</td>
+        <td><span class="phase-pill pill-p4">P4 前台</span></td>
+        <td>✅ 業主決定批次</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- DEPENDENCY NOTE -->
+  <div class="dep-note">
+    <h3>關鍵依賴說明</h3>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>L0 → 全部</strong>：角色權限 RBAC 和學年設定是所有模組的地基，不做就全部模組都要回頭改。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P1 課程 → P2 財務</strong>：班級和出缺席資料建好，帳單才能正確計算出勤調整。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P1 師資基礎 → P2 財務</strong>：排班和打卡資料是薪資計算的輸入來源。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P1 課程 + P1 師資 → P3 師資進階</strong>：教師培訓和行為積分需要排班、課程資料作為計算基礎。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P2 財務 + P1 課程 → P4 前台</strong>：家長 App 的出缺席查詢、帳單查看，需要 P1/P2 資料已建立。</div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-title">分期詳細規劃</div>
+
+  <div class="timeline">
+
+    <!-- P0 -->
+    <div class="phase-block p0">
+      <div class="phase-dot"></div>
+      <div class="phase-card">
+        <div class="phase-header">
+          <span class="phase-badge">P0 — 動工前提</span>
+          <div class="phase-title-wrap">
+            <div class="phase-name">系統底層建置</div>
+            <div class="phase-desc">這不是「功能」，是所有功能的地基。不做 P0，後面每個模組都要回頭改架構。</div>
+          </div>
+        </div>
+        <div class="phase-constraint">
+          <span class="label">強制條件：</span>
+          <span>無條件先做，不進業主取捨討論範圍。</span>
+        </div>
+        <div class="unit-list">
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">🏗️</div>
+              <div class="unit-name">L0 系統底層</div>
+            </div>
+            <div class="unit-scope">
+              <span>RBAC 角色權限管理</span>
+              <span>學年期別設定</span>
+              <span>學生永久 ID</span>
+              <span>分校基礎資料</span>
+              <span>多校區關聯設計</span>
+            </div>
+          </div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-label">✓ P0 完成後交付</div>
+          <div class="deliverable-text">系統可登入、可設定角色、可定義學年期別、可管理分校資料。這是讓後續所有功能模組能正確「歸屬」的骨架。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P1 -->
+    <div class="phase-block p1">
+      <div class="phase-dot"></div>
+      <div class="phase-card">
+        <div class="phase-header">
+          <span class="phase-badge">P1 — 核心作業</span>
+          <div class="phase-title-wrap">
+            <div class="phase-name">內部核心業務跑起來</div>
+            <div class="phase-desc">後台人員最常用的功能，讓教職員先熟悉系統，再開放家長端。</div>
+          </div>
+        </div>
+        <div class="phase-constraint">
+          <span class="label">依賴：</span>
+          <span>P0 完成後才能開始。</span>
+        </div>
+        <div class="unit-list">
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">📚</div>
+              <div class="unit-name">課程與教學</div>
+            </div>
+            <div class="unit-scope">
+              <span>班級管理（多班並存）</span>
+              <span>排課系統</span>
+              <span>出缺席紀錄</span>
+              <span>學生多班歸屬設計</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">👨‍🏫</div>
+              <div class="unit-name">師資與人資（基礎）</div>
+            </div>
+            <div class="unit-scope">
+              <span>教職員建檔（正職/外籍/外聘兼職 type 分流）</span>
+              <span>排班系統</span>
+              <span>打卡紀錄</span>
+              <span>外籍老師合規（工作證效期追蹤）</span>
+              <span>外聘兼職勞健保門檻計算</span>
+            </div>
+          </div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-label">✓ P1 完成後交付</div>
+          <div class="deliverable-text">後台人員可管理班級、排課、出缺席、打卡。財務計算有資料來源。這是系統「真實上線」的第一個里程碑。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="phase-block p2">
+      <div class="phase-dot"></div>
+      <div class="phase-card">
+        <div class="phase-header">
+          <span class="phase-badge">P2 — 財務與安全合規</span>
+          <div class="phase-title-wrap">
+            <div class="phase-name">金流上線 + 法律風險消除</div>
+            <div class="phase-desc">財務是業主最直接的 KPI；安全照顧是法律義務，發生事故後才補就太晚了。</div>
+          </div>
+        </div>
+        <div class="phase-constraint">
+          <span class="label">依賴：</span>
+          <span>P1 課程與排班資料需先建立，財務計算才能正確。</span>
+        </div>
+        <div class="unit-list">
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">💰</div>
+              <div class="unit-name">財務</div>
+            </div>
+            <div class="unit-scope">
+              <span>帳單產生與收費</span>
+              <span>繳費紀錄與對帳</span>
+              <span>學費優惠/折抵規則</span>
+              <span>跨校薪資計算</span>
+              <span>鐘點費申報</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">🏥</div>
+              <div class="unit-name">學生安全照顧</div>
+            </div>
+            <div class="unit-scope">
+              <span>學生健康與過敏紀錄</span>
+              <span>吃藥管理（含家長授權書）</span>
+              <span>接送授權紀錄</span>
+              <span>家長同意書管理</span>
+            </div>
+          </div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-label">✓ P2 完成後交付</div>
+          <div class="deliverable-text">帳單可開、收費可追蹤、薪資可計算。學生健康與用藥紀錄數位化，法律風險降低，可應對外部查核。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="phase-block p3">
+      <div class="phase-dot"></div>
+      <div class="phase-card">
+        <div class="phase-header">
+          <span class="phase-badge">P3 — 深化內部</span>
+          <div class="phase-title-wrap">
+            <div class="phase-name">招生、行政、師資進階</div>
+            <div class="phase-desc">P1/P2 穩了之後，開始補強招生轉換效率、行政流程、以及教師培養體系。</div>
+          </div>
+        </div>
+        <div class="phase-constraint">
+          <span class="label">依賴：</span>
+          <span>P1 + P2 穩定運行後開始。各子單位可分批導入，不需同時。</span>
+        </div>
+        <div class="unit-list">
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">🎯</div>
+              <div class="unit-name">招生與 CRM</div>
+            </div>
+            <div class="unit-scope">
+              <span>潛在客戶 CRM（名單到入班狀態流）</span>
+              <span>預約系統（參觀/試聽/諮詢/會談）</span>
+              <span>試聽與諮詢管理</span>
+              <span>說明會報名</span>
+              <span>轉介來源追蹤</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">🗂️</div>
+              <div class="unit-name">行政</div>
+            </div>
+            <div class="unit-scope">
+              <span>教材發放紀錄</span>
+              <span>文件管理</span>
+              <span>活動管理與報名</span>
+              <span>場地設備管理</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">🎓</div>
+              <div class="unit-name">師資進階培訓</div>
+            </div>
+            <div class="unit-scope">
+              <span>教師培訓系統（SOP/影片/測驗/申論/主管審核）</span>
+              <span>教師行為積分系統（每日任務/五感恩/會議出席 QR Code/能量存摺）</span>
+              <span>底層共用 teacher_activity_log 資料表</span>
+              <span>積分與獎金連動</span>
+            </div>
+          </div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-label">✓ P3 完成後交付</div>
+          <div class="deliverable-text">招生有 CRM 可追名單；行政流程數位化；教師新人有系統化 onboarding、每日行為有積分記錄。內部管理完整閉環。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="phase-block p4">
+      <div class="phase-dot"></div>
+      <div class="phase-card">
+        <div class="phase-header">
+          <span class="phase-badge">P4 — 對外前台</span>
+          <div class="phase-title-wrap">
+            <div class="phase-name">家長/學生端 + 行銷</div>
+            <div class="phase-desc">內部系統穩了，再開放對外介面。這樣家長看到的是可信賴的系統，不是半成品。</div>
+          </div>
+        </div>
+        <div class="phase-constraint">
+          <span class="label">依賴：</span>
+          <span>P1 課程資料 + P2 財務帳單 + P3 招生資料 全部到位後再開。</span>
+        </div>
+        <div class="unit-list">
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">📱</div>
+              <div class="unit-name">家長/學生前台</div>
+            </div>
+            <div class="unit-scope">
+              <span>家長 App（出缺席/帳單/通知/搜尋/對話留言）</span>
+              <span>學生 App（課程/作業/補課影片/AI 口說練習）</span>
+              <span>通知系統（班級公告/繳費提醒/活動）</span>
+              <span>家長一對一會談管理</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">📣</div>
+              <div class="unit-name">行銷</div>
+            </div>
+            <div class="unit-scope">
+              <span>口碑來源追蹤</span>
+              <span>說明會/活動報名</span>
+              <span>對外知識庫（官網內容）</span>
+            </div>
+          </div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-label">✓ P4 完成後交付</div>
+          <div class="deliverable-text">家長有 App 可查出缺席、帳單、通知、跟老師對話；學生有入口接補課影片和 AI 練習。系統完整對外開放，形成完整服務閉環。</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- AI LAYER NOTE -->
+  <div class="notice">
+    <strong>AI 智能層</strong>：不是獨立導入期，而是橫切的加值能力，隨各單位漸進接入——
+    課程單位接入 AI 口說練習；師資培訓單位接入 AI 測驗出題；家長前台接入 AI 留言分類與主管預警；師資積分系統接入 AI 回報內容品質檢查。
+    不需等到 P4 才有 AI，P1 起就可以局部接入。
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>白老師國際語言中心 — 系統導入分期藍圖 v1.0 &nbsp;|&nbsp; 本文件為業主決策依據，請搭配《智慧營運系統規劃 v0.23》使用</p>
+  <p style="margin-top:8px;"><a href="bailaoshi-operations-v2.html">← 回到模組清單 v0.23</a></p>
+</footer>
+
+</body>
+</html>
