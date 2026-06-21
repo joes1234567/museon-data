@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 智慧營運系統規劃 v0.21</title>
+<title>白老師國際語言中心 — 智慧營運系統規劃 v0.22</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -343,12 +343,12 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v0.21 — 業主簡報版：結構優化，情境優先</div>
+  <div class="hero-tag">系統規劃文件 v0.22 — 技能樹架構版：四層依賴 + 完整模組清單</div>
   <h1>白老師國際語言中心<br><span>智慧營運系統</span>規劃</h1>
   <p class="hero-sub">從諮詢到結業，整合教務、財務、AI 輔助與 MUSEON 智能對接的五階段導入計畫</p>
   <div class="hero-meta">
     <div class="hero-meta-item">
-      <span class="hero-meta-num">28</span>
+      <span class="hero-meta-num">33</span>
       <span class="hero-meta-label">核心模組</span>
     </div>
     <div class="hero-meta-item">
@@ -987,11 +987,124 @@
   </div>
 </section>
 
+<!-- SKILL TREE -->
+<section>
+  <div class="container">
+    <div class="section-label">模組技能樹</div>
+    <h2 class="section-title">四層依賴結構：先後順序決定投資邏輯</h2>
+    <p class="section-desc">不是所有模組地位相同。L0 底層不做，所有上層模組都會出問題；L1 安全責任不做，業主面臨法律風險——這兩層不進業主的「可選清單」，是開工前提。L2 是系統主幹；L3 由業主決定批次與時序。</p>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 8px;">
+
+      <!-- L0 -->
+      <div style="background: linear-gradient(135deg, #12121A 0%, #1e2840 100%); border-radius: 14px; padding: 24px 28px; color: #fff;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+          <div style="background: rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #fff;">L0 底層基礎</div>
+          <div style="font-size: 14px; font-weight: 700; color: #fff;">開工前提 — 不進取捨討論，不做就全部要回頭改</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;">
+          <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: #E0714D; margin-bottom: 3px;">MOD 14</div>
+            <div style="font-size: 13px; color: #fff; font-weight: 600;">角色權限 RBAC</div>
+            <div style="font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 4px;">沒有這個，工程師各自決定權限，後期逐一翻程式碼改</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: #E0714D; margin-bottom: 3px;">MOD 04</div>
+            <div style="font-size: 13px; color: #fff; font-weight: 600;">學年期別設定</div>
+            <div style="font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 4px;">帳單計算、排課邏輯、升班批次全依賴此底層</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: #E0714D; margin-bottom: 3px;">MOD 01</div>
+            <div style="font-size: 13px; color: #fff; font-weight: 600;">學生永久 ID</div>
+            <div style="font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 4px;">轉班、停課、復學，歷史資料不斷層</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: #E0714D; margin-bottom: 3px;">MOD 02</div>
+            <div style="font-size: 13px; color: #fff; font-weight: 600;">分校基礎資料</div>
+            <div style="font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 4px;">薪資攤算、勞健保歸屬的計算前提</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- L1 -->
+      <div style="background: linear-gradient(135deg, #FEF0EC 0%, #FDF5F2 100%); border: 2px solid rgba(196,80,42,0.3); border-radius: 14px; padding: 24px 28px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+          <div style="background: var(--ember); border-radius: 8px; padding: 6px 14px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #fff;">L1 安全責任</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink);">法律風險層 — 業主可書面簽切結跳過，但出事自負</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;">
+          <div style="background: #fff; border: 1px solid rgba(196,80,42,0.2); border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--ember); margin-bottom: 3px;">MOD 29</div>
+            <div style="font-size: 13px; color: var(--ink); font-weight: 600;">學生健康與過敏紀錄</div>
+            <div style="font-size: 11px; color: var(--slate); margin-top: 4px;">過敏原、慢性病、緊急聯絡人——出事時找不到資料是業主的法律風險</div>
+          </div>
+          <div style="background: #fff; border: 1px solid rgba(196,80,42,0.2); border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--ember); margin-bottom: 3px;">MOD 27</div>
+            <div style="font-size: 13px; color: var(--ink); font-weight: 600;">吃藥管理</div>
+            <div style="font-size: 11px; color: var(--slate); margin-top: 4px;">含家長授權書、服藥執行紀錄，衛福部有規範</div>
+          </div>
+          <div style="background: #fff; border: 1px solid rgba(196,80,42,0.2); border-radius: 8px; padding: 12px 14px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--ember); margin-bottom: 3px;">MOD 30</div>
+            <div style="font-size: 13px; color: var(--ink); font-weight: 600;">接送授權管理</div>
+            <div style="font-size: 11px; color: var(--slate); margin-top: 4px;">誰可以接孩子、臨時委託紀錄——未授權者帶走孩子是安全事故</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- L2 -->
+      <div style="background: linear-gradient(135deg, #E8F5F0 0%, #F4FAF8 100%); border: 1px solid #b2ddd4; border-radius: 14px; padding: 24px 28px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+          <div style="background: #2D8A6E; border-radius: 8px; padding: 6px 14px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #fff;">L2 核心營運</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink);">主流程 — 沒有這些就沒有「系統」，業主可排優先順序但不能全跳</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 8px;">
+          <div style="background: #fff; border: 1px solid #b2ddd4; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2D8A6E;">MOD 03/06</span> 招生/就讀流程</div>
+          <div style="background: #fff; border: 1px solid #b2ddd4; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2D8A6E;">MOD 07/08/09</span> 排課/出缺席/補課</div>
+          <div style="background: #fff; border: 1px solid #b2ddd4; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2D8A6E;">MOD 10/11</span> 費用規則/帳單收費</div>
+          <div style="background: #fff; border: 1px solid #b2ddd4; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2D8A6E;">MOD 16</span> 跨校薪資計算</div>
+          <div style="background: #fff; border: 1px solid #b2ddd4; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2D8A6E;">MOD 12</span> 統一通知 Bus</div>
+          <div style="background: #fff; border: 1px solid #b2ddd4; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2D8A6E;">MOD 23</span> 家長 App 殼層</div>
+        </div>
+      </div>
+
+      <!-- L3 -->
+      <div style="background: linear-gradient(135deg, #EBF4F8 0%, #F4F8FB 100%); border: 1px solid #b2d0df; border-radius: 14px; padding: 24px 28px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+          <div style="background: #2A6A8A; border-radius: 8px; padding: 6px 14px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #fff;">L3 功能擴充</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink);">業主決定批次 — L2 穩定後再啟動，完全按業務優先級排序</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 8px;">
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 33</span> 外師管理（外籍/外聘）</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 28</span> 補課影片管理</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 18</span> 行銷追蹤</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 31</span> 家長同意書管理</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 32</span> 教材發放紀錄</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 15/13</span> 財務對帳/餐點代訂</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 26</span> 活動管理</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 17</span> 學習歷程/成績</div>
+          <div style="background: #fff; border: 1px solid #b2d0df; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--ink);"><span style="font-weight: 700; color: #2A6A8A;">MOD 19–25</span> AI 智慧模組</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 20px; background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px;">
+      <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 10px;">給業主的決策參考</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; font-size: 12px; color: var(--slate); line-height: 1.6;">
+        <div><strong style="color: var(--ink);">L0</strong> 不進取捨討論，工程開始前必須設計完畢。預算再緊也不能跳過。</div>
+        <div><strong style="color: var(--ember);">L1</strong> 可以跳過，但跳過的後果是業主自負——建議書面確認後才能省略。</div>
+        <div><strong style="color: #2D8A6E;">L2</strong> 核心流程，第一年通常必做。業主可決定各模組的優先順序，但不能全數跳過。</div>
+        <div><strong style="color: #2A6A8A;">L3</strong> 完全由業主決定做哪些、哪期做。L2 穩定後再啟動，不影響核心上線時間。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- MODULES -->
 <section style="background: var(--snow);">
   <div class="container">
     <div class="section-label">系統模組架構</div>
-    <h2 class="section-title">28 個核心模組，分五階段導入</h2>
+    <h2 class="section-title">33 個核心模組，分五階段導入</h2>
     <p class="section-desc">核心優先、往外擴展、痛點為先——每個階段上線即可解決現有業務問題，不等全部完成才有價值。</p>
 
     <!-- Phase 1 -->
@@ -999,7 +1112,7 @@
       <div class="phase-header">
         <span class="phase-badge pb-1">第一階段</span>
         <span class="phase-title">核心地基</span>
-        <span class="phase-subtitle">教務長 · 行政主任優先用 · 8 個模組</span>
+        <span class="phase-subtitle">教務長 · 行政主任優先用 · 9 個模組</span>
       </div>
       <p style="font-size:13px; color:var(--slate); margin-bottom:18px;">
         本階段所有模組由 <span style="color:#2A6A8A; font-weight:700;">營運系統負責建置與維護</span>，白老師日常操作介面在營運系統內，MUSEON 於 Phase 4 串接 API 後提供智能輔助。
@@ -1049,6 +1162,12 @@
           <div class="module-desc">分角色設定操作權限（主管、行政、老師、家長），資料可見範圍精細控管，操作留痕。</div>
           <span class="module-tag t-core">核心基礎</span>
         </div>
+        <div class="module-card highlight">
+          <div class="module-num">MOD 29 ⚠️</div>
+          <div class="module-name">學生健康與過敏紀錄</div>
+          <div class="module-desc">與 MOD 27 吃藥管理配套但分開設計。記錄學生的過敏原、慢性病史、特殊飲食需求、不可接觸事項、緊急聯絡人（可能是祖父母，不一定是家長）。<strong>安全責任層級</strong>——出事時有無紀錄是法律責任的分水嶺，應在學生建檔時同步填寫。</div>
+          <span class="module-tag t-warn">安全責任</span>
+        </div>
         <div class="module-card">
           <div class="module-num">MOD 24</div>
           <div class="module-name">知識庫建置啟動</div>
@@ -1063,7 +1182,7 @@
       <div class="phase-header">
         <span class="phase-badge pb-2">第二階段</span>
         <span class="phase-title">財務與溝通痛點</span>
-        <span class="phase-subtitle">解決帳務與通知最大痛點 · 6 個模組</span>
+        <span class="phase-subtitle">解決帳務與通知最大痛點 · 7 個模組</span>
       </div>
       <p style="font-size:13px; color:var(--slate); margin-bottom:18px;">
         本階段所有模組由 <span style="color:#2A6A8A; font-weight:700;">營運系統負責建置與維護</span>，自動帳單、欠費提醒、補課通知均由營運系統處理，MUSEON 於 Phase 4 串接後可智能分析帳務異常。
@@ -1102,6 +1221,12 @@
           <span class="module-tag t-warn" style="margin-left:4px;">複雜節點</span>
         </div>
         <div class="module-card">
+          <div class="module-num">MOD 30</div>
+          <div class="module-name">接送授權管理</div>
+          <div class="module-desc">定義誰可以接走孩子：長期授權名單（家長、祖父母等）、臨時委託（今天讓阿姨來接，含身份說明）、未授權者到場的應對流程。<strong>安全責任層級</strong>——有紀錄才能劃清業主責任，配合家長 App 可線上設定臨時委託。</div>
+          <span class="module-tag t-warn">安全責任</span>
+        </div>
+        <div class="module-card">
           <div class="module-num">MOD 12</div>
           <div class="module-name">統一通知 Bus</div>
           <div class="module-desc">所有模組（帳單、出缺席、吃藥、補課影片、活動…）觸發的通知，統一寫入<strong>通知資料表</strong>，再由本模組統一派送至 LINE、Email 或 App 推播。好處：擴充新通知場景時只需新增觸發，不改派送邏輯；換通知渠道（LINE→App）只改這一處。支援情境：繳費提醒、缺席通知、吃藥提醒、補課影片上架、活動報名確認、停補課公告。</div>
@@ -1115,7 +1240,7 @@
       <div class="phase-header">
         <span class="phase-badge pb-3">第三階段</span>
         <span class="phase-title">業務擴展</span>
-        <span class="phase-subtitle">行銷部 · 人資 · 國際部延伸 · 家長端 · 活動管理 · 9 個模組</span>
+        <span class="phase-subtitle">行銷部 · 人資 · 國際部延伸 · 家長端 · 活動管理 · 12 個模組</span>
       </div>
       <p style="font-size:13px; color:var(--slate); margin-bottom:18px;">
         本階段所有模組由 <span style="color:#2A6A8A; font-weight:700;">營運系統負責建置與維護</span>，包含家長 App 殼層（查成績、出席、繳費）；Phase 5 開通後由 <span style="color:#C4502A; font-weight:700;">MUSEON 負責</span>加上 AI 個人化推播功能。
@@ -1175,6 +1300,25 @@
           <div class="module-name">補課影片管理</div>
           <div class="module-desc">老師上傳補課錄影後，系統自動比對缺席名單，將影片分發給需補課的學員，並透過統一通知 Bus（MOD 12）推播「你有新的補課影片」；家長與學生在 App 內可查看歷史影片列表，老師後台可追蹤觀看狀態。<strong>QR Code 掃描</strong>可作為實體補課到場確認的備用方式。</div>
           <span class="module-tag t-svc">教學服務</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 31</div>
+          <div class="module-name">家長同意書管理</div>
+          <div class="module-desc">活動出遊同意書、吃藥授權書、拍照同意、課程錄影授權等，支援家長在 App 內電子簽署與存檔。出事時能即時調出授權紀錄，不需翻找紙本。配合 MOD 26 活動管理使用，活動建立後自動推送同意書待簽通知。</div>
+          <span class="module-tag t-svc">法規合規</span>
+        </div>
+        <div class="module-card">
+          <div class="module-num">MOD 32</div>
+          <div class="module-name">教材發放紀錄</div>
+          <div class="module-desc">追蹤「誰拿了哪本書、哪個版本、是否繳回」，取代紙本登記表。行政補購有依據，學生轉班時可快速核查教材狀況。配合 MOD 45 影音知識庫，實體教材與數位資源統一管理。</div>
+          <span class="module-tag t-core">教學行政</span>
+        </div>
+        <div class="module-card highlight">
+          <div class="module-num">MOD 33 ⚠️</div>
+          <div class="module-name">外師管理</div>
+          <div class="module-desc">支援兩種教師類型，以 <code>type</code> 欄位分流、共用排班架構：<br><strong>外籍老師</strong>——工作證效期追蹤、效期前 N 天自動提醒、合法課時上限管控；<br><strong>外聘兼職（本國籍）</strong>——勞健保投保門檻判定、鐘點費申報欄位差異。<br>新增第三種類型不需改架構。<strong>動工前請確認：外籍 vs 外聘目前各佔多少？</strong>此決定影響哪個欄位先建置。</div>
+          <span class="module-tag t-hr">人資</span>
+          <span class="module-tag t-warn" style="margin-left:4px;">雙類型設計</span>
         </div>
       </div>
     </div>
@@ -1306,6 +1450,7 @@
           <li>報名就讀多對多設計</li>
           <li>出缺席紀錄</li>
           <li>帳號權限分層控管</li>
+          <li>學生健康與過敏紀錄</li>
         </ul>
       </div>
       <div class="roadmap-phase rp-upcoming">
@@ -1319,6 +1464,7 @@
           <li>五種費用規則引擎</li>
           <li>部分繳款帳單追蹤</li>
           <li>通知推送上線</li>
+          <li>接送授權管理</li>
         </ul>
       </div>
       <div class="roadmap-phase rp-future">
@@ -1335,6 +1481,9 @@
           <li>家長 App 建殼上線</li>
           <li>吃藥管理（獨立資料表）</li>
           <li>補課影片管理</li>
+          <li>家長同意書電子簽署</li>
+          <li>教材發放紀錄</li>
+          <li>外師管理（外籍 / 外聘兩種）</li>
         </ul>
       </div>
       <div class="roadmap-phase rp-future" style="background: linear-gradient(135deg, #F5F0FC 0%, #F9F6FE 100%);">
@@ -1448,8 +1597,8 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.21</p>
-  <p style="margin-top: 8px;">v0.21 更新：吃藥管理升格為獨立模組 MOD 27（3–4 張獨立資料表）、新增補課影片管理 MOD 28、通知模組 MOD 12 重構為統一通知 Bus 架構（所有模組通知統一路由派送），共 28 個模組</p>
+  <p><strong>白老師國際語言中心 × MUSEON</strong> — 智慧營運系統規劃 v0.22</p>
+  <p style="margin-top: 8px;">v0.22 更新：新增「模組技能樹」章節（L0 底層基礎 / L1 安全責任 / L2 核心營運 / L3 功能擴充四層依賴架構）、新增 MOD 29 學生健康與過敏紀錄、MOD 30 接送授權管理、MOD 31 家長同意書管理、MOD 32 教材發放紀錄、MOD 33 外師管理（外籍 / 外聘兩種），共 33 個模組</p>
 </div>
 
 </body>
