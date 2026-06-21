@@ -521,10 +521,43 @@
     </div>
   </div>
 
-  <!-- 5. 迭代藍圖 -->
+  <!-- 5. 做與不做（第二階段） -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">5</div>
+      <div class="section-title">做與不做（第二階段）</div>
+    </div>
+    <div class="scope-grid">
+      <div class="card scope-in">
+        <span class="scope-badge badge-in">第二階段做</span>
+        <ul class="scope-list">
+          <li>✓ 高階經銷商查看組織下線狀況</li>
+          <li>✓ 下線活躍度 ／ 長期未提貨提醒</li>
+          <li>✓ 提貨週期分析</li>
+          <li>✓ 點數不足自動提醒</li>
+          <li>✓ 產品消耗趨勢報表</li>
+          <li>✓ LINE ／ Email 通知整合</li>
+        </ul>
+      </div>
+      <div class="card scope-out">
+        <span class="scope-badge badge-out">第二階段不做</span>
+        <ul class="scope-list">
+          <li>✗ 自動獎金 ／ 分潤計算（v3）</li>
+          <li>✗ 倉庫庫存管理（v3）</li>
+          <li>✗ 顧客健康管理 App</li>
+          <li>✗ 進階資料分析（v3）</li>
+          <li>✗ 金流整合（刷卡 ／ 轉帳）</li>
+          <li>✗ 電子發票 ／ 財務會計</li>
+          <li>✗ 跨境物流整合</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. 迭代藍圖 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
       <div class="section-title">三階段發展藍圖</div>
     </div>
     <div class="phase-timeline">
@@ -562,51 +595,13 @@
         </div>
         <div class="phase-content">
           <div class="phase-tag phase-tag-3">業務規模成熟後</div>
-          <div class="phase-name">進階功能 ＋ AI 擴充</div>
+          <div class="phase-name">進階功能擴充</div>
           <div class="phase-desc">
             在獎金制度規則確定後，新增自動化獎金計算；庫存流程穩定後導入倉儲管理；
-            提貨資料累積夠多後，啟用 AI 分析（提貨預測、異常偵測、經銷商活躍度分析）。
+            提貨資料累積夠多後，開放進階資料分析（提貨預測、異常偵測、經銷商活躍度趨勢）。
           </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- 6. 規劃費用 -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">6</div>
-      <div class="section-title">規劃費用估算</div>
-    </div>
-    <div class="price-card">
-      <div class="price-label">本次規劃費用建議範圍</div>
-      <div class="price-range">NTD 60,000 – 90,000</div>
-      <div class="price-unit">規劃費用（不含開發）</div>
-      <div class="price-note">
-        本案包含公司端 ＋ 經銷商端雙入口、點數交易邏輯、提貨審核流程、<br>
-        角色權限、操作稽核、基礎報表，比單一後台系統複雜。<br>
-        第一階段未含 AI ／ 獎金 ／ 完整庫存，故未達企業級報價。
-      </div>
-    </div>
-    <div class="price-includes">
-      <div class="price-includes-title">規劃費用包含的交付內容</div>
-      <ul class="includes-list">
-        <li><span class="dot"></span>完整需求文件（使用者故事 ＋ 場景驗收條件）</li>
-        <li><span class="dot"></span>系統架構設計（分層架構 ＋ 模組拆分）</li>
-        <li><span class="dot"></span>資料庫設計（所有資料表欄位 ＋ 關聯邏輯）</li>
-        <li><span class="dot"></span>API 規格書（所有端點 ＋ 請求回傳格式）</li>
-        <li><span class="dot"></span>權限與安全設計方案</li>
-        <li><span class="dot"></span>三階段迭代路線建議</li>
-        <li><span class="dot"></span>開發費用參考估算（提供給開發商報價用）</li>
-      </ul>
-    </div>
-    <div class="card" style="background: #fff8e1; margin-top: 12px;">
-      <div class="card-title" style="color: #e65100;">📌 注意事項</div>
-      <p style="font-size: 13px; color: #666; line-height: 1.9;">
-        以上為<strong>規劃費用</strong>，不含後續開發費用。<br>
-        若範圍增加獎金制度、庫存管理、LINE ／ 物流 ／ 金流整合或舊系統資料轉移，需重新估算。<br>
-        需求變更以當時確認範圍為準。
-      </p>
     </div>
   </div>
 
@@ -619,8 +614,6 @@
     <ol class="next-list">
       <li>確認前述 8 個關鍵業務規則，釐清系統邊界</li>
       <li>決定第一階段範圍是否與規劃書一致，或有調整</li>
-      <li>確認規劃費用區間可接受，簽署規劃合約</li>
-      <li>規劃完成後，以規劃書對接開發商進行開發報價</li>
       <li>開發啟動前先跑 MVP 驗收清單，確保不遺漏核心場景</li>
     </ol>
   </div>
