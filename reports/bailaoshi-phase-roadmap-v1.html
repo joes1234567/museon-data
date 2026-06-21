@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 系統導入分期藍圖 v1.0</title>
+<title>白老師國際語言中心 — 系統導入分期藍圖 v1.1</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -22,6 +22,8 @@
     --p2: #B8923A;
     --p3: #2A7A6E;
     --p4: #5A5A6E;
+    --p5: #6A4A9A;
+    --p6: #C4502A;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -72,7 +74,7 @@
     font-size: 16px;
     color: rgba(255,255,255,0.6);
     position: relative;
-    max-width: 580px;
+    max-width: 620px;
     margin: 0 auto 36px;
   }
   .hero-meta {
@@ -154,6 +156,8 @@
   .phase-block.p2 .phase-dot { color: var(--p2); background: var(--p2); }
   .phase-block.p3 .phase-dot { color: var(--p3); background: var(--p3); }
   .phase-block.p4 .phase-dot { color: var(--p4); background: var(--p4); }
+  .phase-block.p5 .phase-dot { color: var(--p5); background: var(--p5); }
+  .phase-block.p6 .phase-dot { color: var(--p6); background: var(--p6); }
 
   .phase-card {
     background: #fff;
@@ -183,6 +187,8 @@
   .p2 .phase-badge { background: rgba(184,146,58,0.12); color: var(--p2); }
   .p3 .phase-badge { background: rgba(42,122,110,0.12); color: var(--p3); }
   .p4 .phase-badge { background: rgba(90,90,110,0.1); color: var(--p4); }
+  .p5 .phase-badge { background: rgba(106,74,154,0.12); color: var(--p5); }
+  .p6 .phase-badge { background: rgba(196,80,42,0.12); color: var(--p6); }
 
   .phase-title-wrap {}
   .phase-name {
@@ -235,6 +241,8 @@
   .p2 .unit-icon { background: rgba(184,146,58,0.1); }
   .p3 .unit-icon { background: rgba(42,122,110,0.1); }
   .p4 .unit-icon { background: rgba(90,90,110,0.08); }
+  .p5 .unit-icon { background: rgba(106,74,154,0.1); }
+  .p6 .unit-icon { background: rgba(196,80,42,0.1); }
 
   .unit-name {
     font-size: 15px;
@@ -255,6 +263,11 @@
     font-size: 12px;
     margin: 2px 3px 2px 0;
     color: var(--slate);
+  }
+  .unit-scope span.warn {
+    background: #FEF0EC;
+    border-color: rgba(196,80,42,0.3);
+    color: #C4502A;
   }
 
   /* DELIVERABLE */
@@ -315,6 +328,8 @@
   .pill-p2 { background: rgba(184,146,58,0.12); color: var(--p2); }
   .pill-p3 { background: rgba(42,122,110,0.12); color: var(--p3); }
   .pill-p4 { background: rgba(90,90,110,0.10); color: var(--p4); }
+  .pill-p5 { background: rgba(106,74,154,0.12); color: var(--p5); }
+  .pill-p6 { background: rgba(196,80,42,0.12); color: var(--p6); }
 
   /* DEPENDENCY NOTE */
   .dep-note {
@@ -348,30 +363,44 @@
     color: var(--mist);
   }
   footer a { color: var(--ember-light); text-decoration: none; }
+
+  /* MODULE COUNT BAR */
+  .mod-count {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mist);
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    padding: 2px 9px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
 </style>
 </head>
 <body>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統導入規劃</div>
+  <div class="hero-tag">系統導入規劃 v1.1 — 完整七階段版</div>
   <h1>白老師國際語言中心<br><span>系統導入分期藍圖</span></h1>
-  <p class="hero-sub">以「功能單位」為單位逐期導入，確保每期都有可驗收的交付物，降低整體導入風險。</p>
+  <p class="hero-sub">以「功能單位」為導入單位，從地基到 AI 智慧輔助七階段漸進，每期都有可驗收交付物，業主決定深度與節奏。</p>
   <div class="hero-meta">
     <div class="hero-meta-item">
-      <span class="hero-meta-value">5</span>
+      <span class="hero-meta-value">7</span>
       <span class="hero-meta-label">導入階段</span>
     </div>
     <div class="hero-meta-item">
-      <span class="hero-meta-value">9</span>
+      <span class="hero-meta-value">11</span>
       <span class="hero-meta-label">功能單位</span>
     </div>
     <div class="hero-meta-item">
-      <span class="hero-meta-value">35+</span>
+      <span class="hero-meta-value">44</span>
       <span class="hero-meta-label">系統模組</span>
     </div>
     <div class="hero-meta-item">
-      <span class="hero-meta-value">v1.0</span>
+      <span class="hero-meta-value">v1.1</span>
       <span class="hero-meta-label">文件版本</span>
     </div>
   </div>
@@ -381,8 +410,9 @@
 
   <!-- NOTICE -->
   <div class="notice">
-    <strong>本文件用途</strong>：這份分期藍圖是系統導入的<strong>決策依據</strong>，說明「先做什麼、後做什麼、每期業主能拿到什麼」。
-    模組細節請參考《智慧營運系統規劃 v0.23》；本文件聚焦在導入順序與交付物定義。
+    <strong>本文件用途</strong>：這份分期藍圖是系統導入的<strong>決策依據</strong>，說明「先做什麼、後做什麼、每期業主能拿到什麼」。<br>
+    模組細節請參考《智慧營運系統規劃 v0.23》；本文件聚焦在導入順序與交付物定義。<br>
+    <strong>v1.1 更新</strong>：補入 P5 MUSEON API 串接（4 個 API 模組）、P6 AI 智慧輔助（5 個 AI 模組）、MOD 24 知識庫建置；共 44 個模組全覆蓋。
   </div>
 
   <!-- UNIT OVERVIEW -->
@@ -406,57 +436,69 @@
       </tr>
       <tr>
         <td><strong>1. 課程與教學</strong></td>
-        <td>班級管理、排課、出缺席、補課影片、學習歷程、AI 口說練習</td>
+        <td>班級管理（多班並存）、排課、出缺席、補課管理、補課影片</td>
         <td><span class="phase-pill pill-p1">P1 核心</span></td>
         <td>❌ 必做（核心業務）</td>
       </tr>
       <tr>
         <td><strong>2. 師資與人資基礎</strong></td>
-        <td>排班打卡、薪資計算、外師合規管理</td>
+        <td>教職員建檔（正職/外籍/外聘兼職）、排班系統、打卡紀錄、外師合規</td>
         <td><span class="phase-pill pill-p1">P1 核心</span></td>
         <td>❌ 必做（財務前置）</td>
       </tr>
       <tr>
-        <td><strong>3. 財務</strong></td>
-        <td>帳單收費、繳費紀錄、學費優惠折抵規則</td>
+        <td><strong>3. 知識庫建置</strong></td>
+        <td>歷史 QA 教材整理、向量化、教學 wiki——AI 品質的前置條件，越早啟動越好</td>
+        <td><span class="phase-pill pill-p1">P1 同步啟動</span></td>
+        <td>⚠️ 建議越早越好（AI 前置）</td>
+      </tr>
+      <tr>
+        <td><strong>4. 財務</strong></td>
+        <td>帳單收費、繳費紀錄、學費優惠折抵規則、跨校薪資計算、對帳報表</td>
         <td><span class="phase-pill pill-p2">P2 財務</span></td>
         <td>❌ 必做（法律義務）</td>
       </tr>
       <tr>
-        <td><strong>4. 學生安全照顧</strong></td>
-        <td>健康過敏紀錄、吃藥管理、接送授權、家長同意書</td>
+        <td><strong>5. 學生安全照顧</strong></td>
+        <td>健康過敏紀錄、吃藥管理（含家長授權書）、接送授權紀錄、家長同意書</td>
         <td><span class="phase-pill pill-p2">P2 財務</span></td>
         <td>⚠️ 強烈建議（法律風險）</td>
       </tr>
       <tr>
-        <td><strong>5. 招生與 CRM</strong></td>
-        <td>潛在客戶管理、預約系統、試聽/諮詢、說明會、轉介追蹤</td>
+        <td><strong>6. 招生與 CRM</strong></td>
+        <td>潛在客戶 CRM（名單狀態流）、預約系統、試聽/諮詢管理、說明會、轉介追蹤</td>
         <td><span class="phase-pill pill-p3">P3 深化</span></td>
         <td>✅ 業主決定批次</td>
       </tr>
       <tr>
-        <td><strong>6. 行政</strong></td>
-        <td>教材發放、文件管理、活動管理、場地設備</td>
+        <td><strong>7. 行政</strong></td>
+        <td>教材發放紀錄、文件管理、活動管理（QR 報到）、餐點代訂、場地設備</td>
         <td><span class="phase-pill pill-p3">P3 深化</span></td>
         <td>✅ 業主決定批次</td>
       </tr>
       <tr>
-        <td><strong>7. 師資進階培訓</strong></td>
-        <td>教師培訓系統（SOP/測驗/審核）、教師行為積分系統（日常任務/會議出席/能量存摺）</td>
+        <td><strong>8. 師資進階培訓</strong></td>
+        <td>教師培訓系統（SOP/測驗/主管審核）、教師行為積分系統（日常任務/會議出席/能量存摺）、外師管理</td>
         <td><span class="phase-pill pill-p3">P3 深化</span></td>
         <td>✅ 業主決定批次</td>
       </tr>
       <tr>
-        <td><strong>8. 家長/學生前台</strong></td>
-        <td>雙端 App（搜尋/對話/學生入口）、通知系統、一對一會談管理</td>
+        <td><strong>9. 家長/學生前台</strong></td>
+        <td>雙端 App（搜尋/對話式留言/學生入口）、通知系統、學習歷程/成績、家長一對一會談管理</td>
         <td><span class="phase-pill pill-p4">P4 前台</span></td>
         <td>✅ 業主決定批次</td>
       </tr>
       <tr>
-        <td><strong>9. 行銷</strong></td>
-        <td>口碑來源追蹤、活動報名、對外知識庫</td>
-        <td><span class="phase-pill pill-p4">P4 前台</span></td>
+        <td><strong>10. MUSEON API 串接</strong></td>
+        <td>行政/總務/客服/行銷四大模組 API 對接，讓 MUSEON 可讀取即時業務資料</td>
+        <td><span class="phase-pill pill-p5">P5 智能對接</span></td>
         <td>✅ 業主決定批次</td>
+      </tr>
+      <tr>
+        <td><strong>11. AI 智慧輔助</strong></td>
+        <td>AI 學習助理、AI 作業批改、AI 口說練習、AI 行政檢查、AI 客製出題與弱點分析</td>
+        <td><span class="phase-pill pill-p6">P6 AI 輔助</span></td>
+        <td>✅ 資料積累後啟動</td>
       </tr>
     </tbody>
   </table>
@@ -484,6 +526,14 @@
       <span class="dep-arrow">▸</span>
       <div><strong>P2 財務 + P1 課程 → P4 前台</strong>：家長 App 的出缺席查詢、帳單查看，需要 P1/P2 資料已建立。</div>
     </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P1–P4 全部穩定 → P5 MUSEON 串接</strong>：MUSEON 讀取業務資料的 API 串接，需要四大模組資料已穩定累積，串接才有意義。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>MOD 24 知識庫 + P5 串接 + 學員資料累積 → P6 AI</strong>：AI 口說練習、客製出題、弱點分析都需要知識庫到位 + 足夠的學習歷程資料。MOD 24 越早啟動，P6 品質越高。</div>
+    </div>
   </div>
 
   <!-- TIMELINE -->
@@ -510,20 +560,19 @@
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">🏗️</div>
-              <div class="unit-name">L0 系統底層</div>
+              <div class="unit-name">L0 系統底層 <span class="mod-count">4 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>RBAC 角色權限管理</span>
-              <span>學年期別設定</span>
-              <span>學生永久 ID</span>
-              <span>分校基礎資料</span>
-              <span>多校區關聯設計</span>
+              <span>MOD 14 — RBAC 角色權限管理</span>
+              <span>MOD 04 — 學年期別設定</span>
+              <span>MOD 01 — 學生永久 ID</span>
+              <span>MOD 02 — 分校基礎資料</span>
             </div>
           </div>
         </div>
         <div class="deliverable">
           <div class="deliverable-label">✓ P0 完成後交付</div>
-          <div class="deliverable-text">系統可登入、可設定角色、可定義學年期別、可管理分校資料。這是讓後續所有功能模組能正確「歸屬」的骨架。</div>
+          <div class="deliverable-text">系統可登入、可設定角色權限、可定義學年期別、可管理分校資料。讓後續所有功能模組能正確「歸屬」的骨架。</div>
         </div>
       </div>
     </div>
@@ -535,8 +584,8 @@
         <div class="phase-header">
           <span class="phase-badge">P1 — 核心作業</span>
           <div class="phase-title-wrap">
-            <div class="phase-name">內部核心業務跑起來</div>
-            <div class="phase-desc">後台人員最常用的功能，讓教職員先熟悉系統，再開放家長端。</div>
+            <div class="phase-name">內部核心業務跑起來 + 知識庫同步啟動</div>
+            <div class="phase-desc">後台人員最常用的功能，讓教職員先熟悉系統，再開放家長端。知識庫同步建置越早，AI 品質越高。</div>
           </div>
         </div>
         <div class="phase-constraint">
@@ -547,32 +596,46 @@
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">📚</div>
-              <div class="unit-name">課程與教學</div>
+              <div class="unit-name">課程與教學 <span class="mod-count">5 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>班級管理（多班並存）</span>
-              <span>排課系統</span>
-              <span>出缺席紀錄</span>
-              <span>學生多班歸屬設計</span>
+              <span>MOD 01 — 人員資料管理（學生/家長/老師/員工）</span>
+              <span>MOD 03 — 課程與班級管理（多班並存、班名年度更新）</span>
+              <span class="warn">⚠️ 複雜節點</span>
+              <span>MOD 06 — 報名/就讀管理（一人多班，多對多關係）</span>
+              <span class="warn">⚠️ 複雜節點</span>
+              <span>MOD 08 — 出缺席管理</span>
+              <span>MOD 09 — 補課管理</span>
             </div>
           </div>
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">👨‍🏫</div>
-              <div class="unit-name">師資與人資（基礎）</div>
+              <div class="unit-name">師資與人資（基礎） <span class="mod-count">3 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>教職員建檔（正職/外籍/外聘兼職 type 分流）</span>
-              <span>排班系統</span>
-              <span>打卡紀錄</span>
-              <span>外籍老師合規（工作證效期追蹤）</span>
-              <span>外聘兼職勞健保門檻計算</span>
+              <span>MOD 02 — 分校與教室管理（四校區、排課衝突偵測）</span>
+              <span>MOD 07 — 排課管理</span>
+              <span>MOD 33 基礎 — 教職員建檔（正職/外籍/外聘兼職 type 分流）</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">📖</div>
+              <div class="unit-name">知識庫建置（MOD 24）— 同步啟動</div>
+            </div>
+            <div class="unit-scope">
+              <span>歷史 QA 教材收集與整理</span>
+              <span>統一格式（題目/標準答案/難度標籤）</span>
+              <span>教學 wiki 建立</span>
+              <span>向量化供 P6 AI 查詢使用</span>
+              <span style="color: var(--ember); font-size: 12px; font-weight: 600;">MOD 24 越早啟動，P6 AI 口說與客製出題品質越高</span>
             </div>
           </div>
         </div>
         <div class="deliverable">
           <div class="deliverable-label">✓ P1 完成後交付</div>
-          <div class="deliverable-text">後台人員可管理班級、排課、出缺席、打卡。財務計算有資料來源。這是系統「真實上線」的第一個里程碑。</div>
+          <div class="deliverable-text">後台人員可管理班級、排課、出缺席、補課。財務計算有資料來源。知識庫開始積累素材。這是系統「真實上線」的第一個里程碑。</div>
         </div>
       </div>
     </div>
@@ -596,32 +659,37 @@
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">💰</div>
-              <div class="unit-name">財務</div>
+              <div class="unit-name">財務 <span class="mod-count">5 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>帳單產生與收費</span>
-              <span>繳費紀錄與對帳</span>
-              <span>學費優惠/折抵規則</span>
-              <span>跨校薪資計算</span>
-              <span>鐘點費申報</span>
+              <span>MOD 10 — 定價/費用規則（五種費用 × 多折扣組合）</span>
+              <span class="warn">⚠️ 規則引擎複雜</span>
+              <span>MOD 11 — 帳單/繳費（部分繳款、暑期分期）</span>
+              <span class="warn">⚠️ 複雜節點</span>
+              <span>MOD 12 — 統一通知 Bus</span>
+              <span>MOD 15 — 對帳/財務報表</span>
+              <span>MOD 16 — 薪資與打卡排班（跨校薪資攤算、鐘點費依班級人數計算）</span>
+              <span class="warn">⚠️ 最高複雜度</span>
             </div>
           </div>
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">🏥</div>
-              <div class="unit-name">學生安全照顧</div>
+              <div class="unit-name">學生安全照顧 <span class="mod-count">4 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>學生健康與過敏紀錄</span>
-              <span>吃藥管理（含家長授權書）</span>
-              <span>接送授權紀錄</span>
-              <span>家長同意書管理</span>
+              <span>MOD 29 — 學生健康與過敏紀錄</span>
+              <span class="warn">⚠️ 安全責任，法律風險</span>
+              <span>MOD 27 — 吃藥管理（含家長授權書、服藥執行紀錄）</span>
+              <span class="warn">⚠️ 安全責任，法律風險</span>
+              <span>MOD 30 — 接送授權管理（長期授權 + 臨時委託）</span>
+              <span>MOD 31 — 家長同意書管理（電子簽署）</span>
             </div>
           </div>
         </div>
         <div class="deliverable">
           <div class="deliverable-label">✓ P2 完成後交付</div>
-          <div class="deliverable-text">帳單可開、收費可追蹤、薪資可計算。學生健康與用藥紀錄數位化，法律風險降低，可應對外部查核。</div>
+          <div class="deliverable-text">帳單可開、收費可追蹤、薪資可自動計算。學生健康、用藥、接送授權全部數位化，法律風險降低，可應對外部查核。</div>
         </div>
       </div>
     </div>
@@ -634,49 +702,47 @@
           <span class="phase-badge">P3 — 深化內部</span>
           <div class="phase-title-wrap">
             <div class="phase-name">招生、行政、師資進階</div>
-            <div class="phase-desc">P1/P2 穩了之後，開始補強招生轉換效率、行政流程、以及教師培養體系。</div>
+            <div class="phase-desc">P1/P2 穩了之後，開始補強招生轉換效率、行政流程、以及教師培養體系。各子單位可分批導入，不需同時。</div>
           </div>
         </div>
         <div class="phase-constraint">
           <span class="label">依賴：</span>
-          <span>P1 + P2 穩定運行後開始。各子單位可分批導入，不需同時。</span>
+          <span>P1 + P2 穩定運行後開始。各子單位可分批導入，不需同時啟動。</span>
         </div>
         <div class="unit-list">
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">🎯</div>
-              <div class="unit-name">招生與 CRM</div>
+              <div class="unit-name">招生與 CRM <span class="mod-count">2 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>潛在客戶 CRM（名單到入班狀態流）</span>
-              <span>預約系統（參觀/試聽/諮詢/會談）</span>
-              <span>試聽與諮詢管理</span>
-              <span>說明會報名</span>
-              <span>轉介來源追蹤</span>
+              <span>MOD 05 — 試聽/諮詢管理（含預約子模組：官網/LINE/App 入口、可選時段、到場/未到紀錄、來源追蹤）</span>
+              <span>MOD 18 — 招生/行銷追蹤（含潛在客戶 CRM：新名單→已聯絡→已預約→已試聽→已入班/未成交，支援離校生回流）</span>
             </div>
           </div>
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">🗂️</div>
-              <div class="unit-name">行政</div>
+              <div class="unit-name">行政 <span class="mod-count">4 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>教材發放紀錄</span>
-              <span>文件管理</span>
-              <span>活動管理與報名</span>
-              <span>場地設備管理</span>
+              <span>MOD 13 — 餐點代訂（儲值金預充、老師確認才扣款、請假自動不扣）</span>
+              <span>MOD 26 — 活動管理（建立/報名/名額控管/QR Code 電子報到）</span>
+              <span>MOD 28 — 補課影片管理（自動比對缺席名單分發影片）</span>
+              <span>MOD 32 — 教材發放紀錄</span>
             </div>
           </div>
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">🎓</div>
-              <div class="unit-name">師資進階培訓</div>
+              <div class="unit-name">師資進階培訓 <span class="mod-count">3 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>教師培訓系統（SOP/影片/測驗/申論/主管審核）</span>
-              <span>教師行為積分系統（每日任務/五感恩/會議出席 QR Code/能量存摺）</span>
-              <span>底層共用 teacher_activity_log 資料表</span>
-              <span>積分與獎金連動</span>
+              <span>MOD 33 完整 — 外師管理（外籍老師工作證效期追蹤 / 外聘兼職勞健保門檻，type 欄位分流）</span>
+              <span class="warn">⚠️ 雙類型設計</span>
+              <span>MOD 34 — 教師培訓管理（SOP/培訓影片/測驗/申論/主管審核/能力紀錄/新人 onboarding）</span>
+              <span>MOD 35 — 教師行為積分系統（每日任務五感恩 + 會議出席QRCode + 能量存摺積分連動獎金，共用 teacher_activity_log）</span>
+              <span class="warn">⚠️ 三合一設計</span>
             </div>
           </div>
         </div>
@@ -694,60 +760,149 @@
         <div class="phase-header">
           <span class="phase-badge">P4 — 對外前台</span>
           <div class="phase-title-wrap">
-            <div class="phase-name">家長/學生端 + 行銷</div>
+            <div class="phase-name">家長/學生端 App + 行銷</div>
             <div class="phase-desc">內部系統穩了，再開放對外介面。這樣家長看到的是可信賴的系統，不是半成品。</div>
           </div>
         </div>
         <div class="phase-constraint">
           <span class="label">依賴：</span>
-          <span>P1 課程資料 + P2 財務帳單 + P3 招生資料 全部到位後再開。</span>
+          <span>P1 課程資料 + P2 財務帳單 全部到位後再開。P5 AI 推播功能在 P6 接通後加入。</span>
         </div>
         <div class="unit-list">
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">📱</div>
-              <div class="unit-name">家長/學生前台</div>
+              <div class="unit-name">家長/學生前台 <span class="mod-count">3 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>家長 App（出缺席/帳單/通知/搜尋/對話留言）</span>
-              <span>學生 App（課程/作業/補課影片/AI 口說練習）</span>
-              <span>通知系統（班級公告/繳費提醒/活動）</span>
-              <span>家長一對一會談管理</span>
+              <span>MOD 23 — 家長/學生 App（雙入口）：家長端查成績/出席/帳單/通知/搜尋/對話式留言（類LINE，客訴標記，主管可見高風險訊息）；學生端課程/作業/補課影片/AI 口說練習</span>
+              <span>MOD 17 — 學習歷程/成績（含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會談前摘要/會談後追蹤）</span>
+              <span>MOD 12 擴充 — 通知系統（繳費提醒/缺席通知/吃藥提醒/補課影片上架/活動確認/停補課公告，LINE/App 統一推播）</span>
             </div>
           </div>
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">📣</div>
-              <div class="unit-name">行銷</div>
+              <div class="unit-name">行銷 <span class="mod-count">1 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>口碑來源追蹤</span>
+              <span>MOD 18 擴充 — 口碑來源追蹤</span>
               <span>說明會/活動報名</span>
               <span>對外知識庫（官網內容）</span>
+              <span>各管道成交率分析</span>
             </div>
           </div>
         </div>
         <div class="deliverable">
           <div class="deliverable-label">✓ P4 完成後交付</div>
-          <div class="deliverable-text">家長有 App 可查出缺席、帳單、通知、跟老師對話；學生有入口接補課影片和 AI 練習。系統完整對外開放，形成完整服務閉環。</div>
+          <div class="deliverable-text">家長有 App 可查出缺席、帳單、通知、跟老師對話；學生有入口接補課影片。系統完整對外開放，形成完整服務閉環。P6 AI 推播功能待接通後加入。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="phase-block p5">
+      <div class="phase-dot"></div>
+      <div class="phase-card">
+        <div class="phase-header">
+          <span class="phase-badge">P5 — MUSEON 智能對接</span>
+          <div class="phase-title-wrap">
+            <div class="phase-name">四大模組 API 串接，讓 AI 讀得到業務資料</div>
+            <div class="phase-desc">透過營運系統開放 API，MUSEON 可讀取四大業務模組即時資料，提供主管問答、異常預警與跨部門報告整合。<strong>資料仍由營運系統管理，MUSEON 負責讀取與智能分析。</strong></div>
+          </div>
+        </div>
+        <div class="phase-constraint">
+          <span class="label">依賴：</span>
+          <span>P1–P4 全部穩定運行後啟動。API 串接需要各模組資料已有足夠積累才有分析意義。</span>
+        </div>
+        <div class="unit-list">
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">🔌</div>
+              <div class="unit-name">MUSEON API 串接 <span class="mod-count">4 個 API 模組</span></div>
+            </div>
+            <div class="unit-scope">
+              <span>API 01 — 行政模組串接（學生建檔/出缺席/報名就讀，支援行政流程智能提醒）</span>
+              <span>API 02 — 總務模組串接（場地排課/設備管理，回答「哪間教室今天有空」）</span>
+              <span>API 03 — 客服模組串接（家長詢問紀錄/投訴處理，輔助快速查詢學生狀態）</span>
+              <span>API 04 — 行銷模組串接（說明會報名/招生來源/活動成效，自動產製招生分析報告）</span>
+            </div>
+          </div>
+          <div class="unit-item" style="background: #F5F0FC; border-color: rgba(106,74,154,0.2);">
+            <div class="unit-header">
+              <div class="unit-icon" style="background: rgba(106,74,154,0.1);">🔐</div>
+              <div class="unit-name" style="color: #6A4A9A;">權限與安全架構</div>
+            </div>
+            <div class="unit-scope">
+              <span>MUSEON_SVC 獨立服務帳號（不借用員工帳號，日誌格式「MUSEON_SVC 執行◯◯，觸發者：員工」）</span>
+              <span>最小權限原則：生效權限 = min（MUSEON 權限, 員工權限）</span>
+              <span>身份綁定：LINE ID ↔ 員工編號，一次性完成</span>
+              <span>高風險操作人工確認（改費率/軟刪除先推播確認）</span>
+              <span>自動排程操作鎖定白名單低風險項目</span>
+            </div>
+          </div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-label">✓ P5 完成後交付</div>
+          <div class="deliverable-text">MUSEON 可即時回答業務問題（「這個孩子還有幾堂補課」「本月未繳費名單」），主動偵測異常（連續缺席/帳單逾期/老師鐘點超時），自動產製跨部門報告。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="phase-block p6">
+      <div class="phase-dot"></div>
+      <div class="phase-card">
+        <div class="phase-header">
+          <span class="phase-badge">P6 — AI 智慧輔助</span>
+          <div class="phase-title-wrap">
+            <div class="phase-name">資料積累後啟動，從被動查詢到主動預警</div>
+            <div class="phase-desc">MOD 24 知識庫 + P5 串接 + 學員資料積累三個前提同時到位後，才能發揮 AI 最大效益。前提越早準備，P6 越快啟動。</div>
+          </div>
+        </div>
+        <div class="phase-constraint">
+          <span class="label">依賴：</span>
+          <span>MOD 24 知識庫建置到位 + P5 MUSEON API 串接完成 + 學員學習歷程資料足夠積累（至少一學期）。</span>
+        </div>
+        <div class="unit-list">
+          <div class="unit-item">
+            <div class="unit-header">
+              <div class="unit-icon">🤖</div>
+              <div class="unit-name">AI 智慧輔助 <span class="mod-count">5 個 AI 模組</span></div>
+            </div>
+            <div class="unit-scope">
+              <span>MOD 19 — AI 學習助理（MUSEON 負責）：個人化學習建議/出席異常預警/學習里程碑通報/繳費到期提醒/每週進度摘要，主動推播家長不需問</span>
+              <span>MOD 20 — AI 作業批改（營運系統內建）：AI 初評 + 老師最終審核，大幅縮短批改時間</span>
+              <span>MOD 21 — AI 口說練習（營運系統內建）：學生與 AI 對話練習英文，評估發音/流暢度/進步軌跡</span>
+              <span class="warn">⚠️ Demo 為簽約前提，先行驗證可行性</span>
+              <span>MOD 22 — AI 行政檢查（MUSEON 負責）：每日自動掃描異常（欠費未通知/出缺席異常/補課逾期），主動提醒行政</span>
+              <span>MOD 25 — AI 客製出題與弱點分析（MUSEON 負責）：根據學員歷史識別弱點，生成個人化練習題，老師審核後發送</span>
+            </div>
+          </div>
+        </div>
+        <div class="deliverable">
+          <div class="deliverable-label">✓ P6 完成後交付</div>
+          <div class="deliverable-text">AI 從「被動查詢工具」進化為「主動預警系統」——學生弱點自動分析、家長不需追問、行政異常自動發現。系統完整實現從招生到學習成果的數位閉環。</div>
         </div>
       </div>
     </div>
 
   </div><!-- /timeline -->
 
-  <!-- AI LAYER NOTE -->
-  <div class="notice">
-    <strong>AI 智能層</strong>：不是獨立導入期，而是橫切的加值能力，隨各單位漸進接入——
-    課程單位接入 AI 口說練習；師資培訓單位接入 AI 測驗出題；家長前台接入 AI 留言分類與主管預警；師資積分系統接入 AI 回報內容品質檢查。
-    不需等到 P4 才有 AI，P1 起就可以局部接入。
+  <!-- SUMMARY NOTE -->
+  <div class="notice" style="border-left-color: var(--teal);">
+    <strong>完整系統總覽（44 個模組）</strong><br>
+    L0 底層 4 個 → P1 核心 9 個（含 MOD 24 知識庫）→ P2 財務+安全 9 個 → P3 深化內部 9 個 → P4 對外前台 4 個 → P5 API 串接 4 個 → P6 AI 輔助 5 個<br><br>
+    <strong>業主決策框架</strong>：P0–P2 是必做核心（22 個模組）；P3–P4 各子單位可由業主排序；P5–P6 依業主數位化成熟度推進，不影響 P1–P4 的正常上線。<br>
+    MOD 24 知識庫建議在 P1 就同步啟動——它是 P6 AI 品質的前置條件，越早啟動等於為未來 AI 儲值。
   </div>
 
 </div><!-- /container -->
 
 <footer>
-  <p>白老師國際語言中心 — 系統導入分期藍圖 v1.0 &nbsp;|&nbsp; 本文件為業主決策依據，請搭配《智慧營運系統規劃 v0.23》使用</p>
-  <p style="margin-top:8px;"><a href="bailaoshi-operations-v2.html">← 回到模組清單 v0.23</a></p>
+  <p>白老師國際語言中心 — 系統導入分期藍圖 v1.1 &nbsp;|&nbsp; 本文件為業主決策依據，請搭配《智慧營運系統規劃 v0.23》使用</p>
+  <p style="margin-top:8px;"><a href="bailaoshi-operations-v2.html">← 回到完整模組清單 v0.23</a></p>
+  <p style="margin-top:6px; font-size:12px; color: #b0b0b8;">v1.1 更新：補入 P5 MUSEON API 串接（API 01–04）、P6 AI 智慧輔助（MOD 19/20/21/22/25）、MOD 24 知識庫明確列入 P1；共 44 個模組全覆蓋</p>
 </footer>
 
 </body>
