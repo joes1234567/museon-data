@@ -506,19 +506,6 @@
         </ul>
       </div>
     </div>
-    <div class="card" style="margin-top:0; border-left: 4px solid #ff9800;">
-      <div class="card-title">⚠️ 需要在開發前確認的 8 個規則</div>
-      <p style="font-size:13px; color:#555; line-height: 1.9;">
-        ① 經銷商可以自己送出提貨申請嗎？ &nbsp;|&nbsp;
-        ② 提貨申請是否一定要公司審核才能扣點？<br>
-        ③ 扣點時機：送出時扣 or 審核通過才扣？ &nbsp;|&nbsp;
-        ④ 取消提貨是否退點？什麼狀態前可退？<br>
-        ⑤ 儲值是否 100% 只能由公司端操作？ &nbsp;|&nbsp;
-        ⑥ 經銷商可以看幾層下線？<br>
-        ⑦ 產品點數是否依經銷商等級有不同？ &nbsp;|&nbsp;
-        ⑧ 舊系統資料是否要匯入第一階段？
-      </p>
-    </div>
   </div>
 
   <!-- 5. 做與不做（第二階段） -->
@@ -553,10 +540,50 @@
     </div>
   </div>
 
-  <!-- 6. 迭代藍圖 -->
+  <!-- 6. 第二階段核心功能 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">6</div>
+      <div class="section-title">第二階段核心功能</div>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="icon">🏗️</div>
+        <div class="name">組織下線可視化</div>
+        <div class="desc">高階經銷商可查看自己組織範圍的下線狀況與活躍度</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🔔</div>
+        <div class="name">長期未提貨提醒</div>
+        <div class="desc">自動偵測並提醒哪些下線超過設定週期未提貨</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">📈</div>
+        <div class="name">提貨週期分析</div>
+        <div class="desc">依時間段分析各經銷商提貨頻率與消耗趨勢</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">⚠️</div>
+        <div class="name">點數不足提醒</div>
+        <div class="desc">點數低於閾值時自動通知相關人員</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">📊</div>
+        <div class="name">產品消耗趨勢報表</div>
+        <div class="desc">各產品的消耗量趨勢，輔助進貨決策</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">💬</div>
+        <div class="name">LINE ／ Email 通知整合</div>
+        <div class="desc">重要事件（提貨審核、點數不足）主動推送通知</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 迭代藍圖 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
       <div class="section-title">三階段發展藍圖</div>
     </div>
     <div class="phase-timeline">
@@ -603,15 +630,53 @@
     </div>
   </div>
 
-  <!-- 7. 下一步 -->
+  <!-- 8. 開發前需確認的 8 個規則 -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num">7</div>
+      <div class="section-num">8</div>
+      <div class="section-title">開發前需確認的 8 個業務規則</div>
+    </div>
+    <div class="card" style="border-left: 4px solid #e94560;">
+      <ol style="font-size:14px; color:#333; line-height:2.1; padding-left:18px; margin:0;">
+        <li>經銷商可以自己送出提貨申請嗎？還是要由公司代送？</li>
+        <li>提貨申請是否一定要公司審核才能扣點？</li>
+        <li>扣點時機：送出申請時扣，還是審核通過後才扣？</li>
+        <li>取消提貨是否退點？在哪個狀態前可以退？</li>
+        <li>儲值是否 100% 只能由公司端操作？</li>
+        <li>高階經銷商可以看幾層下線的資料？</li>
+        <li>產品點數換算是否依經銷商等級有所不同？</li>
+        <li>舊系統的資料是否需要匯入第一階段？</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 9. 第二階段要確認的事情 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div class="section-title">第二階段啟動前要確認的事情</div>
+    </div>
+    <div class="card" style="border-left: 4px solid #0f3460;">
+      <ol style="font-size:14px; color:#333; line-height:2.1; padding-left:18px; margin:0;">
+        <li>「長期未提貨」的定義：幾個月算長期？由誰設定閾值？</li>
+        <li>點數不足提醒的觸發條件：餘額低於幾點開始通知？</li>
+        <li>LINE ／ Email 通知的接收對象：通知到本人、上線，還是公司？</li>
+        <li>高階經銷商組織視角的層級範圍：只看直屬下線還是整個下線樹？</li>
+        <li>v2 啟動時機：v1 上線穩定多久後才開始規劃 v2？</li>
+        <li>獎金 ／ 分潤計算規則（目前尚未定案，等規則確認後補充）</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 10. 下一步 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">10</div>
       <div class="section-title">建議下一步</div>
     </div>
     <ol class="next-list">
-      <li>確認前述 8 個關鍵業務規則，釐清系統邊界</li>
-      <li>決定第一階段範圍是否與規劃書一致，或有調整</li>
+      <li>安排業務規則確認會議，逐一確認上方 8 個問題</li>
+      <li>確認第一階段範圍是否與規劃書一致，或有需要調整</li>
       <li>開發啟動前先跑 MVP 驗收清單，確保不遺漏核心場景</li>
     </ol>
   </div>
