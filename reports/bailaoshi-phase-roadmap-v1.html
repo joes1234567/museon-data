@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 系統導入分期藍圖 v1.2</title>
+<title>白老師國際語言中心 — 系統導入分期藍圖 v1.3</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -383,7 +383,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統導入規劃 v1.2 — L0 五模組確認版</div>
+  <div class="hero-tag">系統導入規劃 v1.3 — 含互動式視覺化地圖</div>
   <h1>白老師國際語言中心<br><span>系統導入分期藍圖</span></h1>
   <p class="hero-sub">以「功能單位」為導入單位，從地基到 AI 智慧輔助七階段漸進，每期都有可驗收交付物，業主決定深度與節奏。</p>
   <div class="hero-meta">
@@ -400,7 +400,7 @@
       <span class="hero-meta-label">系統模組</span>
     </div>
     <div class="hero-meta-item">
-      <span class="hero-meta-value">v1.2</span>
+      <span class="hero-meta-value">v1.3</span>
       <span class="hero-meta-label">文件版本</span>
     </div>
   </div>
@@ -899,10 +899,246 @@
 
 </div><!-- /container -->
 
+<!-- ===== SWIMLANE VISUAL MAP ===== -->
+<div style="background: #EFEDE7; border-top: 2px solid var(--border); padding: 56px 0 48px;">
+  <div style="max-width: 960px; margin: 0 auto; padding: 0 24px 0;">
+    <div class="section-title">導入順序視覺化地圖</div>
+    <p style="font-size: 13px; color: var(--slate); margin-bottom: 28px; line-height: 1.7;">
+      左到右 = 先到後，同一欄 = 同期可並行。滑鼠移到任一功能單位查看包含模組清單。右邊的階段必須等左邊完成才能啟動。
+    </p>
+  </div>
+
+  <div style="overflow-x: auto; padding: 0 24px 24px; -webkit-overflow-scrolling: touch;">
+    <div id="sl-row" style="display: flex; align-items: flex-start; min-width: 1320px; padding-bottom: 8px;">
+
+      <!-- P0 -->
+      <div class="sl-col">
+        <div class="sl-hdr" style="background: #7C3AED;">P0<br><small>動工前提</small></div>
+        <div class="sl-body">
+          <div class="sl-unit" data-modules="MOD 14 — RBAC 角色權限管理|MOD 04 — 學年期別設定|MOD 01a — 學生永久 ID|MOD 02 — 分校基礎資料|MOD 01b — 人員基礎資料（person 主表，所有模組的人員掛載點）">
+            <span class="sl-emoji">🏗️</span>
+            <span class="sl-name">L0 系統底層</span>
+            <span class="sl-cnt">5 模組</span>
+          </div>
+          <div class="sl-badge sl-req">❌ 無條件必做</div>
+        </div>
+      </div>
+
+      <div class="sl-arrow-col">▶</div>
+
+      <!-- P1 -->
+      <div class="sl-col sl-wide">
+        <div class="sl-hdr" style="background: #C4502A;">P1<br><small>核心作業</small></div>
+        <div class="sl-body">
+          <div class="sl-unit" data-modules="MOD 03 — 課程與班級管理（多班並存）|MOD 06 — 報名就讀管理（一人多班）|MOD 08 — 出缺席管理|MOD 09 — 補課管理">
+            <span class="sl-emoji">📚</span>
+            <span class="sl-name">課程與教學</span>
+            <span class="sl-cnt">4 模組</span>
+          </div>
+          <div class="sl-unit" data-modules="MOD 33基礎 — 教職員建檔（正職/外籍/外聘分流）|MOD 07 — 排課管理（四校區衝突偵測）|打卡紀錄 / 外師合規">
+            <span class="sl-emoji">👨‍🏫</span>
+            <span class="sl-name">師資人資基礎</span>
+            <span class="sl-cnt">3 模組</span>
+          </div>
+          <div class="sl-unit sl-unit-early" data-modules="MOD 24 — 歷史QA教材收集整理|統一格式（題目/標準答案/難度標籤）|教學 wiki 建立|向量化，供 P6 AI 口說與出題使用|⭐ 越早啟動，P6 AI 品質越高">
+            <span class="sl-emoji">📖</span>
+            <span class="sl-name">知識庫建置</span>
+            <span class="sl-cnt">同步啟動 ⭐</span>
+          </div>
+          <div class="sl-badge sl-req">❌ 必做</div>
+        </div>
+      </div>
+
+      <div class="sl-arrow-col">▶</div>
+
+      <!-- P2 -->
+      <div class="sl-col sl-wide">
+        <div class="sl-hdr" style="background: #B8923A;">P2<br><small>財務與合規</small></div>
+        <div class="sl-body">
+          <div class="sl-unit" data-modules="MOD 10 — 定價費用規則（五種費用×多折扣）|MOD 11 — 帳單繳費（部分繳款/分期）|MOD 12 — 統一通知 Bus|MOD 15 — 對帳財務報表|MOD 16 — 薪資打卡排班（跨校薪資攤算）">
+            <span class="sl-emoji">💰</span>
+            <span class="sl-name">財務</span>
+            <span class="sl-cnt">5 模組</span>
+          </div>
+          <div class="sl-unit sl-unit-legal" data-modules="MOD 29 — 學生健康與過敏紀錄|MOD 27 — 吃藥管理（含家長授權書、服藥執行紀錄）|MOD 30 — 接送授權管理（長期+臨時）|MOD 31 — 家長同意書（電子簽署）|⚠️ 法律風險，不能拖">
+            <span class="sl-emoji">🏥</span>
+            <span class="sl-name">學生安全照顧</span>
+            <span class="sl-cnt">4 模組 ⚠️ 法律</span>
+          </div>
+          <div class="sl-badge sl-req">❌ 必做</div>
+        </div>
+      </div>
+
+      <div class="sl-arrow-col">▶</div>
+
+      <!-- P3 -->
+      <div class="sl-col sl-wide">
+        <div class="sl-hdr" style="background: #2A7A6E;">P3<br><small>深化內部</small></div>
+        <div class="sl-body">
+          <div class="sl-unit" data-modules="MOD 05 — 試聽諮詢管理（含預約子模組：官網/LINE/App入口、來源追蹤）|MOD 18 — 招生行銷追蹤（潛在客戶CRM：新名單→已聯絡→已預約→已入班）">
+            <span class="sl-emoji">🎯</span>
+            <span class="sl-name">招生與 CRM</span>
+            <span class="sl-cnt">2 模組</span>
+          </div>
+          <div class="sl-unit" data-modules="MOD 13 — 餐點代訂（儲值金預充、請假自動不扣）|MOD 26 — 活動管理（報名/名額控管/QR Code電子報到）|MOD 28 — 補課影片管理（自動比對缺席名單）|MOD 32 — 教材發放紀錄">
+            <span class="sl-emoji">🗂️</span>
+            <span class="sl-name">行政</span>
+            <span class="sl-cnt">4 模組</span>
+          </div>
+          <div class="sl-unit" data-modules="MOD 33完整 — 外師管理（工作證效期追蹤/外聘勞健保門檻）|MOD 34 — 教師培訓管理（SOP/培訓影片/測驗/申論/主管審核/能力紀錄）|MOD 35 — 教師行為積分系統（每日任務+會議出席QR+能量存摺，三合一設計）">
+            <span class="sl-emoji">🎓</span>
+            <span class="sl-name">師資進階培訓</span>
+            <span class="sl-cnt">3 模組</span>
+          </div>
+          <div class="sl-badge sl-opt">✅ 業主決定批次</div>
+        </div>
+      </div>
+
+      <div class="sl-arrow-col">▶</div>
+
+      <!-- P4 -->
+      <div class="sl-col sl-wide">
+        <div class="sl-hdr" style="background: #5A5A6E;">P4<br><small>對外前台</small></div>
+        <div class="sl-body">
+          <div class="sl-unit" data-modules="MOD 23 — 家長/學生雙端App（查成績/出席/帳單/對話式留言/AI口說入口）|MOD 17 — 學習歷程成績（含家長一對一會談子模組：預約/會前摘要/會後追蹤）|MOD 12擴充 — 通知系統（繳費/缺席/補課/活動，LINE/App統一推播）">
+            <span class="sl-emoji">📱</span>
+            <span class="sl-name">家長/學生前台</span>
+            <span class="sl-cnt">3 模組</span>
+          </div>
+          <div class="sl-unit" data-modules="口碑來源追蹤（各管道成交率）|說明會/活動報名|對外知識庫（官網可見內容）|各管道成交率分析報表">
+            <span class="sl-emoji">📣</span>
+            <span class="sl-name">行銷</span>
+            <span class="sl-cnt">1 模組</span>
+          </div>
+          <div class="sl-badge sl-opt">✅ 業主決定批次</div>
+        </div>
+      </div>
+
+      <div class="sl-arrow-col">▶</div>
+
+      <!-- P5 -->
+      <div class="sl-col">
+        <div class="sl-hdr" style="background: #6A4A9A;">P5<br><small>智能對接</small></div>
+        <div class="sl-body">
+          <div class="sl-unit" data-modules="API 01 — 行政串接（學生建檔/出缺席/報名）|API 02 — 總務串接（場地排課，回答「今天哪間空」）|API 03 — 客服串接（家長詢問/投訴，快速查學生狀態）|API 04 — 行銷串接（說明會報名/招生來源/活動成效）|🔐 MUSEON_SVC 獨立帳號 + 最小權限 + 高風險人工確認">
+            <span class="sl-emoji">🔌</span>
+            <span class="sl-name">MUSEON API串接</span>
+            <span class="sl-cnt">4 個 API</span>
+          </div>
+          <div class="sl-badge sl-opt">✅ 業主決定</div>
+        </div>
+      </div>
+
+      <div class="sl-arrow-col">▶</div>
+
+      <!-- P6 -->
+      <div class="sl-col">
+        <div class="sl-hdr" style="background: #C4502A;">P6<br><small>AI 智慧</small></div>
+        <div class="sl-body">
+          <div class="sl-unit" data-modules="MOD 19 — AI 學習助理（個人化建議/出席異常預警/每週進度摘要，主動推播）|MOD 20 — AI 作業批改（AI初評+老師最終審核）|MOD 21 — AI 口說練習（學生與AI對話練英文，評估發音/流暢度）|MOD 22 — AI 行政檢查（每日掃描欠費未通知/出缺席異常/補課逾期）|MOD 25 — AI 客製出題與弱點分析（根據歷史生成個人化練習題）">
+            <span class="sl-emoji">🤖</span>
+            <span class="sl-name">AI 智慧輔助</span>
+            <span class="sl-cnt">5 個 AI 模組</span>
+          </div>
+          <div class="sl-badge sl-opt">✅ 資料積累後啟動</div>
+        </div>
+      </div>
+
+    </div><!-- /sl-row -->
+  </div><!-- /overflow-x -->
+
+  <!-- Legend -->
+  <div style="max-width: 960px; margin: 20px auto 0; padding: 0 24px; display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: var(--slate); align-items: center;">
+    <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 14px; height: 14px; background: #FEF0EC; border: 1px solid rgba(196,80,42,0.4); border-radius: 3px; display: inline-block; flex-shrink:0;"></span>法律風險模組</div>
+    <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 14px; height: 14px; background: rgba(42,122,110,0.1); border: 1px solid rgba(42,122,110,0.35); border-radius: 3px; display: inline-block; flex-shrink:0;"></span>建議提早啟動</div>
+    <div style="opacity: 0.7;">← 滑鼠移到卡片查看包含模組</div>
+    <div style="opacity: 0.7;">← 橫向滑動查看全圖</div>
+  </div>
+</div>
+
+<!-- Floating tooltip -->
+<div id="sl-tip" style="
+  position: fixed; display: none;
+  background: #12121A; color: rgba(255,255,255,0.92);
+  font-size: 12px; line-height: 1.85;
+  padding: 14px 18px; border-radius: 10px;
+  max-width: 300px; z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+"></div>
+
+<style>
+/* Swimlane styles */
+.sl-col { display: flex; flex-direction: column; width: 168px; flex-shrink: 0; }
+.sl-wide { width: 198px; }
+.sl-hdr {
+  color: #fff; padding: 12px 10px;
+  border-radius: 10px 10px 0 0;
+  text-align: center; font-size: 13px; font-weight: 700; line-height: 1.5;
+}
+.sl-hdr small { font-size: 10px; font-weight: 400; opacity: 0.82; letter-spacing: 0.3px; }
+.sl-body {
+  background: #fff; border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 10px 10px; padding: 12px;
+  display: flex; flex-direction: column; gap: 10px; flex: 1;
+}
+.sl-unit {
+  background: var(--parchment); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 10px;
+  cursor: pointer; user-select: none;
+  transition: box-shadow 0.15s, transform 0.12s;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.sl-unit:hover {
+  box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+  transform: translateY(-2px);
+  border-color: rgba(0,0,0,0.18);
+}
+.sl-unit-legal  { border-color: rgba(196,80,42,0.35); background: #FEF0EC; }
+.sl-unit-early  { border-color: rgba(42,122,110,0.3); background: rgba(42,122,110,0.06); }
+.sl-emoji { font-size: 18px; line-height: 1; }
+.sl-name  { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.sl-cnt   { font-size: 11px; color: var(--mist); }
+.sl-badge {
+  text-align: center; padding: 5px 4px;
+  border-radius: 6px; font-size: 11px; font-weight: 600;
+}
+.sl-req { background: rgba(196,80,42,0.08); color: #C4502A; }
+.sl-opt { background: rgba(42,122,110,0.08); color: #2A7A6E; }
+.sl-arrow-col {
+  display: flex; align-items: flex-start; justify-content: center;
+  width: 30px; flex-shrink: 0; padding-top: 44px;
+  color: var(--mist); font-size: 18px;
+}
+</style>
+
+<script>
+(function () {
+  var tip = document.getElementById('sl-tip');
+  function pos(e) {
+    var x = e.clientX + 18, y = e.clientY - 12;
+    var tw = tip.offsetWidth, th = tip.offsetHeight;
+    tip.style.left = (x + tw > window.innerWidth - 8 ? e.clientX - tw - 18 : x) + 'px';
+    tip.style.top  = (y + th > window.innerHeight - 8 ? e.clientY - th - 12 : y) + 'px';
+  }
+  document.querySelectorAll('.sl-unit[data-modules]').forEach(function (el) {
+    el.addEventListener('mouseenter', function (e) {
+      tip.innerHTML = el.dataset.modules.split('|').map(function (m) {
+        return '<div style="padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.07)">· ' + m + '</div>';
+      }).join('');
+      tip.style.display = 'block';
+      pos(e);
+    });
+    el.addEventListener('mousemove', pos);
+    el.addEventListener('mouseleave', function () { tip.style.display = 'none'; });
+  });
+})();
+</script>
+
 <footer>
-  <p>白老師國際語言中心 — 系統導入分期藍圖 v1.1 &nbsp;|&nbsp; 本文件為業主決策依據，請搭配《智慧營運系統規劃 v0.23》使用</p>
+  <p>白老師國際語言中心 — 系統導入分期藍圖 v1.3 &nbsp;|&nbsp; 本文件為業主決策依據，請搭配《智慧營運系統規劃 v0.23》使用</p>
   <p style="margin-top:8px;"><a href="bailaoshi-operations-v2.html">← 回到完整模組清單 v0.23</a></p>
-  <p style="margin-top:6px; font-size:12px; color: #b0b0b8;">v1.2 更新：L0 確認 5 個模組（加入 MOD 01b 人員基礎資料）；MOD 03 確認歸 P1；MOD 33 確認歸 P1 師資人資基礎</p>
+  <p style="margin-top:6px; font-size:12px; color: #b0b0b8;">v1.3 更新：新增「導入順序視覺化地圖」——橫向分期 Swimlane，滑鼠移到卡片可查看所有模組</p>
 </footer>
 
 </body>
