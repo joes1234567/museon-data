@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>易睫清潔坊 — 智慧營運管理系統規劃</title>
+<style>
+  :root {
+    --jade: #1a6b3c;
+    --jade-light: #2d9a5c;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --ink: #0f1a12;
+    --slate: #4A5A4E;
+    --mist: #8898A0;
+    --border: #DDE4DC;
+    --parchment: #F5F8F5;
+    --snow: #FBFDFB;
+    --success: #2D8A6E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a1a0e 0%, #12391e 60%, #1a5a30 100%);
+    color: #fff;
+    padding: 64px 40px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,107,60,0.28) 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 50%, rgba(42,122,110,0.15) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(45,154,92,0.25);
+    border: 1px solid rgba(45,154,92,0.5);
+    color: #5ecf85;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #5ecf85; }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .hero-meta-num { font-size: 30px; font-weight: 700; color: #5ecf85; }
+  .hero-meta-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+  /* LAYOUT */
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--jade); font-weight: 600; margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(21px, 3vw, 29px); font-weight: 700;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.3;
+  }
+  .section-desc {
+    color: var(--slate); font-size: 15px; max-width: 640px; margin-bottom: 40px;
+  }
+
+  /* PAIN POINTS */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .pain-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+  .pain-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+  .pain-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pi-red { background: #FEF0EC; }
+  .pi-orange { background: #FFF5E6; }
+  .pi-blue { background: #EBF4F8; }
+  .pi-green { background: #E8F5EE; }
+  .pain-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--ink); }
+  .pain-desc { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+  /* FLOW */
+  .flow-wrapper {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px 28px; overflow-x: auto;
+  }
+  .flow-row {
+    display: flex; align-items: center; gap: 0;
+    flex-wrap: nowrap; min-width: 720px;
+  }
+  .flow-step {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; flex: 1; min-width: 76px;
+  }
+  .flow-circle {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0;
+  }
+  .flow-step-label { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.4; }
+  .flow-arrow { color: var(--mist); font-size: 16px; flex-shrink: 0; padding: 0 2px; margin-bottom: 22px; }
+
+  .bg-blue { background: #EBF4F8; }
+  .bg-teal { background: #E6F4F2; }
+  .bg-green { background: #E8F5EE; }
+  .bg-gold { background: #FBF4E6; }
+  .bg-ember { background: #FEF0EC; }
+  .bg-purple { background: #F0EBF8; }
+  .bg-lime { background: #F0F8E8; }
+
+  /* FUNCTION AREA */
+  .func-area { margin-bottom: 44px; }
+  .func-header {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+    padding-bottom: 16px; border-bottom: 2px solid var(--border);
+  }
+  .func-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .fi-green { background: #E8F5EE; }
+  .fi-blue { background: #EBF4F8; }
+  .fi-purple { background: #F0EBF8; }
+  .fi-gold { background: #FBF4E6; }
+  .fi-gray { background: #F0F0F0; }
+  .func-title-group { flex: 1; }
+  .func-area-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+  .func-area-desc { font-size: 13px; color: var(--mist); margin-top: 2px; }
+  .func-modules-count {
+    font-size: 12px; font-weight: 600; color: var(--mist);
+    background: var(--parchment); border: 1px solid var(--border);
+    padding: 4px 14px; border-radius: 20px;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+  }
+  .module-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px;
+    position: relative;
+  }
+  .module-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.06); }
+  .module-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .module-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .phase-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 9px;
+    border-radius: 10px; white-space: nowrap; flex-shrink: 0; margin-left: 8px;
+  }
+  .pt-1 { background: #E8F5EE; color: #1a6b3c; border: 1px solid #c2deca; }
+  .pt-2 { background: #EBF4F8; color: #2A6A8A; border: 1px solid #b8d5e8; }
+  .pt-3 { background: #FBF4E6; color: #B8923A; border: 1px solid #e0ceA0; }
+  .pt-4 { background: #F0EBF8; color: #6A4A9A; border: 1px solid #c9b8e8; }
+  .module-value {
+    font-size: 13px; color: var(--jade); font-weight: 600;
+    margin-bottom: 6px; line-height: 1.5;
+  }
+  .module-detail { font-size: 12px; color: var(--slate); line-height: 1.6; }
+  .module-note {
+    font-size: 11px; color: var(--mist); margin-top: 10px;
+    padding-top: 10px; border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+
+  /* TIMELINE STRIP */
+  .timeline-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; margin-bottom: 0;
+  }
+  .ts-phase {
+    padding: 20px 18px;
+    border-right: 1px solid var(--border);
+  }
+  .ts-phase:last-child { border-right: none; }
+  .ts-p1 { background: linear-gradient(135deg, #E8F5EE, #F4FAF6); }
+  .ts-p2 { background: #FAFCFF; }
+  .ts-p3 { background: #FFFDF5; }
+  .ts-p4 { background: #FAF8FF; }
+  .ts-num { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .ts-p1 .ts-num { color: #1a6b3c; }
+  .ts-p2 .ts-num { color: #2A6A8A; }
+  .ts-p3 .ts-num { color: #B8923A; }
+  .ts-p4 .ts-num { color: #6A4A9A; }
+  .ts-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .ts-period { font-size: 12px; color: var(--mist); margin-bottom: 12px; }
+  .ts-milestone {
+    font-size: 12px; color: var(--slate);
+    padding: 8px 12px; border-radius: 8px;
+    line-height: 1.6; font-weight: 600;
+  }
+  .ts-p1 .ts-milestone { background: rgba(26,107,60,0.08); color: #1a6b3c; }
+  .ts-p2 .ts-milestone { background: rgba(42,106,138,0.08); color: #2A6A8A; }
+  .ts-p3 .ts-milestone { background: rgba(184,146,58,0.08); color: #B8923A; }
+  .ts-p4 .ts-milestone { background: rgba(106,74,154,0.08); color: #6A4A9A; }
+  .ts-list { list-style: none; margin-top: 10px; }
+  .ts-list li { font-size: 12px; color: var(--slate); padding: 2px 0; display: flex; gap: 6px; }
+  .ts-list li::before { content: '·'; color: var(--mist); }
+
+  /* DISPATCH STAGES */
+  .dispatch-stages {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 0;
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; margin-bottom: 28px;
+  }
+  .dispatch-stage { padding: 26px 24px; }
+  .ds-1 { background: #F4FAF6; }
+  .ds-2 { background: #F0F4FA; }
+  .dispatch-stage-arrow {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 4px; background: var(--snow);
+    border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+    color: var(--mist); font-size: 18px;
+  }
+  .ds-phase-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .ds-1 .ds-phase-tag { color: #1a6b3c; }
+  .ds-2 .ds-phase-tag { color: #2A6A8A; }
+  .ds-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .ds-desc { font-size: 13px; color: var(--slate); line-height: 1.7; margin-bottom: 12px; }
+  .ds-items { list-style: none; }
+  .ds-items li { font-size: 12px; color: var(--slate); padding: 2px 0; display: flex; gap: 6px; align-items: flex-start; }
+  .ds-1 .ds-items li::before { content: '✓'; color: #1a6b3c; font-weight: 700; flex-shrink: 0; }
+  .ds-2 .ds-items li::before { content: '◇'; color: #2A6A8A; font-weight: 700; flex-shrink: 0; }
+  .ds-condition { margin-top: 12px; padding: 10px 14px; background: rgba(42,106,138,0.08); border-radius: 8px; font-size: 12px; color: #2A6A8A; line-height: 1.6; }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%);
+    border: 1px solid #a8d8bc; border-radius: 14px;
+    padding: 28px 32px;
+  }
+  .highlight-box h3 { font-size: 17px; font-weight: 700; color: #1a6b3c; margin-bottom: 10px; }
+  .highlight-box p { font-size: 14px; color: var(--slate); }
+
+  /* RISK TABLE */
+  .risk-table { width: 100%; border-collapse: collapse; }
+  .risk-table th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-size: 13px; }
+  .risk-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--slate); vertical-align: top; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-high { background: #FFF5F5; }
+  .risk-mid { background: #FFFBF0; }
+  .risk-low { background: #F5FFF8; }
+  .risk-label { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  .rl-high { background: #FEE2E2; color: #B91C1C; }
+  .rl-mid { background: #FEF3C7; color: #92400E; }
+  .rl-low { background: #D1FAE5; color: #065F46; }
+
+  /* ROI */
+  .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 32px; }
+  .roi-card { background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .roi-num { font-size: 34px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px; }
+  .roi-unit { font-size: 13px; color: var(--mist); margin-bottom: 8px; }
+  .roi-label { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .roi-detail { font-size: 12px; color: var(--slate); line-height: 1.5; }
+  .roi-formula {
+    background: #0f1a12; color: #5ecf85;
+    border-radius: 10px; padding: 22px 28px;
+    font-family: 'Menlo', 'Monaco', monospace; font-size: 13px;
+    line-height: 2.2; margin: 0 0 20px;
+  }
+  .roi-formula .label { color: rgba(255,255,255,0.45); font-size: 11px; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 32px 24px; font-size: 13px;
+  }
+  .footer strong { color: rgba(255,255,255,0.75); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 20px; }
+    section { padding: 40px 0; }
+    .timeline-strip { grid-template-columns: 1fr 1fr; }
+    .timeline-strip .ts-phase:nth-child(2) { border-right: none; }
+    .timeline-strip .ts-phase:nth-child(3) { border-top: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">系統規劃文件 v1.0</div>
+  <h1>易睫清潔坊<br><span>智慧營運管理系統</span>規劃</h1>
+  <p class="hero-sub">一套整合客戶、員工、排班、薪資、派工與財務的數位化營運系統——讓 Peggy 從「每天救火」升級為「監督者」</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">11</span>
+      <span class="hero-meta-label">核心功能模組</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">5</span>
+      <span class="hero-meta-label">業務功能區塊</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">4</span>
+      <span class="hero-meta-label">交付階段</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">6–8</span>
+      <span class="hero-meta-label">個月回本</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="container">
+    <div class="section-label">現況痛點</div>
+    <h2 class="section-title">Peggy 每天承擔的六大負擔</h2>
+    <p class="section-desc">這套系統針對易睫日常營運中最耗腦力、最依賴記憶、最容易出錯的流程，進行系統性解決。</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon pi-red">💸</div>
+        <div>
+          <div class="pain-title">薪資計算耗時不透明</div>
+          <div class="pain-desc">半月手動結算，憑筆記與記憶，容易誤算；員工一有異議就要翻 LINE 記錄。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-red">🗓️</div>
+        <div>
+          <div class="pain-title">排班全靠老闆腦力</div>
+          <div class="pain-desc">員工臨時請假、跨區調度讓 Peggy 疲於奔命，沒有系統輔助，排完還要逐一通知。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">💬</div>
+        <div>
+          <div class="pain-title">報價不穩定</div>
+          <div class="pain-desc">純坪數計算偶爾報太高，透天型尤其容易誤差；新場景難以精算，客戶比較時容易輸給對手。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">👷</div>
+        <div>
+          <div class="pain-title">派工依靠人工判斷</div>
+          <div class="pain-desc">裝潢細清必須老手帶隊，但沒有系統化的技能標籤，全靠 Peggy 記住每個人的能力。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">📋</div>
+        <div>
+          <div class="pain-title">客戶資料分散</div>
+          <div class="pain-desc">清潔偏好、鑰匙方式、特殊注意事項分散在 LINE、紙本與記憶，新員工很難交接。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">💰</div>
+        <div>
+          <div class="pain-title">收款帳目難追蹤</div>
+          <div class="pain-desc">現金、LINE Pay、銀行轉帳三種方式並存，對帳靠手動核對，欠款容易漏追。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">完整業務流程</div>
+    <h2 class="section-title">從客戶詢問到薪資結算，全程數位化</h2>
+    <p class="section-desc">系統串接易睫完整的服務生命週期，每個環節的資料自動流轉，Peggy 只需在關鍵節點做最終確認。</p>
+    <div class="flow-wrapper">
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">📞</div>
+          <div class="flow-step-label">客戶<br>詢價</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-green">🧮</div>
+          <div class="flow-step-label">報價<br>輔助</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-teal">✅</div>
+          <div class="flow-step-label">確認<br>建檔</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-lime">📋</div>
+          <div class="flow-step-label">排班<br>派工</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-gold">📍</div>
+          <div class="flow-step-label">員工<br>打卡</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-ember">📝</div>
+          <div class="flow-step-label">服務<br>記錄</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-purple">💳</div>
+          <div class="flow-step-label">收款<br>對帳</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">⭐</div>
+          <div class="flow-step-label">客戶<br>回饋</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-green">💰</div>
+          <div class="flow-step-label">薪資<br>結算</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCTION AREAS -->
+<section>
+  <div class="container">
+    <div class="section-label">系統功能全景</div>
+    <h2 class="section-title">五大業務區塊，11 個功能模組</h2>
+    <p class="section-desc">按 Peggy 的業務場景分組——每個模組解決一個具體的日常問題。括號內的階段標示是交付時間，不是重要性排序。</p>
+
+    <!-- AREA 1: 客戶管理 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-green">👤</div>
+        <div class="func-title-group">
+          <div class="func-area-name">客戶與案場管理</div>
+          <div class="func-area-desc">所有客戶資料的單一入口，新員工也能做到位</div>
+        </div>
+        <div class="func-modules-count">2 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">客戶資料管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">客戶的一切都在這一張卡</div>
+          <div class="module-detail">進入方式、服務頻率、清潔偏好、特殊注意事項、付款方式、歷史服務紀錄——統一建檔。任何員工接案前打開這張卡，不需要問 Peggy。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">系統權限控管</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">誰能看什麼、誰能改什麼，全由你決定</div>
+          <div class="module-detail">老闆、主管、員工三層角色，各自只看到自己需要的資訊。帳號開通、停用一鍵完成，每筆操作留存紀錄。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 2: 員工與排班 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-blue">👥</div>
+        <div class="func-title-group">
+          <div class="func-area-name">員工與排班管理</div>
+          <div class="func-area-desc">員工資訊、技能、班表、打卡全部整合，停止用 LINE 追人</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">員工技能管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">每個人能做什麼，系統幫你記</div>
+          <div class="module-detail">年資等級、技能標籤（居家/細清/大掃除）、首選區域、排班限制——建檔一次，派工時直接篩選，不靠記憶。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">班表管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">排班、調整、通知——一個介面完成</div>
+          <div class="module-detail">手動排班介面，臨時請假、補班、跨區調度直接在系統操作。班表狀態即時同步給所有員工，不需要再逐一傳 LINE。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">員工打卡系統</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">工時自動累計，薪資不再算錯</div>
+          <div class="module-detail">手機網頁一鍵打卡，工時自動計算並連動薪資模組。可選配 GPS 確認到場，異常自動提醒老闆。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 3: 派工執行 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-purple">🗺️</div>
+        <div class="func-title-group">
+          <div class="func-area-name">派工與服務執行</div>
+          <div class="func-area-desc">從「Peggy 全靠記憶」到「系統初篩，老闆確認」</div>
+        </div>
+        <div class="func-modules-count">2 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">派工建議草稿</div>
+            <span class="phase-tag pt-3">第三階段</span>
+          </div>
+          <div class="module-value">系統先篩，Peggy 最終確認</div>
+          <div class="module-detail">根據技能匹配、地理分區、當日排班量、收入平衡，自動產生派工名單草稿。Peggy 微調後送出——從「全靠直覺」到「有草稿可以改」。</div>
+          <div class="module-note">⚠ 需要第一階段 2–3 個月的真實資料沉澱，建議品質才有參考價值。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">服務記錄與回饋</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">每場服務都留下紀錄，下次不用重問</div>
+          <div class="module-detail">帶隊主管填寫內部服務筆記，客戶知識庫持續累積。服務完成後手動推送 LINE 回饋連結，正面評價可作口碑素材。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 4: 財務 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gold">💰</div>
+        <div class="func-title-group">
+          <div class="func-area-name">財務與報價</div>
+          <div class="func-area-desc">薪資、報價、收款三條線全數位化，帳目清晰有憑有據</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">薪資計算模組</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">半月結算從 2 小時縮到 30 分鐘</div>
+          <div class="module-detail">時薪制 × 工時自動計算，支援難度獎金、稱讚獎金、護底補足。打卡資料就緒後，薪資自動算出來，員工有疑義 30 秒查清楚。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">報價輔助模組</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">報價有依據，不再靠感覺猜</div>
+          <div class="module-detail">坪數 × 係數 + 櫃體 + 耗材 + 交通，彙整歷史案例提供參考區間。最終由 Peggy 確認定案，輔助判斷，不取代判斷。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">收款與對帳管理</div>
+            <span class="phase-tag pt-3">第三階段</span>
+          </div>
+          <div class="module-value">現金、LINE Pay、轉帳全記錄，欠款一眼看到</div>
+          <div class="module-detail">三種收款方式統一記錄，系統比對班表應收金額，差異自動標示。v1 不串第三方支付 API，先穩定收款記錄與對帳邏輯。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 5: 擴張 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gray">🚀</div>
+        <div class="func-title-group">
+          <div class="func-area-name">擴張與分析</div>
+          <div class="func-area-desc">台南本部穩定後，系統支援多據點與財務深度分析</div>
+        </div>
+        <div class="func-modules-count">4 個選配模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">耗材管理模組</div>
+            <span class="phase-tag pt-3">第三階段</span>
+          </div>
+          <div class="module-value">庫存低了自動提醒，成本不再靠猜</div>
+          <div class="module-detail">清潔劑、魔布等耗材庫存追蹤，低於警戒量自動提醒補貨，每場服務連動耗材成本，支援毛利計算。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">毛利報表</div>
+            <span class="phase-tag pt-4">第四階段</span>
+          </div>
+          <div class="module-value">每場服務賺了多少，數字說話</div>
+          <div class="module-detail">服務收入 - 薪資成本 - 耗材成本 = 單場毛利，支援月報、服務類型分析、員工效率報告。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">人事成本試算</div>
+            <span class="phase-tag pt-4">第四階段</span>
+          </div>
+          <div class="module-value">正規化前先算清楚划不划算</div>
+          <div class="module-detail">支援多薪資結構的人事成本試算，協助 Peggy 評估正規化成本，分批導入。<br><span style="font-size:11px; color:var(--mist);">⚠ 僅供內部成本模擬，實際合規需由會計師確認。</span></div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">多據點管理</div>
+            <span class="phase-tag pt-4">第四階段</span>
+          </div>
+          <div class="module-value">外縣市開起來，同一套系統管</div>
+          <div class="module-detail">外縣市負責人管理當地員工、班表與收款，資料隔離但老闆可跨區查看。第一階段已預留架構，不需改底層。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">交付時間表</div>
+    <h2 class="section-title">四個階段，每個階段都有具體的里程碑</h2>
+    <p class="section-desc">不需要等所有功能完成才開始用——第一階段上線，行政工作就已經減少一半。</p>
+    <div class="timeline-strip">
+      <div class="ts-phase ts-p1">
+        <div class="ts-num">第一階段</div>
+        <div class="ts-name">基礎建立</div>
+        <div class="ts-period">M1–M2</div>
+        <div class="ts-milestone">Peggy 能做到：客戶 / 員工 / 班表全建檔，員工自己查班表不用問</div>
+        <ul class="ts-list">
+          <li>客戶資料 + 案場建檔</li>
+          <li>員工技能標籤</li>
+          <li>班表管理（手動）</li>
+          <li>手機打卡</li>
+          <li>系統權限控管</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p2">
+        <div class="ts-num">第二階段</div>
+        <div class="ts-name">效率提升</div>
+        <div class="ts-period">M3–M4</div>
+        <div class="ts-milestone">Peggy 能做到：薪資結算 &lt; 30 分鐘，報價有據可查</div>
+        <ul class="ts-list">
+          <li>薪資自動計算</li>
+          <li>報價輔助模組</li>
+          <li>服務記錄（內部筆記）</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p3">
+        <div class="ts-num">第三階段</div>
+        <div class="ts-name">智慧化</div>
+        <div class="ts-period">M5–M6</div>
+        <div class="ts-milestone">Peggy 能做到：看系統草稿確認派工，不再從零想起</div>
+        <ul class="ts-list">
+          <li>派工建議草稿</li>
+          <li>收款與對帳管理</li>
+          <li>耗材庫存追蹤</li>
+          <li>客戶回饋推送</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p4">
+        <div class="ts-num">第四階段</div>
+        <div class="ts-name">擴張準備</div>
+        <div class="ts-period">M7+</div>
+        <div class="ts-milestone">Peggy 能做到：外縣市據點獨立運作，毛利一眼看到</div>
+        <ul class="ts-list">
+          <li>多據點管理</li>
+          <li>毛利分析報表</li>
+          <li>人事成本試算</li>
+          <li>對外估價頁（選配）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISPATCH DEEP DIVE -->
+<section>
+  <div class="container">
+    <div class="section-label">核心差異化功能</div>
+    <h2 class="section-title">派工兩階段：先人工、後建議</h2>
+    <p class="section-desc">派工不是一次到位——先在 Phase 1 建立人工排班習慣與資料基礎，Phase 3 才有足夠乾淨的歷史資料讓系統提出有意義的建議草稿。</p>
+
+    <div class="dispatch-stages">
+      <div class="dispatch-stage ds-1">
+        <div class="ds-phase-tag">Phase 1–2 · 人工派工</div>
+        <div class="ds-title">系統輔助，Peggy 主導</div>
+        <div class="ds-desc">資料還不夠，系統不猜。這個階段的目標是讓每筆派工記錄都乾淨進到資料庫。</div>
+        <ul class="ds-items">
+          <li>手動排班介面，Peggy 直接操作</li>
+          <li>技能標籤提示：誰能帶這場</li>
+          <li>衝突提醒：同一員工雙重派工自動警告</li>
+          <li>班表狀態即時同步給員工查看</li>
+          <li>每筆派工資料自動累積進歷史庫</li>
+        </ul>
+      </div>
+      <div class="dispatch-stage-arrow">→</div>
+      <div class="dispatch-stage ds-2">
+        <div class="ds-phase-tag">Phase 3 · 建議派工</div>
+        <div class="ds-title">系統初篩草稿，Peggy 確認</div>
+        <div class="ds-desc">依據過去案件（員工 × 案場類型 × 完成品質 × 工時）跑出建議名單，Peggy 微調後送出。</div>
+        <ul class="ds-items">
+          <li>技能匹配：裝潢細清必須老手帶隊</li>
+          <li>地理路由：同員工案場集中同分區</li>
+          <li>收入平衡：本月偏低者優先補場</li>
+          <li>新人保護：物理阻擋新人單獨出場</li>
+        </ul>
+        <div class="ds-condition">
+          ⚠ 建議品質的前提：Phase 1–2 資料夠乾淨、夠多——通常需要 2–3 個月沉澱。資料品質差，建議就沒有參考價值。
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>建議制，不是替代制</h3>
+      <p>系統提供「哪些人可以配這場」的草稿名單，最終由 Peggy 確認或微調。這是設計原則，不是功能缺陷——保留人情判斷空間，讓系統做初篩，讓老闆做決定。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">投資回收分析</div>
+    <h2 class="section-title">導入後的實際回收——用數字說話</h2>
+    <p class="section-desc">以台南本部 10 位員工、每月 80 場服務為基準估算。每一個節省點都來自訪談中的真實痛點。</p>
+
+    <div class="roi-grid">
+      <div class="roi-card">
+        <div class="roi-num">36</div>
+        <div class="roi-unit">小時／年</div>
+        <div class="roi-label">薪資計算省下的時間</div>
+        <div class="roi-detail">從 2hr 縮到 30min × 24 次結算<br>換算 Peggy 每年多出 1 個工作週</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">120</div>
+        <div class="roi-unit">小時／年</div>
+        <div class="roi-label">排班決策省下的腦力</div>
+        <div class="roi-detail">每日排班從 60min → 30min<br>乘以 240 個出班日，減少 50% 思考量</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">40</div>
+        <div class="roi-unit">小時／年</div>
+        <div class="roi-label">報價作業省下的溝通</div>
+        <div class="roi-detail">200 次報價，每次從 15min → 3min<br>有歷史案例參考，報出去更有信心</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">NT$19,200+</div>
+        <div class="roi-unit">每年保護的收款</div>
+        <div class="roi-label">欠款追回與漏收防堵</div>
+        <div class="roi-detail">保守估計每月追回 2 筆 × NT$800<br>三種收款方式全記錄，不再漏帳</div>
+      </div>
+      <div class="roi-card" style="border-color: #a8d8bc; background: linear-gradient(135deg, #E8F5EE 0%, #F4FAF6 100%);">
+        <div class="roi-num" style="color:#1a6b3c;">6–8</div>
+        <div class="roi-unit">個月</div>
+        <div class="roi-label">預計系統回本</div>
+        <div class="roi-detail">以年度效益 NT$136,000+ 為基準<br>Phase 1+2 投資 NT$44,000–68,000</div>
+      </div>
+    </div>
+
+    <div class="roi-formula">
+      <div class="label">年度效益試算（Phase 1 + Phase 2 上線後）</div>
+      <div>薪資計算節省（36hr × NT$600）  ≈  NT$21,600</div>
+      <div>排班腦力節省（120hr × NT$600）  ≈  NT$72,000</div>
+      <div>報價作業節省（40hr × NT$600）  ≈  NT$24,000</div>
+      <div>收款保護（欠款追回 + 漏帳防堵）  ≈  NT$19,200+</div>
+      <div>────────────────────────────────────</div>
+      <div style="color:#fff; font-weight:700;">年度可回收效益合計  ≈  NT$136,000+</div>
+      <div>&nbsp;</div>
+      <div class="label">回本試算</div>
+      <div>預估 ROI（Year 1）            ≈  100%–210%</div>
+      <div style="color:#fff; font-weight:700;">完整回本期限               ≈  6–8 個月</div>
+      <div style="font-size:10px; color:rgba(255,255,255,0.4); margin-top:8px;">試算基準：Peggy 時間機會成本 NT$600/hr，Phase 1+2 投資 NT$44,000–68,000</div>
+    </div>
+
+    <!-- Scenario Returns -->
+    <div style="margin-top: 32px; margin-bottom: 32px;">
+      <div class="section-label" style="margin-bottom: 12px;">情境回報</div>
+      <h3 style="font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">做好之後，這些場景會真的發生</h3>
+      <p style="font-size: 14px; color: var(--slate); margin-bottom: 20px;">數字節省了多少小時，只是表面。省下來的時間被拿去做更值錢的事——這才是最低估的那一塊。</p>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; border-left: 4px solid #1a6b3c;">
+          <div style="font-size: 12px; font-weight: 700; color: #1a6b3c; letter-spacing: 1px; margin-bottom: 6px;">情境 A｜排班</div>
+          <div style="font-size: 14px; color: var(--slate); line-height: 1.7;">以前：周日晚上 Peggy 坐下來排班，開 LINE 問誰有空、誰請假沒說清楚，排到 11 點還有空洞。之後：系統週五自動拉出下週班表草稿，衝突自動標紅，她確認一下送出，20 分鐘結束。<strong style="color: var(--ink);">那個周日晚上，她第一次沒有打開 LINE。</strong></div>
+        </div>
+        <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; border-left: 4px solid #6A4A9A;">
+          <div style="font-size: 12px; font-weight: 700; color: #6A4A9A; letter-spacing: 1px; margin-bottom: 6px;">情境 D｜人事糾紛</div>
+          <div style="font-size: 14px; color: var(--slate); line-height: 1.7;">某阿姨說「上次薪水少算」，現在 Peggy 只能靠記憶或翻 LINE 記錄。系統跑起來後，每筆班次、時數、付款都有 log，<strong style="color: var(--ink);">30 秒查清楚，不需要道歉也不需要爭。</strong></div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; padding: 16px 20px; background: #f8fbf8; border: 1px solid #c8e0d0; border-radius: 10px; font-size: 13px; color: var(--slate); line-height: 1.7;">
+        NT$136,000 是保守的年效益估算。真正的回報是：Peggy 重新拿回對生意的掌控感，而不是被行政細節追著跑。<strong style="color: var(--ink);">客戶糾紛時系統有記錄、Peggy 不在時代理人能接手、要開第二個據點時 SOP 已內嵌——這些不出現在試算表裡，但業主碰到後感受比任何數字都強。</strong>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top:0;">
+      <h3>最大的 ROI 不是省錢，是讓 Peggy 可以放手</h3>
+      <p>當排班、薪資、報價都有系統撐著，Peggy 才能從「每天救火」升級為「監督者」——這是擴張外縣市的前提，也是系統最核心的價值。</p>
+    </div>
+
+    <!-- Cost of Inaction -->
+    <div style="margin-top: 32px;">
+      <div class="section-label" style="margin-bottom:12px;">不做的代價</div>
+      <h2 class="section-title" style="margin-bottom:8px;">繼續手動，這些場景會繼續發生</h2>
+      <p class="section-desc" style="margin-bottom:24px;">數字可以算，但真正讓人痛的是場景——那個夜晚、那通電話、那個一去不回頭的機會。</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px;">
+        <div style="background: #fff0ed; border: 1px solid #f5c4a8; border-radius: 12px; padding: 16px 18px; text-align: center;">
+          <div style="font-size: 28px; font-weight: 800; color: #c0392b; line-height: 1;">NT$6,000+</div>
+          <div style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 1px; margin: 4px 0 8px;">每月 / 薪資算錯風險</div>
+          <div style="font-size: 12px; color: #555; line-height: 1.6;">手動對班表 × 件數 × 加班，每月只要一個員工算錯，補發成本 + 爭議時間 = 半天工。</div>
+        </div>
+        <div style="background: #fff0ed; border: 1px solid #f5c4a8; border-radius: 12px; padding: 16px 18px; text-align: center;">
+          <div style="font-size: 28px; font-weight: 800; color: #c0392b; line-height: 1;">NT$1,600/月</div>
+          <div style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 1px; margin: 4px 0 8px;">收款漏洞（保守估）</div>
+          <div style="font-size: 12px; color: #555; line-height: 1.6;">LINE 記帳容易漏、轉帳確認靠記憶，每月 2 筆未追回的小帳 × 12 個月 = NT$19,200 消失。</div>
+        </div>
+        <div style="background: #fff0ed; border: 1px solid #f5c4a8; border-radius: 12px; padding: 16px 18px; text-align: center;">
+          <div style="font-size: 28px; font-weight: 800; color: #c0392b; line-height: 1;">2hr/天</div>
+          <div style="font-size: 11px; font-weight: 700; color: #888; letter-spacing: 1px; margin: 4px 0 8px;">Peggy 每天花在行政的時間</div>
+          <div style="font-size: 12px; color: #555; line-height: 1.6;">排班調動、確認打卡、回客戶報價——這 2hr 的機會成本是拓客、開新據點、休息。</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+        <div style="background: #fff8f5; border: 1px solid #f5c4a8; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 22px; font-weight: 800; color: #c0392b; margin-bottom: 4px;">信任裂縫</div>
+          <div style="font-size: 12px; color: #888; margin-bottom: 10px;">薪資算錯一次，那個人就少了一分</div>
+          <div style="font-size: 13px; color: #444; line-height: 1.7;">員工不計較是因為還在忍。算錯一次薪水，即使補了，信任就已經少一分。那個人開始留意外面的機會——<strong>離職成本 NT$30,000+</strong>（找人 + 培訓），遠超任何算錯金額。</div>
+        </div>
+        <div style="background: #fff8f5; border: 1px solid #f5c4a8; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 22px; font-weight: 800; color: #c0392b; margin-bottom: 4px;">單點失效</div>
+          <div style="font-size: 12px; color: #888; margin-bottom: 10px;">所有 know-how 在 Peggy 腦袋裡</div>
+          <div style="font-size: 13px; color: #444; line-height: 1.7;">Peggy 請假、生病、出意外——公司停擺。客戶偏好、鑰匙放哪、哪個員工不能配誰，全部鎖在一個人身上。<strong>這不是風險，這是計時炸彈。</strong></div>
+        </div>
+        <div style="background: #fff8f5; border: 1px solid #f5c4a8; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 22px; font-weight: 800; color: #c0392b; margin-bottom: 4px;">客戶跑單</div>
+          <div style="font-size: 12px; color: #888; margin-bottom: 10px;">一次失誤，失去的不只這一筆</div>
+          <div style="font-size: 13px; color: #444; line-height: 1.7;">排班出錯沒人到場，失去的不是 NT$2,000 那場服務費——是這個客戶的<strong>終生消費價值</strong>（年均 NT$24,000+）以及她跟朋友說的那句「算了，換一家」。</div>
+        </div>
+        <div style="background: #fff8f5; border: 1px solid #f5c4a8; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 22px; font-weight: 800; color: #c0392b; margin-bottom: 4px;">擴張天花板</div>
+          <div style="font-size: 12px; color: #888; margin-bottom: 10px;">開第二間店的那天就是系統崩潰的那天</div>
+          <div style="font-size: 13px; color: #444; line-height: 1.7;">現在的手工方式，員工從 10 人到 15 人就會開始出錯，更別說外縣市據點。<strong>每拖一個月</strong>，就是少一個月準備擴張基礎——機會不等人。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATING COSTS -->
+<section>
+  <div class="container">
+    <div class="section-label">年度運營費用</div>
+    <h2 class="section-title">系統跑起來之後，每年的維護成本</h2>
+    <p class="section-desc">以下為系統上線後所需的第三方服務費用，依實際使用規模而定。</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px;">
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center;">
+        <div style="font-size: 22px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px;">NT$6,000–20,000</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--mist); letter-spacing: 1px; margin-bottom: 8px;">每年</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">主機</div>
+        <div style="font-size: 12px; color: var(--slate); line-height: 1.5;">VPS 雲端伺服器費用，依流量與穩定性需求調整方案。</div>
+      </div>
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center;">
+        <div style="font-size: 22px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px;">NT$0–9,600</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--mist); letter-spacing: 1px; margin-bottom: 8px;">每年</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">LINE Official Account</div>
+        <div style="font-size: 12px; color: var(--slate); line-height: 1.5;">免費方案可起步，月訊息量超標時升級付費方案（NT$800/月）。</div>
+      </div>
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center;">
+        <div style="font-size: 22px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px;">NT$600–1,200</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--mist); letter-spacing: 1px; margin-bottom: 8px;">每年</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">網域</div>
+        <div style="font-size: 12px; color: var(--slate); line-height: 1.5;">.com.tw 或 .tw 年費，一次申請長期使用。</div>
+      </div>
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center;">
+        <div style="font-size: 22px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px;">NT$0–4,000</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--mist); letter-spacing: 1px; margin-bottom: 8px;">每年</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">SSL 憑證</div>
+        <div style="font-size: 12px; color: var(--slate); line-height: 1.5;">Let's Encrypt 免費版可優先採用；高保障商業憑證視需求另計。</div>
+      </div>
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center;">
+        <div style="font-size: 22px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px;">NT$1,200–3,600</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--mist); letter-spacing: 1px; margin-bottom: 8px;">每年</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">簡訊通知</div>
+        <div style="font-size: 12px; color: var(--slate); line-height: 1.5;">OTP 驗證與自動提醒簡訊，依月發送量計費。</div>
+      </div>
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center;">
+        <div style="font-size: 22px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px;">依業務量</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--mist); letter-spacing: 1px; margin-bottom: 8px;">&nbsp;</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">金流手續費</div>
+        <div style="font-size: 12px; color: var(--slate); line-height: 1.5;">ECPay / 藍新 / LINE Pay，每筆交易 2–3.5%，依實際收款金額計算。</div>
+      </div>
+    </div>
+    <div style="background: var(--parchment); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; font-size: 13px; color: var(--slate); line-height: 1.7; text-align: center;">
+      以上費用均依實際需求給付給相關第三方服務商，上述數字僅供參考，最終金額視業主選擇方案而定。
+    </div>
+  </div>
+</section>
+
+<!-- RISK -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">風險評估</div>
+    <h2 class="section-title">六大風險與因應方案</h2>
+    <p class="section-desc">誠實面對可能的阻力，提前設計因應機制。</p>
+    <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;">
+      <table class="risk-table">
+        <tr><th>風險</th><th>機率</th><th>因應方案</th></tr>
+        <tr class="risk-high">
+          <td><strong>員工抗拒使用系統</strong></td>
+          <td><span class="risk-label rl-high">中高</span></td>
+          <td>手機介面極簡，只做打卡與班表查看；不強迫改變付款習慣；訪談確認最小操作步驟</td>
+        </tr>
+        <tr class="risk-high">
+          <td><strong>派工規則無法完全機制化</strong></td>
+          <td><span class="risk-label rl-high">高</span></td>
+          <td>系統提建議草稿、Peggy 確認，不走全自動；保留人情判斷空間，這是設計原則而非缺陷</td>
+        </tr>
+        <tr class="risk-mid">
+          <td><strong>勞健保正規化壓力</strong></td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>Phase 2 先做薪資自動化，Phase 4 加人事成本試算（內部模擬用）；實際合規需由會計師確認，系統不作法律判斷</td>
+        </tr>
+        <tr class="risk-mid">
+          <td><strong>現金收款帳目對不上</strong></td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>先做記錄功能，不強制改變收款模式；設計簡單對帳介面讓老闆一眼看到差異</td>
+        </tr>
+        <tr class="risk-low">
+          <td><strong>客戶資料遷移困難（LINE）</strong></td>
+          <td><span class="risk-label rl-low">低</span></td>
+          <td>分批手動匯入，舊客戶維持 LINE 聯絡，新客戶直接進系統建檔</td>
+        </tr>
+        <tr class="risk-low">
+          <td><strong>外縣市據點管理複雜化</strong></td>
+          <td><span class="risk-label rl-low">低（Phase 4）</span></td>
+          <td>Phase 1 預留 branch_id 欄位；Phase 4 再設計多帳號架構，先以台南本部穩定為主</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>易睫清潔坊 · 智慧營運管理系統規劃</strong>
+  <br>v1.0 · 基於三次訪談逐字稿（2026-06-02 × 2, 2026-06-08）· 機密文件
+</div>
+
+</body>
+</html>
