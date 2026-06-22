@@ -1390,10 +1390,8 @@ nSel
     links.forEach(l=>{if(l.source.id===d.id)conn.add(l.target.id);if(l.target.id===d.id)conn.add(l.source.id);});
     nSel.classed('dim',n=>!conn.has(n.id));
     lSel.classed('dim',l=>l.source.id!==d.id&&l.target.id!==d.id).classed('highlight',l=>l.source.id===d.id||l.target.id===d.id);
-    ttP.style.color=PC[d.phase];ttP.textContent=`${d.phase} · ${d.unit}`;ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';
   })
-  .on('mousemove',function(ev){tip.style.left=Math.min(ev.clientX+18,window.innerWidth-300)+'px';tip.style.top=(ev.clientY-50)+'px';})
-  .on('mouseleave',function(){nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);tip.style.display='none';})
+  .on('mouseleave',function(){nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);})
   .on('click',function(ev,d){
     ev.stopPropagation();
     const panel=document.getElementById('kg-detail');

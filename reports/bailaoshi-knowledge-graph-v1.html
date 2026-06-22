@@ -436,19 +436,10 @@ nodeSel
     nodeSel.classed('dim', n => !conn.has(n.id));
     linkSel.classed('dim',       l => l.source.id !== d.id && l.target.id !== d.id)
            .classed('highlight', l => l.source.id === d.id || l.target.id === d.id);
-    ttPhase.style.color = PHASE_COLORS[d.phase];
-    ttPhase.textContent = `${d.phase} · ${d.unit}`;
-    ttName.textContent  = d.short;
-    ttDesc.textContent  = d.desc;
-  })
-  .on('mousemove', function(ev) {
-    tip.style.left = Math.min(ev.clientX + 18, window.innerWidth - 300) + 'px';
-    tip.style.top  = (ev.clientY - 50) + 'px';
   })
   .on('mouseleave', function() {
     nodeSel.classed('dim', false);
     linkSel.classed('dim', false).classed('highlight', false);
-    tip.style.display = 'none';
   })
   .on('click', function(ev, d) {
     ev.stopPropagation();
