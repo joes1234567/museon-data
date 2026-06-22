@@ -440,7 +440,6 @@ nodeSel
     ttPhase.textContent = `${d.phase} · ${d.unit}`;
     ttName.textContent  = d.short;
     ttDesc.textContent  = d.desc;
-    tip.style.display = 'block';
   })
   .on('mousemove', function(ev) {
     tip.style.left = Math.min(ev.clientX + 18, window.innerWidth - 300) + 'px';
