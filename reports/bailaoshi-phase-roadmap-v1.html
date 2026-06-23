@@ -1189,20 +1189,20 @@
   <div id="kg-d-deps-sec" style="display:none;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">前置依賴</div><ul id="kg-d-deps" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
   <div id="kg-d-enables-sec" style="display:none;margin-top:2px;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">解鎖模組</div><ul id="kg-d-enables" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
   <div id="kg-d-meta" style="display:none;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;text-align:center;">
+    <div id="kg-d-metrics-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:5px;text-align:center;">
       <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
         <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">ROI 類型</div>
         <div id="kg-d-roi" style="font-size:11px;font-weight:700;color:var(--ink);line-height:1.3;"></div>
       </div>
-      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+      <div id="kg-d-weeks-box" style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
         <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">週數</div>
         <div id="kg-d-devweeks" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
       </div>
-      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+      <div id="kg-d-acceptance-box" style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
         <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">驗收點</div>
         <div id="kg-d-meetings" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
       </div>
-      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+      <div id="kg-d-coeff-box" style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
         <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">係數</div>
         <div id="kg-d-coeff" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
       </div>
@@ -1438,9 +1438,16 @@ nSel
     if(d.roi||d.weeks||d.acceptance||d.coeff){
       document.getElementById('kg-d-meta').style.display='block';
       document.getElementById('kg-d-roi').textContent=d.roi||'—';
-      document.getElementById('kg-d-devweeks').textContent=d.weeks?d.weeks+'週':'—';
-      document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
-      document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
+      const hasM=!!(d.weeks||d.acceptance||d.coeff);
+      document.getElementById('kg-d-weeks-box').style.display=hasM?'':'none';
+      document.getElementById('kg-d-acceptance-box').style.display=hasM?'':'none';
+      document.getElementById('kg-d-coeff-box').style.display=hasM?'':'none';
+      document.getElementById('kg-d-metrics-grid').style.gridTemplateColumns=hasM?'1fr 1fr':'1fr';
+      if(hasM){
+        document.getElementById('kg-d-devweeks').textContent=d.weeks?d.weeks+'週':'—';
+        document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
+        document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
+      }
     }else{document.getElementById('kg-d-meta').style.display='none';}
     const deps=links.filter(l=>l.target.id===d.id);
     const enables=links.filter(l=>l.source.id===d.id);
@@ -1455,9 +1462,16 @@ nSel
     const meta=document.getElementById('kg-d-meta');
     if(d.roi||d.weeks||d.acceptance||d.coeff){
       document.getElementById('kg-d-roi').textContent=d.roi||'—';
-      document.getElementById('kg-d-devweeks').textContent=d.weeks?d.weeks+'週':'—';
-      document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
-      document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
+      const hasM2=!!(d.weeks||d.acceptance||d.coeff);
+      document.getElementById('kg-d-weeks-box').style.display=hasM2?'':'none';
+      document.getElementById('kg-d-acceptance-box').style.display=hasM2?'':'none';
+      document.getElementById('kg-d-coeff-box').style.display=hasM2?'':'none';
+      document.getElementById('kg-d-metrics-grid').style.gridTemplateColumns=hasM2?'1fr 1fr':'1fr';
+      if(hasM2){
+        document.getElementById('kg-d-devweeks').textContent=d.weeks?d.weeks+'週':'—';
+        document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
+        document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
+      }
       meta.style.display='block';
     }else{meta.style.display='none';}
     panel.style.display='block';
