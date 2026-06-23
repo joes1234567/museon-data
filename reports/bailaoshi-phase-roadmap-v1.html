@@ -1447,6 +1447,13 @@ nSel
       document.getElementById('kg-d-enables-sec').style.display='block';
       document.getElementById('kg-d-enables').innerHTML=enables.map(l=>{const t=nodes.find(n=>n.id===l.target.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${t?t.short:l.target.id}</li>`;}).join('');
     }else{document.getElementById('kg-d-enables-sec').style.display='none';}
+    const meta=document.getElementById('kg-d-meta');
+    if(d.roi||d.devWeeks||d.meetings){
+      document.getElementById('kg-d-roi').textContent=d.roi||'—';
+      document.getElementById('kg-d-devweeks').textContent=d.devWeeks?d.devWeeks+'週':'—';
+      document.getElementById('kg-d-meetings').textContent=d.meetings?d.meetings+'次':'—';
+      meta.style.display='block';
+    }else{meta.style.display='none';}
     panel.style.display='block';
   });
 svg.on('click',()=>{selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';});
