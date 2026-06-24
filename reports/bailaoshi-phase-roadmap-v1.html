@@ -1612,6 +1612,8 @@ document.querySelectorAll('.kg-btn[data-kgphase]').forEach(btn=>{
   });
 });
 document.getElementById('kg-btn-reset').addEventListener('click',()=>{svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);});
+window.addToEstimate=addToEstimate;
+window.clearEstimate=clearEstimate;
 })();
 </script>
 
