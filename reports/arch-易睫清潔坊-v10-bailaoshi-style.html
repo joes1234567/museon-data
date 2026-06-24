@@ -981,110 +981,272 @@
 
 
 <!-- KNOWLEDGE GRAPH -->
-<section>
-  <div class="container">
-    <div class="section-label">模組依賴圖譜</div>
+<section style="padding:0;">
+  <div style="background:var(--parchment);border-top:2px solid var(--border);padding:40px 0 0;">
+  <div class="container" style="padding-bottom:20px;">
+    <div class="section-label">模組依賴知識圖譜</div>
     <h2 class="section-title">功能模組的承接關係</h2>
-    <p class="section-desc">每個箭頭代表資料流向——前置模組的資料是後置模組運作的基礎，也是各階段建置順序的核心依據。</p>
-    <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 16px; padding: 24px 16px; overflow-x: auto;">
-      <svg viewBox="0 0 910 490" style="width:100%; min-width:680px; height:auto; display:block; font-family:'Noto Sans TC',-apple-system,sans-serif;" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arw-p1" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#1a6b3c" opacity="0.7"/></marker>
-          <marker id="arw-p2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2A6A8A" opacity="0.7"/></marker>
-          <marker id="arw-p3" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#B8923A" opacity="0.7"/></marker>
-          <marker id="arw-sk" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#888" opacity="0.55"/></marker>
-        </defs>
+    <p class="section-desc">14 個模組節點，顏色對應四個建置階段。滑鼠移到節點查看說明；<strong>點擊節點</strong>鎖定並亮顯<strong>所有前置依賴鏈</strong>，再按一次或點空白處取消。滾輪縮放，拖曳平移。</p>
+  </div>
 
-        <!-- Column backgrounds -->
-        <rect x="10"  y="36" width="160" height="444" rx="10" fill="#E8F5EE" opacity="0.45"/>
-        <rect x="240" y="36" width="160" height="444" rx="10" fill="#EBF4F8" opacity="0.45"/>
-        <rect x="470" y="36" width="160" height="444" rx="10" fill="#FBF4E6" opacity="0.45"/>
-        <rect x="700" y="36" width="160" height="444" rx="10" fill="#F0EBF8" opacity="0.45"/>
+  <div class="kgyi-controls" id="kgyi-controls">
+    <button class="kgyi-btn active" data-kgphase="all">全部</button>
+    <div class="kgyi-sep"></div>
+    <button class="kgyi-btn" data-kgphase="P1">第一階段</button>
+    <button class="kgyi-btn" data-kgphase="P2">第二階段</button>
+    <button class="kgyi-btn" data-kgphase="P3">第三階段</button>
+    <button class="kgyi-btn" data-kgphase="P4">第四階段</button>
+    <div class="kgyi-sep"></div>
+    <button class="kgyi-btn" id="kgyi-btn-reset" style="color:var(--slate);">重置視圖</button>
+  </div>
 
-        <!-- Phase labels -->
-        <text x="90"  y="22" text-anchor="middle" fill="#1a6b3c" font-size="10" font-weight="700" letter-spacing="1">第一階段</text>
-        <text x="320" y="22" text-anchor="middle" fill="#2A6A8A" font-size="10" font-weight="700" letter-spacing="1">第二階段</text>
-        <text x="550" y="22" text-anchor="middle" fill="#B8923A" font-size="10" font-weight="700" letter-spacing="1">第三階段</text>
-        <text x="780" y="22" text-anchor="middle" fill="#6A4A9A" font-size="10" font-weight="700" letter-spacing="1">第四階段</text>
+  <div id="kgyi-graph-wrap"><svg id="kgyi-graph"></svg></div>
 
-        <!-- ── EDGES (behind nodes) ── -->
-        <!-- 客戶資料管理 → 報價輔助模組 -->
-        <path d="M 162 78 C 201 78 201 113 248 113" fill="none" stroke="#1a6b3c" stroke-width="1.5" opacity="0.55" marker-end="url(#arw-p1)"/>
-        <!-- 客戶資料管理 → 服務記錄與回饋 -->
-        <path d="M 162 78 C 195 78 195 363 248 363" fill="none" stroke="#1a6b3c" stroke-width="1.5" opacity="0.4" marker-end="url(#arw-p1)"/>
-        <!-- 客戶資料管理 → 收款與對帳管理 [skip P2] -->
-        <path d="M 162 71 C 320 52 320 52 478 113" fill="none" stroke="#888" stroke-width="1.2" opacity="0.35" stroke-dasharray="5,3" marker-end="url(#arw-sk)"/>
-        <!-- 員工技能管理 → 派工建議草稿 [skip P2] -->
-        <path d="M 162 243 C 320 243 320 258 478 258" fill="none" stroke="#888" stroke-width="1.2" opacity="0.35" stroke-dasharray="5,3" marker-end="url(#arw-sk)"/>
-        <!-- 班表管理 → 薪資計算模組 -->
-        <path d="M 162 328 C 205 328 205 228 248 228" fill="none" stroke="#1a6b3c" stroke-width="1.5" opacity="0.5" marker-end="url(#arw-p1)"/>
-        <!-- 班表管理 → 派工建議草稿 [skip P2] -->
-        <path d="M 162 335 C 320 335 320 268 478 268" fill="none" stroke="#888" stroke-width="1.2" opacity="0.3" stroke-dasharray="5,3" marker-end="url(#arw-sk)"/>
-        <!-- 員工打卡系統 → 薪資計算模組 -->
-        <path d="M 162 413 C 201 413 201 238 248 238" fill="none" stroke="#1a6b3c" stroke-width="1.5" opacity="0.5" marker-end="url(#arw-p1)"/>
-        <!-- 服務記錄與回饋 → 派工建議草稿 -->
-        <path d="M 392 352 C 435 352 435 258 478 258" fill="none" stroke="#2A6A8A" stroke-width="1.5" opacity="0.55" marker-end="url(#arw-p2)"/>
-        <!-- 服務記錄與回饋 → 耗材管理模組 -->
-        <path d="M 392 373 C 435 373 435 398 478 398" fill="none" stroke="#2A6A8A" stroke-width="1.5" opacity="0.5" marker-end="url(#arw-p2)"/>
-        <!-- 薪資計算模組 → 毛利報表 [skip P3] -->
-        <path d="M 392 221 C 550 200 550 183 708 183" fill="none" stroke="#888" stroke-width="1.2" opacity="0.35" stroke-dasharray="5,3" marker-end="url(#arw-sk)"/>
-        <!-- 薪資計算模組 → 人事成本試算 [skip P3] -->
-        <path d="M 392 235 C 550 235 550 323 708 323" fill="none" stroke="#888" stroke-width="1.2" opacity="0.35" stroke-dasharray="5,3" marker-end="url(#arw-sk)"/>
-        <!-- 耗材管理模組 → 毛利報表 -->
-        <path d="M 622 391 C 665 391 665 193 708 193" fill="none" stroke="#B8923A" stroke-width="1.5" opacity="0.5" marker-end="url(#arw-p3)"/>
-        <!-- 系統權限控管 → 多據點管理 [long skip] -->
-        <path d="M 162 156 C 430 156 430 450 708 450" fill="none" stroke="#888" stroke-width="1" opacity="0.2" stroke-dasharray="4,4" marker-end="url(#arw-sk)"/>
+  <div class="kgyi-legend">
+    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#1a6b3c;"></div> 第一階段</div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#2A6A8A;"></div> 第二階段</div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#B8923A;"></div> 第三階段</div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#6A4A9A;"></div> 第四階段</div>
+    <div class="kgyi-sep" style="height:18px;"></div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-line" style="border-color:#1a6b3c;"></div> 直接資料依賴</div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-line" style="border-color:#888;border-style:dashed;"></div> 跨階段間接依賴</div>
+    <div style="color:var(--mist);font-size:11px;">← 滑鼠移到節點查看說明 · 點擊查看詳情 · 滾輪縮放 · 拖曳平移</div>
+  </div>
+</div>
 
-        <!-- ── NODES ── -->
-        <!-- P1 第一階段 -->
-        <rect x="18" y="62"  width="144" height="32" rx="7" fill="#1a6b3c"/>
-        <text x="90" y="82"  text-anchor="middle" fill="white" font-size="11" font-weight="600">客戶資料管理</text>
-        <rect x="18" y="140" width="144" height="32" rx="7" fill="#1a6b3c" opacity="0.82"/>
-        <text x="90" y="160" text-anchor="middle" fill="white" font-size="11" font-weight="600">系統權限控管</text>
-        <rect x="18" y="227" width="144" height="32" rx="7" fill="#1a6b3c" opacity="0.85"/>
-        <text x="90" y="247" text-anchor="middle" fill="white" font-size="11" font-weight="600">員工技能管理</text>
-        <rect x="18" y="312" width="144" height="32" rx="7" fill="#2d9a5c"/>
-        <text x="90" y="332" text-anchor="middle" fill="white" font-size="11" font-weight="600">班表管理</text>
-        <rect x="18" y="397" width="144" height="32" rx="7" fill="#2d9a5c"/>
-        <text x="90" y="417" text-anchor="middle" fill="white" font-size="11" font-weight="600">員工打卡系統</text>
+<!-- Tooltip -->
+<div id="kgyi-tooltip" style="position:fixed;display:none;background:#12121A;color:rgba(255,255,255,0.92);font-size:12px;line-height:1.85;padding:12px 16px;border-radius:10px;max-width:260px;z-index:9999;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+  <div id="kgyi-tt-phase" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.7;margin-bottom:4px;"></div>
+  <div id="kgyi-tt-name"  style="font-size:13px;font-weight:700;margin-bottom:6px;"></div>
+  <div id="kgyi-tt-desc"  style="font-size:12px;opacity:0.82;line-height:1.65;"></div>
+</div>
 
-        <!-- P2 第二階段 -->
-        <rect x="248" y="97"  width="144" height="32" rx="7" fill="#2A6A8A" opacity="0.8"/>
-        <text x="320" y="117" text-anchor="middle" fill="white" font-size="11" font-weight="600">報價輔助模組</text>
-        <rect x="248" y="212" width="144" height="32" rx="7" fill="#2A6A8A"/>
-        <text x="320" y="232" text-anchor="middle" fill="white" font-size="11" font-weight="600">薪資計算模組</text>
-        <rect x="248" y="347" width="144" height="32" rx="7" fill="#2A6A8A" opacity="0.85"/>
-        <text x="320" y="367" text-anchor="middle" fill="white" font-size="11" font-weight="600">服務記錄與回饋</text>
-
-        <!-- P3 第三階段 -->
-        <rect x="478" y="97"  width="144" height="32" rx="7" fill="#B8923A" opacity="0.8"/>
-        <text x="550" y="117" text-anchor="middle" fill="white" font-size="11" font-weight="600">收款與對帳管理</text>
-        <rect x="478" y="242" width="144" height="32" rx="7" fill="#B8923A"/>
-        <text x="550" y="262" text-anchor="middle" fill="white" font-size="11" font-weight="600">派工建議草稿</text>
-        <rect x="478" y="382" width="144" height="32" rx="7" fill="#B8923A" opacity="0.8"/>
-        <text x="550" y="402" text-anchor="middle" fill="white" font-size="11" font-weight="600">耗材管理模組</text>
-
-        <!-- P4 第四階段 -->
-        <rect x="708" y="167" width="144" height="32" rx="7" fill="#6A4A9A"/>
-        <text x="780" y="187" text-anchor="middle" fill="white" font-size="11" font-weight="600">毛利報表</text>
-        <rect x="708" y="307" width="144" height="32" rx="7" fill="#6A4A9A" opacity="0.8"/>
-        <text x="780" y="327" text-anchor="middle" fill="white" font-size="11" font-weight="600">人事成本試算</text>
-        <rect x="708" y="434" width="144" height="32" rx="7" fill="#6A4A9A" opacity="0.7"/>
-        <text x="780" y="454" text-anchor="middle" fill="white" font-size="11" font-weight="600">多據點管理</text>
-      </svg>
-    </div>
-    <div style="display:flex; gap:24px; margin-top:14px; flex-wrap:wrap; font-size:12px; color:var(--slate); align-items:center;">
-      <div style="display:flex; align-items:center; gap:6px;">
-        <svg width="30" height="10" style="flex-shrink:0;"><line x1="2" y1="5" x2="22" y2="5" stroke="#1a6b3c" stroke-width="1.5"/><polygon points="21,2 29,5 21,8" fill="#1a6b3c" opacity="0.7"/></svg>
-        直接資料依賴
+<!-- Detail panel -->
+<div id="kgyi-detail" style="display:none;position:fixed;right:16px;top:110px;width:260px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;box-shadow:0 8px 32px rgba(0,0,0,0.12);z-index:200;font-size:13px;max-height:calc(100vh - 130px);overflow-y:auto;">
+  <span onclick="document.getElementById('kgyi-detail').style.display='none'" style="position:absolute;right:12px;top:10px;cursor:pointer;color:var(--mist);font-size:18px;line-height:1;">×</span>
+  <div id="kgyi-d-phase" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px;"></div>
+  <div id="kgyi-d-name"  style="font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.4;"></div>
+  <div id="kgyi-d-desc"  style="font-size:12px;color:var(--slate);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);"></div>
+  <div id="kgyi-d-deps-sec" style="display:none;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">前置依賴</div><ul id="kgyi-d-deps" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
+  <div id="kgyi-d-enables-sec" style="display:none;margin-top:2px;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">解鎖模組</div><ul id="kgyi-d-enables" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
+  <div id="kgyi-d-meta" style="display:none;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;text-align:center;">
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">ROI 類型</div>
+        <div id="kgyi-d-roi" style="font-size:10px;font-weight:700;color:var(--ink);line-height:1.3;"></div>
       </div>
-      <div style="display:flex; align-items:center; gap:6px;">
-        <svg width="30" height="10" style="flex-shrink:0;"><line x1="2" y1="5" x2="22" y2="5" stroke="#888" stroke-width="1.2" stroke-dasharray="4,3"/><polygon points="21,2 29,5 21,8" fill="#888" opacity="0.55"/></svg>
-        跨階段間接依賴（需中間階段資料沉澱）
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">製作時間</div>
+        <div id="kgyi-d-devweeks" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
+      </div>
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">會議次數</div>
+        <div id="kgyi-d-meetings" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<style>
+.kgyi-controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;align-items:center;}
+.kgyi-btn{padding:5px 13px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid currentColor;background:transparent;transition:background 0.15s,color 0.15s;letter-spacing:0.3px;line-height:1.4;}
+.kgyi-btn.active{color:#fff!important;}
+.kgyi-btn[data-kgphase="all"]{color:var(--ink);border-color:var(--ink);}
+.kgyi-btn[data-kgphase="all"].active{background:var(--ink);}
+.kgyi-btn[data-kgphase="P1"]{color:#1a6b3c;border-color:#1a6b3c;}
+.kgyi-btn[data-kgphase="P1"].active{background:#1a6b3c;}
+.kgyi-btn[data-kgphase="P2"]{color:#2A6A8A;border-color:#2A6A8A;}
+.kgyi-btn[data-kgphase="P2"].active{background:#2A6A8A;}
+.kgyi-btn[data-kgphase="P3"]{color:#B8923A;border-color:#B8923A;}
+.kgyi-btn[data-kgphase="P3"].active{background:#B8923A;}
+.kgyi-btn[data-kgphase="P4"]{color:#6A4A9A;border-color:#6A4A9A;}
+.kgyi-btn[data-kgphase="P4"].active{background:#6A4A9A;}
+.kgyi-sep{width:1px;height:20px;background:var(--border);}
+#kgyi-graph-wrap{background:#fff;overflow:hidden;}
+svg#kgyi-graph{display:block;width:100%;cursor:grab;}
+svg#kgyi-graph:active{cursor:grabbing;}
+.kgyi-node circle{stroke-width:2.5;cursor:pointer;}
+.kgyi-node .node-icon{font-size:13px;text-anchor:middle;pointer-events:none;dominant-baseline:central;}
+.kgyi-node .node-label{font-size:9.5px;fill:var(--ink);text-anchor:middle;pointer-events:none;font-weight:500;}
+.kgyi-link{fill:none;}
+.kgyi-link.depends{stroke:#1a6b3c;stroke-width:1.8;stroke-opacity:0.55;}
+.kgyi-link.indirect{stroke:#888;stroke-width:1.3;stroke-opacity:0.4;stroke-dasharray:5,3;}
+.kgyi-link.highlight{stroke-opacity:0.9!important;stroke-width:2.5!important;}
+.kgyi-link.dim{stroke-opacity:0.05!important;}
+.kgyi-node.dim circle{opacity:0.12;}
+.kgyi-node.dim .node-icon{opacity:0.12;}
+.kgyi-node.dim .node-label{opacity:0.12;}
+.kgyi-phase-bg{fill-opacity:0.03;}
+.kgyi-phase-lbl{font-size:11px;font-weight:700;letter-spacing:0.8px;fill-opacity:0.45;text-anchor:middle;}
+.kgyi-legend{display:flex;gap:16px;flex-wrap:wrap;padding:10px 24px;background:var(--parchment);border-top:1px solid var(--border);font-size:11.5px;color:var(--slate);align-items:center;justify-content:center;}
+.kgyi-leg-item{display:flex;align-items:center;gap:5px;}
+.kgyi-leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+.kgyi-leg-line{display:inline-block;width:22px;height:0;border-top:2px solid;vertical-align:middle;flex-shrink:0;}
+</style>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function(){
+const PC={P1:'#1a6b3c',P2:'#2A6A8A',P3:'#B8923A',P4:'#6A4A9A'};
+const PX={P1:120,P2:340,P3:560,P4:780};
+const PL={P1:'第一階段 基礎建置',P2:'第二階段 核心功能',P3:'第三階段 智慧調度',P4:'第四階段 管理報表'};
+const W=900,H=560;
+const nodes=[
+  {id:'M01',short:'客戶資料管理',  label:'客戶資料\n管理',  phase:'P1',icon:'👤',desc:'客戶基本資料、服務地址、偏好紀錄，所有服務流程的核心資料來源',roi:'行政效率',devWeeks:3,meetings:2},
+  {id:'M02',short:'系統權限控管',  label:'系統權限\n控管',  phase:'P1',icon:'🔐',desc:'老闆/行政/清潔師各角色最小權限配置，資料安全的基礎建設',roi:'基礎建設',devWeeks:2,meetings:1},
+  {id:'M03',short:'員工技能管理',  label:'員工技能\n管理',  phase:'P1',icon:'🏷️',desc:'清潔師持有技能標籤（深層清潔/玻璃/窗簾），派工配對的核心依據',roi:'服務品質',devWeeks:2,meetings:2},
+  {id:'M04',short:'班表管理',      label:'班表\n管理',      phase:'P1',icon:'📋',desc:'員工出勤班表，薪資計算與派工的時間基礎，防止排班衝突',roi:'行政效率',devWeeks:3,meetings:2},
+  {id:'M05',short:'員工打卡系統',  label:'員工打卡\n系統',  phase:'P1',icon:'⏱️',desc:'到場/離場打卡，實際工時核實，防範薪資爭議的客觀紀錄',roi:'行政效率',devWeeks:2,meetings:2},
+  {id:'M06',short:'報價輔助模組',  label:'報價輔助\n模組',  phase:'P2',icon:'💲',desc:'根據客戶地址/面積/服務類型自動產生估價單，縮短業務回覆時間',roi:'業績成長',devWeeks:4,meetings:3},
+  {id:'M07',short:'薪資計算模組',  label:'薪資計算\n模組',  phase:'P2',icon:'💰',desc:'整合班表、打卡、加班，自動產生薪資明細，大幅減少人工核算錯誤',roi:'行政效率',devWeeks:5,meetings:3},
+  {id:'M08',short:'服務記錄與回饋',label:'服務記錄\n與回饋',phase:'P2',icon:'📝',desc:'每次服務的執行紀錄、客戶評分、問題回報，是派工優化與改進的核心依據',roi:'服務品質',devWeeks:3,meetings:2},
+  {id:'M09',short:'收款與對帳管理',label:'收款對帳\n管理',  phase:'P3',icon:'🧾',desc:'收款狀態追蹤、發票開立、未收款提醒，現金流健康的關鍵控制點',roi:'財務收益',devWeeks:4,meetings:3},
+  {id:'M10',short:'派工建議草稿',  label:'派工建議\n草稿',  phase:'P3',icon:'🗺️',desc:'依技能、地區、班表自動建議最佳派工組合，減少人工調度來回溝通',roi:'行政效率',devWeeks:5,meetings:3},
+  {id:'M11',short:'耗材管理模組',  label:'耗材管理\n模組',  phase:'P3',icon:'🧴',desc:'清潔用品進出庫、每筆服務耗材用量紀錄，計算實際服務成本',roi:'成本管控',devWeeks:3,meetings:2},
+  {id:'M12',short:'毛利報表',      label:'毛利\n報表',      phase:'P4',icon:'📊',desc:'每筆服務收入扣除人力+耗材成本，即時呈現毛利率，支持定價決策',roi:'財務收益',devWeeks:3,meetings:2},
+  {id:'M13',short:'人事成本試算',  label:'人事成本\n試算',  phase:'P4',icon:'📈',desc:'員工人力成本總覽，支持擴編/縮編的財務決策模擬',roi:'財務收益',devWeeks:2,meetings:2},
+  {id:'M14',short:'多據點管理',    label:'多據點\n管理',    phase:'P4',icon:'🏢',desc:'跨服務區域的整合管理視圖，支持業務擴展後的統一調度與報表',roi:'業務擴張',devWeeks:4,meetings:3},
+];
+const links=[
+  {source:'M01',target:'M06',type:'depends'},
+  {source:'M01',target:'M08',type:'depends'},
+  {source:'M04',target:'M07',type:'depends'},
+  {source:'M05',target:'M07',type:'depends'},
+  {source:'M08',target:'M10',type:'depends'},
+  {source:'M08',target:'M11',type:'depends'},
+  {source:'M11',target:'M12',type:'depends'},
+  {source:'M01',target:'M09',type:'indirect'},
+  {source:'M03',target:'M10',type:'indirect'},
+  {source:'M04',target:'M10',type:'indirect'},
+  {source:'M07',target:'M12',type:'indirect'},
+  {source:'M07',target:'M13',type:'indirect'},
+  {source:'M02',target:'M14',type:'indirect'},
+];
+const svg=d3.select('svg#kgyi-graph').attr('viewBox',`0 0 ${W} ${H}`).attr('height',Math.min(560,window.innerHeight-150));
+const g=svg.append('g');
+const zoom=d3.zoom().scaleExtent([0.25,4]).on('zoom',e=>g.attr('transform',e.transform));
+svg.call(zoom);
+const defs=svg.append('defs');
+const LC={depends:'#1a6b3c',indirect:'#888'};
+Object.entries(LC).forEach(([type,color])=>{
+  defs.append('marker').attr('id',`kgyi-ar-${type}`).attr('viewBox','0 -5 10 10').attr('refX',26).attr('refY',0)
+    .attr('markerWidth',5).attr('markerHeight',5).attr('orient','auto')
+    .append('path').attr('d','M0,-5L10,0L0,5').attr('fill',color).attr('fill-opacity',0.7);
+});
+Object.entries(PX).forEach(([phase,cx])=>{
+  g.append('rect').attr('class','kgyi-phase-bg').attr('x',cx-80).attr('y',40).attr('width',160).attr('height',H-52).attr('fill',PC[phase]).attr('rx',8);
+  g.append('text').attr('class','kgyi-phase-lbl').attr('x',cx).attr('y',26).attr('fill',PC[phase]).text(PL[phase]);
+});
+nodes.forEach(n=>{
+  const col=nodes.filter(m=>m.phase===n.phase);
+  const idx=col.indexOf(n);
+  const step=(H-120)/(col.length+1);
+  n.x=PX[n.phase]+(idx%2===0?0:12);
+  n.y=60+step*(idx+1);
+});
+const lSel=g.append('g').selectAll('.kgyi-link').data(links).join('path')
+  .attr('class',d=>`kgyi-link ${d.type}`).attr('marker-end',d=>`url(#kgyi-ar-${d.type})`);
+const nSel=g.append('g').selectAll('.kgyi-node').data(nodes).join('g').attr('class','kgyi-node')
+  .call(d3.drag().on('start',ds).on('drag',dd).on('end',de));
+nSel.append('circle').attr('r',23).attr('fill',d=>PC[d.phase]).attr('fill-opacity',0.88).attr('stroke','#fff');
+nSel.append('text').attr('class','node-icon').attr('dy','0.35em').text(d=>d.icon);
+nSel.each(function(d){
+  d.label.split('\n').forEach((line,i)=>{
+    d3.select(this).append('text').attr('class','node-label').attr('y',31+i*13).text(line);
+  });
+});
+const sim=d3.forceSimulation(nodes)
+  .force('link',d3.forceLink(links).id(d=>d.id).distance(100).strength(0.2))
+  .force('charge',d3.forceManyBody().strength(-280))
+  .force('x',d3.forceX(d=>PX[d.phase]).strength(0.9))
+  .force('y',d3.forceY(H/2).strength(0.08))
+  .force('collide',d3.forceCollide(36))
+  .on('tick',tick);
+function tick(){
+  lSel.attr('d',d=>{
+    const dx=d.target.x-d.source.x,dy=d.target.y-d.source.y;
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
+    const dr=len*0.7;
+    return `M${d.source.x},${d.source.y} A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
+  });
+  nSel.attr('transform',d=>`translate(${d.x},${d.y})`);
+}
+function ds(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
+function dd(e,d){d.fx=e.x;d.fy=e.y;}
+function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
+const tip=document.getElementById('kgyi-tooltip');
+const ttP=document.getElementById('kgyi-tt-phase');
+const ttN=document.getElementById('kgyi-tt-name');
+const ttD=document.getElementById('kgyi-tt-desc');
+let selNode=null,selAnc=new Set();
+function getAnc(id){
+  const s=new Set([id]);const q=[id];
+  while(q.length){const c=q.shift();links.forEach(l=>{if(l.target.id===c&&!s.has(l.source.id)){s.add(l.source.id);q.push(l.source.id);}});}
+  return s;
+}
+function applyAnc(s){
+  nSel.classed('dim',n=>!s.has(n.id));
+  lSel.classed('dim',l=>!s.has(l.source.id)||!s.has(l.target.id)).classed('highlight',l=>s.has(l.source.id)&&s.has(l.target.id));
+}
+nSel
+  .on('mouseenter',function(ev,d){
+    if(selNode){ttP.style.color=PC[d.phase];ttP.textContent=PL[d.phase];ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';return;}
+    const conn=new Set([d.id]);
+    links.forEach(l=>{if(l.source.id===d.id)conn.add(l.target.id);if(l.target.id===d.id)conn.add(l.source.id);});
+    nSel.classed('dim',n=>!conn.has(n.id));
+    lSel.classed('dim',l=>l.source.id!==d.id&&l.target.id!==d.id).classed('highlight',l=>l.source.id===d.id||l.target.id===d.id);
+    ttP.style.color=PC[d.phase];ttP.textContent=PL[d.phase];ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';
+  })
+  .on('mousemove',function(ev){tip.style.left=Math.min(ev.clientX+18,window.innerWidth-280)+'px';tip.style.top=(ev.clientY-50)+'px';})
+  .on('mouseleave',function(){if(selNode){applyAnc(selAnc);}else{nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);}tip.style.display='none';})
+  .on('click',function(ev,d){
+    ev.stopPropagation();
+    if(selNode===d.id){selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kgyi-detail').style.display='none';return;}
+    selNode=d.id;selAnc=getAnc(d.id);applyAnc(selAnc);
+    document.getElementById('kgyi-d-phase').textContent=PL[d.phase];
+    document.getElementById('kgyi-d-phase').style.color=PC[d.phase];
+    document.getElementById('kgyi-d-name').textContent=d.short;
+    document.getElementById('kgyi-d-desc').textContent=d.desc;
+    const deps=links.filter(l=>l.target.id===d.id);
+    const enables=links.filter(l=>l.source.id===d.id);
+    if(deps.length){
+      document.getElementById('kgyi-d-deps-sec').style.display='block';
+      document.getElementById('kgyi-d-deps').innerHTML=deps.map(l=>{const s=nodes.find(n=>n.id===l.source.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${s?s.short:l.source.id}</li>`;}).join('');
+    }else{document.getElementById('kgyi-d-deps-sec').style.display='none';}
+    if(enables.length){
+      document.getElementById('kgyi-d-enables-sec').style.display='block';
+      document.getElementById('kgyi-d-enables').innerHTML=enables.map(l=>{const t=nodes.find(n=>n.id===l.target.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${t?t.short:l.target.id}</li>`;}).join('');
+    }else{document.getElementById('kgyi-d-enables-sec').style.display='none';}
+    if(d.roi||d.devWeeks||d.meetings){
+      document.getElementById('kgyi-d-meta').style.display='block';
+      document.getElementById('kgyi-d-roi').textContent=d.roi||'—';
+      document.getElementById('kgyi-d-devweeks').textContent=d.devWeeks?d.devWeeks+'週':'—';
+      document.getElementById('kgyi-d-meetings').textContent=d.meetings?d.meetings+'次':'—';
+    }else{document.getElementById('kgyi-d-meta').style.display='none';}
+    document.getElementById('kgyi-detail').style.display='block';
+  });
+svg.on('click',()=>{selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kgyi-detail').style.display='none';});
+let aP=null;
+document.querySelectorAll('.kgyi-btn[data-kgphase]').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const ph=this.dataset.kgphase;
+    document.querySelectorAll('.kgyi-btn[data-kgphase]').forEach(b=>b.classList.remove('active'));
+    if(ph==='all'||ph===aP){
+      aP=null;document.querySelector('[data-kgphase="all"]').classList.add('active');
+      nSel.classed('dim',false);lSel.classed('dim',false);
+    }else{
+      aP=ph;this.classList.add('active');
+      const show=new Set([ph]);
+      links.forEach(l=>{if(l.source.phase===ph)show.add(l.target.phase);if(l.target.phase===ph)show.add(l.source.phase);});
+      nSel.classed('dim',d=>!show.has(d.phase));
+      lSel.classed('dim',l=>!show.has(l.source.phase)||!show.has(l.target.phase));
+    }
+  });
+});
+document.getElementById('kgyi-btn-reset').addEventListener('click',()=>{svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);});
+})();
+</script>
+
 
 <!-- FOOTER -->
 <div class="footer">
