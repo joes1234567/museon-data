@@ -185,9 +185,78 @@
   .module-card {
     background: var(--snow); border: 1px solid var(--border);
     border-radius: 10px; padding: 18px;
-    position: relative;
+    position: relative; cursor: pointer;
+    transition: box-shadow 0.15s, border-color 0.15s;
   }
-  .module-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.06); }
+  .module-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); border-color: #b0d4be; }
+  .module-card-hint {
+    font-size: 10px; color: var(--mist); margin-top: 10px;
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  /* SIDE PANEL */
+  .sp-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(15,26,18,0.35); z-index: 900;
+    backdrop-filter: blur(2px);
+  }
+  .sp-overlay.open { display: block; }
+  .sp-drawer {
+    position: fixed; top: 0; right: -440px; bottom: 0;
+    width: 420px; max-width: 95vw;
+    background: var(--snow); z-index: 901;
+    box-shadow: -6px 0 32px rgba(0,0,0,0.14);
+    display: flex; flex-direction: column;
+    transition: right 0.28s cubic-bezier(0.22,1,0.36,1);
+    overflow: hidden;
+  }
+  .sp-drawer.open { right: 0; }
+  .sp-head {
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .sp-close {
+    margin-left: auto; background: none; border: none;
+    cursor: pointer; color: var(--mist); font-size: 20px;
+    flex-shrink: 0; padding: 0; line-height: 1;
+  }
+  .sp-close:hover { color: var(--ink); }
+  .sp-module-name {
+    font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.3;
+  }
+  .sp-phase-badge {
+    font-size: 10px; font-weight: 700; padding: 2px 9px;
+    border-radius: 10px; margin-top: 4px; display: inline-block;
+  }
+  .sp-body { flex: 1; overflow-y: auto; padding: 20px 24px 32px; }
+  .sp-section { margin-bottom: 24px; }
+  .sp-section-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--jade); margin-bottom: 12px;
+  }
+  .sp-cost-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px; gap: 12px;
+  }
+  .sp-cost-row:last-child { border-bottom: none; }
+  .sp-cost-label { color: var(--slate); flex-shrink: 0; }
+  .sp-cost-val { font-weight: 600; color: var(--ink); text-align: right; }
+  .sp-cost-note { font-size: 11px; color: var(--mist); margin-top: 6px; line-height: 1.5; }
+  .sp-eff-row {
+    display: grid; grid-template-columns: auto 1fr; gap: 8px 12px;
+    font-size: 13px; margin-bottom: 8px; align-items: start;
+  }
+  .sp-eff-arrow { color: var(--mist); font-size: 11px; padding-top: 2px; }
+  .sp-eff-before { color: var(--slate); }
+  .sp-eff-after { color: var(--jade); font-weight: 600; }
+  .sp-saving {
+    background: #E8F5EE; border: 1px solid #b8d8c4;
+    border-radius: 8px; padding: 10px 14px; margin-top: 12px;
+    font-size: 13px; color: #1a6b3c; font-weight: 600; line-height: 1.6;
+  }
+  .sp-saving-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; margin-bottom: 3px; color: #2d9a5c; }
   .module-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
   .module-name { font-size: 14px; font-weight: 700; color: var(--ink); }
   .phase-tag {
@@ -978,11 +1047,250 @@
   </div>
 </section>
 
+<!-- SIDE PANEL -->
+<div class="sp-overlay" id="spOverlay" onclick="closePanel()"></div>
+<div class="sp-drawer" id="spDrawer">
+  <div class="sp-head">
+    <div>
+      <div class="sp-module-name" id="spName"></div>
+      <span class="sp-phase-badge" id="spBadge"></span>
+    </div>
+    <button class="sp-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="sp-body">
+    <div class="sp-section">
+      <div class="sp-section-title">模組費用</div>
+      <div id="spCostRows"></div>
+      <div class="sp-cost-note" id="spCostNote"></div>
+    </div>
+    <div class="sp-section">
+      <div class="sp-section-title">效率提升</div>
+      <div class="sp-eff-row">
+        <div class="sp-eff-arrow">以前</div>
+        <div class="sp-eff-before" id="spBefore"></div>
+      </div>
+      <div class="sp-eff-row">
+        <div class="sp-eff-arrow">之後</div>
+        <div class="sp-eff-after" id="spAfter"></div>
+      </div>
+      <div class="sp-saving">
+        <div class="sp-saving-label">省下</div>
+        <div id="spSaving"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <div class="footer">
   <strong>易睫清潔坊 · 智慧營運管理系統規劃</strong>
   <br>v1.0 · 基於三次訪談逐字稿（2026-06-02 × 2, 2026-06-08）· 機密文件
 </div>
 
+<script>
+const MODULE_DATA = {
+  '客戶資料管理': {
+    phase: '第一階段', phaseClass: 'pt-1',
+    costs: [
+      { label: '開發費', val: '含第一階段總包' },
+      { label: '運營費', val: '無獨立費用（主機費已含）' },
+    ],
+    costNote: '',
+    before: '客戶偏好、進入方式、注意事項全靠 Peggy 記憶，員工接案前要逐一問',
+    after: '統一建檔，員工開卡即可查到所有需求，無需再詢問',
+    saving: '每場服務準備時間省 10 分鐘 × 80 場 ≈ 13 小時/月',
+  },
+  '系統權限控管': {
+    phase: '第一階段', phaseClass: 'pt-1',
+    costs: [
+      { label: '開發費', val: '含第一階段總包' },
+      { label: '運營費', val: '無' },
+    ],
+    costNote: '',
+    before: '無權限區分，任何人可見所有資料（含薪資、客戶聯絡方式）',
+    after: '老闆／主管／員工三層隔離，帳號開停一鍵完成，每筆操作留存紀錄',
+    saving: '資料外洩風險降到最低；帳號管理從電話通知縮為 5 分鐘線上操作',
+  },
+  '員工技能管理': {
+    phase: '第一階段', phaseClass: 'pt-1',
+    costs: [
+      { label: '開發費', val: '含第一階段總包' },
+      { label: '運營費', val: '無' },
+    ],
+    costNote: '',
+    before: 'Peggy 靠記憶記誰能做居家／細清／大掃除，派工時得逐一回想',
+    after: '技能標籤 + 首選區域建檔，派工時直接篩選，不靠記憶',
+    saving: '每次派工決策省 5–10 分鐘，錯配率大幅降低',
+  },
+  '班表管理': {
+    phase: '第一階段', phaseClass: 'pt-1',
+    costs: [
+      { label: '開發費', val: '含第一階段總包' },
+      { label: '運營費', val: '無（主機費已含）' },
+    ],
+    costNote: '',
+    before: '周日晚上開 LINE 問誰有空、誰請假沒說，排到 11 點還有空洞',
+    after: '系統拉草稿，衝突自動標紅，確認送出 20 分鐘結束，員工自己查不用問',
+    saving: '每週節省 40 分鐘 ≈ 35 小時/年；Peggy 周日晚上第一次沒打開 LINE',
+  },
+  '員工打卡系統': {
+    phase: '第一階段', phaseClass: 'pt-1',
+    costs: [
+      { label: '開發費', val: '含第一階段總包' },
+      { label: '運營費', val: '基本免費（選配 GPS 無額外費）' },
+    ],
+    costNote: '',
+    before: '工時靠員工自填或口頭回報，誤差常見，薪資糾紛難釐清',
+    after: '手機一鍵打卡，工時自動累計連動薪資，每筆異常自動提醒老闆',
+    saving: '薪資計算爭議減少 90%；員工查詢工時 30 秒完成',
+  },
+  '派工建議草稿': {
+    phase: '第三階段', phaseClass: 'pt-3',
+    costs: [
+      { label: '開發費', val: '含第三階段總包（NT$20,000–35,000）' },
+      { label: '運營費', val: '無（本地規則計算）' },
+    ],
+    costNote: '⚠ 需第一、二階段 2–3 個月真實資料沉澱，建議品質才有參考價值',
+    before: '全靠 Peggy 直覺配對，單次派工決策 30–60 分鐘，壓力大',
+    after: '系統跑初篩草稿（技能匹配 + 地理分區 + 收入平衡），Peggy 微調後送出',
+    saving: '每週派工決策省 30 分鐘 ≈ 26 小時/年；新人保護機制零失誤',
+  },
+  '服務記錄與回饋': {
+    phase: '第二階段', phaseClass: 'pt-2',
+    costs: [
+      { label: '開發費', val: '含第二階段總包' },
+      { label: '運營費', val: 'LINE OA 免費起步；超量 NT$800/月' },
+    ],
+    costNote: '',
+    before: '服務完成無記錄，下次同案場需重新問客戶偏好；口碑素材全靠回憶',
+    after: '帶隊主管填服務筆記即時入庫；完成後自動推 LINE 回饋連結收集好評',
+    saving: '每場服務準備省 5 分鐘 + 客訴率降低；正面評價直接累積為口碑素材',
+  },
+  '薪資計算模組': {
+    phase: '第二階段', phaseClass: 'pt-2',
+    costs: [
+      { label: '開發費', val: '含第二階段總包（NT$12,000–18,000）' },
+      { label: '運營費', val: '無' },
+    ],
+    costNote: '',
+    before: '每次結算人工核對 2 小時，遇到阿姨質疑只能翻 LINE 記錄或靠記憶',
+    after: '打卡資料就緒後 30 分鐘出薪資，難度獎金／護底補足自動計算',
+    saving: '36 小時/年（NT$21,600）；薪資爭議 30 秒查清楚',
+  },
+  '報價輔助模組': {
+    phase: '第二階段', phaseClass: 'pt-2',
+    costs: [
+      { label: '開發費', val: '含第二階段總包' },
+      { label: '運營費', val: '無' },
+    ],
+    costNote: '',
+    before: '報價靠感覺，每次 15 分鐘以上，沒有歷史案例對比，不知道報貴還是便宜',
+    after: '坪數 × 係數 + 耗材 + 交通自動算出區間，歷史案例參考，3 分鐘定案',
+    saving: '200 次報價 × 12 分鐘 = 40 小時/年（NT$24,000）；報出去更有信心',
+  },
+  '收款與對帳管理': {
+    phase: '第三階段', phaseClass: 'pt-3',
+    costs: [
+      { label: '開發費', val: '含第三階段總包' },
+      { label: '運營費', val: '金流手續費 2–3.5%（依實際交易量，v1 不串 API）' },
+    ],
+    costNote: 'v1 先做記錄與對帳邏輯，不強制改變收款模式',
+    before: '現金、LINE Pay、轉帳混雜，手動對帳常漏帳，欠款難追蹤',
+    after: '三種收款方式統一記錄，系統比對應收差異自動標示，欠款一眼看到',
+    saving: '每月追回 2 筆 × NT$800 = NT$19,200+/年；漏帳風險降至接近零',
+  },
+  '耗材管理模組': {
+    phase: '第三階段', phaseClass: 'pt-3',
+    costs: [
+      { label: '開發費', val: '含第三階段總包' },
+      { label: '運營費', val: '無' },
+    ],
+    costNote: '',
+    before: '耗材靠目視管理，常發現臨時缺貨才緊急採購，成本計算靠估算',
+    after: '庫存低於警戒量自動提醒，每場服務連動耗材成本，毛利計算精準',
+    saving: '緊急補貨溢價降低；成本核算從「月底估算」變「每場即時計算」',
+  },
+  '毛利報表': {
+    phase: '第四階段', phaseClass: 'pt-4',
+    costs: [
+      { label: '開發費', val: '含第四階段總包' },
+      { label: '運營費', val: '無（依賴前三階段資料）' },
+    ],
+    costNote: '需耗材管理模組上線後才能計算完整毛利',
+    before: '不知道哪類服務最賺，定價憑感覺，高毛利客戶和高成本客戶無法區分',
+    after: '服務收入 - 薪資成本 - 耗材成本 = 單場毛利，月報 + 服務類型分析',
+    saving: '定價決策有數字依據；識別高毛利服務類型，接案優先順序更精準',
+  },
+  '人事成本試算': {
+    phase: '第四階段', phaseClass: 'pt-4',
+    costs: [
+      { label: '開發費', val: '含第四階段總包' },
+      { label: '運營費', val: '無' },
+    ],
+    costNote: '⚠ 僅供內部成本模擬，實際合規需由會計師確認',
+    before: '正規化試算靠 Excel 人工操作，容易出錯，無法快速比較多種薪資結構',
+    after: '多薪資結構模擬一鍵比較，協助評估正規化成本與時機',
+    saving: '財務決策風險降低；避免因試算錯誤導致正規化後成本超預算',
+  },
+  '多據點管理': {
+    phase: '第四階段', phaseClass: 'pt-4',
+    costs: [
+      { label: '開發費', val: '第四階段額外開發（NT$15,000–25,000）' },
+      { label: '運營費', val: '主機費依流量升級，+NT$2,000–8,000/年' },
+    ],
+    costNote: '第一階段已預留 branch_id 架構，擴張時無需改底層',
+    before: '外縣市只能用 LINE 管理，無法統一查看，資料散落各地',
+    after: '各地負責人管當地員工班表收款，老闆跨區查看，資料安全隔離',
+    saving: '擴張時無需重建系統；管理時間從「逐一 LINE 問」到「系統一鍵查」',
+  },
+};
+
+const PHASE_BADGE_STYLE = {
+  'pt-1': 'background:#E8F5EE;color:#1a6b3c;border:1px solid #c2deca;',
+  'pt-2': 'background:#EBF4F8;color:#2A6A8A;border:1px solid #b8d5e8;',
+  'pt-3': 'background:#FBF4E6;color:#B8923A;border:1px solid #e0ceA0;',
+  'pt-4': 'background:#F0EBF8;color:#6A4A9A;border:1px solid #c9b8e8;',
+};
+
+function openPanel(moduleName) {
+  const d = MODULE_DATA[moduleName];
+  if (!d) return;
+  document.getElementById('spName').textContent = moduleName;
+  const badge = document.getElementById('spBadge');
+  badge.textContent = d.phase;
+  badge.style.cssText = (PHASE_BADGE_STYLE[d.phaseClass] || '') + ';font-size:10px;font-weight:700;padding:2px 9px;border-radius:10px;';
+  const rows = d.costs.map(c =>
+    `<div class="sp-cost-row"><span class="sp-cost-label">${c.label}</span><span class="sp-cost-val">${c.val}</span></div>`
+  ).join('');
+  document.getElementById('spCostRows').innerHTML = rows;
+  document.getElementById('spCostNote').textContent = d.costNote;
+  document.getElementById('spBefore').textContent = d.before;
+  document.getElementById('spAfter').textContent = d.after;
+  document.getElementById('spSaving').textContent = d.saving;
+  document.getElementById('spOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('spDrawer').classList.add('open'), 10);
+}
+
+function closePanel() {
+  document.getElementById('spDrawer').classList.remove('open');
+  document.getElementById('spOverlay').classList.remove('open');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.module-card').forEach(card => {
+    const nameEl = card.querySelector('.module-name');
+    if (!nameEl) return;
+    const name = nameEl.textContent.trim();
+    if (!MODULE_DATA[name]) return;
+    card.addEventListener('click', () => openPanel(name));
+    const hint = document.createElement('div');
+    hint.className = 'module-card-hint';
+    hint.innerHTML = '▸ 點擊查看費用與效率';
+    card.appendChild(hint);
+  });
+});
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+</script>
 </body>
 </html>
