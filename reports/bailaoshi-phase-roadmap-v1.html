@@ -1178,10 +1178,13 @@
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
         <div>
           <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px;">估價計算器</div>
-          <div id="kg-est-title" style="font-size:16px;font-weight:700;color:var(--ink);line-height:1.4;"></div>
-          <div style="font-size:11px;color:var(--mist);margin-top:4px;">含本模組 + 所有前置依賴（遞迴追蹤）</div>
+          <div id="kg-est-header" style="font-size:16px;font-weight:700;color:var(--ink);line-height:1.4;">尚未選擇任何模組</div>
+          <div style="font-size:11px;color:var(--mist);margin-top:4px;">多選目標 → 合併前置鏈，共用模組不重複計算</div>
         </div>
-        <span onclick="document.getElementById('kg-estimator').style.display='none'" style="cursor:pointer;color:var(--mist);font-size:22px;line-height:1;padding:2px 6px;margin-left:12px;flex-shrink:0;">×</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:12px;">
+          <button onclick="clearEstimate()" style="padding:4px 12px;border-radius:6px;background:transparent;color:var(--mist);border:1px solid var(--border);font-size:11px;cursor:pointer;">清除全選</button>
+          <span onclick="if(selectedForEstimate.size===0){document.getElementById('kg-estimator').style.display='none';}" style="cursor:pointer;color:var(--mist);font-size:22px;line-height:1;padding:2px 6px;">×</span>
+        </div>
       </div>
       <div id="kg-est-list" style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;max-height:320px;overflow-y:auto;"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#EEF6FF 0%,#F0F4FF 100%);border-radius:10px;padding:14px 18px;margin-top:4px;">
@@ -1231,6 +1234,9 @@
       <div id="kg-d-savings-label" style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">每月省人力費</div>
       <div id="kg-d-savings" style="font-size:13px;font-weight:700;color:#B45C00;"></div>
     </div>
+  </div>
+  <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);">
+    <button id="kg-add-to-estimate" onclick="addToEstimate()" style="width:100%;padding:9px;border-radius:8px;background:#1A5DC8;color:#fff;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.15s,color 0.15s;">+ 加入估價</button>
   </div>
 </div>
 
@@ -1436,6 +1442,8 @@ const nSel=g.append('g').selectAll('.kg-node').data(nodes).join('g').attr('class
 nSel.append('circle').attr('r',23).attr('fill',d=>PC[d.phase]).attr('fill-opacity',0.88).attr('stroke','#fff');
 nSel.filter(d=>d.legal).append('circle').attr('class','risk-ring').attr('r',27)
   .attr('fill','none').attr('stroke','#C4502A').attr('stroke-width',1.8).attr('stroke-dasharray','4,3').attr('stroke-opacity',0.75);
+nSel.append('circle').attr('class','estimate-ring').attr('r',31)
+  .attr('fill','none').attr('stroke','transparent').attr('stroke-width',2.5).attr('stroke-dasharray','none');
 nSel.append('text').attr('class','node-icon').attr('dy','0.35em').text(d=>d.icon);
 nSel.each(function(d){
   d.label.split('\n').forEach((line,i)=>{
@@ -1462,6 +1470,51 @@ function ds(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
 function dd(e,d){d.fx=e.x;d.fy=e.y;}
 function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
 let selNode=null,selAnc=new Set();
+let currentPanelNodeId=null,selectedForEstimate=new Set();
+function addToEstimate(){
+  if(!currentPanelNodeId)return;
+  const id=currentPanelNodeId;
+  if(selectedForEstimate.has(id))selectedForEstimate.delete(id);else selectedForEstimate.add(id);
+  refreshAddBtn();refreshEstimateRings();renderEstimator();
+}
+function clearEstimate(){
+  selectedForEstimate.clear();refreshAddBtn();refreshEstimateRings();renderEstimator();
+}
+function refreshAddBtn(){
+  const btn=document.getElementById('kg-add-to-estimate');if(!btn||!currentPanelNodeId)return;
+  const inSet=selectedForEstimate.has(currentPanelNodeId);
+  btn.textContent=inSet?'✓ 已加入估價':'+ 加入估價';
+  btn.style.background=inSet?'#EEF6FF':'#1A5DC8';btn.style.color=inSet?'#1A5DC8':'#fff';
+  btn.style.border=inSet?'1.5px solid #1A5DC8':'none';
+}
+function refreshEstimateRings(){
+  nSel.select('.estimate-ring').attr('stroke',n=>selectedForEstimate.has(n.id)?'#F59E0B':'transparent');
+}
+function renderEstimator(){
+  if(selectedForEstimate.size===0){document.getElementById('kg-estimator').style.display='none';return;}
+  const allAnc=new Set();
+  selectedForEstimate.forEach(id=>getAnc(id).forEach(a=>allAnc.add(a)));
+  const phOrd={P0:0,P1:1,P2:2,P3:3,P4:4,P5:5,P6:6};
+  const ancNodes=[...allAnc].map(id=>nodes.find(n=>n.id===id)).filter(Boolean);
+  ancNodes.sort((a,b)=>(phOrd[a.phase]||0)-(phOrd[b.phase]||0));
+  const totalCost=ancNodes.reduce((s,n)=>s+nodeCost(n),0);
+  document.getElementById('kg-est-header').textContent='已選 '+selectedForEstimate.size+' 個目標模組';
+  document.getElementById('kg-est-count').textContent=ancNodes.length+' 個模組（目標 + 前置依賴）';
+  document.getElementById('kg-est-list').innerHTML=ancNodes.map(n=>{
+    const c=nodeCost(n);const isTarget=selectedForEstimate.has(n.id);
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:'+(isTarget?'#EEF6FF':'#F8F8FB')+';margin-bottom:1px;">'
+      +'<div style="display:flex;align-items:center;gap:8px;min-width:0;">'
+      +'<span style="font-size:10px;background:'+PC[n.phase]+';color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">'+n.phase+'</span>'
+      +'<span style="font-size:12px;font-weight:'+(isTarget?700:500)+';color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+n.short+'</span>'
+      +(isTarget?'<span style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1px solid #C3D8F7;border-radius:3px;padding:0 5px;flex-shrink:0;">目標</span>':'')
+      +'</div>'
+      +'<span style="font-size:12px;font-weight:600;color:'+(c?'#1A5DC8':'var(--mist)')+';flex-shrink:0;margin-left:12px;">'+(c?'NT$'+c.toLocaleString():'—')+'</span>'
+      +'</div>';
+  }).join('');
+  document.getElementById('kg-est-total').textContent=totalCost?'NT$'+totalCost.toLocaleString():'—';
+  document.getElementById('kg-estimator').style.display='block';
+  setTimeout(()=>document.getElementById('kg-estimator').scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
 function getAnc(id){
   const s=new Set([id]);const q=[id];
   while(q.length){const c=q.shift();links.forEach(l=>{if(l.target.id===c&&!s.has(l.source.id)){s.add(l.source.id);q.push(l.source.id);}});}
@@ -1482,7 +1535,7 @@ nSel
   .on('mouseleave',function(){if(selNode){applyAnc(selAnc);}else{nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);}})
   .on('click',function(ev,d){
     ev.stopPropagation();
-    if(selNode===d.id){selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';document.getElementById('kg-estimator').style.display='none';return;}
+    if(selNode===d.id){selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';currentPanelNodeId=null;return;}
     selNode=d.id;selAnc=getAnc(d.id);applyAnc(selAnc);
     const panel=document.getElementById('kg-detail');
     document.getElementById('kg-d-phase').textContent=`${d.phase} · ${d.unit}`;
@@ -1538,30 +1591,9 @@ nSel
       meta.style.display='block';
     }else{meta.style.display='none';}
     panel.style.display='block';
-    // 估價計算器
-    const ancSet=getAnc(d.id);
-    const ancNodes=[...ancSet].map(id=>nodes.find(n=>n.id===id)).filter(Boolean);
-    const phOrd={P0:0,P1:1,P2:2,P3:3,P4:4,P5:5,P6:6};
-    ancNodes.sort((a,b)=>(phOrd[a.phase]||0)-(phOrd[b.phase]||0));
-    const totalCost=ancNodes.reduce((s,n)=>s+nodeCost(n),0);
-    document.getElementById('kg-est-title').textContent=d.short+' 的完整前置清單';
-    document.getElementById('kg-est-count').textContent=ancNodes.length+' 個模組';
-    document.getElementById('kg-est-list').innerHTML=ancNodes.map(n=>{
-      const c=nodeCost(n);const isSelf=(n.id===d.id);
-      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:'+(isSelf?'#EEF6FF':'#F8F8FB')+';margin-bottom:1px;">'
-        +'<div style="display:flex;align-items:center;gap:8px;min-width:0;">'
-        +'<span style="font-size:10px;background:'+PC[n.phase]+';color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">'+n.phase+'</span>'
-        +'<span style="font-size:12px;font-weight:'+(isSelf?700:500)+';color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+n.short+'</span>'
-        +(isSelf?'<span style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1px solid #C3D8F7;border-radius:3px;padding:0 5px;flex-shrink:0;">目標</span>':'')
-        +'</div>'
-        +'<span style="font-size:12px;font-weight:600;color:'+(c?'#1A5DC8':'var(--mist)')+';flex-shrink:0;margin-left:12px;">'+(c?'NT$'+c.toLocaleString():'—')+'</span>'
-        +'</div>';
-    }).join('');
-    document.getElementById('kg-est-total').textContent=totalCost?'NT$'+totalCost.toLocaleString():'—';
-    document.getElementById('kg-estimator').style.display='block';
-    setTimeout(()=>document.getElementById('kg-estimator').scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+    currentPanelNodeId=d.id;refreshAddBtn();
   });
-svg.on('click',()=>{selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';document.getElementById('kg-estimator').style.display='none';});
+svg.on('click',()=>{selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';currentPanelNodeId=null;});
 let aP=null;
 document.querySelectorAll('.kg-btn[data-kgphase]').forEach(btn=>{
   btn.addEventListener('click',function(){
