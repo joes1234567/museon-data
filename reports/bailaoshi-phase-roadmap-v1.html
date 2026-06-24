@@ -1215,6 +1215,10 @@
       <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">完成本模組後剩餘</div>
       <div id="kg-d-remaining" style="font-size:13px;font-weight:700;color:#1A7A3A;"></div>
     </div>
+    <div id="kg-d-savings-box" style="display:none;margin-top:4px;background:#FFF8E6;border-radius:7px;padding:8px 3px;text-align:center;">
+      <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">每月幫客戶省費</div>
+      <div id="kg-d-savings" style="font-size:13px;font-weight:700;color:#B45C00;"></div>
+    </div>
   </div>
 </div>
 
@@ -1356,6 +1360,8 @@ const links=[
   {source:'MOD21',target:'MOD23',type:'depends'},{source:'MOD19',target:'MOD23',type:'depends'},
 ];
 const TOTAL_COST=nodes.reduce((s,n)=>s+nodeCost(n),0);
+const HOURLY_RATE=213;
+const SAVINGS_HR={'MOD14':1,'MOD04':0.5,'MOD01a':1,'MOD02':0.5,'MOD01b':1,'MOD03':4,'MOD06':3,'MOD08':6,'MOD09':3,'MOD07':4,'MOD33b':1,'MOD24':3,'MOD10':4,'MOD11':8,'MOD12':4,'MOD15':6,'MOD16':10,'MOD29':2,'MOD27':2,'MOD30':1,'MOD31':1,'MOD05':4,'MOD18':5,'MOD13':3,'MOD26':2,'MOD28':3,'MOD32':1,'MOD33f':2,'MOD34':4,'MOD35':3,'MOD23':8,'MOD17':5,'MOD12x':3,'MOD18x':3,'API01':2,'API02':2,'API03':2,'API04':2,'MOD19':5,'MOD20':10,'MOD21':15,'MOD22':4,'MOD25':6};
 const svg=d3.select('svg#kg-graph').attr('viewBox',`0 0 ${W} ${H}`).attr('height',Math.min(840,window.innerHeight-150));
 const g=svg.append('g');
 const zoom=d3.zoom().scaleExtent([0.25,4]).on('zoom',e=>g.attr('transform',e.transform));
@@ -1461,7 +1467,10 @@ nSel
       const cost=(d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
       const costBox=document.getElementById('kg-d-cost-box');
       const remBox=document.getElementById('kg-d-remaining-box');
+      const savingsBox=document.getElementById('kg-d-savings-box');
+      const savingsAmt=SAVINGS_HR[d.id]?Math.round(SAVINGS_HR[d.id]*HOURLY_RATE):null;
       if(cost){costBox.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost.toLocaleString();remBox.style.display='';document.getElementById('kg-d-remaining').textContent='NT$'+(TOTAL_COST-cost).toLocaleString();}else{costBox.style.display='none';remBox.style.display='none';}
+      if(savingsAmt){savingsBox.style.display='';document.getElementById('kg-d-savings').textContent='約 NT$'+savingsAmt.toLocaleString()+'/月';}else{savingsBox.style.display='none';}
     }else{document.getElementById('kg-d-meta').style.display='none';}
     const deps=links.filter(l=>l.target.id===d.id);
     const enables=links.filter(l=>l.source.id===d.id);
@@ -1489,7 +1498,10 @@ nSel
       const cost2=(d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
       const costBox2=document.getElementById('kg-d-cost-box');
       const remBox2=document.getElementById('kg-d-remaining-box');
+      const savingsBox2=document.getElementById('kg-d-savings-box');
+      const savingsAmt2=SAVINGS_HR[d.id]?Math.round(SAVINGS_HR[d.id]*HOURLY_RATE):null;
       if(cost2){costBox2.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost2.toLocaleString();remBox2.style.display='';document.getElementById('kg-d-remaining').textContent='NT$'+(TOTAL_COST-cost2).toLocaleString();}else{costBox2.style.display='none';remBox2.style.display='none';}
+      if(savingsAmt2){savingsBox2.style.display='';document.getElementById('kg-d-savings').textContent='約 NT$'+savingsAmt2.toLocaleString()+'/月';}else{savingsBox2.style.display='none';}
       meta.style.display='block';
     }else{meta.style.display='none';}
     panel.style.display='block';
