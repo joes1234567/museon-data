@@ -1174,11 +1174,6 @@
   </div>
 </div>
 
-<div id="kg-tooltip" style="position:fixed;display:none;background:#12121A;color:rgba(255,255,255,0.92);font-size:12px;line-height:1.85;padding:12px 16px;border-radius:10px;max-width:280px;z-index:9999;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
-  <div class="tt-phase" id="kg-tt-phase"></div>
-  <div class="tt-name"  id="kg-tt-name"></div>
-  <div class="tt-desc"  id="kg-tt-desc"></div>
-</div>
 
 <div id="kg-detail" style="display:none;position:fixed;right:16px;top:110px;width:272px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;box-shadow:0 8px 32px rgba(0,0,0,0.12);z-index:200;font-size:13px;max-height:calc(100vh - 130px);overflow-y:auto;">
   <span onclick="document.getElementById('kg-detail').style.display='none'" style="position:absolute;right:12px;top:10px;cursor:pointer;color:var(--mist);font-size:18px;line-height:1;">×</span>
@@ -1210,10 +1205,6 @@
     <div id="kg-d-cost-box" style="display:none;margin-top:5px;background:#EEF6FF;border-radius:7px;padding:8px 3px;text-align:center;">
       <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">模組費用</div>
       <div id="kg-d-cost" style="font-size:13px;font-weight:700;color:#1A5DC8;"></div>
-    </div>
-    <div id="kg-d-remaining-box" style="display:none;margin-top:4px;background:#F0FBF4;border-radius:7px;padding:8px 3px;text-align:center;">
-      <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">完成本模組後剩餘</div>
-      <div id="kg-d-remaining" style="font-size:13px;font-weight:700;color:#1A7A3A;"></div>
     </div>
     <div id="kg-d-savings-box" style="display:none;margin-top:4px;background:#FFF8E6;border-radius:7px;padding:8px 3px;text-align:center;">
       <div id="kg-d-savings-label" style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">每月省人力費</div>
@@ -1449,10 +1440,6 @@ function tick(){
 function ds(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
 function dd(e,d){d.fx=e.x;d.fy=e.y;}
 function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
-const tip=document.getElementById('kg-tooltip');
-const ttP=document.getElementById('kg-tt-phase');
-const ttN=document.getElementById('kg-tt-name');
-const ttD=document.getElementById('kg-tt-desc');
 let selNode=null,selAnc=new Set();
 function getAnc(id){
   const s=new Set([id]);const q=[id];
@@ -1465,15 +1452,13 @@ function applyAnc(s){
 }
 nSel
   .on('mouseenter',function(ev,d){
-    if(selNode){ttP.style.color=PC[d.phase];ttP.textContent=`${d.phase} · ${d.unit}`;ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';return;}
+    if(selNode){return;}
     const conn=new Set([d.id]);
     links.forEach(l=>{if(l.source.id===d.id)conn.add(l.target.id);if(l.target.id===d.id)conn.add(l.source.id);});
     nSel.classed('dim',n=>!conn.has(n.id));
     lSel.classed('dim',l=>l.source.id!==d.id&&l.target.id!==d.id).classed('highlight',l=>l.source.id===d.id||l.target.id===d.id);
-    ttP.style.color=PC[d.phase];ttP.textContent=`${d.phase} · ${d.unit}`;ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';
   })
-  .on('mousemove',function(ev){tip.style.left=Math.min(ev.clientX+18,window.innerWidth-300)+'px';tip.style.top=(ev.clientY-50)+'px';})
-  .on('mouseleave',function(){if(selNode){applyAnc(selAnc);}else{nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);}tip.style.display='none';})
+  .on('mouseleave',function(){if(selNode){applyAnc(selAnc);}else{nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);}})
   .on('click',function(ev,d){
     ev.stopPropagation();
     if(selNode===d.id){selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';return;}
@@ -1499,8 +1484,7 @@ nSel
       }
       const cost=(d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
       const costBox=document.getElementById('kg-d-cost-box');
-      const remBox=document.getElementById('kg-d-remaining-box');
-      if(cost){costBox.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost.toLocaleString();remBox.style.display='';document.getElementById('kg-d-remaining').textContent='NT$'+(TOTAL_COST-cost).toLocaleString();}else{costBox.style.display='none';remBox.style.display='none';}
+      if(cost){costBox.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost.toLocaleString();}else{costBox.style.display='none';}
       showROI(d.id);
     }else{document.getElementById('kg-d-meta').style.display='none';}
     const deps=links.filter(l=>l.target.id===d.id);
@@ -1528,8 +1512,7 @@ nSel
       }
       const cost2=(d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
       const costBox2=document.getElementById('kg-d-cost-box');
-      const remBox2=document.getElementById('kg-d-remaining-box');
-      if(cost2){costBox2.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost2.toLocaleString();remBox2.style.display='';document.getElementById('kg-d-remaining').textContent='NT$'+(TOTAL_COST-cost2).toLocaleString();}else{costBox2.style.display='none';remBox2.style.display='none';}
+      if(cost2){costBox2.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost2.toLocaleString();}else{costBox2.style.display='none';}
       showROI(d.id);
       meta.style.display='block';
     }else{meta.style.display='none';}
