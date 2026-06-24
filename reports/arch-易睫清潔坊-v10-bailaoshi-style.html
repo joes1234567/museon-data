@@ -1148,6 +1148,12 @@
     <div id="kg-tt-phase"></div>
     <div id="kg-tt-name"></div>
     <div id="kg-tt-desc"></div>
+    <div id="kg-tt-meta" style="margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.15); display:grid; grid-template-columns:1fr 1fr; gap:5px 14px; font-size:11px;">
+      <div><div style="opacity:0.5; margin-bottom:2px;">ROI 情境</div><div id="kg-tt-roi" style="font-weight:600; opacity:0.92;"></div></div>
+      <div><div style="opacity:0.5; margin-bottom:2px;">週數</div><div id="kg-tt-weeks" style="font-weight:600; opacity:0.92;"></div></div>
+      <div><div style="opacity:0.5; margin-bottom:2px;">驗收點</div><div id="kg-tt-checkpoints" style="font-weight:600; opacity:0.92;"></div></div>
+      <div><div style="opacity:0.5; margin-bottom:2px;">係數</div><div id="kg-tt-multiplier" style="font-weight:600; opacity:0.92;"></div></div>
+    </div>
   </div>
 
   <div id="kg-detail">
@@ -1155,6 +1161,12 @@
     <div class="kd-phase" id="kg-d-phase"></div>
     <div class="kd-name"  id="kg-d-name"></div>
     <div class="kd-unit"  id="kg-d-unit"></div>
+    <div id="kg-d-meta" style="display:grid; grid-template-columns:1fr 1fr; gap:8px 12px; margin:10px 0; padding:10px 12px; background:#F7F5F0; border-radius:8px; font-size:12px;">
+      <div><div style="font-size:10px;color:#9898A8;font-weight:700;letter-spacing:0.8px;margin-bottom:3px;">ROI 情境</div><div id="kg-d-roi" style="color:#12121A;font-weight:600;line-height:1.4;"></div></div>
+      <div><div style="font-size:10px;color:#9898A8;font-weight:700;letter-spacing:0.8px;margin-bottom:3px;">週數</div><div id="kg-d-weeks" style="color:#12121A;font-weight:600;"></div></div>
+      <div><div style="font-size:10px;color:#9898A8;font-weight:700;letter-spacing:0.8px;margin-bottom:3px;">驗收點</div><div id="kg-d-checkpoints" style="color:#12121A;font-weight:600;"></div></div>
+      <div><div style="font-size:10px;color:#9898A8;font-weight:700;letter-spacing:0.8px;margin-bottom:3px;">係數</div><div id="kg-d-multiplier" style="color:#12121A;font-weight:600;"></div></div>
+    </div>
     <div id="kg-d-deps-sec"    style="display:none"><div class="kd-sec">前置依賴</div><ul class="kd-list" id="kg-d-deps"></ul></div>
     <div id="kg-d-enables-sec" style="display:none"><div class="kd-sec">解鎖模組</div><ul class="kd-list" id="kg-d-enables"></ul></div>
   </div>
@@ -1167,20 +1179,20 @@
     const W = 1100, H = 600;
 
     const nodes = [
-      {id:'M01', short:'系統權限控管',   label:'系統\n權限控管',   phase:'P1', unit:'客戶與案場', icon:'🔐', desc:'三層角色設定，帳號開通停用，操作記錄留存——所有模組的安全地基'},
-      {id:'M02', short:'客戶資料管理',   label:'客戶\n資料管理',   phase:'P1', unit:'客戶與案場', icon:'👤', desc:'客戶建檔、案場設定、進入方式、清潔偏好、歷史服務紀錄查詢，新員工交接不問 Peggy'},
-      {id:'M03', short:'員工技能管理',   label:'員工\n技能管理',   phase:'P1', unit:'員工與排班', icon:'⭐', desc:'技能標籤、年資等級、區域偏好、排班限制，派工不靠記憶靠系統'},
-      {id:'M04', short:'班表管理',       label:'班表\n管理',       phase:'P1', unit:'員工與排班', icon:'📋', desc:'手動排班介面、臨時請假調度、衝突自動提醒、員工查班免問老闆，排班從周日噩夢變成 20 分鐘例行'},
-      {id:'M05', short:'員工打卡系統',   label:'員工\n打卡系統',   phase:'P1', unit:'員工與排班', icon:'⏱️', desc:'手機網頁打卡、工時自動計算、異常自動提醒（可選 GPS），工時紀錄消滅薪資糾紛'},
-      {id:'M06', short:'服務記錄與回饋', label:'服務記錄\n與回饋', phase:'P2', unit:'派工與服務', icon:'📝', desc:'帶隊主管服務筆記、客戶知識庫累積、LINE 回饋連結推送，每場服務留痕跡口碑可積累'},
-      {id:'M07', short:'薪資計算模組',   label:'薪資\n計算模組',   phase:'P2', unit:'財務與報價', icon:'💰', desc:'工時自動計算、難度獎金、稱讚獎金、護底補足、半月結算，結算從 2 小時縮到 30 分鐘'},
-      {id:'M08', short:'報價輔助模組',   label:'報價\n輔助模組',   phase:'P2', unit:'財務與報價', icon:'💲', desc:'坪數係數計算、耗材費用加算、歷史案例參考區間、交通費計算，報出去的價格有依據不靠感覺'},
-      {id:'M09', short:'派工建議草稿',   label:'派工\n建議草稿',   phase:'P3', unit:'派工與服務', icon:'🎯', desc:'技能匹配初篩、地理路由優化、收入平衡、新人保護機制，草稿取代從零想起 Peggy 只需確認'},
-      {id:'M10', short:'收款與對帳管理', label:'收款\n對帳管理',   phase:'P3', unit:'財務與報價', icon:'🧾', desc:'三種收款方式記錄、應收金額比對、差異自動標示、欠款追蹤清單，漏帳從此有記錄可查'},
-      {id:'M11', short:'耗材管理模組',   label:'耗材\n管理模組',   phase:'P3', unit:'擴張與分析', icon:'📦', desc:'庫存追蹤、低庫存自動提醒、每場服務耗材成本連動、毛利計算基礎，清潔劑快用完系統先告訴你'},
-      {id:'M12', short:'毛利報表',       label:'毛利\n報表',       phase:'P4', unit:'擴張與分析', icon:'📊', desc:'單場毛利計算、月報損益分析、服務類型分析、員工效率報告，哪種服務最賺數字說話'},
-      {id:'M13', short:'人事成本試算',   label:'人事\n成本試算',   phase:'P4', unit:'擴張與分析', icon:'🧮', desc:'多薪資結構試算、正規化成本模擬、分批導入評估，正規化前先算清楚划不划算'},
-      {id:'M14', short:'多據點管理',     label:'多據點\n管理',     phase:'P4', unit:'擴張與分析', icon:'🏢', desc:'外縣市帳號管理、跨區資料隔離、老闆跨區總覽，台南本部穩定後啟動——開外縣市那天系統已準備好'},
+      {id:'M01', short:'系統權限控管',   label:'系統\n權限控管',   phase:'P1', unit:'客戶與案場', icon:'🔐', desc:'三層角色設定，帳號開通停用，操作記錄留存——所有模組的安全地基',           roi:'所有模組的安全地基',              weeks:'1 週', checkpoints:'2 點', multiplier:'×1.0'},
+      {id:'M02', short:'客戶資料管理',   label:'客戶\n資料管理',   phase:'P1', unit:'客戶與案場', icon:'👤', desc:'客戶建檔、案場設定、進入方式、清潔偏好、歷史服務紀錄查詢，新員工交接不問 Peggy', roi:'新員工交接不問 Peggy',             weeks:'2 週', checkpoints:'3 點', multiplier:'×1.0'},
+      {id:'M03', short:'員工技能管理',   label:'員工\n技能管理',   phase:'P1', unit:'員工與排班', icon:'⭐', desc:'技能標籤、年資等級、區域偏好、排班限制，派工不靠記憶靠系統',               roi:'派工不靠記憶靠系統',              weeks:'1 週', checkpoints:'2 點', multiplier:'×1.0'},
+      {id:'M04', short:'班表管理',       label:'班表\n管理',       phase:'P1', unit:'員工與排班', icon:'📋', desc:'手動排班介面、臨時請假調度、衝突自動提醒、員工查班免問老闆，排班從周日噩夢變成 20 分鐘例行', roi:'排班從周日噩夢變成 20 分鐘例行', weeks:'2 週', checkpoints:'3 點', multiplier:'×1.1'},
+      {id:'M05', short:'員工打卡系統',   label:'員工\n打卡系統',   phase:'P1', unit:'員工與排班', icon:'⏱️', desc:'手機網頁打卡、工時自動計算、異常自動提醒（可選 GPS），工時紀錄消滅薪資糾紛', roi:'工時紀錄消滅薪資糾紛',            weeks:'1 週', checkpoints:'3 點', multiplier:'×1.1'},
+      {id:'M06', short:'服務記錄與回饋', label:'服務記錄\n與回饋', phase:'P2', unit:'派工與服務', icon:'📝', desc:'帶隊主管服務筆記、客戶知識庫累積、LINE 回饋連結推送，每場服務留痕跡口碑可積累', roi:'每場服務留痕跡，口碑可積累',      weeks:'1 週', checkpoints:'2 點', multiplier:'×1.0'},
+      {id:'M07', short:'薪資計算模組',   label:'薪資\n計算模組',   phase:'P2', unit:'財務與報價', icon:'💰', desc:'工時自動計算、難度獎金、稱讚獎金、護底補足、半月結算，結算從 2 小時縮到 30 分鐘', roi:'半月結算從 2 小時縮到 30 分鐘',   weeks:'2 週', checkpoints:'3 點', multiplier:'×1.15'},
+      {id:'M08', short:'報價輔助模組',   label:'報價\n輔助模組',   phase:'P2', unit:'財務與報價', icon:'💲', desc:'坪數係數計算、耗材費用加算、歷史案例參考區間、交通費計算，報出去的價格有依據不靠感覺', roi:'報出去的價格有依據，不靠感覺',   weeks:'1 週', checkpoints:'2 點', multiplier:'×1.1'},
+      {id:'M09', short:'派工建議草稿',   label:'派工\n建議草稿',   phase:'P3', unit:'派工與服務', icon:'🎯', desc:'技能匹配初篩、地理路由優化、收入平衡、新人保護機制，草稿取代從零想起 Peggy 只需確認', roi:'草稿取代從零想起，Peggy 只需確認', weeks:'3 週', checkpoints:'3 點', multiplier:'×1.2'},
+      {id:'M10', short:'收款與對帳管理', label:'收款\n對帳管理',   phase:'P3', unit:'財務與報價', icon:'🧾', desc:'三種收款方式記錄、應收金額比對、差異自動標示、欠款追蹤清單，漏帳從此有記錄可查', roi:'漏帳從此有記錄可查',              weeks:'2 週', checkpoints:'3 點', multiplier:'×1.1'},
+      {id:'M11', short:'耗材管理模組',   label:'耗材\n管理模組',   phase:'P3', unit:'擴張與分析', icon:'📦', desc:'庫存追蹤、低庫存自動提醒、每場服務耗材成本連動、毛利計算基礎，清潔劑快用完系統先告訴你', roi:'清潔劑快用完系統先告訴你',       weeks:'2 週', checkpoints:'2 點', multiplier:'×1.0'},
+      {id:'M12', short:'毛利報表',       label:'毛利\n報表',       phase:'P4', unit:'擴張與分析', icon:'📊', desc:'單場毛利計算、月報損益分析、服務類型分析、員工效率報告，哪種服務最賺數字說話', roi:'哪種服務最賺，數字說話',         weeks:'2 週', checkpoints:'3 點', multiplier:'×1.1'},
+      {id:'M13', short:'人事成本試算',   label:'人事\n成本試算',   phase:'P4', unit:'擴張與分析', icon:'🧮', desc:'多薪資結構試算、正規化成本模擬、分批導入評估，正規化前先算清楚划不划算',   roi:'正規化前先算清楚划不划算',       weeks:'2 週', checkpoints:'2 點', multiplier:'×1.1'},
+      {id:'M14', short:'多據點管理',     label:'多據點\n管理',     phase:'P4', unit:'擴張與分析', icon:'🏢', desc:'外縣市帳號管理、跨區資料隔離、老闆跨區總覽，台南本部穩定後啟動——開外縣市那天系統已準備好', roi:'開外縣市那天系統已準備好',       weeks:'3 週', checkpoints:'3 點', multiplier:'×1.2'},
     ];
 
     const links = [
@@ -1295,9 +1307,13 @@
         linkSel.classed('dim',       l => l.source.id !== d.id && l.target.id !== d.id)
                .classed('highlight', l => l.source.id === d.id || l.target.id === d.id);
         document.getElementById('kg-tt-phase').style.color = PHASE_COLORS[d.phase];
-        document.getElementById('kg-tt-phase').textContent = d.phase + ' · ' + d.unit;
-        document.getElementById('kg-tt-name').textContent  = d.short;
-        document.getElementById('kg-tt-desc').textContent  = d.desc;
+        document.getElementById('kg-tt-phase').textContent      = d.phase + ' · ' + d.unit;
+        document.getElementById('kg-tt-name').textContent       = d.short;
+        document.getElementById('kg-tt-desc').textContent       = d.desc;
+        document.getElementById('kg-tt-roi').textContent        = d.roi;
+        document.getElementById('kg-tt-weeks').textContent      = d.weeks;
+        document.getElementById('kg-tt-checkpoints').textContent = d.checkpoints;
+        document.getElementById('kg-tt-multiplier').textContent = d.multiplier;
         tip.style.display = 'block';
       })
       .on('mousemove', function(ev) {
@@ -1315,8 +1331,12 @@
         const dph   = document.getElementById('kg-d-phase');
         dph.textContent = d.phase + ' · ' + d.unit;
         dph.style.color = PHASE_COLORS[d.phase];
-        document.getElementById('kg-d-name').textContent = d.short;
-        document.getElementById('kg-d-unit').textContent = d.desc;
+        document.getElementById('kg-d-name').textContent        = d.short;
+        document.getElementById('kg-d-unit').textContent        = d.desc;
+        document.getElementById('kg-d-roi').textContent         = d.roi;
+        document.getElementById('kg-d-weeks').textContent       = d.weeks;
+        document.getElementById('kg-d-checkpoints').textContent = d.checkpoints;
+        document.getElementById('kg-d-multiplier').textContent  = d.multiplier;
 
         const deps    = links.filter(l => l.target.id === d.id);
         const enables = links.filter(l => l.source.id === d.id);
