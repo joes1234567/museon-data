@@ -1211,6 +1211,10 @@
       <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">模組費用</div>
       <div id="kg-d-cost" style="font-size:13px;font-weight:700;color:#1A5DC8;"></div>
     </div>
+    <div id="kg-d-remaining-box" style="display:none;margin-top:4px;background:#F0FBF4;border-radius:7px;padding:8px 3px;text-align:center;">
+      <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">完成本模組後剩餘</div>
+      <div id="kg-d-remaining" style="font-size:13px;font-weight:700;color:#1A7A3A;"></div>
+    </div>
   </div>
 </div>
 
@@ -1271,6 +1275,7 @@ const PC={P0:'#7C3AED',P1:'#C4502A',P2:'#B8923A',P3:'#2A7A6E',P4:'#5A5A6E',P5:'#
 const PX={P0:110,P1:295,P2:490,P3:680,P4:860,P5:1030,P6:1205};
 const PL={P0:'P0 系統底層',P1:'P1 核心作業',P2:'P2 財務合規',P3:'P3 深化內部',P4:'P4 對外前台',P5:'P5 API串接',P6:'P6 AI智慧'};
 const W=1320,H=840;
+const nodeCost=n=>(n.weeks&&n.acceptance&&n.coeff)?Math.round((n.weeks*12000+n.acceptance*5000)*n.coeff):0;
 const nodes=[
   {id:'MOD14',short:'RBAC 角色權限',label:'RBAC\n角色權限',phase:'P0',unit:'L0 系統底層',icon:'🔐',desc:'所有模組的存取控制，正職/行政/家長/AI 各角色最小權限',legal:false,roi:'系統地基',weeks:1.5,acceptance:3,coeff:1.3},
   {id:'MOD04',short:'學年期別設定',label:'學年\n期別設定',phase:'P0',unit:'L0 系統底層',icon:'📅',desc:'所有課程、班級、帳單的時間軸基礎，學年結束後資料不消失',legal:false,roi:'系統地基',weeks:0.5,acceptance:1,coeff:1.1},
@@ -1350,6 +1355,7 @@ const links=[
   {source:'API03',target:'MOD19',type:'ai'},
   {source:'MOD21',target:'MOD23',type:'depends'},{source:'MOD19',target:'MOD23',type:'depends'},
 ];
+const TOTAL_COST=nodes.reduce((s,n)=>s+nodeCost(n),0);
 const svg=d3.select('svg#kg-graph').attr('viewBox',`0 0 ${W} ${H}`).attr('height',Math.min(840,window.innerHeight-150));
 const g=svg.append('g');
 const zoom=d3.zoom().scaleExtent([0.25,4]).on('zoom',e=>g.attr('transform',e.transform));
@@ -1452,9 +1458,10 @@ nSel
         document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
         document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
       }
-      const cost=(d.weeks&&d.acceptance&&d.coeff)?Math.round((d.weeks*12000+d.acceptance*5000)*d.coeff):null;
+      const cost=(d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
       const costBox=document.getElementById('kg-d-cost-box');
-      if(cost){costBox.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost.toLocaleString();}else{costBox.style.display='none';}
+      const remBox=document.getElementById('kg-d-remaining-box');
+      if(cost){costBox.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost.toLocaleString();remBox.style.display='';document.getElementById('kg-d-remaining').textContent='NT$'+(TOTAL_COST-cost).toLocaleString();}else{costBox.style.display='none';remBox.style.display='none';}
     }else{document.getElementById('kg-d-meta').style.display='none';}
     const deps=links.filter(l=>l.target.id===d.id);
     const enables=links.filter(l=>l.source.id===d.id);
@@ -1479,9 +1486,10 @@ nSel
         document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
         document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
       }
-      const cost2=(d.weeks&&d.acceptance&&d.coeff)?Math.round((d.weeks*12000+d.acceptance*5000)*d.coeff):null;
+      const cost2=(d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
       const costBox2=document.getElementById('kg-d-cost-box');
-      if(cost2){costBox2.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost2.toLocaleString();}else{costBox2.style.display='none';}
+      const remBox2=document.getElementById('kg-d-remaining-box');
+      if(cost2){costBox2.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost2.toLocaleString();remBox2.style.display='';document.getElementById('kg-d-remaining').textContent='NT$'+(TOTAL_COST-cost2).toLocaleString();}else{costBox2.style.display='none';remBox2.style.display='none';}
       meta.style.display='block';
     }else{meta.style.display='none';}
     panel.style.display='block';
