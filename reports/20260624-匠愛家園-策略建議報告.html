@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>匠愛家園 — 2026下半年盡職調查暨策略建議報告</title>
+  <style>
+    :root {
+      --primary: #1B4F72;
+      --accent:  #2E86C1;
+      --warn:    #C0392B;
+      --ok:      #1E8449;
+      --amber:   #D68910;
+      --bg:      #F5F8FA;
+      --card:    #FFFFFF;
+      --border:  #D6E4EF;
+      --text:    #1A2B3C;
+      --muted:   #6B7F93;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; }
+
+    .header { background: linear-gradient(135deg, #1B4F72 0%, #154360 100%); color: #fff; padding: 52px 40px 40px; }
+    .header .tag { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: .65; margin-bottom: 10px; }
+    .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 6px; }
+    .header .sub { font-size: 15px; opacity: .8; margin-bottom: 28px; }
+    .header .meta { display: flex; gap: 36px; flex-wrap: wrap; }
+    .header .meta-item { display: flex; flex-direction: column; }
+    .header .meta-item .label { font-size: 10px; letter-spacing: 1px; opacity: .55; text-transform: uppercase; }
+    .header .meta-item .value { font-size: 13px; font-weight: 600; margin-top: 3px; }
+
+    .alert-banner { background: #FDEDEC; border-left: 5px solid #C0392B; padding: 16px 24px; display: flex; align-items: flex-start; gap: 12px; }
+    .alert-banner .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .alert-banner p { font-size: 14px; color: #922B21; font-weight: 600; line-height: 1.6; }
+
+    .container { max-width: 920px; margin: 0 auto; padding: 44px 24px 80px; }
+
+    .section { margin-bottom: 52px; }
+    .section-title { font-size: 18px; font-weight: 700; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 12px; margin-bottom: 22px; display: flex; align-items: center; gap: 10px; }
+    .section-num { background: var(--primary); color: #fff; font-size: 11px; font-weight: 700; border-radius: 4px; padding: 2px 7px; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-bottom: 16px; }
+    .card-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; color: var(--primary); }
+    .card.warn-card { border-left: 4px solid var(--warn); }
+    .card.ok-card { border-left: 4px solid var(--ok); }
+    .card.amber-card { border-left: 4px solid var(--amber); }
+
+    .status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+    .status.red    { background: #FADBD8; color: #922B21; }
+    .status.yellow { background: #FDEBD0; color: #784212; }
+    .status.green  { background: #D5F5E3; color: #1E8449; }
+    .status.blue   { background: #D6EAF8; color: #1B4F72; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } .grid3 { grid-template-columns: 1fr; } }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: var(--primary); color: #fff; padding: 11px 14px; text-align: left; font-size: 12px; letter-spacing: .5px; }
+    td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #EBF5FB; }
+
+    .kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .kpi { flex: 1; min-width: 140px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; text-align: center; }
+    .kpi .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .kpi .kpi-val { font-size: 26px; font-weight: 700; line-height: 1.1; }
+    .kpi .kpi-note { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .kpi.red-kpi .kpi-val { color: var(--warn); }
+    .kpi.green-kpi .kpi-val { color: var(--ok); }
+    .kpi.amber-kpi .kpi-val { color: var(--amber); }
+
+    .roadmap { display: flex; flex-direction: column; gap: 0; }
+    .phase { display: flex; gap: 0; }
+    .phase-line { display: flex; flex-direction: column; align-items: center; width: 52px; flex-shrink: 0; }
+    .phase-dot { width: 38px; height: 38px; border-radius: 50%; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .phase-dot.p1 { background: var(--warn); }
+    .phase-dot.p2 { background: var(--amber); }
+    .phase-dot.p3 { background: var(--accent); }
+    .phase-dot.p4 { background: var(--ok); }
+    .phase-connector { width: 2px; flex: 1; background: var(--border); min-height: 20px; }
+    .phase-body { padding: 0 0 36px 16px; flex: 1; }
+    .phase-label { font-size: 11px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+    .phase-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+    .phase-items { display: flex; flex-direction: column; gap: 7px; }
+    .phase-item { font-size: 13px; padding: 8px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
+
+    .highlight-box { background: #EBF5FB; border: 1px solid #AED6F1; border-radius: 8px; padding: 16px 20px; margin: 14px 0; font-size: 14px; line-height: 1.8; }
+    .highlight-box strong { color: var(--primary); }
+
+    .pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin: 2px; }
+    .pill.red    { background: #FADBD8; color: #922B21; }
+    .pill.green  { background: #D5F5E3; color: #1E8449; }
+    .pill.blue   { background: #D6EAF8; color: #1B4F72; }
+    .pill.amber  { background: #FDEBD0; color: #784212; }
+
+    ul.bullet { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    ul.bullet li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+    ul.bullet li::before { content: "▸"; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    .collab-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+    .collab-card .collab-tag { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; background: var(--accent); color: #fff; display: inline-block; margin-bottom: 10px; }
+    .collab-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .collab-card .collab-meta { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+
+    .quote { border-left: 3px solid var(--accent); padding: 10px 16px; background: #EBF5FB; border-radius: 0 8px 8px 0; font-size: 14px; color: #1B4F72; font-style: italic; margin: 14px 0; }
+
+    .footer { border-top: 1px solid var(--border); padding: 28px 40px; text-align: center; font-size: 12px; color: var(--muted); background: #fff; }
+    .footer strong { color: var(--primary); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="tag">Confidential · Strategy Report · MUSEON Biz-Collab</div>
+  <h1>匠愛家園 · 2026下半年策略建議</h1>
+  <div class="sub">盡職調查 · B2B 通路財務診斷 · 異業合作方案</div>
+  <div class="meta">
+    <div class="meta-item"><span class="label">報告日期</span><span class="value">2026-06-24</span></div>
+    <div class="meta-item"><span class="label">報告類型</span><span class="value">盡職調查 + 策略建議</span></div>
+    <div class="meta-item"><span class="label">核心議題</span><span class="value">B2B 毛利 10%——達標即虧損</span></div>
+    <div class="meta-item"><span class="label">報告版本</span><span class="value">v1.0</span></div>
+  </div>
+</div>
+
+<!-- 紅燈警告 -->
+<div class="alert-banner">
+  <span class="alert-icon">⚠️</span>
+  <p>財務紅燈：以現行定價結構達成 2026H2 B2B 目標，月毛利僅 4,000 元，遠低於業務人力成本 50,000 元以上。<br>
+  本報告核心建議：<strong>先修定價結構，再談規模</strong>。否則每多找一家門市，月虧損就擴大一輪。</p>
+</div>
+
+<div class="container">
+
+  <!-- ── 一、速覽結論 ── -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">01</span> 速覽結論</div>
+    <div class="kpi-row">
+      <div class="kpi amber-kpi">
+        <div class="kpi-label">目標難度</div>
+        <div class="kpi-val">中等</div>
+        <div class="kpi-note">5家可達，但不應達</div>
+      </div>
+      <div class="kpi red-kpi">
+        <div class="kpi-label">最脆弱環節</div>
+        <div class="kpi-val">10%</div>
+        <div class="kpi-note">毛利率——規模化反傷</div>
+      </div>
+      <div class="kpi green-kpi">
+        <div class="kpi-label">最強槓桿</div>
+        <div class="kpi-val">文創</div>
+        <div class="kpi-note">石鼓模式：聯名 > 削價</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">業務人力</div>
+        <div class="kpi-val">2人</div>
+        <div class="kpi-note">5家/月，節奏可控</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p style="font-size:15px; line-height:1.9;">
+        匠愛家園產品本身具備文化溫度（石鼓文創聯名方向）與健康賣點，
+        但現行 <strong>B2B 批發毛利 10%</strong> 結構是根本性炸彈。
+        達成 5 家門市目標後，月毛利 4,000 元對比業務成本 50,000 元以上，<strong>規模越大，虧損越深</strong>。<br><br>
+        本報告建議三條並行路線：① <strong>立即修定價護欄</strong>、② <strong>轉攻高毛利的 B2C / 文創禮品通路</strong>、
+        ③ <strong>異業合作引入互補流量</strong>，以合作取代單靠自己業務人力開發的路徑。
+      </p>
+    </div>
+  </div>
+
+  <!-- ── 二、財務健康診斷 ── -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">02</span> 財務健康診斷 <span class="status red">紅燈</span></div>
+
+    <div class="card warn-card">
+      <div class="card-title">試算：達標後月損益</div>
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>計算邏輯</th>
+            <th>金額</th>
+            <th>警示</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>目標出貨量</td>
+            <td>5家 × 100罐/月</td>
+            <td>500罐/月</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>月收入</td>
+            <td>500罐 × 80元</td>
+            <td><strong>40,000 元</strong></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>毛利（10%）</td>
+            <td>40,000 × 10%</td>
+            <td><strong>4,000 元</strong></td>
+            <td><span class="status red">嚴重偏低</span></td>
+          </tr>
+          <tr>
+            <td>業務人力成本</td>
+            <td>2人薪資 + 交通 + 樣品</td>
+            <td><strong>≥50,000 元</strong></td>
+            <td><span class="status red">毛利覆蓋率 8%</span></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700; color:#C0392B;">月度淨虧損（估算）</td>
+            <td>4,000 − 50,000</td>
+            <td style="font-weight:700; color:#C0392B;">約 −46,000 元</td>
+            <td><span class="status red">達標即虧損</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card warn-card">
+      <div class="card-title">根因分析：利潤去哪了？</div>
+      <ul class="bullet">
+        <li>出廠 80 元，門市零售 150–200 元，<strong>通路吃掉 47–60% 的利潤空間</strong>——生產商扛所有成本，卻只拿邊角料</li>
+        <li>2個月有效期限 → 門市庫存壓力高 → <strong>退換貨風險直接侵蝕毛利</strong>，已入帳的收入可能倒扣</li>
+        <li>B2B批發定價邏輯 = 量大換低價，但匠愛家園「量」不足以攤平業務成本，<strong>等量大再降價只會更慘</strong></li>
+        <li>現行定價沒有「最低門市售價（MAP）」保護，各門市自行降價 → 品牌力被通路消耗</li>
+      </ul>
+    </div>
+
+    <div class="highlight-box">
+      <strong>核心判斷：</strong>這個目標的本質問題不是「能不能找到5家」，而是「找到之後財務能不能撐住」。在修正定價結構之前，<strong>每開一家新合作門市就是在擴大虧損</strong>，而非驗證商業模式。
+    </div>
+  </div>
+
+  <!-- ── 三、定價結構修復方案 ── -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">03</span> 定價結構修復方案（優先執行）</div>
+
+    <div class="grid2">
+      <div class="card ok-card">
+        <div class="card-title">方案 A：設最低毛利底線</div>
+        <ul class="bullet">
+          <li>訂 B2B 批發最低毛利 <strong>30%</strong>（出廠改 120 元）</li>
+          <li>給門市的零售建議價鎖定 180–220 元，設 MAP 協議</li>
+          <li>達標後月毛利從 4,000 → <strong>12,000 元</strong>，還不夠但可控</li>
+        </ul>
+        <div style="margin-top:12px;">
+          <span class="pill green">甜頭：改價不需改產品</span>
+          <span class="pill amber">代價：部分門市可能因進貨成本上升而退出</span>
+        </div>
+      </div>
+      <div class="card ok-card">
+        <div class="card-title">方案 B：聯名禮品盒加值</div>
+        <ul class="bullet">
+          <li>與文創品牌或在地特色IP聯名，出 <strong>禮盒組合</strong>（單組售價 350–600 元）</li>
+          <li>每組含 3–6 罐，邊際毛利可達 <strong>40–50%</strong></li>
+          <li>禮品通路（文創店、伴手禮店）是高溢價通路，不需要 B2B 批發邏輯</li>
+        </ul>
+        <div style="margin-top:12px;">
+          <span class="pill green">甜頭：同樣兩人業務，每筆訂單貢獻大10倍</span>
+          <span class="pill amber">代價：需要包裝設計投入，前期成本提高</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card amber-card">
+      <div class="card-title">方案 C：D2C 直售補血（並行）</div>
+      <ul class="bullet">
+        <li>開設品牌官方電商（蝦皮/LINE購物），零售定價 160–200 元，毛利可達 <strong>50–60%</strong></li>
+        <li>不走批發，直接建立消費者名單 → 提升回購率 → 不依賴門市</li>
+        <li>每月 50 罐 D2C 訂單，毛利相當於 500 罐 B2B 批發的 6 倍</li>
+      </ul>
+      <div style="margin-top:12px;">
+        <span class="pill green">甜頭：立即啟動，成本低</span>
+        <span class="pill amber">代價：需流量，初期需投入內容/廣告預算</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 四、異業合作推薦 ── -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">04</span> 異業合作推薦（Biz-Collab 引擎）</div>
+
+    <p style="font-size:14px; color:var(--muted); margin-bottom:20px;">
+      以下合作對象條件：同 TA（家庭主婦、健康意識消費者、40–60歲女性）、無直接競爭、可資源互換、有通路可利用。
+    </p>
+
+    <div class="grid2">
+      <div class="collab-card">
+        <div class="collab-tag">優先 #1</div>
+        <h3>親子/媽媽社群 KOL</h3>
+        <div class="collab-meta">飲食安全 × 在地食材 TA 高度重疊</div>
+        <ul class="bullet">
+          <li><strong>合作玩法：</strong>KOL 體驗評測 + 粉絲限量組合包，分潤制（不砸錢買廣告）</li>
+          <li><strong>你給：</strong>產品樣品 + 限定包裝 + 分潤 15%</li>
+          <li><strong>你拿：</strong>社群流量 + 消費者名單 + 首購轉換</li>
+          <li><strong>營收估算：</strong>一個 5 萬粉 KOL 活動，轉換 1% = 500 人 × 160 元 = 80,000 元首購</li>
+        </ul>
+      </div>
+      <div class="collab-card">
+        <div class="collab-tag">優先 #2</div>
+        <h3>文創/選物店（石鼓模式）</h3>
+        <div class="collab-meta">禮品通路 × 品牌溢價 TA 完全吻合</div>
+        <ul class="bullet">
+          <li><strong>合作玩法：</strong>聯名禮盒 — 對方提 IP 設計，你提產品，各出一半成本，拆分利潤</li>
+          <li><strong>你給：</strong>產品成本 + 客製包裝費用</li>
+          <li><strong>你拿：</strong>溢價定位 + 非競爭通路進入 + 品牌曝光</li>
+          <li><strong>營收估算：</strong>每月賣 100 組禮盒（450 元/組）= 45,000 元，毛利率 40% = 18,000 元</li>
+        </ul>
+      </div>
+      <div class="collab-card">
+        <div class="collab-tag">優先 #3</div>
+        <h3>中醫診所 / 中藥行</h3>
+        <div class="collab-meta">健康意識消費者 × 信任背書強</div>
+        <ul class="bullet">
+          <li><strong>合作玩法：</strong>診所待診區展示，醫師推薦背書，非委託銷售而是醫師自用推薦</li>
+          <li><strong>你給：</strong>產品樣品 + 專屬優惠碼（診所病患專屬折扣）</li>
+          <li><strong>你拿：</strong>醫師背書信任感 + 健康族群精準名單</li>
+          <li><strong>營收估算：</strong>10 間診所，每間每月帶進 10 位新客 = 100 人 × 150 元 = 15,000 元</li>
+        </ul>
+      </div>
+      <div class="collab-card">
+        <div class="collab-tag">優先 #4</div>
+        <h3>健身房 / 瑜伽教室</h3>
+        <div class="collab-meta">健康生活方式 × 重複消費頻率高</div>
+        <ul class="bullet">
+          <li><strong>合作玩法：</strong>會員福利包 — 新會員入會禮品袋含 1 罐試飲，附 QR 碼轉換</li>
+          <li><strong>你給：</strong>樣品成本（出廠價 × 樣品數量）</li>
+          <li><strong>你拿：</strong>精準健康族群試飲 → 轉換首購</li>
+          <li><strong>營收估算：</strong>每月 200 位新會員試飲，轉換 10% = 20 人 × 160 元 = 3,200 元（先期培育）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top:20px;">
+      <strong>關鍵洞察：</strong>以上每個合作對象，你的業務人力「投入一次談判」就能打開一條持續進單的通路，而非像 B2B 批發需要不斷跑業務維繫關係。<strong>合作通路的邊際成本遠低於傳統業務開發。</strong>
+    </div>
+  </div>
+
+  <!-- ── 五、合作洽談 SOP ── -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">05</span> 合作洽談 SOP</div>
+
+    <div class="roadmap">
+      <div class="phase">
+        <div class="phase-line">
+          <div class="phase-dot p1">W1</div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-label">Week 1 — 鎖定目標 + 冷接觸</div>
+          <div class="phase-title">篩選合作對象清單</div>
+          <div class="phase-items">
+            <div class="phase-item">列出當地 10–15 間文創選物店、親子門市、健身房，標記 IG 粉絲數與 Google 評分</div>
+            <div class="phase-item">優先挑 IG 活躍（週更新）、評分 4.3 以上、無同類競品在架的場所</div>
+            <div class="phase-item">以「粉絲/顧客試用禮」切入，不是推銷，降低對方防衛心</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-line">
+          <div class="phase-dot p2">W2</div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-label">Week 2 — 初次接觸 + 送樣</div>
+          <div class="phase-title">上門拜訪話術（石鼓模式）</div>
+          <div class="phase-items">
+            <div class="phase-item">開場：「我們做的是 ___（產品亮點），目前在找願意一起說故事的品牌，不是一般的寄賣。」</div>
+            <div class="phase-item">提案：「送您10罐給顧客試用，您拍個 IG Story，我們幫您設計聯名包裝，完全不用您出錢。」</div>
+            <div class="phase-item">一週後跟進：「試用回饋怎麼樣？有沒有顧客主動問購買方式？」</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-line">
+          <div class="phase-dot p3">W3</div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-label">Week 3 — 轉換正式合作</div>
+          <div class="phase-title">確認合作模式（選一）</div>
+          <div class="phase-items">
+            <div class="phase-item">委託銷售：對方無庫存壓力，賣出才結款，你承擔庫存風險（適合試水期）</div>
+            <div class="phase-item">聯名禮盒：共同設計包裝，各自定義利潤分配，比純批發毛利高 3–4 倍</div>
+            <div class="phase-item">粉絲分潤：對方每月貼 2 則推廣內容，按轉換碼計算分潤 15%，零前期成本</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-line">
+          <div class="phase-dot p4">W4+</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-label">Month 2+ — 深化與複製</div>
+          <div class="phase-title">評估成效 → 複製到下一家</div>
+          <div class="phase-items">
+            <div class="phase-item">每個合作對象月底統計：帶入訂單數 / 新客轉換 / 回購率</div>
+            <div class="phase-item">表現前 3 名合作對象 → 投入更多資源（限定款、聯名禮盒）</div>
+            <div class="phase-item">沉寂合作對象（3個月零轉換） → 停止補貨，重新評估</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 六、營收模擬器 ── -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">06</span> 營收模擬：三種路線比較</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>路線</th>
+          <th>月銷量</th>
+          <th>單價</th>
+          <th>月收入</th>
+          <th>毛利率</th>
+          <th>月毛利</th>
+          <th>建議</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#FEF9F9;">
+          <td style="color:#C0392B; font-weight:600;">現況 B2B 批發</td>
+          <td>500罐</td>
+          <td>80元</td>
+          <td>40,000元</td>
+          <td style="color:#C0392B; font-weight:700;">10%</td>
+          <td style="color:#C0392B; font-weight:700;">4,000元</td>
+          <td><span class="pill red">不建議擴大</span></td>
+        </tr>
+        <tr style="background:#FDFAF4;">
+          <td style="color:#784212; font-weight:600;">B2B 提價（30%毛利）</td>
+          <td>400罐</td>
+          <td>120元</td>
+          <td>48,000元</td>
+          <td style="color:#D68910; font-weight:700;">30%</td>
+          <td style="color:#D68910; font-weight:700;">14,400元</td>
+          <td><span class="pill amber">過渡期</span></td>
+        </tr>
+        <tr style="background:#F4FBF7;">
+          <td style="color:#1E8449; font-weight:600;">聯名禮盒 B2B2C</td>
+          <td>100組</td>
+          <td>450元/組</td>
+          <td>45,000元</td>
+          <td style="color:#1E8449; font-weight:700;">40%</td>
+          <td style="color:#1E8449; font-weight:700;">18,000元</td>
+          <td><span class="pill green">優先推進</span></td>
+        </tr>
+        <tr style="background:#F0F6FF;">
+          <td style="color:#1B4F72; font-weight:600;">D2C 直售</td>
+          <td>200罐</td>
+          <td>170元</td>
+          <td>34,000元</td>
+          <td style="color:#1B4F72; font-weight:700;">55%</td>
+          <td style="color:#1B4F72; font-weight:700;">18,700元</td>
+          <td><span class="pill blue">並行建立</span></td>
+        </tr>
+        <tr style="background:#F4FBF7; font-weight:700;">
+          <td style="color:#1E8449;">理想組合（Q3目標）</td>
+          <td>禮盒50組 + D2C 150罐</td>
+          <td>混合</td>
+          <td>47,500元</td>
+          <td style="color:#1E8449; font-weight:700;">47%</td>
+          <td style="color:#1E8449; font-weight:700;">22,325元</td>
+          <td><span class="pill green">可覆蓋部分人力成本</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="quote">
+      理想組合月毛利 22,325 元，仍低於業務成本 50,000 元。因此，2026H2 的核心任務不是「達業績目標」，而是「修正商業模式的底層邏輯」，用下半年跑通 1–2 條高毛利通路，打好明年規模化的地基。
+    </div>
+  </div>
+
+  <!-- ── 七、90天行動計畫 ── -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">07</span> 90 天行動計畫</div>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>時間</th>
+            <th>行動</th>
+            <th>負責人</th>
+            <th>完成標準</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:600; color:#C0392B;">第 1–2 週</td>
+            <td>停止所有低於 30% 毛利的新合作談判；現有批發門市協商提價或轉委託銷售</td>
+            <td>老闆 + 業務主管</td>
+            <td>新定價表出版</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600; color:#D68910;">第 2–4 週</td>
+            <td>拜訪 3 間文創選物店，用「送樣 + 聯名包裝」模式試水，目標簽 1 間</td>
+            <td>業務 A</td>
+            <td>1 間聯名合作確認</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600; color:#D68910;">第 3–5 週</td>
+            <td>開設蝦皮/LINE購物官方店，上架 3 款 SKU，定價 160–200 元</td>
+            <td>業務 B + 設計</td>
+            <td>上架完成 + 首月 20 訂單</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600; color:#2E86C1;">第 5–8 週</td>
+            <td>聯繫 2 位親子/健康 KOL，提出分潤合作，目標 1 人合作啟動</td>
+            <td>業務 A</td>
+            <td>KOL 首篇貼文上線</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600; color:#2E86C1;">第 6–8 週</td>
+            <td>完成首批聯名禮盒設計 + 打樣，最小訂購量 50 組</td>
+            <td>業務 B + 設計</td>
+            <td>樣品完成，合作方確認</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600; color:#1E8449;">第 9–12 週</td>
+            <td>統計各通路數據，關閉零轉換合作，複製最佳模式到 2–3 個新對象</td>
+            <td>老闆 + 業務雙人</td>
+            <td>月毛利達 15,000 元</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 八、關鍵問題清單 ── -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">08</span> 現場待確認事項</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">財務面</div>
+        <ul class="bullet">
+          <li>現有門市是固定批發還是委託銷售？退貨率實際是多少？</li>
+          <li>出廠 80 元的成本結構：原料 / 包裝 / 人工各佔多少？</li>
+          <li>目前每月實際進帳金額 vs 應收帳款狀況？</li>
+          <li>有無拿到任何補貼/補助（農委會、地方政府）？</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">業務面</div>
+        <ul class="bullet">
+          <li>現有5家（或更多）中，哪家賣最好？為什麼？能複製嗎？</li>
+          <li>2個月有效期的退貨，過去有沒有真的發生？頻率多高？</li>
+          <li>業務2人的薪資結構：底薪 + 提成，還是純底薪？</li>
+          <li>有沒有老客戶（回購者）？他們的購買動機是什麼？</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 九、總結判斷 ── -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">09</span> 總結判斷</div>
+    <div class="card ok-card">
+      <div class="card-title">三個優先順序</div>
+      <ul class="bullet" style="gap:14px;">
+        <li>
+          <div>
+            <strong style="color:#C0392B;">P0（立即）：修定價護欄</strong><br>
+            <span style="font-size:13px; color:var(--muted);">在現有任何門市續約或新增前，先確認不再用10%毛利做生意。這是所有後續行動的前提。</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong style="color:#D68910;">P1（1個月內）：開一條高毛利通路</strong><br>
+            <span style="font-size:13px; color:var(--muted);">聯名禮盒或D2C直售，只要有一條跑起來，就能證明商業模式可行。目標：月毛利突破 15,000 元。</span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong style="color:#1E8449;">P2（3個月內）：確立異業合作通路</strong><br>
+            <span style="font-size:13px; color:var(--muted);">與1–2個合作夥伴（KOL / 文創店 / 診所）建立穩定轉介模式，讓每月有持續進單，不靠業務員一家一家跑。</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="highlight-box" style="margin-top:20px;">
+      <strong>最後一句話：</strong>匠愛家園的產品有故事、有溫度，這是很多競品沒有的資產。但「有好產品」到「能賺錢」之間，差的不是業務人數，是<strong>找到願意為這個故事付溢價的對的通路</strong>。石鼓文創模式就是這個答案——客製聯名讓你離開價格戰，進入品牌戰。
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>本報告由 <strong>MUSEON Biz-Collab 引擎</strong> 生成 · 2026-06-24 · 資料來源：匠愛家園提供之財務與業務資訊</p>
+  <p style="margin-top:6px;">報告用途：內部決策參考 · 請勿外流</p>
+</div>
+
+</body>
+</html>
