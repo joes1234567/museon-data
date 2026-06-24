@@ -307,76 +307,6 @@
   }
   .roi-formula .label { color: rgba(255,255,255,0.45); font-size: 11px; }
 
-  /* KNOWLEDGE GRAPH */
-  .kg-container {
-    background: var(--snow); border: 1px solid var(--border);
-    border-radius: 16px; padding: 28px 16px; margin-bottom: 28px; overflow-x: auto;
-  }
-  .kg-svg { width: 100%; max-width: 800px; display: block; margin: 0 auto; }
-  .kg-dep-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
-  .kg-dep-row {
-    display: flex; align-items: center; gap: 10px;
-    background: var(--snow); border: 1px solid var(--border);
-    border-radius: 8px; padding: 10px 14px; flex-wrap: wrap;
-  }
-  .kg-dep-tag { font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 10px; white-space: nowrap; }
-  .kg-p1  { background: #E8F5EE; color: #1a6b3c; border: 1px solid #c2deca; }
-  .kg-p2b { background: #EBF4F8; color: #2A6A8A; border: 1px solid #b8d5e8; }
-  .kg-p4  { background: #F0EBF8; color: #6A4A9A; border: 1px solid #c9b8e8; }
-  .kg-dep-arr { color: var(--mist); font-size: 13px; flex-shrink: 0; }
-  .kg-dep-data { font-size: 12px; color: var(--slate); flex: 1; min-width: 160px; }
-  .kg-build-order {
-    background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%);
-    border: 1px solid #a8d8bc; border-radius: 14px; padding: 24px 28px;
-  }
-  .kg-build-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .kg-build-step { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 180px; }
-  .kg-build-num {
-    width: 34px; height: 34px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; font-weight: 800; flex-shrink: 0;
-  }
-  .kg-build-text { display: flex; flex-direction: column; gap: 3px; }
-  .kg-build-text strong { font-size: 13px; color: var(--ink); }
-  .kg-build-text span { font-size: 12px; color: var(--slate); }
-  .kg-build-arr { color: var(--mist); font-size: 20px; flex-shrink: 0; }
-
-  /* MODULE CARD v2 — 白老師 format */
-  .mc-area-label {
-    font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--mist); margin-bottom: 8px;
-  }
-  .mc-features {
-    display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0 12px;
-  }
-  .mc-feat-tag {
-    background: var(--parchment); border: 1px solid var(--border);
-    border-radius: 5px; font-size: 11px; color: var(--slate);
-    padding: 2px 7px; line-height: 1.5;
-  }
-  .mc-stats {
-    border-top: 1px solid var(--border); margin-top: 12px; padding-top: 10px;
-    display: flex; flex-direction: column; gap: 6px;
-  }
-  .mc-kv { display: flex; gap: 8px; align-items: flex-start; }
-  .mc-kv-label {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.5px; color: var(--mist);
-    min-width: 54px; flex-shrink: 0; padding-top: 1px;
-  }
-  .mc-kv-val { font-size: 12px; color: var(--slate); line-height: 1.5; }
-  .mc-kv-inline { display: flex; gap: 14px; margin-top: 2px; flex-wrap: wrap; }
-  .mc-kv-item { display: flex; flex-direction: column; gap: 2px; min-width: 44px; }
-  .mc-kv-item .mc-kv-label { min-width: auto; }
-  .mc-kv-num { font-size: 13px; font-weight: 700; color: var(--ink); }
-  .mc-cost {
-    background: linear-gradient(135deg, #E8F5EE, #F0FAF4);
-    border: 1px solid #a8d8bc; border-radius: 8px;
-    padding: 8px 12px; margin-top: 2px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .mc-cost-label { font-size: 11px; font-weight: 700; color: var(--jade); }
-  .mc-cost-val { font-size: 15px; font-weight: 800; color: var(--jade); }
-
   /* FOOTER */
   .footer {
     background: var(--ink); color: rgba(255,255,255,0.45);
@@ -390,9 +320,80 @@
     .timeline-strip { grid-template-columns: 1fr 1fr; }
     .timeline-strip .ts-phase:nth-child(2) { border-right: none; }
     .timeline-strip .ts-phase:nth-child(3) { border-top: 1px solid var(--border); }
+    .side-panel { width: 100vw; }
   }
+
+  /* SIDE PANEL */
+  .panel-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.38); z-index: 100;
+    backdrop-filter: blur(2px);
+  }
+  .panel-overlay.active { display: block; }
+  .side-panel {
+    position: fixed; top: 0; right: -420px;
+    width: 390px; max-width: 100vw; height: 100vh; overflow-y: auto;
+    background: var(--snow); box-shadow: -4px 0 32px rgba(0,0,0,0.14);
+    z-index: 101; transition: right 0.28s cubic-bezier(0.4,0,0.2,1);
+  }
+  .side-panel.active { right: 0; }
+  .panel-header {
+    background: linear-gradient(135deg, #0a1a0e 0%, #12391e 100%);
+    color: #fff; padding: 28px 24px 22px; position: sticky; top: 0; z-index: 1;
+  }
+  .panel-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,0.1); border: none;
+    color: #fff; font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .panel-close:hover { background: rgba(255,255,255,0.22); }
+  .panel-module-tag { font-size: 10px; letter-spacing: 2px; color: #5ecf85; font-weight: 700; margin-bottom: 8px; }
+  .panel-title { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .panel-phase { font-size: 12px; color: rgba(255,255,255,0.45); }
+  .panel-body { padding: 24px; }
+  .panel-section { margin-bottom: 26px; }
+  .panel-section-title {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ps-fee { color: var(--gold); }
+  .ps-eff { color: var(--jade); }
+  .fee-row {
+    display: flex; gap: 10px; margin-bottom: 8px;
+    font-size: 13px; color: var(--slate); line-height: 1.6; align-items: flex-start;
+  }
+  .fee-label { color: var(--mist); flex-shrink: 0; width: 52px; font-size: 12px; padding-top: 1px; }
+  .fee-value { flex: 1; }
+  .eff-item {
+    background: var(--parchment); border-radius: 8px;
+    padding: 14px 16px; margin-bottom: 10px; font-size: 13px; line-height: 1.7;
+  }
+  .eff-before { color: #999; margin-bottom: 6px; }
+  .eff-before::before { content: '以前　'; font-weight: 700; color: #c0392b; }
+  .eff-after { color: var(--ink); }
+  .eff-after::before { content: '之後　'; font-weight: 700; color: #1a6b3c; }
+  .eff-saving {
+    padding: 10px 14px; background: #E8F5EE; border-radius: 8px;
+    font-size: 12px; color: #1a6b3c; font-weight: 600; line-height: 1.6;
+  }
+  .panel-note {
+    font-size: 11px; color: #8a7a50; margin-top: 8px;
+    padding: 8px 12px; background: #FBF4E6;
+    border-radius: 6px; border-left: 3px solid var(--gold); line-height: 1.6;
+  }
+  .module-click-hint {
+    font-size: 10px; color: var(--mist); margin-top: 10px;
+    padding-top: 8px; border-top: 1px solid var(--border);
+    display: flex; align-items: center; gap: 5px; letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .module-click-hint::before { content: '↗'; font-size: 11px; }
+  .module-card:hover .module-click-hint { color: var(--jade); }
 </style>
-<script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
 
@@ -1049,353 +1050,177 @@
   </div>
 </section>
 
-<!-- MODULE DEPENDENCY GRAPH -->
-<section>
-  <div class="container">
-    <div class="section-label">系統架構</div>
-    <h2 class="section-title">模組依賴知識圖譜</h2>
-    <p class="section-desc">14 個模組左到右是演化建置順序——hover 顯示說明，點擊查看前置依賴與解鎖模組，滾輪縮放，可拖曳平移。</p>
-  </div>
-
-  <style>
-  #kg-wrap { background: #fff; overflow: hidden; }
-  svg#kg-graph { display: block; width: 100%; cursor: grab; }
-  svg#kg-graph:active { cursor: grabbing; }
-  .kg-controls {
-    display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
-    padding: 10px 16px; background: #fff; border-bottom: 1px solid #E2E0DA; align-items: center;
-  }
-  .kg-btn {
-    padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;
-    cursor: pointer; border: 1.5px solid currentColor; background: transparent;
-    transition: background 0.15s, color 0.15s; letter-spacing: 0.3px; line-height: 1.4;
-  }
-  .kg-btn.active { color: #fff !important; }
-  .kg-btn[data-phase="all"] { color: #12121A; border-color: #12121A; }
-  .kg-btn[data-phase="all"].active { background: #12121A; }
-  .kg-btn[data-phase="P1"] { color: #1a6b3c; }
-  .kg-btn[data-phase="P1"].active { background: #1a6b3c; border-color: #1a6b3c; }
-  .kg-btn[data-phase="P2"] { color: #2A6A8A; }
-  .kg-btn[data-phase="P2"].active { background: #2A6A8A; border-color: #2A6A8A; }
-  .kg-btn[data-phase="P3"] { color: #B8923A; }
-  .kg-btn[data-phase="P3"].active { background: #B8923A; border-color: #B8923A; }
-  .kg-btn[data-phase="P4"] { color: #6A4A9A; }
-  .kg-btn[data-phase="P4"].active { background: #6A4A9A; border-color: #6A4A9A; }
-  .kg-sep { width: 1px; height: 20px; background: #E2E0DA; }
-  .kg-node circle { stroke-width: 2.5; cursor: pointer; }
-  .kg-link { fill: none; stroke: #b0b0be; stroke-width: 1.5; stroke-opacity: 0.5; }
-  .kg-link.highlight { stroke-opacity: 0.9 !important; stroke-width: 2.5 !important; }
-  .kg-link.dim { stroke-opacity: 0.05 !important; }
-  .kg-node.dim circle { opacity: 0.12; }
-  .kg-node.dim text { opacity: 0.12; }
-  #kg-tooltip {
-    position: fixed; display: none;
-    background: #12121A; color: rgba(255,255,255,0.92);
-    font-size: 12px; line-height: 1.85; padding: 12px 16px; border-radius: 10px;
-    max-width: 280px; z-index: 9999; pointer-events: none;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  }
-  #kg-tt-phase { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7; margin-bottom: 4px; }
-  #kg-tt-name  { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-  #kg-tt-desc  { font-size: 12px; opacity: 0.82; line-height: 1.65; }
-  #kg-detail {
-    display: none; position: fixed; right: 16px; top: 110px;
-    width: 272px; background: #fff; border: 1px solid #E2E0DA; border-radius: 12px;
-    padding: 18px 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-    z-index: 200; font-size: 13px; max-height: calc(100vh - 130px); overflow-y: auto;
-  }
-  #kg-detail .kd-close { position: absolute; right: 12px; top: 10px; cursor: pointer; color: #9898A8; font-size: 18px; line-height: 1; }
-  #kg-detail .kd-close:hover { color: #12121A; }
-  #kg-detail .kd-phase { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #9898A8; margin-bottom: 6px; }
-  #kg-detail .kd-name  { font-size: 15px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
-  #kg-detail .kd-unit  { font-size: 12px; color: #5A5A6E; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #E2E0DA; }
-  #kg-detail .kd-sec   { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #9898A8; margin: 10px 0 5px; }
-  #kg-detail .kd-list  { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-  #kg-detail .kd-list li { font-size: 12px; color: #5A5A6E; padding-left: 14px; position: relative; line-height: 1.5; }
-  #kg-detail .kd-list li::before { content: '→'; position: absolute; left: 0; color: #9898A8; }
-  .kg-legend {
-    display: flex; gap: 16px; flex-wrap: wrap; padding: 10px 24px;
-    background: #F7F5F0; border-top: 1px solid #E2E0DA;
-    font-size: 11.5px; color: #5A5A6E; align-items: center; justify-content: center;
-  }
-  .kg-legend .kl-item { display: flex; align-items: center; gap: 5px; }
-  .kg-legend .kl-dot  { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
-  </style>
-
-  <div class="kg-controls" id="kg-controls">
-    <button class="kg-btn active" data-phase="all">全部</button>
-    <div class="kg-sep"></div>
-    <button class="kg-btn" data-phase="P1">P1 第一階段</button>
-    <button class="kg-btn" data-phase="P2">P2 第二階段</button>
-    <button class="kg-btn" data-phase="P3">P3 第三階段</button>
-    <button class="kg-btn" data-phase="P4">P4 第四階段</button>
-    <div class="kg-sep"></div>
-    <button class="kg-btn" id="kg-reset" style="color:#5A5A6E; border-color:#5A5A6E;">重置視圖</button>
-  </div>
-
-  <div id="kg-wrap"><svg id="kg-graph"></svg></div>
-
-  <div class="kg-legend">
-    <div class="kl-item"><div class="kl-dot" style="background:#1a6b3c"></div> P1 第一階段</div>
-    <div class="kl-item"><div class="kl-dot" style="background:#2A6A8A"></div> P2 第二階段</div>
-    <div class="kl-item"><div class="kl-dot" style="background:#B8923A"></div> P3 第三階段</div>
-    <div class="kl-item"><div class="kl-dot" style="background:#6A4A9A"></div> P4 第四階段</div>
-    <div style="width:1px;height:18px;background:#E2E0DA;"></div>
-    <div style="color:#9898A8; font-size:11px;">← hover 查看說明 · 點擊查看依賴 · 滾輪縮放 · 拖曳平移</div>
-  </div>
-
-  <div id="kg-tooltip">
-    <div id="kg-tt-phase"></div>
-    <div id="kg-tt-name"></div>
-    <div id="kg-tt-desc"></div>
-    <div id="kg-tt-meta" style="margin-top:8px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.15); display:grid; grid-template-columns:1fr 1fr; gap:5px 14px; font-size:11px;">
-      <div><div style="opacity:0.5; margin-bottom:2px;">ROI 情境</div><div id="kg-tt-roi" style="font-weight:600; opacity:0.92;"></div></div>
-      <div><div style="opacity:0.5; margin-bottom:2px;">週數</div><div id="kg-tt-weeks" style="font-weight:600; opacity:0.92;"></div></div>
-      <div><div style="opacity:0.5; margin-bottom:2px;">驗收點</div><div id="kg-tt-checkpoints" style="font-weight:600; opacity:0.92;"></div></div>
-      <div><div style="opacity:0.5; margin-bottom:2px;">係數</div><div id="kg-tt-multiplier" style="font-weight:600; opacity:0.92;"></div></div>
-    </div>
-  </div>
-
-  <div id="kg-detail">
-    <span class="kd-close" onclick="document.getElementById('kg-detail').style.display='none'">×</span>
-    <div class="kd-phase" id="kg-d-phase"></div>
-    <div class="kd-name"  id="kg-d-name"></div>
-    <div class="kd-unit"  id="kg-d-unit"></div>
-    <div id="kg-d-meta" style="display:grid; grid-template-columns:1fr 1fr; gap:8px 12px; margin:10px 0; padding:10px 12px; background:#F7F5F0; border-radius:8px; font-size:12px;">
-      <div><div style="font-size:10px;color:#9898A8;font-weight:700;letter-spacing:0.8px;margin-bottom:3px;">ROI 情境</div><div id="kg-d-roi" style="color:#12121A;font-weight:600;line-height:1.4;"></div></div>
-      <div><div style="font-size:10px;color:#9898A8;font-weight:700;letter-spacing:0.8px;margin-bottom:3px;">週數</div><div id="kg-d-weeks" style="color:#12121A;font-weight:600;"></div></div>
-      <div><div style="font-size:10px;color:#9898A8;font-weight:700;letter-spacing:0.8px;margin-bottom:3px;">驗收點</div><div id="kg-d-checkpoints" style="color:#12121A;font-weight:600;"></div></div>
-      <div><div style="font-size:10px;color:#9898A8;font-weight:700;letter-spacing:0.8px;margin-bottom:3px;">係數</div><div id="kg-d-multiplier" style="color:#12121A;font-weight:600;"></div></div>
-    </div>
-    <div id="kg-d-deps-sec"    style="display:none"><div class="kd-sec">前置依賴</div><ul class="kd-list" id="kg-d-deps"></ul></div>
-    <div id="kg-d-enables-sec" style="display:none"><div class="kd-sec">解鎖模組</div><ul class="kd-list" id="kg-d-enables"></ul></div>
-  </div>
-
-  <script>
-  (function() {
-    const PHASE_COLORS = {P1:'#1a6b3c', P2:'#2A6A8A', P3:'#B8923A', P4:'#6A4A9A'};
-    const PHASE_X      = {P1:160, P2:430, P3:700, P4:960};
-    const PHASE_LABELS = {P1:'P1 第一階段', P2:'P2 第二階段', P3:'P3 第三階段', P4:'P4 第四階段'};
-    const W = 1100, H = 600;
-
-    const nodes = [
-      {id:'M01', short:'系統權限控管',   label:'系統\n權限控管',   phase:'P1', unit:'客戶與案場', icon:'🔐', desc:'三層角色設定，帳號開通停用，操作記錄留存——所有模組的安全地基',           roi:'所有模組的安全地基',              weeks:'1 週', checkpoints:'2 點', multiplier:'×1.0'},
-      {id:'M02', short:'客戶資料管理',   label:'客戶\n資料管理',   phase:'P1', unit:'客戶與案場', icon:'👤', desc:'客戶建檔、案場設定、進入方式、清潔偏好、歷史服務紀錄查詢，新員工交接不問 Peggy', roi:'新員工交接不問 Peggy',             weeks:'2 週', checkpoints:'3 點', multiplier:'×1.0'},
-      {id:'M03', short:'員工技能管理',   label:'員工\n技能管理',   phase:'P1', unit:'員工與排班', icon:'⭐', desc:'技能標籤、年資等級、區域偏好、排班限制，派工不靠記憶靠系統',               roi:'派工不靠記憶靠系統',              weeks:'1 週', checkpoints:'2 點', multiplier:'×1.0'},
-      {id:'M04', short:'班表管理',       label:'班表\n管理',       phase:'P1', unit:'員工與排班', icon:'📋', desc:'手動排班介面、臨時請假調度、衝突自動提醒、員工查班免問老闆，排班從周日噩夢變成 20 分鐘例行', roi:'排班從周日噩夢變成 20 分鐘例行', weeks:'2 週', checkpoints:'3 點', multiplier:'×1.1'},
-      {id:'M05', short:'員工打卡系統',   label:'員工\n打卡系統',   phase:'P1', unit:'員工與排班', icon:'⏱️', desc:'手機網頁打卡、工時自動計算、異常自動提醒（可選 GPS），工時紀錄消滅薪資糾紛', roi:'工時紀錄消滅薪資糾紛',            weeks:'1 週', checkpoints:'3 點', multiplier:'×1.1'},
-      {id:'M06', short:'服務記錄與回饋', label:'服務記錄\n與回饋', phase:'P2', unit:'派工與服務', icon:'📝', desc:'帶隊主管服務筆記、客戶知識庫累積、LINE 回饋連結推送，每場服務留痕跡口碑可積累', roi:'每場服務留痕跡，口碑可積累',      weeks:'1 週', checkpoints:'2 點', multiplier:'×1.0'},
-      {id:'M07', short:'薪資計算模組',   label:'薪資\n計算模組',   phase:'P2', unit:'財務與報價', icon:'💰', desc:'工時自動計算、難度獎金、稱讚獎金、護底補足、半月結算，結算從 2 小時縮到 30 分鐘', roi:'半月結算從 2 小時縮到 30 分鐘',   weeks:'2 週', checkpoints:'3 點', multiplier:'×1.15'},
-      {id:'M08', short:'報價輔助模組',   label:'報價\n輔助模組',   phase:'P2', unit:'財務與報價', icon:'💲', desc:'坪數係數計算、耗材費用加算、歷史案例參考區間、交通費計算，報出去的價格有依據不靠感覺', roi:'報出去的價格有依據，不靠感覺',   weeks:'1 週', checkpoints:'2 點', multiplier:'×1.1'},
-      {id:'M09', short:'派工建議草稿',   label:'派工\n建議草稿',   phase:'P3', unit:'派工與服務', icon:'🎯', desc:'技能匹配初篩、地理路由優化、收入平衡、新人保護機制，草稿取代從零想起 Peggy 只需確認', roi:'草稿取代從零想起，Peggy 只需確認', weeks:'3 週', checkpoints:'3 點', multiplier:'×1.2'},
-      {id:'M10', short:'收款與對帳管理', label:'收款\n對帳管理',   phase:'P3', unit:'財務與報價', icon:'🧾', desc:'三種收款方式記錄、應收金額比對、差異自動標示、欠款追蹤清單，漏帳從此有記錄可查', roi:'漏帳從此有記錄可查',              weeks:'2 週', checkpoints:'3 點', multiplier:'×1.1'},
-      {id:'M11', short:'耗材管理模組',   label:'耗材\n管理模組',   phase:'P3', unit:'擴張與分析', icon:'📦', desc:'庫存追蹤、低庫存自動提醒、每場服務耗材成本連動、毛利計算基礎，清潔劑快用完系統先告訴你', roi:'清潔劑快用完系統先告訴你',       weeks:'2 週', checkpoints:'2 點', multiplier:'×1.0'},
-      {id:'M12', short:'毛利報表',       label:'毛利\n報表',       phase:'P4', unit:'擴張與分析', icon:'📊', desc:'單場毛利計算、月報損益分析、服務類型分析、員工效率報告，哪種服務最賺數字說話', roi:'哪種服務最賺，數字說話',         weeks:'2 週', checkpoints:'3 點', multiplier:'×1.1'},
-      {id:'M13', short:'人事成本試算',   label:'人事\n成本試算',   phase:'P4', unit:'擴張與分析', icon:'🧮', desc:'多薪資結構試算、正規化成本模擬、分批導入評估，正規化前先算清楚划不划算',   roi:'正規化前先算清楚划不划算',       weeks:'2 週', checkpoints:'2 點', multiplier:'×1.1'},
-      {id:'M14', short:'多據點管理',     label:'多據點\n管理',     phase:'P4', unit:'擴張與分析', icon:'🏢', desc:'外縣市帳號管理、跨區資料隔離、老闆跨區總覽，台南本部穩定後啟動——開外縣市那天系統已準備好', roi:'開外縣市那天系統已準備好',       weeks:'3 週', checkpoints:'3 點', multiplier:'×1.2'},
-    ];
-
-    const links = [
-      {source:'M01', target:'M02', type:'depends'},
-      {source:'M01', target:'M03', type:'depends'},
-      {source:'M03', target:'M04', type:'depends'},
-      {source:'M04', target:'M05', type:'depends'},
-      {source:'M02', target:'M06', type:'depends'},
-      {source:'M04', target:'M06', type:'depends'},
-      {source:'M04', target:'M07', type:'depends'},
-      {source:'M05', target:'M07', type:'depends'},
-      {source:'M02', target:'M08', type:'depends'},
-      {source:'M02', target:'M09', type:'depends'},
-      {source:'M03', target:'M09', type:'depends'},
-      {source:'M07', target:'M10', type:'depends'},
-      {source:'M08', target:'M10', type:'depends'},
-      {source:'M06', target:'M11', type:'depends'},
-      {source:'M07', target:'M12', type:'depends'},
-      {source:'M11', target:'M12', type:'depends'},
-      {source:'M07', target:'M13', type:'depends'},
-      {source:'M01', target:'M14', type:'depends'},
-      {source:'M02', target:'M14', type:'depends'},
-      {source:'M03', target:'M14', type:'depends'},
-      {source:'M04', target:'M14', type:'depends'},
-      {source:'M05', target:'M14', type:'depends'},
-    ];
-
-    const svg = d3.select('#kg-graph')
-      .attr('viewBox', `0 0 ${W} ${H}`)
-      .attr('height', Math.min(600, window.innerHeight - 200));
-    const g = svg.append('g');
-    const zoom = d3.zoom().scaleExtent([0.3, 4]).on('zoom', e => g.attr('transform', e.transform));
-    svg.call(zoom);
-
-    // Arrow marker
-    const defs = svg.append('defs');
-    defs.append('marker').attr('id', 'kg-ar')
-      .attr('viewBox','0 -5 10 10').attr('refX', 26).attr('refY', 0)
-      .attr('markerWidth', 5).attr('markerHeight', 5).attr('orient', 'auto')
-      .append('path').attr('d','M0,-5L10,0L0,5').attr('fill', '#b0b0be').attr('fill-opacity', 0.7);
-
-    // Phase lane backgrounds + labels
-    Object.entries(PHASE_X).forEach(([phase, cx]) => {
-      g.append('rect').attr('x', cx-82).attr('y', 42).attr('width', 164).attr('height', H-54)
-        .attr('fill', PHASE_COLORS[phase]).attr('fill-opacity', 0.025).attr('rx', 8);
-      g.append('text').attr('x', cx).attr('y', 28).attr('text-anchor','middle')
-        .attr('fill', PHASE_COLORS[phase]).attr('font-size','11').attr('font-weight','700')
-        .attr('letter-spacing','0.8').attr('fill-opacity','0.6').text(PHASE_LABELS[phase]);
-    });
-
-    // Initial positions
-    nodes.forEach(n => {
-      const col = nodes.filter(m => m.phase === n.phase);
-      const idx = col.indexOf(n);
-      const step = (H - 120) / (col.length + 1);
-      n.x = PHASE_X[n.phase] + (idx % 2 === 0 ? 0 : 12);
-      n.y = 70 + step * (idx + 1);
-    });
-
-    const linkSel = g.append('g').selectAll('.kg-link')
-      .data(links).join('path').attr('class','kg-link').attr('marker-end','url(#kg-ar)');
-
-    const nodeSel = g.append('g').selectAll('.kg-node')
-      .data(nodes).join('g').attr('class','kg-node')
-      .call(d3.drag().on('start', ds).on('drag', dd).on('end', de));
-
-    nodeSel.append('circle').attr('r', 23)
-      .attr('fill', d => PHASE_COLORS[d.phase]).attr('fill-opacity', 0.88).attr('stroke','#fff');
-
-    nodeSel.append('text').attr('dy','0.35em').text(d => d.icon)
-      .attr('font-size','13').attr('text-anchor','middle').attr('pointer-events','none').attr('dominant-baseline','central');
-
-    nodeSel.each(function(d) {
-      d.label.split('\n').forEach((line, i) => {
-        d3.select(this).append('text').attr('y', 31 + i * 13).text(line)
-          .attr('font-size','9.5').attr('fill','#12121A').attr('text-anchor','middle')
-          .attr('pointer-events','none').attr('font-weight','500');
-      });
-    });
-
-    const sim = d3.forceSimulation(nodes)
-      .force('link',    d3.forceLink(links).id(d => d.id).distance(85).strength(0.25))
-      .force('charge',  d3.forceManyBody().strength(-300))
-      .force('x',       d3.forceX(d => PHASE_X[d.phase]).strength(0.9))
-      .force('y',       d3.forceY(H / 2).strength(0.08))
-      .force('collide', d3.forceCollide(36))
-      .on('tick', tick);
-
-    function tick() {
-      linkSel.attr('d', d => {
-        const dx = d.target.x - d.source.x, dy = d.target.y - d.source.y;
-        const len = Math.sqrt(dx*dx + dy*dy) || 1;
-        return `M${d.source.x},${d.source.y} A${len*0.75},${len*0.75} 0 0,1 ${d.target.x},${d.target.y}`;
-      });
-      nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
-    }
-
-    function ds(e, d) { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; }
-    function dd(e, d) { d.fx = e.x; d.fy = e.y; }
-    function de(e, d) { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }
-
-    const tip = document.getElementById('kg-tooltip');
-
-    nodeSel
-      .on('mouseenter', function(ev, d) {
-        const conn = new Set([d.id]);
-        links.forEach(l => {
-          if (l.source.id === d.id) conn.add(l.target.id);
-          if (l.target.id === d.id) conn.add(l.source.id);
-        });
-        nodeSel.classed('dim', n => !conn.has(n.id));
-        linkSel.classed('dim',       l => l.source.id !== d.id && l.target.id !== d.id)
-               .classed('highlight', l => l.source.id === d.id || l.target.id === d.id);
-        document.getElementById('kg-tt-phase').style.color = PHASE_COLORS[d.phase];
-        document.getElementById('kg-tt-phase').textContent      = d.phase + ' · ' + d.unit;
-        document.getElementById('kg-tt-name').textContent       = d.short;
-        document.getElementById('kg-tt-desc').textContent       = d.desc;
-        document.getElementById('kg-tt-roi').textContent        = d.roi;
-        document.getElementById('kg-tt-weeks').textContent      = d.weeks;
-        document.getElementById('kg-tt-checkpoints').textContent = d.checkpoints;
-        document.getElementById('kg-tt-multiplier').textContent = d.multiplier;
-        tip.style.display = 'block';
-      })
-      .on('mousemove', function(ev) {
-        tip.style.left = Math.min(ev.clientX + 18, window.innerWidth - 300) + 'px';
-        tip.style.top  = (ev.clientY - 50) + 'px';
-      })
-      .on('mouseleave', function() {
-        nodeSel.classed('dim', false);
-        linkSel.classed('dim', false).classed('highlight', false);
-        tip.style.display = 'none';
-      })
-      .on('click', function(ev, d) {
-        ev.stopPropagation();
-        const panel = document.getElementById('kg-detail');
-        const dph   = document.getElementById('kg-d-phase');
-        dph.textContent = d.phase + ' · ' + d.unit;
-        dph.style.color = PHASE_COLORS[d.phase];
-        document.getElementById('kg-d-name').textContent        = d.short;
-        document.getElementById('kg-d-unit').textContent        = d.desc;
-        document.getElementById('kg-d-roi').textContent         = d.roi;
-        document.getElementById('kg-d-weeks').textContent       = d.weeks;
-        document.getElementById('kg-d-checkpoints').textContent = d.checkpoints;
-        document.getElementById('kg-d-multiplier').textContent  = d.multiplier;
-
-        const deps    = links.filter(l => l.target.id === d.id);
-        const enables = links.filter(l => l.source.id === d.id);
-
-        const depsSec = document.getElementById('kg-d-deps-sec');
-        if (deps.length) {
-          depsSec.style.display = 'block';
-          document.getElementById('kg-d-deps').innerHTML =
-            deps.map(l => '<li>' + (nodes.find(n => n.id === l.source.id) || {short: l.source.id}).short + '</li>').join('');
-        } else { depsSec.style.display = 'none'; }
-
-        const enSec = document.getElementById('kg-d-enables-sec');
-        if (enables.length) {
-          enSec.style.display = 'block';
-          document.getElementById('kg-d-enables').innerHTML =
-            enables.map(l => '<li>' + (nodes.find(n => n.id === l.target.id) || {short: l.target.id}).short + '</li>').join('');
-        } else { enSec.style.display = 'none'; }
-
-        panel.style.display = 'block';
-      });
-
-    svg.on('click', () => { document.getElementById('kg-detail').style.display = 'none'; });
-
-    let activePhase = null;
-    document.querySelectorAll('.kg-btn[data-phase]').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const ph = this.dataset.phase;
-        document.querySelectorAll('.kg-btn[data-phase]').forEach(b => b.classList.remove('active'));
-        if (ph === 'all' || ph === activePhase) {
-          activePhase = null;
-          document.querySelector('.kg-btn[data-phase="all"]').classList.add('active');
-          nodeSel.classed('dim', false);
-          linkSel.classed('dim', false);
-        } else {
-          activePhase = ph;
-          this.classList.add('active');
-          const show = new Set([ph]);
-          links.forEach(l => {
-            if (l.source.phase === ph) show.add(l.target.phase);
-            if (l.target.phase === ph) show.add(l.source.phase);
-          });
-          nodeSel.classed('dim', d => !show.has(d.phase));
-          linkSel.classed('dim', l => !show.has(l.source.phase) || !show.has(l.target.phase));
-        }
-      });
-    });
-
-    document.getElementById('kg-reset').addEventListener('click', () => {
-      svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
-    });
-  })();
-  </script>
-</section>
-
 <!-- FOOTER -->
 <div class="footer">
   <strong>易睫清潔坊 · 智慧營運管理系統規劃</strong>
   <br>v1.0 · 基於三次訪談逐字稿（2026-06-02 × 2, 2026-06-08）· 機密文件
 </div>
+
+<!-- SIDE PANEL OVERLAY -->
+<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+<div class="side-panel" id="sidePanel">
+  <div class="panel-header">
+    <button class="panel-close" onclick="closePanel()">✕</button>
+    <div class="panel-module-tag">模組詳情</div>
+    <div class="panel-title" id="panelModuleName"></div>
+    <div class="panel-phase" id="panelPhase"></div>
+  </div>
+  <div class="panel-body">
+    <div class="panel-section">
+      <div class="panel-section-title ps-fee">模組費用</div>
+      <div id="panelFeeContent"></div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-title ps-eff">效率提升</div>
+      <div id="panelEffContent"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const MODULE_DATA = {
+  '客戶資料管理': {
+    phase: '第一階段',
+    fee: { dev: '包含在第一階段基礎開發費中', ops: '無額外第三方服務費用', note: '' },
+    before: '新員工接案前需問 Peggy 3–5 個問題，每次花費 5–10 分鐘',
+    after: '打開客戶卡片，0 次詢問即可出發',
+    saving: '每月節省 Peggy 40+ 次重複解答，約 3–5 小時溝通成本'
+  },
+  '系統權限控管': {
+    phase: '第一階段',
+    fee: { dev: '包含在第一階段基礎開發費中', ops: '無額外費用', note: '' },
+    before: '每次新員工入職需手動交代哪些資訊可查看，容易遺漏',
+    after: '開帳號選角色，系統自動限制可見範圍與操作權限',
+    saving: '帳號開通從 10 分鐘 → 2 分鐘；每筆操作留存紀錄，消除越權風險'
+  },
+  '員工技能管理': {
+    phase: '第一階段',
+    fee: { dev: '包含在第一階段基礎開發費中', ops: '無額外費用', note: '' },
+    before: '派工時需要回想每個人能做什麼，全憑 Peggy 記憶',
+    after: '技能標籤篩選，直接看哪些人符合這場服務需求',
+    saving: '候選人篩選時間：30 分鐘 → 5 分鐘，效率提升 83%'
+  },
+  '班表管理': {
+    phase: '第一階段',
+    fee: { dev: '包含在第一階段基礎開發費中', ops: '無額外費用（員工查班表透過系統）', note: '' },
+    before: '每週排班需 2 小時，完成後逐一用 LINE 通知員工',
+    after: '班表變更一鍵儲存，所有員工即時同步查看',
+    saving: '每週節省 1.5 小時；消除「沒看到通知」造成的人員空洞'
+  },
+  '員工打卡系統': {
+    phase: '第一階段',
+    fee: { dev: '包含在第一階段基礎開發費中', ops: 'SMS 驗證簡訊：NT$1,200–3,600/年（依月發送量）', note: 'GPS 定位屬選配功能，不影響基本打卡流程' },
+    before: '工時靠 LINE 回報，人工對照班表，半月薪資結算耗費 2 小時',
+    after: '手機一鍵打卡，工時自動累計並連動薪資模組',
+    saving: '薪資計算時間省 75%；工時爭議 30 秒查清楚，不需要翻 LINE 記錄'
+  },
+  '派工建議草稿': {
+    phase: '第三階段',
+    fee: { dev: '包含在第三階段開發費中', ops: '無額外費用（在現有伺服器執行）', note: '需 Phase 1–2 累積 2–3 個月乾淨資料才有參考價值' },
+    before: '每場派工 Peggy 全憑直覺與記憶配對，決策時間 15–30 分鐘',
+    after: '系統產出草稿名單，Peggy 微調確認，決策時間 3–5 分鐘',
+    saving: '派工決策效率提升 70–80%；衝突派工自動提醒，消除雙重派工錯誤'
+  },
+  '服務記錄與回饋': {
+    phase: '第二階段',
+    fee: { dev: '包含在第二階段開發費中', ops: 'LINE Official Account：NT$0（免費方案起步）/ NT$800/月（超標後升級）', note: '初期訊息量低，建議先用免費方案觀察' },
+    before: '服務後客戶意見靠電話或 LINE 收集，容易遺漏；新員工不知道客戶偏好',
+    after: '服務完成自動推送 LINE 回饋連結；筆記持續累積進客戶知識庫',
+    saving: '口碑素材蒐集自動化；客戶偏好交接時間從 15 分鐘 → 0'
+  },
+  '薪資計算模組': {
+    phase: '第二階段',
+    fee: { dev: '包含在第二階段開發費中', ops: '無額外費用（計算在伺服器端執行）', note: '' },
+    before: '半月結算需手動對班表 × 件數 × 加班系數，每次耗費 2 小時',
+    after: '打卡資料就緒後薪資自動算出，Peggy 確認即可',
+    saving: '每次結算省 1.5 小時，每年節省 36 小時；薪資爭議 30 秒查清楚'
+  },
+  '報價輔助模組': {
+    phase: '第二階段',
+    fee: { dev: '包含在第二階段開發費中', ops: '無額外費用', note: '' },
+    before: '報價靠感覺估算，透天型容易誤差，每次需 15 分鐘',
+    after: '坪數 × 係數 + 歷史案例區間，報價有據可查，每次 3 分鐘',
+    saving: '每年 200 次報價節省 40 小時；報價準確度提升，客戶信心增加'
+  },
+  '收款與對帳管理': {
+    phase: '第三階段',
+    fee: { dev: '包含在第三階段開發費中', ops: '金流手續費：每筆 2–3.5%（ECPay / 藍新 / LINE Pay）\n月費：NT$0–300（依服務商方案）', note: 'v1 不強制串第三方支付 API，手動記錄優先；金流費用視後期是否接入而定' },
+    before: '三種收款方式手動核對，每月對帳需 3 小時，欠款容易漏追',
+    after: '系統比對應收與實收，差異自動標示醒目',
+    saving: '月對帳時間：3 小時 → 30 分鐘；欠款追回率提升，每年保護 NT$19,200+'
+  },
+  '耗材管理模組': {
+    phase: '第三階段',
+    fee: { dev: '包含在第三階段開發費中', ops: '無額外費用', note: '' },
+    before: '補貨靠肉眼判斷，常常缺貨才發現，緊急採購成本高',
+    after: '庫存低於警戒量自動提醒，每場服務連動耗材成本',
+    saving: '補貨決策時間 -80%；耗材成本透明化，支援毛利精算'
+  },
+  '毛利報表': {
+    phase: '第四階段',
+    fee: { dev: '包含在第四階段開發費中', ops: '無額外費用', note: '需耗材管理模組的資料才能準確計算毛利' },
+    before: '月財務報告需人工彙整薪資 + 收款 + 耗材，耗時半天',
+    after: '每場服務毛利即時可見；月報自動彙整',
+    saving: '月財務報告時間：4 小時 → 自動生成；決策資料即時化'
+  },
+  '人事成本試算': {
+    phase: '第四階段',
+    fee: { dev: '包含在第四階段開發費中', ops: '無額外費用（內部試算工具）', note: '僅供內部成本模擬，實際合規需由會計師確認' },
+    before: '正規化評估靠人工估算試算表，難以快速比較多種方案',
+    after: '多薪資結構情境一鍵比較；成本差異數字化呈現',
+    saving: '評估決策時間 -50%；避免正規化後才發現成本結構不合理'
+  },
+  '多據點管理': {
+    phase: '第四階段',
+    fee: { dev: '包含在第四階段開發費中（Phase 1 已預留架構）', ops: '額外伺服器費用依規模：約 +NT$2,000–5,000/年', note: 'Phase 1 已預留 branch_id 欄位，不需改底層架構，新據點上線成本極低' },
+    before: '外縣市開店需要另行建置一套管理系統，成本倍增',
+    after: '同一套系統多帳號隔離管理；老闆可跨區查看',
+    saving: '新據點建置成本大幅降低；管理學習曲線歸零，即開即用'
+  }
+};
+
+function openPanel(name) {
+  var data = MODULE_DATA[name];
+  if (!data) return;
+  document.getElementById('panelModuleName').textContent = name;
+  document.getElementById('panelPhase').textContent = data.phase;
+
+  var feeHtml = '<div class="fee-row"><span class="fee-label">開發費</span><span class="fee-value">' + data.fee.dev + '</span></div>';
+  feeHtml += '<div class="fee-row"><span class="fee-label">運營費</span><span class="fee-value">' + data.fee.ops.replace(/\n/g, '<br>') + '</span></div>';
+  if (data.fee.note) { feeHtml += '<div class="panel-note">' + data.fee.note + '</div>'; }
+  document.getElementById('panelFeeContent').innerHTML = feeHtml;
+
+  var effHtml = '<div class="eff-item">';
+  effHtml += '<div class="eff-before">' + data.before + '</div>';
+  effHtml += '<div class="eff-after">' + data.after + '</div>';
+  effHtml += '</div>';
+  effHtml += '<div class="eff-saving">' + data.saving + '</div>';
+  document.getElementById('panelEffContent').innerHTML = effHtml;
+
+  document.getElementById('panelOverlay').classList.add('active');
+  document.getElementById('sidePanel').classList.add('active');
+}
+
+function closePanel() {
+  document.getElementById('panelOverlay').classList.remove('active');
+  document.getElementById('sidePanel').classList.remove('active');
+}
+
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePanel(); });
+
+document.querySelectorAll('.module-card').forEach(function(card) {
+  var nameEl = card.querySelector('.module-name');
+  if (!nameEl) return;
+  var name = nameEl.textContent.trim();
+  if (!MODULE_DATA[name]) return;
+  card.style.cursor = 'pointer';
+  var hint = document.createElement('div');
+  hint.className = 'module-click-hint';
+  hint.textContent = '費用與效率提升';
+  card.appendChild(hint);
+  card.addEventListener('click', function() { openPanel(name); });
+});
+</script>
 
 </body>
 </html>
