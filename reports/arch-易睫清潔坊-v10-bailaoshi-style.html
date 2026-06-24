@@ -1030,18 +1030,22 @@
   <div id="kgyi-d-deps-sec" style="display:none;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">前置依賴</div><ul id="kgyi-d-deps" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
   <div id="kgyi-d-enables-sec" style="display:none;margin-top:2px;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">解鎖模組</div><ul id="kgyi-d-enables" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
   <div id="kgyi-d-meta" style="display:none;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;text-align:center;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;text-align:center;">
       <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
-        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">ROI 類型</div>
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">ROI 情境</div>
         <div id="kgyi-d-roi" style="font-size:10px;font-weight:700;color:var(--ink);line-height:1.3;"></div>
       </div>
       <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
-        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">製作時間</div>
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">製作週數</div>
         <div id="kgyi-d-devweeks" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
       </div>
       <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
-        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">會議次數</div>
-        <div id="kgyi-d-meetings" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">驗收點</div>
+        <div id="kgyi-d-acceptance" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
+      </div>
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">係數</div>
+        <div id="kgyi-d-coefficient" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
       </div>
     </div>
   </div>
@@ -1092,20 +1096,20 @@ const PX={P1:120,P2:340,P3:560,P4:780};
 const PL={P1:'第一階段 基礎建置',P2:'第二階段 核心功能',P3:'第三階段 智慧調度',P4:'第四階段 管理報表'};
 const W=900,H=560;
 const nodes=[
-  {id:'M01',short:'客戶資料管理',  label:'客戶資料\n管理',  phase:'P1',icon:'👤',desc:'客戶基本資料、服務地址、偏好紀錄，所有服務流程的核心資料來源',roi:'行政效率',devWeeks:3,meetings:2},
-  {id:'M02',short:'系統權限控管',  label:'系統權限\n控管',  phase:'P1',icon:'🔐',desc:'老闆/行政/清潔師各角色最小權限配置，資料安全的基礎建設',roi:'基礎建設',devWeeks:2,meetings:1},
-  {id:'M03',short:'員工技能管理',  label:'員工技能\n管理',  phase:'P1',icon:'🏷️',desc:'清潔師持有技能標籤（深層清潔/玻璃/窗簾），派工配對的核心依據',roi:'服務品質',devWeeks:2,meetings:2},
-  {id:'M04',short:'班表管理',      label:'班表\n管理',      phase:'P1',icon:'📋',desc:'員工出勤班表，薪資計算與派工的時間基礎，防止排班衝突',roi:'行政效率',devWeeks:3,meetings:2},
-  {id:'M05',short:'員工打卡系統',  label:'員工打卡\n系統',  phase:'P1',icon:'⏱️',desc:'到場/離場打卡，實際工時核實，防範薪資爭議的客觀紀錄',roi:'行政效率',devWeeks:2,meetings:2},
-  {id:'M06',short:'報價輔助模組',  label:'報價輔助\n模組',  phase:'P2',icon:'💲',desc:'根據客戶地址/面積/服務類型自動產生估價單，縮短業務回覆時間',roi:'業績成長',devWeeks:4,meetings:3},
-  {id:'M07',short:'薪資計算模組',  label:'薪資計算\n模組',  phase:'P2',icon:'💰',desc:'整合班表、打卡、加班，自動產生薪資明細，大幅減少人工核算錯誤',roi:'行政效率',devWeeks:5,meetings:3},
-  {id:'M08',short:'服務記錄與回饋',label:'服務記錄\n與回饋',phase:'P2',icon:'📝',desc:'每次服務的執行紀錄、客戶評分、問題回報，是派工優化與改進的核心依據',roi:'服務品質',devWeeks:3,meetings:2},
-  {id:'M09',short:'收款與對帳管理',label:'收款對帳\n管理',  phase:'P3',icon:'🧾',desc:'收款狀態追蹤、發票開立、未收款提醒，現金流健康的關鍵控制點',roi:'財務收益',devWeeks:4,meetings:3},
-  {id:'M10',short:'派工建議草稿',  label:'派工建議\n草稿',  phase:'P3',icon:'🗺️',desc:'依技能、地區、班表自動建議最佳派工組合，減少人工調度來回溝通',roi:'行政效率',devWeeks:5,meetings:3},
-  {id:'M11',short:'耗材管理模組',  label:'耗材管理\n模組',  phase:'P3',icon:'🧴',desc:'清潔用品進出庫、每筆服務耗材用量紀錄，計算實際服務成本',roi:'成本管控',devWeeks:3,meetings:2},
-  {id:'M12',short:'毛利報表',      label:'毛利\n報表',      phase:'P4',icon:'📊',desc:'每筆服務收入扣除人力+耗材成本，即時呈現毛利率，支持定價決策',roi:'財務收益',devWeeks:3,meetings:2},
-  {id:'M13',short:'人事成本試算',  label:'人事成本\n試算',  phase:'P4',icon:'📈',desc:'員工人力成本總覽，支持擴編/縮編的財務決策模擬',roi:'財務收益',devWeeks:2,meetings:2},
-  {id:'M14',short:'多據點管理',    label:'多據點\n管理',    phase:'P4',icon:'🏢',desc:'跨服務區域的整合管理視圖，支持業務擴展後的統一調度與報表',roi:'業務擴張',devWeeks:4,meetings:3},
+  {id:'M01',short:'客戶資料管理',  label:'客戶資料\n管理',  phase:'P1',icon:'👤',desc:'客戶基本資料、服務地址、偏好紀錄，所有服務流程的核心資料來源',roi:'行政效率',devWeeks:2,acceptance:1,coefficient:1.0},
+  {id:'M02',short:'系統權限控管',  label:'系統權限\n控管',  phase:'P1',icon:'🔐',desc:'老闆/行政/清潔師各角色最小權限配置，資料安全的基礎建設',roi:'基礎建設',devWeeks:2,acceptance:3,coefficient:1.3},
+  {id:'M03',short:'員工技能管理',  label:'員工技能\n管理',  phase:'P1',icon:'🏷️',desc:'清潔師持有技能標籤（深層清潔/玻璃/窗簾），派工配對的核心依據',roi:'服務品質',devWeeks:1,acceptance:1,coefficient:1.0},
+  {id:'M04',short:'班表管理',      label:'班表\n管理',      phase:'P1',icon:'📋',desc:'員工出勤班表，薪資計算與派工的時間基礎，防止排班衝突',roi:'行政效率',devWeeks:3,acceptance:2,coefficient:1.15},
+  {id:'M05',short:'員工打卡系統',  label:'員工打卡\n系統',  phase:'P1',icon:'⏱️',desc:'到場/離場打卡，實際工時核實，防範薪資爭議的客觀紀錄',roi:'行政效率',devWeeks:1,acceptance:2,coefficient:1.15},
+  {id:'M06',short:'報價輔助模組',  label:'報價輔助\n模組',  phase:'P2',icon:'💲',desc:'根據客戶地址/面積/服務類型自動產生估價單，縮短業務回覆時間',roi:'業績成長',devWeeks:4,acceptance:3,coefficient:1.2},
+  {id:'M07',short:'薪資計算模組',  label:'薪資計算\n模組',  phase:'P2',icon:'💰',desc:'整合班表、打卡、加班，自動產生薪資明細，大幅減少人工核算錯誤',roi:'行政效率',devWeeks:5,acceptance:4,coefficient:1.5},
+  {id:'M08',short:'服務記錄與回饋',label:'服務記錄\n與回饋',phase:'P2',icon:'📝',desc:'每次服務的執行紀錄、客戶評分、問題回報，是派工優化與改進的核心依據',roi:'服務品質',devWeeks:3,acceptance:2,coefficient:1.15},
+  {id:'M09',short:'收款與對帳管理',label:'收款對帳\n管理',  phase:'P3',icon:'🧾',desc:'收款狀態追蹤、發票開立、未收款提醒，現金流健康的關鍵控制點',roi:'財務收益',devWeeks:4,acceptance:4,coefficient:1.4},
+  {id:'M10',short:'派工建議草稿',  label:'派工建議\n草稿',  phase:'P3',icon:'🗺️',desc:'依技能、地區、班表自動建議最佳派工組合，減少人工調度來回溝通',roi:'行政效率',devWeeks:5,acceptance:3,coefficient:1.25},
+  {id:'M11',short:'耗材管理模組',  label:'耗材管理\n模組',  phase:'P3',icon:'🧴',desc:'清潔用品進出庫、每筆服務耗材用量紀錄，計算實際服務成本',roi:'成本管控',devWeeks:3,acceptance:2,coefficient:1.15},
+  {id:'M12',short:'毛利報表',      label:'毛利\n報表',      phase:'P4',icon:'📊',desc:'每筆服務收入扣除人力+耗材成本，即時呈現毛利率，支持定價決策',roi:'財務收益',devWeeks:3,acceptance:3,coefficient:1.35},
+  {id:'M13',short:'人事成本試算',  label:'人事成本\n試算',  phase:'P4',icon:'📈',desc:'員工人力成本總覽，支持擴編/縮編的財務決策模擬',roi:'財務收益',devWeeks:2,acceptance:3,coefficient:1.35},
+  {id:'M14',short:'多據點管理',    label:'多據點\n管理',    phase:'P4',icon:'🏢',desc:'跨服務區域的整合管理視圖，支持業務擴展後的統一調度與報表',roi:'業務擴張',devWeeks:4,acceptance:3,coefficient:1.25},
 ];
 const links=[
   {source:'M01',target:'M06',type:'depends'},
@@ -1217,11 +1221,12 @@ nSel
       document.getElementById('kgyi-d-enables-sec').style.display='block';
       document.getElementById('kgyi-d-enables').innerHTML=enables.map(l=>{const t=nodes.find(n=>n.id===l.target.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${t?t.short:l.target.id}</li>`;}).join('');
     }else{document.getElementById('kgyi-d-enables-sec').style.display='none';}
-    if(d.roi||d.devWeeks||d.meetings){
+    if(d.roi||d.devWeeks||d.acceptance){
       document.getElementById('kgyi-d-meta').style.display='block';
       document.getElementById('kgyi-d-roi').textContent=d.roi||'—';
       document.getElementById('kgyi-d-devweeks').textContent=d.devWeeks?d.devWeeks+'週':'—';
-      document.getElementById('kgyi-d-meetings').textContent=d.meetings?d.meetings+'次':'—';
+      document.getElementById('kgyi-d-acceptance').textContent=d.acceptance?d.acceptance+'個':'—';
+      document.getElementById('kgyi-d-coefficient').textContent=d.coefficient?'×'+d.coefficient:'—';
     }else{document.getElementById('kgyi-d-meta').style.display='none';}
     document.getElementById('kgyi-detail').style.display='block';
   });
