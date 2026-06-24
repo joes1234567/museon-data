@@ -392,6 +392,7 @@
     .timeline-strip .ts-phase:nth-child(3) { border-top: 1px solid var(--border); }
   }
 </style>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
 
@@ -1310,432 +1311,321 @@
   <div class="container">
     <div class="section-label">系統架構</div>
     <h2 class="section-title">模組依賴知識圖譜</h2>
-    <p class="section-desc">14 個模組依建置順序排列——每張卡都標明前置依賴，讓你一眼看清楚哪個先做、做完才能做哪個。</p>
-
-    <!-- 建置層 1：地基 -->
-    <div class="func-area">
-      <div class="func-header">
-        <div class="func-icon fi-green">🏗️</div>
-        <div class="func-title-group">
-          <div class="func-area-name">建置層 1 — 地基（第一階段）</div>
-          <div class="func-area-desc">無前置依賴或僅依賴地基本身——先建這五個，其他所有模組才能動</div>
-        </div>
-        <div class="func-modules-count">5 個模組</div>
-      </div>
-      <div class="module-grid">
-
-        <div class="module-card">
-          <div class="mc-area-label">P1 · 客戶與案場</div>
-          <div class="module-top">
-            <div class="module-name">系統權限控管</div>
-            <span class="phase-tag pt-1">第一階段</span>
-          </div>
-          <div class="module-value">誰能看什麼、誰能改什麼，全由你決定</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">三層角色設定</span>
-            <span class="mc-feat-tag">帳號開通停用</span>
-            <span class="mc-feat-tag">操作記錄留存</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">無（地基模組）</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">所有模組的安全地基</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$4,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">資料安全有保障 · 帳號管理一鍵完成</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P1 · 客戶與案場</div>
-          <div class="module-top">
-            <div class="module-name">客戶資料管理</div>
-            <span class="phase-tag pt-1">第一階段</span>
-          </div>
-          <div class="module-value">客戶的一切都在這一張卡</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">客戶建檔</span>
-            <span class="mc-feat-tag">案場設定</span>
-            <span class="mc-feat-tag">進入方式記錄</span>
-            <span class="mc-feat-tag">清潔偏好</span>
-            <span class="mc-feat-tag">歷史服務紀錄查詢</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">系統權限控管</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">新員工交接不問 Peggy</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$8,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 2 小時/月 · 交接零摩擦</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P1 · 員工與排班</div>
-          <div class="module-top">
-            <div class="module-name">員工技能管理</div>
-            <span class="phase-tag pt-1">第一階段</span>
-          </div>
-          <div class="module-value">每個人能做什麼，系統幫你記</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">技能標籤建立</span>
-            <span class="mc-feat-tag">年資等級設定</span>
-            <span class="mc-feat-tag">區域偏好設定</span>
-            <span class="mc-feat-tag">排班限制標記</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">系統權限控管</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">派工不靠記憶靠系統</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$5,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 1 小時/月 · 用對人不靠猜</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P1 · 員工與排班</div>
-          <div class="module-top">
-            <div class="module-name">班表管理</div>
-            <span class="phase-tag pt-1">第一階段</span>
-          </div>
-          <div class="module-value">排班、調整、通知——一個介面完成</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">手動排班介面</span>
-            <span class="mc-feat-tag">臨時請假調度</span>
-            <span class="mc-feat-tag">衝突自動提醒</span>
-            <span class="mc-feat-tag">員工查班免問老闆</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">員工技能管理</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">排班從周日噩夢變成 20 分鐘例行</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$11,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 10 小時/月 · Peggy 的周日還給她</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P1 · 員工與排班</div>
-          <div class="module-top">
-            <div class="module-name">員工打卡系統</div>
-            <span class="phase-tag pt-1">第一階段</span>
-          </div>
-          <div class="module-value">工時自動累計，薪資不再算錯</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">手機網頁打卡</span>
-            <span class="mc-feat-tag">工時自動計算</span>
-            <span class="mc-feat-tag">異常自動提醒</span>
-            <span class="mc-feat-tag">GPS 確認（可選）</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">班表管理</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">工時紀錄消滅薪資糾紛</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$9,500</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 2 小時/月 · 糾紛 30 秒查清</span></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 建置層 2：核心運營 -->
-    <div class="func-area">
-      <div class="func-header">
-        <div class="func-icon fi-blue">⚙️</div>
-        <div class="func-title-group">
-          <div class="func-area-name">建置層 2 — 核心運營（第二階段）</div>
-          <div class="func-area-desc">地基穩定後啟動——依賴 P1 資料餵養，讓日常營運從人腦轉移到系統</div>
-        </div>
-        <div class="func-modules-count">3 個模組</div>
-      </div>
-      <div class="module-grid">
-
-        <div class="module-card">
-          <div class="mc-area-label">P2 · 派工與服務</div>
-          <div class="module-top">
-            <div class="module-name">服務記錄與回饋</div>
-            <span class="phase-tag pt-2">第二階段</span>
-          </div>
-          <div class="module-value">每場服務都留下紀錄，下次不用重問</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">帶隊主管服務筆記</span>
-            <span class="mc-feat-tag">客戶知識庫累積</span>
-            <span class="mc-feat-tag">LINE 回饋連結推送</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">客戶資料管理、班表管理</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">每場服務留痕跡，口碑可積累</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$6,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">降低客訴 · 口碑素材自然積累</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P2 · 財務與報價</div>
-          <div class="module-top">
-            <div class="module-name">薪資計算模組</div>
-            <span class="phase-tag pt-2">第二階段</span>
-          </div>
-          <div class="module-value">半月結算從 2 小時縮到 30 分鐘</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">工時自動計算</span>
-            <span class="mc-feat-tag">難度獎金設定</span>
-            <span class="mc-feat-tag">稱讚獎金</span>
-            <span class="mc-feat-tag">護底補足</span>
-            <span class="mc-feat-tag">半月結算</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">員工打卡系統、班表管理</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">半月結算從 2 小時縮到 30 分鐘</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.15</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$14,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 3 小時/月 · 員工薪資異議消失</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P2 · 財務與報價</div>
-          <div class="module-top">
-            <div class="module-name">報價輔助模組</div>
-            <span class="phase-tag pt-2">第二階段</span>
-          </div>
-          <div class="module-value">報價有依據，不再靠感覺猜</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">坪數係數計算</span>
-            <span class="mc-feat-tag">耗材費用加算</span>
-            <span class="mc-feat-tag">歷史案例參考區間</span>
-            <span class="mc-feat-tag">交通費計算</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">客戶資料管理</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">報出去的價格有依據，不再靠感覺</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$9,200</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 3 小時/月 · 報價時間從 15 分縮到 3 分</span></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 建置層 3：成熟優化 -->
-    <div class="func-area">
-      <div class="func-header">
-        <div class="func-icon fi-gold">📈</div>
-        <div class="func-title-group">
-          <div class="func-area-name">建置層 3 — 成熟優化（第三階段）</div>
-          <div class="func-area-desc">P2 積累 2–3 個月數據後啟動——讓系統從「記錄」升級到「優化」</div>
-        </div>
-        <div class="func-modules-count">3 個模組</div>
-      </div>
-      <div class="module-grid">
-
-        <div class="module-card">
-          <div class="mc-area-label">P3 · 派工與服務</div>
-          <div class="module-top">
-            <div class="module-name">派工建議草稿</div>
-            <span class="phase-tag pt-3">第三階段</span>
-          </div>
-          <div class="module-value">系統先篩，Peggy 最終確認</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">技能匹配初篩</span>
-            <span class="mc-feat-tag">地理路由優化</span>
-            <span class="mc-feat-tag">收入平衡</span>
-            <span class="mc-feat-tag">新人保護機制</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">員工技能管理、客戶資料管理（需 2–3 個月歷史資料）</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">草稿取代從零想起，Peggy 只需確認</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">3週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.2</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$25,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 5 小時/月 · 最佳配對浮出水面</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P3 · 財務與報價</div>
-          <div class="module-top">
-            <div class="module-name">收款與對帳管理</div>
-            <span class="phase-tag pt-3">第三階段</span>
-          </div>
-          <div class="module-value">現金、LINE Pay、轉帳全記錄，欠款一眼看到</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">三種收款方式記錄</span>
-            <span class="mc-feat-tag">應收金額比對</span>
-            <span class="mc-feat-tag">差異自動標示</span>
-            <span class="mc-feat-tag">欠款追蹤清單</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">薪資計算模組、報價輔助模組</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">漏帳從此有記錄可查</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$15,500</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 2 小時/月 · 每月追回 NT$1,600+</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P3 · 擴張與分析</div>
-          <div class="module-top">
-            <div class="module-name">耗材管理模組</div>
-            <span class="phase-tag pt-3">第三階段</span>
-          </div>
-          <div class="module-value">庫存低了自動提醒，成本不再靠猜</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">庫存追蹤</span>
-            <span class="mc-feat-tag">低庫存自動提醒</span>
-            <span class="mc-feat-tag">每場服務耗材成本連動</span>
-            <span class="mc-feat-tag">毛利計算基礎</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">服務記錄與回饋</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">清潔劑快用完系統先告訴你</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$11,500</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 1 小時/月 · 斷貨風險歸零</span></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 建置層 4：洞察擴張 -->
-    <div class="func-area">
-      <div class="func-header">
-        <div class="func-icon fi-gray">🚀</div>
-        <div class="func-title-group">
-          <div class="func-area-name">建置層 4 — 洞察擴張（第四階段）</div>
-          <div class="func-area-desc">台南本部穩定後啟動——從執行型系統升級為決策型系統</div>
-        </div>
-        <div class="func-modules-count">3 個選配模組</div>
-      </div>
-      <div class="module-grid">
-
-        <div class="module-card">
-          <div class="mc-area-label">P4 · 擴張與分析</div>
-          <div class="module-top">
-            <div class="module-name">毛利報表</div>
-            <span class="phase-tag pt-4">第四階段</span>
-          </div>
-          <div class="module-value">每場服務賺了多少，數字說話</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">單場毛利計算</span>
-            <span class="mc-feat-tag">月報損益分析</span>
-            <span class="mc-feat-tag">服務類型分析</span>
-            <span class="mc-feat-tag">員工效率報告</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">薪資計算模組、耗材管理模組</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">哪種服務最賺，數字說話</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$17,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">知道該力推哪項服務 · 淘汰低利業務</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P4 · 擴張與分析</div>
-          <div class="module-top">
-            <div class="module-name">人事成本試算</div>
-            <span class="phase-tag pt-4">第四階段</span>
-          </div>
-          <div class="module-value">正規化前先算清楚划不划算</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">多薪資結構試算</span>
-            <span class="mc-feat-tag">正規化成本模擬</span>
-            <span class="mc-feat-tag">分批導入評估</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">薪資計算模組</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">正規化前先算清楚划不划算</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$13,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">人事決策有數字支撐</span></div>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="mc-area-label">P4 · 擴張與分析</div>
-          <div class="module-top">
-            <div class="module-name">多據點管理</div>
-            <span class="phase-tag pt-4">第四階段</span>
-          </div>
-          <div class="module-value">外縣市開起來，同一套系統管</div>
-          <div class="mc-features">
-            <span class="mc-feat-tag">外縣市帳號管理</span>
-            <span class="mc-feat-tag">跨區資料隔離</span>
-            <span class="mc-feat-tag">老闆跨區總覽</span>
-            <span class="mc-feat-tag">架構 P1 起預留</span>
-          </div>
-          <div class="mc-stats">
-            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">全部 P1 模組（台南本部穩定後啟動）</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">開外縣市那天系統已準備好</span></div>
-            <div class="mc-kv-inline">
-              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">3週</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
-              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.2</span></div>
-            </div>
-            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$23,000</span></div>
-            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">外縣市擴張不必重建系統</span></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
+    <p class="section-desc">14 個模組左到右是演化建置順序——hover 顯示說明，點擊查看前置依賴與解鎖模組，滾輪縮放，可拖曳平移。</p>
   </div>
+
+  <style>
+  #kg-wrap { background: #fff; overflow: hidden; }
+  svg#kg-graph { display: block; width: 100%; cursor: grab; }
+  svg#kg-graph:active { cursor: grabbing; }
+  .kg-controls {
+    display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+    padding: 10px 16px; background: #fff; border-bottom: 1px solid #E2E0DA; align-items: center;
+  }
+  .kg-btn {
+    padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    cursor: pointer; border: 1.5px solid currentColor; background: transparent;
+    transition: background 0.15s, color 0.15s; letter-spacing: 0.3px; line-height: 1.4;
+  }
+  .kg-btn.active { color: #fff !important; }
+  .kg-btn[data-phase="all"] { color: #12121A; border-color: #12121A; }
+  .kg-btn[data-phase="all"].active { background: #12121A; }
+  .kg-btn[data-phase="P1"] { color: #1a6b3c; }
+  .kg-btn[data-phase="P1"].active { background: #1a6b3c; border-color: #1a6b3c; }
+  .kg-btn[data-phase="P2"] { color: #2A6A8A; }
+  .kg-btn[data-phase="P2"].active { background: #2A6A8A; border-color: #2A6A8A; }
+  .kg-btn[data-phase="P3"] { color: #B8923A; }
+  .kg-btn[data-phase="P3"].active { background: #B8923A; border-color: #B8923A; }
+  .kg-btn[data-phase="P4"] { color: #6A4A9A; }
+  .kg-btn[data-phase="P4"].active { background: #6A4A9A; border-color: #6A4A9A; }
+  .kg-sep { width: 1px; height: 20px; background: #E2E0DA; }
+  .kg-node circle { stroke-width: 2.5; cursor: pointer; }
+  .kg-link { fill: none; stroke: #b0b0be; stroke-width: 1.5; stroke-opacity: 0.5; }
+  .kg-link.highlight { stroke-opacity: 0.9 !important; stroke-width: 2.5 !important; }
+  .kg-link.dim { stroke-opacity: 0.05 !important; }
+  .kg-node.dim circle { opacity: 0.12; }
+  .kg-node.dim text { opacity: 0.12; }
+  #kg-tooltip {
+    position: fixed; display: none;
+    background: #12121A; color: rgba(255,255,255,0.92);
+    font-size: 12px; line-height: 1.85; padding: 12px 16px; border-radius: 10px;
+    max-width: 280px; z-index: 9999; pointer-events: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  #kg-tt-phase { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7; margin-bottom: 4px; }
+  #kg-tt-name  { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  #kg-tt-desc  { font-size: 12px; opacity: 0.82; line-height: 1.65; }
+  #kg-detail {
+    display: none; position: fixed; right: 16px; top: 110px;
+    width: 272px; background: #fff; border: 1px solid #E2E0DA; border-radius: 12px;
+    padding: 18px 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    z-index: 200; font-size: 13px; max-height: calc(100vh - 130px); overflow-y: auto;
+  }
+  #kg-detail .kd-close { position: absolute; right: 12px; top: 10px; cursor: pointer; color: #9898A8; font-size: 18px; line-height: 1; }
+  #kg-detail .kd-close:hover { color: #12121A; }
+  #kg-detail .kd-phase { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #9898A8; margin-bottom: 6px; }
+  #kg-detail .kd-name  { font-size: 15px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+  #kg-detail .kd-unit  { font-size: 12px; color: #5A5A6E; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #E2E0DA; }
+  #kg-detail .kd-sec   { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #9898A8; margin: 10px 0 5px; }
+  #kg-detail .kd-list  { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  #kg-detail .kd-list li { font-size: 12px; color: #5A5A6E; padding-left: 14px; position: relative; line-height: 1.5; }
+  #kg-detail .kd-list li::before { content: '→'; position: absolute; left: 0; color: #9898A8; }
+  .kg-legend {
+    display: flex; gap: 16px; flex-wrap: wrap; padding: 10px 24px;
+    background: #F7F5F0; border-top: 1px solid #E2E0DA;
+    font-size: 11.5px; color: #5A5A6E; align-items: center; justify-content: center;
+  }
+  .kg-legend .kl-item { display: flex; align-items: center; gap: 5px; }
+  .kg-legend .kl-dot  { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+  </style>
+
+  <div class="kg-controls" id="kg-controls">
+    <button class="kg-btn active" data-phase="all">全部</button>
+    <div class="kg-sep"></div>
+    <button class="kg-btn" data-phase="P1">P1 第一階段</button>
+    <button class="kg-btn" data-phase="P2">P2 第二階段</button>
+    <button class="kg-btn" data-phase="P3">P3 第三階段</button>
+    <button class="kg-btn" data-phase="P4">P4 第四階段</button>
+    <div class="kg-sep"></div>
+    <button class="kg-btn" id="kg-reset" style="color:#5A5A6E; border-color:#5A5A6E;">重置視圖</button>
+  </div>
+
+  <div id="kg-wrap"><svg id="kg-graph"></svg></div>
+
+  <div class="kg-legend">
+    <div class="kl-item"><div class="kl-dot" style="background:#1a6b3c"></div> P1 第一階段</div>
+    <div class="kl-item"><div class="kl-dot" style="background:#2A6A8A"></div> P2 第二階段</div>
+    <div class="kl-item"><div class="kl-dot" style="background:#B8923A"></div> P3 第三階段</div>
+    <div class="kl-item"><div class="kl-dot" style="background:#6A4A9A"></div> P4 第四階段</div>
+    <div style="width:1px;height:18px;background:#E2E0DA;"></div>
+    <div style="color:#9898A8; font-size:11px;">← hover 查看說明 · 點擊查看依賴 · 滾輪縮放 · 拖曳平移</div>
+  </div>
+
+  <div id="kg-tooltip">
+    <div id="kg-tt-phase"></div>
+    <div id="kg-tt-name"></div>
+    <div id="kg-tt-desc"></div>
+  </div>
+
+  <div id="kg-detail">
+    <span class="kd-close" onclick="document.getElementById('kg-detail').style.display='none'">×</span>
+    <div class="kd-phase" id="kg-d-phase"></div>
+    <div class="kd-name"  id="kg-d-name"></div>
+    <div class="kd-unit"  id="kg-d-unit"></div>
+    <div id="kg-d-deps-sec"    style="display:none"><div class="kd-sec">前置依賴</div><ul class="kd-list" id="kg-d-deps"></ul></div>
+    <div id="kg-d-enables-sec" style="display:none"><div class="kd-sec">解鎖模組</div><ul class="kd-list" id="kg-d-enables"></ul></div>
+  </div>
+
+  <script>
+  (function() {
+    const PHASE_COLORS = {P1:'#1a6b3c', P2:'#2A6A8A', P3:'#B8923A', P4:'#6A4A9A'};
+    const PHASE_X      = {P1:160, P2:430, P3:700, P4:960};
+    const PHASE_LABELS = {P1:'P1 第一階段', P2:'P2 第二階段', P3:'P3 第三階段', P4:'P4 第四階段'};
+    const W = 1100, H = 600;
+
+    const nodes = [
+      {id:'M01', short:'系統權限控管',   label:'系統\n權限控管',   phase:'P1', unit:'客戶與案場', icon:'🔐', desc:'三層角色設定，帳號開通停用，操作記錄留存——所有模組的安全地基'},
+      {id:'M02', short:'客戶資料管理',   label:'客戶\n資料管理',   phase:'P1', unit:'客戶與案場', icon:'👤', desc:'客戶建檔、案場設定、進入方式、清潔偏好、歷史服務紀錄查詢，新員工交接不問 Peggy'},
+      {id:'M03', short:'員工技能管理',   label:'員工\n技能管理',   phase:'P1', unit:'員工與排班', icon:'⭐', desc:'技能標籤、年資等級、區域偏好、排班限制，派工不靠記憶靠系統'},
+      {id:'M04', short:'班表管理',       label:'班表\n管理',       phase:'P1', unit:'員工與排班', icon:'📋', desc:'手動排班介面、臨時請假調度、衝突自動提醒、員工查班免問老闆，排班從周日噩夢變成 20 分鐘例行'},
+      {id:'M05', short:'員工打卡系統',   label:'員工\n打卡系統',   phase:'P1', unit:'員工與排班', icon:'⏱️', desc:'手機網頁打卡、工時自動計算、異常自動提醒（可選 GPS），工時紀錄消滅薪資糾紛'},
+      {id:'M06', short:'服務記錄與回饋', label:'服務記錄\n與回饋', phase:'P2', unit:'派工與服務', icon:'📝', desc:'帶隊主管服務筆記、客戶知識庫累積、LINE 回饋連結推送，每場服務留痕跡口碑可積累'},
+      {id:'M07', short:'薪資計算模組',   label:'薪資\n計算模組',   phase:'P2', unit:'財務與報價', icon:'💰', desc:'工時自動計算、難度獎金、稱讚獎金、護底補足、半月結算，結算從 2 小時縮到 30 分鐘'},
+      {id:'M08', short:'報價輔助模組',   label:'報價\n輔助模組',   phase:'P2', unit:'財務與報價', icon:'💲', desc:'坪數係數計算、耗材費用加算、歷史案例參考區間、交通費計算，報出去的價格有依據不靠感覺'},
+      {id:'M09', short:'派工建議草稿',   label:'派工\n建議草稿',   phase:'P3', unit:'派工與服務', icon:'🎯', desc:'技能匹配初篩、地理路由優化、收入平衡、新人保護機制，草稿取代從零想起 Peggy 只需確認'},
+      {id:'M10', short:'收款與對帳管理', label:'收款\n對帳管理',   phase:'P3', unit:'財務與報價', icon:'🧾', desc:'三種收款方式記錄、應收金額比對、差異自動標示、欠款追蹤清單，漏帳從此有記錄可查'},
+      {id:'M11', short:'耗材管理模組',   label:'耗材\n管理模組',   phase:'P3', unit:'擴張與分析', icon:'📦', desc:'庫存追蹤、低庫存自動提醒、每場服務耗材成本連動、毛利計算基礎，清潔劑快用完系統先告訴你'},
+      {id:'M12', short:'毛利報表',       label:'毛利\n報表',       phase:'P4', unit:'擴張與分析', icon:'📊', desc:'單場毛利計算、月報損益分析、服務類型分析、員工效率報告，哪種服務最賺數字說話'},
+      {id:'M13', short:'人事成本試算',   label:'人事\n成本試算',   phase:'P4', unit:'擴張與分析', icon:'🧮', desc:'多薪資結構試算、正規化成本模擬、分批導入評估，正規化前先算清楚划不划算'},
+      {id:'M14', short:'多據點管理',     label:'多據點\n管理',     phase:'P4', unit:'擴張與分析', icon:'🏢', desc:'外縣市帳號管理、跨區資料隔離、老闆跨區總覽，台南本部穩定後啟動——開外縣市那天系統已準備好'},
+    ];
+
+    const links = [
+      {source:'M01', target:'M02', type:'depends'},
+      {source:'M01', target:'M03', type:'depends'},
+      {source:'M03', target:'M04', type:'depends'},
+      {source:'M04', target:'M05', type:'depends'},
+      {source:'M02', target:'M06', type:'depends'},
+      {source:'M04', target:'M06', type:'depends'},
+      {source:'M04', target:'M07', type:'depends'},
+      {source:'M05', target:'M07', type:'depends'},
+      {source:'M02', target:'M08', type:'depends'},
+      {source:'M02', target:'M09', type:'depends'},
+      {source:'M03', target:'M09', type:'depends'},
+      {source:'M07', target:'M10', type:'depends'},
+      {source:'M08', target:'M10', type:'depends'},
+      {source:'M06', target:'M11', type:'depends'},
+      {source:'M07', target:'M12', type:'depends'},
+      {source:'M11', target:'M12', type:'depends'},
+      {source:'M07', target:'M13', type:'depends'},
+      {source:'M01', target:'M14', type:'depends'},
+      {source:'M02', target:'M14', type:'depends'},
+      {source:'M03', target:'M14', type:'depends'},
+      {source:'M04', target:'M14', type:'depends'},
+      {source:'M05', target:'M14', type:'depends'},
+    ];
+
+    const svg = d3.select('#kg-graph')
+      .attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('height', Math.min(600, window.innerHeight - 200));
+    const g = svg.append('g');
+    const zoom = d3.zoom().scaleExtent([0.3, 4]).on('zoom', e => g.attr('transform', e.transform));
+    svg.call(zoom);
+
+    // Arrow marker
+    const defs = svg.append('defs');
+    defs.append('marker').attr('id', 'kg-ar')
+      .attr('viewBox','0 -5 10 10').attr('refX', 26).attr('refY', 0)
+      .attr('markerWidth', 5).attr('markerHeight', 5).attr('orient', 'auto')
+      .append('path').attr('d','M0,-5L10,0L0,5').attr('fill', '#b0b0be').attr('fill-opacity', 0.7);
+
+    // Phase lane backgrounds + labels
+    Object.entries(PHASE_X).forEach(([phase, cx]) => {
+      g.append('rect').attr('x', cx-82).attr('y', 42).attr('width', 164).attr('height', H-54)
+        .attr('fill', PHASE_COLORS[phase]).attr('fill-opacity', 0.025).attr('rx', 8);
+      g.append('text').attr('x', cx).attr('y', 28).attr('text-anchor','middle')
+        .attr('fill', PHASE_COLORS[phase]).attr('font-size','11').attr('font-weight','700')
+        .attr('letter-spacing','0.8').attr('fill-opacity','0.6').text(PHASE_LABELS[phase]);
+    });
+
+    // Initial positions
+    nodes.forEach(n => {
+      const col = nodes.filter(m => m.phase === n.phase);
+      const idx = col.indexOf(n);
+      const step = (H - 120) / (col.length + 1);
+      n.x = PHASE_X[n.phase] + (idx % 2 === 0 ? 0 : 12);
+      n.y = 70 + step * (idx + 1);
+    });
+
+    const linkSel = g.append('g').selectAll('.kg-link')
+      .data(links).join('path').attr('class','kg-link').attr('marker-end','url(#kg-ar)');
+
+    const nodeSel = g.append('g').selectAll('.kg-node')
+      .data(nodes).join('g').attr('class','kg-node')
+      .call(d3.drag().on('start', ds).on('drag', dd).on('end', de));
+
+    nodeSel.append('circle').attr('r', 23)
+      .attr('fill', d => PHASE_COLORS[d.phase]).attr('fill-opacity', 0.88).attr('stroke','#fff');
+
+    nodeSel.append('text').attr('dy','0.35em').text(d => d.icon)
+      .attr('font-size','13').attr('text-anchor','middle').attr('pointer-events','none').attr('dominant-baseline','central');
+
+    nodeSel.each(function(d) {
+      d.label.split('\n').forEach((line, i) => {
+        d3.select(this).append('text').attr('y', 31 + i * 13).text(line)
+          .attr('font-size','9.5').attr('fill','#12121A').attr('text-anchor','middle')
+          .attr('pointer-events','none').attr('font-weight','500');
+      });
+    });
+
+    const sim = d3.forceSimulation(nodes)
+      .force('link',    d3.forceLink(links).id(d => d.id).distance(85).strength(0.25))
+      .force('charge',  d3.forceManyBody().strength(-300))
+      .force('x',       d3.forceX(d => PHASE_X[d.phase]).strength(0.9))
+      .force('y',       d3.forceY(H / 2).strength(0.08))
+      .force('collide', d3.forceCollide(36))
+      .on('tick', tick);
+
+    function tick() {
+      linkSel.attr('d', d => {
+        const dx = d.target.x - d.source.x, dy = d.target.y - d.source.y;
+        const len = Math.sqrt(dx*dx + dy*dy) || 1;
+        return `M${d.source.x},${d.source.y} A${len*0.75},${len*0.75} 0 0,1 ${d.target.x},${d.target.y}`;
+      });
+      nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
+    }
+
+    function ds(e, d) { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; }
+    function dd(e, d) { d.fx = e.x; d.fy = e.y; }
+    function de(e, d) { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }
+
+    const tip = document.getElementById('kg-tooltip');
+
+    nodeSel
+      .on('mouseenter', function(ev, d) {
+        const conn = new Set([d.id]);
+        links.forEach(l => {
+          if (l.source.id === d.id) conn.add(l.target.id);
+          if (l.target.id === d.id) conn.add(l.source.id);
+        });
+        nodeSel.classed('dim', n => !conn.has(n.id));
+        linkSel.classed('dim',       l => l.source.id !== d.id && l.target.id !== d.id)
+               .classed('highlight', l => l.source.id === d.id || l.target.id === d.id);
+        document.getElementById('kg-tt-phase').style.color = PHASE_COLORS[d.phase];
+        document.getElementById('kg-tt-phase').textContent = d.phase + ' · ' + d.unit;
+        document.getElementById('kg-tt-name').textContent  = d.short;
+        document.getElementById('kg-tt-desc').textContent  = d.desc;
+        tip.style.display = 'block';
+      })
+      .on('mousemove', function(ev) {
+        tip.style.left = Math.min(ev.clientX + 18, window.innerWidth - 300) + 'px';
+        tip.style.top  = (ev.clientY - 50) + 'px';
+      })
+      .on('mouseleave', function() {
+        nodeSel.classed('dim', false);
+        linkSel.classed('dim', false).classed('highlight', false);
+        tip.style.display = 'none';
+      })
+      .on('click', function(ev, d) {
+        ev.stopPropagation();
+        const panel = document.getElementById('kg-detail');
+        const dph   = document.getElementById('kg-d-phase');
+        dph.textContent = d.phase + ' · ' + d.unit;
+        dph.style.color = PHASE_COLORS[d.phase];
+        document.getElementById('kg-d-name').textContent = d.short;
+        document.getElementById('kg-d-unit').textContent = d.desc;
+
+        const deps    = links.filter(l => l.target.id === d.id);
+        const enables = links.filter(l => l.source.id === d.id);
+
+        const depsSec = document.getElementById('kg-d-deps-sec');
+        if (deps.length) {
+          depsSec.style.display = 'block';
+          document.getElementById('kg-d-deps').innerHTML =
+            deps.map(l => '<li>' + (nodes.find(n => n.id === l.source.id) || {short: l.source.id}).short + '</li>').join('');
+        } else { depsSec.style.display = 'none'; }
+
+        const enSec = document.getElementById('kg-d-enables-sec');
+        if (enables.length) {
+          enSec.style.display = 'block';
+          document.getElementById('kg-d-enables').innerHTML =
+            enables.map(l => '<li>' + (nodes.find(n => n.id === l.target.id) || {short: l.target.id}).short + '</li>').join('');
+        } else { enSec.style.display = 'none'; }
+
+        panel.style.display = 'block';
+      });
+
+    svg.on('click', () => { document.getElementById('kg-detail').style.display = 'none'; });
+
+    let activePhase = null;
+    document.querySelectorAll('.kg-btn[data-phase]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const ph = this.dataset.phase;
+        document.querySelectorAll('.kg-btn[data-phase]').forEach(b => b.classList.remove('active'));
+        if (ph === 'all' || ph === activePhase) {
+          activePhase = null;
+          document.querySelector('.kg-btn[data-phase="all"]').classList.add('active');
+          nodeSel.classed('dim', false);
+          linkSel.classed('dim', false);
+        } else {
+          activePhase = ph;
+          this.classList.add('active');
+          const show = new Set([ph]);
+          links.forEach(l => {
+            if (l.source.phase === ph) show.add(l.target.phase);
+            if (l.target.phase === ph) show.add(l.source.phase);
+          });
+          nodeSel.classed('dim', d => !show.has(d.phase));
+          linkSel.classed('dim', l => !show.has(l.source.phase) || !show.has(l.target.phase));
+        }
+      });
+    });
+
+    document.getElementById('kg-reset').addEventListener('click', () => {
+      svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
+    });
+  })();
+  </script>
 </section>
 
 <!-- FOOTER -->
