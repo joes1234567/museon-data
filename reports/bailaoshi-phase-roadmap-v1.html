@@ -1191,7 +1191,7 @@
   <div id="kg-d-meta" style="display:none;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
     <div id="kg-d-metrics-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:5px;text-align:center;">
       <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
-        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">ROI 類型</div>
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">ROI 情境</div>
         <div id="kg-d-roi" style="font-size:11px;font-weight:700;color:var(--ink);line-height:1.3;"></div>
       </div>
       <div id="kg-d-weeks-box" style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
@@ -1206,6 +1206,10 @@
         <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">係數</div>
         <div id="kg-d-coeff" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
       </div>
+    </div>
+    <div id="kg-d-cost-box" style="display:none;margin-top:5px;background:#EEF6FF;border-radius:7px;padding:8px 3px;text-align:center;">
+      <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">模組費用</div>
+      <div id="kg-d-cost" style="font-size:13px;font-weight:700;color:#1A5DC8;"></div>
     </div>
   </div>
 </div>
@@ -1448,6 +1452,9 @@ nSel
         document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
         document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
       }
+      const cost=(d.weeks&&d.acceptance&&d.coeff)?Math.round((d.weeks*12000+d.acceptance*5000)*d.coeff):null;
+      const costBox=document.getElementById('kg-d-cost-box');
+      if(cost){costBox.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost.toLocaleString();}else{costBox.style.display='none';}
     }else{document.getElementById('kg-d-meta').style.display='none';}
     const deps=links.filter(l=>l.target.id===d.id);
     const enables=links.filter(l=>l.source.id===d.id);
@@ -1472,6 +1479,9 @@ nSel
         document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
         document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
       }
+      const cost2=(d.weeks&&d.acceptance&&d.coeff)?Math.round((d.weeks*12000+d.acceptance*5000)*d.coeff):null;
+      const costBox2=document.getElementById('kg-d-cost-box');
+      if(cost2){costBox2.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost2.toLocaleString();}else{costBox2.style.display='none';}
       meta.style.display='block';
     }else{meta.style.display='none';}
     panel.style.display='block';
