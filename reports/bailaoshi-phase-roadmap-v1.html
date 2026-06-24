@@ -1216,7 +1216,7 @@
       <div id="kg-d-remaining" style="font-size:13px;font-weight:700;color:#1A7A3A;"></div>
     </div>
     <div id="kg-d-savings-box" style="display:none;margin-top:4px;background:#FFF8E6;border-radius:7px;padding:8px 3px;text-align:center;">
-      <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">每月幫客戶省費</div>
+      <div id="kg-d-savings-label" style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">每月省人力費</div>
       <div id="kg-d-savings" style="font-size:13px;font-weight:700;color:#B45C00;"></div>
     </div>
   </div>
@@ -1361,7 +1361,31 @@ const links=[
 ];
 const TOTAL_COST=nodes.reduce((s,n)=>s+nodeCost(n),0);
 const HOURLY_RATE=213;
-const SAVINGS_HR={'MOD14':1,'MOD04':0.5,'MOD01a':1,'MOD02':0.5,'MOD01b':1,'MOD03':4,'MOD06':3,'MOD08':6,'MOD09':3,'MOD07':4,'MOD33b':1,'MOD24':3,'MOD10':4,'MOD11':8,'MOD12':4,'MOD15':6,'MOD16':10,'MOD29':2,'MOD27':2,'MOD30':1,'MOD31':1,'MOD05':4,'MOD18':5,'MOD13':3,'MOD26':2,'MOD28':3,'MOD32':1,'MOD33f':2,'MOD34':4,'MOD35':3,'MOD23':8,'MOD17':5,'MOD12x':3,'MOD18x':3,'API01':2,'API02':2,'API03':2,'API04':2,'MOD19':5,'MOD20':10,'MOD21':15,'MOD22':4,'MOD25':6};
+const SAVINGS_HR={'MOD03':4,'MOD06':3,'MOD07':4,'MOD08':6,'MOD09':3,'MOD10':4,'MOD12':4,'MOD12x':3,'MOD13':3,'MOD15':6,'MOD16':10,'MOD26':2,'MOD28':3,'MOD32':1,'MOD33f':6};
+const ROI_DIM={'MOD14':'成本節省','MOD04':'系統地基','MOD01a':'系統地基','MOD02':'系統地基','MOD01b':'系統地基','MOD03':'省時','MOD06':'省時','MOD08':'省時','MOD09':'省時','MOD07':'省時','MOD33b':'系統地基','MOD24':'效率倍增','MOD10':'省時','MOD11':'成本節省','MOD12':'省時','MOD15':'省時','MOD16':'省時','MOD29':'成本節省','MOD27':'成本節省','MOD30':'成本節省','MOD31':'成本節省','MOD05':'增收','MOD18':'增收','MOD13':'省時','MOD26':'省時','MOD28':'省時','MOD32':'省時','MOD33f':'省時','MOD34':'效率倍增','MOD35':'效率倍增','MOD23':'增收','MOD17':'增收','MOD12x':'省時','MOD18x':'增收','API01':'效率倍增','API02':'效率倍增','API03':'效率倍增','API04':'增收','MOD19':'效率倍增','MOD20':'效率倍增','MOD21':'增收','MOD22':'效率倍增','MOD25':'效率倍增'};
+const ROI_DETAIL={'MOD24':'AI 精準度隨材料累積持續成長','MOD34':'新人上手時間 -60%','MOD35':'教師積分連獎金，主動出席率 +80%','API01':'行政流程自動提醒，0 漏報','API02':'場地查詢 1 秒回覆，免電話','API03':'客服回應速度 ×3','MOD19':'每位老師追蹤學生量 ×3','MOD20':'作業批改時間 -80%','MOD22':'每日自動掃描異常，0 漏網','MOD25':'出題時間 -75%','MOD14':'資安事故潛在損失 NT$300,000+/年','MOD11':'壞帳與漏收款，每年少損 NT$60,000+','MOD29':'醫療糾紛法律費用 NT$200,000+/年','MOD27':'用藥糾紛風險 NT$150,000+/年','MOD30':'接送安全事故 NT$300,000+/年','MOD31':'合規文件缺失罰款 NT$50,000+/年','MOD05':'試聽轉入班率 +15% → 多 2 名/月','MOD18':'潛客流失 -30%，每月多 3 名','MOD23':'續班率 +20% → 每年多 NT$120,000','MOD17':'家長看到成長紀錄，續班決策快 2 週','MOD18x':'投放 ROI 精準 +40%','API04':'招生報告自動產製，省決策時間','MOD21':'差異化賣點 → 簽約率 +25%'};
+function showROI(id){
+  const savingsBox=document.getElementById('kg-d-savings-box');
+  const savingsLabel=document.getElementById('kg-d-savings-label');
+  const savingsVal=document.getElementById('kg-d-savings');
+  const dim=ROI_DIM[id]||'';
+  if(dim==='省時'&&SAVINGS_HR[id]){
+    const hrs=SAVINGS_HR[id];const amt=Math.round(hrs*HOURLY_RATE);
+    savingsBox.style.display='';savingsBox.style.background='#FFF8E6';
+    savingsLabel.textContent='每月省人力費';savingsVal.style.color='#B45C00';
+    savingsVal.textContent='省 '+hrs+' 小時 → 約 NT$'+amt.toLocaleString()+'/月';
+  }else if((dim==='效率倍增'||dim==='成本節省'||dim==='增收')&&ROI_DETAIL[id]){
+    const cfg={'效率倍增':{bg:'#EEF9F8',label:'效率提升',color:'#1A7A6E'},'成本節省':{bg:'#FEF0EC',label:'每年避損估算',color:'#C4502A'},'增收':{bg:'#EEF6F0',label:'每月增收潛力',color:'#1A7A3A'}}[dim];
+    savingsBox.style.display='';savingsBox.style.background=cfg.bg;
+    savingsLabel.textContent=cfg.label;savingsVal.style.color=cfg.color;
+    savingsVal.textContent=ROI_DETAIL[id];
+  }else if(dim==='系統地基'){
+    const cnt=links.filter(l=>l.source.id===id).length;
+    savingsBox.style.display='';savingsBox.style.background='#F4F4F9';
+    savingsLabel.textContent='地基貢獻';savingsVal.style.color='#5A5A6E';
+    savingsVal.textContent=cnt?cnt+' 個模組建立在此之上':'系統基礎層';
+  }else{savingsBox.style.display='none';}
+}
 const svg=d3.select('svg#kg-graph').attr('viewBox',`0 0 ${W} ${H}`).attr('height',Math.min(840,window.innerHeight-150));
 const g=svg.append('g');
 const zoom=d3.zoom().scaleExtent([0.25,4]).on('zoom',e=>g.attr('transform',e.transform));
@@ -1467,10 +1491,8 @@ nSel
       const cost=(d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
       const costBox=document.getElementById('kg-d-cost-box');
       const remBox=document.getElementById('kg-d-remaining-box');
-      const savingsBox=document.getElementById('kg-d-savings-box');
-      const savingsAmt=SAVINGS_HR[d.id]?Math.round(SAVINGS_HR[d.id]*HOURLY_RATE):null;
       if(cost){costBox.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost.toLocaleString();remBox.style.display='';document.getElementById('kg-d-remaining').textContent='NT$'+(TOTAL_COST-cost).toLocaleString();}else{costBox.style.display='none';remBox.style.display='none';}
-      if(savingsAmt){savingsBox.style.display='';document.getElementById('kg-d-savings').textContent='約 NT$'+savingsAmt.toLocaleString()+'/月';}else{savingsBox.style.display='none';}
+      showROI(d.id);
     }else{document.getElementById('kg-d-meta').style.display='none';}
     const deps=links.filter(l=>l.target.id===d.id);
     const enables=links.filter(l=>l.source.id===d.id);
@@ -1498,10 +1520,8 @@ nSel
       const cost2=(d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
       const costBox2=document.getElementById('kg-d-cost-box');
       const remBox2=document.getElementById('kg-d-remaining-box');
-      const savingsBox2=document.getElementById('kg-d-savings-box');
-      const savingsAmt2=SAVINGS_HR[d.id]?Math.round(SAVINGS_HR[d.id]*HOURLY_RATE):null;
       if(cost2){costBox2.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost2.toLocaleString();remBox2.style.display='';document.getElementById('kg-d-remaining').textContent='NT$'+(TOTAL_COST-cost2).toLocaleString();}else{costBox2.style.display='none';remBox2.style.display='none';}
-      if(savingsAmt2){savingsBox2.style.display='';document.getElementById('kg-d-savings').textContent='約 NT$'+savingsAmt2.toLocaleString()+'/月';}else{savingsBox2.style.display='none';}
+      showROI(d.id);
       meta.style.display='block';
     }else{meta.style.display='none';}
     panel.style.display='block';
