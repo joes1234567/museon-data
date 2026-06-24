@@ -1482,10 +1482,11 @@ function clearEstimate(){
 }
 function refreshAddBtn(){
   const btn=document.getElementById('kg-add-to-estimate');if(!btn||!currentPanelNodeId)return;
-  const inSet=selectedForEstimate.has(currentPanelNodeId);
-  btn.textContent=inSet?'✓ 已加入估價':'+ 加入估價';
-  btn.style.background=inSet?'#EEF6FF':'#1A5DC8';btn.style.color=inSet?'#1A5DC8':'#fff';
-  btn.style.border=inSet?'1.5px solid #1A5DC8':'none';
+  let inEstimator=selectedForEstimate.has(currentPanelNodeId);
+  if(!inEstimator){selectedForEstimate.forEach(id=>{if(getAnc(id).has(currentPanelNodeId))inEstimator=true;});}
+  btn.textContent=inEstimator?'✓ 已加入估價':'+ 加入估價';
+  btn.style.background=inEstimator?'#EEF6FF':'#1A5DC8';btn.style.color=inEstimator?'#1A5DC8':'#fff';
+  btn.style.border=inEstimator?'1.5px solid #1A5DC8':'none';
 }
 function refreshEstimateRings(){
   nSel.select('.estimate-ring').attr('stroke',n=>selectedForEstimate.has(n.id)?'#F59E0B':'transparent');
