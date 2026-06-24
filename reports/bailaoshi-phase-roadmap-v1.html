@@ -1506,7 +1506,7 @@ function renderEstimator(){
       +'<div style="display:flex;align-items:center;gap:8px;min-width:0;">'
       +'<span style="font-size:10px;background:'+PC[n.phase]+';color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">'+n.phase+'</span>'
       +'<span style="font-size:12px;font-weight:'+(isTarget?700:500)+';color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+n.short+'</span>'
-      +(isTarget?'<span style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1px solid #C3D8F7;border-radius:3px;padding:0 5px;flex-shrink:0;">目標</span>':'')
+      +(isTarget?'<button onclick="window.removeFromEstimate('+JSON.stringify(n.id)+')" style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1.5px solid #1A5DC8;border-radius:4px;padding:2px 7px;flex-shrink:0;cursor:pointer;font-weight:700;line-height:1.4;">✓ 已加入估價</button>':'')
       +'</div>'
       +'<span style="font-size:12px;font-weight:600;color:'+(c?'#1A5DC8':'var(--mist)')+';flex-shrink:0;margin-left:12px;">'+(c?'NT$'+c.toLocaleString():'—')+'</span>'
       +'</div>';
@@ -1614,6 +1614,7 @@ document.querySelectorAll('.kg-btn[data-kgphase]').forEach(btn=>{
 document.getElementById('kg-btn-reset').addEventListener('click',()=>{svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);});
 window.addToEstimate=addToEstimate;
 window.clearEstimate=clearEstimate;
+window.removeFromEstimate=function(id){selectedForEstimate.delete(id);refreshAddBtn();refreshEstimateRings();renderEstimator();};
 })();
 </script>
 
