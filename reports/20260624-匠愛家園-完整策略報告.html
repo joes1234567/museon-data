@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>匠愛家園 — 2026下半年盡職調查暨完整策略建議報告</title>
+  <style>
+    :root {
+      --primary: #1B4F72;
+      --accent:  #2E86C1;
+      --warn:    #C0392B;
+      --ok:      #1E8449;
+      --amber:   #D68910;
+      --bg:      #F5F8FA;
+      --card:    #FFFFFF;
+      --border:  #D6E4EF;
+      --text:    #1A2B3C;
+      --muted:   #6B7F93;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; }
+
+    /* ── HEADER ── */
+    .header { background: linear-gradient(135deg, #0D2E47 0%, #1B4F72 60%, #2874A6 100%); color: #fff; padding: 56px 40px 44px; }
+    .header .tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: .6; margin-bottom: 10px; }
+    .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 6px; }
+    .header .sub { font-size: 15px; opacity: .8; margin-bottom: 32px; }
+    .header .meta { display: flex; gap: 40px; flex-wrap: wrap; }
+    .header .meta-item .label { font-size: 10px; letter-spacing: 1px; opacity: .55; text-transform: uppercase; }
+    .header .meta-item .value { font-size: 13px; font-weight: 600; margin-top: 3px; }
+
+    /* ── ALERT ── */
+    .alert-banner { background: #FDEDEC; border-left: 6px solid #C0392B; padding: 18px 28px; display: flex; align-items: flex-start; gap: 14px; }
+    .alert-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .alert-banner p { font-size: 14px; color: #922B21; font-weight: 600; line-height: 1.65; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 48px 24px 100px; }
+
+    .section { margin-bottom: 56px; }
+    .section-title { font-size: 18px; font-weight: 700; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 14px; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .section-num { background: var(--primary); color: #fff; font-size: 11px; font-weight: 700; border-radius: 4px; padding: 2px 8px; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 26px; margin-bottom: 18px; }
+    .card-title { font-size: 14px; font-weight: 700; margin-bottom: 16px; color: var(--primary); }
+    .card.warn-card { border-left: 5px solid var(--warn); }
+    .card.ok-card { border-left: 5px solid var(--ok); }
+    .card.amber-card { border-left: 5px solid var(--amber); }
+    .card.blue-card { border-left: 5px solid var(--accent); }
+
+    .status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+    .status.red    { background: #FADBD8; color: #922B21; }
+    .status.yellow { background: #FDEBD0; color: #784212; }
+    .status.green  { background: #D5F5E3; color: #1E8449; }
+    .status.blue   { background: #D6EAF8; color: #1B4F72; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+    @media (max-width: 640px) {
+      .grid2 { grid-template-columns: 1fr; }
+      .grid3 { grid-template-columns: 1fr; }
+      .header { padding: 40px 20px 32px; }
+      .header h1 { font-size: 24px; }
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: var(--primary); color: #fff; padding: 12px 16px; text-align: left; font-size: 12px; letter-spacing: .5px; }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #EBF5FB; }
+
+    .kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .kpi { flex: 1; min-width: 140px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; text-align: center; }
+    .kpi .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .kpi .kpi-val { font-size: 28px; font-weight: 700; line-height: 1.1; }
+    .kpi .kpi-note { font-size: 11px; color: var(--muted); margin-top: 5px; }
+    .kpi.red-kpi .kpi-val { color: var(--warn); }
+    .kpi.green-kpi .kpi-val { color: var(--ok); }
+    .kpi.amber-kpi .kpi-val { color: var(--amber); }
+    .kpi.blue-kpi .kpi-val { color: var(--accent); }
+
+    /* ── ROADMAP ── */
+    .roadmap { display: flex; flex-direction: column; gap: 0; }
+    .phase { display: flex; gap: 0; }
+    .phase-line { display: flex; flex-direction: column; align-items: center; width: 56px; flex-shrink: 0; }
+    .phase-dot { width: 40px; height: 40px; border-radius: 50%; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .phase-dot.p1 { background: var(--warn); }
+    .phase-dot.p2 { background: var(--amber); }
+    .phase-dot.p3 { background: var(--ok); }
+    .phase-connector { width: 2px; background: var(--border); flex: 1; min-height: 24px; }
+    .phase-body { flex: 1; padding: 4px 0 32px 16px; }
+    .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .phase-label { font-size: 15px; font-weight: 700; }
+    .phase-period { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .phase-tasks { list-style: none; padding: 0; }
+    .phase-tasks li { font-size: 13.5px; padding: 5px 0; color: var(--text); display: flex; gap: 10px; align-items: flex-start; }
+    .phase-tasks li::before { content: "▸"; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+
+    /* ── STRATEGY CARD ── */
+    .strategy-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+    .strategy-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .strategy-badge { font-size: 22px; font-weight: 900; width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .strategy-badge.a { background: #D5F5E3; color: #1E8449; }
+    .strategy-badge.b { background: #D6EAF8; color: #1B4F72; }
+    .strategy-badge.c { background: #FDEBD0; color: #784212; }
+    .strategy-name { font-size: 16px; font-weight: 700; }
+    .strategy-subtitle { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    @media (max-width: 640px) { .pros-cons { grid-template-columns: 1fr; } }
+    .pro-box, .con-box { border-radius: 8px; padding: 14px 16px; }
+    .pro-box { background: #D5F5E3; }
+    .con-box { background: #FADBD8; }
+    .pro-box h4 { font-size: 12px; font-weight: 700; color: #1E8449; margin-bottom: 8px; letter-spacing: 1px; }
+    .con-box h4 { font-size: 12px; font-weight: 700; color: #922B21; margin-bottom: 8px; letter-spacing: 1px; }
+    .pro-box li, .con-box li { font-size: 13px; line-height: 1.6; padding: 2px 0 2px 14px; position: relative; list-style: none; }
+    .pro-box li::before { content: "✓"; position: absolute; left: 0; color: #1E8449; font-weight: 700; }
+    .con-box li::before { content: "✗"; position: absolute; left: 0; color: #922B21; font-weight: 700; }
+
+    /* ── RISK TABLE ── */
+    .risk-high td:first-child { border-left: 4px solid var(--warn); }
+    .risk-med td:first-child { border-left: 4px solid var(--amber); }
+    .risk-low td:first-child { border-left: 4px solid var(--ok); }
+
+    /* ── DECISION BOX ── */
+    .decision-box { background: #0D2E47; color: #fff; border-radius: 12px; padding: 32px 36px; margin-top: 20px; }
+    .decision-box h3 { font-size: 16px; font-weight: 700; margin-bottom: 18px; opacity: .7; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; }
+    .decision-box ol { padding-left: 0; list-style: none; }
+    .decision-box li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; display: flex; gap: 12px; }
+    .decision-box li:last-child { border-bottom: none; }
+    .decision-box .q-num { color: #7FB3D3; font-weight: 700; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    .footer { text-align: center; padding: 32px 20px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 60px; }
+
+    /* ── QUICK SUMMARY TABLE ── */
+    .summary-item { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .summary-item:last-child { border-bottom: none; }
+    .summary-key { color: var(--muted); font-size: 13px; }
+    .summary-val { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+    /* ── P&L ── */
+    .pl-row { display: flex; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+    .pl-row:last-child { border-bottom: none; }
+    .pl-row.total { background: #0D2E47; color: #fff; border-radius: 8px; margin-top: 8px; font-weight: 700; font-size: 15px; }
+    .pl-row.subtotal { background: #EBF5FB; font-weight: 600; }
+    .pl-val { font-weight: 600; }
+    .pl-val.neg { color: var(--warn); }
+    .pl-val.pos { color: var(--ok); }
+
+    /* ── ROOT CAUSE ── */
+    .cause-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .cause-item:last-child { border-bottom: none; }
+    .cause-num { width: 32px; height: 32px; border-radius: 50%; background: var(--warn); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .cause-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .cause-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── NEXT STEP ── */
+    .nextstep { background: linear-gradient(135deg, #1E8449 0%, #27AE60 100%); color: #fff; border-radius: 12px; padding: 30px 36px; margin-top: 20px; }
+    .nextstep h3 { font-size: 14px; letter-spacing: 2px; text-transform: uppercase; opacity: .7; margin-bottom: 16px; }
+    .nextstep ul { list-style: none; }
+    .nextstep li { font-size: 15px; font-weight: 600; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.2); display: flex; gap: 12px; align-items: flex-start; }
+    .nextstep li:last-child { border-bottom: none; }
+    .nextstep .step-num { background: rgba(255,255,255,0.2); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight { background: #FFFDE7; border: 1px solid #F9CA24; border-radius: 10px; padding: 18px 22px; margin: 16px 0; font-size: 14px; color: #5D4037; }
+    .highlight strong { color: #2D2D2D; }
+
+    p { font-size: 14px; line-height: 1.75; color: var(--muted); margin-bottom: 8px; }
+    ul.plain li { font-size: 13.5px; padding: 4px 0; line-height: 1.65; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="tag">Confidential · Business Intelligence Report</div>
+  <h1>匠愛家園 — 2026下半年</h1>
+  <div class="sub">盡職調查暨完整策略建議報告</div>
+  <div class="meta">
+    <div class="meta-item"><span class="label">報告日期</span><span class="value">2026-06-24</span></div>
+    <div class="meta-item"><span class="label">分析期間</span><span class="value">2026 H2（七月 → 十二月）</span></div>
+    <div class="meta-item"><span class="label">機密等級</span><span class="value">內部決策用</span></div>
+    <div class="meta-item"><span class="label">信心度</span><span class="value">82%（財務基於提供數字）</span></div>
+  </div>
+</div>
+
+<!-- ALERT -->
+<div class="alert-banner">
+  <div class="alert-icon">⚠️</div>
+  <p>核心警示：目標達成後月虧 NT$46,000+。現行商模在 B2B 批發結構下，規模化只會讓虧損更大。<br>
+  首要任務不是「找夠 5 家」，而是「先修毛利結構，再談擴通路」。</p>
+</div>
+
+<div class="container">
+
+  <!-- 1. 速覽結論 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">01</span> 速覽結論表</div>
+    <div class="card">
+      <div class="summary-item">
+        <span class="summary-key">目標難度</span>
+        <span class="summary-val"><span class="status yellow">⚠ 中等可達</span> 但財務結構是隱形炸彈</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">最脆弱環節</span>
+        <span class="summary-val"><span class="status red">🔴 高風險</span> 毛利 10% — 規模化會讓問題更大</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">最強槓桿</span>
+        <span class="summary-val"><span class="status green">✅ 優先押注</span> 石鼓文創聯名 / 客製差異化</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">業務人力配置</span>
+        <span class="summary-val"><span class="status blue">ℹ 合理</span> 2人開發 5 家，節奏可控</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">根本問題</span>
+        <span class="summary-val"><span class="status red">🔴 結構性</span> 通路拿走 47-60% 利潤，毛利倒掛</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">六個月後情境</span>
+        <span class="summary-val"><span class="status yellow">⚠ 取決</span> 修毛利 → 可存活；不修 → 越做越虧</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-key">財務風險指數</span>
+        <span class="summary-val"><span class="status red">88分 紅燈</span> 三維風險評估</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 財務健康診斷 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">02</span> 財務健康診斷（達標後損益試算）</div>
+
+    <div class="kpi-row">
+      <div class="kpi amber-kpi">
+        <div class="kpi-label">目標出貨</div>
+        <div class="kpi-val">500罐</div>
+        <div class="kpi-note">5家 × 100罐/月</div>
+      </div>
+      <div class="kpi amber-kpi">
+        <div class="kpi-label">月收入</div>
+        <div class="kpi-val">NT$40K</div>
+        <div class="kpi-note">出廠價 80元 × 500罐</div>
+      </div>
+      <div class="kpi red-kpi">
+        <div class="kpi-label">月毛利（10%）</div>
+        <div class="kpi-val">NT$4K</div>
+        <div class="kpi-note">只有 4,000 元</div>
+      </div>
+      <div class="kpi red-kpi">
+        <div class="kpi-label">月淨虧損</div>
+        <div class="kpi-val">-NT$46K+</div>
+        <div class="kpi-note">達標後每月虧</div>
+      </div>
+    </div>
+
+    <div class="card warn-card">
+      <div class="card-title">月損益完整拆解</div>
+      <div class="pl-row"><span>目標出貨量</span><span class="pl-val">500 罐/月</span></div>
+      <div class="pl-row"><span>月收入（出廠 80元 × 500罐）</span><span class="pl-val pos">+ NT$40,000</span></div>
+      <div class="pl-row"><span>產品成本（約 90% = 原料+製造+包裝）</span><span class="pl-val neg">− NT$36,000</span></div>
+      <div class="pl-row subtotal"><span>毛利（10%）</span><span class="pl-val">NT$4,000</span></div>
+      <div class="pl-row"><span>業務薪資（2人，含勞健保）</span><span class="pl-val neg">− NT$~40,000</span></div>
+      <div class="pl-row"><span>業務交通費 + 拜訪成本</span><span class="pl-val neg">− NT$~5,000</span></div>
+      <div class="pl-row"><span>樣品 + 試用品費用</span><span class="pl-val neg">− NT$~3,000</span></div>
+      <div class="pl-row"><span>退貨/換貨風險損失（2個月效期）</span><span class="pl-val neg">− NT$~2,000 以上</span></div>
+      <div class="pl-row total"><span>📌 月淨損益（達標後）</span><span>− NT$46,000+</span></div>
+    </div>
+
+    <div class="highlight">
+      <strong>關鍵洞察：</strong>通路端以 NT$150-200 零售，但出廠只有 NT$80，通路獲利 NT$70-120/罐（佔零售47-60%）。生產方承擔所有成本風險、只拿 10%。這個結構在任何規模下都無法獲利。
+    </div>
+  </div>
+
+  <!-- 3. 根因分析 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">03</span> 根因分析</div>
+    <div class="card">
+      <div class="cause-item">
+        <div class="cause-num">1</div>
+        <div class="cause-body">
+          <h4>通路利潤結構倒掛</h4>
+          <p>出廠 NT$80，門市零售 NT$150-200。通路獲利是生產方的 17-30 倍。B2B 批發模式讓全部利潤空間留在通路，生產方只拿固定低毛利，不受益於零售溢價。</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-num">2</div>
+        <div class="cause-body">
+          <h4>有效期限2個月——庫存壓力全壓通路</h4>
+          <p>2個月效期在 B2B 批發中是致命弱點。通路商庫存壓力大，談判籌碼極低，退換貨風險直接吃掉本已薄薄的毛利。每次退貨就是一次虧損加碼。</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-num">3</div>
+        <div class="cause-body">
+          <h4>產品無差異化——陷入純價格競爭</h4>
+          <p>在通路端，若無法說出獨特賣點或客製需求，產品就是貨架上一格，定價受通路壓縮，業務談判空間為零。沒差異化就沒籌碼。</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-num">4</div>
+        <div class="cause-body">
+          <h4>定價邏輯混淆——成本加成 vs 價值定價</h4>
+          <p>現行出廠價 80元 是成本加成邏輯，沒有考慮市場價值定位。若能走客製路線或聯名路線，出廠價理論上可拉高至 NT$150-250，整個商模才成立。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 三大策略方向 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">04</span> 三大策略方向（含甜頭與代價）</div>
+
+    <p style="margin-bottom:20px;">三個方向不是互斥的。建議的排序是：A 為主線先跑（短期提毛利），B 同步建立（補充通路），C 為底線保護。</p>
+
+    <!-- 方案A -->
+    <div class="strategy-card">
+      <div class="strategy-header">
+        <div class="strategy-badge a">A</div>
+        <div>
+          <div class="strategy-name">石鼓文創客製聯名模式</div>
+          <div class="strategy-subtitle">主線方案 · 優先執行 · 毛利可達 35-50%</div>
+        </div>
+        <span class="status green" style="margin-left:auto;">推薦優先</span>
+      </div>
+      <p style="color:var(--text);">不賣通用產品，改走客製聯名路線——以石鼓文創（或其他文化/品牌方）為合作夥伴，提供專屬包裝、客製配方、限量聯名款。脫離純價格競爭，出廠價可談到 NT$150-250，毛利直接翻三倍以上。</p>
+      <div class="pros-cons">
+        <div class="pro-box">
+          <h4>甜頭 ✓</h4>
+          <ul>
+            <li>出廠價提升至 NT$150-250，毛利率可達 35-50%</li>
+            <li>客製化產品難被比價，談判籌碼大幅提升</li>
+            <li>聯名帶來品牌背書，通路更願意合作</li>
+            <li>石鼓文創已有固定客群，銷售風險共擔</li>
+            <li>退貨風險大幅降低（預購/訂製制）</li>
+          </ul>
+        </div>
+        <div class="con-box">
+          <h4>代價 ✗</h4>
+          <ul>
+            <li>需要先接觸石鼓文創方，確認合作意願與條件</li>
+            <li>客製生產需要最小訂量保障（需談清楚）</li>
+            <li>包裝設計成本（首次投入約 NT$30,000-80,000）</li>
+            <li>聯名談判週期可能需要 1-3 個月</li>
+            <li>現有通路合約若有獨家條款，需先釐清</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <strong>執行要點：</strong>
+        <ul class="plain" style="margin-top:8px;">
+          <li>• 第一步：約石鼓文創窗口洽談，帶樣品 + 初步聯名提案</li>
+          <li>• 聯名定價邏輯：石鼓拿品牌授權費（建議抽 8-12%），匠愛家園主導生產與供貨</li>
+          <li>• 測試 SKU：先做 1款，最小訂量 200罐，驗證市場反應後擴品</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 方案B -->
+    <div class="strategy-card">
+      <div class="strategy-header">
+        <div class="strategy-badge b">B</div>
+        <div>
+          <div class="strategy-name">D2C 直銷補充通路</div>
+          <div class="strategy-subtitle">輔助方案 · 同步建立 · 收回通路利差</div>
+        </div>
+        <span class="status blue" style="margin-left:auto;">輔助同步</span>
+      </div>
+      <p style="color:var(--text);">不只靠通路，同步建立直接面消費者（D2C）的銷售管道。電商平台（Shopee/蝦皮）、官方 LINE@、企業禮贈採購，都是可以拿回通路利差的方式。出廠 80 元 vs 直售 150-180 元，多 NT$70-100/罐直接進口袋。</p>
+      <div class="pros-cons">
+        <div class="pro-box">
+          <h4>甜頭 ✓</h4>
+          <ul>
+            <li>收回通路利差 NT$70-100/罐</li>
+            <li>掌握消費者數據與回購關係</li>
+            <li>企業禮贈是高客單、低退貨的優質通路</li>
+            <li>不被通路商壓價，定價自主</li>
+            <li>LINE@ 可做忠誠客戶經營，提升回購率</li>
+          </ul>
+        </div>
+        <div class="con-box">
+          <h4>代價 ✗</h4>
+          <ul>
+            <li>電商需要投廣告費，前期獲客成本高</li>
+            <li>要有人力管訂單、出貨、客服</li>
+            <li>2 個月效期在電商容易出現退貨糾紛</li>
+            <li>現有業務人力是否能兼顧 D2C 需評估</li>
+            <li>品牌知名度低，冷啟動難</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <strong>建議切入點：</strong>
+        <ul class="plain" style="margin-top:8px;">
+          <li>• 從企業禮贈採購切入（B2B 路徑但直接，毛利高）</li>
+          <li>• 先不做電商廣告，靠人脈及現有業務業主名單開發</li>
+          <li>• LINE@ 官方帳號先建起來，現有客戶先匯聚</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 方案C -->
+    <div class="strategy-card">
+      <div class="strategy-header">
+        <div class="strategy-badge c">C</div>
+        <div>
+          <div class="strategy-name">合約條款重建</div>
+          <div class="strategy-subtitle">底線保護 · 立即執行 · 避免繼續虧損</div>
+        </div>
+        <span class="status yellow" style="margin-left:auto;">立即執行</span>
+      </div>
+      <p style="color:var(--text);">不管跑哪個主線方案，現有及新簽的通路合約都需要重新談判。目前合約極可能對匠愛家園不利——出廠價低、退換貨條款寬鬆、無最低採購量保障。這不是策略問題，是止血措施。</p>
+      <div class="pros-cons">
+        <div class="pro-box">
+          <h4>甜頭 ✓</h4>
+          <ul>
+            <li>停止繼續出血（每罐都在補貼通路）</li>
+            <li>最低採購量保障減少庫存退貨風險</li>
+            <li>合約條款清楚後，業務談判有依據</li>
+            <li>現有通路若不接受新條款，可評估是否繼續合作</li>
+          </ul>
+        </div>
+        <div class="con-box">
+          <h4>代價 ✗</h4>
+          <ul>
+            <li>現有通路商可能不接受，要有換通路的準備</li>
+            <li>談判過程中可能暫時影響出貨量</li>
+            <li>需要有談判底氣（D2C 或聯名作為 BATNA）</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <strong>核心條款建議：</strong>
+        <ul class="plain" style="margin-top:8px;">
+          <li>• 最低月採購量：每家至少 80 罐（低於此免費上架消失）</li>
+          <li>• 退換貨限制：效期剩 30 天以上才接受退貨</li>
+          <li>• 付款週期：縮短至 30 天以內（不接受 60 天帳期）</li>
+          <li>• 獨家條款：若有需確認範圍，避免被鎖死</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 行動路線圖 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">05</span> 三期行動路線圖</div>
+
+    <div class="roadmap">
+      <div class="phase">
+        <div class="phase-line">
+          <div class="phase-dot p1">P1</div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-header">
+            <div class="phase-label">Phase 1：止血 + 探路</div>
+            <div class="phase-period">0 → 2 個月（七月、八月）</div>
+          </div>
+          <ul class="phase-tasks">
+            <li>檢視所有現有通路合約，標記不利條款</li>
+            <li>啟動合約重談（C方案），建立最低採購量保障</li>
+            <li>接觸石鼓文創，評估聯名合作意願與條件（A方案探路）</li>
+            <li>建立 LINE@ 官方帳號，收攏既有客戶</li>
+            <li>盤點產品成本結構，確認是否有壓縮原料或包裝成本的空間</li>
+            <li>業務 KPI 調整：從「開發家數」改為「每家毛利貢獻」</li>
+          </ul>
+          <div style="margin-top:12px;">
+            <strong>里程碑：</strong>合約重談完成率 80% · 石鼓文創第一次正式洽談完成
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-line">
+          <div class="phase-dot p2">P2</div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-header">
+            <div class="phase-label">Phase 2：試點 + 驗證</div>
+            <div class="phase-period">2 → 4 個月（九月、十月）</div>
+          </div>
+          <ul class="phase-tasks">
+            <li>若石鼓聯名可行，推出第一款聯名 SKU（測試 200 罐）</li>
+            <li>以聯名款為試點，驗證新出廠價（目標 NT$150-200）</li>
+            <li>開發 2-3 家企業禮贈採購客戶（業務主力轉移）</li>
+            <li>評估現有 5 家通路的接受新條款比例，判斷哪些保留</li>
+            <li>收集聯名款消費者反饋，決定是否擴品</li>
+          </ul>
+          <div style="margin-top:12px;">
+            <strong>里程碑：</strong>聯名款首批出貨 · 企業採購至少 1 筆成交
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-line">
+          <div class="phase-dot p3">P3</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-header">
+            <div class="phase-label">Phase 3：複製 + 優化</div>
+            <div class="phase-period">4 → 6 個月（十一月、十二月）</div>
+          </div>
+          <ul class="phase-tasks">
+            <li>若聯名款驗證成功，擴增 2-3 個 SKU 或合作對象</li>
+            <li>整體毛利率提升至 25% 以上（達標才繼續擴通路）</li>
+            <li>篩選出盈利通路，淘汰繼續倒掛的合作</li>
+            <li>年底前達成整體月盈虧平衡（而非繼續虧損）</li>
+            <li>建立下一年 H1 擴張計畫（基於已驗證的商模）</li>
+          </ul>
+          <div style="margin-top:12px;">
+            <strong>里程碑：</strong>整體毛利率 ≥ 25% · 月損益轉正或盈虧平衡
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. 風險矩陣 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">06</span> 風險矩陣 + 對策</div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:5%">#</th>
+            <th style="width:20%">風險項目</th>
+            <th style="width:10%">等級</th>
+            <th style="width:35%">說明</th>
+            <th>對策</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="risk-high">
+            <td>1</td>
+            <td><strong>毛利繼續倒掛</strong></td>
+            <td><span class="status red">高</span></td>
+            <td>繼續走現有商模、規模化後月虧越來越大</td>
+            <td>先修毛利結構（A/C方案），不達 20% 毛利不擴通路</td>
+          </tr>
+          <tr class="risk-high">
+            <td>2</td>
+            <td><strong>石鼓聯名失敗</strong></td>
+            <td><span class="status red">高</span></td>
+            <td>石鼓文創不願意合作或條件過苛</td>
+            <td>預備 2-3 個備選聯名對象（文化/茶品/禮品品牌）；同步走B方案</td>
+          </tr>
+          <tr class="risk-high">
+            <td>3</td>
+            <td><strong>大量退貨</strong></td>
+            <td><span class="status red">高</span></td>
+            <td>2個月效期在通路積壓，退貨直接吃掉利潤</td>
+            <td>合約加入退貨限制條款；提升訂製比例降低庫存風險</td>
+          </tr>
+          <tr class="risk-med">
+            <td>4</td>
+            <td><strong>業務人力不足</strong></td>
+            <td><span class="status yellow">中</span></td>
+            <td>同時跑 A+B+C 三方案，2人可能兼顧不來</td>
+            <td>排優先順序：先 C（止血）→ A（提毛利）→ B（補充）</td>
+          </tr>
+          <tr class="risk-med">
+            <td>5</td>
+            <td><strong>通路商流失</strong></td>
+            <td><span class="status yellow">中</span></td>
+            <td>合約重談後，部分通路商不接受新條款，轉單競品</td>
+            <td>視為正常汰換。不願接受合理條款的通路，不值得繼續</td>
+          </tr>
+          <tr class="risk-low">
+            <td>6</td>
+            <td><strong>聯名款品質不一致</strong></td>
+            <td><span class="status green">低</span></td>
+            <td>客製 SKU 打樣週期拉長，首批品質控管</td>
+            <td>第一款小批試跑（200罐），不急於大量生產</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 7. 常見誤判陷阱 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">07</span> 常見誤判陷阱</div>
+    <div class="grid2">
+      <div class="card warn-card">
+        <div class="card-title">⚠ 陷阱一：把「找到5家」當成目標</div>
+        <p style="color:var(--text);">找到5家是數字目標，但財務告訴你：達標=月虧 NT$46,000。真正的目標是「找到能盈利的合作模式」，家數是結果，不是原因。</p>
+      </div>
+      <div class="card warn-card">
+        <div class="card-title">⚠ 陷阱二：認為「多賣就能分攤成本」</div>
+        <p style="color:var(--text);">在毛利倒掛的結構下，多賣只是多虧。10% 毛利無法覆蓋固定業務費用，規模化前必須先修毛利率。</p>
+      </div>
+      <div class="card warn-card">
+        <div class="card-title">⚠ 陷阱三：先擴品再想定價</div>
+        <p style="color:var(--text);">現有 SKU 都在虧，擴品不會讓商模好轉。每個新 SKU 都要先確認出廠價和毛利，再決定是否推出。</p>
+      </div>
+      <div class="card warn-card">
+        <div class="card-title">⚠ 陷阱四：靠「關係」取代「商模」</div>
+        <p style="color:var(--text);">業務靠人情打開門，但如果商模不對，人情用完就沒了。石鼓聯名或 D2C 是補強商模，不是靠人情撐。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. 決策前必確認問題 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">08</span> 決策前必確認問題</div>
+    <div class="decision-box">
+      <h3>回答這 5 題，策略才能精確</h3>
+      <ol>
+        <li><span class="q-num">Q1</span>石鼓文創（或備選品牌方）是否已有初步接觸意願？若完全沒有，聯名方案時程需延後 1 個月。</li>
+        <li><span class="q-num">Q2</span>現有通路合約有無獨家條款或最低出廠價綁定？若有，合約重談的談判空間受限。</li>
+        <li><span class="q-num">Q3</span>原料成本佔出廠價比例是多少？10% 毛利是指扣掉原料後，還是扣掉所有成本後？數字影響改善空間評估。</li>
+        <li><span class="q-num">Q4</span>既有客群（消費者直接回購）有多少人？若已有固定熟客，D2C 方案啟動成本大幅降低。</li>
+        <li><span class="q-num">Q5</span>兩位業務是全職還是兼任？目前月人力成本確切數字？影響 P&L 試算精確度。</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 9. 給決策者的話 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">09</span> 給決策者的 5 句話</div>
+    <div class="card">
+      <div class="summary-item">
+        <span class="summary-val" style="font-size:14px;">📌 問題不是業務不夠努力，是現在的定價讓他們越跑越虧。</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-val" style="font-size:14px;">📌 石鼓聯名是改變遊戲規則的機會，但要先確認對方有意願。</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-val" style="font-size:14px;">📌 任何決定在執行前先做一件事：算出這個決定的毛利率是多少。</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-val" style="font-size:14px;">📌 未來 2 個月的目標：合約重談完成 + 聯名方案可行性確認。</span>
+      </div>
+      <div class="summary-item" style="border-bottom:none;">
+        <span class="summary-val" style="font-size:14px;">📌 毛利率沒到 25% 之前，不要把擴通路當優先任務。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. 最小下一步 -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">10</span> 最小下一步（本週就能做）</div>
+    <div class="nextstep">
+      <h3>立即行動清單</h3>
+      <ul>
+        <li>
+          <div class="step-num">1</div>
+          <span>約石鼓文創窗口，說「有一個合作想法想聊」（不需要完整提案，先探意願）</span>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <span>拿出現有所有通路合約，找出退換貨條款、最低採購量、獨家條款三項，逐一標記</span>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <span>確認真實原料成本佔比（問生產方），重新算出「聯名款出廠價 NT$150 時的毛利率」</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 免責聲明 -->
+  <div class="card" style="background:#F8F9FA; border-style:dashed;">
+    <div class="card-title" style="color:var(--muted);">分析說明與限制</div>
+    <p>財務試算基於提供數字（出廠 NT$80、毛利 10%、2人業務）。原料成本結構細節、實際退貨率、業務薪資細節、既有合約條款均未完整揭露，若有偏差需重新試算。石鼓文創聯名可行性取決於品牌方意願，無法從現有資料單方面評估。補充 Q1-Q5 答案後，策略建議精度可顯著提升。</p>
+    <p style="margin-top:8px;">信心度：82%（主要不確定源：原料成本佔比、聯名方意願、合約條款細節）</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>本報告由 MUSEON 商業分析系統生成 · 2026-06-24 · 機密文件，僅供內部決策使用</p>
+  <p style="margin-top:4px;">信心度 82% · 部分財務數字待確認後需重算</p>
+</div>
+
+</body>
+</html>
