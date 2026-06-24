@@ -1310,163 +1310,431 @@
   <div class="container">
     <div class="section-label">系統架構</div>
     <h2 class="section-title">模組依賴知識圖譜</h2>
-    <p class="section-desc">五大功能區塊的資料流向與依賴關係——哪個模組先建好、哪個模組的資料餵給誰，建置順序一目了然。</p>
+    <p class="section-desc">14 個模組依建置順序排列——每張卡都標明前置依賴，讓你一眼看清楚哪個先做、做完才能做哪個。</p>
 
-    <div class="kg-container">
-      <svg class="kg-svg" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="kg-arr" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-            <polygon points="0 0, 9 3.5, 0 7" fill="#8898A0" />
-          </marker>
-        </defs>
-
-        <!-- ── Edges ── -->
-        <!-- N1→N3 客戶管理→派工執行 -->
-        <line x1="259" y1="96" x2="362" y2="212" stroke="#c2deca" stroke-width="1.8" marker-end="url(#kg-arr)"/>
-        <!-- N2→N3 員工排班→派工執行 -->
-        <line x1="541" y1="96" x2="438" y2="212" stroke="#c2deca" stroke-width="1.8" marker-end="url(#kg-arr)"/>
-        <!-- N1→N4 客戶管理→財務報價（虛線） -->
-        <line x1="185" y1="130" x2="185" y2="350" stroke="#c2deca" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#kg-arr)"/>
-        <!-- N2→N4 員工排班→財務報價（曲線繞右側） -->
-        <path d="M615,130 C755,240 755,368 259,385" fill="none" stroke="#c2deca" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#kg-arr)"/>
-        <!-- N3→N4 派工執行→財務報價（核心強耦合） -->
-        <line x1="340" y1="280" x2="259" y2="352" stroke="#b8d5e8" stroke-width="2.2" marker-end="url(#kg-arr)"/>
-        <!-- N3→N5 派工執行→擴張分析 -->
-        <line x1="460" y1="280" x2="541" y2="352" stroke="#b8d5e8" stroke-width="2" marker-end="url(#kg-arr)"/>
-        <!-- N4→N5 財務報價→擴張分析（虛線） -->
-        <line x1="260" y1="384" x2="541" y2="384" stroke="#c9b8e8" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#kg-arr)"/>
-
-        <!-- ── Edge labels ── -->
-        <rect x="277" y="143" width="62" height="17" rx="4" fill="white" stroke="#DDE4DC" stroke-width="0.8"/>
-        <text x="308" y="155" fill="#1a6b3c" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">案場資料</text>
-
-        <rect x="461" y="143" width="62" height="17" rx="4" fill="white" stroke="#DDE4DC" stroke-width="0.8"/>
-        <text x="492" y="155" fill="#1a6b3c" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">員工清單</text>
-
-        <rect x="193" y="231" width="50" height="17" rx="4" fill="white" stroke="#DDE4DC" stroke-width="0.8"/>
-        <text x="218" y="243" fill="#2A7A6E" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">費率</text>
-
-        <rect x="644" y="283" width="62" height="17" rx="4" fill="white" stroke="#DDE4DC" stroke-width="0.8"/>
-        <text x="675" y="295" fill="#2A7A6E" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">出勤時數</text>
-
-        <rect x="264" y="309" width="44" height="17" rx="4" fill="white" stroke="#DDE4DC" stroke-width="0.8"/>
-        <text x="286" y="321" fill="#2A6A8A" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">完工</text>
-
-        <rect x="478" y="309" width="62" height="17" rx="4" fill="white" stroke="#DDE4DC" stroke-width="0.8"/>
-        <text x="509" y="321" fill="#2A6A8A" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">服務記錄</text>
-
-        <rect x="366" y="373" width="44" height="17" rx="4" fill="white" stroke="#DDE4DC" stroke-width="0.8"/>
-        <text x="388" y="385" fill="#6A4A9A" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">收支</text>
-
-        <!-- ── Nodes ── -->
-        <!-- N1: 客戶與案場管理 Phase 1 -->
-        <rect x="111" y="62" width="148" height="68" rx="12" fill="#E8F5EE" stroke="#a8d8bc" stroke-width="1.5"/>
-        <text x="185" y="85" fill="#0f1a12" font-size="13" font-weight="700" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">客戶與案場管理</text>
-        <text x="185" y="102" fill="#1a6b3c" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">Phase 1 · 基礎主檔</text>
-        <text x="185" y="116" fill="#4A5A4E" font-size="9.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">建檔 · 案場 · 費率</text>
-
-        <!-- N2: 員工與排班管理 Phase 1 -->
-        <rect x="541" y="62" width="148" height="68" rx="12" fill="#E8F5EE" stroke="#a8d8bc" stroke-width="1.5"/>
-        <text x="615" y="85" fill="#0f1a12" font-size="13" font-weight="700" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">員工與排班管理</text>
-        <text x="615" y="102" fill="#1a6b3c" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">Phase 1 · 基礎主檔</text>
-        <text x="615" y="116" fill="#4A5A4E" font-size="9.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">建檔 · 班表 · 出勤</text>
-
-        <!-- N3: 派工與服務執行 Phase 2 -->
-        <rect x="326" y="212" width="148" height="68" rx="12" fill="#EBF4F8" stroke="#b8d5e8" stroke-width="1.5"/>
-        <text x="400" y="235" fill="#0f1a12" font-size="13" font-weight="700" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">派工與服務執行</text>
-        <text x="400" y="252" fill="#2A6A8A" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">Phase 2 · 執行中樞</text>
-        <text x="400" y="266" fill="#4A5A4E" font-size="9.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">派工 · 簽到 · 完工</text>
-
-        <!-- N4: 財務與報價 Phase 2 -->
-        <rect x="111" y="350" width="148" height="68" rx="12" fill="#FBF4E6" stroke="#e0ceA0" stroke-width="1.5"/>
-        <text x="185" y="373" fill="#0f1a12" font-size="13" font-weight="700" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">財務與報價</text>
-        <text x="185" y="390" fill="#B8923A" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">Phase 2 · 結算引擎</text>
-        <text x="185" y="404" fill="#4A5A4E" font-size="9.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">報價 · 請款 · 薪資</text>
-
-        <!-- N5: 擴張與分析 Phase 4 -->
-        <rect x="541" y="350" width="148" height="68" rx="12" fill="#F0EBF8" stroke="#c9b8e8" stroke-width="1.5"/>
-        <text x="615" y="373" fill="#0f1a12" font-size="13" font-weight="700" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">擴張與分析</text>
-        <text x="615" y="390" fill="#6A4A9A" font-size="10" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">Phase 4 · 洞察層</text>
-        <text x="615" y="404" fill="#4A5A4E" font-size="9.5" text-anchor="middle" font-family="'Noto Sans TC',sans-serif">KPI · 看板 · 多據點</text>
-      </svg>
-    </div>
-
-    <!-- 依賴明細表 -->
-    <div class="section-label" style="margin-bottom: 12px;">依賴明細</div>
-    <div class="kg-dep-list">
-      <div class="kg-dep-row">
-        <span class="kg-dep-tag kg-p1">客戶管理</span>
-        <span class="kg-dep-arr">→</span>
-        <span class="kg-dep-tag kg-p2b">派工執行</span>
-        <span class="kg-dep-data">案場地址、服務週期、特殊需求（派工必要輸入）</span>
+    <!-- 建置層 1：地基 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-green">🏗️</div>
+        <div class="func-title-group">
+          <div class="func-area-name">建置層 1 — 地基（第一階段）</div>
+          <div class="func-area-desc">無前置依賴或僅依賴地基本身——先建這五個，其他所有模組才能動</div>
+        </div>
+        <div class="func-modules-count">5 個模組</div>
       </div>
-      <div class="kg-dep-row">
-        <span class="kg-dep-tag kg-p1">員工排班</span>
-        <span class="kg-dep-arr">→</span>
-        <span class="kg-dep-tag kg-p2b">派工執行</span>
-        <span class="kg-dep-data">可用員工清單、技能標籤、當日出勤狀態</span>
-      </div>
-      <div class="kg-dep-row">
-        <span class="kg-dep-tag kg-p1">客戶管理</span>
-        <span class="kg-dep-arr">→</span>
-        <span class="kg-dep-tag kg-p2b">財務報價</span>
-        <span class="kg-dep-data">客戶費率、合約條款、報價對象（報價必要輸入）</span>
-      </div>
-      <div class="kg-dep-row">
-        <span class="kg-dep-tag kg-p1">員工排班</span>
-        <span class="kg-dep-arr">→</span>
-        <span class="kg-dep-tag kg-p2b">財務報價</span>
-        <span class="kg-dep-data">出勤時數、加班記錄 → 薪資計算的唯一依據</span>
-      </div>
-      <div class="kg-dep-row">
-        <span class="kg-dep-tag kg-p2b">派工執行</span>
-        <span class="kg-dep-arr">→</span>
-        <span class="kg-dep-tag kg-p2b">財務報價</span>
-        <span class="kg-dep-data">完工確認、服務品項 → 觸發帳單建立的事件來源</span>
-      </div>
-      <div class="kg-dep-row">
-        <span class="kg-dep-tag kg-p2b">派工執行</span>
-        <span class="kg-dep-arr">→</span>
-        <span class="kg-dep-tag kg-p4">擴張分析</span>
-        <span class="kg-dep-data">服務完成率、員工效率紀錄、案場頻率數據</span>
-      </div>
-      <div class="kg-dep-row">
-        <span class="kg-dep-tag kg-p2b">財務報價</span>
-        <span class="kg-dep-arr">→</span>
-        <span class="kg-dep-tag kg-p4">擴張分析</span>
-        <span class="kg-dep-data">收支數據、客戶利潤率、薪資成本趨勢</span>
-      </div>
-    </div>
+      <div class="module-grid">
 
-    <!-- 建置順序建議 -->
-    <div class="kg-build-order">
-      <div class="section-label" style="margin-bottom: 14px;">建置順序建議</div>
-      <div class="kg-build-row">
-        <div class="kg-build-step">
-          <div class="kg-build-num" style="background: #E8F5EE; color: #1a6b3c;">1</div>
-          <div class="kg-build-text">
-            <strong>客戶管理 + 員工排班</strong>
-            <span>基礎資料層，兩者互相獨立可並行建置，是其他所有模組的上游來源</span>
+        <div class="module-card">
+          <div class="mc-area-label">P1 · 客戶與案場</div>
+          <div class="module-top">
+            <div class="module-name">系統權限控管</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">誰能看什麼、誰能改什麼，全由你決定</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">三層角色設定</span>
+            <span class="mc-feat-tag">帳號開通停用</span>
+            <span class="mc-feat-tag">操作記錄留存</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">無（地基模組）</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">所有模組的安全地基</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$4,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">資料安全有保障 · 帳號管理一鍵完成</span></div>
           </div>
         </div>
-        <div class="kg-build-arr">→</div>
-        <div class="kg-build-step">
-          <div class="kg-build-num" style="background: #EBF4F8; color: #2A6A8A;">2</div>
-          <div class="kg-build-text">
-            <strong>派工執行 + 財務報價</strong>
-            <span>核心運營層，依賴第 1 層資料驅動，兩者可並行但需等 Phase 1 穩定後再啟動</span>
+
+        <div class="module-card">
+          <div class="mc-area-label">P1 · 客戶與案場</div>
+          <div class="module-top">
+            <div class="module-name">客戶資料管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">客戶的一切都在這一張卡</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">客戶建檔</span>
+            <span class="mc-feat-tag">案場設定</span>
+            <span class="mc-feat-tag">進入方式記錄</span>
+            <span class="mc-feat-tag">清潔偏好</span>
+            <span class="mc-feat-tag">歷史服務紀錄查詢</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">系統權限控管</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">新員工交接不問 Peggy</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$8,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 2 小時/月 · 交接零摩擦</span></div>
           </div>
         </div>
-        <div class="kg-build-arr">→</div>
-        <div class="kg-build-step">
-          <div class="kg-build-num" style="background: #F0EBF8; color: #6A4A9A;">3</div>
-          <div class="kg-build-text">
-            <strong>擴張與分析</strong>
-            <span>洞察層，需前兩層積累 3 個月以上真實數據才有統計意義，提前建只是空殼</span>
+
+        <div class="module-card">
+          <div class="mc-area-label">P1 · 員工與排班</div>
+          <div class="module-top">
+            <div class="module-name">員工技能管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">每個人能做什麼，系統幫你記</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">技能標籤建立</span>
+            <span class="mc-feat-tag">年資等級設定</span>
+            <span class="mc-feat-tag">區域偏好設定</span>
+            <span class="mc-feat-tag">排班限制標記</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">系統權限控管</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">派工不靠記憶靠系統</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$5,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 1 小時/月 · 用對人不靠猜</span></div>
           </div>
         </div>
+
+        <div class="module-card">
+          <div class="mc-area-label">P1 · 員工與排班</div>
+          <div class="module-top">
+            <div class="module-name">班表管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">排班、調整、通知——一個介面完成</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">手動排班介面</span>
+            <span class="mc-feat-tag">臨時請假調度</span>
+            <span class="mc-feat-tag">衝突自動提醒</span>
+            <span class="mc-feat-tag">員工查班免問老闆</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">員工技能管理</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">排班從周日噩夢變成 20 分鐘例行</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$11,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 10 小時/月 · Peggy 的周日還給她</span></div>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="mc-area-label">P1 · 員工與排班</div>
+          <div class="module-top">
+            <div class="module-name">員工打卡系統</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">工時自動累計，薪資不再算錯</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">手機網頁打卡</span>
+            <span class="mc-feat-tag">工時自動計算</span>
+            <span class="mc-feat-tag">異常自動提醒</span>
+            <span class="mc-feat-tag">GPS 確認（可選）</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">班表管理</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">工時紀錄消滅薪資糾紛</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$9,500</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 2 小時/月 · 糾紛 30 秒查清</span></div>
+          </div>
+        </div>
+
       </div>
     </div>
+
+    <!-- 建置層 2：核心運營 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-blue">⚙️</div>
+        <div class="func-title-group">
+          <div class="func-area-name">建置層 2 — 核心運營（第二階段）</div>
+          <div class="func-area-desc">地基穩定後啟動——依賴 P1 資料餵養，讓日常營運從人腦轉移到系統</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+
+        <div class="module-card">
+          <div class="mc-area-label">P2 · 派工與服務</div>
+          <div class="module-top">
+            <div class="module-name">服務記錄與回饋</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">每場服務都留下紀錄，下次不用重問</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">帶隊主管服務筆記</span>
+            <span class="mc-feat-tag">客戶知識庫累積</span>
+            <span class="mc-feat-tag">LINE 回饋連結推送</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">客戶資料管理、班表管理</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">每場服務留痕跡，口碑可積累</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$6,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">降低客訴 · 口碑素材自然積累</span></div>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="mc-area-label">P2 · 財務與報價</div>
+          <div class="module-top">
+            <div class="module-name">薪資計算模組</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">半月結算從 2 小時縮到 30 分鐘</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">工時自動計算</span>
+            <span class="mc-feat-tag">難度獎金設定</span>
+            <span class="mc-feat-tag">稱讚獎金</span>
+            <span class="mc-feat-tag">護底補足</span>
+            <span class="mc-feat-tag">半月結算</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">員工打卡系統、班表管理</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">半月結算從 2 小時縮到 30 分鐘</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.15</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$14,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 3 小時/月 · 員工薪資異議消失</span></div>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="mc-area-label">P2 · 財務與報價</div>
+          <div class="module-top">
+            <div class="module-name">報價輔助模組</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">報價有依據，不再靠感覺猜</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">坪數係數計算</span>
+            <span class="mc-feat-tag">耗材費用加算</span>
+            <span class="mc-feat-tag">歷史案例參考區間</span>
+            <span class="mc-feat-tag">交通費計算</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">客戶資料管理</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">報出去的價格有依據，不再靠感覺</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">1週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$9,200</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 3 小時/月 · 報價時間從 15 分縮到 3 分</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 建置層 3：成熟優化 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gold">📈</div>
+        <div class="func-title-group">
+          <div class="func-area-name">建置層 3 — 成熟優化（第三階段）</div>
+          <div class="func-area-desc">P2 積累 2–3 個月數據後啟動——讓系統從「記錄」升級到「優化」</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+
+        <div class="module-card">
+          <div class="mc-area-label">P3 · 派工與服務</div>
+          <div class="module-top">
+            <div class="module-name">派工建議草稿</div>
+            <span class="phase-tag pt-3">第三階段</span>
+          </div>
+          <div class="module-value">系統先篩，Peggy 最終確認</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">技能匹配初篩</span>
+            <span class="mc-feat-tag">地理路由優化</span>
+            <span class="mc-feat-tag">收入平衡</span>
+            <span class="mc-feat-tag">新人保護機制</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">員工技能管理、客戶資料管理（需 2–3 個月歷史資料）</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">草稿取代從零想起，Peggy 只需確認</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">3週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.2</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$25,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 5 小時/月 · 最佳配對浮出水面</span></div>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="mc-area-label">P3 · 財務與報價</div>
+          <div class="module-top">
+            <div class="module-name">收款與對帳管理</div>
+            <span class="phase-tag pt-3">第三階段</span>
+          </div>
+          <div class="module-value">現金、LINE Pay、轉帳全記錄，欠款一眼看到</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">三種收款方式記錄</span>
+            <span class="mc-feat-tag">應收金額比對</span>
+            <span class="mc-feat-tag">差異自動標示</span>
+            <span class="mc-feat-tag">欠款追蹤清單</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">薪資計算模組、報價輔助模組</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">漏帳從此有記錄可查</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$15,500</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 2 小時/月 · 每月追回 NT$1,600+</span></div>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="mc-area-label">P3 · 擴張與分析</div>
+          <div class="module-top">
+            <div class="module-name">耗材管理模組</div>
+            <span class="phase-tag pt-3">第三階段</span>
+          </div>
+          <div class="module-value">庫存低了自動提醒，成本不再靠猜</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">庫存追蹤</span>
+            <span class="mc-feat-tag">低庫存自動提醒</span>
+            <span class="mc-feat-tag">每場服務耗材成本連動</span>
+            <span class="mc-feat-tag">毛利計算基礎</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">服務記錄與回饋</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">清潔劑快用完系統先告訴你</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.0</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$11,500</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">省 1 小時/月 · 斷貨風險歸零</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 建置層 4：洞察擴張 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gray">🚀</div>
+        <div class="func-title-group">
+          <div class="func-area-name">建置層 4 — 洞察擴張（第四階段）</div>
+          <div class="func-area-desc">台南本部穩定後啟動——從執行型系統升級為決策型系統</div>
+        </div>
+        <div class="func-modules-count">3 個選配模組</div>
+      </div>
+      <div class="module-grid">
+
+        <div class="module-card">
+          <div class="mc-area-label">P4 · 擴張與分析</div>
+          <div class="module-top">
+            <div class="module-name">毛利報表</div>
+            <span class="phase-tag pt-4">第四階段</span>
+          </div>
+          <div class="module-value">每場服務賺了多少，數字說話</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">單場毛利計算</span>
+            <span class="mc-feat-tag">月報損益分析</span>
+            <span class="mc-feat-tag">服務類型分析</span>
+            <span class="mc-feat-tag">員工效率報告</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">薪資計算模組、耗材管理模組</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">哪種服務最賺，數字說話</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$17,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">知道該力推哪項服務 · 淘汰低利業務</span></div>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="mc-area-label">P4 · 擴張與分析</div>
+          <div class="module-top">
+            <div class="module-name">人事成本試算</div>
+            <span class="phase-tag pt-4">第四階段</span>
+          </div>
+          <div class="module-value">正規化前先算清楚划不划算</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">多薪資結構試算</span>
+            <span class="mc-feat-tag">正規化成本模擬</span>
+            <span class="mc-feat-tag">分批導入評估</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">薪資計算模組</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">正規化前先算清楚划不划算</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">2週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">2點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.1</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$13,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">人事決策有數字支撐</span></div>
+          </div>
+        </div>
+
+        <div class="module-card">
+          <div class="mc-area-label">P4 · 擴張與分析</div>
+          <div class="module-top">
+            <div class="module-name">多據點管理</div>
+            <span class="phase-tag pt-4">第四階段</span>
+          </div>
+          <div class="module-value">外縣市開起來，同一套系統管</div>
+          <div class="mc-features">
+            <span class="mc-feat-tag">外縣市帳號管理</span>
+            <span class="mc-feat-tag">跨區資料隔離</span>
+            <span class="mc-feat-tag">老闆跨區總覽</span>
+            <span class="mc-feat-tag">架構 P1 起預留</span>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-kv"><span class="mc-kv-label">前置依賴</span><span class="mc-kv-val">全部 P1 模組（台南本部穩定後啟動）</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">ROI 情境</span><span class="mc-kv-val">開外縣市那天系統已準備好</span></div>
+            <div class="mc-kv-inline">
+              <div class="mc-kv-item"><span class="mc-kv-label">週數</span><span class="mc-kv-num">3週</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">驗收點</span><span class="mc-kv-num">3點</span></div>
+              <div class="mc-kv-item"><span class="mc-kv-label">係數</span><span class="mc-kv-num">×1.2</span></div>
+            </div>
+            <div class="mc-cost"><span class="mc-cost-label">模組費用</span><span class="mc-cost-val">NT$23,000</span></div>
+            <div class="mc-kv"><span class="mc-kv-label">每月負擔</span><span class="mc-kv-val">外縣市擴張不必重建系統</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
