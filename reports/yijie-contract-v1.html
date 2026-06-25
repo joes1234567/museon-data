@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>軟體開發服務合約 — 易睫清潔坊營運管理系統</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Serif TC", "Times New Roman", serif;
+    font-size: 14px;
+    line-height: 2.0;
+    color: #111;
+    background: #f5f5f0;
+    padding: 40px 20px;
+  }
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px 70px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+  .contract-header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #1a1a2e;
+    padding-bottom: 28px;
+  }
+  .contract-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+  }
+  .contract-subtitle {
+    font-size: 13px;
+    color: #666;
+    letter-spacing: 1px;
+  }
+  .parties-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0 36px;
+  }
+  .parties-table td {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    vertical-align: top;
+  }
+  .parties-table .label {
+    background: #f0f0f0;
+    font-weight: 600;
+    width: 120px;
+    color: #333;
+    text-align: center;
+  }
+  .section {
+    margin-bottom: 28px;
+  }
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a2e;
+    border-left: 4px solid #1a1a2e;
+    padding-left: 10px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .section-content {
+    padding-left: 16px;
+  }
+  .clause {
+    margin-bottom: 10px;
+  }
+  .clause-num {
+    display: inline-block;
+    min-width: 26px;
+    font-weight: 600;
+    color: #555;
+  }
+  table.detail {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  table.detail th {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  table.detail td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e8e8e8;
+    vertical-align: top;
+  }
+  table.detail tr:nth-child(even) td {
+    background: #fafafa;
+  }
+  .total-row td {
+    font-weight: 700;
+    background: #f0f0f0 !important;
+    border-top: 2px solid #1a1a2e;
+  }
+  .highlight-box {
+    background: #f9f9f6;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .sign-section {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .sign-block {
+    border: 1px solid #ccc;
+    padding: 20px 24px 60px;
+  }
+  .sign-label {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 16px;
+    color: #1a1a2e;
+  }
+  .sign-field {
+    border-bottom: 1px solid #888;
+    padding: 4px 0;
+    margin-bottom: 14px;
+    min-height: 28px;
+    font-size: 13px;
+    color: #444;
+  }
+  .sign-field-label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 2px;
+  }
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 11px;
+    color: #aaa;
+    border-top: 1px solid #eee;
+    padding-top: 16px;
+  }
+  .blank-field {
+    display: inline-block;
+    border-bottom: 1px solid #333;
+    min-width: 120px;
+    height: 20px;
+    vertical-align: bottom;
+  }
+  .amount-highlight {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; padding: 30px 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="contract-header">
+    <div class="contract-title">軟體開發服務合約</div>
+    <div class="contract-subtitle">SOFTWARE DEVELOPMENT SERVICE AGREEMENT</div>
+  </div>
+
+  <!-- 立約人 -->
+  <div class="section">
+    <div class="section-title">立約人</div>
+    <table class="parties-table">
+      <tr>
+        <td class="label">甲方<br>（委託方）</td>
+        <td>
+          <div><span style="color:#888">公司/個人名稱：</span><span class="blank-field"></span></div>
+          <div style="margin-top:8px"><span style="color:#888">負責人：</span><span class="blank-field"></span></div>
+          <div style="margin-top:8px"><span style="color:#888">統一編號：</span><span class="blank-field"></span></div>
+          <div style="margin-top:8px"><span style="color:#888">聯絡地址：</span><span class="blank-field" style="min-width:240px"></span></div>
+          <div style="margin-top:8px"><span style="color:#888">聯絡電話：</span><span class="blank-field"></span></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">乙方<br>（服務方）</td>
+        <td>
+          <div><span style="color:#888">公司名稱：</span>玥瓏云智囊有限公司</div>
+          <div style="margin-top:8px"><span style="color:#888">負責人：</span><span class="blank-field"></span></div>
+          <div style="margin-top:8px"><span style="color:#888">統一編號：</span><span class="blank-field"></span></div>
+          <div style="margin-top:8px"><span style="color:#888">聯絡地址：</span><span class="blank-field" style="min-width:240px"></span></div>
+          <div style="margin-top:8px"><span style="color:#888">聯絡電話：</span><span class="blank-field"></span></div>
+        </td>
+      </tr>
+    </table>
+    <div style="font-size:13px;color:#555;padding-left:4px">
+      甲乙雙方就「易睫清潔坊營運管理系統」開發事宜，經充分協商，訂立本合約，共同遵守。
+    </div>
+  </div>
+
+  <!-- 第一條：服務標的 -->
+  <div class="section">
+    <div class="section-title">第一條　服務標的</div>
+    <div class="section-content">
+      <div class="clause">
+        <span class="clause-num">1.1</span>
+        乙方為甲方開發「易睫清潔坊營運管理系統」（以下簡稱「本系統」），涵蓋下列 14 個功能模組，採整套一次性開發方式交付：
+      </div>
+      <table class="detail" style="margin-top:12px">
+        <thead>
+          <tr>
+            <th style="width:60px">模組</th>
+            <th>功能名稱</th>
+            <th style="width:80px">開發週數</th>
+            <th style="width:90px">驗收點數</th>
+            <th style="width:110px">模組費用</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>M01</td><td>登入與權限管理</td><td>1 週</td><td>1 點</td><td>NT$6,200</td></tr>
+          <tr><td>M02</td><td>客戶資料管理</td><td>2 週</td><td>3 點</td><td>NT$19,370</td></tr>
+          <tr><td>M03</td><td>服務項目與定價設定</td><td>1 週</td><td>1 點</td><td>NT$6,200</td></tr>
+          <tr><td>M04</td><td>訂單建立與管理</td><td>2 週</td><td>2 點</td><td>NT$14,260</td></tr>
+          <tr><td>M05</td><td>排班與派工排程</td><td>1 週</td><td>2 點</td><td>NT$10,005</td></tr>
+          <tr><td>M06</td><td>員工出勤與績效</td><td>2 週</td><td>3 點</td><td>NT$17,880</td></tr>
+          <tr><td>M07</td><td>消耗品庫存管理</td><td>2 週</td><td>4 點</td><td>NT$26,100</td></tr>
+          <tr><td>M08</td><td>帳款收付與對帳</td><td>3 週</td><td>2 點</td><td>NT$18,515</td></tr>
+          <tr><td>M09</td><td>客戶滿意度回饋</td><td>1 週</td><td>4 點</td><td>NT$19,180</td></tr>
+          <tr><td>M10</td><td>報表與數據分析</td><td>3 週</td><td>3 點</td><td>NT$23,250</td></tr>
+          <tr><td>M11</td><td>通知與提醒系統</td><td>1 週</td><td>2 點</td><td>NT$10,005</td></tr>
+          <tr><td>M12</td><td>行動端（員工 App）</td><td>1 週</td><td>3 點</td><td>NT$15,120</td></tr>
+          <tr><td>M13</td><td>行動端（客戶 App）</td><td>1 週</td><td>3 點</td><td>NT$15,120</td></tr>
+          <tr><td>M14</td><td>系統整合與 API</td><td>2 週</td><td>3 點</td><td>NT$18,625</td></tr>
+          <tr class="total-row"><td colspan="4" style="text-align:right">合計</td><td>NT$219,830</td></tr>
+        </tbody>
+      </table>
+      <div class="clause" style="margin-top:8px">
+        <span class="clause-num">1.2</span>
+        本系統採整套開發，各模組不得單獨拆分購買。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二條：合約金額 -->
+  <div class="section">
+    <div class="section-title">第二條　合約金額</div>
+    <div class="section-content">
+      <div class="clause">
+        <span class="clause-num">2.1</span>
+        本合約總金額為新臺幣 <span class="amount-highlight">NT$219,830 元整</span>（含稅）。
+      </div>
+      <div class="clause">
+        <span class="clause-num">2.2</span>
+        本合約金額為固定總價，乙方不得以任何理由要求追加費用，但甲方要求超出本合約範圍之變更除外（詳第五條）。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三條：付款方式 -->
+  <div class="section">
+    <div class="section-title">第三條　付款方式</div>
+    <div class="section-content">
+      <table class="detail">
+        <thead>
+          <tr>
+            <th>付款期次</th>
+            <th>付款時間點</th>
+            <th style="width:80px">比例</th>
+            <th style="width:120px">金額</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>第一期（訂金）</td>
+            <td>簽約後次月 10 日前</td>
+            <td>40%</td>
+            <td>NT$87,932</td>
+          </tr>
+          <tr>
+            <td>第二期（驗收款）</td>
+            <td>第二次驗收通過後次月 10 日前</td>
+            <td>30%</td>
+            <td>NT$65,949</td>
+          </tr>
+          <tr>
+            <td>第三期（尾款）</td>
+            <td>系統正式上線後第 2 個月之 10 日前</td>
+            <td>30%</td>
+            <td>NT$65,949</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3" style="text-align:right">合計</td>
+            <td>NT$219,830</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clause" style="margin-top:8px">
+        <span class="clause-num">3.1</span>
+        付款方式：匯款至乙方指定帳戶。帳戶資訊於簽約後另行書面通知甲方。
+      </div>
+      <div class="clause">
+        <span class="clause-num">3.2</span>
+        甲方逾期未付款，每逾一日按未付金額千分之三計算遲延利息，並暫停後續開發工作，直至款項繳清為止。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第四條：開發期程與驗收 -->
+  <div class="section">
+    <div class="section-title">第四條　開發期程與驗收</div>
+    <div class="section-content">
+      <div class="clause">
+        <span class="clause-num">4.1</span>
+        本系統開發期程共 <strong>2 個月</strong>，自合約生效日起算（合約生效日為甲方支付第一期訂金到帳日）。
+      </div>
+      <div class="clause">
+        <span class="clause-num">4.2</span>
+        驗收分兩階段進行：
+      </div>
+      <div class="highlight-box">
+        <div><strong>第一次驗收</strong>（開發第一個月末）：M01–M07 共 7 個模組</div>
+        <div style="margin-top:8px"><strong>第二次驗收</strong>（開發第二個月末）：M08–M14 共 7 個模組，並整合測試全系統</div>
+      </div>
+      <div class="clause">
+        <span class="clause-num">4.3</span>
+        每次驗收期間，甲方應於收到乙方驗收通知後 <strong>7 個工作日內</strong>完成驗收確認。逾期未回覆視為驗收通過。
+      </div>
+      <div class="clause">
+        <span class="clause-num">4.4</span>
+        驗收標準：各模組依乙方提供之功能規格書逐項測試，功能達成率 ≥ 95% 視為通過。技術決策與功能達成認定由乙方技術負責人簽字確認，甲方負責通知。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第五條：修改與變更 -->
+  <div class="section">
+    <div class="section-title">第五條　修改與變更</div>
+    <div class="section-content">
+      <div class="clause">
+        <span class="clause-num">5.1</span>
+        每次驗收後，甲方享有 <strong>5 次免費修改</strong>（共 10 次），修改範圍以驗收標準書所列功能為限。
+      </div>
+      <div class="clause">
+        <span class="clause-num">5.2</span>
+        超出免費次數之修改，每次收取 <strong>NT$5,000</strong>（含稅），須雙方書面確認後執行。
+      </div>
+      <div class="clause">
+        <span class="clause-num">5.3</span>
+        超出本合約範圍之需求變更（新增功能或模組）須另簽變更合約，費用另計。
+      </div>
+      <div class="clause">
+        <span class="clause-num">5.4</span>
+        修改計次定義：同一問題之反覆調整視為同一次；不同需求項目各計一次。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第六條：智慧財產權 -->
+  <div class="section">
+    <div class="section-title">第六條　智慧財產權</div>
+    <div class="section-content">
+      <div class="clause">
+        <span class="clause-num">6.1</span>
+        本系統之程式碼、設計文件及相關技術文件之著作財產權，於甲方完成全額付款後歸甲方所有。
+      </div>
+      <div class="clause">
+        <span class="clause-num">6.2</span>
+        乙方保留將本系統開發過程中所形成之通用技術方法及框架用於其他專案之權利，但不得洩漏甲方之業務資訊與資料。
+      </div>
+      <div class="clause">
+        <span class="clause-num">6.3</span>
+        甲方提供之所有素材（商標、品牌識別、業務資料等）著作權仍歸甲方所有，乙方僅得用於本系統開發目的。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第七條：保密 -->
+  <div class="section">
+    <div class="section-title">第七條　保密義務</div>
+    <div class="section-content">
+      <div class="clause">
+        <span class="clause-num">7.1</span>
+        雙方應對本合約內容及對方因履約所取得之業務資訊、技術資訊保守秘密，未經對方書面同意不得向第三方揭露。
+      </div>
+      <div class="clause">
+        <span class="clause-num">7.2</span>
+        保密義務自合約生效日起至合約終止後 <strong>2 年</strong>止。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第八條：違約責任 -->
+  <div class="section">
+    <div class="section-title">第八條　違約責任</div>
+    <div class="section-content">
+      <div class="clause">
+        <span class="clause-num">8.1</span>
+        乙方逾期交付（逾約定驗收日 14 個工作日以上），每逾一日按合約總金額千分之一計算違約金，最高不超過合約總金額之 10%。
+      </div>
+      <div class="clause">
+        <span class="clause-num">8.2</span>
+        甲方無正當理由終止合約，已支付款項不予退還；乙方因可歸責事由終止合約，應退還甲方已支付款項並賠償同額違約金。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第九條：爭議解決 -->
+  <div class="section">
+    <div class="section-title">第九條　爭議解決</div>
+    <div class="section-content">
+      <div class="clause">
+        <span class="clause-num">9.1</span>
+        本合約適用中華民國法律。
+      </div>
+      <div class="clause">
+        <span class="clause-num">9.2</span>
+        因本合約所生之爭議，雙方應先協商解決；協商不成，以臺灣臺北地方法院為第一審管轄法院。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第十條：其他約定 -->
+  <div class="section">
+    <div class="section-title">第十條　其他約定</div>
+    <div class="section-content">
+      <div class="clause">
+        <span class="clause-num">10.1</span>
+        本合約共兩份正本，甲乙雙方各持一份，具同等法律效力。
+      </div>
+      <div class="clause">
+        <span class="clause-num">10.2</span>
+        本合約未盡事宜，依中華民國相關法令及誠信原則處理。
+      </div>
+      <div class="clause">
+        <span class="clause-num">10.3</span>
+        合約生效日：<span class="blank-field" style="min-width:160px"></span>（以訂金到帳日為準）
+      </div>
+    </div>
+  </div>
+
+  <!-- 簽署欄 -->
+  <div class="sign-section">
+    <div class="sign-block">
+      <div class="sign-label">甲方（委託方）</div>
+      <div class="sign-field-label">公司/個人名稱</div>
+      <div class="sign-field"></div>
+      <div class="sign-field-label">負責人簽章</div>
+      <div class="sign-field"></div>
+      <div class="sign-field-label">日期</div>
+      <div class="sign-field"></div>
+    </div>
+    <div class="sign-block">
+      <div class="sign-label">乙方（服務方）</div>
+      <div class="sign-field-label">玥瓏云智囊有限公司</div>
+      <div class="sign-field"></div>
+      <div class="sign-field-label">負責人簽章</div>
+      <div class="sign-field"></div>
+      <div class="sign-field-label">日期</div>
+      <div class="sign-field"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    本合約由玥瓏云智囊有限公司製作 · 易睫清潔坊營運管理系統開發合約 v1.0
+  </div>
+
+</div>
+</body>
+</html>
