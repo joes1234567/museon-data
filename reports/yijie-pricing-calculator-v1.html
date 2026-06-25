@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>易睫清潔坊 — 模組依賴圖譜 × 估價計算器</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --p1:#C4502A; --p2:#B8923A; --p3:#2A7A6E; --p4:#5A5A6E;
+  --p1-bg:#FBF0EC; --p2-bg:#FBF6EC; --p3-bg:#EBF4F1; --p4-bg:#EEEEF2;
+  --p1-bd:#e8c4b0; --p2-bd:#e8d8b0; --p3-bd:#b0d4c8; --p4-bd:#c8c8d4;
+  --ink:#12121A; --slate:#5A5A6E; --mist:#9898A8;
+  --border:#E2E0DA; --parchment:#F7F5F0; --snow:#FDFCFA;
+  --jade:#2A7A6E; --accent:#5ecfa8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--parchment);color:var(--ink);}
+
+.hero{
+  background:linear-gradient(135deg,#0f1f18 0%,#1a3028 60%,#1e3530 100%);
+  color:#fff;padding:26px 32px 22px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(42,122,110,0.18) 0%,transparent 70%),
+             radial-gradient(ellipse at 70% 50%,rgba(94,207,168,0.08) 0%,transparent 70%);
+}
+.hero-tag{
+  display:inline-block;background:rgba(94,207,168,0.15);border:1px solid rgba(94,207,168,0.35);
+  color:var(--accent);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  padding:3px 12px;border-radius:20px;margin-bottom:12px;position:relative;
+}
+.hero h1{font-size:clamp(16px,2.5vw,26px);font-weight:700;position:relative;margin-bottom:6px;}
+.hero h1 span{color:var(--accent);}
+.hero p{font-size:11.5px;color:rgba(255,255,255,0.45);position:relative;}
+
+.controls{
+  display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center;
+  padding:9px 16px;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.ctrl-btn{
+  padding:5px 13px;border-radius:20px;font-size:11px;font-weight:600;
+  cursor:pointer;border:1.5px solid currentColor;background:transparent;
+  transition:background .15s,color .15s;line-height:1.4;
+}
+.ctrl-btn.active{color:#fff!important;}
+.ctrl-btn[data-phase="all"]{color:var(--ink);border-color:var(--ink);}
+.ctrl-btn[data-phase="all"].active{background:var(--ink);}
+.ctrl-btn[data-phase="P1"]{color:var(--p1);}
+.ctrl-btn[data-phase="P1"].active{background:var(--p1);border-color:var(--p1);}
+.ctrl-btn[data-phase="P2"]{color:var(--p2);}
+.ctrl-btn[data-phase="P2"].active{background:var(--p2);border-color:var(--p2);}
+.ctrl-btn[data-phase="P3"]{color:var(--p3);}
+.ctrl-btn[data-phase="P3"].active{background:var(--p3);border-color:var(--p3);}
+.ctrl-btn[data-phase="P4"]{color:var(--p4);}
+.ctrl-btn[data-phase="P4"].active{background:var(--p4);border-color:var(--p4);}
+.ctrl-sep{width:1px;height:20px;background:var(--border);flex-shrink:0;}
+.ctrl-hint{font-size:10px;color:var(--mist);}
+
+#graph-wrap{background:#fff;overflow:hidden;}
+svg#graph{display:block;width:100%;cursor:grab;}
+svg#graph:active{cursor:grabbing;}
+
+.node circle{stroke-width:2.5;cursor:pointer;}
+.node .node-icon{font-size:13px;text-anchor:middle;pointer-events:none;dominant-baseline:central;}
+.node .node-label{font-size:9px;fill:var(--ink);text-anchor:middle;pointer-events:none;font-weight:500;}
+
+.link{fill:none;}
+.link.depends{stroke:#a8a8b8;stroke-width:1.8;stroke-opacity:0.6;}
+.link.indirect{stroke:#a8a8b8;stroke-width:1.2;stroke-opacity:0.35;stroke-dasharray:5,3;}
+.link.highlight{stroke-opacity:0.9!important;stroke-width:2.5!important;}
+.link.dim{stroke-opacity:0.04!important;}
+.node.dim circle{opacity:.1;}
+.node.dim .node-icon,.node.dim .node-label{opacity:.1;}
+
+.phase-bg{fill-opacity:.03;}
+.phase-lbl{font-size:10.5px;font-weight:700;letter-spacing:.8px;fill-opacity:.4;text-anchor:middle;}
+
+#tooltip{
+  position:fixed;display:none;
+  background:#12121A;color:rgba(255,255,255,.92);
+  font-size:12px;line-height:1.8;
+  padding:12px 16px;border-radius:10px;
+  max-width:260px;z-index:9999;pointer-events:none;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+}
+.tt-phase{font-size:10px;letter-spacing:1.5px;opacity:.6;margin-bottom:3px;}
+.tt-name{font-size:14px;font-weight:700;margin-bottom:4px;}
+.tt-fee{color:var(--accent);font-size:13px;font-weight:600;margin-bottom:6px;}
+.tt-desc{opacity:.7;font-size:11px;}
+
+.legend{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:center;
+  padding:7px 20px 6px;font-size:10.5px;color:var(--mist);
+  border-top:1px solid var(--border);background:#fff;
+}
+.legend-item{display:flex;align-items:center;gap:6px;}
+.leg-solid{width:22px;height:2px;background:#a8a8b8;border-radius:2px;}
+.leg-dash{width:22px;height:2px;background:repeating-linear-gradient(90deg,#a8a8b8 0,#a8a8b8 5px,transparent 5px,transparent 8px);}
+
+.calc-section{background:#fff;border-top:2px solid var(--border);padding:22px 28px 28px;}
+.calc-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px;}
+.calc-title{font-size:9.5px;letter-spacing:2.5px;color:var(--mist);text-transform:uppercase;margin-bottom:5px;}
+.calc-count{font-size:20px;font-weight:700;color:var(--ink);}
+.calc-count em{color:var(--jade);font-style:normal;}
+.calc-desc{font-size:11.5px;color:var(--mist);margin-top:3px;}
+.lock-badge{
+  display:inline-flex;align-items:center;gap:5px;flex-shrink:0;
+  background:var(--p3-bg);border:1px solid var(--p3-bd);color:var(--p3);
+  font-size:10.5px;font-weight:600;padding:5px 13px;border-radius:20px;
+  letter-spacing:.3px;margin-top:2px;
+}
+
+.calc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:7px;margin-bottom:18px;
+}
+.calc-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 13px;border-radius:8px;border:1px solid var(--border);background:var(--snow);
+}
+.calc-item-left{display:flex;align-items:center;gap:9px;}
+.phase-badge{
+  font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;
+  letter-spacing:.4px;flex-shrink:0;
+}
+.badge-P1{background:var(--p1-bg);color:var(--p1);border:1px solid var(--p1-bd);}
+.badge-P2{background:var(--p2-bg);color:var(--p2);border:1px solid var(--p2-bd);}
+.badge-P3{background:var(--p3-bg);color:var(--p3);border:1px solid var(--p3-bd);}
+.badge-P4{background:var(--p4-bg);color:var(--p4);border:1px solid var(--p4-bd);}
+.item-name{font-size:13px;font-weight:500;color:var(--ink);}
+.item-fee{font-size:13px;font-weight:600;color:var(--slate);flex-shrink:0;}
+
+.calc-total{
+  background:linear-gradient(135deg,#0f1f18 0%,#1a3028 100%);
+  border-radius:12px;padding:20px 26px;
+  display:flex;align-items:center;justify-content:space-between;
+  color:#fff;gap:16px;flex-wrap:wrap;
+}
+.total-label{font-size:11.5px;color:rgba(255,255,255,.55);margin-bottom:3px;}
+.total-sub{font-size:12px;color:rgba(255,255,255,.35);}
+.total-amount{font-size:38px;font-weight:700;color:var(--accent);letter-spacing:-1.5px;line-height:1;}
+.total-note{font-size:10.5px;color:rgba(255,255,255,.3);margin-top:5px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">模組依賴知識圖譜</div>
+  <h1>易睫清潔坊 — <span>估價計算器</span></h1>
+  <p>滑鼠移到節點查看說明 · 點擊節點查看依賴關係 · 滾輪縮放 · 拖曳平移</p>
+</div>
+
+<div class="controls">
+  <button class="ctrl-btn active" data-phase="all">全部</button>
+  <button class="ctrl-btn" data-phase="P1">P1 核心基礎</button>
+  <button class="ctrl-btn" data-phase="P2">P2 財務合規</button>
+  <button class="ctrl-btn" data-phase="P3">P3 深化優化</button>
+  <button class="ctrl-btn" data-phase="P4">P4 前台報表</button>
+  <div class="ctrl-sep"></div>
+  <span class="ctrl-hint">← 滑鼠移到節點查看說明 · 點擊查看依賴 · 滾輪縮放 · 拖曳平移</span>
+</div>
+
+<div id="graph-wrap">
+  <svg id="graph"></svg>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="leg-solid"></div>資料依賴</div>
+  <div class="legend-item"><div class="leg-dash"></div>功能延伸</div>
+</div>
+
+<div class="calc-section">
+  <div class="calc-header">
+    <div>
+      <div class="calc-title">估 價 計 算 器</div>
+      <div class="calc-count">已選 <em>14</em> 個目標模組</div>
+      <div class="calc-desc">全方案 · 所有模組納入 · 共用模組不重複計算</div>
+    </div>
+    <div class="lock-badge">🔒 全案鎖定</div>
+  </div>
+
+  <div class="calc-grid" id="calc-grid"></div>
+
+  <div class="calc-total">
+    <div>
+      <div class="total-label">完整導入成本</div>
+      <div class="total-sub">14 個模組 · 全方案 · 兩個月完成</div>
+    </div>
+    <div style="text-align:right">
+      <div class="total-amount">NT$220,000</div>
+      <div class="total-note">精算 NT$219,830，對外報整數</div>
+    </div>
+  </div>
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+const NODES = [
+  {id:'M01',short:'客戶資料管理', label:'客戶資料\n管理', phase:'P1',icon:'👤',desc:'客戶基本資料、服務地址、偏好紀錄，所有服務流程的核心資料來源',devWeeks:1,fee:6200},
+  {id:'M02',short:'系統權限控管', label:'系統權限\n控管', phase:'P1',icon:'🔐',desc:'老闆/行政/清潔師各角色最小權限配置，資料安全的基礎建設',devWeeks:2,fee:19370},
+  {id:'M03',short:'員工技能管理', label:'員工技能\n管理', phase:'P1',icon:'🏷️',desc:'清潔師技能標籤（深層清潔/玻璃/窗簾），派工配對的核心依據',devWeeks:1,fee:6200},
+  {id:'M04',short:'班表管理',     label:'班表\n管理',     phase:'P1',icon:'📋',desc:'員工出勤班表，薪資計算與派工的時間基礎，防止排班衝突',devWeeks:2,fee:14260},
+  {id:'M05',short:'員工打卡系統', label:'員工打卡\n系統', phase:'P1',icon:'⏱️',desc:'到場/離場打卡，實際工時核實，防範薪資爭議的客觀紀錄',devWeeks:1,fee:10005},
+  {id:'M06',short:'報價輔助模組', label:'報價輔助\n模組', phase:'P2',icon:'💲',desc:'根據客戶地址/面積/服務類型自動產生估價單，縮短業務回覆時間',devWeeks:2,fee:17880},
+  {id:'M07',short:'薪資計算模組', label:'薪資計算\n模組', phase:'P2',icon:'💰',desc:'整合班表、打卡、加班，自動產生薪資明細，大幅減少人工核算錯誤',devWeeks:2,fee:26100},
+  {id:'M08',short:'服務記錄回饋', label:'服務記錄\n與回饋', phase:'P2',icon:'📝',desc:'每次服務執行紀錄、客戶評分、問題回報，派工優化的核心依據',devWeeks:3,fee:18515},
+  {id:'M09',short:'收款對帳管理', label:'收款對帳\n管理', phase:'P3',icon:'🧾',desc:'收款狀態追蹤、發票開立、未收款提醒，現金流健康的關鍵控制點',devWeeks:1,fee:19180},
+  {id:'M10',short:'派工建議草稿', label:'派工建議\n草稿', phase:'P3',icon:'🗺️',desc:'依技能、地區、班表自動建議最佳派工組合，減少人工調度來回溝通',devWeeks:3,fee:23250},
+  {id:'M11',short:'耗材管理模組', label:'耗材管理\n模組', phase:'P3',icon:'🧴',desc:'清潔用品進出庫、每筆服務耗材用量紀錄，計算實際服務成本',devWeeks:1,fee:10005},
+  {id:'M12',short:'毛利報表',     label:'毛利\n報表',     phase:'P4',icon:'📊',desc:'每筆服務收入扣除人力+耗材成本，即時呈現毛利率，支持定價決策',devWeeks:1,fee:15120},
+  {id:'M13',short:'人事成本試算', label:'人事成本\n試算', phase:'P4',icon:'📈',desc:'員工人力成本總覽，支持擴編/縮編的財務決策模擬',devWeeks:1,fee:15120},
+  {id:'M14',short:'多據點管理',   label:'多據點\n管理',   phase:'P4',icon:'🏢',desc:'跨服務區域整合管理視圖，支持業務擴展後的統一調度與報表',devWeeks:2,fee:18625},
+];
+
+const LINKS = [
+  {source:'M01',target:'M06',type:'depends'},
+  {source:'M01',target:'M08',type:'depends'},
+  {source:'M04',target:'M07',type:'depends'},
+  {source:'M05',target:'M07',type:'depends'},
+  {source:'M08',target:'M10',type:'depends'},
+  {source:'M08',target:'M11',type:'depends'},
+  {source:'M11',target:'M12',type:'depends'},
+  {source:'M01',target:'M09',type:'indirect'},
+  {source:'M03',target:'M10',type:'indirect'},
+  {source:'M04',target:'M10',type:'indirect'},
+  {source:'M07',target:'M12',type:'indirect'},
+  {source:'M07',target:'M13',type:'indirect'},
+  {source:'M02',target:'M14',type:'indirect'},
+];
+
+const PC = {P1:'#C4502A',P2:'#B8923A',P3:'#2A7A6E',P4:'#5A5A6E'};
+const PB = {P1:'#FBF0EC',P2:'#FBF6EC',P3:'#EBF4F1',P4:'#EEEEF2'};
+const PHASES = ['P1','P2','P3','P4'];
+const PLABELS = {P1:'P1 核心基礎',P2:'P2 財務合規',P3:'P3 深化優化',P4:'P4 前台報表'};
+
+// Build calculator list
+const grid = document.getElementById('calc-grid');
+NODES.forEach(n => {
+  const el = document.createElement('div');
+  el.className = 'calc-item';
+  el.innerHTML = `
+    <div class="calc-item-left">
+      <span class="phase-badge badge-${n.phase}">${n.phase}</span>
+      <span class="item-name">${n.short}</span>
+    </div>
+    <span class="item-fee">NT$${n.fee.toLocaleString()}</span>
+  `;
+  grid.appendChild(el);
+});
+
+// D3 Graph
+const W = 960, H = 540;
+const svg = d3.select('#graph')
+  .attr('viewBox',`0 0 ${W} ${H}`)
+  .attr('height', Math.min(540, window.innerHeight - 160));
+
+const defs = svg.append('defs');
+['depends','indirect'].forEach(t => {
+  defs.append('marker').attr('id',`arr-${t}`)
+    .attr('viewBox','0 -5 10 10').attr('refX',24).attr('refY',0)
+    .attr('markerWidth',5).attr('markerHeight',5).attr('orient','auto')
+    .append('path').attr('d','M0,-5L10,0L0,5')
+    .attr('fill', t==='depends'?'#a8a8b8':'#c0c0cc')
+    .attr('opacity', t==='depends'?0.7:0.4);
+});
+
+const zoom = d3.zoom().scaleExtent([0.35,3]).on('zoom',e=>g.attr('transform',e.transform));
+svg.call(zoom);
+const g = svg.append('g');
+
+const colW = W / 4;
+PHASES.forEach((ph,i) => {
+  g.append('rect').attr('class','phase-bg')
+    .attr('x',i*colW).attr('y',0).attr('width',colW).attr('height',H)
+    .attr('fill',PB[ph]);
+  g.append('text').attr('class','phase-lbl')
+    .attr('x',i*colW+colW/2).attr('y',16)
+    .attr('fill',PC[ph])
+    .text(PLABELS[ph]);
+});
+
+NODES.forEach(n => {
+  const pi = PHASES.indexOf(n.phase);
+  n.x = (pi+0.5)*colW + (Math.random()-0.5)*60;
+  n.y = 55 + Math.random()*(H-110);
+});
+
+const sim = d3.forceSimulation(NODES)
+  .force('link', d3.forceLink(LINKS).id(d=>d.id).distance(85).strength(0.35))
+  .force('charge', d3.forceManyBody().strength(-200))
+  .force('x', d3.forceX(d=>(PHASES.indexOf(d.phase)+0.5)*colW).strength(0.45))
+  .force('y', d3.forceY(H/2).strength(0.05))
+  .force('collide', d3.forceCollide(d=>20+d.devWeeks*3+4));
+
+const linkSel = g.append('g').selectAll('.link')
+  .data(LINKS).join('line')
+  .attr('class',d=>`link ${d.type}`)
+  .attr('marker-end',d=>`url(#arr-${d.type})`);
+
+const tip = document.getElementById('tooltip');
+
+const nodeSel = g.append('g').selectAll('.node')
+  .data(NODES).join('g').attr('class','node')
+  .call(d3.drag()
+    .on('start',(e,d)=>{if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;})
+    .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y;})
+    .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;})
+  );
+
+nodeSel.append('circle')
+  .attr('r',d=>19+d.devWeeks*3.5)
+  .attr('fill',d=>PB[d.phase])
+  .attr('stroke',d=>PC[d.phase]);
+
+nodeSel.append('text').attr('class','node-icon').attr('y',-5).text(d=>d.icon);
+
+nodeSel.each(function(d){
+  const parts = d.label.split('\n');
+  d3.select(this).selectAll('.node-label')
+    .data(parts).join('text')
+    .attr('class','node-label')
+    .attr('y',(p,i)=>8+i*11)
+    .text(p=>p);
+});
+
+nodeSel
+  .on('mousemove',(ev,d)=>{
+    tip.style.display='block';
+    tip.style.left=(ev.clientX+14)+'px';
+    tip.style.top=(ev.clientY-12)+'px';
+    tip.innerHTML=`
+      <div class="tt-phase">${d.phase} · ${d.id}</div>
+      <div class="tt-name">${d.short}</div>
+      <div class="tt-fee">NT$${d.fee.toLocaleString()}</div>
+      <div class="tt-desc">${d.desc}</div>
+    `;
+  })
+  .on('mouseleave',()=>{ tip.style.display='none'; })
+  .on('click',(ev,d)=>{
+    ev.stopPropagation();
+    const conn = new Set([d.id]);
+    LINKS.forEach(l=>{
+      const sid = typeof l.source==='object'?l.source.id:l.source;
+      const tid = typeof l.target==='object'?l.target.id:l.target;
+      if(sid===d.id) conn.add(tid);
+      if(tid===d.id) conn.add(sid);
+    });
+    nodeSel.classed('dim',n=>!conn.has(n.id));
+    linkSel
+      .classed('dim',l=>{
+        const sid=typeof l.source==='object'?l.source.id:l.source;
+        const tid=typeof l.target==='object'?l.target.id:l.target;
+        return sid!==d.id&&tid!==d.id;
+      })
+      .classed('highlight',l=>{
+        const sid=typeof l.source==='object'?l.source.id:l.source;
+        const tid=typeof l.target==='object'?l.target.id:l.target;
+        return sid===d.id||tid===d.id;
+      });
+  });
+
+svg.on('click',()=>{
+  nodeSel.classed('dim',false);
+  linkSel.classed('dim',false).classed('highlight',false);
+  tip.style.display='none';
+});
+
+sim.on('tick',()=>{
+  linkSel
+    .attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+    .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+  nodeSel.attr('transform',d=>`translate(${d.x},${d.y})`);
+});
+
+let active = null;
+document.querySelectorAll('.ctrl-btn[data-phase]').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const ph = this.dataset.phase;
+    document.querySelectorAll('.ctrl-btn[data-phase]').forEach(b=>b.classList.remove('active'));
+    if(ph==='all'||ph===active){
+      active=null;
+      document.querySelector('[data-phase="all"]').classList.add('active');
+      nodeSel.classed('dim',false); linkSel.classed('dim',false);
+    } else {
+      active=ph; this.classList.add('active');
+      const show=new Set([ph]);
+      LINKS.forEach(l=>{
+        const snd = typeof l.source==='object'?l.source:NODES.find(n=>n.id===l.source);
+        const tnd = typeof l.target==='object'?l.target:NODES.find(n=>n.id===l.target);
+        if(snd&&snd.phase===ph&&tnd) show.add(tnd.phase);
+        if(tnd&&tnd.phase===ph&&snd) show.add(snd.phase);
+      });
+      nodeSel.classed('dim',d=>!show.has(d.phase));
+      linkSel.classed('dim',l=>{
+        const sph=typeof l.source==='object'?l.source.phase:NODES.find(n=>n.id===l.source)?.phase;
+        const tph=typeof l.target==='object'?l.target.phase:NODES.find(n=>n.id===l.target)?.phase;
+        return !show.has(sph)||!show.has(tph);
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>
