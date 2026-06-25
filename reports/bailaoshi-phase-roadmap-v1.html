@@ -503,39 +503,6 @@
     </tbody>
   </table>
 
-  <!-- DEPENDENCY NOTE -->
-  <div class="dep-note">
-    <h3>關鍵依賴說明</h3>
-    <div class="dep-row">
-      <span class="dep-arrow">▸</span>
-      <div><strong>L0 → 全部</strong>：角色權限 RBAC 和學年設定是所有模組的地基，不做就全部模組都要回頭改。</div>
-    </div>
-    <div class="dep-row">
-      <span class="dep-arrow">▸</span>
-      <div><strong>P1 課程 → P2 財務</strong>：班級和出缺席資料建好，帳單才能正確計算出勤調整。</div>
-    </div>
-    <div class="dep-row">
-      <span class="dep-arrow">▸</span>
-      <div><strong>P1 師資基礎 → P2 財務</strong>：排班和打卡資料是薪資計算的輸入來源。</div>
-    </div>
-    <div class="dep-row">
-      <span class="dep-arrow">▸</span>
-      <div><strong>P1 課程 + P1 師資 → P3 師資進階</strong>：教師培訓和行為積分需要排班、課程資料作為計算基礎。</div>
-    </div>
-    <div class="dep-row">
-      <span class="dep-arrow">▸</span>
-      <div><strong>P2 財務 + P1 課程 → P4 前台</strong>：家長 App 的出缺席查詢、帳單查看，需要 P1/P2 資料已建立。</div>
-    </div>
-    <div class="dep-row">
-      <span class="dep-arrow">▸</span>
-      <div><strong>P1–P4 全部穩定 → P5 MUSEON 串接</strong>：MUSEON 讀取業務資料的 API 串接，需要四大模組資料已穩定累積，串接才有意義。</div>
-    </div>
-    <div class="dep-row">
-      <span class="dep-arrow">▸</span>
-      <div><strong>MOD 24 知識庫 + P5 串接 + 學員資料累積 → P6 AI</strong>：AI 口說練習、客製出題、弱點分析都需要知識庫到位 + 足夠的學習歷程資料。MOD 24 越早啟動，P6 品質越高。</div>
-    </div>
-  </div>
-
 <!-- ===== KNOWLEDGE GRAPH ===== -->
 <div style="background:var(--parchment);border-top:2px solid var(--border);padding:40px 0 0;">
   <div style="max-width:960px;margin:0 auto;padding:0 24px 20px;">
@@ -1022,6 +989,39 @@ window.selectAll=selectAll;
 window.removeFromEstimate=function(id){selectedForEstimate.delete(id);refreshAddBtn();refreshEstimateRings();renderEstimator();};
 })();
 </script>
+
+  <!-- DEPENDENCY NOTE -->
+  <div class="dep-note">
+    <h3>關鍵依賴說明</h3>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>L0 → 全部</strong>：角色權限 RBAC 和學年設定是所有模組的地基，不做就全部模組都要回頭改。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P1 課程 → P2 財務</strong>：班級和出缺席資料建好，帳單才能正確計算出勤調整。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P1 師資基礎 → P2 財務</strong>：排班和打卡資料是薪資計算的輸入來源。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P1 課程 + P1 師資 → P3 師資進階</strong>：教師培訓和行為積分需要排班、課程資料作為計算基礎。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P2 財務 + P1 課程 → P4 前台</strong>：家長 App 的出缺席查詢、帳單查看，需要 P1/P2 資料已建立。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>P1–P4 全部穩定 → P5 MUSEON 串接</strong>：MUSEON 讀取業務資料的 API 串接，需要四大模組資料已穩定累積，串接才有意義。</div>
+    </div>
+    <div class="dep-row">
+      <span class="dep-arrow">▸</span>
+      <div><strong>MOD 24 知識庫 + P5 串接 + 學員資料累積 → P6 AI</strong>：AI 口說練習、客製出題、弱點分析都需要知識庫到位 + 足夠的學習歷程資料。MOD 24 越早啟動，P6 品質越高。</div>
+    </div>
+  </div>
 
   <!-- TIMELINE -->
   <div class="section-title">分期詳細規劃</div>
