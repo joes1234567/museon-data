@@ -438,6 +438,78 @@
   </div>
 </section>
 
+<!-- SCOPE GATE -->
+<section>
+  <div class="container">
+    <div class="section-label">範圍控管</div>
+    <h2 class="section-title">這份規劃的邊界——哪些在內、哪些刻意不做</h2>
+    <p class="section-desc">業主在確認前最重要的一頁。明確邊界讓雙方對齊，避免上線後出現「我以為這個有包含」的落差。</p>
+
+    <!-- OUT OF SCOPE -->
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+        <div style="width: 6px; height: 6px; border-radius: 50%; background: #B91C1C;"></div>
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #B91C1C;">第一階段刻意不做</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+        <div style="background: #FFF5F5; border: 1px solid #FCA5A5; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">自動獎金計算</div>
+          <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">獎金規則仍有彈性與例外，制度未完全標準化前做出來只會算錯。等制度確定後進 Phase 3 再建。</div>
+        </div>
+        <div style="background: #FFF5F5; border: 1px solid #FCA5A5; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">完整庫存／倉儲系統</div>
+          <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">借貨、合併提貨、盤點、臨時取貨情境仍複雜，第一階段不承諾庫存 100% 準確。先穩定提貨與點數流程。</div>
+        </div>
+        <div style="background: #FFF5F5; border: 1px solid #FCA5A5; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">借貨前台功能</div>
+          <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">第二次會議已確認：前台開放借貨反而鼓勵頻繁借貸，增加對帳複雜度。後台保留管理員人工調整的彈性。</div>
+        </div>
+        <div style="background: #FFF5F5; border: 1px solid #FCA5A5; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">完整 C 端電商</div>
+          <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">C 端消費者可預留身份與資料結構，但第一階段以 B 端經銷商提貨、儲值、審核為核心，不做 C 端完整購物流程。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASSUMPTIONS -->
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+        <div style="width: 6px; height: 6px; border-radius: 50%; background: #B8923A;"></div>
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #B8923A;">容易被誤解的假設</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="background: #FFFDF5; border: 1px solid #e8d8a0; border-radius: 12px; padding: 18px 22px; display: flex; gap: 14px; align-items: flex-start;">
+          <div style="width: 28px; height: 28px; background: #FEF3C7; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">≠</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">這不是 ERP</div>
+            <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">第一階段只解決經銷商提貨、點數、儲值、審核、報表與稽核。財務系統、人資、採購不在範圍內。</div>
+          </div>
+        </div>
+        <div style="background: #FFFDF5; border: 1px solid #e8d8a0; border-radius: 12px; padding: 18px 22px; display: flex; gap: 14px; align-items: flex-start;">
+          <div style="width: 28px; height: 28px; background: #FEF3C7; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">≠</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">這不是一般電商平台</div>
+            <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">雖然用購物車式操作，但核心是「提貨申請＋公司審核＋扣點」，不是 B2C 一般電商金流，消費者端刷卡購物不在第一階段。</div>
+          </div>
+        </div>
+        <div style="background: #FFFDF5; border: 1px solid #e8d8a0; border-radius: 12px; padding: 18px 22px; display: flex; gap: 14px; align-items: flex-start;">
+          <div style="width: 28px; height: 28px; background: #FEF3C7; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">!</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">提貨申請送出後，不立即扣點</div>
+            <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">第二次會議已確認：公司審核確認有貨後才扣點。送出申請 ≠ 點數已扣。這是避免無貨仍扣點的核心設計。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCOPE SUMMARY -->
+    <div style="background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%); border: 1px solid #a8d8bc; border-radius: 14px; padding: 28px 32px;">
+      <div style="font-size: 15px; font-weight: 700; color: #1a6b3c; margin-bottom: 10px;">總結：這套系統的定位</div>
+      <p style="font-size: 14px; color: var(--slate); line-height: 1.8;">一套讓經銷商可以<strong>自助查詢點數、送出提貨申請</strong>，公司端可進行<strong>儲值、審核、扣點、退點、出貨與報表管理</strong>的 B2B 經銷商營運系統。不是 ERP、不是電商、不是獎金系統——是讓提貨流程從 LINE 人工接單升級為系統自動化審核的第一步。</p>
+    </div>
+  </div>
+</section>
+
 <!-- FUNCTION AREAS -->
 <section>
   <div class="container">
