@@ -483,8 +483,8 @@
         <td>✅ 業主決定批次</td>
       </tr>
       <tr>
-        <td><strong>9. 家長/學生前台</strong></td>
-        <td>雙端 App（搜尋/對話式留言/學生入口）、通知系統、學習歷程/成績、家長一對一會談管理</td>
+        <td><strong>9. 家長（學生）/ 教職人員前台</strong></td>
+        <td>雙角色 App（家長含學生端 + 教職人員端）、通知系統、學習歷程/成績、家長一對一會談管理</td>
         <td><span class="phase-pill pill-p4">P4 前台</span></td>
         <td>✅ 業主決定批次</td>
       </tr>
@@ -698,7 +698,7 @@ const nodes=[
   {id:'MOD33f',short:'外師管理（完整）',label:'外師管理\n（完整）',phase:'P3',unit:'師資進階培訓',icon:'🌍',desc:'外籍老師工作證效期追蹤、外聘兼職勞健保門檻，type 欄位分流',legal:false,roi:'踩雷防護',weeks:1,acceptance:2,coeff:1.3},
   {id:'MOD34',short:'教師培訓管理',label:'教師培訓\n管理',phase:'P3',unit:'師資進階培訓',icon:'🎓',desc:'SOP/培訓影片/測驗/申論/主管審核/能力紀錄/新人 onboarding 系統化',legal:false,roi:'好老師留得住',weeks:2,acceptance:3,coeff:1.3},
   {id:'MOD35',short:'教師行為積分',label:'教師行為\n積分系統',phase:'P3',unit:'師資進階培訓',icon:'⭐',desc:'三合一設計：每日任務五感恩 + 會議出席QR + 能量存摺積分連動獎金',legal:false,roi:'好老師留得住',weeks:1.5,acceptance:3,coeff:1.25},
-  {id:'MOD23',short:'家長/學生 App',label:'家長/學生\n前台 App',phase:'P4',unit:'家長學生前台',icon:'📱',desc:'雙入口：家長查成績/出席/帳單/對話留言；學生看課程/作業/AI口說',legal:false,roi:'家長主動續班',weeks:4,acceptance:4,coeff:1.3},
+  {id:'MOD23',short:'家長（學生）/ 教職人員 App',label:'家長（學生）\n教職人員 App',phase:'P4',unit:'家長學生前台',icon:'📱',desc:'雙角色：家長（含學生）查成績/出席/帳單/對話留言/活動報名；教職人員端課表查詢/班級出席/學生資料快查/通知推送',legal:false,roi:'家長主動續班',weeks:4,acceptance:4,coeff:1.3},
   {id:'MOD17',short:'學習歷程/成績',label:'學習歷程\n成績',phase:'P4',unit:'家長學生前台',icon:'📒',desc:'含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會前摘要',legal:false,roi:'家長主動續班',weeks:2,acceptance:3,coeff:1.25},
   {id:'MOD12x',short:'通知系統擴充',label:'通知系統\n擴充',phase:'P4',unit:'家長學生前台',icon:'🔔',desc:'繳費/缺席/補課/活動通知，LINE + App 統一推播（MOD 12 延伸）',legal:false,roi:'省人省時',weeks:1,acceptance:2,coeff:1.15},
   {id:'MOD18x',short:'行銷擴充',label:'行銷\n（擴充）',phase:'P4',unit:'行銷',icon:'📣',desc:'口碑來源追蹤、說明會/活動報名、各管道成交率分析（MOD 18 延伸）',legal:false,roi:'潛客變學生',weeks:1.5,acceptance:2,coeff:1.2},
@@ -1247,7 +1247,7 @@ window.removeFromEstimate=function(id){selectedForEstimate.delete(id);refreshAdd
         <div class="phase-header">
           <span class="phase-badge">P4 — 對外前台</span>
           <div class="phase-title-wrap">
-            <div class="phase-name">家長/學生端 App + 行銷</div>
+            <div class="phase-name">家長（學生）/ 教職人員 App + 行銷</div>
             <div class="phase-desc">內部系統穩了，再開放對外介面。這樣家長看到的是可信賴的系統，不是半成品。</div>
           </div>
         </div>
@@ -1259,10 +1259,10 @@ window.removeFromEstimate=function(id){selectedForEstimate.delete(id);refreshAdd
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">📱</div>
-              <div class="unit-name">家長/學生前台 <span class="mod-count">3 模組</span></div>
+              <div class="unit-name">家長（學生）/ 教職人員前台 <span class="mod-count">3 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>MOD 23 — 家長/學生 App（雙入口）：家長端查成績/出席/帳單/通知/搜尋/對話式留言（類LINE，客訴標記，主管可見高風險訊息）；學生端課程/作業/補課影片/AI 口說練習</span>
+              <span>MOD 23 — 家長（學生）/ 教職人員 App（雙角色）：家長端（含學生）查成績/出席/帳單/通知/搜尋/對話式留言（類LINE，客訴標記，主管可見高風險訊息），學生在家長帳號下看課程/作業/補課影片/AI 口說；教職人員端課表查詢/班級出席管理/學生資料快查/通知推送/吃藥確認執行紀錄</span>
               <span>MOD 17 — 學習歷程/成績（含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會談前摘要/會談後追蹤）</span>
               <span>MOD 12 擴充 — 通知系統（繳費提醒/缺席通知/吃藥提醒/補課影片上架/活動確認/停補課公告，LINE/App 統一推播）</span>
             </div>
