@@ -199,9 +199,44 @@
   }
   .badge-in { background: #e8f5e9; color: #2e7d32; }
   .badge-out { background: #fce4ec; color: #c62828; }
+  .badge-confirm { background: #e3f2fd; color: #1565c0; }
   .scope-list { list-style: none; }
   .scope-list li { font-size: 13px; color: #555; padding: 5px 0; border-bottom: 1px solid #f5f5f5; }
   .scope-list li:last-child { border: none; }
+
+  /* Confirmed decisions */
+  .decision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 640px) { .decision-grid { grid-template-columns: 1fr; } }
+  .decision-item {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-left: 4px solid #1565c0;
+  }
+  .decision-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #1565c0;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .decision-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+  }
+  .decision-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+  }
 
   /* Phases */
   .phase-timeline { position: relative; }
@@ -243,39 +278,6 @@
   .phase-tag-3 { color: #533483; }
   .phase-name { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
   .phase-desc { font-size: 13px; color: #666; }
-
-  /* Pricing */
-  .price-card {
-    background: linear-gradient(135deg, #1a1a2e, #0f3460);
-    border-radius: 20px;
-    padding: 36px;
-    color: white;
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  .price-label { font-size: 13px; color: rgba(255,255,255,0.55); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
-  .price-range { font-size: 42px; font-weight: 800; color: #e94560; margin-bottom: 6px; }
-  .price-unit { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
-  .price-note { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.8; }
-  .price-includes {
-    background: white;
-    border-radius: 14px;
-    padding: 24px 28px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  }
-  .price-includes-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 14px; }
-  .includes-list { list-style: none; }
-  .includes-list li {
-    font-size: 13px;
-    color: #555;
-    padding: 6px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid #f5f5f5;
-  }
-  .includes-list li:last-child { border: none; }
-  .includes-list li .dot { width: 6px; height: 6px; background: #e94560; border-radius: 50%; flex-shrink: 0; }
 
   /* Next steps */
   .next-list { list-style: none; counter-reset: next; }
@@ -326,7 +328,7 @@
   <div class="cover-meta">
     <div class="cover-meta-item">
       <span class="cover-meta-label">版本</span>
-      <span class="cover-meta-value">v1.0</span>
+      <span class="cover-meta-value">v1.1</span>
     </div>
     <div class="cover-meta-item">
       <span class="cover-meta-label">文件性質</span>
@@ -405,7 +407,7 @@
       <div class="role-card">
         <div class="role-icon">👑</div>
         <div class="role-name">高階經銷商 ／ 總代理</div>
-        <div class="role-desc">可看到自己組織範圍的狀況<br><span style="font-size:11px;color:#e94560;font-weight:700;">（第二階段開放）</span></div>
+        <div class="role-desc">可看到自己組織範圍的狀況</div>
         <ul class="role-list">
           <li>查看下線經銷商提貨狀況</li>
           <li>查看哪些下線長期未提貨</li>
@@ -506,44 +508,54 @@
         </ul>
       </div>
     </div>
+    <div class="card" style="margin-top:0; border-left: 4px solid #ff9800;">
+      <div class="card-title">⏳ 仍待確認（第三次會議前釐清）</div>
+      <p style="font-size:13px; color:#555; line-height: 2.0;">
+        ① 消費者帳號架構：是否與經銷商共用同一系統？還是分開建置（身分切換 or 獨立登入）？<br>
+        ② 組織樹層級深度：確切幾層？影響高階經銷商查詢設計。<br>
+        ③ 消費者 ↔ 經銷商的交易金流：由誰串接、歸屬哪一端？
+      </p>
+    </div>
   </div>
 
-  <!-- 5. 第二階段核心功能 -->
+  <!-- 5. 第二次會議確認的關鍵決策 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">5</div>
-      <div class="section-title">第二階段核心功能</div>
+      <div class="section-title">第二次會議確認的關鍵決策</div>
     </div>
-    <div class="features-grid">
-      <div class="feature-item">
-        <div class="icon">🏗️</div>
-        <div class="name">組織下線可視化</div>
-        <div class="desc">高階經銷商可查看自己組織範圍的下線狀況與活躍度</div>
+    <div class="decision-grid">
+      <div class="decision-item">
+        <div class="decision-label">借貨合併</div>
+        <div class="decision-title">後台可做，前台不露出</div>
+        <div class="decision-desc">
+          系統後台支援借貨合併操作，但前台介面不提供此功能入口，
+          避免形成惡性借貸文化。
+        </div>
       </div>
-      <div class="feature-item">
-        <div class="icon">🔔</div>
-        <div class="name">長期未提貨提醒</div>
-        <div class="desc">自動偵測並提醒哪些下線超過設定週期未提貨</div>
+      <div class="decision-item">
+        <div class="decision-label">退貨 ／ 退點機制</div>
+        <div class="decision-title">消費者全退、經銷商九折回購</div>
+        <div class="decision-desc">
+          消費者可全額退貨退點。退出不再經營的經銷商，效期一年以上的產品
+          以九折回購，點數轉為現金或轉給上線，由人工逐案決定。
+        </div>
       </div>
-      <div class="feature-item">
-        <div class="icon">📈</div>
-        <div class="name">提貨週期分析</div>
-        <div class="desc">依時間段分析各經銷商提貨頻率與消耗趨勢</div>
+      <div class="decision-item">
+        <div class="decision-label">現有網站整合</div>
+        <div class="decision-title">傑克飛保留，新系統加跳轉按鈕</div>
+        <div class="decision-desc">
+          現有傑克飛網站維持不動，新系統加一個跳轉按鈕連結，
+          後台各自獨立，不做資料整合。
+        </div>
       </div>
-      <div class="feature-item">
-        <div class="icon">⚠️</div>
-        <div class="name">點數不足提醒</div>
-        <div class="desc">點數低於閾值時自動通知相關人員</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">📊</div>
-        <div class="name">產品消耗趨勢報表</div>
-        <div class="desc">各產品的消耗量趨勢，輔助進貨決策</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">💬</div>
-        <div class="name">LINE ／ Email 通知整合</div>
-        <div class="desc">重要事件（提貨審核、點數不足）主動推送通知</div>
+      <div class="decision-item">
+        <div class="decision-label">Phase 3 範圍調整</div>
+        <div class="decision-title">獎金計算確認暫緩</div>
+        <div class="decision-desc">
+          獎金制度仍在調整中，Phase 3 的自動化獎金計算功能暫不開發，
+          待制度確定後再排期。
+        </div>
       </div>
     </div>
   </div>
@@ -620,68 +632,32 @@
           <div class="phase-dot phase-dot-3">v3</div>
         </div>
         <div class="phase-content">
-          <div class="phase-tag phase-tag-3">業務規模成熟後</div>
+          <div class="phase-tag phase-tag-3">制度確定後</div>
           <div class="phase-name">獎金計算 ／ 倉儲管理</div>
           <div class="phase-desc">
-            在獎金制度規則確定後，新增自動化獎金計算；庫存流程穩定後導入倉儲管理。
+            待獎金制度規則確定後，新增自動化獎金計算；
+            庫存流程穩定後導入倉儲管理。（時程視制度調整進度而定）
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 8. 開發前需確認的 8 個規則 -->
+  <!-- 8. 下一步 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">8</div>
-      <div class="section-title">開發前需確認的 8 個業務規則</div>
-    </div>
-    <div class="card" style="border-left: 4px solid #e94560;">
-      <ol style="font-size:14px; color:#333; line-height:2.1; padding-left:18px; margin:0;">
-        <li>經銷商可以自己送出提貨申請嗎？還是要由公司代送？</li>
-        <li>提貨申請是否一定要公司審核才能扣點？</li>
-        <li>扣點時機：送出申請時扣，還是審核通過後才扣？</li>
-        <li>取消提貨是否退點？在哪個狀態前可以退？</li>
-        <li>儲值是否 100% 只能由公司端操作？</li>
-        <li>高階經銷商可以看幾層下線的資料？</li>
-        <li>產品點數換算是否依經銷商等級有所不同？</li>
-        <li>舊系統的資料是否需要匯入第一階段？</li>
-      </ol>
-    </div>
-  </div>
-
-  <!-- 9. 第二階段要確認的事情 -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">9</div>
-      <div class="section-title">第二階段啟動前要確認的事情</div>
-    </div>
-    <div class="card" style="border-left: 4px solid #0f3460;">
-      <ol style="font-size:14px; color:#333; line-height:2.1; padding-left:18px; margin:0;">
-        <li>「長期未提貨」的定義：幾個月算長期？由誰設定閾值？</li>
-        <li>點數不足提醒的觸發條件：餘額低於幾點開始通知？</li>
-        <li>LINE ／ Email 通知的接收對象：通知到本人、上線，還是公司？</li>
-        <li>高階經銷商組織視角的層級範圍：只看直屬下線還是整個下線樹？</li>
-        <li>v2 啟動時機：v1 上線穩定多久後才開始規劃 v2？</li>
-      </ol>
-    </div>
-  </div>
-
-  <!-- 10. 下一步 -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">10</div>
       <div class="section-title">建議下一步</div>
     </div>
     <ol class="next-list">
-      <li>安排業務規則確認會議，逐一確認上方 8 個問題</li>
-      <li>確認第一階段範圍是否與規劃書一致，或有需要調整</li>
+      <li>第三次會議整體 review 本規劃書，確認範圍後準備報價</li>
+      <li>釐清仍待確認的 3 個問題（消費者帳號架構、組織樹層級深度、金流歸屬）</li>
       <li>開發啟動前先跑 MVP 驗收清單，確保不遺漏核心場景</li>
     </ol>
   </div>
 
   <div class="divider"></div>
-  <div class="footer">艾琳諾｜提貨儲值系統 MVP 規劃書 v1.0 — 業主版 © 2026</div>
+  <div class="footer">艾琳諾｜提貨儲值系統 MVP 規劃書 v1.1 — 業主版 © 2026</div>
 
 </div>
 </body>
