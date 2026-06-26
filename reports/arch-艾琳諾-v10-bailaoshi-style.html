@@ -1273,10 +1273,385 @@
 </section>
 
 
+<!-- KNOWLEDGE GRAPH -->
+<section>
+  <div class="container">
+    <div class="section-label">模組依賴知識圖譜</div>
+    <h2 class="section-title">功能模組的承接關係</h2>
+    <p class="section-desc">19 個模組節點，顏色對應三個建置階段。滑鼠移到節點查看說明；<strong>點擊節點</strong>鎖定並亮顯<strong>所有前置依賴鏈</strong>，再按一次或點空白處取消。滾輪縮放，拖曳平移。</p>
+  </div>
+
+  <div class="kgyi-controls" id="kgyi-controls">
+    <button class="kgyi-btn active" data-kgphase="all">全部</button>
+    <div class="kgyi-sep"></div>
+    <button class="kgyi-btn" data-kgphase="P1">第一階段</button>
+    <button class="kgyi-btn" data-kgphase="P2">第二階段</button>
+    <button class="kgyi-btn" data-kgphase="P3">第三階段</button>
+    <div class="kgyi-sep"></div>
+    <button class="kgyi-btn" id="kgyi-btn-reset" style="color:var(--slate);">重置視圖</button>
+  </div>
+
+  <div id="kgyi-graph-wrap"><svg id="kgyi-graph"></svg></div>
+
+  <div class="kgyi-legend">
+    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#1a6b3c;"></div> 第一階段 基礎核心</div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#2A6A8A;"></div> 第二階段 協作擴展</div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#7c3aed;"></div> 第三階段 會員商城</div>
+    <div class="kgyi-sep" style="height:18px;"></div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-line" style="border-color:#1a6b3c;"></div> 直接資料依賴</div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-line" style="border-color:#888;border-style:dashed;"></div> 跨階段間接依賴</div>
+    <div style="color:var(--mist);font-size:13px;">← 滑鼠移到節點查看說明 · 點擊查看詳情 · 滾輪縮放 · 拖曳平移</div>
+  </div>
+</section>
+
+<!-- Tooltip -->
+<div id="kgyi-tooltip" style="position:fixed;display:none;background:#12121A;color:rgba(255,255,255,0.92);font-size:14px;line-height:1.85;padding:12px 16px;border-radius:10px;max-width:260px;z-index:9999;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+  <div id="kgyi-tt-phase" style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.7;margin-bottom:4px;"></div>
+  <div id="kgyi-tt-name" style="font-size:15px;font-weight:700;margin-bottom:6px;"></div>
+  <div id="kgyi-tt-desc" style="font-size:14px;opacity:0.82;line-height:1.65;"></div>
+</div>
+
+<!-- Detail panel -->
+<div id="kgyi-detail" style="display:none;position:fixed;right:16px;top:110px;width:260px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;box-shadow:0 8px 32px rgba(0,0,0,0.12);z-index:200;font-size:15px;max-height:calc(100vh - 130px);overflow-y:auto;">
+  <span onclick="document.getElementById('kgyi-detail').style.display='none'" style="position:absolute;right:12px;top:10px;cursor:pointer;color:var(--mist);font-size:18px;line-height:1;">×</span>
+  <div id="kgyi-d-phase" style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px;"></div>
+  <div id="kgyi-d-name" style="font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.4;"></div>
+  <div id="kgyi-d-desc" style="font-size:14px;color:var(--slate);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);"></div>
+  <div id="kgyi-d-deps-sec" style="display:none;"><div style="font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">前置依賴</div><ul id="kgyi-d-deps" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
+  <div id="kgyi-d-enables-sec" style="display:none;margin-top:2px;"><div style="font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">解鎖模組</div><ul id="kgyi-d-enables" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
+  <div id="kgyi-d-meta" style="display:none;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;text-align:center;margin-bottom:5px;">
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:11px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">端別</div>
+        <div id="kgyi-d-roi" style="font-size:11px;font-weight:700;color:var(--ink);line-height:1.3;"></div>
+      </div>
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:11px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">製作週數</div>
+        <div id="kgyi-d-devweeks" style="font-size:14px;font-weight:700;color:var(--ink);"></div>
+      </div>
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:11px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">驗收點</div>
+        <div id="kgyi-d-checkpoints" style="font-size:14px;font-weight:700;color:var(--ink);"></div>
+      </div>
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:11px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">係數</div>
+        <div id="kgyi-d-coefficient" style="font-size:14px;font-weight:700;color:var(--ink);"></div>
+      </div>
+    </div>
+    <div id="kgyi-d-cost-sec" style="display:none;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px;">模組費用</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:4px;">
+        <span style="color:var(--slate);">開發費</span>
+        <span id="kgyi-d-cost-dev" style="color:var(--ink);font-weight:700;"></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:4px;">
+        <span style="color:var(--slate);">運營費</span>
+        <span id="kgyi-d-cost-op" style="color:var(--ink);font-weight:700;"></span>
+      </div>
+      <div id="kgyi-d-cost-note-wrap" style="display:none;margin-top:4px;padding:4px 7px;background:#FFF8EE;border-radius:5px;">
+        <div id="kgyi-d-cost-note" style="font-size:12px;color:#8a5a00;line-height:1.5;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.kgyi-controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;align-items:center;}
+.kgyi-btn{padding:5px 13px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid currentColor;background:transparent;transition:background 0.15s,color 0.15s;letter-spacing:0.3px;line-height:1.4;}
+.kgyi-btn.active{color:#fff!important;}
+.kgyi-btn[data-kgphase="all"]{color:var(--ink);border-color:var(--ink);}
+.kgyi-btn[data-kgphase="all"].active{background:var(--ink);}
+.kgyi-btn[data-kgphase="P1"]{color:#1a6b3c;border-color:#1a6b3c;}
+.kgyi-btn[data-kgphase="P1"].active{background:#1a6b3c;}
+.kgyi-btn[data-kgphase="P2"]{color:#2A6A8A;border-color:#2A6A8A;}
+.kgyi-btn[data-kgphase="P2"].active{background:#2A6A8A;}
+.kgyi-btn[data-kgphase="P3"]{color:#7c3aed;border-color:#7c3aed;}
+.kgyi-btn[data-kgphase="P3"].active{background:#7c3aed;}
+.kgyi-sep{width:1px;height:20px;background:var(--border);}
+#kgyi-graph-wrap{background:#fff;overflow:hidden;}
+svg#kgyi-graph{display:block;width:100%;cursor:grab;}
+svg#kgyi-graph:active{cursor:grabbing;}
+.kgyi-node circle{stroke-width:2.5;cursor:pointer;}
+.kgyi-node .node-icon{font-size:15px;text-anchor:middle;pointer-events:none;dominant-baseline:central;}
+.kgyi-node .node-label{font-size:12px;fill:var(--ink);text-anchor:middle;pointer-events:none;font-weight:500;}
+.kgyi-link{fill:none;}
+.kgyi-link.depends{stroke:#1a6b3c;stroke-width:1.8;stroke-opacity:0.55;}
+.kgyi-link.indirect{stroke:#888;stroke-width:1.3;stroke-opacity:0.4;stroke-dasharray:5,3;}
+.kgyi-link.highlight{stroke-opacity:0.9!important;stroke-width:2.5!important;}
+.kgyi-link.dim{stroke-opacity:0.05!important;}
+.kgyi-node.dim circle{opacity:0.12;}
+.kgyi-node.dim .node-icon{opacity:0.12;}
+.kgyi-node.dim .node-label{opacity:0.12;}
+.kgyi-phase-bg{fill-opacity:0.03;}
+.kgyi-phase-lbl{font-size:13px;font-weight:700;letter-spacing:0.8px;fill-opacity:0.45;text-anchor:middle;}
+.kgyi-legend{display:flex;gap:16px;flex-wrap:wrap;padding:10px 24px;background:var(--parchment);border-top:1px solid var(--border);font-size:13.5px;color:var(--slate);align-items:center;justify-content:center;}
+.kgyi-leg-item{display:flex;align-items:center;gap:5px;}
+.kgyi-leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+.kgyi-leg-line{display:inline-block;width:22px;height:0;border-top:2px solid;vertical-align:middle;flex-shrink:0;}
+</style>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function(){
+const PC={P1:'#1a6b3c',P2:'#2A6A8A',P3:'#7c3aed'};
+const PX={P1:155,P2:490,P3:820};
+const PL={P1:'第一階段 基礎核心',P2:'第二階段 協作擴展',P3:'第三階段 會員商城'};
+const W=980,H=760;
+const nodes=[
+  {id:'M01',short:'管理者管理',label:'管理者\n管理',phase:'P1',icon:'🔐',desc:'管理員/營運人員分角色，帳號狀態切換，操作紀錄全留存，是所有端別帳號的基礎',roi:'公司端',devWeeks:1,checkpoints:2,coefficient:1.0,cost:{devFee:8500,opFee:0,note:''}},
+  {id:'M02',short:'稽核與系統設定',label:'稽核系統\n設定',phase:'P1',icon:'📋',desc:'每筆操作不可刪除的稽核日誌與系統參數統一管理，合規基礎',roi:'公司端',devWeeks:2,checkpoints:2,coefficient:1.15,cost:{devFee:14260,opFee:0,note:''}},
+  {id:'M03',short:'經銷商管理',label:'經銷商\n管理',phase:'P1',icon:'👥',desc:'帳號建立、等級設定、上線關係，B2B2C 網絡的起點，驅動後續所有點數與提貨流程',roi:'公司端',devWeeks:2,checkpoints:3,coefficient:1.25,cost:{devFee:15500,opFee:0,note:''}},
+  {id:'M04',short:'產品目錄管理',label:'產品目錄\n管理',phase:'P1',icon:'📦',desc:'產品分類、點數定價、上下架控制，缺貨自動封閉申請入口',roi:'公司端',devWeeks:1.5,checkpoints:2,coefficient:1.0,cost:{devFee:10005,opFee:0,note:''}},
+  {id:'M05',short:'儲值管理',label:'儲值\n管理',phase:'P1',icon:'🪙',desc:'人工 key 入儲值，每筆留來源/時間/操作者，取代口頭確認，驅動點數總帳',roi:'公司端',devWeeks:2,checkpoints:3,coefficient:1.2,cost:{devFee:16820,opFee:0,note:''}},
+  {id:'M06',short:'點數管理',label:'點數\n管理',phase:'P1',icon:'💰',desc:'點數總帳、異動全留存、退點、人工調整必填原因，提貨扣點閉環的核心',roi:'公司端',devWeeks:2.5,checkpoints:4,coefficient:1.4,cost:{devFee:21080,opFee:0,note:''}},
+  {id:'M07',short:'提貨管理',label:'提貨\n管理',phase:'P1',icon:'🛒',desc:'審核→扣點→出貨完整閉環，每個節點有人負責有記錄，取消後自動退點',roi:'公司端',devWeeks:3,checkpoints:4,coefficient:1.2,cost:{devFee:22320,opFee:0,note:''}},
+  {id:'M08',short:'管理報表',label:'管理\n報表',phase:'P1',icon:'📊',desc:'提貨/點數/產品消耗/活躍度/異常五張報表，含匯出，決策有數字支撐',roi:'公司端',devWeeks:2,checkpoints:2,coefficient:1.2,cost:{devFee:17650,opFee:0,note:''}},
+  {id:'M09',short:'帳號中心',label:'帳號\n中心',phase:'P1',icon:'🔑',desc:'由公司建立帳號，經銷商自助管理個人資料和密碼重設',roi:'經銷商端',devWeeks:1,checkpoints:1,coefficient:1.0,cost:{devFee:6200,opFee:0,note:''}},
+  {id:'M10',short:'點數查詢',label:'點數\n查詢',phase:'P1',icon:'💳',desc:'登入即見餘額，儲值/扣點/退點每筆流向一鍵查清楚',roi:'經銷商端',devWeeks:1,checkpoints:2,coefficient:1.0,cost:{devFee:8950,opFee:0,note:''}},
+  {id:'M11',short:'產品目錄',label:'產品\n瀏覽',phase:'P1',icon:'🏷️',desc:'可提貨清單、分類篩選，缺貨產品自動標示不可選，避免白申請',roi:'經銷商端',devWeeks:1,checkpoints:1,coefficient:1.0,cost:{devFee:7440,opFee:0,note:''}},
+  {id:'M12',short:'提貨申請',label:'提貨\n申請',phase:'P1',icon:'🛍️',desc:'購物車式選品，送出前即時試算點數，取貨方式選宅配或自取，不靠 LINE',roi:'經銷商端',devWeeks:2.5,checkpoints:3,coefficient:1.3,cost:{devFee:20210,opFee:0,note:''}},
+  {id:'M13',short:'提貨紀錄查詢',label:'提貨\n紀錄',phase:'P1',icon:'📝',desc:'每筆申請有狀態有單號，不用問公司進度，審核前可自助取消',roi:'經銷商端',devWeeks:1,checkpoints:1,coefficient:1.0,cost:{devFee:7440,opFee:0,note:''}},
+  {id:'M14',short:'組織樹管理',label:'組織樹\n管理',phase:'P2',icon:'🌳',desc:'組織結構可視化，52% 等階截斷自動處理，可視範圍依角色設定',roi:'公司端',devWeeks:3,checkpoints:4,coefficient:1.5,cost:{devFee:26100,opFee:0,note:''}},
+  {id:'M15',short:'通知提醒',label:'通知\n提醒',phase:'P2',icon:'🔔',desc:'儲值完成/提貨狀態/點數不足預警/系統公告，主動通知不靠人追',roi:'經銷商端',devWeeks:1.5,checkpoints:2,coefficient:1.1,cost:{devFee:12400,opFee:0,note:''}},
+  {id:'M16',short:'下線組織查看',label:'下線\n查看',phase:'P2',icon:'👁️',desc:'高階經銷商可見授權範圍內下線動態，遇到同階 52% 截止',roi:'經銷商端',devWeeks:2,checkpoints:2,coefficient:1.15,cost:{devFee:14260,opFee:0,note:''}},
+  {id:'M17',short:'獨立商城入口',label:'商城\n入口',phase:'P3',icon:'🔗',desc:'每位經銷商一條子路徑 URL（/shop/代碼），分享連結即推廣入口，不登入可瀏覽',roi:'會員商城端',devWeeks:2.5,checkpoints:3,coefficient:1.2,cost:{devFee:21700,opFee:0,note:''}},
+  {id:'M18',short:'低摩擦下單',label:'低摩擦\n下單',phase:'P3',icon:'🧾',desc:'不強制註冊可訪客結帳，訂單自動歸屬入口經銷商，完成後寄送會員邀請',roi:'會員商城端',devWeeks:2.5,checkpoints:3,coefficient:1.2,cost:{devFee:19800,opFee:0,note:''}},
+  {id:'M19',short:'會員中心',label:'會員\n中心',phase:'P3',icon:'👤',desc:'每位經銷商的會員資料互相隔離，帳號永久綁定所屬經銷商，可查訂單歷史',roi:'會員商城端',devWeeks:1.5,checkpoints:2,coefficient:1.1,cost:{devFee:13950,opFee:0,note:''}},
+];
+const links=[
+  {source:'M01',target:'M03',type:'depends'},
+  {source:'M01',target:'M04',type:'depends'},
+  {source:'M03',target:'M05',type:'depends'},
+  {source:'M05',target:'M06',type:'depends'},
+  {source:'M06',target:'M07',type:'depends'},
+  {source:'M07',target:'M08',type:'depends'},
+  {source:'M03',target:'M09',type:'depends'},
+  {source:'M06',target:'M10',type:'depends'},
+  {source:'M04',target:'M11',type:'depends'},
+  {source:'M12',target:'M13',type:'depends'},
+  {source:'M17',target:'M18',type:'depends'},
+  {source:'M18',target:'M19',type:'depends'},
+  {source:'M01',target:'M02',type:'indirect'},
+  {source:'M09',target:'M12',type:'indirect'},
+  {source:'M11',target:'M12',type:'indirect'},
+  {source:'M10',target:'M12',type:'indirect'},
+  {source:'M07',target:'M15',type:'indirect'},
+  {source:'M03',target:'M14',type:'indirect'},
+  {source:'M14',target:'M16',type:'indirect'},
+  {source:'M04',target:'M17',type:'indirect'},
+];
+const svg=d3.select('svg#kgyi-graph').attr('viewBox',`0 0 ${W} ${H}`).attr('height',Math.min(640,window.innerHeight-150));
+const g=svg.append('g');
+const zoom=d3.zoom().scaleExtent([0.25,4]).on('zoom',e=>g.attr('transform',e.transform));
+svg.call(zoom);
+const defs=svg.append('defs');
+const LC={depends:'#1a6b3c',indirect:'#888'};
+Object.entries(LC).forEach(([type,color])=>{
+  defs.append('marker').attr('id',`kgyi-ar-${type}`).attr('viewBox','0 -5 10 10').attr('refX',26).attr('refY',0)
+    .attr('markerWidth',5).attr('markerHeight',5).attr('orient','auto')
+    .append('path').attr('d','M0,-5L10,0L0,5').attr('fill',color).attr('fill-opacity',0.7);
+});
+Object.entries(PX).forEach(([phase,cx])=>{
+  g.append('rect').attr('class','kgyi-phase-bg').attr('x',cx-80).attr('y',40).attr('width',160).attr('height',H-52).attr('fill',PC[phase]).attr('rx',8);
+  g.append('text').attr('class','kgyi-phase-lbl').attr('x',cx).attr('y',26).attr('fill',PC[phase]).text(PL[phase]);
+});
+nodes.forEach(n=>{
+  const col=nodes.filter(m=>m.phase===n.phase);
+  const idx=col.indexOf(n);
+  const step=(H-120)/(col.length+1);
+  n.x=PX[n.phase]+(idx%2===0?0:12);
+  n.y=60+step*(idx+1);
+});
+const lSel=g.append('g').selectAll('.kgyi-link').data(links).join('path')
+  .attr('class',d=>`kgyi-link ${d.type}`).attr('marker-end',d=>`url(#kgyi-ar-${d.type})`);
+const nSel=g.append('g').selectAll('.kgyi-node').data(nodes).join('g').attr('class','kgyi-node')
+  .call(d3.drag().on('start',ds).on('drag',dd).on('end',de));
+nSel.append('circle').attr('r',23).attr('fill',d=>PC[d.phase]).attr('fill-opacity',0.88).attr('stroke','#fff');
+nSel.append('text').attr('class','node-icon').attr('dy','0.35em').text(d=>d.icon);
+nSel.each(function(d){
+  d.label.split('\n').forEach((line,i)=>{
+    d3.select(this).append('text').attr('class','node-label').attr('y',31+i*13).text(line);
+  });
+});
+const sim=d3.forceSimulation(nodes)
+  .force('link',d3.forceLink(links).id(d=>d.id).distance(90).strength(0.2))
+  .force('charge',d3.forceManyBody().strength(-200))
+  .force('x',d3.forceX(d=>PX[d.phase]).strength(0.8))
+  .force('y',d3.forceY(H/2).strength(0.07))
+  .force('collide',d3.forceCollide(38))
+  .on('tick',tick);
+function tick(){
+  lSel.attr('d',d=>{
+    const dx=d.target.x-d.source.x,dy=d.target.y-d.source.y;
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
+    const dr=len*0.7;
+    return `M${d.source.x},${d.source.y} A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
+  });
+  nSel.attr('transform',d=>`translate(${d.x},${d.y})`);
+}
+function ds(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
+function dd(e,d){d.fx=e.x;d.fy=e.y;}
+function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
+const tip=document.getElementById('kgyi-tooltip');
+const ttP=document.getElementById('kgyi-tt-phase');
+const ttN=document.getElementById('kgyi-tt-name');
+const ttD=document.getElementById('kgyi-tt-desc');
+let selNode=null,selAnc=new Set();
+function getAnc(id){
+  const s=new Set([id]);const q=[id];
+  while(q.length){const c=q.shift();links.forEach(l=>{if(l.target.id===c&&!s.has(l.source.id)){s.add(l.source.id);q.push(l.source.id);}});}
+  return s;
+}
+function applyAnc(s){
+  nSel.classed('dim',n=>!s.has(n.id));
+  lSel.classed('dim',l=>!s.has(l.source.id)||!s.has(l.target.id)).classed('highlight',l=>s.has(l.source.id)&&s.has(l.target.id));
+}
+nSel
+  .on('mouseenter',function(ev,d){
+    if(selNode){ttP.style.color=PC[d.phase];ttP.textContent=PL[d.phase];ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';return;}
+    const conn=new Set([d.id]);
+    links.forEach(l=>{if(l.source.id===d.id)conn.add(l.target.id);if(l.target.id===d.id)conn.add(l.source.id);});
+    nSel.classed('dim',n=>!conn.has(n.id));
+    lSel.classed('dim',l=>l.source.id!==d.id&&l.target.id!==d.id).classed('highlight',l=>l.source.id===d.id||l.target.id===d.id);
+    ttP.style.color=PC[d.phase];ttP.textContent=PL[d.phase];ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';
+  })
+  .on('mousemove',function(ev){tip.style.left=Math.min(ev.clientX+18,window.innerWidth-280)+'px';tip.style.top=(ev.clientY-50)+'px';})
+  .on('mouseleave',function(){if(selNode){applyAnc(selAnc);}else{nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);}tip.style.display='none';})
+  .on('click',function(ev,d){
+    ev.stopPropagation();
+    if(selNode===d.id){selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kgyi-detail').style.display='none';return;}
+    selNode=d.id;selAnc=getAnc(d.id);applyAnc(selAnc);
+    document.getElementById('kgyi-d-phase').textContent=PL[d.phase];
+    document.getElementById('kgyi-d-phase').style.color=PC[d.phase];
+    document.getElementById('kgyi-d-name').textContent=d.short;
+    document.getElementById('kgyi-d-desc').textContent=d.desc;
+    const deps=links.filter(l=>l.target.id===d.id);
+    const enables=links.filter(l=>l.source.id===d.id);
+    if(deps.length){
+      document.getElementById('kgyi-d-deps-sec').style.display='block';
+      document.getElementById('kgyi-d-deps').innerHTML=deps.map(l=>{const s=nodes.find(n=>n.id===l.source.id);return`<li style="font-size:14px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${s?s.short:l.source.id}</li>`;}).join('');
+    }else{document.getElementById('kgyi-d-deps-sec').style.display='none';}
+    if(enables.length){
+      document.getElementById('kgyi-d-enables-sec').style.display='block';
+      document.getElementById('kgyi-d-enables').innerHTML=enables.map(l=>{const t=nodes.find(n=>n.id===l.target.id);return`<li style="font-size:14px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${t?t.short:l.target.id}</li>`;}).join('');
+    }else{document.getElementById('kgyi-d-enables-sec').style.display='none';}
+    if(d.roi||d.devWeeks||d.checkpoints){
+      document.getElementById('kgyi-d-meta').style.display='block';
+      document.getElementById('kgyi-d-roi').textContent=d.roi||'—';
+      document.getElementById('kgyi-d-devweeks').textContent=d.devWeeks?d.devWeeks+'週':'—';
+      document.getElementById('kgyi-d-checkpoints').textContent=d.checkpoints?d.checkpoints+'個':'—';
+      document.getElementById('kgyi-d-coefficient').textContent=d.coefficient?'×'+d.coefficient:'—';
+    }else{document.getElementById('kgyi-d-meta').style.display='none';}
+    if(d.cost){
+      document.getElementById('kgyi-d-cost-sec').style.display='block';
+      document.getElementById('kgyi-d-cost-dev').textContent='NT$'+d.cost.devFee.toLocaleString();
+      document.getElementById('kgyi-d-cost-op').textContent=d.cost.opFee?'NT$'+d.cost.opFee.toLocaleString()+' /月':'—';
+      if(d.cost.note){document.getElementById('kgyi-d-cost-note-wrap').style.display='block';document.getElementById('kgyi-d-cost-note').textContent=d.cost.note;}
+      else{document.getElementById('kgyi-d-cost-note-wrap').style.display='none';}
+    }else{document.getElementById('kgyi-d-cost-sec').style.display='none';}
+    document.getElementById('kgyi-detail').style.display='block';
+  });
+svg.on('click',()=>{selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kgyi-detail').style.display='none';});
+let aP=null;
+document.querySelectorAll('.kgyi-btn[data-kgphase]').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const ph=this.dataset.kgphase;
+    document.querySelectorAll('.kgyi-btn[data-kgphase]').forEach(b=>b.classList.remove('active'));
+    if(ph==='all'||ph===aP){
+      aP=null;document.querySelector('[data-kgphase="all"]').classList.add('active');
+      nSel.classed('dim',false);lSel.classed('dim',false);
+    }else{
+      aP=ph;this.classList.add('active');
+      const show=new Set([ph]);
+      links.forEach(l=>{if(l.source.phase===ph)show.add(l.target.phase);if(l.target.phase===ph)show.add(l.source.phase);});
+      nSel.classed('dim',d=>!show.has(d.phase));
+      lSel.classed('dim',l=>!show.has(l.source.phase)||!show.has(l.target.phase));
+    }
+  });
+});
+document.getElementById('kgyi-btn-reset').addEventListener('click',()=>{svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);});
+})();
+</script>
+
+
+<!-- ESTIMATOR -->
+<section>
+  <div class="container">
+    <div class="section-label">估價計算器</div>
+    <h2 class="section-title">19 個模組費用明細</h2>
+
+    <div style="background:#fff;border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.06);">
+
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--border);background:var(--snow);">
+        <div>
+          <div style="font-size:18px;font-weight:700;color:var(--ink);">三端系統 · <span style="color:var(--jade);">19</span> 大模組</div>
+          <div style="font-size:13px;color:var(--mist);margin-top:2px;">三個階段逐步導入，最小可交付，快速回收價值</div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:6px;background:#f0f4ff;border:1.5px solid #2a4b9b;color:#2a4b9b;border-radius:24px;padding:7px 18px;font-size:13px;font-weight:700;letter-spacing:0.3px;">B2B2C 三端</div>
+      </div>
+
+      <div style="padding:8px 24px 6px;background:#f2f8f4;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#1a6b3c;">第一階段 基礎核心</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">管理者管理</span><span class="calc-fee">NT$8,500</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">稽核與系統設定</span><span class="calc-fee">NT$14,260</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">經銷商管理</span><span class="calc-fee">NT$15,500</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">產品目錄管理</span><span class="calc-fee">NT$10,005</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">儲值管理</span><span class="calc-fee">NT$16,820</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">點數管理</span><span class="calc-fee">NT$21,080</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">提貨管理</span><span class="calc-fee">NT$22,320</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">管理報表</span><span class="calc-fee">NT$17,650</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">帳號中心（經銷商）</span><span class="calc-fee">NT$6,200</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">點數查詢與明細（經銷商）</span><span class="calc-fee">NT$8,950</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">產品目錄（經銷商）</span><span class="calc-fee">NT$7,440</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">購物車式提貨申請（經銷商）</span><span class="calc-fee">NT$20,210</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">提貨紀錄查詢（經銷商）</span><span class="calc-fee">NT$7,440</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#f8faf8;border-bottom:1px solid var(--border);">
+        <span style="font-size:13px;color:var(--slate);">第一階段小計</span>
+        <span style="font-size:14px;font-weight:700;color:#1a6b3c;">NT$176,375</span>
+      </div>
+
+      <div style="padding:8px 24px 6px;background:#eef4f8;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#2A6A8A;">第二階段 協作擴展</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">組織樹管理</span><span class="calc-fee">NT$26,100</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">通知提醒（經銷商）</span><span class="calc-fee">NT$12,400</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">下線組織查看（高階經銷商）</span><span class="calc-fee">NT$14,260</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#f4f8fb;border-bottom:1px solid var(--border);">
+        <span style="font-size:13px;color:var(--slate);">第二階段小計</span>
+        <span style="font-size:14px;font-weight:700;color:#2A6A8A;">NT$52,760</span>
+      </div>
+
+      <div style="padding:8px 24px 6px;background:#f5f0ff;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7c3aed;">第三階段 會員商城</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">獨立商城入口</span><span class="calc-fee">NT$21,700</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">低摩擦下單流程</span><span class="calc-fee">NT$19,800</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">會員中心</span><span class="calc-fee">NT$13,950</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#faf6ff;border-bottom:1px solid var(--border);">
+        <span style="font-size:13px;color:var(--slate);">第三階段小計</span>
+        <span style="font-size:14px;font-weight:700;color:#7c3aed;">NT$55,450</span>
+      </div>
+
+      <div style="padding:24px 28px;background:linear-gradient(135deg,#0a0a1a 0%,#12183a 60%,#1a2a5a 100%);display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:3px;">完整三端導入成本</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.35);">視第三方串接數量與模組選配而定</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:36px;font-weight:800;color:#a78bfa;letter-spacing:-1px;">NT$284,585</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.calc-row{display:flex;align-items:center;gap:12px;padding:13px 24px;border-bottom:1px solid #f0f4f0;}
+.calc-badge{flex-shrink:0;font-size:11px;font-weight:800;letter-spacing:0.5px;color:#fff;border-radius:6px;padding:3px 8px;}
+.calc-name{flex:1;font-size:15px;color:var(--ink);font-weight:500;}
+.calc-fee{font-size:15px;font-weight:700;color:var(--ink);}
+</style>
+
+
 <!-- FOOTER -->
 <div class="footer">
   <strong>艾琳諾 — B2B 經銷商提貨儲值管理系統規劃</strong><br>
-  文件版本 v1.2 · 基於兩次訪談記錄彙整 · 2026-06-26<br>
+  文件版本 v1.3 · 基於兩次訪談記錄彙整 · 2026-06-26<br>
   三個待確認項目（消費者帳號架構 / 組織樹層級 / 金流歸屬）確認後，進入報價鎖定
 </div>
 
