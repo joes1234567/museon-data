@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艾琳諾 — 經銷商提貨儲值管理系統規劃</title>
+<style>
+  :root {
+    --jade: #1a6b3c;
+    --jade-light: #2d9a5c;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --ink: #0f1a12;
+    --slate: #4A5A4E;
+    --mist: #8898A0;
+    --border: #DDE4DC;
+    --parchment: #F5F8F5;
+    --snow: #FBFDFB;
+    --success: #2D8A6E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a1a0e 0%, #12391e 60%, #1a5a30 100%);
+    color: #fff;
+    padding: 64px 40px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,107,60,0.28) 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 50%, rgba(42,122,110,0.15) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(45,154,92,0.25);
+    border: 1px solid rgba(45,154,92,0.5);
+    color: #5ecf85;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #5ecf85; }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .hero-meta-num { font-size: 30px; font-weight: 700; color: #5ecf85; }
+  .hero-meta-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+  /* LAYOUT */
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--jade); font-weight: 600; margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(21px, 3vw, 29px); font-weight: 700;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.3;
+  }
+  .section-desc {
+    color: var(--slate); font-size: 15px; max-width: 640px; margin-bottom: 40px;
+  }
+
+  /* PAIN POINTS */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .pain-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+  .pain-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+  .pain-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pi-red { background: #FEF0EC; }
+  .pi-orange { background: #FFF5E6; }
+  .pi-blue { background: #EBF4F8; }
+  .pi-green { background: #E8F5EE; }
+  .pain-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--ink); }
+  .pain-desc { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+  /* FLOW */
+  .flow-wrapper {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px 28px; overflow-x: auto;
+  }
+  .flow-row {
+    display: flex; align-items: center; gap: 0;
+    flex-wrap: nowrap; min-width: 720px;
+  }
+  .flow-step {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; flex: 1; min-width: 76px;
+  }
+  .flow-circle {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0;
+  }
+  .flow-step-label { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.4; }
+  .flow-arrow { color: var(--mist); font-size: 16px; flex-shrink: 0; padding: 0 2px; margin-bottom: 22px; }
+
+  .bg-blue { background: #EBF4F8; }
+  .bg-teal { background: #E6F4F2; }
+  .bg-green { background: #E8F5EE; }
+  .bg-gold { background: #FBF4E6; }
+  .bg-ember { background: #FEF0EC; }
+  .bg-purple { background: #F0EBF8; }
+  .bg-lime { background: #F0F8E8; }
+
+  /* FUNCTION AREA */
+  .func-area { margin-bottom: 44px; }
+  .func-header {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+    padding-bottom: 16px; border-bottom: 2px solid var(--border);
+  }
+  .func-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .fi-green { background: #E8F5EE; }
+  .fi-blue { background: #EBF4F8; }
+  .fi-purple { background: #F0EBF8; }
+  .fi-gold { background: #FBF4E6; }
+  .fi-gray { background: #F0F0F0; }
+  .func-title-group { flex: 1; }
+  .func-area-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+  .func-area-desc { font-size: 13px; color: var(--mist); margin-top: 2px; }
+  .func-modules-count {
+    font-size: 12px; font-weight: 600; color: var(--mist);
+    background: var(--parchment); border: 1px solid var(--border);
+    padding: 4px 14px; border-radius: 20px;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+  }
+  .module-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px;
+    position: relative;
+  }
+  .module-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.06); }
+  .module-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .module-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .phase-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 9px;
+    border-radius: 10px; white-space: nowrap; flex-shrink: 0; margin-left: 8px;
+  }
+  .pt-1 { background: #E8F5EE; color: #1a6b3c; border: 1px solid #c2deca; }
+  .pt-2 { background: #EBF4F8; color: #2A6A8A; border: 1px solid #b8d5e8; }
+  .pt-3 { background: #FBF4E6; color: #B8923A; border: 1px solid #e0ceA0; }
+  .pt-4 { background: #F0EBF8; color: #6A4A9A; border: 1px solid #c9b8e8; }
+  .module-value {
+    font-size: 13px; color: var(--jade); font-weight: 600;
+    margin-bottom: 6px; line-height: 1.5;
+  }
+  .module-detail { font-size: 12px; color: var(--slate); line-height: 1.6; }
+  .module-note {
+    font-size: 11px; color: var(--mist); margin-top: 10px;
+    padding-top: 10px; border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+
+  /* TIMELINE STRIP */
+  .timeline-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; margin-bottom: 0;
+  }
+  .ts-phase {
+    padding: 20px 18px;
+    border-right: 1px solid var(--border);
+  }
+  .ts-phase:last-child { border-right: none; }
+  .ts-p1 { background: linear-gradient(135deg, #E8F5EE, #F4FAF6); }
+  .ts-p2 { background: #FAFCFF; }
+  .ts-p3 { background: #FFFDF5; }
+  .ts-num { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .ts-p1 .ts-num { color: #1a6b3c; }
+  .ts-p2 .ts-num { color: #2A6A8A; }
+  .ts-p3 .ts-num { color: #B8923A; }
+  .ts-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .ts-period { font-size: 12px; color: var(--mist); margin-bottom: 12px; }
+  .ts-milestone {
+    font-size: 12px; color: var(--slate);
+    padding: 8px 12px; border-radius: 8px;
+    line-height: 1.6; font-weight: 600;
+  }
+  .ts-p1 .ts-milestone { background: rgba(26,107,60,0.08); color: #1a6b3c; }
+  .ts-p2 .ts-milestone { background: rgba(42,106,138,0.08); color: #2A6A8A; }
+  .ts-p3 .ts-milestone { background: rgba(184,146,58,0.08); color: #B8923A; }
+  .ts-list { list-style: none; margin-top: 10px; }
+  .ts-list li { font-size: 12px; color: var(--slate); padding: 2px 0; display: flex; gap: 6px; }
+  .ts-list li::before { content: '·'; color: var(--mist); }
+
+  /* DECISION CARDS */
+  .decision-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;
+    margin-bottom: 32px;
+  }
+  .decision-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 22px;
+    border-left: 4px solid #1a6b3c;
+  }
+  .decision-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #1a6b3c; margin-bottom: 6px; }
+  .decision-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .decision-detail { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%);
+    border: 1px solid #a8d8bc; border-radius: 14px;
+    padding: 28px 32px;
+  }
+  .highlight-box h3 { font-size: 17px; font-weight: 700; color: #1a6b3c; margin-bottom: 10px; }
+  .highlight-box p { font-size: 14px; color: var(--slate); }
+
+  /* RISK TABLE */
+  .risk-table { width: 100%; border-collapse: collapse; }
+  .risk-table th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-size: 13px; }
+  .risk-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--slate); vertical-align: top; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-high { background: #FFF5F5; }
+  .risk-mid { background: #FFFBF0; }
+  .risk-low { background: #F5FFF8; }
+  .risk-label { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  .rl-high { background: #FEE2E2; color: #B91C1C; }
+  .rl-mid { background: #FEF3C7; color: #92400E; }
+  .rl-low { background: #D1FAE5; color: #065F46; }
+
+  /* ROI */
+  .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 32px; }
+  .roi-card { background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .roi-num { font-size: 34px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px; }
+  .roi-unit { font-size: 13px; color: var(--mist); margin-bottom: 8px; }
+  .roi-label { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .roi-detail { font-size: 12px; color: var(--slate); line-height: 1.5; }
+  .roi-formula {
+    background: #0f1a12; color: #5ecf85;
+    border-radius: 10px; padding: 22px 28px;
+    font-family: 'Menlo', 'Monaco', monospace; font-size: 13px;
+    line-height: 2.2; margin: 0 0 20px;
+  }
+  .roi-formula .label { color: rgba(255,255,255,0.45); font-size: 11px; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 32px 24px; font-size: 13px;
+  }
+  .footer strong { color: rgba(255,255,255,0.75); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 20px; }
+    section { padding: 40px 0; }
+    .timeline-strip { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">系統規劃文件 v1.0</div>
+  <h1>艾琳諾<br><span>經銷商提貨儲值管理系統</span>規劃</h1>
+  <p class="hero-sub">一套整合帳號身分、點數錢包、提貨申請、組織可視化與數據分析的自助式經銷商平台——讓公司從「LINE 人工接單」升級為「系統自動化審核」</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">12</span>
+      <span class="hero-meta-label">核心功能模組</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">4</span>
+      <span class="hero-meta-label">使用者身分層級</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">3</span>
+      <span class="hero-meta-label">交付階段</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-num">已確認</span>
+      <span class="hero-meta-label">4 項關鍵決策</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="container">
+    <div class="section-label">現況痛點</div>
+    <h2 class="section-title">每天靠 LINE 撐起來的提貨流程，正在吃掉你的人力</h2>
+    <p class="section-desc">這套系統針對艾琳諾目前最依賴人工、最難追蹤、最容易出錯的六個環節，進行系統性解決。</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon pi-red">📱</div>
+        <div>
+          <div class="pain-title">提貨申請全靠 LINE 傳訊息</div>
+          <div class="pain-desc">經銷商傳訊申請、公司人工接收、手動核對點數、通知出貨——每筆提貨最少 5 個來回，無法追蹤狀態。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-red">💰</div>
+        <div>
+          <div class="pain-title">點數餘額人工查詢</div>
+          <div class="pain-desc">經銷商想查點數只能問人，公司需人工回覆；儲值是否入帳、點數剩多少全靠人工核對，易出錯。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">🔀</div>
+        <div>
+          <div class="pain-title">借貨合單無法管理</div>
+          <div class="pain-desc">經銷商互相借點合單免運，私下約定後才通知公司，公平性無法驗證，月底對帳複雜度高。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">🌳</div>
+        <div>
+          <div class="pain-title">組織樹不可見</div>
+          <div class="pain-desc">高級經銷商看不到下線的提貨狀態與業績動態，只能靠電話詢問，無法主動引導下線行動。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">⏰</div>
+        <div>
+          <div class="pain-title">長期未提貨無預警</div>
+          <div class="pain-desc">哪些經銷商超過一段時間沒提貨、點數快過期，沒有系統提醒，靠記憶追蹤容易漏掉。</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">🔄</div>
+        <div>
+          <div class="pain-title">退貨退出流程不清</div>
+          <div class="pain-desc">退貨、退出時的點數退還、九折回購機制全靠人工協調，流程未標準化，每次處理方式不一致。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">完整業務流程</div>
+    <h2 class="section-title">從儲值到出貨，全程數位化可追蹤</h2>
+    <p class="section-desc">系統串接艾琳諾從點數購買到提貨收到的完整流程，每個環節自動記錄，公司只需在關鍵節點審核確認。</p>
+    <div class="flow-wrapper">
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">💳</div>
+          <div class="flow-step-label">經銷商<br>儲值申請</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-green">✅</div>
+          <div class="flow-step-label">公司<br>確認入帳</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-teal">🪙</div>
+          <div class="flow-step-label">點數<br>入錢包</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-lime">🛒</div>
+          <div class="flow-step-label">提貨<br>申請</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-gold">📋</div>
+          <div class="flow-step-label">公司<br>審核</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-ember">📦</div>
+          <div class="flow-step-label">扣點<br>出貨</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-purple">📊</div>
+          <div class="flow-step-label">交易<br>歷史</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-circle bg-blue">🔔</div>
+          <div class="flow-step-label">通知<br>送達</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCTION AREAS -->
+<section>
+  <div class="container">
+    <div class="section-label">系統功能全景</div>
+    <h2 class="section-title">四大業務區塊，12 個功能模組</h2>
+    <p class="section-desc">按艾琳諾的業務場景分組——每個模組解決一個具體的日常問題。括號內的階段標示是交付時間，不是重要性排序。</p>
+
+    <!-- AREA 1: 帳號與身分 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-green">🔐</div>
+        <div class="func-title-group">
+          <div class="func-area-name">帳號與身分管理</div>
+          <div class="func-area-desc">四層身分架構，誰能看什麼、能做什麼，全由公司決定</div>
+        </div>
+        <div class="func-modules-count">2 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">四層身分控管</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">四種角色，各自的介面和權限</div>
+          <div class="module-detail">公司管理員、營運人員、一般經銷商、高級/總代理——登入後看到的功能依身分不同。帳號開通、停用、密碼重設，管理員一鍵完成。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">操作稽核日誌</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">誰在什麼時間做了什麼，全部留存</div>
+          <div class="module-detail">點數異動、提貨審核、帳號變更——每筆操作自動產生時間戳記錄。有爭議時 30 秒查清楚，不需要靠記憶或翻聊天記錄。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 2: 點數與儲值 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-blue">🪙</div>
+        <div class="func-title-group">
+          <div class="func-area-name">點數錢包與儲值</div>
+          <div class="func-area-desc">經銷商自助查點數、兩種儲值路徑、餘額即時顯示</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">點數錢包</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">餘額、異動明細，登入就看得到</div>
+          <div class="module-detail">經銷商登入即見當前點數餘額、每筆入帳/扣點記錄。不再需要問公司「我還剩幾點」——自助查詢，省去雙方溝通時間。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">儲值申請流程</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">線下刷卡單、線上轉帳兩路都走</div>
+          <div class="module-detail">v1 支援兩種儲值模式：（1）線下刷卡後公司人工 key 入系統；（2）線上轉帳後系統自動比對入帳。第二階段可接入線上刷卡 API。每筆儲值有狀態追蹤，入帳後自動通知經銷商。</div>
+          <div class="module-note">⚠ 線上刷卡 API 在第一階段不串接，先穩定流程後評估。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">點數不足預警</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">快沒點數前自動提醒，不讓提貨被卡住</div>
+          <div class="module-detail">系統偵測點數低於設定閾值時，自動推送 LINE 或 Email 通知，讓經銷商有時間提前儲值，不在需要提貨時才發現點數不足。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 3: 提貨流程 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-purple">🛒</div>
+        <div class="func-title-group">
+          <div class="func-area-name">提貨申請與審核</div>
+          <div class="func-area-desc">購物車式申請、公司審核確認、退貨處理——全流程線上化</div>
+        </div>
+        <div class="func-modules-count">4 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">購物車式提貨申請</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">選產品 → 確認清單 → 填配送地址 → 送出</div>
+          <div class="module-detail">經銷商從產品清單加入購物車，設定數量後確認訂單。配送方式支援宅配到府或到公司自取。取代 LINE 傳訊息的混亂流程，每筆申請有單號可追蹤。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">審核工作流</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">公司確認 → 扣點 → 出貨——不再靠人工記憶</div>
+          <div class="module-detail">申請送出後，公司收到待審通知。確認庫存無誤後審核通過，系統自動扣點並記錄。公司可批次查看待審清單，不再靠 LINE 通知漏接。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">退貨處理流程</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">退貨靠系統記錄，不靠口頭約定</div>
+          <div class="module-detail">支援兩種退貨：（1）消費者 1 個月滿意保證，全額退點；（2）退出經銷商九折回購（有效期 1 年以上產品），系統記錄退貨申請，公司內部人員審核後返還點數或現金。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">產品清單管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">產品、點數定價、庫存狀態，統一在這裡</div>
+          <div class="module-detail">公司管理員維護產品清單、點數定價、庫存數量。產品缺貨時自動標示不可申請，避免經銷商申請後才被告知無貨。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREA 4: 組織與分析 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gold">📊</div>
+        <div class="func-title-group">
+          <div class="func-area-name">組織可視化與數據分析</div>
+          <div class="func-area-desc">高級經銷商看得到下線、公司看得到全局——從數據主動出擊</div>
+        </div>
+        <div class="func-modules-count">3 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">組織樹可視化</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">高級經銷商能看到下線，到下一個52%節點為止</div>
+          <div class="module-detail">高級/總代理登入後可看到下線組織樹結構，包含各層成員的提貨狀態與點數概況。遇到下一層高級節點即截止。公司管理員可查看全局組織。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">提貨趨勢與未提貨提醒</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">哪些貨常被提、誰太久沒動——系統自動告訴你</div>
+          <div class="module-detail">自動偵測超過設定天數未提貨的經銷商，發送 LINE/Email 提醒。同時提供各產品提貨頻率趨勢，幫助公司掌握庫存節奏與補貨時機。</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">商品消耗報表與操作稽核</div>
+            <span class="phase-tag pt-2">第二階段</span>
+          </div>
+          <div class="module-value">每筆點數流向、每筆操作記錄，查帳 30 秒</div>
+          <div class="module-detail">系統自動彙整商品流出數量、各經銷商提貨占比、點數消耗速率報表。操作稽核日誌可按日期、帳號篩選，任何異常快速定位。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONFIRMED DECISIONS -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">已確認的關鍵決策</div>
+    <h2 class="section-title">第二次會議後，這四件事已經定案</h2>
+    <p class="section-desc">這些不是待議項目——是已經雙方確認、直接進入規格的邊界決策。</p>
+    <div class="decision-grid">
+      <div class="decision-card">
+        <div class="decision-label">借貨合單</div>
+        <div class="decision-title">前台不做借貨功能，後台保留彈性</div>
+        <div class="decision-detail">前台介面不開放借貨/合單入口，避免養成習慣、引發更複雜的糾紛。後台可保留管理員手動調整點數的機制，應對真正需要的例外狀況。</div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-label">退貨機制</div>
+        <div class="decision-title">消費者全退、經銷商九折回購</div>
+        <div class="decision-detail">消費者 1 個月內全額退點。退出的經銷商，有效期 1 年以上的產品可申請九折回購，由會計人工到公司處理，系統記錄申請與結果。</div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-label">傑克飛整合</div>
+        <div class="decision-title">現有網站保留，新系統加跳轉按鈕</div>
+        <div class="decision-detail">傑克飛現有網站維持不動，新提貨系統獨立建置，在傑克飛網站加入「前往提貨系統」按鈕跳轉。兩個系統後台不整合，各自獨立維運。</div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-label">獎金計算</div>
+        <div class="decision-title">Phase 3 獎金計算暫緩，待制度確定後再進</div>
+        <div class="decision-detail">獎金分配制度目前仍在調整，Phase 3 獎金計算模組暫不列入 MVP 範圍。制度確定後再評估建置時程，確保做一次就是對的。</div>
+      </div>
+    </div>
+
+    <!-- PENDING ITEMS -->
+    <div style="background: #FFFDF5; border: 1px solid #e8d8a0; border-radius: 12px; padding: 24px 28px;">
+      <div class="section-label" style="color: #B8923A; margin-bottom: 10px;">第三次會議前需確認</div>
+      <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 12px;">這 3 點確認後，報價就能鎖定</div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 24px; height: 24px; background: #FEF3C7; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #92400E; flex-shrink: 0;">1</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 600; color: var(--ink);">消費者帳號架構</div>
+            <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">消費者是否加入同一系統（用身分切換），或維持與經銷商完全隔離？這影響帳號系統的複雜度與未來擴展性。</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 24px; height: 24px; background: #FEF3C7; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #92400E; flex-shrink: 0;">2</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 600; color: var(--ink);">組織樹層級深度</div>
+            <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">目前確認 4 個獎金等級，但樹狀結構是否有超過 5-6 層的可能性？層數影響權限系統的設計，工時浮動約 ±30%。</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="width: 24px; height: 24px; background: #FEF3C7; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #92400E; flex-shrink: 0;">3</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 600; color: var(--ink);">金流歸屬</div>
+            <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">消費者與經銷商之間的交易金流由誰來串？是公司統一收款，還是由高級經銷商各自處理？這影響財務模組的建置方向。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+  <div class="container">
+    <div class="section-label">交付時間表</div>
+    <h2 class="section-title">三個階段，每個階段都有具體的里程碑</h2>
+    <p class="section-desc">不需要等所有功能完成才開始用——第一階段上線，提貨申請就已經全面線上化，告別 LINE 接單。</p>
+    <div class="timeline-strip">
+      <div class="ts-phase ts-p1">
+        <div class="ts-num">第一階段</div>
+        <div class="ts-name">核心建立</div>
+        <div class="ts-period">M1–M2</div>
+        <div class="ts-milestone">公司能做到：經銷商自助申請提貨，不再靠 LINE 接單</div>
+        <ul class="ts-list">
+          <li>四層帳號與身分控管</li>
+          <li>點數錢包與儲值申請</li>
+          <li>購物車式提貨申請</li>
+          <li>審核工作流（確認/扣點/出貨）</li>
+          <li>產品清單管理</li>
+          <li>退貨申請流程</li>
+          <li>操作稽核日誌</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p2">
+        <div class="ts-num">第二階段</div>
+        <div class="ts-name">可視化與智能提醒</div>
+        <div class="ts-period">M3–M4</div>
+        <div class="ts-milestone">高級經銷商能做到：看到下線動態，公司能主動提醒未提貨</div>
+        <ul class="ts-list">
+          <li>組織樹可視化</li>
+          <li>長期未提貨自動提醒</li>
+          <li>提貨趨勢分析</li>
+          <li>點數不足預警</li>
+          <li>商品消耗報表</li>
+          <li>Email / LINE 通知整合</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p3">
+        <div class="ts-num">第三階段</div>
+        <div class="ts-name">擴展（待定）</div>
+        <div class="ts-period">M5+ / 待評估</div>
+        <div class="ts-milestone">制度確定後：獎金計算自動化、倉儲管理接入</div>
+        <ul class="ts-list">
+          <li>獎金計算模組（待制度確定）</li>
+          <li>倉儲管理整合</li>
+          <li>線上刷卡 API 串接</li>
+          <li>消費者帳號架構（待第三次會議確認）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE FEATURE DEEP DIVE -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">核心設計原則</div>
+    <h2 class="section-title">借貨功能：設計在後台，不露在前台</h2>
+    <p class="section-desc">這是第二次會議中最關鍵的一個設計決策——理由和執行方式值得說清楚。</p>
+
+    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; background: var(--snow); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 28px;">
+      <div style="padding: 26px 24px; background: #FFF5F5;">
+        <div style="font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #B91C1C; margin-bottom: 6px;">不做的</div>
+        <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">前台開放借貨申請</div>
+        <div style="font-size: 13px; color: var(--slate); line-height: 1.7; margin-bottom: 12px;">提供借貨 UI → 養成習慣 → 月月大量借貨 → 對帳越來越複雜 → 糾紛增加 → 系統反而製造問題。</div>
+        <ul style="list-style: none;">
+          <li style="font-size: 12px; color: #B91C1C; padding: 2px 0; display: flex; gap: 6px;">✗ 借貸習慣固化，難以管控</li>
+          <li style="font-size: 12px; color: #B91C1C; padding: 2px 0; display: flex; gap: 6px;">✗ 對帳複雜度倍增</li>
+          <li style="font-size: 12px; color: #B91C1C; padding: 2px 0; display: flex; gap: 6px;">✗ 公平性爭議難處理</li>
+        </ul>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; padding: 0 4px; background: var(--snow); border-left: 1px solid var(--border); border-right: 1px solid var(--border); color: var(--mist); font-size: 18px;">→</div>
+      <div style="padding: 26px 24px; background: #F0FAF4;">
+        <div style="font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #1a6b3c; margin-bottom: 6px;">決定做的</div>
+        <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">後台保留管理員手動調整</div>
+        <div style="font-size: 13px; color: var(--slate); line-height: 1.7; margin-bottom: 12px;">前台無借貨入口 → 降低發生頻率 → 真的需要例外時，管理員後台人工處理 → 每筆都有稽核記錄。</div>
+        <ul style="list-style: none;">
+          <li style="font-size: 12px; color: #1a6b3c; padding: 2px 0; display: flex; gap: 6px;">✓ 降低借貸行為的發生頻率</li>
+          <li style="font-size: 12px; color: #1a6b3c; padding: 2px 0; display: flex; gap: 6px;">✓ 例外仍可人工處理並留存記錄</li>
+          <li style="font-size: 12px; color: #1a6b3c; padding: 2px 0; display: flex; gap: 6px;">✓ 對帳保持簡單清晰</li>
+        </ul>
+        <div style="margin-top: 12px; padding: 10px 14px; background: rgba(26,107,60,0.08); border-radius: 8px; font-size: 12px; color: #1a6b3c; line-height: 1.6;">⚠ 若業務需求確定借貨是高頻需求，第二階段可重新評估是否開放前台功能。</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>系統設計的邊界：不是功能做不到，是刻意不放</h3>
+      <p>借貨系統在技術上完全可以做。選擇不做是因為「有功能 = 有行為」——前台暴露入口會提高使用頻率。這次設計的原則是：讓系統引導健康的使用行為，而不是方便所有行為。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section>
+  <div class="container">
+    <div class="section-label">投資回收分析</div>
+    <h2 class="section-title">導入後的實際回收——用數字說話</h2>
+    <p class="section-desc">以目前人工處理 LINE 提貨訊息的時間成本為基準估算。每一個節省點都來自訪談中的真實流程痛點。</p>
+
+    <div class="roi-grid">
+      <div class="roi-card">
+        <div class="roi-num">20</div>
+        <div class="roi-unit">小時／月</div>
+        <div class="roi-label">提貨接單省下的人力</div>
+        <div class="roi-detail">每日 10–15 則 LINE 申請 × 5 分鐘處理<br>系統自助申請後，公司僅需批次審核</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">10</div>
+        <div class="roi-unit">小時／月</div>
+        <div class="roi-label">點數查詢省下的溝通</div>
+        <div class="roi-detail">每日約 5 則點數查詢訊息<br>經銷商自助查看後，人工回覆歸零</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">8</div>
+        <div class="roi-unit">小時／月</div>
+        <div class="roi-label">對帳作業省下的時間</div>
+        <div class="roi-detail">點數進出、退貨、月底結算<br>系統自動記錄後，人工核對大幅縮短</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">↓90%</div>
+        <div class="roi-unit">出錯率</div>
+        <div class="roi-label">點數異動錯誤風險</div>
+        <div class="roi-detail">人工 key 點數被數字化流程取代<br>每筆有稽核記錄，有爭議即查</div>
+      </div>
+      <div class="roi-card" style="border-color: #a8d8bc; background: linear-gradient(135deg, #E8F5EE 0%, #F4FAF6 100%);">
+        <div class="roi-num" style="color:#1a6b3c;">12–16</div>
+        <div class="roi-unit">個月</div>
+        <div class="roi-label">預計系統回本（保守）</div>
+        <div class="roi-detail">以月省人力 38 小時 × 人力成本估算<br>保守版不計入錯誤率降低的無形效益</div>
+      </div>
+    </div>
+
+    <div class="roi-formula">
+      <div class="label">月度效益試算（Phase 1 + Phase 2 上線後）</div>
+      <div>提貨接單省下（20hr × NT$250）   ≈  NT$5,000</div>
+      <div>點數查詢省下（10hr × NT$250）   ≈  NT$2,500</div>
+      <div>對帳作業省下（8hr × NT$250）    ≈  NT$2,000</div>
+      <div>點數錯誤風險降低（保守估）       ≈  NT$2,000+</div>
+      <div>────────────────────────────────────</div>
+      <div style="color:#fff; font-weight:700;">月度可回收效益合計   ≈  NT$11,500+</div>
+      <div>&nbsp;</div>
+      <div class="label">回本試算（假設建置費 NT$150,000–190,000）</div>
+      <div style="color:#fff; font-weight:700;">完整回本期限   ≈  12–16 個月（保守版）</div>
+      <div style="font-size:10px; color:rgba(255,255,255,0.4); margin-top:8px;">*人力成本以 NT$250/hr 估算，實際依貴公司薪資結構調整。未計入高級經銷商主動管理下線帶來的業績提升效益。</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;">
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; border-left: 4px solid #1a6b3c;">
+        <div style="font-size: 12px; font-weight: 700; color: #1a6b3c; letter-spacing: 1px; margin-bottom: 6px;">情境 A｜提貨爭議</div>
+        <div style="font-size: 14px; color: var(--slate); line-height: 1.7;">以前：某經銷商說「我上次申請的貨沒有全到」，公司翻 LINE 記錄、查出貨單，來回確認半小時。系統上線後：打開稽核日誌，申請時間、審核人員、出貨日期一行看完。<strong style="color: var(--ink);">爭議 3 分鐘解決，雙方都有憑據。</strong></div>
+      </div>
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; border-left: 4px solid #2A6A8A;">
+        <div style="font-size: 12px; font-weight: 700; color: #2A6A8A; letter-spacing: 1px; margin-bottom: 6px;">情境 B｜下線管理</div>
+        <div style="font-size: 14px; color: var(--slate); line-height: 1.7;">高級經銷商以前要靠打電話、傳訊息才知道下線的提貨狀況。系統上線後，登入就能看到組織樹，哪些人這個月還沒動、點數快見底——<strong style="color: var(--ink);">主動出擊的時機有了，不再只是被動等下線來問。</strong></div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>最大的回報不是省人力，是公司拿回對流程的掌控感</h3>
+      <p>當提貨申請、點數異動、組織動態都在系統裡，公司不再靠 LINE 群組撐起一整個業務流程。有記錄、有數據、有預警——這是讓公司能繼續擴大經銷商規模的基礎，不是只省幾個小時。</p>
+    </div>
+  </div>
+</section>
+
+<!-- RISK -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">風險與對策</div>
+    <h2 class="section-title">五項主要風險，附等級與對策</h2>
+    <p class="section-desc">預先看到風險，比事後補救便宜。</p>
+    <table class="risk-table">
+      <thead>
+        <tr>
+          <th style="width:18%">風險項目</th>
+          <th style="width:10%">等級</th>
+          <th style="width:36%">說明</th>
+          <th>對策</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="risk-high">
+          <td><strong>經銷商接受度低</strong></td>
+          <td><span class="risk-label rl-high">高</span></td>
+          <td>部分年長或習慣 LINE 的經銷商可能抗拒切換到新系統，初期使用率不足。</td>
+          <td>Phase 1 並行運行（LINE + 系統），給 1–2 個月過渡期，主動協助老用戶上手。高級經銷商先帶頭使用，帶動下線效果最好。</td>
+        </tr>
+        <tr class="risk-high">
+          <td><strong>組織樹層級未確認</strong></td>
+          <td><span class="risk-label rl-high">高</span></td>
+          <td>層級深度影響權限系統複雜度，若第三次會議後變動大，工時需重估。</td>
+          <td>第三次會議前確認最深層級數與每層可見範圍，鎖定後才進入詳細設計。建議簽約前先確認此項。</td>
+        </tr>
+        <tr class="risk-mid">
+          <td><strong>點數異動爭議移轉</strong></td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>導入初期舊的 LINE 記錄與新系統數據不一致，可能引發經銷商追溯歷史糾紛。</td>
+          <td>設定系統上線日作為數據起算點，上線前的歷史交易維持現有方式處理，系統不承接歷史對帳責任。開線說明清楚。</td>
+        </tr>
+        <tr class="risk-mid">
+          <td><strong>退貨/退出 SOP 未完整</strong></td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>退貨流程（九折回購、點數退還、現金退款）尚未完整 SOP 化，系統上線後容易出現漏洞。</td>
+          <td>Phase 1 開始前，與公司內部確認退貨完整 SOP，寫入系統規則。退出的點數現金/轉讓由管理員人工處理，系統只記錄，不自動執行。</td>
+        </tr>
+        <tr class="risk-low">
+          <td><strong>Phase 3 範圍膨脹</strong></td>
+          <td><span class="risk-label rl-low">低</span></td>
+          <td>獎金計算制度調整完後，需求可能比預期複雜，影響 Phase 3 建置時程。</td>
+          <td>Phase 3 簽約時單獨評估工時與費用，獎金模組視制度複雜度彈性報價，避免影響 Phase 1–2 進度。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- NEXT STEP -->
+<section>
+  <div class="container">
+    <div class="section-label">下一步</div>
+    <h2 class="section-title">第三次會議：整體 Review + 準備報價</h2>
+    <p class="section-desc">兩次訪談已確認主要架構。第三次會議的目標是確認三個待議項目，讓報價範圍可以完整鎖定。</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+        <div style="font-size: 32px; margin-bottom: 8px;">✅</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">已確定（直接進設計）</div>
+        <ul style="list-style: none; font-size: 13px; color: var(--slate);">
+          <li style="padding: 3px 0;">· 三個交付階段範圍</li>
+          <li style="padding: 3px 0;">· 四層身分架構</li>
+          <li style="padding: 3px 0;">· 借貨前台不做</li>
+          <li style="padding: 3px 0;">· 退貨退出機制</li>
+          <li style="padding: 3px 0;">· 傑克飛不整合後台</li>
+          <li style="padding: 3px 0;">· 獎金計算 Phase 3 暫緩</li>
+        </ul>
+      </div>
+      <div style="background: #FFFDF5; border: 1px solid #e8d8a0; border-radius: 12px; padding: 22px;">
+        <div style="font-size: 32px; margin-bottom: 8px;">📋</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">第三次會議確認（影響報價）</div>
+        <ul style="list-style: none; font-size: 13px; color: var(--slate);">
+          <li style="padding: 3px 0;">· 消費者帳號架構決策</li>
+          <li style="padding: 3px 0;">· 組織樹最深層級數</li>
+          <li style="padding: 3px 0;">· 金流歸屬（誰收款）</li>
+        </ul>
+      </div>
+      <div style="background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 22px;">
+        <div style="font-size: 32px; margin-bottom: 8px;">💰</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">確認後即可報價</div>
+        <ul style="list-style: none; font-size: 13px; color: var(--slate);">
+          <li style="padding: 3px 0;">· Phase 1 + Phase 2 報價鎖定</li>
+          <li style="padding: 3px 0;">· Phase 3 單獨估算（制度確定後）</li>
+          <li style="padding: 3px 0;">· 時程確認 + 合約簽署</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>艾琳諾 — 經銷商提貨儲值管理系統規劃</strong><br>
+  文件版本 v1.0 · 基於兩次訪談記錄彙整 · 2026-06-26<br>
+  三個待確認項目確認後，此文件將更新為 v1.1 並附報價清單
+</div>
+
+</body>
+</html>
