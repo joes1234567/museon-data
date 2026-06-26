@@ -438,163 +438,262 @@
   </div>
 </section>
 
-<!-- SCOPE GATE -->
-<section>
-  <div class="container">
-    <div class="section-label">範圍控管</div>
-    <h2 class="section-title">這份規劃的邊界——哪些在內、哪些刻意不做</h2>
-    <p class="section-desc">業主在確認前最重要的一頁。明確邊界讓雙方對齊，避免上線後出現「我以為這個有包含」的落差。</p>
-
-    <!-- OUT OF SCOPE -->
-    <div style="margin-bottom: 32px;">
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
-        <div style="width: 6px; height: 6px; border-radius: 50%; background: #B91C1C;"></div>
-        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #B91C1C;">第一階段刻意不做</div>
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
-        <div style="background: #FFF5F5; border: 1px solid #FCA5A5; border-radius: 12px; padding: 20px;">
-          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">自動獎金計算</div>
-          <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">獎金規則仍有彈性與例外，制度未完全標準化前做出來只會算錯。等制度確定後進 Phase 3 再建。</div>
-        </div>
-        <div style="background: #FFF5F5; border: 1px solid #FCA5A5; border-radius: 12px; padding: 20px;">
-          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">完整庫存／倉儲系統</div>
-          <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">借貨、合併提貨、盤點、臨時取貨情境仍複雜，第一階段不承諾庫存 100% 準確。先穩定提貨與點數流程。</div>
-        </div>
-        <div style="background: #FFF5F5; border: 1px solid #FCA5A5; border-radius: 12px; padding: 20px;">
-          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">借貨前台功能</div>
-          <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">第二次會議已確認：前台開放借貨反而鼓勵頻繁借貸，增加對帳複雜度。後台保留管理員人工調整的彈性。</div>
-        </div>
-        <div style="background: #FFF5F5; border: 1px solid #FCA5A5; border-radius: 12px; padding: 20px;">
-          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">完整 C 端電商</div>
-          <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">C 端消費者可預留身份與資料結構，但第一階段以 B 端經銷商提貨、儲值、審核為核心，不做 C 端完整購物流程。</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ASSUMPTIONS -->
-    <div style="margin-bottom: 32px;">
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
-        <div style="width: 6px; height: 6px; border-radius: 50%; background: #B8923A;"></div>
-        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #B8923A;">容易被誤解的假設</div>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="background: #FFFDF5; border: 1px solid #e8d8a0; border-radius: 12px; padding: 18px 22px; display: flex; gap: 14px; align-items: flex-start;">
-          <div style="width: 28px; height: 28px; background: #FEF3C7; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">≠</div>
-          <div>
-            <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">這不是 ERP</div>
-            <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">第一階段只解決經銷商提貨、點數、儲值、審核、報表與稽核。財務系統、人資、採購不在範圍內。</div>
-          </div>
-        </div>
-        <div style="background: #FFFDF5; border: 1px solid #e8d8a0; border-radius: 12px; padding: 18px 22px; display: flex; gap: 14px; align-items: flex-start;">
-          <div style="width: 28px; height: 28px; background: #FEF3C7; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">≠</div>
-          <div>
-            <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">這不是一般電商平台</div>
-            <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">雖然用購物車式操作，但核心是「提貨申請＋公司審核＋扣點」，不是 B2C 一般電商金流，消費者端刷卡購物不在第一階段。</div>
-          </div>
-        </div>
-        <div style="background: #FFFDF5; border: 1px solid #e8d8a0; border-radius: 12px; padding: 18px 22px; display: flex; gap: 14px; align-items: flex-start;">
-          <div style="width: 28px; height: 28px; background: #FEF3C7; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;">!</div>
-          <div>
-            <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">提貨申請送出後，不立即扣點</div>
-            <div style="font-size: 13px; color: var(--slate); line-height: 1.6;">第二次會議已確認：公司審核確認有貨後才扣點。送出申請 ≠ 點數已扣。這是避免無貨仍扣點的核心設計。</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SCOPE SUMMARY -->
-    <div style="background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%); border: 1px solid #a8d8bc; border-radius: 14px; padding: 28px 32px;">
-      <div style="font-size: 15px; font-weight: 700; color: #1a6b3c; margin-bottom: 10px;">總結：這套系統的定位</div>
-      <p style="font-size: 14px; color: var(--slate); line-height: 1.8;">一套讓經銷商可以<strong>自助查詢點數、送出提貨申請</strong>，公司端可進行<strong>儲值、審核、扣點、退點、出貨與報表管理</strong>的 B2B 經銷商營運系統。不是 ERP、不是電商、不是獎金系統——是讓提貨流程從 LINE 人工接單升級為系統自動化審核的第一步。</p>
-    </div>
-  </div>
-</section>
-
 <!-- FUNCTION AREAS -->
 <section>
   <div class="container">
     <div class="section-label">系統功能全景</div>
-    <h2 class="section-title">四大業務區塊，12 個功能模組</h2>
-    <p class="section-desc">按艾琳諾的業務場景分組——每個模組解決一個具體的日常問題。括號內的階段標示是交付時間，不是重要性排序。</p>
+    <h2 class="section-title">兩端系統，16 大模組，完整功能架構</h2>
+    <p class="section-desc">依使用者入口分為公司端（管理後台）與經銷商端（自助入口），涵蓋 64 個功能點。括號內的階段標示是交付時間，不是重要性排序。</p>
 
-    <!-- AREA 1: 帳號與身分 -->
+    <!-- === 公司端 === -->
+    <div style="margin: 36px 0 16px 0;">
+      <div style="display: inline-flex; align-items: center; gap: 10px; background: #f0faf4; border: 1.5px solid #1a6b3c; border-radius: 8px; padding: 8px 16px;">
+        <span style="font-size: 18px;">🏢</span>
+        <span style="font-size: 16px; font-weight: 700; color: #1a6b3c;">公司端（HQ Admin）</span>
+        <span style="font-size: 12px; color: var(--slate); margin-left: 4px;">9 大功能模組 · 管理員 / 營運人員使用</span>
+      </div>
+    </div>
+
+    <!-- 公司端 AREA 1: 帳號與稽核 -->
     <div class="func-area">
       <div class="func-header">
         <div class="func-icon fi-green">🔐</div>
         <div class="func-title-group">
-          <div class="func-area-name">帳號與身分管理</div>
-          <div class="func-area-desc">四層身分架構，誰能看什麼、能做什麼，全由公司決定</div>
+          <div class="func-area-name">帳號權限與稽核</div>
+          <div class="func-area-desc">管理者帳號 / RBAC 角色控管 / 稽核日誌 / 系統參數</div>
         </div>
         <div class="func-modules-count">2 個模組</div>
       </div>
       <div class="module-grid">
         <div class="module-card">
           <div class="module-top">
-            <div class="module-name">四層身分控管</div>
+            <div class="module-name">管理者管理</div>
             <span class="phase-tag pt-1">第一階段</span>
           </div>
-          <div class="module-value">四種角色，各自的介面和權限</div>
-          <div class="module-detail">公司管理員、營運人員、一般經銷商、高級/總代理——登入後看到的功能依身分不同。帳號開通、停用、密碼重設，管理員一鍵完成。</div>
+          <div class="module-value">管理員 / 營運人員分角色，操作記錄全留存</div>
+          <div class="module-detail">管理者類別設定 · 管理者列表維護 · 帳號狀態切換（啟用/停用）· 角色權限設定 · 登入紀錄查詢</div>
         </div>
         <div class="module-card">
           <div class="module-top">
-            <div class="module-name">操作稽核日誌</div>
+            <div class="module-name">稽核與系統設定</div>
             <span class="phase-tag pt-1">第一階段</span>
           </div>
-          <div class="module-value">誰在什麼時間做了什麼，全部留存</div>
-          <div class="module-detail">點數異動、提貨審核、帳號變更——每筆操作自動產生時間戳記錄。有爭議時 30 秒查清楚，不需要靠記憶或翻聊天記錄。</div>
+          <div class="module-value">每筆操作不可刪除，系統參數統一管理</div>
+          <div class="module-detail">操作紀錄查詢 · 權限異動記錄 · 匯出紀錄追蹤 · 系統參數設定</div>
         </div>
       </div>
     </div>
 
-    <!-- AREA 2: 點數與儲值 -->
+    <!-- 公司端 AREA 2: 經銷商與組織 -->
     <div class="func-area">
       <div class="func-header">
-        <div class="func-icon fi-blue">🪙</div>
+        <div class="func-icon fi-blue">👥</div>
         <div class="func-title-group">
-          <div class="func-area-name">點數錢包與儲值</div>
-          <div class="func-area-desc">經銷商自助查點數、兩種儲值路徑、餘額即時顯示</div>
+          <div class="func-area-name">經銷商管理與組織樹</div>
+          <div class="func-area-desc">建立帳號 / 設定等級 / 組織樹結構 / 52% 截斷邏輯</div>
         </div>
-        <div class="func-modules-count">3 個模組</div>
+        <div class="func-modules-count">2 個模組</div>
       </div>
       <div class="module-grid">
         <div class="module-card">
           <div class="module-top">
-            <div class="module-name">點數錢包</div>
+            <div class="module-name">經銷商管理</div>
             <span class="phase-tag pt-1">第一階段</span>
           </div>
-          <div class="module-value">餘額、異動明細，登入就看得到</div>
-          <div class="module-detail">經銷商登入即見當前點數餘額、每筆入帳/扣點記錄。不再需要問公司「我還剩幾點」——自助查詢，省去雙方溝通時間。</div>
+          <div class="module-value">帳號建立、等級設定、上線關係，一次到位</div>
+          <div class="module-detail">經銷商列表與搜尋 · 建立 / 停用帳號 · 等級設定 · 上線 / 推薦人設定 · 帳號狀態管理</div>
         </div>
         <div class="module-card">
           <div class="module-top">
-            <div class="module-name">儲值申請流程</div>
-            <span class="phase-tag pt-1">第一階段</span>
-          </div>
-          <div class="module-value">線下刷卡單、線上轉帳兩路都走</div>
-          <div class="module-detail">v1 支援兩種儲值模式：（1）線下刷卡後公司人工 key 入系統；（2）線上轉帳後系統自動比對入帳。第二階段可接入線上刷卡 API。每筆儲值有狀態追蹤，入帳後自動通知經銷商。</div>
-          <div class="module-note">⚠ 線上刷卡 API 在第一階段不串接，先穩定流程後評估。</div>
-        </div>
-        <div class="module-card">
-          <div class="module-top">
-            <div class="module-name">點數不足預警</div>
+            <div class="module-name">組織樹管理</div>
             <span class="phase-tag pt-2">第二階段</span>
           </div>
-          <div class="module-value">快沒點數前自動提醒，不讓提貨被卡住</div>
-          <div class="module-detail">系統偵測點數低於設定閾值時，自動推送 LINE 或 Email 通知，讓經銷商有時間提前儲值，不在需要提貨時才發現點數不足。</div>
+          <div class="module-value">組織結構可視化，52% 截斷自動處理</div>
+          <div class="module-detail">組織樹結構瀏覽 · 52% 等階截斷設定 · 可視範圍權限設定 · 組織異動紀錄</div>
         </div>
       </div>
     </div>
 
-    <!-- AREA 3: 提貨流程 -->
+    <!-- 公司端 AREA 3: 產品 -->
     <div class="func-area">
       <div class="func-header">
-        <div class="func-icon fi-purple">🛒</div>
+        <div class="func-icon fi-purple">📦</div>
         <div class="func-title-group">
-          <div class="func-area-name">提貨申請與審核</div>
-          <div class="func-area-desc">購物車式申請、公司審核確認、退貨處理——全流程線上化</div>
+          <div class="func-area-name">產品管理</div>
+          <div class="func-area-desc">產品類別 / 上下架控制 / 點數定價 / 缺貨封閉入口</div>
         </div>
-        <div class="func-modules-count">4 個模組</div>
+        <div class="func-modules-count">1 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">產品目錄管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">缺貨自動封閉申請入口，不讓經銷商撞空</div>
+          <div class="module-detail">產品類別分類 · 產品列表維護 · 上 / 下架控制 · 點數定價設定 · 缺貨狀態標示（自動封閉申請）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 公司端 AREA 4: 儲值與點數 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gold">🪙</div>
+        <div class="func-title-group">
+          <div class="func-area-name">儲值管理與點數系統</div>
+          <div class="func-area-desc">人工儲值 / 點數異動全留存 / 退點 / 人工調整</div>
+        </div>
+        <div class="func-modules-count">2 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">儲值管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">每筆儲值留來源、時間、操作者，不靠口頭</div>
+          <div class="module-detail">儲值建立（人工 key 入）· 儲值紀錄查詢 · 儲值來源標記 · 儲值操作稽核</div>
+        </div>
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">點數管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">點數異動全留存，人工調整必填原因</div>
+          <div class="module-detail">點數錢包查詢 · 點數異動紀錄 · 退點操作 · 人工調整（含原因記錄）· 點數不足提醒設定</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 公司端 AREA 5: 提貨 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-green">🛒</div>
+        <div class="func-title-group">
+          <div class="func-area-name">提貨審核與出貨管理</div>
+          <div class="func-area-desc">待審清單 / 審核扣點 / 出貨 / 取消退點——完整閉環</div>
+        </div>
+        <div class="func-modules-count">1 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">提貨管理</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">審核 → 扣點 → 出貨，每個節點有人負責、有記錄追蹤</div>
+          <div class="module-detail">提貨申請列表（待審 / 全部）· 提貨詳情查看 · 審核通過（自動扣點）· 退回申請（不扣點）· 出貨 / 自取狀態更新 · 取消申請 · 取消後退點</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 公司端 AREA 6: 報表 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-blue">📊</div>
+        <div class="func-title-group">
+          <div class="func-area-name">報表中心</div>
+          <div class="func-area-desc">提貨 / 點數 / 產品 / 活躍度 / 異常——五張管理報表</div>
+        </div>
+        <div class="func-modules-count">1 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">管理報表</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">點數流向、產品消耗、異常紀錄，數字說話</div>
+          <div class="module-detail">提貨報表 · 點數報表 · 產品消耗報表 · 經銷商活躍報表 · 異常報表（含匯出功能）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === 經銷商端 === -->
+    <div style="margin: 48px 0 16px 0;">
+      <div style="display: inline-flex; align-items: center; gap: 10px; background: #f0f4ff; border: 1.5px solid #2a4b9b; border-radius: 8px; padding: 8px 16px;">
+        <span style="font-size: 18px;">👤</span>
+        <span style="font-size: 16px; font-weight: 700; color: #2a4b9b;">經銷商端（Dealer Portal）</span>
+        <span style="font-size: 12px; color: var(--slate); margin-left: 4px;">7 大功能模組 · 一般 / 高階經銷商使用</span>
+      </div>
+    </div>
+
+    <!-- 經銷商端 AREA 1: 帳號 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-green">🔑</div>
+        <div class="func-title-group">
+          <div class="func-area-name">帳號管理</div>
+          <div class="func-area-desc">登入 / 忘記密碼 / 個人資料</div>
+        </div>
+        <div class="func-modules-count">1 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">帳號中心</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">帳號由公司建立，經銷商自助管理個人資料</div>
+          <div class="module-detail">帳號登入 · 忘記密碼重設 · 個人資料維護 · 登出</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 經銷商端 AREA 2: 點數 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gold">💰</div>
+        <div class="func-title-group">
+          <div class="func-area-name">點數中心</div>
+          <div class="func-area-desc">餘額即時查 / 儲值明細 / 扣點退點紀錄</div>
+        </div>
+        <div class="func-modules-count">1 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">點數查詢與明細</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">登入即見餘額，每筆點數流向一鍵查清楚</div>
+          <div class="module-detail">目前可用點數 · 鎖定點數（待審核中）· 儲值紀錄 · 扣點紀錄 · 退點紀錄 · 完整點數明細</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 經銷商端 AREA 3: 產品瀏覽 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-purple">📋</div>
+        <div class="func-title-group">
+          <div class="func-area-name">產品瀏覽</div>
+          <div class="func-area-desc">可提貨清單 / 分類篩選 / 缺貨自動提示</div>
+        </div>
+        <div class="func-modules-count">1 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top">
+            <div class="module-name">產品目錄</div>
+            <span class="phase-tag pt-1">第一階段</span>
+          </div>
+          <div class="module-value">缺貨產品自動標示不可選，避免白申請</div>
+          <div class="module-detail">可提貨產品清單 · 產品分類篩選 · 產品詳情 · 暫停提貨提示</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 經銷商端 AREA 4: 提貨申請與紀錄 -->
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-green">🛒</div>
+        <div class="func-title-group">
+          <div class="func-area-name">提貨申請與紀錄</div>
+          <div class="func-area-desc">購物車 / 點數試算 / 申請追蹤 / 取消退點</div>
+        </div>
+        <div class="func-modules-count">2 個模組</div>
       </div>
       <div class="module-grid">
         <div class="module-card">
@@ -602,70 +701,46 @@
             <div class="module-name">購物車式提貨申請</div>
             <span class="phase-tag pt-1">第一階段</span>
           </div>
-          <div class="module-value">選產品 → 確認清單 → 填配送地址 → 送出</div>
-          <div class="module-detail">經銷商從產品清單加入購物車，設定數量後確認訂單。配送方式支援宅配到府或到公司自取。取代 LINE 傳訊息的混亂流程，每筆申請有單號可追蹤。</div>
+          <div class="module-value">送出前即時試算點數，確認就送出，不靠 LINE</div>
+          <div class="module-detail">加入購物車 · 點數即時試算 · 取貨方式選擇（宅配 / 自取）· 收件資料填寫 · 送出申請</div>
         </div>
         <div class="module-card">
           <div class="module-top">
-            <div class="module-name">審核工作流</div>
+            <div class="module-name">提貨紀錄查詢</div>
             <span class="phase-tag pt-1">第一階段</span>
           </div>
-          <div class="module-value">公司確認 → 扣點 → 出貨——不再靠人工記憶</div>
-          <div class="module-detail">申請送出後，公司收到待審通知。確認庫存無誤後審核通過，系統自動扣點並記錄。公司可批次查看待審清單，不再靠 LINE 通知漏接。</div>
-        </div>
-        <div class="module-card">
-          <div class="module-top">
-            <div class="module-name">退貨處理流程</div>
-            <span class="phase-tag pt-1">第一階段</span>
-          </div>
-          <div class="module-value">退貨靠系統記錄，不靠口頭約定</div>
-          <div class="module-detail">支援兩種退貨：（1）消費者 1 個月滿意保證，全額退點；（2）退出經銷商九折回購（有效期 1 年以上產品），系統記錄退貨申請，公司內部人員審核後返還點數或現金。</div>
-        </div>
-        <div class="module-card">
-          <div class="module-top">
-            <div class="module-name">產品清單管理</div>
-            <span class="phase-tag pt-1">第一階段</span>
-          </div>
-          <div class="module-value">產品、點數定價、庫存狀態，統一在這裡</div>
-          <div class="module-detail">公司管理員維護產品清單、點數定價、庫存數量。產品缺貨時自動標示不可申請，避免經銷商申請後才被告知無貨。</div>
+          <div class="module-value">每筆申請有狀態、有單號，不用問公司進度</div>
+          <div class="module-detail">提貨申請列表 · 申請詳情 · 即時狀態追蹤 · 取消申請（審核前）· 退回原因查看</div>
         </div>
       </div>
     </div>
 
-    <!-- AREA 4: 組織與分析 -->
+    <!-- 經銷商端 AREA 5: 通知與下線 -->
     <div class="func-area">
       <div class="func-header">
-        <div class="func-icon fi-gold">📊</div>
+        <div class="func-icon fi-blue">🔔</div>
         <div class="func-title-group">
-          <div class="func-area-name">組織可視化與數據分析</div>
-          <div class="func-area-desc">高級經銷商看得到下線、公司看得到全局——從數據主動出擊</div>
+          <div class="func-area-name">通知提醒與下線查看</div>
+          <div class="func-area-desc">點數不足 / 提貨進度 / 高階經銷商下線組織（第二階段）</div>
         </div>
-        <div class="func-modules-count">3 個模組</div>
+        <div class="func-modules-count">2 個模組</div>
       </div>
       <div class="module-grid">
         <div class="module-card">
           <div class="module-top">
-            <div class="module-name">組織樹可視化</div>
+            <div class="module-name">通知提醒</div>
             <span class="phase-tag pt-2">第二階段</span>
           </div>
-          <div class="module-value">高級經銷商能看到下線，到下一個52%節點為止</div>
-          <div class="module-detail">高級/總代理登入後可看到下線組織樹結構，包含各層成員的提貨狀態與點數概況。遇到下一層高級節點即截止。公司管理員可查看全局組織。</div>
+          <div class="module-value">主動通知，不讓點數快沒時才發現</div>
+          <div class="module-detail">儲值完成通知 · 提貨狀態更新通知 · 點數不足預警 · 系統公告推送</div>
         </div>
         <div class="module-card">
           <div class="module-top">
-            <div class="module-name">提貨趨勢與未提貨提醒</div>
+            <div class="module-name">下線組織查看（高階經銷商）</div>
             <span class="phase-tag pt-2">第二階段</span>
           </div>
-          <div class="module-value">哪些貨常被提、誰太久沒動——系統自動告訴你</div>
-          <div class="module-detail">自動偵測超過設定天數未提貨的經銷商，發送 LINE/Email 提醒。同時提供各產品提貨頻率趨勢，幫助公司掌握庫存節奏與補貨時機。</div>
-        </div>
-        <div class="module-card">
-          <div class="module-top">
-            <div class="module-name">商品消耗報表與操作稽核</div>
-            <span class="phase-tag pt-2">第二階段</span>
-          </div>
-          <div class="module-value">每筆點數流向、每筆操作記錄，查帳 30 秒</div>
-          <div class="module-detail">系統自動彙整商品流出數量、各經銷商提貨占比、點數消耗速率報表。操作稽核日誌可按日期、帳號篩選，任何異常快速定位。</div>
+          <div class="module-value">可見自己授權範圍內的下線動態，遇到同階 52% 截止</div>
+          <div class="module-detail">下線列表查詢 · 下線提貨狀態 · 長期未提貨偵測 · 產品消耗趨勢</div>
         </div>
       </div>
     </div>
