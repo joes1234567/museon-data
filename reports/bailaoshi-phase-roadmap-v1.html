@@ -706,11 +706,11 @@ const nodes=[
   {id:'API02',short:'API 總務串接',label:'API\n總務串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'場地排課/設備管理，MUSEON 回答「今天哪間教室有空」',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
   {id:'API03',short:'API 客服串接',label:'API\n客服串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'家長詢問/投訴紀錄，MUSEON 輔助快速查詢學生狀態',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
   {id:'API04',short:'API 行銷串接',label:'API\n行銷串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'說明會報名/招生來源/活動成效，自動產製招生分析報告',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
-  {id:'MOD19',short:'AI 學習助理',label:'AI\n學習助理',phase:'P6',unit:'AI 智慧輔助',icon:'🤖',desc:'個人化學習建議/出席異常預警/每週進度摘要，主動推播家長不需問',legal:false,roi:'AI 幫你做'},
+  {id:'MOD19',short:'AI 學習助理',label:'AI\n學習助理',phase:'P6',unit:'AI 智慧輔助',icon:'🤖',desc:'個人化學習建議/出席異常預警/每週進度摘要，主動推播家長不需問',legal:false,roi:'AI 幫你做',museonOwned:true},
   {id:'MOD20',short:'AI 作業批改',label:'AI\n作業批改',phase:'P6',unit:'AI 智慧輔助',icon:'📋',desc:'AI 初評 + 老師最終審核，大幅縮短批改時間',legal:false,roi:'AI 幫你做',weeks:1.5,acceptance:3,coeff:1.35},
   {id:'MOD21',short:'AI 口說練習',label:'AI\n口說練習',phase:'P6',unit:'AI 智慧輔助',icon:'🎤',desc:'⭐ 簽約前提 Demo：學生與 AI 對話練英文，評估發音/流暢度/進步軌跡',legal:false,roi:'AI 幫你做',weeks:2.5,acceptance:4,coeff:1.5},
   {id:'MOD22',short:'AI 行政檢查',label:'AI\n行政檢查',phase:'P6',unit:'AI 智慧輔助',icon:'🔍',desc:'每日自動掃描異常：欠費未通知/出缺席異常/補課逾期，主動提醒行政',legal:false,roi:'AI 幫你做',museonOwned:true},
-  {id:'MOD25',short:'AI 客製出題',label:'AI\n客製出題',phase:'P6',unit:'AI 智慧輔助',icon:'📝',desc:'根據學員歷史識別弱點，生成個人化練習題，老師審核後發送',legal:false,roi:'AI 幫你做'}
+  {id:'MOD25',short:'AI 客製出題',label:'AI\n客製出題',phase:'P6',unit:'AI 智慧輔助',icon:'📝',desc:'根據學員歷史識別弱點，生成個人化練習題，老師審核後發送',legal:false,roi:'AI 幫你做',museonOwned:true}
 ];
 const links=[
   {source:'MOD14',target:'MOD03',type:'depends'},{source:'MOD14',target:'MOD07',type:'depends'},{source:'MOD14',target:'MOD10',type:'depends'},
