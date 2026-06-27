@@ -18,6 +18,7 @@
     padding: 64px 48px 56px;
     position: relative;
     overflow: hidden;
+    text-align: center;
   }
   .cover::after {
     content: '';
@@ -58,6 +59,7 @@
     display: flex;
     gap: 32px;
     flex-wrap: wrap;
+    justify-content: center;
   }
   .cover-meta-item {
     display: flex;
@@ -446,7 +448,7 @@
   <div class="cover-meta">
     <div class="cover-meta-item">
       <span class="cover-meta-label">版本</span>
-      <span class="cover-meta-value">v1.5</span>
+      <span class="cover-meta-value">v1.6</span>
     </div>
     <div class="cover-meta-item">
       <span class="cover-meta-label">文件性質</span>
@@ -473,9 +475,11 @@
     <span class="rf-arrow">→</span>
     <span class="rf-step">5 P1 邊界確認</span>
     <span class="rf-arrow">→</span>
-    <span class="rf-step">6 P2 ／ P3 預覽</span>
+    <span class="rf-step">6 P2 預覽</span>
     <span class="rf-arrow">→</span>
-    <span class="rf-step">7 下一步</span>
+    <span class="rf-step">7 P3 預覽</span>
+    <span class="rf-arrow">→</span>
+    <span class="rf-step">8 下一步</span>
   </div>
 </div>
 
@@ -572,11 +576,10 @@
           <div class="phase-line"></div>
         </div>
         <div class="phase-content phase-content-active">
-          <div class="phase-tag phase-tag-1">現在做 · 本次規劃重點</div>
-          <div class="phase-name">提貨 ／ 儲值 MVP（13 個模組）</div>
+          <div class="phase-name">提貨 ／ 儲值 MVP（8 個模組）</div>
           <div class="phase-desc">
             建立核心流程：點數管理、提貨申請、審核扣點、報表稽核。
-            讓公司與經銷商都能用系統取代人工溝通，建立可信任的紀錄基礎。
+            讓公司管理者與營運人員能用系統取代人工溝通，建立可信任的紀錄基礎。
           </div>
         </div>
       </div>
@@ -587,10 +590,10 @@
         </div>
         <div class="phase-content">
           <div class="phase-tag phase-tag-2">資料穩定後 · 協作擴展</div>
-          <div class="phase-name">組織可視化 ＋ 智慧提醒（3 個模組）</div>
+          <div class="phase-name">經銷商自助入口 ＋ 組織可視化 ＋ 智慧提醒（8 個模組）</div>
           <div class="phase-desc">
-            開放高階經銷商查看下線狀況；導入 LINE ／ Email 通知讓追蹤更即時；
-            組織樹視覺化讓管理者掌握全局。
+            開放一般經銷商自助查點數、送提貨申請；開放高階查看下線狀況；
+            導入 LINE ／ Email 通知讓追蹤更即時；組織樹視覺化讓管理者掌握全局。
           </div>
         </div>
       </div>
@@ -676,38 +679,6 @@
       </div>
     </div>
 
-    <div class="phase-label-bar phase-label-bar-p1">
-      <span class="phase-label-badge">經銷商側</span>
-      <span class="phase-label-name">一般經銷商自助使用</span>
-      <span class="phase-label-count">5 個模組</span>
-    </div>
-    <div class="features-grid">
-      <div class="feature-item">
-        <div class="icon">🔐</div>
-        <div class="name">帳號中心</div>
-        <div class="desc">經銷商登入後的個人資料與帳戶設定</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">💎</div>
-        <div class="name">點數查詢與明細</div>
-        <div class="desc">查看點數餘額、儲值與每筆消耗明細紀錄</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🏪</div>
-        <div class="name">產品目錄</div>
-        <div class="desc">瀏覽可申請提貨的產品與對應點數需求</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🛒</div>
-        <div class="name">購物車式提貨申請</div>
-        <div class="desc">像網購一樣選品、確認、送出申請，直觀易用</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🔍</div>
-        <div class="name">提貨紀錄查詢</div>
-        <div class="desc">追蹤歷次提貨申請狀態與出貨紀錄</div>
-      </div>
-    </div>
   </div>
 
   <!-- 5. 第一階段範圍（做與不做） -->
@@ -721,8 +692,7 @@
       <div class="card scope-in">
         <span class="scope-badge badge-in">第一階段做</span>
         <ul class="scope-list">
-          <li>✓ 經銷商帳號與登入</li>
-          <li>✓ 點數錢包（餘額 + 異動紀錄）</li>
+          <li>✓ 經銷商帳號管理（公司端）</li>
           <li>✓ 公司端儲值</li>
           <li>✓ 提貨申請與審核流程</li>
           <li>✓ 扣點 ／ 退點 ／ 取消</li>
@@ -744,8 +714,9 @@
           <li>✗ 電子發票 ／ 財務會計</li>
           <li>✗ 跨境物流整合</li>
           <li>✗ 借貨 ／ 合併提貨前台功能（後台保留人工空間）</li>
-          <li>✗ 組織樹 ／ 通知提醒（P2 做）</li>
-          <li>✗ 獨立商城 ／ 會員中心（P3 做）</li>
+          <li>✗ 一般經銷商自助入口（P2 做）</li>
+          <li>✗ 組織樹 ／ 通知提醒 ／ 高階下線查看（P2 做）</li>
+          <li>✗ 獨立商城 ／ 消費者自助（P3 做）</li>
         </ul>
       </div>
     </div>
@@ -782,22 +753,61 @@
     </div>
   </div>
 
-  <!-- 6. 第二、三階段預覽 -->
+  <!-- 6. 第二階段預覽 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">6</div>
-      <div class="section-title">第二、三階段預覽</div>
+      <div class="section-title">第二階段預覽</div>
     </div>
-    <div class="section-lead">P1 的功能和邊界都清楚了。現在鏡頭再拉回來看全局——P2 和 P3 的預覽讓你知道這套系統最終會走到哪裡。細節等 P1 驗收後，我們再一起確認。</div>
+    <div class="section-lead">P1 的功能和邊界都清楚了。P2 在 P1 資料跑穩後啟動，分兩部分：先開放一般經銷商自助使用，再擴展協作與組織可視化。細節等 P1 驗收後一起確認。</div>
 
     <div class="future-phase-block">
       <div class="future-phase-header">
         <div class="future-phase-dot phase-dot-2">P2</div>
         <div>
-          <div class="future-phase-title">協作擴展 — 組織可視化 ＋ 智慧提醒</div>
-          <div class="future-phase-subtitle">資料跑穩後啟動 · 3 個模組</div>
+          <div class="future-phase-title">經銷商自助入口 ＋ 組織可視化 ＋ 智慧提醒</div>
+          <div class="future-phase-subtitle">資料跑穩後啟動 · 8 個模組</div>
         </div>
       </div>
+      <div style="font-size:11px; font-weight:700; letter-spacing:1px; color:#0f3460; text-transform:uppercase; margin-bottom:8px; margin-top:4px;">經銷商自助側</div>
+      <div class="future-features-row" style="margin-bottom:14px;">
+        <div class="future-feature-pill">
+          <div class="icon">🔐</div>
+          <div>
+            <div class="name">帳號中心</div>
+            <div class="desc">經銷商登入後的個人資料與帳戶設定</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">💎</div>
+          <div>
+            <div class="name">點數查詢與明細</div>
+            <div class="desc">查看點數餘額、儲值與每筆消耗明細紀錄</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🏪</div>
+          <div>
+            <div class="name">產品目錄</div>
+            <div class="desc">瀏覽可申請提貨的產品與對應點數需求</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🛒</div>
+          <div>
+            <div class="name">購物車式提貨申請</div>
+            <div class="desc">像網購一樣選品、確認、送出申請，直觀易用</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🔍</div>
+          <div>
+            <div class="name">提貨紀錄查詢</div>
+            <div class="desc">追蹤歷次提貨申請狀態與出貨紀錄</div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px; font-weight:700; letter-spacing:1px; color:#0f3460; text-transform:uppercase; margin-bottom:8px;">協作 ／ 組織側</div>
       <div class="future-features-row">
         <div class="future-feature-pill">
           <div class="icon">🌳</div>
@@ -822,6 +832,15 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- 7. 第三階段預覽 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">第三階段預覽</div>
+    </div>
+    <div class="section-lead">P2 奠定穩定的經銷商基礎後，P3 是最終形態——打開獨立商城，讓消費者也能直接使用，B 端與 C 端打通。</div>
 
     <div class="future-phase-block">
       <div class="future-phase-header">
@@ -857,13 +876,13 @@
     </div>
   </div>
 
-  <!-- 7. 建議下一步 -->
+  <!-- 8. 建議下一步 -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num">7</div>
+      <div class="section-num">8</div>
       <div class="section-title">建議下一步</div>
     </div>
-    <div class="section-lead">整份文件走完了：目標 → 使用者 → 三階段路線 → P1 功能與邊界 → 未來預覽。骨架已清晰，接下來只剩幾件事需要你確認——確認完就可以啟動開發。</div>
+    <div class="section-lead">整份文件走完了：目標 → 使用者 → 三階段路線 → P1 功能與邊界 → P2 ／ P3 預覽。骨架已清晰，接下來只剩幾件事需要你確認——確認完就可以啟動開發。</div>
     <ol class="next-list">
       <li>確認 ⑧ 舊資料匯入問題（7 個規則已確認，僅剩此項）</li>
       <li>決定 C 端消費者帳號是否列入 P3 範圍</li>
@@ -873,7 +892,7 @@
   </div>
 
   <div class="divider"></div>
-  <div class="footer">艾琳諾｜提貨儲值系統 MVP 規劃書 v1.5 — 業主版 © 2026</div>
+  <div class="footer">艾琳諾｜提貨儲值系統 MVP 規劃書 v1.6 — 業主版 © 2026</div>
 
 </div>
 </body>
