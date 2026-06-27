@@ -166,6 +166,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 14px;
+    margin-bottom: 8px;
   }
   @media (max-width: 700px) { .features-grid { grid-template-columns: 1fr 1fr; } }
   .feature-item {
@@ -178,6 +179,39 @@
   .feature-item .icon { font-size: 26px; margin-bottom: 10px; }
   .feature-item .name { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
   .feature-item .desc { font-size: 12px; color: #888; }
+
+  /* Phase sub-header for features */
+  .phase-subheader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-top: 28px;
+    margin-bottom: 14px;
+  }
+  .phase-subheader-p1 { background: #e94560; margin-top: 0; }
+  .phase-subheader-p2 { background: #0f3460; }
+  .phase-subheader-p3 { background: #533483; }
+  .phase-subheader-badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    background: rgba(255,255,255,0.22);
+    color: white;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .phase-subheader-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+  }
+  .phase-subheader-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+  }
 
   /* Scope */
   .scope-grid {
@@ -203,7 +237,7 @@
   .scope-list li { font-size: 13px; color: #555; padding: 5px 0; border-bottom: 1px solid #f5f5f5; }
   .scope-list li:last-child { border: none; }
 
-  /* Phases */
+  /* Phases timeline */
   .phase-timeline { position: relative; }
   .phase-item {
     display: flex;
@@ -215,7 +249,7 @@
     width: 40px; height: 40px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     flex-shrink: 0;
   }
@@ -243,39 +277,6 @@
   .phase-tag-3 { color: #533483; }
   .phase-name { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
   .phase-desc { font-size: 13px; color: #666; }
-
-  /* Pricing */
-  .price-card {
-    background: linear-gradient(135deg, #1a1a2e, #0f3460);
-    border-radius: 20px;
-    padding: 36px;
-    color: white;
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  .price-label { font-size: 13px; color: rgba(255,255,255,0.55); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
-  .price-range { font-size: 42px; font-weight: 800; color: #e94560; margin-bottom: 6px; }
-  .price-unit { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
-  .price-note { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.8; }
-  .price-includes {
-    background: white;
-    border-radius: 14px;
-    padding: 24px 28px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  }
-  .price-includes-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 14px; }
-  .includes-list { list-style: none; }
-  .includes-list li {
-    font-size: 13px;
-    color: #555;
-    padding: 6px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid #f5f5f5;
-  }
-  .includes-list li:last-child { border: none; }
-  .includes-list li .dot { width: 6px; height: 6px; background: #e94560; border-radius: 50%; flex-shrink: 0; }
 
   /* Next steps */
   .next-list { list-style: none; counter-reset: next; }
@@ -326,7 +327,7 @@
   <div class="cover-meta">
     <div class="cover-meta-item">
       <span class="cover-meta-label">版本</span>
-      <span class="cover-meta-value">v1.1</span>
+      <span class="cover-meta-value">v1.3</span>
     </div>
     <div class="cover-meta-item">
       <span class="cover-meta-label">文件性質</span>
@@ -416,62 +417,132 @@
     </div>
   </div>
 
-  <!-- 3. 核心功能 -->
+  <!-- 3. 三階段功能規劃 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">3</div>
-      <div class="section-title">第一階段核心功能</div>
+      <div class="section-title">三階段功能規劃</div>
+    </div>
+
+    <!-- P1 基礎核心 -->
+    <div class="phase-subheader phase-subheader-p1">
+      <span class="phase-subheader-badge">P1</span>
+      <span class="phase-subheader-name">基礎核心</span>
+      <span class="phase-subheader-count">13 個功能模組</span>
     </div>
     <div class="features-grid">
       <div class="feature-item">
-        <div class="icon">🔐</div>
-        <div class="name">帳號管理</div>
-        <div class="desc">公司建立帳號，分角色登入，各看各的</div>
+        <div class="icon">👨‍💼</div>
+        <div class="name">管理者管理</div>
+        <div class="desc">超級管理員設定，管理系統使用者與角色分配</div>
       </div>
       <div class="feature-item">
-        <div class="icon">💰</div>
-        <div class="name">點數錢包</div>
-        <div class="desc">每個經銷商有專屬點數帳戶，所有異動有紀錄</div>
+        <div class="icon">⚙️</div>
+        <div class="name">稽核與系統設定</div>
+        <div class="desc">系統參數設定，所有操作留存稽核紀錄，避免爭議</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">👥</div>
+        <div class="name">經銷商管理</div>
+        <div class="desc">建立 ／ 停用帳號、設定等級，集中管理全體經銷商</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">📋</div>
+        <div class="name">產品目錄管理</div>
+        <div class="desc">維護可提貨產品清單與各等級點數換算規則</div>
       </div>
       <div class="feature-item">
         <div class="icon">➕</div>
         <div class="name">儲值管理</div>
-        <div class="desc">公司端操作儲值，留存來源與備註</div>
+        <div class="desc">公司端為經銷商儲值，留存來源、金額與備註</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">💰</div>
+        <div class="name">點數管理</div>
+        <div class="desc">點數餘額、明細、手動調整（含原因備註）一體化管理</div>
       </div>
       <div class="feature-item">
         <div class="icon">📦</div>
-        <div class="name">提貨申請</div>
-        <div class="desc">經銷商線上選品申請，公司端審核後扣點</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">✅</div>
-        <div class="name">審核流程</div>
-        <div class="desc">待審核 → 通過扣點 → 出貨 → 完成，全流程追蹤</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🏪</div>
-        <div class="name">產品清單</div>
-        <div class="desc">公司維護產品與點數換算，可依等級設不同規則</div>
+        <div class="name">提貨管理</div>
+        <div class="desc">審核申請、確認庫存後扣點、更新出貨狀態全流程</div>
       </div>
       <div class="feature-item">
         <div class="icon">📊</div>
-        <div class="name">報表匯出</div>
-        <div class="desc">提貨報表、點數異動報表，可依日期 ／ 經銷商篩選</div>
+        <div class="name">管理報表</div>
+        <div class="desc">提貨與點數異動報表，可依日期 ／ 經銷商篩選匯出</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🔐</div>
+        <div class="name">帳號中心（經銷商）</div>
+        <div class="desc">經銷商登入後的個人資料與帳戶設定</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">💎</div>
+        <div class="name">點數查詢與明細（經銷商）</div>
+        <div class="desc">查看點數餘額、儲值與每筆消耗明細紀錄</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🏪</div>
+        <div class="name">產品目錄（經銷商）</div>
+        <div class="desc">瀏覽可申請提貨的產品與對應點數需求</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🛒</div>
+        <div class="name">購物車式提貨申請（經銷商）</div>
+        <div class="desc">像網購一樣選品、確認、送出申請，直觀易用</div>
       </div>
       <div class="feature-item">
         <div class="icon">🔍</div>
-        <div class="name">操作稽核</div>
-        <div class="desc">所有儲值、扣點、審核操作全留紀錄，避免爭議</div>
+        <div class="name">提貨紀錄查詢（經銷商）</div>
+        <div class="desc">追蹤歷次提貨申請狀態與出貨紀錄</div>
+      </div>
+    </div>
+
+    <!-- P2 協作擴展 -->
+    <div class="phase-subheader phase-subheader-p2">
+      <span class="phase-subheader-badge">P2</span>
+      <span class="phase-subheader-name">協作擴展</span>
+      <span class="phase-subheader-count">3 個功能模組</span>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="icon">🌳</div>
+        <div class="name">組織樹管理</div>
+        <div class="desc">視覺化組織架構，管理者掌握全體層級關係</div>
       </div>
       <div class="feature-item">
-        <div class="icon">🛡️</div>
-        <div class="name">權限控管</div>
-        <div class="desc">經銷商只能看自己的資料，管理者才有完整存取</div>
+        <div class="icon">🔔</div>
+        <div class="name">通知提醒（經銷商）</div>
+        <div class="desc">LINE ／ Email 推送審核結果、點數不足、未提貨提醒</div>
       </div>
       <div class="feature-item">
-        <div class="icon">✏️</div>
-        <div class="name">點數手動調整</div>
-        <div class="desc">公司端可人工彈性調整點數，每筆調整必須填寫原因備註</div>
+        <div class="icon">👑</div>
+        <div class="name">下線組織查看（高階經銷商）</div>
+        <div class="desc">高階可查看下線至下一個 52% 職等的狀況與活躍度</div>
+      </div>
+    </div>
+
+    <!-- P3 會員商城 -->
+    <div class="phase-subheader phase-subheader-p3">
+      <span class="phase-subheader-badge">P3</span>
+      <span class="phase-subheader-name">會員商城</span>
+      <span class="phase-subheader-count">3 個功能模組</span>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="icon">🛍️</div>
+        <div class="name">獨立商城入口</div>
+        <div class="desc">獨立商城網址，從現有網站按鈕跳轉，不影響既有網站</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">⚡</div>
+        <div class="name">低摩擦下單流程</div>
+        <div class="desc">消費者可先瀏覽不需登入，要下單才需要建立帳戶</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">👤</div>
+        <div name="name">會員中心</div>
+        <div class="desc">消費者自助訂貨、訂單查詢，帳戶自動歸屬對應經銷商</div>
       </div>
     </div>
   </div>
@@ -509,7 +580,8 @@
           <li>✗ 電子發票 ／ 財務會計</li>
           <li>✗ 跨境物流整合</li>
           <li>✗ 借貨 ／ 合併提貨前台功能（後台保留人工空間）</li>
-          <li>✗ LINE 通知整合（v2 做）</li>
+          <li>✗ 組織樹 ／ 通知提醒（P2 做）</li>
+          <li>✗ 獨立商城 ／ 會員中心（P3 做）</li>
         </ul>
       </div>
     </div>
@@ -521,7 +593,7 @@
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">②</td><td style="padding:6px 8px 6px 0;">是否一定要審核才扣點</td><td style="color:#2e7d32; font-weight:600;">✓ 是，庫存確認後才扣</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">③</td><td style="padding:6px 8px 6px 0;">扣點時機</td><td style="color:#2e7d32; font-weight:600;">✓ 審核通過後才扣</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">④</td><td style="padding:6px 8px 6px 0;">取消提貨是否退點</td><td style="color:#2e7d32; font-weight:600;">✓ 1個月內保證退 ／ 換品退換 ／ 9折回購</td></tr>
-          <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑤</td><td style="padding:6px 8px 6px 0;">儲值是否只能公司操作</td><td style="color:#2e7d32; font-weight:600;">✓ 目前是；線上刷卡列 v2/v3 規劃</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑤</td><td style="padding:6px 8px 6px 0;">儲值是否只能公司操作</td><td style="color:#2e7d32; font-weight:600;">✓ 目前是；線上刷卡列 P2/P3 規劃</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑥</td><td style="padding:6px 8px 6px 0;">高階可看幾層下線</td><td style="color:#2e7d32; font-weight:600;">✓ 到下一個 52% 職等為止</td></tr>
           <tr><td style="padding:6px 4px 6px 0;">⑦</td><td style="padding:6px 8px 6px 0;">點數換算依等級不同</td><td style="color:#2e7d32; font-weight:600;">✓ 各等級都一樣</td></tr>
         </tbody>
@@ -537,120 +609,30 @@
       <div class="card-title">📋 第二次會議新增確認項目</div>
       <ul class="scope-list">
         <li>借貨 ／ 合併提貨：前台不做功能，後台保留人工介入空間</li>
-        <li>點數調整：需人工彈性調整欄位（含原因備註），列入 v1 範圍</li>
+        <li>點數調整：需人工彈性調整欄位（含原因備註），列入 P1 範圍</li>
         <li>長期未提貨通知：閾值兩週，通知上線輔導者（不直接通知本人）</li>
         <li>網站整合：現有網站不動，獨立系統 ＋ 按鈕跳轉</li>
-        <li>點數去留 SOP：人離開時退款 or 轉給上線，待制度化（v2 規劃）</li>
-        <li>C 端消費者帳號：可自助訂貨、不跑金流，是否列入 v2 待確認</li>
+        <li>點數去留 SOP：人離開時退款 or 轉給上線，待制度化（P2 規劃）</li>
+        <li>C 端消費者帳號：可自助訂貨、不跑金流，是否列入 P3 待確認</li>
       </ul>
     </div>
   </div>
 
-  <!-- 5. 第二階段核心功能 -->
+  <!-- 5. 迭代藍圖 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">5</div>
-      <div class="section-title">第二階段核心功能</div>
-    </div>
-    <div class="features-grid">
-      <div class="feature-item">
-        <div class="icon">🏗️</div>
-        <div class="name">組織下線瀏覽</div>
-        <div class="desc">高階經銷商可查看下線至下一個 52% 職等，掌握組織全貌</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🔔</div>
-        <div class="name">活躍度提醒</div>
-        <div class="desc">下線超過兩週未提貨，自動通知上線輔導者介入</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">📈</div>
-        <div class="name">提貨週期分析</div>
-        <div class="desc">分析各經銷商提貨頻率與週期趨勢，找出異常或機會</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">⚠️</div>
-        <div class="name">點數不足提醒</div>
-        <div class="desc">自動偵測低點數帳戶，提早推送提醒避免斷貨</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">📊</div>
-        <div class="name">消耗趨勢報表</div>
-        <div class="desc">產品消耗量趨勢視覺化，輔助公司備貨決策</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">📲</div>
-        <div class="name">LINE ／ Email 通知</div>
-        <div class="desc">整合通訊渠道，審核完成、點數異動等事件自動推送</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">💳</div>
-        <div class="name">線上儲值刷卡</div>
-        <div class="desc">開放線上刷卡儲值，減少人工對帳（v2 ／ v3 評估中）</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">👥</div>
-        <div class="name">C 端消費者帳號</div>
-        <div class="desc">消費者可登入自助訂貨，不跑金流（待確認列入範圍）</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">📋</div>
-        <div class="name">點數去留 SOP</div>
-        <div class="desc">人員離開時退款或轉移機制制度化，不再靠臨機應變</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6. 做與不做（第二階段） -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">6</div>
-      <div class="section-title">做與不做（第二階段）</div>
-    </div>
-    <div class="scope-grid">
-      <div class="card scope-in">
-        <span class="scope-badge badge-in">第二階段做</span>
-        <ul class="scope-list">
-          <li>✓ 高階經銷商查看組織下線狀況（到下一個 52% 職等為止）</li>
-          <li>✓ 下線活躍度 ／ 長期未提貨提醒（閾值兩週，通知上線輔導者）</li>
-          <li>✓ 提貨週期分析</li>
-          <li>✓ 點數不足自動提醒</li>
-          <li>✓ 產品消耗趨勢報表</li>
-          <li>✓ LINE ／ Email 通知整合</li>
-          <li>✓ 線上儲值刷卡（v2/v3 待評估）</li>
-          <li>✓ C 端消費者帳號（自助訂貨、不跑金流，待確認）</li>
-          <li>✓ 點數去留 SOP 制度化（人員離開時的退款 ／ 轉移規則）</li>
-        </ul>
-      </div>
-      <div class="card scope-out">
-        <span class="scope-badge badge-out">第二階段不做</span>
-        <ul class="scope-list">
-          <li>✗ 自動獎金 ／ 分潤計算（v3）</li>
-          <li>✗ 倉庫庫存管理（v3）</li>
-          <li>✗ 顧客健康管理 App</li>
-          <li>✗ 金流整合（刷卡 ／ 轉帳）</li>
-          <li>✗ 電子發票 ／ 財務會計</li>
-          <li>✗ 跨境物流整合</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- 7. 迭代藍圖 -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">7</div>
       <div class="section-title">三階段發展藍圖</div>
     </div>
     <div class="phase-timeline">
       <div class="phase-item">
         <div class="phase-dot-col">
-          <div class="phase-dot phase-dot-1">v1</div>
+          <div class="phase-dot phase-dot-1">P1</div>
           <div class="phase-line"></div>
         </div>
         <div class="phase-content">
-          <div class="phase-tag phase-tag-1">現在做</div>
-          <div class="phase-name">提貨 ／ 儲值 MVP</div>
+          <div class="phase-tag phase-tag-1">現在做 · 基礎核心</div>
+          <div class="phase-name">提貨 ／ 儲值 MVP（13 個模組）</div>
           <div class="phase-desc">
             建立核心流程：點數管理、提貨申請、審核扣點、報表稽核。
             讓公司與經銷商都能用系統取代人工溝通，建立可信任的紀錄基礎。
@@ -659,49 +641,50 @@
       </div>
       <div class="phase-item">
         <div class="phase-dot-col">
-          <div class="phase-dot phase-dot-2">v2</div>
+          <div class="phase-dot phase-dot-2">P2</div>
           <div class="phase-line"></div>
         </div>
         <div class="phase-content">
-          <div class="phase-tag phase-tag-2">數據穩定後</div>
-          <div class="phase-name">組織可視化 ＋ 智慧提醒</div>
+          <div class="phase-tag phase-tag-2">數據穩定後 · 協作擴展</div>
+          <div class="phase-name">組織可視化 ＋ 智慧提醒（3 個模組）</div>
           <div class="phase-desc">
-            開放高階經銷商查看組織下線狀況；加上提貨週期分析、點數不足提醒、
-            產品消耗報表；導入 LINE ／ Email 通知讓追蹤更即時。
+            開放高階經銷商查看下線狀況；導入 LINE ／ Email 通知讓追蹤更即時；
+            組織樹視覺化讓管理者掌握全局。
           </div>
         </div>
       </div>
       <div class="phase-item">
         <div class="phase-dot-col">
-          <div class="phase-dot phase-dot-3">v3</div>
+          <div class="phase-dot phase-dot-3">P3</div>
         </div>
         <div class="phase-content">
-          <div class="phase-tag phase-tag-3">業務規模成熟後</div>
-          <div class="phase-name">獎金計算 ／ 倉儲管理</div>
+          <div class="phase-tag phase-tag-3">業務規模成熟後 · 會員商城</div>
+          <div class="phase-name">獨立商城 ／ 消費者自助（3 個模組）</div>
           <div class="phase-desc">
-            在獎金制度規則確定後，新增自動化獎金計算；庫存流程穩定後導入倉儲管理。
+            開放獨立商城入口，消費者低摩擦瀏覽下單，帳戶自動歸屬對應經銷商；
+            打通 B 端（經銷商）與 C 端（消費者）的完整生態。
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 8. 下一步 -->
+  <!-- 6. 下一步 -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num">8</div>
+      <div class="section-num">6</div>
       <div class="section-title">建議下一步</div>
     </div>
     <ol class="next-list">
       <li>確認 ⑧ 舊資料匯入問題（7 個規則已確認，僅剩此項）</li>
-      <li>決定 C 端消費者帳號是否列入 v2 範圍</li>
+      <li>決定 C 端消費者帳號是否列入 P3 範圍</li>
       <li>制度化點數去留 SOP（人員離開時的規則）</li>
       <li>確認第一階段開發範圍與規劃書一致後，啟動開發</li>
     </ol>
   </div>
 
   <div class="divider"></div>
-  <div class="footer">艾琳諾｜提貨儲值系統 MVP 規劃書 v1.1 — 業主版 © 2026</div>
+  <div class="footer">艾琳諾｜提貨儲值系統 MVP 規劃書 v1.3 — 業主版 © 2026</div>
 
 </div>
 </body>
