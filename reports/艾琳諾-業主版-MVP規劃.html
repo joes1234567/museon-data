@@ -79,12 +79,12 @@
   .container { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
 
   /* Section */
-  .section { margin-bottom: 48px; }
+  .section { margin-bottom: 56px; }
   .section-header {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
   }
   .section-num {
     width: 32px; height: 32px;
@@ -100,6 +100,12 @@
     font-size: 20px;
     font-weight: 700;
     color: #1a1a2e;
+  }
+  .section-lead {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 24px;
+    padding-left: 44px;
   }
 
   /* Card */
@@ -161,83 +167,7 @@
   .role-list li:last-child { border: none; }
   .role-list li::before { content: '✓'; color: #4caf50; font-weight: 700; flex-shrink: 0; }
 
-  /* Features */
-  .features-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 8px;
-  }
-  @media (max-width: 700px) { .features-grid { grid-template-columns: 1fr 1fr; } }
-  .feature-item {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    text-align: center;
-  }
-  .feature-item .icon { font-size: 26px; margin-bottom: 10px; }
-  .feature-item .name { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
-  .feature-item .desc { font-size: 12px; color: #888; }
-
-  /* Phase sub-header for features */
-  .phase-subheader {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    border-radius: 10px;
-    margin-top: 28px;
-    margin-bottom: 14px;
-  }
-  .phase-subheader-p1 { background: #e94560; margin-top: 0; }
-  .phase-subheader-p2 { background: #0f3460; }
-  .phase-subheader-p3 { background: #533483; }
-  .phase-subheader-badge {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    background: rgba(255,255,255,0.22);
-    color: white;
-    padding: 3px 9px;
-    border-radius: 20px;
-  }
-  .phase-subheader-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: white;
-  }
-  .phase-subheader-count {
-    margin-left: auto;
-    font-size: 12px;
-    color: rgba(255,255,255,0.65);
-  }
-
-  /* Scope */
-  .scope-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  @media (max-width: 600px) { .scope-grid { grid-template-columns: 1fr; } }
-  .scope-in { border-left: 4px solid #4caf50; }
-  .scope-out { border-left: 4px solid #e94560; }
-  .scope-badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-bottom: 14px;
-  }
-  .badge-in { background: #e8f5e9; color: #2e7d32; }
-  .badge-out { background: #fce4ec; color: #c62828; }
-  .scope-list { list-style: none; }
-  .scope-list li { font-size: 13px; color: #555; padding: 5px 0; border-bottom: 1px solid #f5f5f5; }
-  .scope-list li:last-child { border: none; }
-
-  /* Phases timeline */
+  /* Phase timeline */
   .phase-timeline { position: relative; }
   .phase-item {
     display: flex;
@@ -271,12 +201,90 @@
     flex: 1;
     margin-bottom: 20px;
   }
+  .phase-content-active {
+    border: 2px solid #e94560;
+  }
   .phase-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
   .phase-tag-1 { color: #e94560; }
   .phase-tag-2 { color: #0f3460; }
   .phase-tag-3 { color: #533483; }
   .phase-name { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
   .phase-desc { font-size: 13px; color: #666; }
+
+  /* Features */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  @media (max-width: 700px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+  .feature-item {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+  .feature-item .icon { font-size: 26px; margin-bottom: 10px; }
+  .feature-item .name { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+  .feature-item .desc { font-size: 12px; color: #888; }
+
+  /* Phase label for features */
+  .phase-label-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+  .phase-label-bar-p1 { background: #e94560; }
+  .phase-label-bar-p2 { background: #0f3460; }
+  .phase-label-bar-p3 { background: #533483; }
+  .phase-label-badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    background: rgba(255,255,255,0.22);
+    color: white;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .phase-label-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+  }
+  .phase-label-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* Scope */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) { .scope-grid { grid-template-columns: 1fr; } }
+  .scope-in { border-left: 4px solid #4caf50; }
+  .scope-out { border-left: 4px solid #e94560; }
+  .scope-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .badge-in { background: #e8f5e9; color: #2e7d32; }
+  .badge-out { background: #fce4ec; color: #c62828; }
+  .scope-list { list-style: none; }
+  .scope-list li { font-size: 13px; color: #555; padding: 5px 0; border-bottom: 1px solid #f5f5f5; }
+  .scope-list li:last-child { border: none; }
 
   /* Next steps */
   .next-list { list-style: none; counter-reset: next; }
@@ -315,6 +323,48 @@
   }
 
   .divider { height: 1px; background: #eee; margin: 40px 0; }
+
+  /* Future phases preview */
+  .future-phase-block {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+  }
+  .future-phase-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .future-phase-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .future-phase-title { font-size: 15px; font-weight: 700; color: #1a1a2e; }
+  .future-phase-subtitle { font-size: 12px; color: #888; margin-top: 2px; }
+  .future-features-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 600px) { .future-features-row { grid-template-columns: 1fr; } }
+  .future-feature-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fb;
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .future-feature-pill .icon { font-size: 20px; flex-shrink: 0; }
+  .future-feature-pill .name { font-size: 13px; font-weight: 600; color: #333; }
+  .future-feature-pill .desc { font-size: 11px; color: #999; margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -327,7 +377,7 @@
   <div class="cover-meta">
     <div class="cover-meta-item">
       <span class="cover-meta-label">版本</span>
-      <span class="cover-meta-value">v1.3</span>
+      <span class="cover-meta-value">v1.4</span>
     </div>
     <div class="cover-meta-item">
       <span class="cover-meta-label">文件性質</span>
@@ -342,7 +392,7 @@
 
 <div class="container">
 
-  <!-- 1. 一句話 -->
+  <!-- 1. 我們在做什麼 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">1</div>
@@ -364,6 +414,7 @@
       <div class="section-num">2</div>
       <div class="section-title">誰在用這套系統</div>
     </div>
+    <div class="section-lead">這套系統服務四種角色，每種角色的操作範圍不同。</div>
     <div class="roles-grid">
       <div class="role-card">
         <div class="role-icon">🏢</div>
@@ -417,20 +468,72 @@
     </div>
   </div>
 
-  <!-- 3. 三階段功能規劃 -->
+  <!-- 3. 三階段發展路徑（總覽） -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">3</div>
-      <div class="section-title">三階段功能規劃</div>
+      <div class="section-title">三階段發展路徑</div>
     </div>
+    <div class="section-lead">整個系統分三個階段推進，每一階段都是下一階段的基礎。</div>
+    <div class="phase-timeline">
+      <div class="phase-item">
+        <div class="phase-dot-col">
+          <div class="phase-dot phase-dot-1">P1</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-content phase-content-active">
+          <div class="phase-tag phase-tag-1">現在做 · 本次規劃重點</div>
+          <div class="phase-name">提貨 ／ 儲值 MVP（13 個模組）</div>
+          <div class="phase-desc">
+            建立核心流程：點數管理、提貨申請、審核扣點、報表稽核。
+            讓公司與經銷商都能用系統取代人工溝通，建立可信任的紀錄基礎。
+          </div>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-dot-col">
+          <div class="phase-dot phase-dot-2">P2</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-tag phase-tag-2">資料穩定後 · 協作擴展</div>
+          <div class="phase-name">組織可視化 ＋ 智慧提醒（3 個模組）</div>
+          <div class="phase-desc">
+            開放高階經銷商查看下線狀況；導入 LINE ／ Email 通知讓追蹤更即時；
+            組織樹視覺化讓管理者掌握全局。
+          </div>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-dot-col">
+          <div class="phase-dot phase-dot-3">P3</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-tag phase-tag-3">業務規模成熟後 · 會員商城</div>
+          <div class="phase-name">獨立商城 ／ 消費者自助（3 個模組）</div>
+          <div class="phase-desc">
+            開放獨立商城入口，消費者低摩擦瀏覽下單，帳戶自動歸屬對應經銷商；
+            打通 B 端（經銷商）與 C 端（消費者）的完整生態。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- P1 基礎核心 -->
-    <div class="phase-subheader phase-subheader-p1">
-      <span class="phase-subheader-badge">P1</span>
-      <span class="phase-subheader-name">基礎核心</span>
-      <span class="phase-subheader-count">13 個功能模組</span>
+  <!-- 4. 第一階段：基礎核心功能（P1） -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">第一階段：基礎核心功能</div>
     </div>
-    <div class="features-grid">
+    <div class="section-lead">P1 共 13 個功能模組，分管理側（8 個）與經銷商側（5 個）。</div>
+
+    <div class="phase-label-bar phase-label-bar-p1" style="margin-bottom:14px;">
+      <span class="phase-label-badge">管理側</span>
+      <span class="phase-label-name">公司管理者 ／ 營運人員使用</span>
+      <span class="phase-label-count">8 個模組</span>
+    </div>
+    <div class="features-grid" style="margin-bottom:28px;">
       <div class="feature-item">
         <div class="icon">👨‍💼</div>
         <div class="name">管理者管理</div>
@@ -471,88 +574,49 @@
         <div class="name">管理報表</div>
         <div class="desc">提貨與點數異動報表，可依日期 ／ 經銷商篩選匯出</div>
       </div>
+    </div>
+
+    <div class="phase-label-bar phase-label-bar-p1">
+      <span class="phase-label-badge">經銷商側</span>
+      <span class="phase-label-name">一般經銷商自助使用</span>
+      <span class="phase-label-count">5 個模組</span>
+    </div>
+    <div class="features-grid">
       <div class="feature-item">
         <div class="icon">🔐</div>
-        <div class="name">帳號中心（經銷商）</div>
+        <div class="name">帳號中心</div>
         <div class="desc">經銷商登入後的個人資料與帳戶設定</div>
       </div>
       <div class="feature-item">
         <div class="icon">💎</div>
-        <div class="name">點數查詢與明細（經銷商）</div>
+        <div class="name">點數查詢與明細</div>
         <div class="desc">查看點數餘額、儲值與每筆消耗明細紀錄</div>
       </div>
       <div class="feature-item">
         <div class="icon">🏪</div>
-        <div class="name">產品目錄（經銷商）</div>
+        <div class="name">產品目錄</div>
         <div class="desc">瀏覽可申請提貨的產品與對應點數需求</div>
       </div>
       <div class="feature-item">
         <div class="icon">🛒</div>
-        <div class="name">購物車式提貨申請（經銷商）</div>
+        <div class="name">購物車式提貨申請</div>
         <div class="desc">像網購一樣選品、確認、送出申請，直觀易用</div>
       </div>
       <div class="feature-item">
         <div class="icon">🔍</div>
-        <div class="name">提貨紀錄查詢（經銷商）</div>
+        <div class="name">提貨紀錄查詢</div>
         <div class="desc">追蹤歷次提貨申請狀態與出貨紀錄</div>
-      </div>
-    </div>
-
-    <!-- P2 協作擴展 -->
-    <div class="phase-subheader phase-subheader-p2">
-      <span class="phase-subheader-badge">P2</span>
-      <span class="phase-subheader-name">協作擴展</span>
-      <span class="phase-subheader-count">3 個功能模組</span>
-    </div>
-    <div class="features-grid">
-      <div class="feature-item">
-        <div class="icon">🌳</div>
-        <div class="name">組織樹管理</div>
-        <div class="desc">視覺化組織架構，管理者掌握全體層級關係</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🔔</div>
-        <div class="name">通知提醒（經銷商）</div>
-        <div class="desc">LINE ／ Email 推送審核結果、點數不足、未提貨提醒</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">👑</div>
-        <div class="name">下線組織查看（高階經銷商）</div>
-        <div class="desc">高階可查看下線至下一個 52% 職等的狀況與活躍度</div>
-      </div>
-    </div>
-
-    <!-- P3 會員商城 -->
-    <div class="phase-subheader phase-subheader-p3">
-      <span class="phase-subheader-badge">P3</span>
-      <span class="phase-subheader-name">會員商城</span>
-      <span class="phase-subheader-count">3 個功能模組</span>
-    </div>
-    <div class="features-grid">
-      <div class="feature-item">
-        <div class="icon">🛍️</div>
-        <div class="name">獨立商城入口</div>
-        <div class="desc">獨立商城網址，從現有網站按鈕跳轉，不影響既有網站</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">⚡</div>
-        <div class="name">低摩擦下單流程</div>
-        <div class="desc">消費者可先瀏覽不需登入，要下單才需要建立帳戶</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">👤</div>
-        <div name="name">會員中心</div>
-        <div class="desc">消費者自助訂貨、訂單查詢，帳戶自動歸屬對應經銷商</div>
       </div>
     </div>
   </div>
 
-  <!-- 4. 範圍 -->
+  <!-- 5. 第一階段範圍（做與不做） -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num">4</div>
-      <div class="section-title">做與不做（第一階段）</div>
+      <div class="section-num">5</div>
+      <div class="section-title">第一階段範圍（做與不做）</div>
     </div>
+    <div class="section-lead">確立邊界，讓第一版保持精準，不過度擴張。</div>
     <div class="scope-grid">
       <div class="card scope-in">
         <span class="scope-badge badge-in">第一階段做</span>
@@ -618,63 +682,88 @@
     </div>
   </div>
 
-  <!-- 5. 迭代藍圖 -->
+  <!-- 6. 第二、三階段預覽 -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num">5</div>
-      <div class="section-title">三階段發展藍圖</div>
+      <div class="section-num">6</div>
+      <div class="section-title">第二、三階段預覽</div>
     </div>
-    <div class="phase-timeline">
-      <div class="phase-item">
-        <div class="phase-dot-col">
-          <div class="phase-dot phase-dot-1">P1</div>
-          <div class="phase-line"></div>
+    <div class="section-lead">P1 穩定上線後，依業務需求推進下一階段。以下為功能預覽，細節在 P1 驗收後再確認。</div>
+
+    <div class="future-phase-block">
+      <div class="future-phase-header">
+        <div class="future-phase-dot phase-dot-2">P2</div>
+        <div>
+          <div class="future-phase-title">協作擴展 — 組織可視化 ＋ 智慧提醒</div>
+          <div class="future-phase-subtitle">資料跑穩後啟動 · 3 個模組</div>
         </div>
-        <div class="phase-content">
-          <div class="phase-tag phase-tag-1">現在做 · 基礎核心</div>
-          <div class="phase-name">提貨 ／ 儲值 MVP（13 個模組）</div>
-          <div class="phase-desc">
-            建立核心流程：點數管理、提貨申請、審核扣點、報表稽核。
-            讓公司與經銷商都能用系統取代人工溝通，建立可信任的紀錄基礎。
+      </div>
+      <div class="future-features-row">
+        <div class="future-feature-pill">
+          <div class="icon">🌳</div>
+          <div>
+            <div class="name">組織樹管理</div>
+            <div class="desc">視覺化組織架構，管理者掌握全體層級關係</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🔔</div>
+          <div>
+            <div class="name">通知提醒（經銷商）</div>
+            <div class="desc">LINE ／ Email 推送審核結果、點數不足、未提貨提醒</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">👑</div>
+          <div>
+            <div class="name">下線組織查看</div>
+            <div class="desc">高階可查看下線至下一個 52% 職等的狀況與活躍度</div>
           </div>
         </div>
       </div>
-      <div class="phase-item">
-        <div class="phase-dot-col">
-          <div class="phase-dot phase-dot-2">P2</div>
-          <div class="phase-line"></div>
-        </div>
-        <div class="phase-content">
-          <div class="phase-tag phase-tag-2">數據穩定後 · 協作擴展</div>
-          <div class="phase-name">組織可視化 ＋ 智慧提醒（3 個模組）</div>
-          <div class="phase-desc">
-            開放高階經銷商查看下線狀況；導入 LINE ／ Email 通知讓追蹤更即時；
-            組織樹視覺化讓管理者掌握全局。
-          </div>
+    </div>
+
+    <div class="future-phase-block">
+      <div class="future-phase-header">
+        <div class="future-phase-dot phase-dot-3">P3</div>
+        <div>
+          <div class="future-phase-title">會員商城 — 獨立商城 ／ 消費者自助</div>
+          <div class="future-phase-subtitle">業務規模成熟後啟動 · 3 個模組</div>
         </div>
       </div>
-      <div class="phase-item">
-        <div class="phase-dot-col">
-          <div class="phase-dot phase-dot-3">P3</div>
+      <div class="future-features-row">
+        <div class="future-feature-pill">
+          <div class="icon">🛍️</div>
+          <div>
+            <div class="name">獨立商城入口</div>
+            <div class="desc">獨立商城網址，從現有網站按鈕跳轉，不影響既有網站</div>
+          </div>
         </div>
-        <div class="phase-content">
-          <div class="phase-tag phase-tag-3">業務規模成熟後 · 會員商城</div>
-          <div class="phase-name">獨立商城 ／ 消費者自助（3 個模組）</div>
-          <div class="phase-desc">
-            開放獨立商城入口，消費者低摩擦瀏覽下單，帳戶自動歸屬對應經銷商；
-            打通 B 端（經銷商）與 C 端（消費者）的完整生態。
+        <div class="future-feature-pill">
+          <div class="icon">⚡</div>
+          <div>
+            <div class="name">低摩擦下單流程</div>
+            <div class="desc">消費者可先瀏覽不需登入，要下單才需要建立帳戶</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">👤</div>
+          <div>
+            <div class="name">會員中心</div>
+            <div class="desc">消費者自助訂貨、訂單查詢，帳戶自動歸屬對應經銷商</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 6. 下一步 -->
+  <!-- 7. 建議下一步 -->
   <div class="section">
     <div class="section-header">
-      <div class="section-num">6</div>
+      <div class="section-num">7</div>
       <div class="section-title">建議下一步</div>
     </div>
+    <div class="section-lead">第一階段範圍已確認 7 項規則，還剩以下四件事需要決定。</div>
     <ol class="next-list">
       <li>確認 ⑧ 舊資料匯入問題（7 個規則已確認，僅剩此項）</li>
       <li>決定 C 端消費者帳號是否列入 P3 範圍</li>
@@ -684,7 +773,7 @@
   </div>
 
   <div class="divider"></div>
-  <div class="footer">艾琳諾｜提貨儲值系統 MVP 規劃書 v1.3 — 業主版 © 2026</div>
+  <div class="footer">艾琳諾｜提貨儲值系統 MVP 規劃書 v1.4 — 業主版 © 2026</div>
 
 </div>
 </body>
