@@ -324,6 +324,44 @@
 
   .divider { height: 1px; background: #eee; margin: 40px 0; }
 
+  /* Reading flow strip */
+  .reading-flow-strip {
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    padding: 14px 24px;
+  }
+  .reading-flow-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .rf-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-right: 8px;
+    white-space: nowrap;
+  }
+  .rf-step {
+    background: #efefef;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    white-space: nowrap;
+  }
+  .rf-arrow {
+    color: #ccc;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
   /* Future phases preview */
   .future-phase-block {
     background: white;
@@ -390,6 +428,26 @@
   </div>
 </div>
 
+<!-- Reading Flow Strip -->
+<div class="reading-flow-strip">
+  <div class="reading-flow-inner">
+    <span class="rf-label">閱讀路線</span>
+    <span class="rf-step">1 目標</span>
+    <span class="rf-arrow">→</span>
+    <span class="rf-step">2 使用者</span>
+    <span class="rf-arrow">→</span>
+    <span class="rf-step">3 三階段路線</span>
+    <span class="rf-arrow">→</span>
+    <span class="rf-step">4 P1 功能細節</span>
+    <span class="rf-arrow">→</span>
+    <span class="rf-step">5 P1 邊界確認</span>
+    <span class="rf-arrow">→</span>
+    <span class="rf-step">6 P2 ／ P3 預覽</span>
+    <span class="rf-arrow">→</span>
+    <span class="rf-step">7 下一步</span>
+  </div>
+</div>
+
 <div class="container">
 
   <!-- 1. 我們在做什麼 -->
@@ -398,6 +456,7 @@
       <div class="section-num">1</div>
       <div class="section-title">我們在做什麼</div>
     </div>
+    <div class="section-lead">這份文件的起點——先說清楚我們在解決什麼問題，後面六個章節都從這個答案展開。</div>
     <div class="oneliner">
       <p>
         建立一套<strong>提貨 ／ 儲值管理系統</strong>，讓艾琳諾公司的
@@ -414,7 +473,7 @@
       <div class="section-num">2</div>
       <div class="section-title">誰在用這套系統</div>
     </div>
-    <div class="section-lead">這套系統服務四種角色，每種角色的操作範圍不同。</div>
+    <div class="section-lead">知道「做什麼」之後，先搞清楚「為誰而做」——角色決定功能邊界，也決定誰是第一批使用者。</div>
     <div class="roles-grid">
       <div class="role-card">
         <div class="role-icon">🏢</div>
@@ -474,7 +533,7 @@
       <div class="section-num">3</div>
       <div class="section-title">三階段發展路徑</div>
     </div>
-    <div class="section-lead">整個系統分三個階段推進，每一階段都是下一階段的基礎。</div>
+    <div class="section-lead">使用者確認了，接下來看整體節奏——系統分三個階段推進，每一階段都是下一階段的地基。第 4 節起會逐階展開細節。</div>
     <div class="phase-timeline">
       <div class="phase-item">
         <div class="phase-dot-col">
@@ -526,7 +585,7 @@
       <div class="section-num">4</div>
       <div class="section-title">第一階段：基礎核心功能</div>
     </div>
-    <div class="section-lead">P1 共 13 個功能模組，分管理側（8 個）與經銷商側（5 個）。</div>
+    <div class="section-lead">第一階段是整個系統的根基。這節把 P1 的 13 個功能模組逐一說清楚，讓你知道這一版會做到什麼程度。</div>
 
     <div class="phase-label-bar phase-label-bar-p1" style="margin-bottom:14px;">
       <span class="phase-label-badge">管理側</span>
@@ -616,7 +675,7 @@
       <div class="section-num">5</div>
       <div class="section-title">第一階段範圍（做與不做）</div>
     </div>
-    <div class="section-lead">確立邊界，讓第一版保持精準，不過度擴張。</div>
+    <div class="section-lead">功能定義完，邊界同樣重要——什麼做、什麼不做說清楚，第一版才不會失焦。這節也把兩次會議確認的業務規則統整在這裡。</div>
     <div class="scope-grid">
       <div class="card scope-in">
         <span class="scope-badge badge-in">第一階段做</span>
@@ -688,7 +747,7 @@
       <div class="section-num">6</div>
       <div class="section-title">第二、三階段預覽</div>
     </div>
-    <div class="section-lead">P1 穩定上線後，依業務需求推進下一階段。以下為功能預覽，細節在 P1 驗收後再確認。</div>
+    <div class="section-lead">P1 的邊界清楚了。這節往前看一步——P2 和 P3 的預覽讓你知道整個路線圖的終點長什麼樣，細節在 P1 驗收後再確認。</div>
 
     <div class="future-phase-block">
       <div class="future-phase-header">
@@ -763,7 +822,7 @@
       <div class="section-num">7</div>
       <div class="section-title">建議下一步</div>
     </div>
-    <div class="section-lead">第一階段範圍已確認 7 項規則，還剩以下四件事需要決定。</div>
+    <div class="section-lead">整份文件走完了——從目標到使用者到三個階段，骨架已清晰。接下來只剩四件事需要你確認，確認完就可以啟動開發。</div>
     <ol class="next-list">
       <li>確認 ⑧ 舊資料匯入問題（7 個規則已確認，僅剩此項）</li>
       <li>決定 C 端消費者帳號是否列入 P3 範圍</li>
