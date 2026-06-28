@@ -1007,22 +1007,335 @@
   </div>
 </section>
 
-<!-- Interactive Tools -->
-<section style="padding: 60px 0 20px;">
+<!-- KNOWLEDGE GRAPH -->
+<section>
   <div class="container">
-    <div class="section-label" style="margin-bottom: 12px;">互動工具</div>
-    <h2 style="font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">模組依賴知識圖譜 · 估價計算器</h2>
-    <p style="font-size: 14px; color: var(--slate); margin-bottom: 24px; line-height: 1.7;">
-      點擊節點可展開模組細節，拖曳重新排列佈局。估價計算器可即時試算各階段報價。
-    </p>
-    <div style="border: 1px solid #d0dce8; border-radius: 14px; overflow: hidden; background: #fff;">
-      <iframe
-        src="yijie-pricing-calculator-v1.html"
-        width="100%"
-        height="1300px"
-        style="border: none; display: block;"
-        title="易睫模組依賴知識圖譜與估價計算器"
-      ></iframe>
+    <div class="section-label">模組依賴知識圖譜</div>
+    <h2 class="section-title">功能模組的承接關係</h2>
+    <p class="section-desc">14 個模組節點，顏色對應四個建置階段。滑鼠移到節點查看說明；<strong>點擊節點</strong>鎖定並亮顯<strong>所有前置依賴鏈</strong>，再按一次或點空白處取消。滾輪縮放，拖曳平移。</p>
+  </div>
+
+  <div class="kgyj-controls" id="kgyj-controls">
+    <button class="kgyj-btn active" data-kgphase="all">全部</button>
+    <div class="kgyj-sep"></div>
+    <button class="kgyj-btn" data-kgphase="P1">P1 核心基礎</button>
+    <button class="kgyj-btn" data-kgphase="P2">P2 財務合規</button>
+    <button class="kgyj-btn" data-kgphase="P3">P3 深化優化</button>
+    <button class="kgyj-btn" data-kgphase="P4">P4 前台報表</button>
+    <div class="kgyj-sep"></div>
+    <button class="kgyj-btn" id="kgyj-btn-reset" style="color:var(--slate);">重置視圖</button>
+  </div>
+
+  <div id="kgyj-graph-wrap"><svg id="kgyj-graph"></svg></div>
+
+  <div class="kgyj-legend">
+    <div class="kgyj-leg-item"><div class="kgyj-leg-dot" style="background:#C4502A;"></div> P1 核心基礎</div>
+    <div class="kgyj-leg-item"><div class="kgyj-leg-dot" style="background:#B8923A;"></div> P2 財務合規</div>
+    <div class="kgyj-leg-item"><div class="kgyj-leg-dot" style="background:#2A7A6E;"></div> P3 深化優化</div>
+    <div class="kgyj-leg-item"><div class="kgyj-leg-dot" style="background:#5A5A6E;"></div> P4 前台報表</div>
+    <div class="kgyj-sep" style="height:18px;"></div>
+    <div class="kgyj-leg-item"><div class="kgyj-leg-line" style="border-color:#C4502A;"></div> 直接資料依賴</div>
+    <div class="kgyj-leg-item"><div class="kgyj-leg-line" style="border-color:#888;border-style:dashed;"></div> 跨階段間接依賴</div>
+    <div style="color:var(--mist);font-size:13px;">← 滑鼠移到節點查看說明 · 點擊查看詳情 · 滾輪縮放 · 拖曳平移</div>
+  </div>
+</section>
+
+<!-- Tooltip -->
+<div id="kgyj-tooltip" style="position:fixed;display:none;background:#12121A;color:rgba(255,255,255,0.92);font-size:14px;line-height:1.85;padding:12px 16px;border-radius:10px;max-width:260px;z-index:9999;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+  <div id="kgyj-tt-phase" style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.7;margin-bottom:4px;"></div>
+  <div id="kgyj-tt-name" style="font-size:15px;font-weight:700;margin-bottom:6px;"></div>
+  <div id="kgyj-tt-desc" style="font-size:14px;opacity:0.82;line-height:1.65;"></div>
+</div>
+
+<!-- Detail panel -->
+<div id="kgyj-detail" style="display:none;position:fixed;right:16px;top:110px;width:260px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;box-shadow:0 8px 32px rgba(0,0,0,0.12);z-index:200;font-size:15px;max-height:calc(100vh - 130px);overflow-y:auto;">
+  <span onclick="document.getElementById('kgyj-detail').style.display='none'" style="position:absolute;right:12px;top:10px;cursor:pointer;color:var(--mist);font-size:18px;line-height:1;">×</span>
+  <div id="kgyj-d-phase" style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px;"></div>
+  <div id="kgyj-d-name" style="font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.4;"></div>
+  <div id="kgyj-d-desc" style="font-size:14px;color:var(--slate);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);"></div>
+  <div id="kgyj-d-deps-sec" style="display:none;"><div style="font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">前置依賴</div><ul id="kgyj-d-deps" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
+  <div id="kgyj-d-enables-sec" style="display:none;margin-top:2px;"><div style="font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">解鎖模組</div><ul id="kgyj-d-enables" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
+  <div id="kgyj-d-meta" style="display:none;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;text-align:center;">
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:11px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">製作週數</div>
+        <div id="kgyj-d-devweeks" style="font-size:14px;font-weight:700;color:var(--ink);"></div>
+      </div>
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:11px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">模組費用</div>
+        <div id="kgyj-d-fee" style="font-size:11px;font-weight:700;color:var(--ink);line-height:1.3;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.kgyj-controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;align-items:center;}
+.kgyj-btn{padding:5px 13px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid currentColor;background:transparent;transition:background 0.15s,color 0.15s;letter-spacing:0.3px;line-height:1.4;}
+.kgyj-btn.active{color:#fff!important;}
+.kgyj-btn[data-kgphase="all"]{color:var(--ink);border-color:var(--ink);}
+.kgyj-btn[data-kgphase="all"].active{background:var(--ink);}
+.kgyj-btn[data-kgphase="P1"]{color:#C4502A;border-color:#C4502A;}
+.kgyj-btn[data-kgphase="P1"].active{background:#C4502A;}
+.kgyj-btn[data-kgphase="P2"]{color:#B8923A;border-color:#B8923A;}
+.kgyj-btn[data-kgphase="P2"].active{background:#B8923A;}
+.kgyj-btn[data-kgphase="P3"]{color:#2A7A6E;border-color:#2A7A6E;}
+.kgyj-btn[data-kgphase="P3"].active{background:#2A7A6E;}
+.kgyj-btn[data-kgphase="P4"]{color:#5A5A6E;border-color:#5A5A6E;}
+.kgyj-btn[data-kgphase="P4"].active{background:#5A5A6E;}
+.kgyj-sep{width:1px;height:20px;background:var(--border);}
+#kgyj-graph-wrap{background:#fff;overflow:hidden;}
+svg#kgyj-graph{display:block;width:100%;cursor:grab;}
+svg#kgyj-graph:active{cursor:grabbing;}
+.kgyj-node circle{stroke-width:2.5;cursor:pointer;}
+.kgyj-node .node-icon{font-size:15px;text-anchor:middle;pointer-events:none;dominant-baseline:central;}
+.kgyj-node .node-label{font-size:12px;fill:var(--ink);text-anchor:middle;pointer-events:none;font-weight:500;}
+.kgyj-link{fill:none;}
+.kgyj-link.depends{stroke:#C4502A;stroke-width:1.8;stroke-opacity:0.55;}
+.kgyj-link.indirect{stroke:#888;stroke-width:1.3;stroke-opacity:0.4;stroke-dasharray:5,3;}
+.kgyj-link.highlight{stroke-opacity:0.9!important;stroke-width:2.5!important;}
+.kgyj-link.dim{stroke-opacity:0.05!important;}
+.kgyj-node.dim circle{opacity:0.12;}
+.kgyj-node.dim .node-icon{opacity:0.12;}
+.kgyj-node.dim .node-label{opacity:0.12;}
+.kgyj-phase-bg{fill-opacity:0.03;}
+.kgyj-phase-lbl{font-size:13px;font-weight:700;letter-spacing:0.8px;fill-opacity:0.45;text-anchor:middle;}
+.kgyj-legend{display:flex;gap:16px;flex-wrap:wrap;padding:10px 24px;background:var(--parchment);border-top:1px solid var(--border);font-size:13.5px;color:var(--slate);align-items:center;justify-content:center;}
+.kgyj-leg-item{display:flex;align-items:center;gap:5px;}
+.kgyj-leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+.kgyj-leg-line{display:inline-block;width:22px;height:0;border-top:2px solid;vertical-align:middle;flex-shrink:0;}
+.calc-row{display:flex;align-items:center;gap:12px;padding:13px 24px;border-bottom:1px solid #f0f4f0;}
+.calc-badge{flex-shrink:0;font-size:11px;font-weight:800;letter-spacing:0.5px;color:#fff;border-radius:6px;padding:3px 8px;}
+.calc-name{flex:1;font-size:15px;color:var(--ink);font-weight:500;}
+.calc-fee{font-size:15px;font-weight:700;color:var(--ink);}
+</style>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function(){
+const PC={P1:'#C4502A',P2:'#B8923A',P3:'#2A7A6E',P4:'#5A5A6E'};
+const PX={P1:138,P2:413,P3:688,P4:963};
+const PL={P1:'P1 核心基礎',P2:'P2 財務合規',P3:'P3 深化優化',P4:'P4 前台報表'};
+const W=1100,H=660;
+const nodes=[
+  {id:'M01',short:'客戶資料管理',label:'客戶資料\n管理',phase:'P1',icon:'👤',desc:'客戶基本資料、服務地址、偏好紀錄，所有服務流程的核心資料來源',devWeeks:1,fee:6200},
+  {id:'M02',short:'系統權限控管',label:'系統權限\n控管',phase:'P1',icon:'🔐',desc:'老闆/行政/清潔師各角色最小權限配置，資料安全的基礎建設',devWeeks:2,fee:19370},
+  {id:'M03',short:'員工技能管理',label:'員工技能\n管理',phase:'P1',icon:'🏷️',desc:'清潔師技能標籤（深層清潔/玻璃/窗簾），派工配對的核心依據',devWeeks:1,fee:6200},
+  {id:'M04',short:'班表管理',label:'班表\n管理',phase:'P1',icon:'📋',desc:'員工出勤班表，薪資計算與派工的時間基礎，防止排班衝突',devWeeks:2,fee:14260},
+  {id:'M05',short:'員工打卡系統',label:'員工打卡\n系統',phase:'P1',icon:'⏱️',desc:'到場/離場打卡，實際工時核實，防範薪資爭議的客觀紀錄',devWeeks:1,fee:10005},
+  {id:'M06',short:'報價輔助模組',label:'報價輔助\n模組',phase:'P2',icon:'💲',desc:'根據客戶地址/面積/服務類型自動產生估價單，縮短業務回覆時間',devWeeks:2,fee:17880},
+  {id:'M07',short:'薪資計算模組',label:'薪資計算\n模組',phase:'P2',icon:'💰',desc:'整合班表、打卡、加班，自動產生薪資明細，大幅減少人工核算錯誤',devWeeks:2,fee:26100},
+  {id:'M08',short:'服務記錄回饋',label:'服務記錄\n回饋',phase:'P2',icon:'📝',desc:'每次服務執行紀錄、客戶評分、問題回報，派工優化的核心依據',devWeeks:3,fee:18515},
+  {id:'M09',short:'收款對帳管理',label:'收款對帳\n管理',phase:'P3',icon:'🧾',desc:'收款狀態追蹤、發票開立、未收款提醒，現金流健康的關鍵控制點',devWeeks:1,fee:19180},
+  {id:'M10',short:'派工建議草稿',label:'派工建議\n草稿',phase:'P3',icon:'🗺️',desc:'依技能、地區、班表自動建議最佳派工組合，減少人工調度來回溝通',devWeeks:3,fee:23250},
+  {id:'M11',short:'耗材管理模組',label:'耗材管理\n模組',phase:'P3',icon:'🧴',desc:'清潔用品進出庫、每筆服務耗材用量紀錄，計算實際服務成本',devWeeks:1,fee:10005},
+  {id:'M12',short:'毛利報表',label:'毛利\n報表',phase:'P4',icon:'📊',desc:'每筆服務收入扣除人力+耗材成本，即時呈現毛利率，支持定價決策',devWeeks:1,fee:15120},
+  {id:'M13',short:'人事成本試算',label:'人事成本\n試算',phase:'P4',icon:'📈',desc:'員工人力成本總覽，支持擴編/縮編的財務決策模擬',devWeeks:1,fee:15120},
+  {id:'M14',short:'多據點管理',label:'多據點\n管理',phase:'P4',icon:'🏢',desc:'跨服務區域整合管理視圖，支持業務擴展後的統一調度與報表',devWeeks:2,fee:18625},
+];
+const links=[
+  {source:'M01',target:'M06',type:'depends'},
+  {source:'M01',target:'M08',type:'depends'},
+  {source:'M04',target:'M07',type:'depends'},
+  {source:'M05',target:'M07',type:'depends'},
+  {source:'M08',target:'M10',type:'depends'},
+  {source:'M08',target:'M11',type:'depends'},
+  {source:'M11',target:'M12',type:'depends'},
+  {source:'M01',target:'M09',type:'indirect'},
+  {source:'M03',target:'M10',type:'indirect'},
+  {source:'M04',target:'M10',type:'indirect'},
+  {source:'M07',target:'M12',type:'indirect'},
+  {source:'M07',target:'M13',type:'indirect'},
+  {source:'M02',target:'M14',type:'indirect'},
+];
+const svg=d3.select('svg#kgyj-graph').attr('viewBox',`0 0 ${W} ${H}`).attr('height',Math.min(640,window.innerHeight-150));
+const g=svg.append('g');
+const zoom=d3.zoom().scaleExtent([0.25,4]).on('zoom',e=>g.attr('transform',e.transform));
+svg.call(zoom);
+const defs=svg.append('defs');
+const LC={depends:'#C4502A',indirect:'#888'};
+Object.entries(LC).forEach(([type,color])=>{
+  defs.append('marker').attr('id',`kgyj-ar-${type}`).attr('viewBox','0 -5 10 10').attr('refX',26).attr('refY',0)
+    .attr('markerWidth',5).attr('markerHeight',5).attr('orient','auto')
+    .append('path').attr('d','M0,-5L10,0L0,5').attr('fill',color).attr('fill-opacity',0.7);
+});
+Object.entries(PX).forEach(([phase,cx])=>{
+  g.append('rect').attr('class','kgyj-phase-bg').attr('x',cx-80).attr('y',40).attr('width',160).attr('height',H-52).attr('fill',PC[phase]).attr('rx',8);
+  g.append('text').attr('class','kgyj-phase-lbl').attr('x',cx).attr('y',26).attr('fill',PC[phase]).text(PL[phase]);
+});
+nodes.forEach(n=>{
+  const col=nodes.filter(m=>m.phase===n.phase);
+  const idx=col.indexOf(n);
+  const step=(H-120)/(col.length+1);
+  n.x=PX[n.phase]+(idx%2===0?0:12);
+  n.y=60+step*(idx+1);
+});
+const lSel=g.append('g').selectAll('.kgyj-link').data(links).join('path')
+  .attr('class',d=>`kgyj-link ${d.type}`).attr('marker-end',d=>`url(#kgyj-ar-${d.type})`);
+const nSel=g.append('g').selectAll('.kgyj-node').data(nodes).join('g').attr('class','kgyj-node')
+  .call(d3.drag().on('start',ds).on('drag',dd).on('end',de));
+nSel.append('circle').attr('r',23).attr('fill',d=>PC[d.phase]).attr('fill-opacity',0.88).attr('stroke','#fff');
+nSel.append('text').attr('class','node-icon').attr('dy','0.35em').text(d=>d.icon);
+nSel.each(function(d){
+  d.label.split('\n').forEach((line,i)=>{
+    d3.select(this).append('text').attr('class','node-label').attr('y',31+i*13).text(line);
+  });
+});
+const sim=d3.forceSimulation(nodes)
+  .force('link',d3.forceLink(links).id(d=>d.id).distance(90).strength(0.2))
+  .force('charge',d3.forceManyBody().strength(-200))
+  .force('x',d3.forceX(d=>PX[d.phase]).strength(0.8))
+  .force('y',d3.forceY(H/2).strength(0.07))
+  .force('collide',d3.forceCollide(38))
+  .on('tick',tick);
+function tick(){
+  lSel.attr('d',d=>{
+    const dx=d.target.x-d.source.x,dy=d.target.y-d.source.y;
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
+    const dr=len*0.7;
+    return `M${d.source.x},${d.source.y} A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
+  });
+  nSel.attr('transform',d=>`translate(${d.x},${d.y})`);
+}
+function ds(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
+function dd(e,d){d.fx=e.x;d.fy=e.y;}
+function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
+const tip=document.getElementById('kgyj-tooltip');
+const ttP=document.getElementById('kgyj-tt-phase');
+const ttN=document.getElementById('kgyj-tt-name');
+const ttD=document.getElementById('kgyj-tt-desc');
+let selNode=null,selAnc=new Set();
+function getAnc(id){
+  const s=new Set([id]);const q=[id];
+  while(q.length){const c=q.shift();links.forEach(l=>{if(l.target.id===c&&!s.has(l.source.id)){s.add(l.source.id);q.push(l.source.id);}});}
+  return s;
+}
+function applyAnc(s){
+  nSel.classed('dim',n=>!s.has(n.id));
+  lSel.classed('dim',l=>!s.has(l.source.id)||!s.has(l.target.id)).classed('highlight',l=>s.has(l.source.id)&&s.has(l.target.id));
+}
+nSel
+  .on('mouseenter',function(ev,d){
+    if(selNode){ttP.style.color=PC[d.phase];ttP.textContent=PL[d.phase];ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';return;}
+    const conn=new Set([d.id]);
+    links.forEach(l=>{if(l.source.id===d.id)conn.add(l.target.id);if(l.target.id===d.id)conn.add(l.source.id);});
+    nSel.classed('dim',n=>!conn.has(n.id));
+    lSel.classed('dim',l=>l.source.id!==d.id&&l.target.id!==d.id).classed('highlight',l=>l.source.id===d.id||l.target.id===d.id);
+    ttP.style.color=PC[d.phase];ttP.textContent=PL[d.phase];ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';
+  })
+  .on('mousemove',function(ev){tip.style.left=Math.min(ev.clientX+18,window.innerWidth-280)+'px';tip.style.top=(ev.clientY-50)+'px';})
+  .on('mouseleave',function(){if(selNode){applyAnc(selAnc);}else{nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);}tip.style.display='none';})
+  .on('click',function(ev,d){
+    ev.stopPropagation();
+    if(selNode===d.id){selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kgyj-detail').style.display='none';return;}
+    selNode=d.id;selAnc=getAnc(d.id);applyAnc(selAnc);
+    document.getElementById('kgyj-d-phase').textContent=PL[d.phase];
+    document.getElementById('kgyj-d-phase').style.color=PC[d.phase];
+    document.getElementById('kgyj-d-name').textContent=d.short;
+    document.getElementById('kgyj-d-desc').textContent=d.desc;
+    const deps=links.filter(l=>l.target.id===d.id);
+    const enables=links.filter(l=>l.source.id===d.id);
+    if(deps.length){
+      document.getElementById('kgyj-d-deps-sec').style.display='block';
+      document.getElementById('kgyj-d-deps').innerHTML=deps.map(l=>{const s=nodes.find(n=>n.id===l.source.id);return`<li style="font-size:14px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${s?s.short:l.source.id}</li>`;}).join('');
+    }else{document.getElementById('kgyj-d-deps-sec').style.display='none';}
+    if(enables.length){
+      document.getElementById('kgyj-d-enables-sec').style.display='block';
+      document.getElementById('kgyj-d-enables').innerHTML=enables.map(l=>{const t=nodes.find(n=>n.id===l.target.id);return`<li style="font-size:14px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${t?t.short:l.target.id}</li>`;}).join('');
+    }else{document.getElementById('kgyj-d-enables-sec').style.display='none';}
+    if(d.devWeeks||d.fee){
+      document.getElementById('kgyj-d-meta').style.display='block';
+      document.getElementById('kgyj-d-devweeks').textContent=d.devWeeks?d.devWeeks+'週':'—';
+      document.getElementById('kgyj-d-fee').textContent=d.fee?'NT$'+d.fee.toLocaleString():'—';
+    }else{document.getElementById('kgyj-d-meta').style.display='none';}
+    document.getElementById('kgyj-detail').style.display='block';
+  });
+svg.on('click',()=>{selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kgyj-detail').style.display='none';});
+let aP=null;
+document.querySelectorAll('.kgyj-btn[data-kgphase]').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const ph=this.dataset.kgphase;
+    document.querySelectorAll('.kgyj-btn[data-kgphase]').forEach(b=>b.classList.remove('active'));
+    if(ph==='all'||ph===aP){
+      aP=null;document.querySelector('[data-kgphase="all"]').classList.add('active');
+      nSel.classed('dim',false);lSel.classed('dim',false);
+    }else{
+      aP=ph;this.classList.add('active');
+      const show=new Set([ph]);
+      links.forEach(l=>{if(l.source.phase===ph)show.add(l.target.phase);if(l.target.phase===ph)show.add(l.source.phase);});
+      nSel.classed('dim',d=>!show.has(d.phase));
+      lSel.classed('dim',l=>!show.has(l.source.phase)||!show.has(l.target.phase));
+    }
+  });
+});
+document.getElementById('kgyj-btn-reset').addEventListener('click',()=>{svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);});
+})();
+</script>
+
+
+<!-- ESTIMATOR -->
+<section>
+  <div class="container">
+    <div class="section-label">估價計算器</div>
+    <h2 class="section-title">14 個模組費用明細</h2>
+
+    <div style="background:#fff;border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.06);">
+
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--border);background:var(--snow);">
+        <div>
+          <div style="font-size:18px;font-weight:700;color:var(--ink);">智慧營運管理系統 · <span style="color:#C4502A;">14</span> 大模組</div>
+          <div style="font-size:13px;color:var(--mist);margin-top:2px;">四個階段逐步導入，最小可交付，快速回收價值</div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:6px;background:#FBF0EC;border:1.5px solid #C4502A;color:#C4502A;border-radius:24px;padding:7px 18px;font-size:13px;font-weight:700;letter-spacing:0.3px;">易睫清潔坊</div>
+      </div>
+
+      <div style="padding:8px 24px 6px;background:#FBF0EC;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#C4502A;">P1 核心基礎</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#C4502A;">P1</span><span class="calc-name">客戶資料管理</span><span class="calc-fee">NT$6,200</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#C4502A;">P1</span><span class="calc-name">系統權限控管</span><span class="calc-fee">NT$19,370</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#C4502A;">P1</span><span class="calc-name">員工技能管理</span><span class="calc-fee">NT$6,200</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#C4502A;">P1</span><span class="calc-name">班表管理</span><span class="calc-fee">NT$14,260</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#C4502A;">P1</span><span class="calc-name">員工打卡系統</span><span class="calc-fee">NT$10,005</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#FBF0EC;border-bottom:1px solid var(--border);">
+        <span style="font-size:13px;color:var(--slate);">P1 小計</span>
+        <span style="font-size:14px;font-weight:700;color:#C4502A;">NT$56,035</span>
+      </div>
+
+      <div style="padding:8px 24px 6px;background:#FBF6EC;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#B8923A;">P2 財務合規</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#B8923A;">P2</span><span class="calc-name">報價輔助模組</span><span class="calc-fee">NT$17,880</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#B8923A;">P2</span><span class="calc-name">薪資計算模組</span><span class="calc-fee">NT$26,100</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#B8923A;">P2</span><span class="calc-name">服務記錄回饋</span><span class="calc-fee">NT$18,515</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#FBF6EC;border-bottom:1px solid var(--border);">
+        <span style="font-size:13px;color:var(--slate);">P2 小計</span>
+        <span style="font-size:14px;font-weight:700;color:#B8923A;">NT$62,495</span>
+      </div>
+
+      <div style="padding:8px 24px 6px;background:#EBF4F1;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#2A7A6E;">P3 深化優化</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A7A6E;">P3</span><span class="calc-name">收款對帳管理</span><span class="calc-fee">NT$19,180</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A7A6E;">P3</span><span class="calc-name">派工建議草稿</span><span class="calc-fee">NT$23,250</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A7A6E;">P3</span><span class="calc-name">耗材管理模組</span><span class="calc-fee">NT$10,005</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#EBF4F1;border-bottom:1px solid var(--border);">
+        <span style="font-size:13px;color:var(--slate);">P3 小計</span>
+        <span style="font-size:14px;font-weight:700;color:#2A7A6E;">NT$52,435</span>
+      </div>
+
+      <div style="padding:8px 24px 6px;background:#EEEEF2;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#5A5A6E;">P4 前台報表</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#5A5A6E;">P4</span><span class="calc-name">毛利報表</span><span class="calc-fee">NT$15,120</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#5A5A6E;">P4</span><span class="calc-name">人事成本試算</span><span class="calc-fee">NT$15,120</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#5A5A6E;">P4</span><span class="calc-name">多據點管理</span><span class="calc-fee">NT$18,625</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#EEEEF2;border-bottom:1px solid var(--border);">
+        <span style="font-size:13px;color:var(--slate);">P4 小計</span>
+        <span style="font-size:14px;font-weight:700;color:#5A5A6E;">NT$48,865</span>
+      </div>
+
+      <div style="padding:24px 28px;background:linear-gradient(135deg,#0f1a12 0%,#1a3028 60%,#1e3530 100%);display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:3px;">完整四階段導入成本</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.35);">視第三方串接數量與模組選配而定</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:36px;font-weight:800;color:#5ecfa8;letter-spacing:-1px;">NT$219,830</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
