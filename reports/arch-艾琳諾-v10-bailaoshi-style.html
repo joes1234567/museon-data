@@ -1397,25 +1397,25 @@ const PX={P1:155,P2:490,P3:820};
 const PL={P1:'第一階段 基礎核心',P2:'第二階段 協作擴展',P3:'第三階段 會員商城'};
 const W=980,H=760;
 const nodes=[
-  {id:'M01',short:'管理者管理',label:'管理者\n管理',phase:'P1',icon:'🔐',desc:'管理員/營運人員分角色，帳號狀態切換，操作紀錄全留存，是所有端別帳號的基礎',roi:'公司端',devWeeks:1,checkpoints:2,coefficient:1.0,cost:{devFee:8500,opFee:0,note:''}},
-  {id:'M02',short:'稽核與系統設定',label:'稽核系統\n設定',phase:'P1',icon:'📋',desc:'每筆操作不可刪除的稽核日誌與系統參數統一管理，合規基礎',roi:'公司端',devWeeks:2,checkpoints:2,coefficient:1.15,cost:{devFee:14260,opFee:0,note:''}},
-  {id:'M03',short:'經銷商管理',label:'經銷商\n管理',phase:'P1',icon:'👥',desc:'帳號建立、等級設定、上線關係，B2B2C 網絡的起點，驅動後續所有點數與提貨流程',roi:'公司端',devWeeks:2,checkpoints:3,coefficient:1.25,cost:{devFee:15500,opFee:0,note:''}},
-  {id:'M04',short:'產品目錄管理',label:'產品目錄\n管理',phase:'P1',icon:'📦',desc:'產品分類、點數定價、上下架控制，缺貨自動封閉申請入口',roi:'公司端',devWeeks:1.5,checkpoints:2,coefficient:1.0,cost:{devFee:10005,opFee:0,note:''}},
-  {id:'M05',short:'儲值管理',label:'儲值\n管理',phase:'P1',icon:'🪙',desc:'人工 key 入儲值，每筆留來源/時間/操作者，取代口頭確認，驅動點數總帳',roi:'公司端',devWeeks:2,checkpoints:3,coefficient:1.2,cost:{devFee:16820,opFee:0,note:''}},
-  {id:'M06',short:'點數管理',label:'點數\n管理',phase:'P1',icon:'💰',desc:'點數總帳、異動全留存、退點、人工調整必填原因，提貨扣點閉環的核心',roi:'公司端',devWeeks:2.5,checkpoints:4,coefficient:1.4,cost:{devFee:21080,opFee:0,note:''}},
-  {id:'M07',short:'提貨管理',label:'提貨\n管理',phase:'P1',icon:'🛒',desc:'審核→扣點→出貨完整閉環，每個節點有人負責有記錄，取消後自動退點',roi:'公司端',devWeeks:3,checkpoints:4,coefficient:1.2,cost:{devFee:22320,opFee:0,note:''}},
-  {id:'M08',short:'管理報表',label:'管理\n報表',phase:'P1',icon:'📊',desc:'提貨/點數/產品消耗/活躍度/異常五張報表，含匯出，決策有數字支撐',roi:'公司端',devWeeks:2,checkpoints:2,coefficient:1.2,cost:{devFee:17650,opFee:0,note:''}},
-  {id:'M09',short:'帳號中心',label:'帳號\n中心',phase:'P2',icon:'🔑',desc:'由公司建立帳號，經銷商自助管理個人資料和密碼重設',roi:'經銷商端',devWeeks:1,checkpoints:1,coefficient:1.0,cost:{devFee:6200,opFee:0,note:''}},
-  {id:'M10',short:'點數查詢',label:'點數\n查詢',phase:'P2',icon:'💳',desc:'登入即見餘額，儲值/扣點/退點每筆流向一鍵查清楚',roi:'經銷商端',devWeeks:1,checkpoints:2,coefficient:1.0,cost:{devFee:8950,opFee:0,note:''}},
-  {id:'M11',short:'產品目錄',label:'產品\n瀏覽',phase:'P2',icon:'🏷️',desc:'可提貨清單、分類篩選，缺貨產品自動標示不可選，避免白申請',roi:'經銷商端',devWeeks:1,checkpoints:1,coefficient:1.0,cost:{devFee:7440,opFee:0,note:''}},
-  {id:'M12',short:'提貨申請',label:'提貨\n申請',phase:'P2',icon:'🛍️',desc:'購物車式選品，送出前即時試算點數，取貨方式選宅配或自取，不靠 LINE',roi:'經銷商端',devWeeks:2.5,checkpoints:3,coefficient:1.3,cost:{devFee:20210,opFee:0,note:''}},
-  {id:'M13',short:'提貨紀錄查詢',label:'提貨\n紀錄',phase:'P2',icon:'📝',desc:'每筆申請有狀態有單號，不用問公司進度，審核前可自助取消',roi:'經銷商端',devWeeks:1,checkpoints:1,coefficient:1.0,cost:{devFee:7440,opFee:0,note:''}},
-  {id:'M14',short:'組織樹管理',label:'組織樹\n管理',phase:'P2',icon:'🌳',desc:'組織結構可視化，52% 等階截斷自動處理，可視範圍依角色設定',roi:'公司端',devWeeks:3,checkpoints:4,coefficient:1.5,cost:{devFee:26100,opFee:0,note:''}},
-  {id:'M15',short:'通知提醒',label:'通知\n提醒',phase:'P2',icon:'🔔',desc:'儲值完成/提貨狀態/點數不足預警/系統公告，主動通知不靠人追',roi:'經銷商端',devWeeks:1.5,checkpoints:2,coefficient:1.1,cost:{devFee:12400,opFee:0,note:''}},
-  {id:'M16',short:'下線組織查看',label:'下線\n查看',phase:'P2',icon:'👁️',desc:'高階經銷商可見授權範圍內下線動態，遇到同階 52% 截止',roi:'經銷商端',devWeeks:2,checkpoints:2,coefficient:1.15,cost:{devFee:14260,opFee:0,note:''}},
-  {id:'M17',short:'獨立商城入口',label:'商城\n入口',phase:'P3',icon:'🔗',desc:'每位經銷商一條子路徑 URL（/shop/代碼），分享連結即推廣入口，不登入可瀏覽',roi:'會員商城端',devWeeks:2.5,checkpoints:3,coefficient:1.2,cost:{devFee:21700,opFee:0,note:''}},
-  {id:'M18',short:'低摩擦下單',label:'低摩擦\n下單',phase:'P3',icon:'🧾',desc:'不強制註冊可訪客結帳，訂單自動歸屬入口經銷商，完成後寄送會員邀請',roi:'會員商城端',devWeeks:2.5,checkpoints:3,coefficient:1.2,cost:{devFee:19800,opFee:0,note:''}},
-  {id:'M19',short:'會員中心',label:'會員\n中心',phase:'P3',icon:'👤',desc:'每位經銷商的會員資料互相隔離，帳號永久綁定所屬經銷商，可查訂單歷史',roi:'會員商城端',devWeeks:1.5,checkpoints:2,coefficient:1.1,cost:{devFee:13950,opFee:0,note:''}},
+  {id:'M01',short:'管理者管理',label:'管理者\n管理',phase:'P1',icon:'🔐',desc:'管理員/營運人員分角色，帳號狀態切換，操作紀錄全留存，是所有端別帳號的基礎',roi:'公司端',devWeeks:1,checkpoints:2,coefficient:1.0,cost:{devFee:22000,opFee:0,note:''}},
+  {id:'M02',short:'稽核與系統設定',label:'稽核系統\n設定',phase:'P1',icon:'📋',desc:'每筆操作不可刪除的稽核日誌與系統參數統一管理，合規基礎',roi:'公司端',devWeeks:2,checkpoints:2,coefficient:1.15,cost:{devFee:39100,opFee:0,note:''}},
+  {id:'M03',short:'經銷商管理',label:'經銷商\n管理',phase:'P1',icon:'👥',desc:'帳號建立、等級設定、上線關係，B2B2C 網絡的起點，驅動後續所有點數與提貨流程',roi:'公司端',devWeeks:2,checkpoints:3,coefficient:1.25,cost:{devFee:48750,opFee:0,note:''}},
+  {id:'M04',short:'產品目錄管理',label:'產品目錄\n管理',phase:'P1',icon:'📦',desc:'產品分類、點數定價、上下架控制，缺貨自動封閉申請入口',roi:'公司端',devWeeks:1.5,checkpoints:2,coefficient:1.0,cost:{devFee:28000,opFee:0,note:''}},
+  {id:'M05',short:'儲值管理',label:'儲值\n管理',phase:'P1',icon:'🪙',desc:'人工 key 入儲值，每筆留來源/時間/操作者，取代口頭確認，驅動點數總帳',roi:'公司端',devWeeks:2,checkpoints:3,coefficient:1.2,cost:{devFee:46800,opFee:0,note:''}},
+  {id:'M06',short:'點數管理',label:'點數\n管理',phase:'P1',icon:'💰',desc:'點數總帳、異動全留存、退點、人工調整必填原因，提貨扣點閉環的核心',roi:'公司端',devWeeks:2.5,checkpoints:4,coefficient:1.4,cost:{devFee:70000,opFee:0,note:''}},
+  {id:'M07',short:'提貨管理',label:'提貨\n管理',phase:'P1',icon:'🛒',desc:'審核→扣點→出貨完整閉環，每個節點有人負責有記錄，取消後自動退點',roi:'公司端',devWeeks:3,checkpoints:4,coefficient:1.2,cost:{devFee:67200,opFee:0,note:''}},
+  {id:'M08',short:'管理報表',label:'管理\n報表',phase:'P1',icon:'📊',desc:'提貨/點數/產品消耗/活躍度/異常五張報表，含匯出，決策有數字支撐',roi:'公司端',devWeeks:2,checkpoints:2,coefficient:1.2,cost:{devFee:40800,opFee:0,note:''}},
+  {id:'M09',short:'帳號中心',label:'帳號\n中心',phase:'P2',icon:'🔑',desc:'由公司建立帳號，經銷商自助管理個人資料和密碼重設',roi:'經銷商端',devWeeks:1,checkpoints:1,coefficient:1.0,cost:{devFee:17000,opFee:0,note:''}},
+  {id:'M10',short:'點數查詢',label:'點數\n查詢',phase:'P2',icon:'💳',desc:'登入即見餘額，儲值/扣點/退點每筆流向一鍵查清楚',roi:'經銷商端',devWeeks:1,checkpoints:2,coefficient:1.0,cost:{devFee:22000,opFee:0,note:''}},
+  {id:'M11',short:'產品目錄',label:'產品\n瀏覽',phase:'P2',icon:'🏷️',desc:'可提貨清單、分類篩選，缺貨產品自動標示不可選，避免白申請',roi:'經銷商端',devWeeks:1,checkpoints:1,coefficient:1.0,cost:{devFee:17000,opFee:0,note:''}},
+  {id:'M12',short:'提貨申請',label:'提貨\n申請',phase:'P2',icon:'🛍️',desc:'購物車式選品，送出前即時試算點數，取貨方式選宅配或自取，不靠 LINE',roi:'經銷商端',devWeeks:2.5,checkpoints:3,coefficient:1.3,cost:{devFee:58500,opFee:0,note:''}},
+  {id:'M13',short:'提貨紀錄查詢',label:'提貨\n紀錄',phase:'P2',icon:'📝',desc:'每筆申請有狀態有單號，不用問公司進度，審核前可自助取消',roi:'經銷商端',devWeeks:1,checkpoints:1,coefficient:1.0,cost:{devFee:17000,opFee:0,note:''}},
+  {id:'M14',short:'組織樹管理',label:'組織樹\n管理',phase:'P2',icon:'🌳',desc:'組織結構可視化，52% 等階截斷自動處理，可視範圍依角色設定',roi:'公司端',devWeeks:3,checkpoints:4,coefficient:1.5,cost:{devFee:84000,opFee:0,note:''}},
+  {id:'M15',short:'通知提醒',label:'通知\n提醒',phase:'P2',icon:'🔔',desc:'儲值完成/提貨狀態/點數不足預警/系統公告，主動通知不靠人追',roi:'經銷商端',devWeeks:1.5,checkpoints:2,coefficient:1.1,cost:{devFee:30800,opFee:0,note:''}},
+  {id:'M16',short:'下線組織查看',label:'下線\n查看',phase:'P2',icon:'👁️',desc:'高階經銷商可見授權範圍內下線動態，遇到同階 52% 截止',roi:'經銷商端',devWeeks:2,checkpoints:2,coefficient:1.15,cost:{devFee:39100,opFee:0,note:''}},
+  {id:'M17',short:'獨立商城入口',label:'商城\n入口',phase:'P3',icon:'🔗',desc:'每位經銷商一條子路徑 URL（/shop/代碼），分享連結即推廣入口，不登入可瀏覽',roi:'會員商城端',devWeeks:2.5,checkpoints:3,coefficient:1.2,cost:{devFee:54000,opFee:0,note:''}},
+  {id:'M18',short:'低摩擦下單',label:'低摩擦\n下單',phase:'P3',icon:'🧾',desc:'不強制註冊可訪客結帳，訂單自動歸屬入口經銷商，完成後寄送會員邀請',roi:'會員商城端',devWeeks:2.5,checkpoints:3,coefficient:1.2,cost:{devFee:54000,opFee:0,note:''}},
+  {id:'M19',short:'會員中心',label:'會員\n中心',phase:'P3',icon:'👤',desc:'每位經銷商的會員資料互相隔離，帳號永久綁定所屬經銷商，可查訂單歷史',roi:'會員商城端',devWeeks:1.5,checkpoints:2,coefficient:1.1,cost:{devFee:30800,opFee:0,note:''}},
 ];
 const links=[
   {source:'M01',target:'M03',type:'depends'},
@@ -1590,40 +1590,40 @@ document.getElementById('kgyi-btn-reset').addEventListener('click',()=>{svg.tran
       </div>
 
       <div style="padding:8px 24px 6px;background:#f2f8f4;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#1a6b3c;">第一階段 基礎核心</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">管理者管理</span><span class="calc-fee">NT$8,500</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">稽核與系統設定</span><span class="calc-fee">NT$14,260</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">經銷商管理</span><span class="calc-fee">NT$15,500</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">產品目錄管理</span><span class="calc-fee">NT$10,005</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">儲值管理</span><span class="calc-fee">NT$16,820</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">點數管理</span><span class="calc-fee">NT$21,080</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">提貨管理</span><span class="calc-fee">NT$22,320</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">管理報表</span><span class="calc-fee">NT$17,650</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">管理者管理</span><span class="calc-fee">NT$22,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">稽核與系統設定</span><span class="calc-fee">NT$39,100</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">經銷商管理</span><span class="calc-fee">NT$48,750</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">產品目錄管理</span><span class="calc-fee">NT$28,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">儲值管理</span><span class="calc-fee">NT$46,800</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">點數管理</span><span class="calc-fee">NT$70,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">提貨管理</span><span class="calc-fee">NT$67,200</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#1a6b3c;">P1</span><span class="calc-name">管理報表</span><span class="calc-fee">NT$40,800</span></div>
       <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#f8faf8;border-bottom:1px solid var(--border);">
         <span style="font-size:13px;color:var(--slate);">第一階段小計</span>
-        <span style="font-size:14px;font-weight:700;color:#1a6b3c;">NT$126,135</span>
+        <span style="font-size:14px;font-weight:700;color:#1a6b3c;">NT$362,650</span>
       </div>
 
       <div style="padding:8px 24px 6px;background:#eef4f8;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#2A6A8A;">第二階段 協作擴展</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">組織樹管理</span><span class="calc-fee">NT$26,100</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">帳號中心（經銷商）</span><span class="calc-fee">NT$6,200</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">點數查詢與明細（經銷商）</span><span class="calc-fee">NT$8,950</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">產品目錄（經銷商）</span><span class="calc-fee">NT$7,440</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">購物車式提貨申請（經銷商）</span><span class="calc-fee">NT$20,210</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">提貨紀錄查詢（經銷商）</span><span class="calc-fee">NT$7,440</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">通知提醒（經銷商）</span><span class="calc-fee">NT$12,400</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">下線組織查看（高階經銷商）</span><span class="calc-fee">NT$14,260</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">組織樹管理</span><span class="calc-fee">NT$84,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">帳號中心（經銷商）</span><span class="calc-fee">NT$17,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">點數查詢與明細（經銷商）</span><span class="calc-fee">NT$22,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">產品目錄（經銷商）</span><span class="calc-fee">NT$17,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">購物車式提貨申請（經銷商）</span><span class="calc-fee">NT$58,500</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">提貨紀錄查詢（經銷商）</span><span class="calc-fee">NT$17,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">通知提醒（經銷商）</span><span class="calc-fee">NT$30,800</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#2A6A8A;">P2</span><span class="calc-name">下線組織查看（高階經銷商）</span><span class="calc-fee">NT$39,100</span></div>
       <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#f4f8fb;border-bottom:1px solid var(--border);">
         <span style="font-size:13px;color:var(--slate);">第二階段小計</span>
-        <span style="font-size:14px;font-weight:700;color:#2A6A8A;">NT$103,000</span>
+        <span style="font-size:14px;font-weight:700;color:#2A6A8A;">NT$285,400</span>
       </div>
 
       <div style="padding:8px 24px 6px;background:#f5f0ff;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7c3aed;">第三階段 會員商城</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">獨立商城入口</span><span class="calc-fee">NT$21,700</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">低摩擦下單流程</span><span class="calc-fee">NT$19,800</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">會員中心</span><span class="calc-fee">NT$13,950</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">獨立商城入口</span><span class="calc-fee">NT$54,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">低摩擦下單流程</span><span class="calc-fee">NT$54,000</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">會員中心</span><span class="calc-fee">NT$30,800</span></div>
       <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#faf6ff;border-bottom:1px solid var(--border);">
         <span style="font-size:13px;color:var(--slate);">第三階段小計</span>
-        <span style="font-size:14px;font-weight:700;color:#7c3aed;">NT$55,450</span>
+        <span style="font-size:14px;font-weight:700;color:#7c3aed;">NT$138,800</span>
       </div>
 
       <div style="padding:24px 28px;background:linear-gradient(135deg,#0a0a1a 0%,#12183a 60%,#1a2a5a 100%);display:flex;justify-content:space-between;align-items:center;">
@@ -1632,7 +1632,7 @@ document.getElementById('kgyi-btn-reset').addEventListener('click',()=>{svg.tran
           <div style="font-size:12px;color:rgba(255,255,255,0.35);">視第三方串接數量與模組選配而定</div>
         </div>
         <div style="text-align:right;">
-          <div style="font-size:36px;font-weight:800;color:#a78bfa;letter-spacing:-1px;">NT$284,585</div>
+          <div style="font-size:36px;font-weight:800;color:#a78bfa;letter-spacing:-1px;">NT$786,850</div>
         </div>
       </div>
     </div>
