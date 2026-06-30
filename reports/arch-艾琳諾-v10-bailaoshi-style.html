@@ -1592,8 +1592,12 @@ document.getElementById('kgyi-btn-reset').addEventListener('click',()=>{svg.tran
 <section>
   <div class="container">
     <div class="section-label">估價計算器</div>
-    <h2 class="section-title">19 個模組費用明細</h2>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
+      <h2 class="section-title" style="margin-bottom:0;">19 個模組費用明細</h2>
+      <button id="estimator-toggle" onclick="(function(){var c=document.getElementById('estimator-content');var b=document.getElementById('estimator-toggle');var open=c.style.display!=='none';c.style.display=open?'none':'block';b.innerHTML=open?'&#9660; 展開明細':'&#9650; 收起明細';})()" style="display:inline-flex;align-items:center;gap:6px;background:#f0f4ff;border:1.5px solid #2a4b9b;color:#2a4b9b;border-radius:24px;padding:9px 20px;font-size:14px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:all 0.2s;">&#9660; 展開明細</button>
+    </div>
 
+    <div id="estimator-content" style="display:none;">
     <div style="background:#fff;border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.06);">
 
       <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--border);background:var(--snow);">
@@ -1651,6 +1655,7 @@ document.getElementById('kgyi-btn-reset').addEventListener('click',()=>{svg.tran
         </div>
       </div>
     </div>
+    </div><!-- /estimator-content -->
   </div>
 </section>
 
