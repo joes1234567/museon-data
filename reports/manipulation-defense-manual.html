@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>操控手法辨識與修復手冊 · 識別→急救→根治</title>
+<style>
+:root{--bg:#0e0906;--s:#1a0f08;--s2:#231508;--b:#3c2810;--ac:#e8923a;--ac2:#e05668;--ac3:#f2c34a;--ac4:#d4734a;--tx:#f5ede0;--tx2:#b09075;--tx3:#7a6050;--dn:#e05040;--sf:#5ec08a;--warn:#f0a030;--crit:#e04040}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:125%}
+body{background:var(--bg);color:var(--tx);font-family:'Helvetica Neue','PingFang TC','Microsoft JhengHei',sans-serif;line-height:1.7;font-size:19px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(14,9,6,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);display:flex;align-items:center;gap:1rem;padding:0 1.5rem;height:56px;overflow-x:auto}
+nav .logo{font-weight:700;font-size:15px;letter-spacing:2px;color:var(--ac2);flex-shrink:0}
+nav a{color:var(--tx2);text-decoration:none;font-size:14px;transition:color .2s;white-space:nowrap;flex-shrink:0}
+nav a:hover{color:var(--tx)}
+nav .sep{color:var(--tx3);flex-shrink:0}
+main{padding-top:56px}
+section{padding:4.5rem 0}
+.container{max-width:1080px;margin:0 auto;padding:0 2rem}
+/* Hero */
+.hero{min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(224,86,104,.12),transparent 70%),radial-gradient(ellipse 40% 30% at 80% 70%,rgba(232,146,58,.07),transparent 60%)}
+.badge{display:inline-block;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--ac2);border:1px solid rgba(224,86,104,.4);border-radius:100px;padding:4px 16px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.4rem,5vw,4.2rem);font-weight:800;letter-spacing:-1px;line-height:1.1;background:linear-gradient(135deg,#fff 20%,var(--ac2) 55%,var(--ac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+.hero-sub{font-size:clamp(1.1rem,2vw,1.4rem);color:var(--tx2);max-width:640px;margin:0 auto 2rem}
+.flow-bar{display:flex;align-items:center;gap:0;background:var(--s);border:1px solid var(--b);border-radius:16px;padding:.9rem 1.8rem;flex-wrap:wrap;justify-content:center;gap:.3rem}
+.fb{background:rgba(224,86,104,.15);color:var(--ac2);border-radius:10px;padding:5px 14px;font-weight:700;font-size:1rem}
+.fb.b{background:rgba(232,146,58,.15);color:var(--ac)}
+.fb.c{background:rgba(94,192,138,.15);color:var(--sf)}
+.fa{color:var(--tx3);font-size:1.4rem;padding:0 .3rem}
+/* Section header */
+.sl{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--ac2);margin-bottom:.7rem}
+.st{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;line-height:1.2;margin-bottom:.9rem}
+.sd{color:var(--tx2);max-width:660px;margin-bottom:2.5rem;font-size:1.05rem}
+/* Technique card */
+.tech-card{background:var(--s);border:1px solid var(--b);border-radius:20px;overflow:hidden;margin-bottom:2.5rem}
+.tech-header{padding:1.8rem 2rem 1.4rem;border-bottom:1px solid var(--b);display:flex;align-items:flex-start;gap:1.2rem;position:relative;overflow:hidden}
+.tech-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(224,86,104,.07),transparent 60%);pointer-events:none}
+.tech-num{width:44px;height:44px;border-radius:12px;background:rgba(224,86,104,.15);border:1px solid rgba(224,86,104,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;color:var(--ac2);flex-shrink:0}
+.tech-title{flex:1}
+.tech-title h3{font-size:1.5rem;font-weight:800;margin-bottom:.3rem}
+.tech-title .zh{color:var(--ac2)}
+.tech-title .en{font-size:.95rem;color:var(--tx3);letter-spacing:1px}
+.tech-title .def{font-size:1rem;color:var(--tx2);margin-top:.4rem;line-height:1.55}
+.danger-level{display:inline-flex;align-items:center;gap:.3rem;background:rgba(224,80,64,.12);border:1px solid rgba(224,80,64,.3);border-radius:100px;padding:3px 12px;font-size:.85rem;color:#e08878;font-weight:600;margin-top:.5rem}
+/* Three-layer tabs */
+.layers{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--b)}
+@media(max-width:720px){.layers{grid-template-columns:1fr}}
+.layer{padding:1.6rem 1.8rem;border-right:1px solid var(--b)}
+.layer:last-child{border-right:none}
+@media(max-width:720px){.layer{border-right:none;border-bottom:1px solid var(--b)}}
+.layer-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;letter-spacing:1px;padding:3px 12px;border-radius:8px;margin-bottom:1rem}
+.layer-1 .layer-badge{background:rgba(224,86,104,.15);color:var(--ac2)}
+.layer-2 .layer-badge{background:rgba(232,146,58,.15);color:var(--ac)}
+.layer-3 .layer-badge{background:rgba(94,192,138,.15);color:var(--sf)}
+.layer h4{font-size:1.1rem;font-weight:700;margin-bottom:.8rem;color:var(--tx)}
+.signal-list{list-style:none;padding:0}
+.signal-list li{padding:.45rem 0;padding-left:1.3rem;position:relative;color:var(--tx2);font-size:.98rem;line-height:1.6;border-bottom:1px solid rgba(255,255,255,.04)}
+.signal-list li:last-child{border-bottom:none}
+.signal-list li::before{content:'';position:absolute;left:0;top:.85rem;width:6px;height:6px;border-radius:50%}
+.layer-1 .signal-list li::before{background:var(--ac2)}
+.layer-2 .signal-list li::before{background:var(--ac)}
+.layer-3 .signal-list li::before{background:var(--sf)}
+.signal-list li strong{color:var(--tx)}
+/* Overview table */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.ov-card{background:var(--s);border:1px solid var(--b);border-radius:14px;padding:1.1rem 1.3rem;cursor:pointer;transition:border-color .2s,transform .2s}
+.ov-card:hover{border-color:rgba(224,86,104,.4);transform:translateY(-2px)}
+.ov-card .num{font-size:.8rem;color:var(--ac2);font-weight:700;letter-spacing:1px;margin-bottom:.3rem}
+.ov-card .name{font-size:1rem;font-weight:700;margin-bottom:.3rem}
+.ov-card .short{font-size:.88rem;color:var(--tx2)}
+/* Healing journey */
+.journey{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem;margin-top:2rem}
+@media(max-width:760px){.journey{grid-template-columns:1fr}}
+.jcard{background:var(--s);border:1px solid var(--b);border-radius:16px;padding:1.6rem}
+.jcard .jnum{font-size:.8rem;letter-spacing:2px;color:var(--tx3);margin-bottom:.5rem;font-weight:700}
+.jcard .jtitle{font-size:1.15rem;font-weight:700;margin-bottom:.8rem}
+.jcard.p1 .jtitle{color:var(--ac2)}
+.jcard.p2 .jtitle{color:var(--ac)}
+.jcard.p3 .jtitle{color:var(--sf)}
+.jcard p{color:var(--tx2);font-size:.97rem;line-height:1.6}
+.jcard ul{list-style:none;padding:0;margin-top:.8rem}
+.jcard ul li{padding:.3rem 0;padding-left:1.2rem;position:relative;color:var(--tx2);font-size:.95rem}
+.jcard ul li::before{content:'→';position:absolute;left:0;color:var(--tx3)}
+/* Anchor section */
+.anchor-box{background:var(--s2);border:1px solid var(--b);border-radius:16px;padding:1.5rem 1.8rem;margin-bottom:1.5rem}
+.anchor-box h4{font-size:1.1rem;font-weight:700;margin-bottom:.8rem;color:var(--ac3)}
+/* Pullquote */
+.pullquote{background:linear-gradient(135deg,rgba(224,86,104,.08),rgba(232,146,58,.05));border:1px solid rgba(224,86,104,.2);border-radius:16px;padding:2rem 2.5rem;text-align:center;margin:2.5rem 0}
+.pullquote blockquote{font-size:clamp(1.2rem,2vw,1.6rem);font-weight:600;line-height:1.5;color:var(--tx)}
+.pullquote cite{display:block;margin-top:.8rem;font-size:.95rem;color:var(--tx3)}
+/* Root cause map */
+.root-map{background:var(--s);border:1px solid var(--b);border-radius:16px;padding:1.8rem}
+.root-row{display:flex;align-items:flex-start;gap:1rem;padding:.8rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.root-row:last-child{border-bottom:none}
+.root-tag{background:rgba(224,86,104,.12);color:var(--ac2);border-radius:8px;padding:3px 10px;font-size:.85rem;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:.15rem}
+.root-content{font-size:.97rem;color:var(--tx2);line-height:1.6}
+.root-content strong{color:var(--tx)}
+/* Warning box */
+.warn-box{background:rgba(224,80,64,.06);border:1px solid rgba(224,80,64,.25);border-radius:14px;padding:1.4rem 1.6rem}
+.warn-box .wt{display:flex;align-items:center;gap:.5rem;font-weight:700;color:var(--dn);margin-bottom:.6rem;font-size:1rem}
+.warn-box p{color:var(--tx2);font-size:.97rem;line-height:1.6}
+/* Back link */
+.back-link{display:inline-flex;align-items:center;gap:.5rem;color:var(--tx2);text-decoration:none;font-size:.95rem;border:1px solid var(--b);border-radius:10px;padding:.4rem 1rem;margin-bottom:2rem;transition:all .2s}
+.back-link:hover{color:var(--tx);border-color:var(--ac)}
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:var(--tx3);font-size:.95rem}
+.sep-line{border:none;border-top:1px solid var(--b);margin:2rem 0}
+/* Checklist */
+.check-list{list-style:none;padding:0}
+.check-list li{display:flex;align-items:flex-start;gap:.7rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.97rem;color:var(--tx2)}
+.check-list li:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border-radius:5px;border:2px solid var(--b);flex-shrink:0;margin-top:.2rem}
+.check-list li strong{color:var(--tx)}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">⚠ 防護手冊</span>
+  <span class="sep">·</span>
+  <a href="#overview">全覽</a>
+  <a href="#t1">馴化</a>
+  <a href="#t2">精神錨點</a>
+  <a href="#t3">擊碎防線</a>
+  <a href="#t4">戀愛腦</a>
+  <a href="#t5">服從測試</a>
+  <a href="#t6">懲罰</a>
+  <a href="#t7">規訓</a>
+  <a href="#t8">高低位</a>
+  <a href="#healing">修復路徑</a>
+</nav>
+
+<main>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="badge">辨識 · 急救 · 根治</div>
+  <h1>操控手法<br>辨識與修復手冊</h1>
+  <p class="hero-sub">如果你曾在一段關係中感覺自己愈來愈陌生、愈來愈小——這份手冊是為你寫的。</p>
+  <div class="flow-bar">
+    <span class="fb">🔍 識別</span>
+    <span class="fa">→</span>
+    <span class="fb b">🚑 急救</span>
+    <span class="fa">→</span>
+    <span class="fb c">🌱 根治</span>
+  </div>
+</section>
+
+<!-- How to use -->
+<section>
+  <div class="container">
+    <a href="attraction-psychology-atlas.html" class="back-link">← 回吸引力心理學主報告</a>
+    <div class="sl">使用說明</div>
+    <div class="st">這份手冊的三層結構</div>
+    <div class="sd">每個手法都拆成三個層次。依照你現在的狀況決定從哪一層開始。</div>
+
+    <div class="journey">
+      <div class="jcard p1">
+        <div class="jnum">LAYER 1</div>
+        <div class="jtitle">🔍 識別</div>
+        <p>這個手法長什麼樣、對方怎麼操作、你身體和情緒會出現哪些訊號。<br><br>用途：對號入座——「我遇到的就是這個。」</p>
+      </div>
+      <div class="jcard p2">
+        <div class="jnum">LAYER 2</div>
+        <div class="jtitle">🚑 短期急救</div>
+        <p>當下或近期怎麼應對、停損點在哪、怎麼離場、心理急救。<br><br>用途：可以立刻用的說明書，不需要先「想通」。</p>
+      </div>
+      <div class="jcard p3">
+        <div class="jnum">LAYER 3</div>
+        <div class="jtitle">🌱 長期根治</div>
+        <p>接回底層原因：為什麼你會被這個手法吸進去？從情緒自主、身份認同、神經回路重建。<br><br>用途：不只逃出去，而是不會再被同類關係困住。</p>
+      </div>
+    </div>
+
+    <hr class="sep-line">
+
+    <div class="warn-box" style="margin-top:1.5rem">
+      <div class="wt">⚠ 重要前提</div>
+      <p>辨識這些手法不是要你「報復」或「反制」——而是幫你從霧中走出來。你在這段關係裡的反應是正常的，不代表你「蠢」或「弱」。神經系統被設計成這樣運作。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Overview -->
+<section id="overview" style="padding-top:2rem">
+  <div class="container">
+    <div class="sl">8 種手法全覽</div>
+    <div class="st">快速索引</div>
+    <div class="sd">點擊卡片跳到對應章節。</div>
+    <div class="overview-grid">
+      <div class="ov-card" onclick="document.getElementById('t1').scrollIntoView({behavior:'smooth'})">
+        <div class="num">01</div>
+        <div class="name">馴化</div>
+        <div class="short">邊界被一點一點磨掉</div>
+      </div>
+      <div class="ov-card" onclick="document.getElementById('t2').scrollIntoView({behavior:'smooth'})">
+        <div class="num">02</div>
+        <div class="name">精神錨點</div>
+        <div class="short">某些觸發點讓你無法離開</div>
+      </div>
+      <div class="ov-card" onclick="document.getElementById('t3').scrollIntoView({behavior:'smooth'})">
+        <div class="num">03</div>
+        <div class="name">擊碎心理防線</div>
+        <div class="short">傷口被當作入口</div>
+      </div>
+      <div class="ov-card" onclick="document.getElementById('t4').scrollIntoView({behavior:'smooth'})">
+        <div class="num">04</div>
+        <div class="name">戀愛腦控制法</div>
+        <div class="short">情緒雲霧遮住判斷力</div>
+      </div>
+      <div class="ov-card" onclick="document.getElementById('t5').scrollIntoView({behavior:'smooth'})">
+        <div class="num">05</div>
+        <div class="name">服從性測試</div>
+        <div class="short">小要求慢慢升級</div>
+      </div>
+      <div class="ov-card" onclick="document.getElementById('t6').scrollIntoView({behavior:'smooth'})">
+        <div class="num">06</div>
+        <div class="name">懲罰</div>
+        <div class="short">冷漠與憤怒作為工具</div>
+      </div>
+      <div class="ov-card" onclick="document.getElementById('t7').scrollIntoView({behavior:'smooth'})">
+        <div class="num">07</div>
+        <div class="name">規訓</div>
+        <div class="short">你變成了另一個人</div>
+      </div>
+      <div class="ov-card" onclick="document.getElementById('t8').scrollIntoView({behavior:'smooth'})">
+        <div class="num">08</div>
+        <div class="name">高低位支配框架</div>
+        <div class="short">你永遠在下面需要學習</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE 1: 馴化 -->
+<section id="t1">
+  <div class="container">
+    <div class="tech-card">
+      <div class="tech-header">
+        <div class="tech-num">01</div>
+        <div class="tech-title">
+          <h3><span class="zh">馴化</span></h3>
+          <div class="en">Conditioning / Domestication</div>
+          <div class="def">透過一系列微小步驟，讓你逐漸接受原本無法接受的事。邊界不是被突破的，是被慢慢磨掉的。</div>
+          <div class="danger-level">⚠ 高危：通常需要數週至數月才被察覺</div>
+        </div>
+      </div>
+      <div class="layers">
+        <div class="layer layer-1">
+          <div class="layer-badge">🔍 識別</div>
+          <h4>你可能遇到了馴化，如果——</h4>
+          <ul class="signal-list">
+            <li>你發現自己接受的事，半年前絕對不會答應</li>
+            <li>「反正就這樣」「算了習慣了」的想法變得很正常</li>
+            <li>對方每次只要求一點點，從來不提大要求</li>
+            <li>你開始替對方的不當行為找理由、解釋</li>
+            <li>身邊的人說「你變了」但你說不清楚哪裡變</li>
+            <li><strong>身體訊號：</strong>面對某些要求感到噁心但還是順從；事後感到羞恥</li>
+          </ul>
+        </div>
+        <div class="layer layer-2">
+          <div class="layer-badge">🚑 急救</div>
+          <h4>現在可以做的事</h4>
+          <ul class="signal-list">
+            <li><strong>命名它：</strong>在心裡說「這是馴化。這不是我同意的。」</li>
+            <li><strong>24小時規則：</strong>任何新的要求，不管多小，先說「我想想」再答覆</li>
+            <li>把你一年前的底線寫下來，跟現在比較——差距就是被磨掉的邊界</li>
+            <li>找一個外部現實檢核：跟你信任的人說「我覺得這正常嗎？」</li>
+            <li>先不需要離開，但需要<strong>停止繼續讓步</strong>，哪怕只是一件事</li>
+          </ul>
+        </div>
+        <div class="layer layer-3">
+          <div class="layer-badge">🌱 根治</div>
+          <h4>為什麼你會被這個困住？</h4>
+          <ul class="signal-list">
+            <li><strong>根因：</strong>邊界感不是天生的，是從早期依附關係學來的——如果你從小學到「愛 = 忍耐」，馴化對你特別有效</li>
+            <li>練習「不」的肌肉：從低風險的場合開始（便利商店、朋友小事）建立邊界肌肉記憶</li>
+            <li>重建身體感知：馴化會讓你切斷身體訊號。每天問自己「現在身體有什麼感覺？」練習接收</li>
+            <li>讀吸引力主報告的「情緒自主」章節——邊界是自主的外層保護</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE 2: 精神錨點 -->
+<section id="t2">
+  <div class="container">
+    <div class="tech-card">
+      <div class="tech-header">
+        <div class="tech-num">02</div>
+        <div class="tech-title">
+          <h3><span class="zh">精神錨點</span></h3>
+          <div class="en">Psychological Anchoring</div>
+          <div class="def">把強烈的情緒（高峰快樂、強烈安全感、極度痛苦）與特定的人、場景、語言綁在一起，讓你在理智上想離開，但某個觸發點一出現就被拉回去。</div>
+          <div class="danger-level">⚠ 高危：即使對方離開後仍長期作用</div>
+        </div>
+      </div>
+      <div class="layers">
+        <div class="layer layer-1">
+          <div class="layer-badge">🔍 識別</div>
+          <h4>精神錨點可能在作用，如果——</h4>
+          <ul class="signal-list">
+            <li>某首歌、某個地方、某個字眼出現，你的情緒立刻劇烈波動</li>
+            <li>你知道這段關係有問題，但每次「感受到他」就想回去</li>
+            <li>分手後幾個月，一個訊息就讓你「解封」所有防線</li>
+            <li>在關係中，某幾個場景（第一次、某個週年）被反覆提起來影響你情緒</li>
+            <li><strong>身體訊號：</strong>心跳加速、想哭、胸口緊——不是因為當下，而是被觸發</li>
+          </ul>
+        </div>
+        <div class="layer layer-2">
+          <div class="layer-badge">🚑 急救</div>
+          <h4>被觸發當下怎麼辦</h4>
+          <ul class="signal-list">
+            <li><strong>辨識觸發器：</strong>列出你知道的觸發點（歌曲、地點、特定詞語），主動管理接觸</li>
+            <li>觸發後「72小時不決策」規則：任何被觸發後的衝動，等72小時再行動</li>
+            <li><strong>Ground技巧：</strong>觸發時說出5個你能看到的東西，把注意力拉回當下</li>
+            <li>不要強迫自己「不去想」——這會讓錨點更強。改為：觀察它，但不要順著它行動</li>
+          </ul>
+        </div>
+        <div class="layer layer-3">
+          <div class="layer-badge">🌱 根治</div>
+          <h4>神經回路可以重寫</h4>
+          <ul class="signal-list">
+            <li>精神錨點的本質是神經回路——反覆觸發就會強化，<strong>不觸發+建立新回路就會弱化</strong></li>
+            <li>主動建立新錨點：把你想要的情緒狀態，和一個<em>新的</em>場景綁在一起，反覆累積</li>
+            <li>時間是必要的：神經回路改寫需要數月。不是意志力，是時間+新體驗</li>
+            <li>如果觸發點伴隨創傷反應（閃回、解離），建議搭配EMDR或身體取向的諮商</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE 3: 擊碎心理防線 -->
+<section id="t3">
+  <div class="container">
+    <div class="tech-card">
+      <div class="tech-header">
+        <div class="tech-num">03</div>
+        <div class="tech-title">
+          <h3><span class="zh">擊碎心理防線</span></h3>
+          <div class="en">Breaking Down Psychological Defenses</div>
+          <div class="def">故意找到、然後針對你的脆弱點、羞恥感或過去的傷口，讓你感到暴露和脆弱，進而產生依賴——把漏洞當成進入你的門。</div>
+          <div class="danger-level">⚠ 極高危：往往偽裝成「深度親密」</div>
+        </div>
+      </div>
+      <div class="layers">
+        <div class="layer layer-1">
+          <div class="layer-badge">🔍 識別</div>
+          <h4>防線被擊碎，如果——</h4>
+          <ul class="signal-list">
+            <li>你分享了脆弱的事，對方後來用這件事在衝突中攻擊你</li>
+            <li>對方說「我看穿你了」「你一直都是這樣」——用你告訴他的事定義你</li>
+            <li>在親密後你感到羞恥、暴露感，而不是安全</li>
+            <li>感覺你「需要」對方才能感覺完整，因為只有他「真正了解你」</li>
+            <li><strong>關鍵區別：</strong>真正的親密讓你感到<em>更完整</em>；這個手法讓你感到<em>更脆弱更依賴</em></li>
+          </ul>
+        </div>
+        <div class="layer layer-2">
+          <div class="layer-badge">🚑 急救</div>
+          <h4>立即可以做的</h4>
+          <ul class="signal-list">
+            <li>記住：<strong>脆弱不是邀請。你的傷口不是入口。</strong></li>
+            <li>暫停分享脆弱面——不是永久，是先讓自己有空間</li>
+            <li>整理哪些事你告訴過他，哪些事後來被拿來攻擊你——把模式看清楚</li>
+            <li>「只有他懂我」的感覺 = 錨點，不是事實。你的脆弱面可以被很多人安全承接</li>
+            <li>跟你信任的朋友練習：分享小事，讓你的神經系統重新學習「分享是安全的」</li>
+          </ul>
+        </div>
+        <div class="layer layer-3">
+          <div class="layer-badge">🌱 根治</div>
+          <h4>傷口不是你的弱點，是你的歷史</h4>
+          <ul class="signal-list">
+            <li>這個手法之所以有效，是因為大多數人都有未處理的傷口。這不是你的錯</li>
+            <li>真正的修復：把傷口帶到<strong>安全的容器</strong>處理（心理諮商），讓它整合而不是被人利用</li>
+            <li>重建真實親密感的能力：學習「漸進式脆弱」——在對方持續展現安全後，再慢慢開放</li>
+            <li>讀主報告「情緒確認與故事建構」章節——真正的親密是共建故事，不是挖掘傷口</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE 4: 戀愛腦控制法 -->
+<section id="t4">
+  <div class="container">
+    <div class="tech-card">
+      <div class="tech-header">
+        <div class="tech-num">04</div>
+        <div class="tech-title">
+          <h3><span class="zh">戀愛腦控制法</span></h3>
+          <div class="en">Love-Brain State Exploitation</div>
+          <div class="def">利用戀愛初期的神經化學狀態（多巴胺、催產素飆升造成的判斷力下降），維持或強化這種「雲霧」狀態，讓你在情緒主導下做決定、接受要求。</div>
+          <div class="danger-level">⚠ 高危：最難被察覺，因為「感覺是真實的」</div>
+        </div>
+      </div>
+      <div class="layers">
+        <div class="layer layer-1">
+          <div class="layer-badge">🔍 識別</div>
+          <h4>戀愛腦狀態被利用，如果——</h4>
+          <ul class="signal-list">
+            <li>你「知道」這件事不對，但「感覺」壓過了知道</li>
+            <li>朋友、家人擔心，但你覺得他們不懂你們的關係</li>
+            <li>做了很多事後悔，但在做的當下感覺「對的」</li>
+            <li>對方擅長在情緒高峰時（約會後、親密後、剛和好後）提出要求</li>
+            <li><strong>關鍵訊號：</strong>你對這段關係的評估，清醒時和在他身邊時，感覺像兩個人</li>
+          </ul>
+        </div>
+        <div class="layer layer-2">
+          <div class="layer-badge">🚑 急救</div>
+          <h4>從雲霧裡走出來的步驟</h4>
+          <ul class="signal-list">
+            <li><strong>重大決定「離場等待」：</strong>任何涉及金錢、承諾、身體的決定，要在「離開他身邊48小時」後做</li>
+            <li>每週跟一個不認識他的朋友見面，保持外部現實感</li>
+            <li>把你的擔憂寫下來（不是說給他聽）——白紙黑字比情緒清醒</li>
+            <li>「感覺很強烈」不等於「這個選擇是對的」——這兩件事是獨立的</li>
+          </ul>
+        </div>
+        <div class="layer layer-3">
+          <div class="layer-badge">🌱 根治</div>
+          <h4>情緒不是敵人，但不能是船長</h4>
+          <ul class="signal-list">
+            <li>戀愛腦本身是正常現象，問題是它被利用了。修復方向是<strong>情緒自主</strong>，不是壓抑情緒</li>
+            <li>練習「情緒 + 判斷雙軌並行」：讓自己感受情緒的同時，保留一個清醒的觀察者</li>
+            <li>從過去的戀愛腦決定中找模式：什麼時候你最容易被影響？那就是你的脆弱時間點</li>
+            <li>讀主報告「多巴胺與損失厭惡」章節——理解神經機制後，雲霧的控制力會下降</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE 5: 服從性測試 -->
+<section id="t5">
+  <div class="container">
+    <div class="tech-card">
+      <div class="tech-header">
+        <div class="tech-num">05</div>
+        <div class="tech-title">
+          <h3><span class="zh">服從性測試</span></h3>
+          <div class="en">Compliance Testing</div>
+          <div class="def">以小測試大，從微小的要求開始，逐漸升級——觀察你是否服從，不服從就施加後果，服從了就進一步要求。把你訓練成「預設答應」的狀態。</div>
+          <div class="danger-level">⚠ 高危：與正常互相讓步極難區分</div>
+        </div>
+      </div>
+      <div class="layers">
+        <div class="layer layer-1">
+          <div class="layer-badge">🔍 識別</div>
+          <h4>你可能正在被測試，如果——</h4>
+          <ul class="signal-list">
+            <li>「不」這個答案，在這段關係裡帶來的後果不成比例</li>
+            <li>你發現自己做了很多你「不太想做但覺得算了」的事</li>
+            <li>有一種模式：他要求→你猶豫→他不舒服→你答應→關係短暫和諧</li>
+            <li>要求的規模在幾個月內持續升級</li>
+            <li><strong>關鍵測試：</strong>對一個小要求說不，看他的反應。正常人接受；在做測試的人，反應會不成比例</li>
+          </ul>
+        </div>
+        <div class="layer layer-2">
+          <div class="layer-badge">🚑 急救</div>
+          <h4>打破服從迴圈</h4>
+          <ul class="signal-list">
+            <li>選一件「小事」說不，觀察他的反應——這是診斷，不是對抗</li>
+            <li><strong>不需要解釋「為什麼不」。</strong>「我不要」是完整的句子</li>
+            <li>記錄一週內你說「算了」「好吧」的次數——拿到數字後你會看清楚規模</li>
+            <li>他的不滿 ≠ 你做錯了。把這兩件事拆開來感受</li>
+          </ul>
+        </div>
+        <div class="layer layer-3">
+          <div class="layer-badge">🌱 根治</div>
+          <h4>重建你的主動同意能力</h4>
+          <ul class="signal-list">
+            <li>服從性測試之所以有效，是因為你把「關係和諧」和「自己的同意」混在一起了</li>
+            <li>健康關係的基礎是：雙方各自完整，然後選擇在一起。<strong>你不需要表演順從來維持關係</strong></li>
+            <li>練習主動同意（而非被動接受）：「我想這樣做」vs「我只是沒有反對」——這兩者的感覺不同</li>
+            <li>讀主報告「投資習慣與身份」章節——沉沒成本是讓測試持續有效的燃料</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE 6: 懲罰 -->
+<section id="t6">
+  <div class="container">
+    <div class="tech-card">
+      <div class="tech-header">
+        <div class="tech-num">06</div>
+        <div class="tech-title">
+          <h3><span class="zh">懲罰</span></h3>
+          <div class="en">Emotional Punishment</div>
+          <div class="def">用冷漠、沉默、撤回關愛、或顯性憤怒來「糾正」你的行為——不是討論問題，而是讓你感受到足夠的不舒服，使你改變。把情緒武器化。</div>
+          <div class="danger-level">⚠ 高危：被包裝成「他就是這樣表達不滿」</div>
+        </div>
+      </div>
+      <div class="layers">
+        <div class="layer layer-1">
+          <div class="layer-badge">🔍 識別</div>
+          <h4>情緒懲罰在運作，如果——</h4>
+          <ul class="signal-list">
+            <li>冷戰、沉默、不回訊息，是你們衝突後的固定模式</li>
+            <li>你感覺自己走在蛋殼上——不知道什麼會觸發他的不滿</li>
+            <li>他不說「你哪裡做錯了」，而是用情緒讓你猜測、道歉、求和</li>
+            <li>道歉成了一種儀式：你道歉→他接受→短暫和好→下次再來</li>
+            <li><strong>關鍵區別：</strong>健康的「我需要空間」有明確的溝通；懲罰式沉默是讓你痛苦到就範</li>
+          </ul>
+        </div>
+        <div class="layer layer-2">
+          <div class="layer-badge">🚑 急救</div>
+          <h4>從懲罰迴圈裡出來</h4>
+          <ul class="signal-list">
+            <li>拒絕替你沒做錯的事道歉——哪怕難受，也不道歉</li>
+            <li>冷戰期間，去做你自己的事。填滿那個空間，而不是焦慮等待他回來</li>
+            <li>命名給自己聽：「他現在用沉默懲罰我。這不是溝通。」</li>
+            <li>注意：每次你為了結束冷戰而道歉，就在訓練他繼續使用這個工具</li>
+          </ul>
+        </div>
+        <div class="layer layer-3">
+          <div class="layer-badge">🌱 根治</div>
+          <h4>重新定義愛和控制的邊界</h4>
+          <ul class="signal-list">
+            <li>懲罰之所以有效，是因為你把他的情緒撤回等同於「愛的消失」——這個等式需要更新</li>
+            <li>學習區分：<strong>真正的衝突修復</strong>（討論 + 各自負責）vs <strong>情緒控制</strong>（讓你痛苦直到就範）</li>
+            <li>哀悼你想要的那種愛——能討論、能修復、能安全表達不同意。那才是你值得的</li>
+            <li>讀主報告「神經系統章節」——焦慮型依附讓冷戰式懲罰特別有效，可以從這裡修</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE 7: 規訓 -->
+<section id="t7">
+  <div class="container">
+    <div class="tech-card">
+      <div class="tech-header">
+        <div class="tech-num">07</div>
+        <div class="tech-title">
+          <h3><span class="zh">規訓</span></h3>
+          <div class="en">Systematic Identity Reshaping</div>
+          <div class="def">透過持續的評價、比較、建議和期望，系統性地改造你的個性、外貌、喜好、人際圈，讓你成為「他想要的版本」——而你逐漸忘記你原來是誰。</div>
+          <div class="danger-level">⚠ 最高危：身份層面的入侵，損害最深</div>
+        </div>
+      </div>
+      <div class="layers">
+        <div class="layer layer-1">
+          <div class="layer-badge">🔍 識別</div>
+          <h4>身份被改造，如果——</h4>
+          <ul class="signal-list">
+            <li>看到過去的照片或日記，你認不出那個人</li>
+            <li>你的朋友圈、興趣、穿著、說話方式都圍繞著他的偏好</li>
+            <li>他有很多「你可以更好」的建議，而你努力實現它們</li>
+            <li>你不確定自己喜歡什麼、不喜歡什麼——好像那個判斷力不見了</li>
+            <li><strong>最深層訊號：</strong>如果他明天消失，你不知道自己是誰</li>
+          </ul>
+        </div>
+        <div class="layer layer-2">
+          <div class="layer-badge">🚑 急救</div>
+          <h4>找回舊的自己</h4>
+          <ul class="signal-list">
+            <li>翻出兩年前的照片、聊天記錄、舊日記——跟過去的自己對話</li>
+            <li>聯絡一個認識你「之前」的朋友，讓他們說說你變了哪些地方</li>
+            <li>做一件只有你自己喜歡的事，不需要他知道，不需要他認可</li>
+            <li>問自己：「如果他從來不存在，我現在會想做什麼？」——從那裡開始</li>
+          </ul>
+        </div>
+        <div class="layer layer-3">
+          <div class="layer-badge">🌱 根治</div>
+          <h4>身份重建是長期工程</h4>
+          <ul class="signal-list">
+            <li>規訓之所以有效，通常是因為在遇見他之前，你的身份認同本來就不夠穩——空白讓他有空間填入</li>
+            <li>身份重建的核心問題：「去掉所有外部定義，我的核心價值是什麼？」——每天給它一個小表達</li>
+            <li>這不是一夜完成的。每找回一個「這是我喜歡的」都是勝利</li>
+            <li>讀主報告「身份認同章節」——你的身份是長期穩定吸引力的來源，也是抵抗規訓的核心盾牌</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE 8: 高低位支配框架 -->
+<section id="t8">
+  <div class="container">
+    <div class="tech-card">
+      <div class="tech-header">
+        <div class="tech-num">08</div>
+        <div class="tech-title">
+          <h3><span class="zh">高低位支配框架</span></h3>
+          <div class="en">Dominance Hierarchy Frame</div>
+          <div class="def">在關係中建立固定的上下位結構——他是老師、導師、更有閱歷的那個；你是學生、需要被指導的那個。這個框架看起來像「他在幫你成長」，實際上是讓你永遠在下位。</div>
+          <div class="danger-level">⚠ 高危：常以「導師型關係」為偽裝</div>
+        </div>
+      </div>
+      <div class="layers">
+        <div class="layer layer-1">
+          <div class="layer-badge">🔍 識別</div>
+          <h4>高低位框架在運作，如果——</h4>
+          <ul class="signal-list">
+            <li>在你們的對話裡，他幾乎永遠是在「教你」，你幾乎永遠是在「學」</li>
+            <li>你的觀點被他輕易否定，他說「你還不懂」你就閉嘴了</li>
+            <li>他用自己的閱歷、年齡、成就讓你感到不夠格表達意見</li>
+            <li>當你在某方面超越他時，他輕描淡寫或轉移話題</li>
+            <li><strong>核心訊號：</strong>你從來不覺得自己跟他是平等的，但說不清楚為什麼</li>
+          </ul>
+        </div>
+        <div class="layer layer-2">
+          <div class="layer-badge">🚑 急救</div>
+          <h4>打破上下位框架</h4>
+          <ul class="signal-list">
+            <li>下次他說「你不懂」，回答：「我想聽你的觀點，但這不代表我的觀點是錯的。」</li>
+            <li>列出你在哪些事情上確實比他更有能力或更了解——把清單放在看得到的地方</li>
+            <li>對等感知練習：「他的閱歷 ≠ 他永遠正確。」這兩件事是分開的</li>
+            <li>在關係以外，去找幾個<strong>真正對等的關係</strong>——讓你的神經系統知道平等是可能的</li>
+          </ul>
+        </div>
+        <div class="layer layer-3">
+          <div class="layer-badge">🌱 根治</div>
+          <h4>你不需要表演才值得被尊重</h4>
+          <ul class="signal-list">
+            <li>這個框架之所以有效，是因為你在某種程度上相信「我需要透過學習、改善、證明，才能獲得他的肯定」</li>
+            <li>根本信念更新：<strong>你的存在本身就是有價值的。</strong>尊重不是靠表現換來的</li>
+            <li>建立平等型親密的能力：找一段雙向、可以互相挑戰的友誼來練習</li>
+            <li>讀主報告「社交訊號與身份催眠」章節——高低位框架是通過社交框架維持的，理解它就能鬆動它</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pullquote -->
+<div class="container">
+  <div class="pullquote">
+    <blockquote>你的神經系統不是在騙你。它在用它學到的方式保護你。<br>修復不是「變強」，是讓它有機會學到新的模式。</blockquote>
+    <cite>— 修復底層邏輯</cite>
+  </div>
+</div>
+
+<!-- Healing Journey -->
+<section id="healing">
+  <div class="container">
+    <div class="sl">修復路徑</div>
+    <div class="st">三階段重建</div>
+    <div class="sd">不管你遇到的是哪個手法（或多個同時），修復的方向是相同的。這三個階段不是線性的，可能會來回——這是正常的。</div>
+
+    <div class="journey">
+      <div class="jcard p1">
+        <div class="jnum">PHASE 1 · 數週至數月</div>
+        <div class="jtitle">情緒急救 + 現實重建</div>
+        <p>先讓自己穩住，重建對現實的感知。</p>
+        <ul>
+          <li>命名發生了什麼，不再替它找藉口</li>
+          <li>讓自己與外部現實重新接觸（朋友、家人、日常）</li>
+          <li>停止讓步，從最小的事情開始</li>
+          <li>身體照顧：睡眠、食物、移動身體</li>
+          <li>允許自己有混亂的情緒，不強迫自己「想通了」</li>
+        </ul>
+      </div>
+      <div class="jcard p2">
+        <div class="jnum">PHASE 2 · 數月至一年</div>
+        <div class="jtitle">根因理解 + 神經回路更新</div>
+        <p>理解為什麼這些手法對你有效，開始從底層重建。</p>
+        <ul>
+          <li>找到你的核心脆弱點（早期依附、身份認同、價值感）</li>
+          <li>建立新的神經錨點：新的人、新的體驗、新的記憶</li>
+          <li>練習情緒自主：情緒可以存在，但不必主導決策</li>
+          <li>讀主報告的底層模型，把知識轉成洞見</li>
+          <li>如有需要，搭配專業支持（諮商、身體取向療法）</li>
+        </ul>
+      </div>
+      <div class="jcard p3">
+        <div class="jnum">PHASE 3 · 長期持續</div>
+        <div class="jtitle">身份重建 + 健康關係能力</div>
+        <p>成為一個在親密關係中仍然是自己的人。</p>
+        <ul>
+          <li>清楚你的核心價值觀和不可妥協的邊界</li>
+          <li>能在新關係中「漸進式信任」而非全開或全閉</li>
+          <li>對關係品量有判斷能力：早期辨識危險訊號</li>
+          <li>在親密中保持獨立性——這不是冷漠，是成熟</li>
+          <li>能接受真正的愛，不因為不熟悉平等而排斥它</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="sep-line">
+
+    <!-- Root cause map -->
+    <div class="anchor-box" style="margin-top:2rem">
+      <h4>為什麼這些手法有效的底層共同原因</h4>
+    </div>
+    <div class="root-map">
+      <div class="root-row">
+        <div class="root-tag">依附焦慮</div>
+        <div class="root-content">害怕被拋棄的底層恐懼，讓你在關係中預設「我需要配合才能留住對方」。<strong>所有八個手法都以此為燃料。</strong></div>
+      </div>
+      <div class="root-row">
+        <div class="root-tag">沉沒成本</div>
+        <div class="root-content">付出得越多，就越難離開——即使理智知道這段關係在傷害你，情感上「不能讓之前的付出白費」。<strong>讓操控可以持續更長時間。</strong></div>
+      </div>
+      <div class="root-row">
+        <div class="root-tag">身份未定錨</div>
+        <div class="root-content">不清楚自己是誰、自己的價值在哪，讓對方有空間來定義你。<strong>規訓和高低位框架的主要入口。</strong></div>
+      </div>
+      <div class="root-row">
+        <div class="root-tag">情緒外包</div>
+        <div class="root-content">把情緒調節的責任放在對方身上——他高興你才高興，他不滿你就恐慌。<strong>讓懲罰和戀愛腦控制特別有效。</strong></div>
+      </div>
+      <div class="root-row">
+        <div class="root-tag">羞恥感</div>
+        <div class="root-content">未被處理的羞恥（我不夠好、我有問題）是脆弱點被利用的入口，也讓你更難說出「這不對」。<strong>擊碎防線的主要標靶。</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section>
+  <div class="container">
+    <div class="warn-box">
+      <div class="wt">📌 最後一件事</div>
+      <p>看完這份手冊，不代表你「應該」做什麼。這裡的每一件事都是選擇，而不是義務。你可以現在就用急救方法，也可以先只是讓自己「看清楚」。看清楚就是改變的開始。</p>
+    </div>
+    <div style="margin-top:2rem;text-align:center">
+      <a href="attraction-psychology-atlas.html" class="back-link" style="display:inline-flex">← 回吸引力心理學主報告，閱讀健康關係的底層模型</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  操控手法辨識與修復手冊 · 配合《吸引力心理學全圖譜》使用 · 識別 → 急救 → 根治
+</footer>
+
+</body>
+</html>
