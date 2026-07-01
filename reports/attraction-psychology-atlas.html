@@ -7,99 +7,99 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <style>
 :root{--bg:#0d0905;--s:#181008;--s2:#221608;--b:#3c2810;--ac:#e8923a;--ac2:#e05668;--ac3:#f2c34a;--ac4:#d4734a;--tx:#f5ede0;--tx2:#b09075;--tx3:#7a6050;--dn:#e05040;--sf:#5ec08a}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:'Helvetica Neue','PingFang TC','Microsoft JhengHei',sans-serif;line-height:1.7;font-size:15px}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;font-size:125%}
+body{background:var(--bg);color:var(--tx);font-family:'Helvetica Neue','PingFang TC','Microsoft JhengHei',sans-serif;line-height:1.7;font-size:19px}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,9,5,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);display:flex;align-items:center;gap:1.2rem;padding:0 1.5rem;height:56px;overflow-x:auto}
-nav .logo{font-weight:700;font-size:13px;letter-spacing:2px;color:var(--ac);text-transform:uppercase;flex-shrink:0}
-nav a{color:var(--tx2);text-decoration:none;font-size:12px;transition:color .2s;white-space:nowrap;flex-shrink:0}nav a:hover{color:var(--tx)}
+nav .logo{font-weight:700;font-size:16px;letter-spacing:2px;color:var(--ac);text-transform:uppercase;flex-shrink:0}
+nav a{color:var(--tx2);text-decoration:none;font-size:15px;transition:color .2s;white-space:nowrap;flex-shrink:0}nav a:hover{color:var(--tx)}
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(232,146,58,.1),transparent 70%),radial-gradient(ellipse 40% 30% at 80% 70%,rgba(224,86,104,.07),transparent 60%)}
-.badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ac);border:1px solid rgba(232,146,58,.4);border-radius:100px;padding:4px 16px;margin-bottom:1.5rem}
-.hero h1{font-size:clamp(2.4rem,6vw,4.5rem);font-weight:800;letter-spacing:-1px;line-height:1.1;background:linear-gradient(135deg,#fff 20%,var(--ac) 60%,var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
-.hero-sub{font-size:clamp(1rem,2vw,1.25rem);color:var(--tx2);max-width:620px;margin:0 auto 2.5rem}
+.badge{display:inline-block;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--ac);border:1px solid rgba(232,146,58,.4);border-radius:100px;padding:4px 16px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(3.0rem,6vw,5.62rem);font-weight:800;letter-spacing:-1px;line-height:1.1;background:linear-gradient(135deg,#fff 20%,var(--ac) 60%,var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+.hero-sub{font-size:clamp(1.25rem,2vw,1.56rem);color:var(--tx2);max-width:620px;margin:0 auto 2.5rem}
 .fbox{display:inline-flex;align-items:center;flex-wrap:wrap;justify-content:center;background:var(--s);border:1px solid var(--b);border-radius:16px;padding:1.2rem 2rem;margin-top:1rem}
-.fl{color:var(--tx2);font-size:.75rem;display:block;margin-bottom:.5rem}
+.fl{color:var(--tx2);font-size:0.938rem;display:block;margin-bottom:.5rem}
 .fr{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
 .fe{color:var(--tx3);margin:0 .3rem}
-.ft{background:rgba(232,146,58,.15);color:var(--ac);border-radius:8px;padding:4px 10px;font-weight:600;font-size:.85rem}
-.ft.g{background:rgba(224,86,104,.15);color:var(--ac2)}.ft.y{background:rgba(242,195,74,.15);color:var(--ac3)}.ft.r{background:rgba(212,115,74,.2);color:var(--ac4);font-size:1rem}
+.ft{background:rgba(232,146,58,.15);color:var(--ac);border-radius:8px;padding:4px 10px;font-weight:600;font-size:1.062rem}
+.ft.g{background:rgba(224,86,104,.15);color:var(--ac2)}.ft.y{background:rgba(242,195,74,.15);color:var(--ac3)}.ft.r{background:rgba(212,115,74,.2);color:var(--ac4);font-size:1.25rem}
 main{padding-top:56px}section{padding:5rem 0}
 .container{max-width:1100px;margin:0 auto;padding:0 2rem}
-.sl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
-.st{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;line-height:1.2;margin-bottom:1rem}
+.sl{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.st{font-size:clamp(2.0rem,3vw,3.0rem);font-weight:700;line-height:1.2;margin-bottom:1rem}
 .sd{color:var(--tx2);max-width:660px;margin-bottom:3rem}
 .g2{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fill,minmax(480px,1fr))}
 .g3{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .card{background:var(--s);border:1px solid var(--b);border-radius:16px;padding:1.75rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
 .card:hover{border-color:rgba(232,146,58,.5);transform:translateY(-2px)}
 .card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,146,58,.05),transparent 60%);pointer-events:none}
-.cn{font-size:.7rem;font-weight:700;letter-spacing:2px;color:var(--ac);margin-bottom:.5rem}
-.card h3{font-size:1.05rem;font-weight:700;margin-bottom:.6rem}.card p{color:var(--tx2);font-size:.9rem;line-height:1.65}
+.cn{font-size:0.875rem;font-weight:700;letter-spacing:2px;color:var(--ac);margin-bottom:.5rem}
+.card h3{font-size:1.312rem;font-weight:700;margin-bottom:.6rem}.card p{color:var(--tx2);font-size:1.125rem;line-height:1.65}
 .ch{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-top:1rem}
-.ci{background:rgba(232,146,58,.1);color:var(--tx);border-radius:6px;padding:3px 10px;font-size:.8rem}
-.ca{color:var(--ac);font-size:.8rem}
+.ci{background:rgba(232,146,58,.1);color:var(--tx);border-radius:6px;padding:3px 10px;font-size:1rem}
+.ca{color:var(--ac);font-size:1rem}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
 .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
 @media(max-width:900px){.three{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.two,.g2,.g3,.three{grid-template-columns:1fr}}
 .cm{background:var(--s);border:1px solid var(--b);border-radius:20px;padding:2.5rem}
 .cnode{display:flex;align-items:center;gap:.75rem;background:var(--s2);border-radius:12px;padding:.75rem 1.25rem;margin-bottom:1rem}
-.cico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.cico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
 .cico.p{background:rgba(232,146,58,.2)}.cico.t{background:rgba(224,86,104,.2)}.cico.y{background:rgba(242,195,74,.2)}.cico.r{background:rgba(212,115,74,.2)}
-.cnode h4{font-size:.9rem;font-weight:600}.cnode p{font-size:.78rem;color:var(--tx2)}
-.carr{color:var(--tx3);font-size:1.1rem;margin-bottom:1rem;padding-left:1.2rem}
+.cnode h4{font-size:1.125rem;font-weight:600}.cnode p{font-size:0.975rem;color:var(--tx2)}
+.carr{color:var(--tx3);font-size:1.375rem;margin-bottom:1rem;padding-left:1.2rem}
 .dbox{background:rgba(224,80,64,.06);border:1px solid rgba(224,80,64,.25);border-radius:16px;padding:1.75rem}
 .sbox{background:rgba(94,192,138,.06);border:1px solid rgba(94,192,138,.25);border-radius:16px;padding:1.75rem}
-.bt{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:.95rem;margin-bottom:1rem}
+.bt{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1.188rem;margin-bottom:1rem}
 .dbox .bt{color:var(--dn)}.sbox .bt{color:var(--sf)}
 .tl{display:flex;flex-wrap:wrap;gap:.5rem}
-.td{background:rgba(224,80,64,.15);color:#e08878;border-radius:8px;padding:4px 12px;font-size:.82rem}
-.ts{background:rgba(94,192,138,.15);color:#70d098;border-radius:8px;padding:4px 12px;font-size:.82rem}
+.td{background:rgba(224,80,64,.15);color:#e08878;border-radius:8px;padding:4px 12px;font-size:1.025rem}
+.ts{background:rgba(94,192,138,.15);color:#70d098;border-radius:8px;padding:4px 12px;font-size:1.025rem}
 .pl{display:flex;flex-direction:column;gap:.75rem}
 .pi{display:flex;align-items:flex-start;gap:1rem;background:var(--s);border:1px solid var(--b);border-radius:12px;padding:1.1rem 1.4rem}
-.pn{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;color:#fff}
-.pi p{font-size:.92rem;color:var(--tx2)}.pi strong{color:var(--tx)}
+.pn{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;font-size:0.938rem;font-weight:700;flex-shrink:0;color:#fff}
+.pi p{font-size:1.15rem;color:var(--tx2)}.pi strong{color:var(--tx)}
 #gc{background:var(--s);border:1px solid var(--b);border-radius:20px;overflow:hidden;height:640px;position:relative;cursor:grab}
 #gc:active{cursor:grabbing}
 #gc svg{width:100%;height:100%}
 .gl{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}
-.li{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--tx2)}
+.li{display:flex;align-items:center;gap:.4rem;font-size:1rem;color:var(--tx2)}
 .ld{width:10px;height:10px;border-radius:50%}
 .mr{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
-.ml{font-size:.85rem;color:var(--tx2);min-width:120px}
+.ml{font-size:1.062rem;color:var(--tx2);min-width:120px}
 .mb{flex:1;height:6px;background:var(--b);border-radius:100px;overflow:hidden}
 .mf{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
-.mv{font-size:.8rem;color:var(--ac);min-width:36px;text-align:right}
+.mv{font-size:1rem;color:var(--ac);min-width:36px;text-align:right}
 .bq{text-align:center;padding:4rem 2rem;background:linear-gradient(180deg,transparent,rgba(232,146,58,.04) 50%,transparent)}
-.bq blockquote{font-size:clamp(1.1rem,2.5vw,1.7rem);font-weight:600;line-height:1.5;max-width:800px;margin:0 auto 1rem}
-.bq cite{font-size:.85rem;color:var(--tx3)}
-footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:var(--tx3);font-size:.8rem}
+.bq blockquote{font-size:clamp(1.38rem,2.5vw,2.12rem);font-weight:600;line-height:1.5;max-width:800px;margin:0 auto 1rem}
+.bq cite{font-size:1.062rem;color:var(--tx3)}
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:var(--tx3);font-size:1rem}
 .hb{background:var(--s2);border:1px solid var(--b);border-radius:16px;padding:1.75rem}
 .zc{position:absolute;bottom:16px;right:16px;display:flex;flex-direction:column;gap:6px;z-index:20}
-.zbtn{width:34px;height:34px;background:var(--s2);border:1px solid var(--b);border-radius:8px;color:var(--tx2);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;user-select:none}
+.zbtn{width:34px;height:34px;background:var(--s2);border:1px solid var(--b);border-radius:8px;color:var(--tx2);font-size:1.375rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;user-select:none}
 .zbtn:hover{background:var(--b);color:var(--tx)}
-.zbtn.sm{font-size:.6rem}
+.zbtn.sm{font-size:0.75rem}
 .sc{background:var(--s);border:1px solid var(--b);border-radius:16px;padding:1.5rem;transition:border-color .2s}
 .sc:hover{border-color:rgba(232,146,58,.4)}
-.sc-num{font-size:.68rem;font-weight:700;letter-spacing:2px;color:var(--ac3);margin-bottom:.4rem}
-.sc-sit{font-size:.95rem;font-weight:700;margin-bottom:.8rem;color:var(--tx)}
-.sc-lbl{font-size:.7rem;font-weight:700;letter-spacing:1px;margin-bottom:.25rem}
+.sc-num{font-size:0.85rem;font-weight:700;letter-spacing:2px;color:var(--ac3);margin-bottom:.4rem}
+.sc-sit{font-size:1.188rem;font-weight:700;margin-bottom:.8rem;color:var(--tx)}
+.sc-lbl{font-size:0.875rem;font-weight:700;letter-spacing:1px;margin-bottom:.25rem}
 .sc-lbl.w{color:var(--dn)}.sc-lbl.r{color:var(--sf)}
-.sc-txt{font-size:.83rem;color:var(--tx2);line-height:1.65;margin-bottom:.6rem}
-.sc-tag{display:inline-block;background:rgba(232,146,58,.12);color:var(--ac);border-radius:6px;padding:2px 9px;font-size:.72rem;margin-top:.3rem}
+.sc-txt{font-size:1.037rem;color:var(--tx2);line-height:1.65;margin-bottom:.6rem}
+.sc-tag{display:inline-block;background:rgba(232,146,58,.12);color:var(--ac);border-radius:6px;padding:2px 9px;font-size:0.9rem;margin-top:.3rem}
 .gbox{background:var(--s);border:1px solid var(--b);border-radius:20px;padding:1.75rem}
-.gbox h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
-.gtag{display:flex;align-items:center;gap:.5rem;background:var(--s2);border-radius:10px;padding:.5rem .9rem;font-size:.85rem;margin-bottom:.45rem;color:var(--tx2)}
+.gbox h3{font-size:1.25rem;font-weight:700;margin-bottom:1rem}
+.gtag{display:flex;align-items:center;gap:.5rem;background:var(--s2);border-radius:10px;padding:.5rem .9rem;font-size:1.062rem;margin-bottom:.45rem;color:var(--tx2)}
 .gtag span{flex-shrink:0}
 .gmid{background:rgba(232,146,58,.07);border:1px solid rgba(232,146,58,.22);border-radius:16px;padding:1.75rem;margin-top:1.75rem}
-.gmid h3{color:var(--ac);font-size:.95rem;font-weight:700;margin-bottom:1.25rem}
+.gmid h3{color:var(--ac);font-size:1.188rem;font-weight:700;margin-bottom:1.25rem}
 .rm{background:var(--s);border:1px solid var(--b);border-radius:20px;padding:2rem}
-.rm-ph{font-size:.68rem;letter-spacing:3px;color:var(--ac3);text-transform:uppercase;margin-bottom:.4rem}
-.rm-ti{font-size:1rem;font-weight:700;margin-bottom:.2rem}
-.rm-su{font-size:.78rem;color:var(--tx3);margin-bottom:1.25rem}
+.rm-ph{font-size:0.85rem;letter-spacing:3px;color:var(--ac3);text-transform:uppercase;margin-bottom:.4rem}
+.rm-ti{font-size:1.25rem;font-weight:700;margin-bottom:.2rem}
+.rm-su{font-size:0.975rem;color:var(--tx3);margin-bottom:1.25rem}
 .rm-it{display:flex;gap:.75rem;margin-bottom:.8rem;align-items:flex-start}
 .rm-dot{width:7px;height:7px;border-radius:50%;background:var(--ac);margin-top:8px;flex-shrink:0}
-.rm-it p{font-size:.87rem;color:var(--tx2);line-height:1.6}
+.rm-it p{font-size:1.087rem;color:var(--tx2);line-height:1.6}
 .rm-it strong{color:var(--tx)}
 </style>
 </head>
@@ -190,21 +190,21 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
     <h3>💡 三個最常見的兩性誤解</h3>
     <div class="g3">
       <div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--dn);margin-bottom:.4rem;">誤解一：條件好等於吸引力強</div>
-        <p style="font-size:.82rem;color:var(--tx2);line-height:1.65;">條件只是初步篩選，決定留下的是「跟你在一起時的情緒體驗」。很多條件普通的人反而更受歡迎——因為讓人感覺放鬆、被理解。</p>
+        <div style="font-size:1.025rem;font-weight:700;color:var(--dn);margin-bottom:.4rem;">誤解一：條件好等於吸引力強</div>
+        <p style="font-size:1.025rem;color:var(--tx2);line-height:1.65;">條件只是初步篩選，決定留下的是「跟你在一起時的情緒體驗」。很多條件普通的人反而更受歡迎——因為讓人感覺放鬆、被理解。</p>
       </div>
       <div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--dn);margin-bottom:.4rem;">誤解二：主動表達會失去優勢</div>
-        <p style="font-size:.82rem;color:var(--tx2);line-height:1.65;">策略性不表達讓人覺得冷淡或沒誠意。真正的優勢是情緒穩定——就算表達了，也不需要對方馬上回應，這才是稀缺性所在。</p>
+        <div style="font-size:1.025rem;font-weight:700;color:var(--dn);margin-bottom:.4rem;">誤解二：主動表達會失去優勢</div>
+        <p style="font-size:1.025rem;color:var(--tx2);line-height:1.65;">策略性不表達讓人覺得冷淡或沒誠意。真正的優勢是情緒穩定——就算表達了，也不需要對方馬上回應，這才是稀缺性所在。</p>
       </div>
       <div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--dn);margin-bottom:.4rem;">誤解三：喜歡就要付出更多</div>
-        <p style="font-size:.82rem;color:var(--tx2);line-height:1.65;">付出越多越期待回報，對方感受到壓力反而退縮。真正有效的是「有選擇地付出」——我付出是因為我想，不是因為需要你留下來。</p>
+        <div style="font-size:1.025rem;font-weight:700;color:var(--dn);margin-bottom:.4rem;">誤解三：喜歡就要付出更多</div>
+        <p style="font-size:1.025rem;color:var(--tx2);line-height:1.65;">付出越多越期待回報，對方感受到壓力反而退縮。真正有效的是「有選擇地付出」——我付出是因為我想，不是因為需要你留下來。</p>
       </div>
     </div>
   </div>
   <div style="margin-top:2rem;">
-    <div style="font-size:.9rem;font-weight:700;margin-bottom:1.25rem;">兩性相處中的五個功課</div>
+    <div style="font-size:1.125rem;font-weight:700;margin-bottom:1.25rem;">兩性相處中的五個功課</div>
     <div class="pl">
       <div class="pi"><div class="pn">1</div><div><strong>先理解，再溝通</strong><p>「我知道你的意思」和「我理解你的感受」是兩件事。大多數誤解不是立場不同，而是沒真正聽懂對方在說什麼。先做後者。</p></div></div>
       <div class="pi"><div class="pn">2</div><div><strong>情緒需求比解決方案更優先</strong><p>男性傾向解決問題，女性傾向先被理解。學會辨認「對方現在需要的是方案還是陪伴」，是進入深層關係的關鍵。</p></div></div>
@@ -223,7 +223,7 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
   <p class="sd">14 份分析最後壓縮成兩條鏈——一條通向自然吸引，一條通向焦慮與消耗</p>
   <div class="two" style="margin-bottom:2.5rem;">
     <div>
-      <div style="font-size:.8rem;color:var(--sf);font-weight:700;letter-spacing:2px;margin-bottom:1rem;">✅ 成熟路徑</div>
+      <div style="font-size:1rem;color:var(--sf);font-weight:700;letter-spacing:2px;margin-bottom:1rem;">✅ 成熟路徑</div>
       <div class="cm">
         <div class="cnode"><div class="cico p">🧠</div><div><h4>神經系統重建</h4><p>反射模式改變，不是意志力</p></div></div>
         <div class="carr">↓</div>
@@ -239,7 +239,7 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
       </div>
     </div>
     <div>
-      <div style="font-size:.8rem;color:var(--dn);font-weight:700;letter-spacing:2px;margin-bottom:1rem;">❌ 焦慮路徑</div>
+      <div style="font-size:1rem;color:var(--dn);font-weight:700;letter-spacing:2px;margin-bottom:1rem;">❌ 焦慮路徑</div>
       <div class="cm" style="border-color:rgba(224,80,64,.2);">
         <div class="cnode"><div class="cico r">😰</div><div><h4>人生只有一個支點</h4><p>沒有朋友、事業、夢想、生活</p></div></div>
         <div class="carr">↓</div>
@@ -256,19 +256,19 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
     </div>
   </div>
   <div class="cm" style="text-align:center;">
-    <div style="font-size:.85rem;color:var(--tx2);margin-bottom:1.5rem;">所有親密關係的通用路徑：吸引 × 共同投入 × 情緒記憶 × 身份認同 × 損失厭惡 = 關係形成</div>
+    <div style="font-size:1.062rem;color:var(--tx2);margin-bottom:1.5rem;">所有親密關係的通用路徑：吸引 × 共同投入 × 情緒記憶 × 身份認同 × 損失厭惡 = 關係形成</div>
     <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap;">
-      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">👁️</div><div style="font-size:.8rem;color:var(--tx2);">認識</div></div>
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.875rem;margin-bottom:.3rem;">👁️</div><div style="font-size:1rem;color:var(--tx2);">認識</div></div>
       <div style="color:var(--tx3);">→</div>
-      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">💫</div><div style="font-size:.8rem;color:var(--tx2);">產生情緒</div></div>
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.875rem;margin-bottom:.3rem;">💫</div><div style="font-size:1rem;color:var(--tx2);">產生情緒</div></div>
       <div style="color:var(--tx3);">→</div>
-      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">🤝</div><div style="font-size:.8rem;color:var(--tx2);">互相投入</div></div>
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.875rem;margin-bottom:.3rem;">🤝</div><div style="font-size:1rem;color:var(--tx2);">互相投入</div></div>
       <div style="color:var(--tx3);">→</div>
-      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">🪪</div><div style="font-size:.8rem;color:var(--tx2);">身份認同</div></div>
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.875rem;margin-bottom:.3rem;">🪪</div><div style="font-size:1rem;color:var(--tx2);">身份認同</div></div>
       <div style="color:var(--tx3);">→</div>
-      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">📖</div><div style="font-size:.8rem;color:var(--tx2);">共同敘事</div></div>
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.875rem;margin-bottom:.3rem;">📖</div><div style="font-size:1rem;color:var(--tx2);">共同敘事</div></div>
       <div style="color:var(--tx3);">→</div>
-      <div style="text-align:center;padding:.5rem;background:rgba(232,146,58,.1);border-radius:12px;"><div style="font-size:1.5rem;margin-bottom:.3rem;">🔗</div><div style="font-size:.8rem;color:var(--ac);">生命互相依存</div></div>
+      <div style="text-align:center;padding:.5rem;background:rgba(232,146,58,.1);border-radius:12px;"><div style="font-size:1.875rem;margin-bottom:.3rem;">🔗</div><div style="font-size:1rem;color:var(--ac);">生命互相依存</div></div>
     </div>
   </div>
 </div>
@@ -281,7 +281,7 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
   <p class="sd">拖曳節點重排、滾輪縮放、拖曳空白區平移——點擊右下角按鈕也可縮放，懸停看說明</p>
   <div id="gc">
     <svg id="kg"></svg>
-    <div id="tip" style="position:absolute;display:none;background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:.75rem 1rem;font-size:.8rem;max-width:220px;color:var(--tx);pointer-events:none;z-index:10;line-height:1.5;"></div>
+    <div id="tip" style="position:absolute;display:none;background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:.75rem 1rem;font-size:1rem;max-width:220px;color:var(--tx);pointer-events:none;z-index:10;line-height:1.5;"></div>
     <div class="zc">
       <button class="zbtn" id="zIn">＋</button>
       <button class="zbtn sm" id="zReset">重置</button>
@@ -399,19 +399,19 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
       <div class="tl">
         <span class="td">馴化</span><span class="td">精神錨點</span><span class="td">擊碎心理防線</span><span class="td">服從性測試</span><span class="td">懲罰</span><span class="td">規訓</span><span class="td">刻意情緒打擊</span><span class="td">利用創傷</span><span class="td">建立控制</span><span class="td">讓她離不開</span>
       </div>
-      <div style="margin-top:1rem;font-size:.82rem;color:var(--tx2);line-height:1.65;"><strong style="color:var(--dn);">共同問題：</strong>目的不是建立關係，而是建立控制。短期可能有效，長期幾乎必然導致不信任、焦慮依附和分離。</div>
+      <div style="margin-top:1rem;font-size:1.025rem;color:var(--tx2);line-height:1.65;"><strong style="color:var(--dn);">共同問題：</strong>目的不是建立關係，而是建立控制。短期可能有效，長期幾乎必然導致不信任、焦慮依附和分離。</div>
     </div>
     <div class="sbox">
       <div class="bt">✅ 這些才是真正有用的</div>
       <div class="tl">
         <span class="ts">情緒確認</span><span class="ts">真正理解</span><span class="ts">心理安全</span><span class="ts">身份一致</span><span class="ts">無條件接納</span><span class="ts">情緒自主</span><span class="ts">設立界線</span><span class="ts">共同建構</span><span class="ts">延遲反應</span><span class="ts">生活重心</span><span class="ts">神經重建</span><span class="ts">一致性</span>
       </div>
-      <div style="margin-top:1rem;font-size:.82rem;color:var(--tx2);line-height:1.65;"><strong style="color:var(--sf);">共同原則：</strong>這些都指向「讓自己成為一個值得長期相處的人」，而不是「讓對方離不開你」。</div>
+      <div style="margin-top:1rem;font-size:1.025rem;color:var(--tx2);line-height:1.65;"><strong style="color:var(--sf);">共同原則：</strong>這些都指向「讓自己成為一個值得長期相處的人」，而不是「讓對方離不開你」。</div>
     </div>
   </div>
   <div class="hb">
-    <div style="font-size:.85rem;font-weight:700;margin-bottom:.75rem;color:var(--ac);">最底層的一句話</div>
-    <p style="color:var(--tx2);font-size:.92rem;line-height:1.7;">把所有心理學、演化心理學和行為科學抽象到最底層，真正長期有效的問題是：<strong style="color:var(--tx);">「怎麼讓自己成為一個即使不用技巧，也值得長期相處的人。」</strong><br><br>當一個人有穩定的情緒、清楚的界線、豐富的生活、持續成長的能力，以及能與伴侶共同建立身份和故事時，大部分技巧都會自然地發生——而且不需要刻意設計。</p>
+    <div style="font-size:1.062rem;font-weight:700;margin-bottom:.75rem;color:var(--ac);">最底層的一句話</div>
+    <p style="color:var(--tx2);font-size:1.15rem;line-height:1.7;">把所有心理學、演化心理學和行為科學抽象到最底層，真正長期有效的問題是：<strong style="color:var(--tx);">「怎麼讓自己成為一個即使不用技巧，也值得長期相處的人。」</strong><br><br>當一個人有穩定的情緒、清楚的界線、豐富的生活、持續成長的能力，以及能與伴侶共同建立身份和故事時，大部分技巧都會自然地發生——而且不需要刻意設計。</p>
   </div>
 </div>
 </section>
@@ -473,8 +473,8 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
     </div>
   </div>
   <div class="hb" style="margin-top:2rem;">
-    <div style="font-size:.85rem;font-weight:700;margin-bottom:.75rem;color:var(--ac);">讀完之後，最重要的一步</div>
-    <p style="color:var(--tx2);font-size:.9rem;line-height:1.7;">選一個情境，想一個你生活中類似的真實狀況，問自己：「如果是用這個框架，我會怎麼做？」然後真的去做一次——不完美沒關係，第一次的目的不是成功，而是讓身體知道理論是真實的。</p>
+    <div style="font-size:1.062rem;font-weight:700;margin-bottom:.75rem;color:var(--ac);">讀完之後，最重要的一步</div>
+    <p style="color:var(--tx2);font-size:1.125rem;line-height:1.7;">選一個情境，想一個你生活中類似的真實狀況，問自己：「如果是用這個框架，我會怎麼做？」然後真的去做一次——不完美沒關係，第一次的目的不是成功，而是讓身體知道理論是真實的。</p>
   </div>
 </div>
 </section>
@@ -567,7 +567,7 @@ nd.append('text').attr('text-anchor','middle').attr('dy','.35em')
 const tip=document.getElementById('tip');
 nd.on('mouseover',(e,d)=>{
   tip.style.display='block';
-  tip.innerHTML=`<strong style="color:${col[d.g]}">${d.id}</strong><br><span style="color:#b09075;font-size:.78rem">${d.info}</span>`;
+  tip.innerHTML=`<strong style="color:${col[d.g]}">${d.id}</strong><br><span style="color:#b09075;font-size:0.975rem">${d.info}</span>`;
 }).on('mousemove',e=>{
   const r=cont.getBoundingClientRect();
   tip.style.left=(e.clientX-r.left+16)+'px';
