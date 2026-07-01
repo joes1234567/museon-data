@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>吸引力心理學全圖譜 · Attraction Psychology Atlas</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root{--bg:#0a0a0f;--s:#12121a;--s2:#1a1a26;--b:#2a2a3e;--ac:#7c6af7;--ac2:#56cfb2;--ac3:#f7c948;--ac4:#f06080;--tx:#e8e8f0;--tx2:#9090b0;--tx3:#5a5a80;--dn:#f04060;--sf:#40c080}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Helvetica Neue','PingFang TC','Microsoft JhengHei',sans-serif;line-height:1.7;font-size:15px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);display:flex;align-items:center;gap:2rem;padding:0 2rem;height:56px}
+nav .logo{font-weight:700;font-size:13px;letter-spacing:2px;color:var(--ac);text-transform:uppercase}
+nav a{color:var(--tx2);text-decoration:none;font-size:13px;transition:color .2s}nav a:hover{color:var(--tx)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(124,106,247,.12),transparent 70%),radial-gradient(ellipse 40% 30% at 80% 70%,rgba(86,207,178,.08),transparent 60%)}
+.badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ac);border:1px solid rgba(124,106,247,.4);border-radius:100px;padding:4px 16px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.4rem,6vw,4.5rem);font-weight:800;letter-spacing:-1px;line-height:1.1;background:linear-gradient(135deg,#fff,var(--ac) 60%,var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+.hero-sub{font-size:clamp(1rem,2vw,1.25rem);color:var(--tx2);max-width:600px;margin:0 auto 2.5rem}
+.fbox{display:inline-flex;align-items:center;flex-wrap:wrap;justify-content:center;background:var(--s);border:1px solid var(--b);border-radius:16px;padding:1.2rem 2rem;margin-top:1rem}
+.fl{color:var(--tx2);font-size:.75rem;display:block;margin-bottom:.4rem}
+.fr{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.fe{color:var(--tx3);margin:0 .3rem}
+.ft{background:rgba(124,106,247,.15);color:var(--ac);border-radius:8px;padding:4px 10px;font-weight:600;font-size:.85rem}
+.ft.g{background:rgba(86,207,178,.15);color:var(--ac2)}.ft.y{background:rgba(247,201,72,.15);color:var(--ac3)}.ft.r{background:rgba(240,96,128,.15);color:var(--ac4);font-size:1rem}
+main{padding-top:56px}section{padding:5rem 0}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem}
+.sl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.st{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;line-height:1.2;margin-bottom:1rem}
+.sd{color:var(--tx2);max-width:640px;margin-bottom:3rem}
+.g2{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fill,minmax(480px,1fr))}
+.g3{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.card{background:var(--s);border:1px solid var(--b);border-radius:16px;padding:1.75rem;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.card:hover{border-color:rgba(124,106,247,.5);transform:translateY(-2px)}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,106,247,.05),transparent 60%);pointer-events:none}
+.cn{font-size:.7rem;font-weight:700;letter-spacing:2px;color:var(--ac);margin-bottom:.5rem}
+.card h3{font-size:1.05rem;font-weight:700;margin-bottom:.6rem}.card p{color:var(--tx2);font-size:.9rem;line-height:1.65}
+.ch{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-top:1rem}
+.ci{background:rgba(124,106,247,.1);color:var(--tx);border-radius:6px;padding:3px 10px;font-size:.8rem}
+.ca{color:var(--ac);font-size:.8rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:700px){.two,.g2,.g3{grid-template-columns:1fr}nav a:not(:first-child){display:none}}
+.cm{background:var(--s);border:1px solid var(--b);border-radius:20px;padding:2.5rem}
+.cnode{display:flex;align-items:center;gap:.75rem;background:var(--s2);border-radius:12px;padding:.75rem 1.25rem;margin-bottom:1rem}
+.cico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.cico.p{background:rgba(124,106,247,.2)}.cico.t{background:rgba(86,207,178,.2)}.cico.y{background:rgba(247,201,72,.2)}.cico.r{background:rgba(240,96,128,.2)}
+.cnode h4{font-size:.9rem;font-weight:600}.cnode p{font-size:.78rem;color:var(--tx2)}
+.carr{color:var(--tx3);font-size:1.1rem;margin-bottom:1rem;padding-left:1.2rem}
+.dbox{background:rgba(240,60,80,.06);border:1px solid rgba(240,60,80,.25);border-radius:16px;padding:1.75rem}
+.sbox{background:rgba(64,192,128,.06);border:1px solid rgba(64,192,128,.25);border-radius:16px;padding:1.75rem}
+.bt{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:.95rem;margin-bottom:1rem}
+.dbox .bt{color:var(--dn)}.sbox .bt{color:var(--sf)}
+.tl{display:flex;flex-wrap:wrap;gap:.5rem}
+.td{background:rgba(240,60,80,.15);color:#f07080;border-radius:8px;padding:4px 12px;font-size:.82rem}
+.ts{background:rgba(64,192,128,.15);color:#60d090;border-radius:8px;padding:4px 12px;font-size:.82rem}
+.pl{display:flex;flex-direction:column;gap:.75rem}
+.pi{display:flex;align-items:flex-start;gap:1rem;background:var(--s);border:1px solid var(--b);border-radius:12px;padding:1.1rem 1.4rem}
+.pn{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;color:#fff}
+.pi p{font-size:.92rem;color:var(--tx2)}.pi strong{color:var(--tx)}
+#gc{background:var(--s);border:1px solid var(--b);border-radius:20px;overflow:hidden;height:580px;position:relative}
+#gc svg{width:100%;height:100%}
+.gl{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}
+.li{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--tx2)}
+.ld{width:10px;height:10px;border-radius:50%}
+.mr{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.ml{font-size:.85rem;color:var(--tx2);min-width:120px}
+.mb{flex:1;height:6px;background:var(--b);border-radius:100px;overflow:hidden}
+.mf{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.mv{font-size:.8rem;color:var(--ac);min-width:32px;text-align:right}
+.bq{text-align:center;padding:4rem 2rem;background:linear-gradient(180deg,transparent,rgba(124,106,247,.05) 50%,transparent)}
+.bq blockquote{font-size:clamp(1.1rem,2.5vw,1.7rem);font-weight:600;line-height:1.5;max-width:800px;margin:0 auto 1rem}
+.bq cite{font-size:.85rem;color:var(--tx3)}
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:var(--tx3);font-size:.8rem}
+.hb{background:var(--s2);border:1px solid var(--b);border-radius:16px;padding:1.75rem}
+</style>
+</head>
+<body>
+<nav>
+  <span class="logo">Attraction Atlas</span>
+  <a href="#models">核心模型</a><a href="#chains">行為鏈</a><a href="#graph">知識圖譜</a><a href="#healthy">健康版本</a><a href="#danger">警示區</a>
+</nav>
+<main>
+
+<div class="hero">
+  <div class="badge">Deep Research · 14 份分析報告 · 吸引力心理學</div>
+  <h1>吸引力全圖譜<br>Attraction Psychology Atlas</h1>
+  <p class="hero-sub">從演化心理學、行為科學、依附理論出發，拆解「讓人靠近」的底層機制——以及那些被包裝成技巧的危險操控</p>
+  <div class="fbox">
+    <div><span class="fl">核心公式</span>
+    <div class="fr">
+      <span class="ft">真實價值</span><span class="fe">×</span><span class="ft g">情緒體驗</span><span class="fe">×</span><span class="ft y">稀缺性</span><span class="fe">×</span><span class="ft">自主性</span><span class="fe">×</span><span class="ft g">需求匹配</span><span class="fe">×</span><span class="ft y">持續成長</span><span class="fe">=</span><span class="ft r">吸引力</span>
+    </div></div>
+  </div>
+</div>
+
+<section id="models" style="background:var(--s);">
+<div class="container">
+  <div class="sl">作者完整框架</div>
+  <h2 class="st">10 個心理機制模型</h2>
+  <p class="sd">作者從演化心理學、行為科學、社會交換理論串成的完整敘事——這是機制，不是技巧</p>
+  <div class="g2">
+    <div class="card"><div class="cn">模型 01</div><h3>🧬 基因訊號（吸引觸發）</h3><p>大腦在 0.1 秒內快速評估：能力、健康、穩定、社交位置、決策能力、情緒穩定。這不只是女性本能，男女都有，只是評估權重不同。</p><div class="ch"><span class="ci">能力訊號</span><span class="ca">→</span><span class="ci">大腦估值</span><span class="ca">→</span><span class="ci">是否值得靠近</span></div></div>
+    <div class="card"><div class="cn">模型 02</div><h3>💫 情緒設計（心動機制）</h3><p>吸引力的決定因素不是你的條件，而是你能否改變對方的情緒狀態。焦慮→安心、無聊→興奮、孤單→被陪伴。人會靠近讓自己感覺比較好的地方。</p><div class="ch"><span class="ci">目前情緒</span><span class="ca">→</span><span class="ci">你改變它</span><span class="ca">→</span><span class="ci">記憶形成</span></div></div>
+    <div class="card"><div class="cn">模型 03</div><h3>🪪 身份建立（我是誰）</h3><p>人最怕自己打臉自己。一旦接受某個身份標籤（「我是成熟的人」），行為會自動向身份靠攏（一致性需求）。身份改變，比能力改變更根本。</p><div class="ch"><span class="ci">身份標籤</span><span class="ca">→</span><span class="ci">一致性驅動</span><span class="ca">→</span><span class="ci">行為重塑</span></div></div>
+    <div class="card"><div class="cn">模型 04</div><h3>💸 投資增加（沉沒成本）</h3><p>IKEA 效應：人會喜歡自己花了很多時間和精力的事物。投入時間、情緒、精力之後，退出成本上升，依附隨之加深。</p><div class="ch"><span class="ci">付出行為</span><span class="ca">→</span><span class="ci">退出成本↑</span><span class="ca">→</span><span class="ci">依附增加</span></div></div>
+    <div class="card"><div class="cn">模型 05</div><h3>🔄 合理化（自我說服）</h3><p>富蘭克林效應：人的大腦會替自己的行為找理由。先做→再相信。「我幫了他，所以我一定重視他。」情緒很多時候是先發生，邏輯只是事後補充。</p><div class="ch"><span class="ci">行為發生</span><span class="ca">→</span><span class="ci">大腦找理由</span><span class="ca">→</span><span class="ci">信念強化</span></div></div>
+    <div class="card"><div class="cn">模型 06</div><h3>🔗 依附形成（離不開）</h3><p>重複→習慣→依賴→離不開。真正戒不掉的不是人，而是神經迴路。晚上聊天→睡覺，一年後身體開始自動期待，這是神經習慣，不是愛。</p><div class="ch"><span class="ci">重複接觸</span><span class="ca">→</span><span class="ci">習慣迴路</span><span class="ca">→</span><span class="ci">神經依附</span></div></div>
+    <div class="card"><div class="cn">模型 07</div><h3>🧭 框架建立（自主性）</h3><p>不是「你一定要照我的」，而是「這是我的原則」。框架不是控制，而是你的生活不是圍繞別人轉。真正的框架來自有自己的世界，不需要強迫別人配合。</p><div class="ch"><span class="ci">自主生活</span><span class="ca">→</span><span class="ci">不依賴回應</span><span class="ca">→</span><span class="ci">自然框架</span></div></div>
+    <div class="card"><div class="cn">模型 08</div><h3>💎 選擇權（稀缺效應）</h3><p>人類大腦高估不容易得到、不容易預測、有成本的東西。稀缺不是故意冷，而是你的人生有很多面向，這段關係只是其中之一，自然就放鬆了。</p><div class="ch"><span class="ci">生活豐富</span><span class="ca">→</span><span class="ci">可替代性</span><span class="ca">→</span><span class="ci">情緒鬆弛</span></div></div>
+    <div class="card"><div class="cn">模型 09</div><h3>🧘 情緒穩定（內核）</h3><p>她冷，你還是你。她熱，你還是你。真正稀缺的是情緒不被外界控制的能力。美女拒絕你→沒事。有人罵你→沒事。不是冷酷，而是不外包自己的情緒。</p><div class="ch"><span class="ci">外部刺激</span><span class="ca">→</span><span class="ci">停一下</span><span class="ca">→</span><span class="ci">選擇回應</span></div></div>
+    <div class="card"><div class="cn">模型 10</div><h3>🌱 長期綁定（共同建構）</h3><p>共同經歷、共同身份、共同故事——這是所有婚姻研究最後的歸宿。依附不是因為被愛，而是因為共同投入、共同身份、共同故事。</p><div class="ch"><span class="ci">共同經驗</span><span class="ca">→</span><span class="ci">共同身份</span><span class="ca">→</span><span class="ci">共同敘事</span></div></div>
+  </div>
+</div>
+</section>
+
+<div class="bq"><blockquote>「技巧可以建立吸引，人格才能維持關係。」</blockquote><cite>14 份分析的共同結論</cite></div>
+
+<section id="chains" style="background:var(--s);">
+<div class="container">
+  <div class="sl">整合模型</div>
+  <h2 class="st">兩條行為鏈：成熟 vs 焦慮</h2>
+  <p class="sd">14 份分析最後壓縮成兩條鏈——一條通向自然吸引，一條通向焦慮與消耗</p>
+  <div class="two" style="margin-bottom:2rem;">
+    <div>
+      <div style="font-size:.8rem;color:var(--sf);font-weight:700;letter-spacing:2px;margin-bottom:1rem;">✅ 成熟路徑</div>
+      <div class="cm">
+        <div class="cnode"><div class="cico p">🧠</div><div><h4>神經系統重建</h4><p>反射模式改變，不是意志力</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode"><div class="cico t">🎭</div><div><h4>情緒自主</h4><p>情緒不外包，不依賴回應</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode"><div class="cico p">👤</div><div><h4>身份穩定</h4><p>清楚「我是誰」，不需外部確認</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode"><div class="cico t">🔁</div><div><h4>一致性</h4><p>今天穩，明天也穩，大腦信任</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode"><div class="cico y">🌐</div><div><h4>自主生活</h4><p>戀愛只是人生一部分，不是全部</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode" style="background:rgba(124,106,247,.15);border:1px solid rgba(124,106,247,.3);"><div class="cico p">✨</div><div><h4>高信任 → 自然吸引</h4><p>不需技巧，人格本身就是磁場</p></div></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.8rem;color:var(--dn);font-weight:700;letter-spacing:2px;margin-bottom:1rem;">❌ 焦慮路徑</div>
+      <div class="cm" style="border-color:rgba(240,60,80,.2);">
+        <div class="cnode"><div class="cico r">😰</div><div><h4>人生只有一個支點</h4><p>沒有朋友、事業、夢想、生活</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode"><div class="cico r">📉</div><div><h4>需求感高漲</h4><p>情緒建立在對方的回覆上</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode"><div class="cico r">🐕</div><div><h4>討好行為啟動</h4><p>開始妥協、解釋、求認可</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode"><div class="cico r">📎</div><div><h4>沉沒成本累積</h4><p>付出太多→不能輸→繼續投入</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode"><div class="cico r">🔗</div><div><h4>焦慮依附</h4><p>不是愛，是神經習慣 + 合理化</p></div></div>
+        <div class="carr">↓</div>
+        <div class="cnode" style="background:rgba(240,60,80,.1);border:1px solid rgba(240,60,80,.3);"><div class="cico r">💥</div><div><h4>吸引下降 → 消耗</h4><p>不信任、情緒消耗、最終分離</p></div></div>
+      </div>
+    </div>
+  </div>
+  <h3 style="margin-bottom:1.5rem;font-size:1.15rem;">所有親密關係的通用路徑（非兩性專屬）</h3>
+  <div class="cm" style="text-align:center;">
+    <div style="font-size:.85rem;color:var(--tx2);margin-bottom:1.5rem;">吸引 × 共同投入 × 情緒記憶 × 身份認同 × 損失厭惡 = 關係形成</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap;">
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">👁️</div><div style="font-size:.8rem;color:var(--tx2);">認識</div></div>
+      <div style="color:var(--tx3);">→</div>
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">💫</div><div style="font-size:.8rem;color:var(--tx2);">產生情緒</div></div>
+      <div style="color:var(--tx3);">→</div>
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">🤝</div><div style="font-size:.8rem;color:var(--tx2);">互相投入</div></div>
+      <div style="color:var(--tx3);">→</div>
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">🪪</div><div style="font-size:.8rem;color:var(--tx2);">身份認同</div></div>
+      <div style="color:var(--tx3);">→</div>
+      <div style="text-align:center;padding:.5rem;"><div style="font-size:1.5rem;margin-bottom:.3rem;">📖</div><div style="font-size:.8rem;color:var(--tx2);">共同敘事</div></div>
+      <div style="color:var(--tx3);">→</div>
+      <div style="text-align:center;padding:.5rem;background:rgba(124,106,247,.1);border-radius:12px;"><div style="font-size:1.5rem;margin-bottom:.3rem;">🔗</div><div style="font-size:.8rem;color:var(--ac);">生命互相依存</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="graph">
+<div class="container">
+  <div class="sl">知識圖譜</div>
+  <h2 class="st">概念關係網絡</h2>
+  <p class="sd">14 份分析中出現的核心概念及其相互關聯——拖曳節點可重新排列，滑鼠懸停看說明</p>
+  <div id="gc">
+    <svg id="kg"></svg>
+    <div id="tip" style="position:absolute;display:none;background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:.75rem 1rem;font-size:.8rem;max-width:220px;color:var(--tx);pointer-events:none;z-index:10;"></div>
+  </div>
+  <div class="gl">
+    <div class="li"><div class="ld" style="background:#7c6af7;"></div>核心身份層</div>
+    <div class="li"><div class="ld" style="background:#56cfb2;"></div>情緒行為層</div>
+    <div class="li"><div class="ld" style="background:#f7c948;"></div>社會認知層</div>
+    <div class="li"><div class="ld" style="background:#f06080;"></div>危險模式</div>
+    <div class="li"><div class="ld" style="background:#e0e0f0;opacity:.7;"></div>結果層</div>
+  </div>
+</div>
+</section>
+
+<section style="background:var(--s);">
+<div class="container">
+  <div class="sl">心理學底層</div>
+  <h2 class="st">12 個最重要的心理原理</h2>
+  <p class="sd">穿越所有批次分析，這些原理反覆出現——這是人性，不是技巧</p>
+  <div class="g3">
+    <div class="card"><div class="cn">心理 01</div><h3>情緒記憶理論</h3><p>人不是愛一個人，而是愛跟他在一起時自己變成的樣子。情緒強度→記憶→再次期待。峰值體驗比頻率更重要。</p></div>
+    <div class="card"><div class="cn">心理 02</div><h3>Validation 情緒確認</h3><p>人最大的需求不是愛，而是「存在被確認」。有人看見真正的我，而且沒有因此離開。所有聊天技巧，最後只有這一句。</p></div>
+    <div class="card"><div class="cn">心理 03</div><h3>Loss Aversion 損失厭惡</h3><p>失去 100 的痛苦 = 得到 200 的快樂。人更容易因為「怕失去」而留下，而非因為「想得到」而前進。</p></div>
+    <div class="card"><div class="cn">心理 04</div><h3>自我實現預言</h3><p>相信→行動→開始符合→更加相信。老師相信學生很好，學生平均真的變好。身份認同會自我強化。</p></div>
+    <div class="card"><div class="cn">心理 05</div><h3>Prediction Error 預測誤差</h3><p>大腦最容易上癮的是「變動獎賞」。以為不會見面→你突然出現→多巴胺上升。IG、遊戲、賭博都用這個原理。</p></div>
+    <div class="card"><div class="cn">心理 06</div><h3>Psychological Safety</h3><p>所有親密都建立在「我可以不用演、不用防禦、不用害怕」。真正的親密不是激情，而是安全。</p></div>
+    <div class="card"><div class="cn">心理 07</div><h3>榮格 Persona 面具論</h3><p>每個人都有社會的我和真正的我。面具不是虛偽，而是保護。真正親密，就是可以放下面具的地方。</p></div>
+    <div class="card"><div class="cn">心理 08</div><h3>Narrative 敘事建構</h3><p>大腦記住故事，不是資訊。「第一次一起迷路」比「吃過一百次飯」更強烈。故事形成身份，身份形成依附。</p></div>
+    <div class="card"><div class="cn">心理 09</div><h3>Misattribution 錯誤歸因</h3><p>吊橋效應的底層。先有情緒（心跳加速），大腦再找原因（是不是因為他？）。很多感覺其實是大腦事後合理化。</p></div>
+    <div class="card"><div class="cn">心理 10</div><h3>Carl Rogers 無條件接納</h3><p>先接納，人才改變；不是先改變，才值得愛。把「無條件積極關注」拿來建立信任，而非建立依附。</p></div>
+    <div class="card"><div class="cn">心理 11</div><h3>Social Comparison 社會比較</h3><p>所有人每天都在問「我夠好嗎？我值得嗎？」真正影響人的不是高低位，而是自我評價的比較機制。</p></div>
+    <div class="card"><div class="cn">心理 12</div><h3>Co-construction 共同建構</h3><p>你怎麼看我→我開始怎麼看自己→我開始怎麼活→我們一起創造彼此。這是所有親密關係真正厲害的地方。</p></div>
+  </div>
+</div>
+</section>
+
+<section id="healthy">
+<div class="container">
+  <div class="sl">健康版本</div>
+  <h2 class="st">8 條真正有價值的原則</h2>
+  <p class="sd">把 14 份分析全部重新過濾，去掉操控性內容，留下這八條——這是人格，不是話術</p>
+  <div class="pl">
+    <div class="pi"><div class="pn">1</div><div><strong>先把自己的生活過好</strong><p>不要把人生重心放在一個人身上。生活沒有重心，大腦會放大任何一個人的價值，戀愛腦本質是生活太小，不是愛太深。</p></div></div>
+    <div class="pi"><div class="pn">2</div><div><strong>不要用討好換愛</strong><p>越努力想被喜歡，越容易失去吸引力。真正原因是自我價值感、獨立性、稀缺性——越需要，越失去主動權。</p></div></div>
+    <div class="pi"><div class="pn">3</div><div><strong>保持自己的界線與原則</strong><p>不是「你一定要照我的」，而是「這是我的原則」。健康關係不是控制，而是彼此都有界線。</p></div></div>
+    <div class="pi"><div class="pn">4</div><div><strong>培養真正的能力，不是包裝人設</strong><p>如果一直展示，代表沒有。真正高價值通常不用證明。每天的生活方式就是你的人格。</p></div></div>
+    <div class="pi"><div class="pn">5</div><div><strong>學會理解，不是分析弱點</strong><p>理解對方→知道怎麼陪伴，不是→知道怎麼操控。Validation 比建議重要：先讓人感覺被理解，再給建議。</p></div></div>
+    <div class="pi"><div class="pn">6</div><div><strong>建立信任，不是建立依賴</strong><p>今天可靠、明天可靠、一年後還是可靠，大腦開始信任。一致性比魅力更有長期效力。</p></div></div>
+    <div class="pi"><div class="pn">7</div><div><strong>雙方都能自由選擇留下</strong><p>「可以離開」才是真正的主導權。真正健康的人不是不愛你，而是沒有你也依然完整，所以選擇留下。</p></div></div>
+    <div class="pi"><div class="pn">8</div><div><strong>真正長久的吸引，來自人格</strong><p>當一個人有穩定的情緒、清楚的身份、豐富的生活、持續成長的能力，吸引力會自然發生——不需要設計。</p></div></div>
+  </div>
+</div>
+</section>
+
+<section id="danger" style="background:var(--s);">
+<div class="container">
+  <div class="sl">警示區</div>
+  <h2 class="st">辨別技巧與操控的邊界</h2>
+  <p class="sd">作者把心理學拿來理解人性，這個方向是對的；但有一步跨過了「理解機制」到「操控他人」</p>
+  <div class="two" style="margin-bottom:2rem;">
+    <div class="dbox">
+      <div class="bt">⚠️ 這些詞要特別謹慎</div>
+      <div class="tl">
+        <span class="td">馴化</span><span class="td">精神錨點</span><span class="td">擊碎心理防線</span><span class="td">服從性測試</span><span class="td">懲罰</span><span class="td">規訓</span><span class="td">刻意情緒打擊</span><span class="td">利用創傷</span><span class="td">建立控制</span><span class="td">讓她離不開</span>
+      </div>
+      <div style="margin-top:1rem;font-size:.82rem;color:var(--tx2);line-height:1.6;"><strong style="color:var(--dn);">共同問題：</strong>目的不是建立關係，而是建立控制。短期可能有效，長期幾乎必然導致不信任、焦慮依附、情緒消耗和分離。</div>
+    </div>
+    <div class="sbox">
+      <div class="bt">✅ 這些才是真正有用的</div>
+      <div class="tl">
+        <span class="ts">情緒確認</span><span class="ts">真正理解</span><span class="ts">心理安全</span><span class="ts">身份一致</span><span class="ts">無條件接納</span><span class="ts">情緒自主</span><span class="ts">設立界線</span><span class="ts">共同建構</span><span class="ts">延遲反應</span><span class="ts">生活重心</span><span class="ts">神經重建</span><span class="ts">一致性</span>
+      </div>
+      <div style="margin-top:1rem;font-size:.82rem;color:var(--tx2);line-height:1.6;"><strong style="color:var(--sf);">共同原則：</strong>這些都指向「讓自己成為一個值得長期相處的人」，而不是「讓對方離不開你」。</div>
+    </div>
+  </div>
+  <div class="hb">
+    <div style="font-size:.85rem;font-weight:700;margin-bottom:.75rem;color:var(--ac);">最底層的一句話</div>
+    <p style="color:var(--tx2);font-size:.92rem;line-height:1.7;">作者一直在研究「怎麼讓對方離不開你」。但把所有心理學、演化心理學和行為科學抽象到最底層，真正長期有效的問題是：<strong style="color:var(--tx);">「怎麼讓自己成為一個即使不用技巧，也值得長期相處的人。」</strong><br><br>當一個人有穩定的情緒、清楚的界線、豐富的生活、持續成長的能力，以及能與伴侶共同建立身份和故事時，大部分技巧都會自然地發生——而且不需要刻意設計。</p>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="container">
+  <div class="sl">概念重要性</div>
+  <h2 class="st">各概念在 14 份分析中的出現頻率</h2>
+  <p class="sd">以出現次數和跨批次一致性為依據評估重要程度</p>
+  <div style="max-width:640px;">
+    <div class="mr"><span class="ml">身份認同</span><div class="mb"><div class="mf" style="width:96%;"></div></div><span class="mv">96%</span></div>
+    <div class="mr"><span class="ml">情緒自主</span><div class="mb"><div class="mf" style="width:94%;"></div></div><span class="mv">94%</span></div>
+    <div class="mr"><span class="ml">一致性信任</span><div class="mb"><div class="mf" style="width:91%;"></div></div><span class="mv">91%</span></div>
+    <div class="mr"><span class="ml">神經回路</span><div class="mb"><div class="mf" style="width:88%;"></div></div><span class="mv">88%</span></div>
+    <div class="mr"><span class="ml">被理解需求</span><div class="mb"><div class="mf" style="width:87%;"></div></div><span class="mv">87%</span></div>
+    <div class="mr"><span class="ml">損失厭惡</span><div class="mb"><div class="mf" style="width:82%;"></div></div><span class="mv">82%</span></div>
+    <div class="mr"><span class="ml">沉沒成本</span><div class="mb"><div class="mf" style="width:80%;"></div></div><span class="mv">80%</span></div>
+    <div class="mr"><span class="ml">共同敘事</span><div class="mb"><div class="mf" style="width:78%;"></div></div><span class="mv">78%</span></div>
+    <div class="mr"><span class="ml">稀缺選擇權</span><div class="mb"><div class="mf" style="width:75%;"></div></div><span class="mv">75%</span></div>
+    <div class="mr"><span class="ml">心理安全感</span><div class="mb"><div class="mf" style="width:72%;"></div></div><span class="mv">72%</span></div>
+    <div class="mr"><span class="ml">預測誤差</span><div class="mb"><div class="mf" style="width:65%;"></div></div><span class="mv">65%</span></div>
+    <div class="mr"><span class="ml">錯誤歸因</span><div class="mb"><div class="mf" style="width:58%;"></div></div><span class="mv">58%</span></div>
+  </div>
+</div>
+</section>
+
+</main>
+<footer>
+  <p>吸引力心理學全圖譜 · 基於 14 份深度分析整合</p>
+  <p style="margin-top:.4rem;opacity:.6;">涵蓋演化心理學、行為科學、依附理論、認知心理學</p>
+</footer>
+
+<script>
+(function(){
+const nodes=[
+  {id:'吸引力',g:'core',r:30,info:'終極目標：不是技巧，是人格的外顯'},
+  {id:'身份認同',g:'id',r:24,info:'最大心理槓桿。人的行為是身份的副產品。'},
+  {id:'一致性',g:'id',r:21,info:'大腦信任一直如此的人。信任來自可預測的穩定。'},
+  {id:'自我敘事',g:'id',r:18,info:'故事塑造身份。我是失敗的人→人生開始符合。'},
+  {id:'情緒自主',g:'em',r:24,info:'情緒不外包。她冷你還是你，她熱你還是你。'},
+  {id:'心理安全',g:'em',r:20,info:'真正親密=可以不用演、不用防禦、不用害怕。'},
+  {id:'被理解需求',g:'em',r:20,info:'人最大的需求是存在被確認，而非被愛。'},
+  {id:'情緒記憶',g:'em',r:18,info:'峰值體驗比頻率重要。人愛跟他在一起時的感覺。'},
+  {id:'情緒確認',g:'em',r:17,info:'Validation。先讓人感覺被理解，再給建議。'},
+  {id:'訊號交換',g:'so',r:16,info:'社交本質是訊號交換。真正高手一直在觀察。'},
+  {id:'稀缺性',g:'so',r:18,info:'生活豐富才有自然稀缺。不是故意冷，是真的有重心。'},
+  {id:'共同建構',g:'so',r:22,info:'長期關係的本質：共同投入、共同身份、共同故事。'},
+  {id:'需求匹配',g:'so',r:16,info:'每個人都有未滿足需求。特質剛好補到缺口=自然吸引。'},
+  {id:'損失厭惡',g:'so',r:18,info:'失去100的痛苦>得到200的快樂。人更怕失去。'},
+  {id:'沉沒成本',g:'so',r:16,info:'IKEA效應：人會喜歡自己投入最多的人事物。'},
+  {id:'預測誤差',g:'so',r:15,info:'多巴胺不是快樂，是期待。不知道下一個=上癮。'},
+  {id:'神經回路',g:'id',r:20,info:'人格=反射模式。真正改變的是神經，不是意志力。'},
+  {id:'面具',g:'id',r:15,info:'面具是保護，不是虛偽。真正親密=可以放下。'},
+  {id:'操控危機',g:'da',r:16,info:'⚠️ 把理解變成利用弱點。目的是控制，不是關係。'},
+  {id:'焦慮依附',g:'da',r:15,info:'⚠️ 情緒建立在對方回覆上。需求感高=吸引力下降。'},
+  {id:'長期關係',g:'out',r:24,info:'終點：共同身份、共同故事、彼此生命互相依存。'},
+  {id:'信任',g:'out',r:19,info:'可信的人，自然吸引。信任來自一致，而非刺激。'},
+];
+const links=[
+  {s:'身份認同',t:'吸引力',v:3},{s:'情緒自主',t:'吸引力',v:3},
+  {s:'一致性',t:'吸引力',v:2},{s:'共同建構',t:'長期關係',v:3},
+  {s:'信任',t:'長期關係',v:3},{s:'一致性',t:'信任',v:3},
+  {s:'心理安全',t:'信任',v:2},{s:'身份認同',t:'一致性',v:2},
+  {s:'自我敘事',t:'身份認同',v:2},{s:'神經回路',t:'情緒自主',v:2},
+  {s:'情緒自主',t:'心理安全',v:2},{s:'被理解需求',t:'心理安全',v:2},
+  {s:'情緒確認',t:'被理解需求',v:2},{s:'情緒記憶',t:'共同建構',v:2},
+  {s:'共同建構',t:'信任',v:2},{s:'需求匹配',t:'吸引力',v:2},
+  {s:'稀缺性',t:'吸引力',v:2},{s:'損失厭惡',t:'沉沒成本',v:2},
+  {s:'沉沒成本',t:'焦慮依附',v:2},{s:'訊號交換',t:'需求匹配',v:1},
+  {s:'預測誤差',t:'吸引力',v:1},{s:'面具',t:'心理安全',v:2},
+  {s:'操控危機',t:'焦慮依附',v:2},{s:'焦慮依附',t:'吸引力',v:-1},
+  {s:'損失厭惡',t:'吸引力',v:1},{s:'神經回路',t:'身份認同',v:2},
+  {s:'自我敘事',t:'共同建構',v:2},
+];
+const col={id:'#7c6af7',em:'#56cfb2',so:'#f7c948',da:'#f06080',out:'#e0e0f0',core:'#ffffff'};
+const cont=document.getElementById('gc');
+const W=cont.offsetWidth||800,H=cont.offsetHeight||580;
+const svg=d3.select('#kg').attr('viewBox',`0 0 ${W} ${H}`);
+const gNodes=nodes.map(d=>({...d}));
+const gLinks=links.map(d=>({source:d.s,target:d.t,value:d.v}));
+const sim=d3.forceSimulation(gNodes)
+  .force('link',d3.forceLink(gLinks).id(d=>d.id).distance(d=>d.value<0?160:95/(d.value||1)+45))
+  .force('charge',d3.forceManyBody().strength(-300))
+  .force('center',d3.forceCenter(W/2,H/2))
+  .force('collision',d3.forceCollide(d=>d.r+16));
+const link=svg.append('g').selectAll('line').data(gLinks).enter().append('line')
+  .attr('stroke',d=>d.value<0?'#f06080':'#2a2a3e')
+  .attr('stroke-width',d=>Math.abs(d.value)*.8+.5)
+  .attr('stroke-dasharray',d=>d.value<0?'5,3':null);
+const node=svg.append('g').selectAll('g').data(gNodes).enter().append('g')
+  .style('cursor','pointer')
+  .call(d3.drag()
+    .on('start',(e,d)=>{if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;})
+    .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y;})
+    .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+node.append('circle').attr('r',d=>d.r).attr('fill',d=>col[d.g]+'18').attr('stroke',d=>col[d.g]).attr('stroke-width',1.8);
+node.append('text').attr('text-anchor','middle').attr('dy','.35em')
+  .attr('font-size',d=>Math.max(9,d.r*.53)+'px').attr('fill',d=>col[d.g]).attr('font-weight','600')
+  .text(d=>d.id.length>5?d.id.slice(0,5):d.id);
+const tip=document.getElementById('tip');
+node.on('mouseover',(e,d)=>{tip.style.display='block';tip.innerHTML=`<strong style="color:${col[d.g]}">${d.id}</strong><br><span style="color:#9090b0;font-size:.78rem">${d.info}</span>`;})
+  .on('mousemove',e=>{const r=cont.getBoundingClientRect();tip.style.left=(e.clientX-r.left+14)+'px';tip.style.top=(e.clientY-r.top-10)+'px';})
+  .on('mouseout',()=>{tip.style.display='none';});
+sim.on('tick',()=>{
+  link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+  node.attr('transform',d=>`translate(${d.x},${d.y})`);
+});
+})();
+</script>
+</body>
+</html>
