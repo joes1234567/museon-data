@@ -101,6 +101,28 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
 .rm-dot{width:7px;height:7px;border-radius:50%;background:var(--ac);margin-top:8px;flex-shrink:0}
 .rm-it p{font-size:1.087rem;color:var(--tx2);line-height:1.6}
 .rm-it strong{color:var(--tx)}
+.flowrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--s);border:1px solid var(--b);border-radius:20px;padding:1.5rem}
+.flosvg{min-width:640px;width:100%;height:auto;display:block}
+.dgwrap{background:var(--s);border:1px solid var(--b);border-radius:20px;padding:1.5rem;display:grid;grid-template-columns:1fr 300px;gap:1.25rem}
+@media(max-width:820px){.dgwrap{grid-template-columns:1fr}}
+#dgc{background:var(--s2);border:1px solid var(--b);border-radius:16px;overflow:hidden;height:560px;position:relative;cursor:grab}
+#dgc:active{cursor:grabbing}
+#dgc svg{width:100%;height:100%}
+.dgnode{cursor:pointer}
+.dgnode circle{transition:opacity .2s}
+.dgnode.dim{opacity:.16}
+.dglink{stroke:#3c2810;stroke-width:1.4;transition:opacity .2s}
+.dglink.dim{opacity:.08}
+.dglink.hot{stroke:#f2c34a;stroke-width:2.4}
+.dgpanel{background:var(--s2);border:1px solid var(--b);border-radius:16px;padding:1.4rem;align-self:start}
+.dgpanel .ph{font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:.35rem}
+.dgpanel .nm{font-size:1.25rem;font-weight:700;margin-bottom:.5rem;color:var(--tx)}
+.dgpanel .ds{font-size:1.037rem;color:var(--tx2);line-height:1.6;margin-bottom:1rem}
+.dgpanel .lb{font-size:0.8rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin:.9rem 0 .4rem}
+.dgpanel ul{list-style:none}
+.dgpanel li{font-size:1rem;color:var(--tx2);padding:3px 0 3px 14px;position:relative;line-height:1.5}
+.dgpanel li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:var(--ac)}
+.dghint{color:var(--tx3);font-size:0.95rem;line-height:1.6}
 </style>
 </head>
 <body>
@@ -108,8 +130,10 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
   <span class="logo">Attraction Atlas</span>
   <a href="#models">核心模型</a>
   <a href="#relationship">兩性關係</a>
+  <a href="#flow">吸引流程</a>
   <a href="#chains">行為鏈</a>
   <a href="#graph">知識圖譜</a>
+  <a href="#deps">依賴鏈</a>
   <a href="#principles">心理原理</a>
   <a href="#scenarios">20情境</a>
   <a href="#healthy">健康原則</a>
@@ -216,7 +240,87 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
 </div>
 </section>
 
-<section id="chains" style="background:var(--s);">
+<section id="flow" style="background:var(--s);">
+<div class="container">
+  <div class="sl">流程總覽</div>
+  <h2 class="st">吸引力建立流程（含關鍵分岔）</h2>
+  <p class="sd">從第一次接觸到長期關係，中間有一個決定走向的分岔點——「你的情緒是不是自己的」。同一個起點，往上是自然吸引，往下是焦慮消耗</p>
+  <div class="flowrap">
+  <svg class="flosvg" viewBox="0 0 900 772" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="吸引力建立流程圖">
+    <defs>
+      <marker id="arrN" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7a6050"/></marker>
+      <marker id="arrG" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5ec08a"/></marker>
+      <marker id="arrR" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#d4734a"/></marker>
+    </defs>
+    <!-- 主幹連線 -->
+    <line x1="450" y1="78"  x2="450" y2="99"  stroke="#7a6050" stroke-width="2" marker-end="url(#arrN)"/>
+    <line x1="450" y1="162" x2="450" y2="183" stroke="#7a6050" stroke-width="2" marker-end="url(#arrN)"/>
+    <line x1="450" y1="246" x2="450" y2="267" stroke="#7a6050" stroke-width="2" marker-end="url(#arrN)"/>
+    <line x1="450" y1="330" x2="450" y2="350" stroke="#7a6050" stroke-width="2" marker-end="url(#arrN)"/>
+    <!-- 分岔連線 -->
+    <path d="M352,402 C270,472 210,468 210,516" fill="none" stroke="#5ec08a" stroke-width="2.4" marker-end="url(#arrG)"/>
+    <path d="M548,402 C630,472 690,468 690,516" fill="none" stroke="#d4734a" stroke-width="2.4" stroke-dasharray="6,4" marker-end="url(#arrR)"/>
+    <text x="250" y="452" fill="#5ec08a" font-size="15" font-weight="700">✅ 成熟</text>
+    <text x="618" y="452" fill="#e05040" font-size="15" font-weight="700">❌ 焦慮</text>
+    <!-- 左路連線 -->
+    <line x1="210" y1="578" x2="210" y2="605" stroke="#5ec08a" stroke-width="2" marker-end="url(#arrG)"/>
+    <line x1="210" y1="664" x2="210" y2="691" stroke="#5ec08a" stroke-width="2" marker-end="url(#arrG)"/>
+    <!-- 右路連線 -->
+    <line x1="690" y1="578" x2="690" y2="605" stroke="#d4734a" stroke-width="2" marker-end="url(#arrR)"/>
+    <line x1="690" y1="664" x2="690" y2="691" stroke="#d4734a" stroke-width="2" marker-end="url(#arrR)"/>
+    <!-- 主幹節點 -->
+    <g>
+      <rect x="350" y="16"  width="200" height="62" rx="13" fill="#221608" stroke="#e8923a" stroke-width="1.6"/>
+      <text x="450" y="42" text-anchor="middle" fill="#f5ede0" font-size="19" font-weight="700">🤝 接觸相遇</text>
+      <text x="450" y="62" text-anchor="middle" fill="#b09075" font-size="12.5">頻率 × 熟悉感</text>
+      <rect x="350" y="100" width="200" height="62" rx="13" fill="#221608" stroke="#e8923a" stroke-width="1.6"/>
+      <text x="450" y="126" text-anchor="middle" fill="#f5ede0" font-size="19" font-weight="700">👀 建立好奇</text>
+      <text x="450" y="146" text-anchor="middle" fill="#b09075" font-size="12.5">讓對方想更了解你</text>
+      <rect x="350" y="184" width="200" height="62" rx="13" fill="#221608" stroke="#e8923a" stroke-width="1.6"/>
+      <text x="450" y="210" text-anchor="middle" fill="#f5ede0" font-size="19" font-weight="700">💫 情緒體驗</text>
+      <text x="450" y="230" text-anchor="middle" fill="#b09075" font-size="12.5">你改變了他的感覺</text>
+      <rect x="350" y="268" width="200" height="62" rx="13" fill="#221608" stroke="#e8923a" stroke-width="1.6"/>
+      <text x="450" y="294" text-anchor="middle" fill="#f5ede0" font-size="19" font-weight="700">🔗 產生連結</text>
+      <text x="450" y="314" text-anchor="middle" fill="#b09075" font-size="12.5">開始形成情緒記憶</text>
+    </g>
+    <!-- 分岔菱形 -->
+    <polygon points="450,352 548,402 450,452 352,402" fill="rgba(242,195,74,.1)" stroke="#f2c34a" stroke-width="2"/>
+    <text x="450" y="396" text-anchor="middle" fill="#f2c34a" font-size="16" font-weight="700">⚖️ 關鍵分岔</text>
+    <text x="450" y="418" text-anchor="middle" fill="#f5ede0" font-size="15">情緒自主嗎？</text>
+    <!-- 成熟路徑 -->
+    <g>
+      <rect x="115" y="518" width="190" height="58" rx="12" fill="rgba(94,192,138,.08)" stroke="#5ec08a" stroke-width="1.6"/>
+      <text x="210" y="542" text-anchor="middle" fill="#f5ede0" font-size="18" font-weight="700">🧭 情緒自主</text>
+      <text x="210" y="562" text-anchor="middle" fill="#8ecf7a" font-size="12.5">情緒不外包</text>
+      <rect x="115" y="606" width="190" height="58" rx="12" fill="rgba(94,192,138,.08)" stroke="#5ec08a" stroke-width="1.6"/>
+      <text x="210" y="630" text-anchor="middle" fill="#f5ede0" font-size="18" font-weight="700">🛡️ 深化信任</text>
+      <text x="210" y="650" text-anchor="middle" fill="#8ecf7a" font-size="12.5">一致性慢慢累積</text>
+      <rect x="115" y="692" width="190" height="62" rx="12" fill="rgba(94,192,138,.15)" stroke="#5ec08a" stroke-width="2"/>
+      <text x="210" y="718" text-anchor="middle" fill="#f5ede0" font-size="18" font-weight="700">✨ 長期依存</text>
+      <text x="210" y="738" text-anchor="middle" fill="#8ecf7a" font-size="12.5">共同身份與敘事</text>
+    </g>
+    <!-- 焦慮路徑 -->
+    <g>
+      <rect x="595" y="518" width="190" height="58" rx="12" fill="rgba(224,80,64,.07)" stroke="#d4734a" stroke-width="1.6"/>
+      <text x="690" y="542" text-anchor="middle" fill="#f5ede0" font-size="18" font-weight="700">📉 需求外包</text>
+      <text x="690" y="562" text-anchor="middle" fill="#e08878" font-size="12.5">情緒綁在對方回覆上</text>
+      <rect x="595" y="606" width="190" height="58" rx="12" fill="rgba(224,80,64,.07)" stroke="#d4734a" stroke-width="1.6"/>
+      <text x="690" y="630" text-anchor="middle" fill="#f5ede0" font-size="18" font-weight="700">📎 沉沒成本</text>
+      <text x="690" y="650" text-anchor="middle" fill="#e08878" font-size="12.5">討好、不斷加碼付出</text>
+      <rect x="595" y="692" width="190" height="62" rx="12" fill="rgba(224,80,64,.13)" stroke="#e05040" stroke-width="2"/>
+      <text x="690" y="718" text-anchor="middle" fill="#f5ede0" font-size="18" font-weight="700">💥 消耗分離</text>
+      <text x="690" y="738" text-anchor="middle" fill="#e08878" font-size="12.5">焦慮依附 → 耗竭</text>
+    </g>
+  </svg>
+  </div>
+  <div class="hb" style="margin-top:1.75rem;">
+    <div style="font-size:1.062rem;font-weight:700;margin-bottom:.5rem;color:var(--ac);">分岔點怎麼過</div>
+    <p style="color:var(--tx2);font-size:1.1rem;line-height:1.7;">前四步大家幾乎都一樣——差別在「產生連結」之後。你的情緒建立在<strong style="color:var(--tx);">自己的生活重心</strong>上，就往成熟路徑走；建立在<strong style="color:var(--tx);">對方的回應</strong>上，就滑向焦慮路徑。這不是一次選擇，而是每一次互動都在重新決定走哪條。</p>
+  </div>
+</div>
+</section>
+
+<section id="chains">
 <div class="container">
   <div class="sl">整合模型</div>
   <h2 class="st">兩條行為鏈：成熟 vs 焦慮</h2>
@@ -274,7 +378,7 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
 </div>
 </section>
 
-<section id="graph">
+<section id="graph" style="background:var(--s);">
 <div class="container">
   <div class="sl">知識圖譜</div>
   <h2 class="st">概念關係網絡</h2>
@@ -295,6 +399,44 @@ footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--b);color:v
     <div class="li"><div class="ld" style="background:#d4734a;"></div>危險模式</div>
     <div class="li"><div class="ld" style="background:#8ecf7a;"></div>兩性專區</div>
     <div class="li"><div class="ld" style="background:#e0d0c0;opacity:.7;"></div>結果層</div>
+  </div>
+</div>
+</section>
+
+<section id="deps">
+<div class="container">
+  <div class="sl">概念依賴鏈</div>
+  <h2 class="st">概念的前後關係：誰是誰的前置</h2>
+  <p class="sd">16 個核心概念，由左（根基）到右（成果）。<strong>點擊任一節點</strong>鎖定並亮顯它的<strong>所有前置依賴鏈</strong>——想長出「吸引力」，得先接通哪些底層？再點一次或點空白處取消。滾輪縮放，拖曳平移</p>
+  <div class="dgwrap">
+    <div id="dgc">
+      <svg id="dgsvg"></svg>
+      <div id="dgtip" style="position:absolute;display:none;background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.7rem .9rem;font-size:0.98rem;max-width:230px;color:var(--tx);pointer-events:none;z-index:10;line-height:1.5;"></div>
+      <div class="zc">
+        <button class="zbtn" id="dgIn">＋</button>
+        <button class="zbtn sm" id="dgReset">重置</button>
+        <button class="zbtn" id="dgOut">－</button>
+      </div>
+    </div>
+    <div class="dgpanel" id="dgpanel">
+      <div class="dghint" id="dghint">👆 點一個概念節點，看它需要哪些前置能力先到位。<br><br>越靠右的概念（如「吸引力」「長期關係」）依賴鏈越長——這就是為什麼技巧沒用，得從根基養起。</div>
+      <div id="dgdetail" style="display:none;">
+        <div class="ph" id="dgLayer"></div>
+        <div class="nm" id="dgName"></div>
+        <div class="ds" id="dgDesc"></div>
+        <div class="lb" id="dgDepsLb" style="display:none;">前置依賴（要先有）</div>
+        <ul id="dgDeps"></ul>
+        <div class="lb" id="dgEnLb" style="display:none;">促成（接通後長出）</div>
+        <ul id="dgEnables"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="gl">
+    <div class="li"><div class="ld" style="background:#d4734a;"></div>根基層</div>
+    <div class="li"><div class="ld" style="background:#e8923a;"></div>自我層</div>
+    <div class="li"><div class="ld" style="background:#f2c34a;"></div>關係能力層</div>
+    <div class="li"><div class="ld" style="background:#e05668;"></div>連結層</div>
+    <div class="li"><div class="ld" style="background:#f5ede0;"></div>成果層</div>
   </div>
 </div>
 </section>
@@ -580,6 +722,112 @@ sim.on('tick',()=>{
 document.getElementById('zIn').onclick=()=>svg.transition().duration(300).call(zoom.scaleBy,1.5);
 document.getElementById('zOut').onclick=()=>svg.transition().duration(300).call(zoom.scaleBy,0.67);
 document.getElementById('zReset').onclick=()=>svg.transition().duration(400).call(zoom.transform,d3.zoomIdentity);
+})();
+</script>
+
+<script>
+(function(){
+const col={f:'#d4734a',s:'#e8923a',r:'#f2c34a',b:'#e05668',o:'#f5ede0'};
+const LN={f:'根基層',s:'自我層',r:'關係能力層',b:'連結層',o:'成果層'};
+const LX={f:0.08,s:0.30,r:0.52,b:0.74,o:0.93};
+const nodes=[
+  {id:'生活重心',L:'f',r:18,desc:'有自己的生活與重心，不把人生押在一個人身上。'},
+  {id:'神經回路',L:'f',r:18,desc:'真正改變的是反射模式，不是意志力。'},
+  {id:'自我敘事',L:'f',r:18,desc:'你怎麼說自己的故事，決定你成為誰。'},
+  {id:'情緒自主',L:'s',r:25,desc:'情緒不外包，不建立在對方的回應上——整張圖的樞紐。'},
+  {id:'身份認同',L:'s',r:25,desc:'行為是身份的副產品，最大的心理槓桿。'},
+  {id:'一致性',L:'r',r:18,desc:'說到做到，大腦才開始信任你。'},
+  {id:'心理安全',L:'r',r:19,desc:'可以不用演、不防禦、不害怕。'},
+  {id:'邊界設立',L:'r',r:17,desc:'清楚的底線，反而讓對方更安心。'},
+  {id:'稀缺性',L:'r',r:17,desc:'生活豐富帶來的自然稀缺，不是故意冷。'},
+  {id:'選擇自由',L:'r',r:17,desc:'可以離開，才是真正選擇留下——健康關係的底層。'},
+  {id:'情緒確認',L:'b',r:18,desc:'先讓人感覺被理解，是所有連結的前提。'},
+  {id:'情緒記憶',L:'b',r:18,desc:'峰值體驗形成記憶，再形成再期待。'},
+  {id:'信任',L:'b',r:21,desc:'一致累積出來的可預測感。'},
+  {id:'共同建構',L:'b',r:21,desc:'共同投入、共同身份、共同故事。'},
+  {id:'吸引力',L:'o',r:29,desc:'人格的外顯，不是技巧。'},
+  {id:'長期關係',L:'o',r:29,desc:'彼此生命互相依存的終點。'},
+];
+const L=[
+  ['生活重心','情緒自主'],['神經回路','情緒自主'],['神經回路','身份認同'],['自我敘事','身份認同'],
+  ['情緒自主','心理安全'],['情緒自主','稀缺性'],['情緒自主','選擇自由'],['身份認同','一致性'],
+  ['情緒確認','心理安全'],['邊界設立','心理安全'],['一致性','信任'],['心理安全','信任'],['選擇自由','信任'],
+  ['情緒記憶','共同建構'],['情緒確認','共同建構'],['自我敘事','共同建構'],
+  ['身份認同','吸引力'],['情緒自主','吸引力'],['稀缺性','吸引力'],
+  ['信任','長期關係'],['共同建構','長期關係'],['吸引力','長期關係'],
+];
+const links=L.map(d=>({source:d[0],target:d[1]}));
+const cont=document.getElementById('dgc');
+const W=cont.offsetWidth||900,H=560;
+const svg=d3.select('#dgsvg').attr('viewBox',`0 0 ${W} ${H}`);
+const g=svg.append('g');
+const zoom=d3.zoom().scaleExtent([0.3,4]).on('zoom',e=>g.attr('transform',e.transform));
+svg.call(zoom);
+const gN=nodes.map(d=>({...d}));
+const gL=links.map(d=>({...d}));
+svg.append('defs').append('marker').attr('id','dgarr').attr('markerWidth',8).attr('markerHeight',8)
+  .attr('refX',7).attr('refY',3).attr('orient','auto').append('path').attr('d','M0,0 L6,3 L0,6 Z').attr('fill','#5a4030');
+const sim=d3.forceSimulation(gN)
+  .force('link',d3.forceLink(gL).id(d=>d.id).distance(78).strength(.25))
+  .force('charge',d3.forceManyBody().strength(-320))
+  .force('x',d3.forceX(d=>LX[d.L]*W).strength(.9))
+  .force('y',d3.forceY(H/2).strength(.09))
+  .force('collide',d3.forceCollide(d=>d.r+10));
+const lSel=g.append('g').selectAll('line').data(gL).enter().append('line')
+  .attr('class','dglink').attr('marker-end','url(#dgarr)');
+const nSel=g.append('g').selectAll('g').data(gN).enter().append('g').attr('class','dgnode')
+  .call(d3.drag()
+    .on('start',(e,d)=>{if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;})
+    .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y;})
+    .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+nSel.append('circle').attr('r',d=>d.r).attr('fill',d=>col[d.L]+'22').attr('stroke',d=>col[d.L]).attr('stroke-width',2);
+nSel.append('text').attr('text-anchor','middle').attr('dy','.35em')
+  .attr('font-size',d=>Math.max(11,d.r*.46)+'px').attr('fill',d=>d.L==='o'?'#1a120a':col[d.L]).attr('font-weight','700')
+  .style('pointer-events','none').text(d=>d.id);
+const tip=document.getElementById('dgtip');
+let sel=null,anc=new Set();
+function getAnc(id){const s=new Set([id]),q=[id];while(q.length){const c=q.shift();gL.forEach(l=>{const t=l.target.id||l.target,so=l.source.id||l.source;if(t===c&&!s.has(so)){s.add(so);q.push(so);}});}return s;}
+function apply(s){
+  nSel.classed('dim',n=>!s.has(n.id));
+  lSel.classed('dim',l=>!(s.has(l.source.id)&&s.has(l.target.id))).classed('hot',l=>s.has(l.source.id)&&s.has(l.target.id));
+}
+function clear(){nSel.classed('dim',false);lSel.classed('dim',false).classed('hot',false);}
+nSel.on('mouseover',(e,d)=>{
+    tip.style.display='block';
+    tip.innerHTML=`<strong style="color:${col[d.L]}">${d.id}</strong> <span style="color:#7a6050;font-size:.85rem">· ${LN[d.L]}</span><br><span style="color:#b09075;font-size:.95rem">${d.desc}</span>`;
+    if(!sel){const c=new Set([d.id]);gL.forEach(l=>{if(l.source.id===d.id)c.add(l.target.id);if(l.target.id===d.id)c.add(l.source.id);});apply(c);}
+  })
+  .on('mousemove',e=>{const r=cont.getBoundingClientRect();tip.style.left=Math.min(e.clientX-r.left+16,W-190)+'px';tip.style.top=(e.clientY-r.top-10)+'px';})
+  .on('mouseout',()=>{tip.style.display='none';if(sel)apply(anc);else clear();})
+  .on('click',(e,d)=>{
+    e.stopPropagation();
+    if(sel===d.id){sel=null;anc=new Set();clear();showHint();return;}
+    sel=d.id;anc=getAnc(d.id);apply(anc);
+    const deps=gL.filter(l=>l.target.id===d.id).map(l=>l.source.id);
+    const en=gL.filter(l=>l.source.id===d.id).map(l=>l.target.id);
+    document.getElementById('dghint').style.display='none';
+    document.getElementById('dgdetail').style.display='block';
+    const lay=document.getElementById('dgLayer');lay.textContent=LN[d.L];lay.style.color=col[d.L];
+    document.getElementById('dgName').textContent=d.id;
+    document.getElementById('dgDesc').textContent=d.desc;
+    const dl=document.getElementById('dgDepsLb'),du=document.getElementById('dgDeps');
+    if(deps.length){dl.style.display='block';du.innerHTML=deps.map(x=>`<li>${x}</li>`).join('');}
+    else{dl.style.display='block';du.innerHTML='<li style="color:#7a6050">（根基概念，無前置）</li>';}
+    const el=document.getElementById('dgEnLb'),eu=document.getElementById('dgEnables');
+    if(en.length){el.style.display='block';eu.innerHTML=en.map(x=>`<li>${x}</li>`).join('');}
+    else{el.style.display='block';eu.innerHTML='<li style="color:#7a6050">（終點成果，無後續）</li>';}
+  });
+function showHint(){document.getElementById('dghint').style.display='block';document.getElementById('dgdetail').style.display='none';}
+svg.on('click',()=>{sel=null;anc=new Set();clear();showHint();});
+sim.on('tick',()=>{
+  lSel.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+      .attr('x2',d=>{const dx=d.target.x-d.source.x,dy=d.target.y-d.source.y,l=Math.hypot(dx,dy)||1;return d.target.x-dx/l*(d.target.r+7);})
+      .attr('y2',d=>{const dx=d.target.x-d.source.x,dy=d.target.y-d.source.y,l=Math.hypot(dx,dy)||1;return d.target.y-dy/l*(d.target.r+7);});
+  nSel.attr('transform',d=>`translate(${d.x},${d.y})`);
+});
+document.getElementById('dgIn').onclick=()=>svg.transition().duration(300).call(zoom.scaleBy,1.5);
+document.getElementById('dgOut').onclick=()=>svg.transition().duration(300).call(zoom.scaleBy,0.67);
+document.getElementById('dgReset').onclick=()=>svg.transition().duration(400).call(zoom.transform,d3.zoomIdentity);
 })();
 </script>
 </body>
