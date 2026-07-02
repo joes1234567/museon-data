@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flow A — AI 導入顧問服務執行指南</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent:  #3b82f6;
+    --p2:      #7c3aed;
+    --p3:      #f59e0b;
+    --p4:      #10b981;
+    --bg:      #f8fafc;
+    --card:    #ffffff;
+    --border:  #e2e8f0;
+    --text:    #1e293b;
+    --muted:   #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Noto Sans TC', sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    color: white; padding: 48px 40px 40px;
+  }
+  .header-inner { max-width: 920px; margin: 0 auto; }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px; padding: 4px 14px;
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 8px; }
+  .header p  { font-size: 15px; opacity: .75; }
+  .header-meta { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .hm {
+    background: rgba(255,255,255,.1); border-radius: 10px; padding: 10px 16px;
+    font-size: 13px; min-width: 100px;
+  }
+  .hm strong { display: block; font-size: 20px; font-weight: 800; margin-bottom: 2px; }
+
+  /* ── Layout ── */
+  .main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+
+  /* ── Clarify Box ── */
+  .clarify-box {
+    background: #fff7ed; border: 1px solid #fed7aa;
+    border-left: 4px solid #f97316; border-radius: 10px;
+    padding: 20px 24px; margin-bottom: 44px;
+  }
+  .clarify-box h3 {
+    font-size: 11px; color: #ea580c; text-transform: uppercase;
+    letter-spacing: .1em; margin-bottom: 14px;
+  }
+  .clarify-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .cg-item .q { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .cg-item .a { font-size: 14px; font-weight: 500; }
+
+  /* ── Section Label ── */
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent);
+    margin: 48px 0 16px;
+  }
+  .section-label:first-of-type { margin-top: 0; }
+
+  /* ── Timeline ── */
+  .timeline { display: flex; flex-direction: column; }
+  .t-phase {
+    display: flex; gap: 0; position: relative;
+  }
+  .t-phase:not(:last-child)::after {
+    content: ''; position: absolute;
+    left: 28px; top: 56px; bottom: 0; width: 2px;
+    background: var(--border); z-index: 0;
+  }
+  .t-dot-col { flex-shrink: 0; width: 58px; display: flex; justify-content: center; padding-top: 18px; }
+  .t-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; color: white; z-index: 1;
+  }
+  .d1 { background: var(--accent); }
+  .d2 { background: var(--p2); }
+  .d3 { background: var(--p3); }
+  .d4 { background: var(--p4); }
+
+  .t-body { flex: 1; padding: 14px 0 36px 0; }
+
+  /* ── Phase Card ── */
+  .phase-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  }
+  .phase-top {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 12px;
+    margin-bottom: 14px; flex-wrap: wrap;
+  }
+  .phase-top h2 { font-size: 20px; font-weight: 700; }
+  .phase-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .tag {
+    display: inline-block; border-radius: 20px;
+    padding: 3px 12px; font-size: 12px; font-weight: 500;
+  }
+  .tag-blue   { background: #eff6ff; color: #2563eb; }
+  .tag-green  { background: #d1fae5; color: #065f46; }
+  .tag-amber  { background: #fffbeb; color: #d97706; }
+  .tag-purple { background: #f3e8ff; color: #7c3aed; }
+  .tag-pink   { background: #fce7f3; color: #9d174d; }
+
+  .purpose-bar {
+    background: #eff6ff; border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; padding: 10px 14px;
+    font-size: 14px; color: #1e40af; font-weight: 500; margin-bottom: 22px;
+  }
+
+  /* ── Sub label ── */
+  .sub-label {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 10px; margin-top: 20px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  }
+  .sub-label:first-of-type { margin-top: 0; }
+
+  /* ── Q list ── */
+  .q-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .q-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #f8fafc; border-radius: 8px; padding: 10px 14px; font-size: 14px;
+  }
+  .q-icon {
+    width: 22px; height: 22px; background: var(--primary); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── Agenda table ── */
+  .agenda-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+    border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
+  }
+  .agenda-table th {
+    background: #f3f4f6; padding: 10px 14px; text-align: left;
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .agenda-table td { padding: 12px 14px; border-top: 1px solid var(--border); vertical-align: top; }
+  .agenda-table tr:nth-child(even) td { background: #fafafa; }
+  .t-cell { white-space: nowrap; font-weight: 600; color: var(--p2); min-width: 80px; }
+
+  /* ── Week checklist ── */
+  .week-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .week-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; padding: 10px 14px;
+    background: #f8fafc; border-radius: 8px;
+    transition: opacity .15s;
+  }
+  .week-badge {
+    font-size: 11px; font-weight: 700; color: white;
+    background: var(--p3); padding: 2px 8px;
+    border-radius: 6px; white-space: nowrap; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── KPI grid ── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .kpi-card {
+    background: #f8fafc; border-radius: 10px; padding: 16px;
+    text-align: center; border: 1px solid var(--border);
+  }
+  .kpi-val { font-size: 20px; font-weight: 800; color: var(--accent); }
+  .kpi-lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── Step list (phase 4) ── */
+  .step-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .step-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; }
+  .s-num {
+    width: 26px; height: 26px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white; flex-shrink: 0;
+    background: var(--p4);
+  }
+  .s-body .s-title { font-weight: 600; margin-bottom: 2px; }
+  .s-body .s-desc  { font-size: 13px; color: var(--muted); }
+
+  /* ── Interactive Checklist ── */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; padding: 10px 14px;
+    border: 1px solid var(--border); border-radius: 8px; background: white;
+    transition: opacity .15s;
+  }
+  .chk-box {
+    width: 18px; height: 18px; border: 2px solid #cbd5e1; border-radius: 4px;
+    flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all .15s;
+  }
+  .chk-box:hover { border-color: var(--accent); background: #eff6ff; }
+
+  /* ── Deliverable box ── */
+  .dbox {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border: 1px solid #86efac; border-radius: 10px;
+    padding: 14px 18px; font-size: 14px;
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-top: 20px;
+  }
+  .dbox-icon { font-size: 20px; flex-shrink: 0; }
+  .dbox strong { display: block; font-size: 11px; color: #15803d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+
+  /* ── Warn box ── */
+  .warn-box {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;
+    padding: 10px 14px; font-size: 13px; color: #92400e; margin-top: 12px;
+  }
+
+  /* ── Insight cards ── */
+  .section-label.dark { color: var(--muted); }
+  .insight-wrap {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 8px 28px;
+  }
+  .insight-card {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 0; border-bottom: 1px solid var(--border);
+  }
+  .insight-card:last-child { border-bottom: none; }
+  .i-icon {
+    background: #f3f4f6; border-radius: 10px;
+    padding: 10px 12px; font-size: 20px; flex-shrink: 0;
+  }
+  .i-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .i-body  { font-size: 14px; color: var(--muted); }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center; color: var(--muted); font-size: 13px;
+    padding: 28px 24px; border-top: 1px solid var(--border); margin-top: 8px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .header { padding: 28px 20px 24px; }
+    .main { padding: 24px 16px; }
+    .clarify-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media print {
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .t-dot   { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">Flow A · 執行指南 v1.0</div>
+    <h1>AI 企業導入顧問服務 — 完整執行路徑</h1>
+    <p>從免費訪談到正式導入，四個階段讓老闆親眼看到 AI 的真實成果</p>
+    <div class="header-meta">
+      <div class="hm"><strong>4</strong>執行階段</div>
+      <div class="hm"><strong>8–12 週</strong>完整週期</div>
+      <div class="hm"><strong>免費起跳</strong>訪談入場</div>
+      <div class="hm"><strong>1 個</strong>聚焦痛點</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Main ── -->
+<div class="main">
+
+  <!-- ── 定義校準 ── -->
+  <div class="clarify-box">
+    <h3>先對齊這兩個定義，後面執行才不會跑偏</h3>
+    <div class="clarify-grid">
+      <div class="cg-item">
+        <div class="q">❌ PoC 的常見誤解</div>
+        <div class="a">「讓老闆決定要不要」≠ PoC 目標</div>
+      </div>
+      <div class="cg-item">
+        <div class="q">✅ PoC 的正確定義</div>
+        <div class="a">挑一個痛點，2–3 週跑出數字（省了多少時間 / 減了多少錯誤），老闆看到成果再決策</div>
+      </div>
+      <div class="cg-item">
+        <div class="q">正式導入 = 三件事</div>
+        <div class="a">① 系統 / 工具建置　② 員工上手訓練　③ 第一個月陪跑校調</div>
+      </div>
+      <div class="cg-item">
+        <div class="q">核心心法</div>
+        <div class="a">數字先，決策後。不靠老闆「感覺」AI 好不好用。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 四階段執行路徑 ── -->
+  <div class="section-label">四個階段 · 執行路徑</div>
+  <div class="timeline">
+
+    <!-- Phase 1 -->
+    <div class="t-phase">
+      <div class="t-dot-col"><div class="t-dot d1">1</div></div>
+      <div class="t-body">
+        <div class="phase-card">
+          <div class="phase-top">
+            <h2>訪談 Interview</h2>
+            <div class="phase-tags">
+              <span class="tag tag-green">免費</span>
+              <span class="tag tag-blue">60–90 分鐘</span>
+              <span class="tag tag-pink">入場門票</span>
+            </div>
+          </div>
+          <div class="purpose-bar">🎯 不是銷售，是診斷。找出公司內部最值得 AI 解決的<strong>一個</strong>痛點。</div>
+
+          <div class="sub-label">四個核心問法方向</div>
+          <ul class="q-list">
+            <li>
+              <div class="q-icon">時</div>
+              <div>哪個工作每天花最多時間，但又覺得「不聰明」？<br><span style="font-size:12px;color:var(--muted)">→ 抓重複性高、腦力消耗低的作業</span></div>
+            </li>
+            <li>
+              <div class="q-icon">錯</div>
+              <div>哪個環節最常出錯、客訴、或讓你很煩？<br><span style="font-size:12px;color:var(--muted)">→ 抓錯誤成本高的流程節點</span></div>
+            </li>
+            <li>
+              <div class="q-icon">資</div>
+              <div>有沒有資料每天都在手工整理？<br><span style="font-size:12px;color:var(--muted)">→ 抓自動化效益最立竿見影的場景</span></div>
+            </li>
+            <li>
+              <div class="q-icon">人</div>
+              <div>員工現在最想甩掉哪件事？<br><span style="font-size:12px;color:var(--muted)">→ 抓有內部動機配合的痛點，導入阻力最小</span></div>
+            </li>
+          </ul>
+
+          <div class="dbox">
+            <div class="dbox-icon">📄</div>
+            <div><strong>交付物</strong>1 頁訪談摘要：痛點 Top 3 + 建議切入點（客戶留存，作為工作坊起點）</div>
+          </div>
+          <div class="warn-box">⚠️ 訪談結束當天整理摘要，隔天確認再給客戶。現場不要承諾「AI 一定能解決」。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="t-phase">
+      <div class="t-dot-col"><div class="t-dot d2">2</div></div>
+      <div class="t-body">
+        <div class="phase-card">
+          <div class="phase-top">
+            <h2>工作坊 Workshop</h2>
+            <div class="phase-tags">
+              <span class="tag tag-amber">1.5–3 萬</span>
+              <span class="tag tag-blue">半天（3–4 小時）</span>
+            </div>
+          </div>
+          <div class="purpose-bar">🎯 讓老闆和關鍵員工<strong>親手體驗</strong> AI，用他們自己公司的文件，找到自己的用法。</div>
+
+          <div class="sub-label">議程規劃</div>
+          <table class="agenda-table">
+            <thead>
+              <tr><th>時段</th><th>內容</th><th>設計重點</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-cell">前 30 分</td>
+                <td><strong>AI 能做什麼 / 不能做什麼</strong></td>
+                <td>用<em>他們行業</em>的案例，不說通用的，讓客戶感受「這跟我有關」</td>
+              </tr>
+              <tr>
+                <td class="t-cell">60 分</td>
+                <td><strong>親手試</strong> — 用公司真實文件跑工具</td>
+                <td>ChatGPT / AI 工具，素材用他們帶來的表單、合約、客服紀錄</td>
+              </tr>
+              <tr>
+                <td class="t-cell">30 分</td>
+                <td><strong>痛點對照</strong> — 訪談結果 vs 體驗後感受</td>
+                <td>讓員工說出「這個可以幫我」，建立主動性</td>
+              </tr>
+              <tr>
+                <td class="t-cell">30–60 分</td>
+                <td><strong>切入點共識</strong> — 決定 PoC 要驗什麼</td>
+                <td>老闆 + 員工一起確認場景，避免落地卡關</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="dbox">
+            <div class="dbox-icon">📋</div>
+            <div><strong>交付物</strong>PoC 提案一頁紙：驗證目標 + 預期數字 + 時程（雙方確認後進入 Phase 3）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="t-phase">
+      <div class="t-dot-col"><div class="t-dot d3">3</div></div>
+      <div class="t-body">
+        <div class="phase-card">
+          <div class="phase-top">
+            <h2>PoC 驗證 Proof of Concept</h2>
+            <div class="phase-tags">
+              <span class="tag tag-amber">視規模報價</span>
+              <span class="tag tag-blue">2–3 週</span>
+              <span class="tag tag-pink">關鍵轉折點</span>
+            </div>
+          </div>
+          <div class="purpose-bar">🎯 用真實數字讓老闆看到 AI 帶來的改變。<strong>數字先，決策後。</strong></div>
+
+          <div class="sub-label">成功衡量標準（事前與客戶確認）</div>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-val">省時</div>
+              <div class="kpi-lbl">節省人工時間<br>（小時 / 週）</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-val">準確</div>
+              <div class="kpi-lbl">錯誤率 / 退件率<br>下降幅度</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-val">滿意</div>
+              <div class="kpi-lbl">員工使用意願<br>（問卷評分）</div>
+            </div>
+          </div>
+
+          <div class="sub-label" style="margin-top:20px;">週進度執行 Checklist（點擊可打勾）</div>
+          <ul class="week-list">
+            <li id="w0">
+              <div class="chk-box" onclick="toggleWeek('w0', this)"></div>
+              <div><span class="week-badge" style="background:var(--p3);">Week 0</span>&nbsp; 確認 PoC 場景、記錄現況基準值（現在花多少時間 / 有多少錯誤）</div>
+            </li>
+            <li id="w1">
+              <div class="chk-box" onclick="toggleWeek('w1', this)"></div>
+              <div><span class="week-badge" style="background:var(--p3);">Week 1</span>&nbsp; 建立 AI 工具 / 流程，讓 1–2 位員工開始試用</div>
+            </li>
+            <li id="w2">
+              <div class="chk-box" onclick="toggleWeek('w2', this)"></div>
+              <div><span class="week-badge" style="background:var(--p3);">Week 2</span>&nbsp; 收集使用數據，修正 prompt / 流程卡點</div>
+            </li>
+            <li id="w3">
+              <div class="chk-box" onclick="toggleWeek('w3', this)"></div>
+              <div><span class="week-badge" style="background:var(--p3);">Week 3</span>&nbsp; 整理成效數字，製作 PoC 成果報告</div>
+            </li>
+            <li id="wf">
+              <div class="chk-box" onclick="toggleWeek('wf', this)"></div>
+              <div><span class="week-badge" style="background:var(--p2);">最終</span>&nbsp; 向老闆呈現 Before vs After，說明正式導入方案與報價</div>
+            </li>
+          </ul>
+
+          <div class="dbox">
+            <div class="dbox-icon">📊</div>
+            <div><strong>交付物</strong>PoC 成果報告（1 頁）— Before vs After 數字對比 + 正式導入建議方案與報價</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="t-phase">
+      <div class="t-dot-col"><div class="t-dot d4">4</div></div>
+      <div class="t-body">
+        <div class="phase-card">
+          <div class="phase-top">
+            <h2>正式導入 Implementation</h2>
+            <div class="phase-tags">
+              <span class="tag tag-purple">5 萬起 / 月費另計</span>
+              <span class="tag tag-blue">4–8 週</span>
+            </div>
+          </div>
+          <div class="purpose-bar">🎯 把 PoC 成果變成公司真實在用的制度，不是繼續測試。</div>
+
+          <div class="sub-label">三件核心工作（缺一不可）</div>
+          <ul class="step-list">
+            <li>
+              <div class="s-num">A</div>
+              <div class="s-body">
+                <div class="s-title">系統 / 工具建置</div>
+                <div class="s-desc">串接公司既有系統、設定自動化工作流程、建立資料規範與 prompt 模板，確保穩定可重複使用</div>
+              </div>
+            </li>
+            <li>
+              <div class="s-num">B</div>
+              <div class="s-body">
+                <div class="s-title">員工上手訓練</div>
+                <div class="s-desc">針對實際使用者做 1–2 次操作培訓 + SOP 文件。重點是「讓他們願意用」，不是把功能全教完</div>
+              </div>
+            </li>
+            <li>
+              <div class="s-num">C</div>
+              <div class="s-body">
+                <div class="s-title">第一個月陪跑校調</div>
+                <div class="s-desc">正式上線後，每週 30 分鐘確認使用狀況、修正卡點、回答問題。這是導入成功率最關鍵的一步，不能省</div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="sub-label" style="margin-top:20px;">導入完成檢核（點擊可打勾）</div>
+          <ul class="checklist">
+            <li><div class="chk-box" onclick="toggleCheck(this)"></div><div>系統穩定運行 ≥ 2 週，無重大問題</div></li>
+            <li><div class="chk-box" onclick="toggleCheck(this)"></div><div>核心使用者可獨立操作，不需再問顧問</div></li>
+            <li><div class="chk-box" onclick="toggleCheck(this)"></div><div>KPI 數字達到 PoC 承諾的 80% 以上</div></li>
+            <li><div class="chk-box" onclick="toggleCheck(this)"></div><div>SOP 文件完成並移交客戶</div></li>
+            <li><div class="chk-box" onclick="toggleCheck(this)"></div><div>老闆確認「這個已經是我們工作的一部分」</div></li>
+          </ul>
+
+          <div class="dbox">
+            <div class="dbox-icon">🏆</div>
+            <div><strong>交付物</strong>導入完成報告 + 後續維護 / 下一個痛點擴張建議（開啟下一輪 Flow A）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- ── 關鍵轉化設計 ── -->
+  <div class="section-label dark" style="color:var(--muted);">關鍵轉化設計</div>
+  <div class="insight-wrap">
+    <div class="insight-card">
+      <div class="i-icon">🎣</div>
+      <div>
+        <div class="i-title">免費訪談是鉤子，不是義務</div>
+        <div class="i-body">目的是讓對方認識你、信任你，找到痛點後順勢推工作坊。不要把它搞成免費諮詢義務。</div>
+      </div>
+    </div>
+    <div class="insight-card">
+      <div class="i-icon">🔬</div>
+      <div>
+        <div class="i-title">工作坊是體驗，不是說服</div>
+        <div class="i-body">讓他們用自己公司的文件親手跑 AI，他們就會自己說服自己。你只是引導者，不是推銷員。</div>
+      </div>
+    </div>
+    <div class="insight-card">
+      <div class="i-icon">📈</div>
+      <div>
+        <div class="i-title">PoC 是決策武器，不是測試品</div>
+        <div class="i-body">事前確認成功標準，事後拿數字說話。老闆看到「省了 X 小時」比看 demo 更容易點頭，轉化率差很多。</div>
+      </div>
+    </div>
+    <div class="insight-card">
+      <div class="i-icon">🔁</div>
+      <div>
+        <div class="i-title">導入完成 = 下一個痛點的起點</div>
+        <div class="i-body">第一個痛點解決後，客戶主動會問「還有什麼可以做」。不需要再賣一次，繼續走 Flow A 就好。</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<div class="footer">
+  Flow A 執行指南 · 內部使用 · 2026-07-02
+</div>
+
+<script>
+function toggleCheck(el) {
+  const on = el.dataset.on === '1';
+  if (on) {
+    el.dataset.on = '0';
+    el.innerHTML = '';
+    el.style.background = '';
+    el.style.borderColor = '';
+    el.parentElement.style.opacity = '1';
+  } else {
+    el.dataset.on = '1';
+    el.innerHTML = '<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    el.style.background = '#10b981';
+    el.style.borderColor = '#10b981';
+    el.parentElement.style.opacity = '0.45';
+  }
+}
+function toggleWeek(id, el) {
+  const li = document.getElementById(id);
+  const on = el.dataset.on === '1';
+  if (on) {
+    el.dataset.on = '0';
+    el.innerHTML = '';
+    el.style.background = '';
+    el.style.borderColor = '';
+    li.style.opacity = '1';
+  } else {
+    el.dataset.on = '1';
+    el.innerHTML = '<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    el.style.background = '#10b981';
+    el.style.borderColor = '#10b981';
+    li.style.opacity = '0.45';
+  }
+}
+</script>
+</body>
+</html>
