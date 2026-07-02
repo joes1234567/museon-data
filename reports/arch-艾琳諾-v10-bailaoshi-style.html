@@ -273,6 +273,20 @@
   .risk-mid { background: #FFFBF0; }
   .risk-low { background: #F5FFF8; }
   .risk-label { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  /* ROI 情境表 */
+  .roi-scenario-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  .roi-scenario-table th { background: var(--ink); color: #fff; padding: 9px 12px; text-align: left; font-size: 12px; letter-spacing: 0.5px; }
+  .roi-scenario-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--slate); vertical-align: top; }
+  .roi-scenario-table tr:last-child td { border-bottom: none; }
+  .rsp1 { background: #F2FAF5; }
+  .rsp1-head td { background: #1a6b3c; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; }
+  .rsp2 { background: #F0F6FA; }
+  .rsp2-head td { background: #2A6A8A; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; }
+  .rsp3 { background: #F5F0FF; }
+  .rsp3-head td { background: #7c3aed; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; }
+  .rsc { text-align: center; font-weight: 600; color: var(--ink); }
+  .rsc-high { color: #e67e22; }
+  .rsc-top { color: #c0392b; font-weight: 700; }
   .rl-high { background: #FEE2E2; color: #B91C1C; }
   .rl-mid { background: #FEF3C7; color: #92400E; }
   .rl-low { background: #D1FAE5; color: #065F46; }
@@ -1248,6 +1262,50 @@
       <div>月效益合計：NT$32,400 + NT$90,000   ≈  NT$122,400</div>
       <div style="color:#fff; font-weight:700;">完整回本期限   ≈  6–7 個月（雙層保守版）</div>
       <div style="color:rgba(255,255,255,0.55); font-size:12px; margin-top:4px;">單靠第一層成本節省：約 24 個月——第二層是讓回本成立的關鍵</div>
+    </div>
+
+    <!-- ROI 情境表 -->
+    <div style="margin: 32px 0 28px;">
+      <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 16px; letter-spacing: 0.3px;">各模組工期情境表</div>
+      <table class="roi-scenario-table">
+        <thead>
+          <tr>
+            <th style="width:8%">編號</th>
+            <th style="width:20%">模組</th>
+            <th style="width:8%;text-align:center">週數</th>
+            <th style="width:9%;text-align:center">驗收點</th>
+            <th style="width:8%;text-align:center">係數</th>
+            <th>判斷原因</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="rsp1-head"><td colspan="6">P1｜後台核心模組</td></tr>
+          <tr class="rsp1"><td>P1M01</td><td>帳號與權限 RBAC</td><td class="rsc">1.5</td><td class="rsc">3</td><td class="rsc">1.35</td><td>權限、角色、操作範圍、敏感操作控管</td></tr>
+          <tr class="rsp1"><td>P1M02</td><td>品牌管理</td><td class="rsc">1</td><td class="rsc">3</td><td class="rsc">1.25</td><td>多品牌隔離、A/B 品牌模式不同</td></tr>
+          <tr class="rsp1"><td>P1M03</td><td>經銷商管理</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.25</td><td>經銷商資料、品牌歸屬、上下線、狀態</td></tr>
+          <tr class="rsp1"><td>P1M04</td><td>產品管理</td><td class="rsc">1.5</td><td class="rsc">2</td><td class="rsc">1.15</td><td>共用產品主檔、上下架、分類、規格</td></tr>
+          <tr class="rsp1"><td>P1M05</td><td>品牌價格管理</td><td class="rsc">1.5</td><td class="rsc">3</td><td class="rsc">1.30</td><td>同產品不同品牌、不同等級價格</td></tr>
+          <tr class="rsp1"><td>P1M06</td><td>點數管理</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>點數近似現金，需交易紀錄、退點、調整、稽核</td></tr>
+          <tr class="rsp1"><td>P1M07</td><td>訂單管理</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>多來源訂單、A/B 品牌、後台代下單、取消退款</td></tr>
+          <tr class="rsp1"><td>P1M08</td><td>庫存管理</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>批號、效期、批次庫存、FEFO、盤點</td></tr>
+          <tr class="rsp1"><td>P1M09</td><td>出貨管理</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.25</td><td>統一出貨、待出貨、自取、列印、扣庫存</td></tr>
+          <tr class="rsp1"><td>P1M10</td><td>報表與稽核</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.35</td><td>報表、匯出、不可刪稽核、操作紀錄</td></tr>
+          <tr class="rsp2-head"><td colspan="6">P2｜A 品牌經銷商端與流程模組</td></tr>
+          <tr class="rsp2"><td>P2M11</td><td>帳號中心 A 品牌</td><td class="rsc">1</td><td class="rsc">2</td><td class="rsc">1.15</td><td>經銷商登入、個資、密碼、帳號中心</td></tr>
+          <tr class="rsp2"><td>P2M12</td><td>點數查詢 / 刷卡儲值</td><td class="rsc">2</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>玉山付款、入點、點數明細、金流風險</td></tr>
+          <tr class="rsp2"><td>P2M13</td><td>自助提貨申請</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.25</td><td>選產品、點數計算、扣點、提貨狀態</td></tr>
+          <tr class="rsp2"><td>P2M14</td><td>轉點 / 合併出貨</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc">1.40</td><td>產品式轉點、接收確認、合併地址、免運規則</td></tr>
+          <tr class="rsp2"><td>P2M15</td><td>組織查看 高階</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>下線查看、可視範圍、等級截斷</td></tr>
+          <tr class="rsp2"><td>P2M16</td><td>玉山金流串接</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc rsc-top">1.50</td><td>金流、回呼、退款、對帳、錯誤防呆</td></tr>
+          <tr class="rsp2"><td>P2M17</td><td>等級自動升級</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.35</td><td>條件設定、自動判斷、升級紀錄</td></tr>
+          <tr class="rsp2"><td>P2M18</td><td>通知提醒</td><td class="rsc">1.5</td><td class="rsc">2</td><td class="rsc">1.15</td><td>儲值、提貨、合併、轉點、狀態通知</td></tr>
+          <tr class="rsp3-head"><td colspan="6">P3｜商城與 AI 匯入</td></tr>
+          <tr class="rsp3"><td>P3.1</td><td>A 品牌獨立商城入口</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>經銷商專屬商城、品牌/經銷商歸屬</td></tr>
+          <tr class="rsp3"><td>P3.2</td><td>消費者自助下單</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>訪客下單、會員下單、付款、取消、退款</td></tr>
+          <tr class="rsp3"><td>P3.3</td><td>AI 智慧資料匯入</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>Excel 匯入、AI 整理、人工確認、異常標記</td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:12px;color:var(--mist);margin-top:8px;">係數說明：基準工時乘數，反映複雜度與風險緩衝。1.15 = 低複雜；1.35 = 中高複雜；1.45+ = 高風險模組（紅字）。</div>
     </div>
 
     <div class="highlight-box">
