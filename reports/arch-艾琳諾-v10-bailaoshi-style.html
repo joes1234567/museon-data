@@ -398,11 +398,11 @@
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <div style="display: flex; gap: 8px; font-size: 13px; color: var(--slate);">
             <span style="color: #7c3aed; font-weight: 700; flex-shrink: 0;">→</span>
-            <span>公司後台建立訂單 → 點數人工入帳</span>
+            <span>門市刷中信卡（線下，不寫入系統）→ 後台手動入點</span>
           </div>
           <div style="display: flex; gap: 8px; font-size: 13px; color: var(--slate);">
             <span style="color: #7c3aed; font-weight: 700; flex-shrink: 0;">→</span>
-            <span>公司確認庫存 → 扣點 → 出貨</span>
+            <span>點數下訂單 → 後台確認 → 扣點 → 門市取貨（無需物流）</span>
           </div>
           <div style="display: flex; gap: 8px; font-size: 13px; color: var(--slate);">
             <span style="color: #7c3aed; font-weight: 700; flex-shrink: 0;">→</span>
@@ -601,8 +601,8 @@
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-step">
-          <div class="flow-circle" style="background: #ede9fe;">🚚</div>
-          <div class="flow-step-label">出貨<br>完成</div>
+          <div class="flow-circle" style="background: #ede9fe;">🏪</div>
+          <div class="flow-step-label">門市取貨<br>（無需物流）</div>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-step">
@@ -701,15 +701,15 @@
           <div style="width: 24px; height: 24px; background: #F0EBF8; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #7c3aed; flex-shrink: 0;">B</div>
           <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #7c3aed;">B 品牌儲值流程</div>
         </div>
-        <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 16px;">公司人工 key 入，每筆有來源記錄</div>
+        <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 16px;">線下刷中信卡 → 後台手動入點，門市取貨</div>
         <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
           <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--slate);">
             <div style="width: 22px; height: 22px; background: #F0EBF8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #7c3aed; flex-shrink: 0;">1</div>
-            <span>公司後台建立 B 品牌訂單</span>
+            <span>客戶在門市刷中信信用卡（線下，金流不寫入系統）</span>
           </div>
           <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--slate);">
             <div style="width: 22px; height: 22px; background: #F0EBF8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #7c3aed; flex-shrink: 0;">2</div>
-            <span>財務人員 key 入 B 品牌點數 + 來源標記</span>
+            <span>後台人員手動新增 B 品牌點數（對應刷卡金額）+ 來源標記</span>
           </div>
           <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--slate);">
             <div style="width: 22px; height: 22px; background: #F0EBF8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #7c3aed; flex-shrink: 0;">3</div>
@@ -717,10 +717,10 @@
           </div>
           <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--slate);">
             <div style="width: 22px; height: 22px; background: #F0EBF8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #7c3aed; flex-shrink: 0;">4</div>
-            <span>公司確認庫存 → 扣點 → 出貨</span>
+            <span>點數下訂單 → 後台確認庫存 → 扣點 → 門市取貨</span>
           </div>
         </div>
-        <div style="padding: 10px 14px; background: #F0EBF8; border-radius: 8px; font-size: 12px; color: #7c3aed; line-height: 1.6;">核心原則：B 品牌點數由公司全程掌控，無自助入口</div>
+        <div style="padding: 10px 14px; background: #F0EBF8; border-radius: 8px; font-size: 12px; color: #7c3aed; line-height: 1.6;">核心原則：B 品牌金流走線下中信刷卡機，系統不記金流；系統只管點數帳戶、訂單狀態與門市取貨</div>
       </div>
 
       <!-- 提貨申請流程 -->
@@ -1033,15 +1033,14 @@
       </div>
     </div>
 
-    <!-- P3A: 商城 -->
     <div class="func-area">
       <div class="func-header">
         <div class="func-icon" style="background: #f3e8ff; font-size: 20px; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🛒</div>
         <div class="func-title-group">
-          <div class="func-area-name">5.19 A 品牌消費者商城</div>
-          <div class="func-area-desc">獨立商城入口 / 消費者自助下單 / 訂單歸屬經銷商</div>
+          <div class="func-area-name">P3.1–P3.3 消費者商城 + AI 資料匯入</div>
+          <div class="func-area-desc">獨立商城 / 消費者自助下單 / AI 協助整理舊資料</div>
         </div>
-        <div class="func-modules-count">2 個模組</div>
+        <div class="func-modules-count">3 個模組</div>
       </div>
       <div class="module-grid">
         <div class="module-card">
@@ -1054,20 +1053,6 @@
           <div class="module-value">訪客可先瀏覽，下單才建帳，款項進公司，訂單歸屬對應經銷商</div>
           <div class="module-detail">訪客瀏覽 · 下單建帳 · 訂單自動歸屬經銷商 · 款項進公司玉山帳戶 · 會員邀請</div>
         </div>
-      </div>
-    </div>
-
-    <!-- P3B: AI 匯入 -->
-    <div class="func-area" style="margin-top: 20px;">
-      <div class="func-header">
-        <div class="func-icon" style="background: #e8f5ee; font-size: 20px; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🤖</div>
-        <div class="func-title-group">
-          <div class="func-area-name">5.20 AI 智慧資料匯入</div>
-          <div class="func-area-desc">Excel 上傳 / AI 自動清洗 / 人工確認後正式匯入</div>
-        </div>
-        <div class="func-modules-count">1 個模組</div>
-      </div>
-      <div class="module-grid">
         <div class="module-card">
           <div class="module-top"><div class="module-name">P3.3 AI 資料匯入</div><span class="phase-tag pt-3">第三階段</span></div>
           <div class="module-value">上傳舊 Excel，AI 自動清洗格式/偵測重複，人工確認後正式匯入</div>
@@ -1279,59 +1264,54 @@
       <div style="color:rgba(255,255,255,0.55); font-size:12px; margin-top:4px;">單靠第一層成本節省：約 24 個月——第二層是讓回本成立的關鍵</div>
     </div>
 
+    <!-- ROI 情境表 -->
+    <div style="margin: 32px 0 28px;">
+      <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 16px; letter-spacing: 0.3px;">各模組工期情境表</div>
+      <table class="roi-scenario-table">
+        <thead>
+          <tr>
+            <th style="width:8%">編號</th>
+            <th style="width:20%">模組</th>
+            <th style="width:8%;text-align:center">週數</th>
+            <th style="width:9%;text-align:center">驗收點</th>
+            <th style="width:8%;text-align:center">係數</th>
+            <th>判斷原因</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="rsp1-head"><td colspan="6">P1｜後台核心模組</td></tr>
+          <tr class="rsp1"><td>P1M01</td><td>帳號與權限 RBAC</td><td class="rsc">1.5</td><td class="rsc">3</td><td class="rsc">1.35</td><td>權限、角色、操作範圍、敏感操作控管</td></tr>
+          <tr class="rsp1"><td>P1M02</td><td>品牌管理</td><td class="rsc">1</td><td class="rsc">3</td><td class="rsc">1.25</td><td>多品牌隔離、A/B 品牌模式不同</td></tr>
+          <tr class="rsp1"><td>P1M03</td><td>經銷商管理</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.25</td><td>經銷商資料、品牌歸屬、上下線、狀態</td></tr>
+          <tr class="rsp1"><td>P1M04</td><td>產品管理</td><td class="rsc">1.5</td><td class="rsc">2</td><td class="rsc">1.15</td><td>共用產品主檔、上下架、分類、規格</td></tr>
+          <tr class="rsp1"><td>P1M05</td><td>品牌價格管理</td><td class="rsc">1.5</td><td class="rsc">3</td><td class="rsc">1.30</td><td>同產品不同品牌、不同等級價格</td></tr>
+          <tr class="rsp1"><td>P1M06</td><td>點數管理</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>點數近似現金，需交易紀錄、退點、調整、稽核</td></tr>
+          <tr class="rsp1"><td>P1M07</td><td>訂單管理</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>多來源訂單、A/B 品牌、後台代下單、取消退款</td></tr>
+          <tr class="rsp1"><td>P1M08</td><td>庫存管理</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>批號、效期、批次庫存、FEFO、盤點</td></tr>
+          <tr class="rsp1"><td>P1M09</td><td>出貨管理</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.25</td><td>統一出貨、待出貨、自取、列印、扣庫存</td></tr>
+          <tr class="rsp1"><td>P1M10</td><td>報表與稽核</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.35</td><td>報表、匯出、不可刪稽核、操作紀錄</td></tr>
+          <tr class="rsp2-head"><td colspan="6">P2｜A 品牌經銷商端與流程模組</td></tr>
+          <tr class="rsp2"><td>P2M11</td><td>帳號中心 A 品牌</td><td class="rsc">1</td><td class="rsc">2</td><td class="rsc">1.15</td><td>經銷商登入、個資、密碼、帳號中心</td></tr>
+          <tr class="rsp2"><td>P2M12</td><td>點數查詢 / 刷卡儲值</td><td class="rsc">2</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>玉山付款、入點、點數明細、金流風險</td></tr>
+          <tr class="rsp2"><td>P2M13</td><td>自助提貨申請</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.25</td><td>選產品、點數計算、扣點、提貨狀態</td></tr>
+          <tr class="rsp2"><td>P2M14</td><td>轉點 / 合併出貨</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc">1.40</td><td>產品式轉點、接收確認、合併地址、免運規則</td></tr>
+          <tr class="rsp2"><td>P2M15</td><td>組織查看 高階</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>下線查看、可視範圍、等級截斷</td></tr>
+          <tr class="rsp2"><td>P2M16</td><td>玉山金流串接</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc rsc-top">1.50</td><td>金流、回呼、退款、對帳、錯誤防呆</td></tr>
+          <tr class="rsp2"><td>P2M17</td><td>等級自動升級</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.35</td><td>條件設定、自動判斷、升級紀錄</td></tr>
+          <tr class="rsp2"><td>P2M18</td><td>通知提醒</td><td class="rsc">1.5</td><td class="rsc">2</td><td class="rsc">1.15</td><td>儲值、提貨、合併、轉點、狀態通知</td></tr>
+          <tr class="rsp3-head"><td colspan="6">P3｜商城與 AI 匯入</td></tr>
+          <tr class="rsp3"><td>P3.1</td><td>A 品牌獨立商城入口</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>經銷商專屬商城、品牌/經銷商歸屬</td></tr>
+          <tr class="rsp3"><td>P3.2</td><td>消費者自助下單</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>訪客下單、會員下單、付款、取消、退款</td></tr>
+          <tr class="rsp3"><td>P3.3</td><td>AI 智慧資料匯入</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>Excel 匯入、AI 整理、人工確認、異常標記</td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:12px;color:var(--mist);margin-top:8px;">係數說明：基準工時乘數，反映複雜度與風險緩衝。1.15 = 低複雜；1.35 = 中高複雜；1.45+ = 高風險模組（紅字）。</div>
+    </div>
+
     <div class="highlight-box">
       <h3>最大的回報不是省人力，是公司拿回對流程的掌控感</h3>
       <p>當提貨申請、點數異動、組織動態都在系統裡，公司不再靠 LINE 群組撐起一整個業務流程。有記錄、有數據、有預警——這是讓公司能繼續擴大經銷商規模的基礎，不是只省幾個小時。</p>
     </div>
-  </div>
-</section>
-
-<!-- 各模組工期情境表（獨立 section） -->
-<section>
-  <div class="container">
-    <div class="section-label">工期情境</div>
-    <h2 class="section-title">各模組週數 · 驗收點 · 係數</h2>
-    <p class="section-desc">21 個模組的工期基準與複雜度係數。係數反映不確定性緩衝，高風險模組（1.45+）以紅字標示。</p>
-    <table class="roi-scenario-table">
-      <thead>
-        <tr>
-          <th style="width:8%">編號</th>
-          <th style="width:22%">模組</th>
-          <th style="width:8%;text-align:center">週數</th>
-          <th style="width:9%;text-align:center">驗收點</th>
-          <th style="width:8%;text-align:center">係數</th>
-          <th>判斷原因</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="rsp1-head"><td colspan="6">P1｜後台核心模組（10 個模組）</td></tr>
-        <tr class="rsp1"><td>P1M01</td><td>帳號與權限 RBAC</td><td class="rsc">1.5</td><td class="rsc">3</td><td class="rsc">1.35</td><td>權限、角色、操作範圍、敏感操作控管</td></tr>
-        <tr class="rsp1"><td>P1M02</td><td>品牌管理</td><td class="rsc">1</td><td class="rsc">3</td><td class="rsc">1.25</td><td>多品牌隔離、A/B 品牌模式不同</td></tr>
-        <tr class="rsp1"><td>P1M03</td><td>經銷商管理</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.25</td><td>經銷商資料、品牌歸屬、上下線、狀態</td></tr>
-        <tr class="rsp1"><td>P1M04</td><td>產品管理</td><td class="rsc">1.5</td><td class="rsc">2</td><td class="rsc">1.15</td><td>共用產品主檔、上下架、分類、規格</td></tr>
-        <tr class="rsp1"><td>P1M05</td><td>品牌價格管理</td><td class="rsc">1.5</td><td class="rsc">3</td><td class="rsc">1.30</td><td>同產品不同品牌、不同等級價格</td></tr>
-        <tr class="rsp1"><td>P1M06</td><td>點數管理</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>點數近似現金，需交易紀錄、退點、調整、稽核</td></tr>
-        <tr class="rsp1"><td>P1M07</td><td>訂單管理</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>多來源訂單、A/B 品牌、後台代下單、取消退款</td></tr>
-        <tr class="rsp1"><td>P1M08</td><td>庫存管理</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>批號、效期、批次庫存、FEFO、盤點</td></tr>
-        <tr class="rsp1"><td>P1M09</td><td>出貨管理</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.25</td><td>統一出貨、待出貨、自取、列印、扣庫存</td></tr>
-        <tr class="rsp1"><td>P1M10</td><td>報表與稽核</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.35</td><td>報表、匯出、不可刪稽核、操作紀錄</td></tr>
-        <tr class="rsp2-head"><td colspan="6">P2｜A 品牌經銷商端與流程模組（8 個模組）</td></tr>
-        <tr class="rsp2"><td>P2M11</td><td>帳號中心 A 品牌</td><td class="rsc">1</td><td class="rsc">2</td><td class="rsc">1.15</td><td>經銷商登入、個資、密碼、帳號中心</td></tr>
-        <tr class="rsp2"><td>P2M12</td><td>點數查詢 / 刷卡儲值</td><td class="rsc">2</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>玉山付款、入點、點數明細、金流風險</td></tr>
-        <tr class="rsp2"><td>P2M13</td><td>自助提貨申請</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.25</td><td>選產品、點數計算、扣點、提貨狀態</td></tr>
-        <tr class="rsp2"><td>P2M14</td><td>轉點 / 合併出貨</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc">1.40</td><td>產品式轉點、接收確認、合併地址、免運規則</td></tr>
-        <tr class="rsp2"><td>P2M15</td><td>組織查看 高階</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>下線查看、可視範圍、等級截斷</td></tr>
-        <tr class="rsp2"><td>P2M16</td><td>玉山金流串接</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc rsc-top">1.50</td><td>金流、回呼、退款、對帳、錯誤防呆</td></tr>
-        <tr class="rsp2"><td>P2M17</td><td>等級自動升級</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.35</td><td>條件設定、自動判斷、升級紀錄</td></tr>
-        <tr class="rsp2"><td>P2M18</td><td>通知提醒</td><td class="rsc">1.5</td><td class="rsc">2</td><td class="rsc">1.15</td><td>儲值、提貨、合併、轉點、狀態通知</td></tr>
-        <tr class="rsp3-head"><td colspan="6">P3A｜A 品牌消費者商城（2 個模組）</td></tr>
-        <tr class="rsp3"><td>P3.1</td><td>A 品牌獨立商城入口</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>經銷商專屬商城、品牌/經銷商歸屬</td></tr>
-        <tr class="rsp3"><td>P3.2</td><td>消費者自助下單</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>訪客下單、會員下單、付款、取消、退款</td></tr>
-        <tr class="rsp3-head" style="background:#e8f5ee; color:#1a6b3c;"><td colspan="6">P3B｜AI 智慧資料匯入（1 個模組）</td></tr>
-        <tr class="rsp3"><td>P3.3</td><td>AI 智慧資料匯入</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>Excel 匯入、AI 整理、人工確認、異常標記</td></tr>
-      </tbody>
-    </table>
-    <div style="font-size:12px;color:var(--mist);margin-top:8px;">係數說明：基準工時乘數，反映複雜度與風險緩衝。1.15 = 低複雜；1.35 = 中高複雜；1.45+ = 高風險模組（紅字）。</div>
   </div>
 </section>
 
