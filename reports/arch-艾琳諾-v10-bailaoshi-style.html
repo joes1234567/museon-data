@@ -1493,6 +1493,13 @@
   <div id="kgyi-d-phase" style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px;"></div>
   <div id="kgyi-d-name" style="font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.4;"></div>
   <div id="kgyi-d-desc" style="font-size:14px;color:var(--slate);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);"></div>
+  <div id="kgyi-d-meta" style="display:none;background:var(--snow);border-radius:8px;padding:10px 12px;margin-bottom:10px;border:1px solid var(--border);">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center;margin-bottom:8px;">
+      <div style="background:#fff;border-radius:6px;padding:6px 4px;border:1px solid var(--border);"><div style="font-size:10px;color:var(--mist);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;">週數</div><div id="kgyi-d-weeks" style="font-size:18px;font-weight:800;color:var(--ink);"></div></div>
+      <div style="background:#fff;border-radius:6px;padding:6px 4px;border:1px solid var(--border);"><div style="font-size:10px;color:var(--mist);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;">係數</div><div id="kgyi-d-coef" style="font-size:18px;font-weight:800;"></div></div>
+    </div>
+    <div><div style="font-size:10px;color:var(--mist);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">驗收點</div><div id="kgyi-d-acceptance" style="font-size:12px;color:var(--slate);line-height:1.6;"></div></div>
+  </div>
   <div id="kgyi-d-deps-sec" style="display:none;"><div style="font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">前置依賴</div><ul id="kgyi-d-deps" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
   <div id="kgyi-d-enables-sec" style="display:none;margin-top:2px;"><div style="font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">解鎖模組</div><ul id="kgyi-d-enables" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
 </div>
@@ -1542,26 +1549,26 @@ const PX={P1:120,P2:380,P3:640,P4:900};
 const PL={P1:'第一階段 後台核心',P2:'第二階段 前台+自動化',P3:'第三階段 AI匯入',P4:'第四階段 商城'};
 const W=1050,H=800;
 const nodes=[
-  {id:'M01',short:'帳號與權限',label:'帳號\n權限',phase:'P1',icon:'🔐',desc:'RBAC 角色自訂，六種預設角色，品牌資料範圍分開控管，所有帳號的基礎'},
-  {id:'M02',short:'品牌管理',label:'品牌\n管理',phase:'P1',icon:'🏷️',desc:'建立 A/B 品牌，各自設定規則（點數/等級/前台類型），資料完全隔離'},
-  {id:'M03',short:'經銷商管理',label:'經銷商\n管理',phase:'P1',icon:'👥',desc:'A/B 品牌各自帳號池，建立/停用/等級設定/推薦人，帳號之間不互通'},
-  {id:'M04',short:'產品管理',label:'產品\n管理',phase:'P1',icon:'📦',desc:'共用產品主檔（SKU/規格/圖片），A/B 品牌共享，各自透過 M05 設定點數'},
-  {id:'M05',short:'品牌價格',label:'品牌\n價格',phase:'P1',icon:'💲',desc:'A/B 品牌各自設定產品點數換算規則，同一產品可有不同品牌售價'},
-  {id:'M06',short:'點數管理',label:'點數\n管理',phase:'P1',icon:'💰',desc:'點數分品牌管理，A/B 點數不互轉，人工調整必填原因，全稽核不可刪除'},
-  {id:'M07',short:'訂單管理',label:'訂單\n管理',phase:'P1',icon:'📋',desc:'A 品牌公司代下 + B 品牌後台代下，庫存確認後扣點，取消可退點'},
-  {id:'M08',short:'庫存管理',label:'庫存\n管理',phase:'P1',icon:'🏭',desc:'批號/效期批次管理，A/B 共用同一倉，入庫/扣庫全有記錄'},
-  {id:'M09',short:'出貨管理',label:'出貨\n管理',phase:'P1',icon:'🚚',desc:'待出貨/待自取列表，出貨進度更新，收貨確認，全品牌統一後台出貨'},
-  {id:'M10',short:'報表與稽核',label:'報表\n稽核',phase:'P1',icon:'📊',desc:'提貨/點數/金流報表分品牌統計，高風險操作留存稽核紀錄，不可刪除'},
-  {id:'M11',short:'帳號中心',label:'帳號\n中心',phase:'P2',icon:'🔑',desc:'A 品牌經銷商自助登入、個人設定、忘記密碼重設，帳號由公司建立'},
-  {id:'M12',short:'點數/刷卡',label:'點數\n刷卡',phase:'P2',icon:'💳',desc:'A 品牌查餘額/明細，玉山刷卡自動入點（Webhook），不需人工確認'},
-  {id:'M13',short:'自助提貨',label:'自助\n提貨',phase:'P2',icon:'🛒',desc:'購物車選品，點數即時試算，送出後不靠 LINE，A 品牌自助完成全流程'},
-  {id:'M14',short:'轉點/合併',label:'轉點\n合併',phase:'P2',icon:'🔄',desc:'點數轉讓給其他 A 品牌經銷商，多訂單合併湊免運，僅限 A 品牌內'},
-  {id:'M15',short:'組織查看',label:'組織\n查看',phase:'P2',icon:'🌳',desc:'高階可見授權範圍下線，52% 截斷規則，活躍度/未提貨偵測'},
-  {id:'M16',short:'玉山金流',label:'玉山\n金流',phase:'P2',icon:'⚡',desc:'玉山信用卡 API 串接，刷卡付款/Webhook 入點/對帳全自動，M12 的基礎設施'},
-  {id:'M17',short:'等級升級',label:'等級\n升級',phase:'P2',icon:'📈',desc:'系統自動判斷 A 品牌業績條件，達標即升等，不需人工審核'},
-  {id:'M18',short:'通知提醒',label:'通知\n提醒',phase:'P2',icon:'🔔',desc:'LINE/Email 推送審核結果、點數不足提醒、長期未提貨警示'},
-  {id:'P3B',short:'AI 匯入',label:'AI\n匯入',phase:'P3',icon:'🤖',desc:'上傳舊 Excel，AI 清洗格式/偵測重複，人工確認後正式匯入'},
-  {id:'P3A',short:'消費者商城',label:'消費者\n商城',phase:'P4',icon:'🛍️',desc:'A 品牌經銷商專屬商城入口，消費者訪客瀏覽/下單，款項進公司'},
+  {id:'M01',short:'帳號與權限',label:'帳號\n權限',phase:'P1',icon:'🔐',desc:'RBAC 角色自訂，六種預設角色，品牌資料範圍分開控管，所有帳號的基礎',weeks:3,coef:1.35,acceptance:'六種角色全部建立；品牌資料範圍測試通過；敏感操作留存稽核紀錄'},
+  {id:'M02',short:'品牌管理',label:'品牌\n管理',phase:'P1',icon:'🏷️',desc:'建立 A/B 品牌，各自設定規則（點數/等級/前台類型），資料完全隔離',weeks:3,coef:1.25,acceptance:'A/B 品牌建立完成；各自規則設定通過；跨品牌資料隔離驗證'},
+  {id:'M03',short:'經銷商管理',label:'經銷商\n管理',phase:'P1',icon:'👥',desc:'A/B 品牌各自帳號池，建立/停用/等級設定/推薦人，帳號之間不互通',weeks:3,coef:1.25,acceptance:'批量建立/停用通過；上下線關係正確；品牌帳號池隔離確認'},
+  {id:'M04',short:'產品管理',label:'產品\n管理',phase:'P1',icon:'📦',desc:'共用產品主檔（SKU/規格/圖片），A/B 品牌共享，各自透過 M05 設定點數',weeks:2,coef:1.15,acceptance:'SKU 建立/上下架正常；圖片管理完成；缺貨自動封閉申請'},
+  {id:'M05',short:'品牌價格',label:'品牌\n價格',phase:'P1',icon:'💲',desc:'A/B 品牌各自設定產品點數換算規則，同一產品可有不同品牌售價',weeks:3,coef:1.30,acceptance:'同產品 A/B 品牌各自定價完成；等級定價差異計算正確'},
+  {id:'M06',short:'點數管理',label:'點數\n管理',phase:'P1',icon:'💰',desc:'點數分品牌管理，A/B 點數不互轉，人工調整必填原因，全稽核不可刪除',weeks:4,coef:1.45,acceptance:'儲值/扣點/退點全流程通過；人工調整必填原因；稽核紀錄不可刪除'},
+  {id:'M07',short:'訂單管理',label:'訂單\n管理',phase:'P1',icon:'📋',desc:'A 品牌公司代下 + B 品牌後台代下，庫存確認後扣點，取消可退點',weeks:4,coef:1.35,acceptance:'A/B 品牌代下單流程通過；庫存確認後扣點；取消退點金額正確'},
+  {id:'M08',short:'庫存管理',label:'庫存\n管理',phase:'P1',icon:'🏭',desc:'批號/效期批次管理，A/B 共用同一倉，入庫/扣庫全有記錄',weeks:4,coef:1.35,acceptance:'批次入庫/扣庫正確；效期預警觸發；批號追蹤記錄完整'},
+  {id:'M09',short:'出貨管理',label:'出貨\n管理',phase:'P1',icon:'🚚',desc:'待出貨/待自取列表，出貨進度更新，收貨確認，全品牌統一後台出貨',weeks:3,coef:1.25,acceptance:'待出貨/自取清單正確；狀態更新通過；收貨確認與退貨申請完成'},
+  {id:'M10',short:'報表與稽核',label:'報表\n稽核',phase:'P1',icon:'📊',desc:'提貨/點數/金流報表分品牌統計，高風險操作留存稽核紀錄，不可刪除',weeks:3,coef:1.35,acceptance:'各類報表 Excel 匯出正確；品牌維度篩選通過；稽核不可刪除確認'},
+  {id:'M11',short:'帳號中心',label:'帳號\n中心',phase:'P2',icon:'🔑',desc:'A 品牌經銷商自助登入、個人設定、忘記密碼重設，帳號由公司建立',weeks:2,coef:1.15,acceptance:'登入/忘記密碼重設通過；個人資料維護正常；帳號狀態確認'},
+  {id:'M12',short:'點數/刷卡',label:'點數\n刷卡',phase:'P2',icon:'💳',desc:'A 品牌查餘額/明細，玉山刷卡自動入點（Webhook），不需人工確認',weeks:4,coef:1.45,acceptance:'刷卡 Webhook 測試通過；點數即時更新；明細記錄完整正確'},
+  {id:'M13',short:'自助提貨',label:'自助\n提貨',phase:'P2',icon:'🛒',desc:'購物車選品，點數即時試算，送出後不靠 LINE，A 品牌自助完成全流程',weeks:3,coef:1.25,acceptance:'購物車選品與點數試算正確；提貨申請全流程通過；不靠 LINE 確認'},
+  {id:'M14',short:'轉點/合併',label:'轉點\n合併',phase:'P2',icon:'🔄',desc:'點數轉讓給其他 A 品牌經銷商，多訂單合併湊免運，僅限 A 品牌內',weeks:4,coef:1.40,acceptance:'轉讓確認流程通過；接收端確認到點；合併免運門檻計算正確'},
+  {id:'M15',short:'組織查看',label:'組織\n查看',phase:'P2',icon:'🌳',desc:'高階可見授權範圍下線，52% 截斷規則，活躍度/未提貨偵測',weeks:3,coef:1.30,acceptance:'52% 截斷規則驗證；高階可視範圍限制正確；長期未提貨偵測觸發'},
+  {id:'M16',short:'玉山金流',label:'玉山\n金流',phase:'P2',icon:'⚡',desc:'玉山信用卡 API 串接，刷卡付款/Webhook 入點/對帳全自動，M12 的基礎設施',weeks:4,coef:1.50,acceptance:'API 沙盒與正式環境測試通過；Webhook 接收正常；對帳紀錄完整'},
+  {id:'M17',short:'等級升級',label:'等級\n升級',phase:'P2',icon:'📈',desc:'系統自動判斷 A 品牌業績條件，達標即升等，不需人工審核',weeks:3,coef:1.35,acceptance:'升等條件觸發正確；升等通知發送；降等保護規則驗證'},
+  {id:'M18',short:'通知提醒',label:'通知\n提醒',phase:'P2',icon:'🔔',desc:'LINE/Email 推送審核結果、點數不足提醒、長期未提貨警示',weeks:2,coef:1.15,acceptance:'各情境通知觸發測試通過；LINE 與 Email 均正確到達'},
+  {id:'P3B',short:'AI 匯入',label:'AI\n匯入',phase:'P3',icon:'🤖',desc:'上傳舊 Excel，AI 清洗格式/偵測重複，人工確認後正式匯入',weeks:4,coef:1.35,acceptance:'Excel 解析通過；AI 清洗率 ≥ 90%；人工確認介面完整；重複/異常標記正確'},
+  {id:'P3A',short:'消費者商城',label:'消費者\n商城',phase:'P4',icon:'🛍️',desc:'A 品牌經銷商專屬商城入口，消費者訪客瀏覽/下單，款項進公司',weeks:4,coef:1.45,acceptance:'訪客瀏覽/下單全流程通過；訂單歸屬正確；款項進玉山帳戶確認'},
 ];
 const links=[
   {source:'M01',target:'M02',type:'depends'},
@@ -1675,6 +1682,14 @@ nSel
     document.getElementById('kgyi-d-phase').style.color=PC[d.phase];
     document.getElementById('kgyi-d-name').textContent=d.short;
     document.getElementById('kgyi-d-desc').textContent=d.desc;
+    if(d.weeks||d.coef||d.acceptance){
+      document.getElementById('kgyi-d-weeks').textContent=d.weeks?`${d.weeks} 週`:'—';
+      const coefEl=document.getElementById('kgyi-d-coef');
+      coefEl.textContent=d.coef||'—';
+      coefEl.style.color=d.coef>=1.50?'#c0561a':d.coef>=1.45?'#c0561a':d.coef>=1.35?'#9b6b2a':'var(--jade)';
+      document.getElementById('kgyi-d-acceptance').textContent=d.acceptance||'—';
+      document.getElementById('kgyi-d-meta').style.display='block';
+    }else{document.getElementById('kgyi-d-meta').style.display='none';}
     const deps=links.filter(l=>l.target.id===d.id);
     const enables=links.filter(l=>l.source.id===d.id);
     if(deps.length){document.getElementById('kgyi-d-deps-sec').style.display='block';document.getElementById('kgyi-d-deps').innerHTML=deps.map(l=>{const s=nodes.find(n=>n.id===l.source.id);return`<li style="font-size:14px;color:var(--slate);padding-left:14px;">${s?s.short:l.source.id}</li>`;}).join('');}
