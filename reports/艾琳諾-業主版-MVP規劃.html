@@ -751,10 +751,10 @@
         </div>
         <div class="phase-content">
           <div class="phase-tag phase-tag-3">業務規模成熟後啟動</div>
-          <div class="phase-name">A 品牌消費者商城 ＋ AI 智慧匯入（3 個模組）</div>
+          <div class="phase-name">A 品牌消費者商城（2 個模組）＋ 外部資料匯入</div>
           <div class="phase-desc">
             開放 A 品牌獨立商城讓消費者下單，訂單自動歸屬對應經銷商，款項進公司；
-            導入 AI 協助 Excel 資料整理，大幅降低初始建檔工作量。
+            舊系統資料由外部人工＋AI整理後，以 CSV 標準格式匯入，人工驗核確保資料完整性（非系統內建模組）。
           </div>
         </div>
       </div>
@@ -876,7 +876,7 @@
           <li>✗ A 品牌高階下線查看（P2 做）</li>
           <li>✗ A 品牌獨立消費者商城（P3 做）</li>
           <li>✗ 消費者前台自助下單（P3 做）</li>
-          <li>✗ AI 資料匯入輔助（P3 做）</li>
+          <li>✗ AI 資料匯入系統功能（外部作業後以 CSV 接入，非系統模組）</li>
           <li>✗ 自動獎金 ／ 分潤計算</li>
         </ul>
       </div>
@@ -892,16 +892,17 @@
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑤</td><td style="padding:6px 8px 6px 0;">取消提貨退點規則</td><td style="color:#2e7d32; font-weight:600;">✓ 1 個月內保證退 ／ 換品退換 ／ 9 折回購</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑥</td><td style="padding:6px 8px 6px 0;">高階可看幾層下線</td><td style="color:#2e7d32; font-weight:600;">✓ 到下一個 52% 職等為止</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑦</td><td style="padding:6px 8px 6px 0;">A 品牌目前等級</td><td style="color:#2e7d32; font-weight:600;">✓ 52%、48%、40%、30%，未來可新增</td></tr>
-          <tr><td style="padding:6px 4px 6px 0;">⑧</td><td style="padding:6px 8px 6px 0;">B 品牌不開放前台</td><td style="color:#2e7d32; font-weight:600;">✓ B 品牌所有操作由公司人員後台代辦</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑧</td><td style="padding:6px 8px 6px 0;">B 品牌不開放前台</td><td style="color:#2e7d32; font-weight:600;">✓ B 品牌所有操作由公司人員後台代辦</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0; width:20px;">⑨</td><td style="padding:6px 8px 6px 0;">B 品牌金流</td><td style="color:#2e7d32; font-weight:600;">✓ 走中國信託門市刷卡機，不寫入系統；系統只記訂單狀態（已收款 ／ 待收款）</td></tr>
+          <tr><td style="padding:6px 4px 6px 0; width:20px;">⑩</td><td style="padding:6px 8px 6px 0;">舊系統資料匯入</td><td style="color:#2e7d32; font-weight:600;">✓ P1 手動建入整理為主，P3 可導入 AI 輔助加速；最終人工驗核確保資料完整性</td></tr>
         </tbody>
       </table>
     </div>
     <div class="card" style="margin-top:0; border-left: 4px solid #ff9800;">
       <div class="card-title">⚠️ 尚待確認</div>
       <p style="font-size:13px; color:#555; line-height:1.9;">
-        ⑨ B 品牌等級規則細節？（A 品牌已確認，B 品牌獨立待訂）<br>
-        ⑩ 舊系統資料是否匯入？若要匯入，P1 手動建入還是 P3 AI 協助？<br>
-        ⑪ 點數去留 SOP：人員離開時退款或轉給上線？（待制度化）
+        ⑪ B 品牌等級規則細節？（A 品牌已確認，B 品牌獨立待訂）<br>
+        ⑫ 點數去留 SOP：人員離開時退款或轉給上線？（待制度化）
       </p>
     </div>
   </div>
@@ -1033,8 +1034,8 @@
       <div class="future-phase-header">
         <div class="future-phase-dot phase-dot-3">P3</div>
         <div>
-          <div class="future-phase-title">AI 智慧資料匯入</div>
-          <div class="future-phase-subtitle">業務規模成熟後啟動 · 1 個模組</div>
+          <div class="future-phase-title">資料匯入作業（外部流程）</div>
+          <div class="future-phase-subtitle">非系統內建模組 · 外部人工＋AI整理後以 CSV 接入</div>
         </div>
       </div>
       <div class="future-features-row">
@@ -1065,7 +1066,6 @@
     <div class="section-lead">整份文件走完了：目標 → 雙品牌模式 → 使用者 → 三階段路線 → P1 功能與邊界 → P2 ／ P3 預覽。接下來只剩幾件事需要確認——確認完就啟動開發。</div>
     <ol class="next-list">
       <li>確認 B 品牌等級規則細節（A 品牌 52%、48%、40%、30% 已確認，B 品牌獨立待訂）</li>
-      <li>決定舊系統資料是否匯入、以及在哪個階段匯入（P1 手動建入 或 P3 AI 協助）</li>
       <li>制度化點數去留 SOP（人員離開時退款 or 轉給上線的規則）</li>
       <li>確認 P1 開發範圍與規劃書一致後，啟動開發</li>
     </ol>
