@@ -197,7 +197,7 @@
   .pt-1 { background: #E8F5EE; color: #1a6b3c; border: 1px solid #c2deca; }
   .pt-2 { background: #EBF4F8; color: #2A6A8A; border: 1px solid #b8d5e8; }
   .pt-3 { background: #FBF4E6; color: #B8923A; border: 1px solid #e0ceA0; }
-  .pt-4 { background: #F0EBF8; color: #6A4A9A; border: 1px solid #c9b8e8; }
+  .pt-4 { background: #FEE8D8; color: #c2410c; border: 1px solid #fdba74; }
   .module-value {
     font-size: 13px; color: var(--jade); font-weight: 600;
     margin-bottom: 6px; line-height: 1.5;
@@ -211,7 +211,7 @@
 
   /* TIMELINE STRIP */
   .timeline-strip {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+    display: grid; grid-template-columns: repeat(4, 1fr);
     gap: 0; border: 1px solid var(--border);
     border-radius: 14px; overflow: hidden; margin-bottom: 0;
   }
@@ -223,10 +223,12 @@
   .ts-p1 { background: linear-gradient(135deg, #E8F5EE, #F4FAF6); }
   .ts-p2 { background: #FAFCFF; }
   .ts-p3 { background: #FFFDF5; }
+  .ts-p4 { background: #FFF4EE; }
   .ts-num { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
   .ts-p1 .ts-num { color: #1a6b3c; }
   .ts-p2 .ts-num { color: #2A6A8A; }
   .ts-p3 .ts-num { color: #B8923A; }
+  .ts-p4 .ts-num { color: #c2410c; }
   .ts-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
   .ts-period { font-size: 12px; color: var(--mist); margin-bottom: 12px; }
   .ts-milestone {
@@ -237,6 +239,7 @@
   .ts-p1 .ts-milestone { background: rgba(26,107,60,0.08); color: #1a6b3c; }
   .ts-p2 .ts-milestone { background: rgba(42,106,138,0.08); color: #2A6A8A; }
   .ts-p3 .ts-milestone { background: rgba(184,146,58,0.08); color: #B8923A; }
+  .ts-p4 .ts-milestone { background: rgba(194,65,12,0.08); color: #c2410c; }
   .ts-list { list-style: none; margin-top: 10px; }
   .ts-list li { font-size: 12px; color: var(--slate); padding: 2px 0; display: flex; gap: 6px; }
   .ts-list li::before { content: '·'; color: var(--mist); }
@@ -284,6 +287,8 @@
   .rsp2-head td { background: #2A6A8A; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; }
   .rsp3 { background: #F5F0FF; }
   .rsp3-head td { background: #7c3aed; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; }
+  .rsp4 { background: #FFF0E6; }
+  .rsp4-head td { background: #c2410c; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; }
   .rsc { text-align: center; font-weight: 600; color: var(--ink); }
   .rsc-high { color: #e67e22; }
   .rsc-top { color: #c0392b; font-weight: 700; }
@@ -781,8 +786,8 @@
 <section>
   <div class="container">
     <div class="section-label">系統功能全景</div>
-    <h2 class="section-title">三個階段，18 個模組，雙品牌完整架構</h2>
-    <p class="section-desc">第一階段建立公司後台核心，讓公司人員能完整管理 A、B 兩個品牌。第二階段開放 A 品牌前台，串接玉山金流。第三階段開放消費者商城與 AI 資料匯入。</p>
+    <h2 class="section-title">四個階段，18 個模組，雙品牌完整架構</h2>
+    <p class="section-desc">第一階段建立公司後台核心，讓公司人員能完整管理 A、B 兩個品牌。第二階段開放 A 品牌前台，串接玉山金流。第三階段導入 AI 資料匯入工具。第四階段開放消費者商城。</p>
 
     <!-- === 第一階段 公司後台 === -->
     <div style="margin: 36px 0 16px 0;">
@@ -1024,39 +1029,61 @@
       </div>
     </div>
 
-    <!-- === 第三階段 消費者商城 + AI === -->
+    <!-- === 第三階段 AI 匯入 === -->
     <div style="margin: 48px 0 16px 0;">
       <div style="display: inline-flex; align-items: center; gap: 10px; background: #fdf4ff; border: 1.5px solid #7c3aed; border-radius: 8px; padding: 8px 16px;">
-        <span style="font-size: 18px;">🛍️</span>
-        <span style="font-size: 16px; font-weight: 700; color: #7c3aed;">第三階段 — A 品牌消費者商城 + AI</span>
-        <span style="font-size: 12px; color: var(--slate); margin-left: 4px;">3 個模組 · 業務規模成熟後啟動</span>
+        <span style="font-size: 18px;">🤖</span>
+        <span style="font-size: 16px; font-weight: 700; color: #7c3aed;">第三階段 — AI 資料匯入</span>
+        <span style="font-size: 12px; color: var(--slate); margin-left: 4px;">1 個模組 · 舊資料整批整理</span>
       </div>
     </div>
 
     <div class="func-area">
       <div class="func-header">
-        <div class="func-icon" style="background: #f3e8ff; font-size: 20px; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🛒</div>
+        <div class="func-icon" style="background: #f3e8ff; font-size: 20px; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🤖</div>
         <div class="func-title-group">
-          <div class="func-area-name">P3.1–P3.3 消費者商城 + AI 資料匯入</div>
-          <div class="func-area-desc">獨立商城 / 消費者自助下單 / AI 協助整理舊資料</div>
+          <div class="func-area-name">P3.1 AI 智慧資料匯入</div>
+          <div class="func-area-desc">Excel 匯入 / AI 整理 / 人工確認 / 異常標記</div>
         </div>
-        <div class="func-modules-count">3 個模組</div>
+        <div class="func-modules-count">1 個模組</div>
       </div>
       <div class="module-grid">
         <div class="module-card">
-          <div class="module-top"><div class="module-name">P3.1 獨立商城入口</div><span class="phase-tag pt-3">第三階段</span></div>
+          <div class="module-top"><div class="module-name">P3.1 AI 智慧資料匯入</div><span class="phase-tag pt-3">第三階段</span></div>
+          <div class="module-value">上傳舊 Excel，AI 自動清洗格式/偵測重複，人工確認後正式匯入</div>
+          <div class="module-detail">Excel 上傳 · AI 格式清洗 · 重複/異常偵測 · 欄位對應 · 人工確認後匯入</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === 第四階段 消費者商城 === -->
+    <div style="margin: 48px 0 16px 0;">
+      <div style="display: inline-flex; align-items: center; gap: 10px; background: #fff4ee; border: 1.5px solid #c2410c; border-radius: 8px; padding: 8px 16px;">
+        <span style="font-size: 18px;">🛍️</span>
+        <span style="font-size: 16px; font-weight: 700; color: #c2410c;">第四階段 — A 品牌消費者商城</span>
+        <span style="font-size: 12px; color: var(--slate); margin-left: 4px;">2 個模組 · 業務規模成熟後啟動</span>
+      </div>
+    </div>
+
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon" style="background: #fff4ee; font-size: 20px; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🛒</div>
+        <div class="func-title-group">
+          <div class="func-area-name">P4.1–P4.2 消費者商城</div>
+          <div class="func-area-desc">獨立商城 / 消費者自助下單</div>
+        </div>
+        <div class="func-modules-count">2 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top"><div class="module-name">P4.1 A 品牌獨立商城入口</div><span class="phase-tag pt-4">第四階段</span></div>
           <div class="module-value">每位 A 品牌經銷商有自己的商城網址，從現有網站跳轉</div>
           <div class="module-detail">子路徑/subdomain 識別 · 產品展示 · 不需登入可瀏覽 · 缺貨自動標示</div>
         </div>
         <div class="module-card">
-          <div class="module-top"><div class="module-name">P3.2 消費者自助下單</div><span class="phase-tag pt-3">第三階段</span></div>
+          <div class="module-top"><div class="module-name">P4.2 消費者自助下單</div><span class="phase-tag pt-4">第四階段</span></div>
           <div class="module-value">訪客可先瀏覽，下單才建帳，款項進公司，訂單歸屬對應經銷商</div>
           <div class="module-detail">訪客瀏覽 · 下單建帳 · 訂單自動歸屬經銷商 · 款項進公司玉山帳戶 · 會員邀請</div>
-        </div>
-        <div class="module-card">
-          <div class="module-top"><div class="module-name">P3.3 AI 資料匯入</div><span class="phase-tag pt-3">第三階段</span></div>
-          <div class="module-value">上傳舊 Excel，AI 自動清洗格式/偵測重複，人工確認後正式匯入</div>
-          <div class="module-detail">Excel 上傳 · AI 格式清洗 · 重複/異常偵測 · 欄位對應 · 人工確認後匯入</div>
         </div>
       </div>
     </div>
@@ -1119,8 +1146,8 @@
 <section>
   <div class="container">
     <div class="section-label">交付時間表</div>
-    <h2 class="section-title">三個階段，每個階段都有具體的里程碑</h2>
-    <p class="section-desc">不需要等所有功能完成才開始用——第一階段後台上線，公司就能管理雙品牌、數位化接收申請。第二階段開放 A 品牌前台，告別 LINE 接單。</p>
+    <h2 class="section-title">四個階段，每個階段都有具體的里程碑</h2>
+    <p class="section-desc">不需要等所有功能完成才開始用——第一階段後台上線，公司就能管理雙品牌、數位化接收申請。第二階段開放 A 品牌前台，告別 LINE 接單。第三階段整理舊資料，第四階段開放消費者商城。</p>
     <div class="timeline-strip">
       <div class="ts-phase ts-p1">
         <div class="ts-num">第一階段</div>
@@ -1150,13 +1177,24 @@
       </div>
       <div class="ts-phase ts-p3">
         <div class="ts-num">第三階段</div>
-        <div class="ts-name">消費者商城 + AI</div>
-        <div class="ts-period">M5+（第 17–21 週）</div>
-        <div class="ts-milestone">A 品牌消費者可透過經銷商專屬商城下單；AI 協助整理舊系統資料</div>
+        <div class="ts-name">AI 資料匯入</div>
+        <div class="ts-period">M5（第 17–18 週）</div>
+        <div class="ts-milestone">AI 協助整理舊系統資料，上傳 Excel 後自動清洗、人工確認後正式匯入</div>
+        <ul class="ts-list">
+          <li>Excel 上傳與 AI 格式清洗</li>
+          <li>重複/異常偵測標記</li>
+          <li>人工確認後正式匯入</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p4">
+        <div class="ts-num">第四階段</div>
+        <div class="ts-name">消費者商城</div>
+        <div class="ts-period">M6+（第 19–23 週）</div>
+        <div class="ts-milestone">A 品牌消費者可透過經銷商專屬商城瀏覽下單；業務規模成熟後啟動</div>
         <ul class="ts-list">
           <li>A 品牌獨立消費者商城</li>
           <li>訪客瀏覽/下單/建帳</li>
-          <li>AI Excel 資料清洗匯入</li>
+          <li>訂單自動歸屬對應經銷商</li>
         </ul>
       </div>
     </div>
@@ -1299,10 +1337,11 @@
           <tr class="rsp2"><td>P2M16</td><td>玉山金流串接</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc rsc-top">1.50</td><td>金流、回呼、退款、對帳、錯誤防呆</td></tr>
           <tr class="rsp2"><td>P2M17</td><td>等級自動升級</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.35</td><td>條件設定、自動判斷、升級紀錄</td></tr>
           <tr class="rsp2"><td>P2M18</td><td>通知提醒</td><td class="rsc">1.5</td><td class="rsc">2</td><td class="rsc">1.15</td><td>儲值、提貨、合併、轉點、狀態通知</td></tr>
-          <tr class="rsp3-head"><td colspan="6">P3｜商城與 AI 匯入</td></tr>
-          <tr class="rsp3"><td>P3.1</td><td>A 品牌獨立商城入口</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>經銷商專屬商城、品牌/經銷商歸屬</td></tr>
-          <tr class="rsp3"><td>P3.2</td><td>消費者自助下單</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>訪客下單、會員下單、付款、取消、退款</td></tr>
-          <tr class="rsp3"><td>P3.3</td><td>AI 智慧資料匯入</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>Excel 匯入、AI 整理、人工確認、異常標記</td></tr>
+          <tr class="rsp3-head"><td colspan="6">P3｜AI 匯入</td></tr>
+          <tr class="rsp3"><td>P3.1</td><td>AI 智慧資料匯入</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc">1.35</td><td>Excel 匯入、AI 整理、人工確認、異常標記</td></tr>
+          <tr class="rsp4-head"><td colspan="6">P4｜商城</td></tr>
+          <tr class="rsp4"><td>P4.1</td><td>A 品牌獨立商城入口</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>經銷商專屬商城、品牌/經銷商歸屬</td></tr>
+          <tr class="rsp4"><td>P4.2</td><td>消費者自助下單</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>訪客下單、會員下單、付款、取消、退款</td></tr>
         </tbody>
       </table>
       <div style="font-size:12px;color:var(--mist);margin-top:8px;">係數說明：基準工時乘數，反映複雜度與風險緩衝。1.15 = 低複雜；1.35 = 中高複雜；1.45+ = 高風險模組（紅字）。</div>
@@ -1398,10 +1437,10 @@
           <td>P3 啟動前先看舊資料樣本，評估清洗難度。AI 只輔助，人工確認是最後關卡。</td>
         </tr>
         <tr class="risk-low">
-          <td><strong>Phase 3 範圍膨脹</strong></td>
+          <td><strong>P4 商城範圍膨脹</strong></td>
           <td><span class="risk-label rl-low">低</span></td>
-          <td>消費者商城和 AI 匯入需求可能比預期複雜，影響 P3 建置時程。</td>
-          <td>P3 簽約時單獨評估工時與費用，視需求複雜度彈性報價，不影響 P1–2 進度。</td>
+          <td>消費者商城需求可能比預期複雜，影響 P4 建置時程。P3 AI 匯入已獨立切分，不互相影響。</td>
+          <td>P4 簽約時單獨評估工時與費用，視需求複雜度彈性報價，不影響 P1–3 進度。</td>
         </tr>
       </tbody>
     </table>
@@ -1413,7 +1452,7 @@
   <div class="container">
     <div class="section-label">模組依賴知識圖譜</div>
     <h2 class="section-title">功能模組的承接關係</h2>
-    <p class="section-desc">18 個模組節點，顏色對應三個建置階段。滑鼠移到節點查看說明；<strong>點擊節點</strong>鎖定並亮顯<strong>所有前置依賴鏈</strong>，再按一次或點空白處取消。滾輪縮放，拖曳平移。</p>
+    <p class="section-desc">18 個模組節點，顏色對應四個建置階段。滑鼠移到節點查看說明；<strong>點擊節點</strong>鎖定並亮顯<strong>所有前置依賴鏈</strong>，再按一次或點空白處取消。滾輪縮放，拖曳平移。</p>
   </div>
 
   <div class="kgyi-controls" id="kgyi-controls">
@@ -1422,6 +1461,7 @@
     <button class="kgyi-btn" data-kgphase="P1">第一階段</button>
     <button class="kgyi-btn" data-kgphase="P2">第二階段</button>
     <button class="kgyi-btn" data-kgphase="P3">第三階段</button>
+    <button class="kgyi-btn" data-kgphase="P4">第四階段</button>
     <div class="kgyi-sep"></div>
     <button class="kgyi-btn" id="kgyi-btn-reset" style="color:var(--slate);">重置視圖</button>
   </div>
@@ -1431,7 +1471,8 @@
   <div class="kgyi-legend">
     <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#1a6b3c;"></div> 第一階段 後台核心</div>
     <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#2A6A8A;"></div> 第二階段 前台+自動化</div>
-    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#7c3aed;"></div> 第三階段 商城+AI</div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#7c3aed;"></div> 第三階段 AI匯入</div>
+    <div class="kgyi-leg-item"><div class="kgyi-leg-dot" style="background:#c2410c;"></div> 第四階段 商城</div>
     <div class="kgyi-sep" style="height:18px;"></div>
     <div class="kgyi-leg-item"><div class="kgyi-leg-line" style="border-color:#1a6b3c;"></div> 直接資料依賴</div>
     <div class="kgyi-leg-item"><div class="kgyi-leg-line" style="border-color:#888;border-style:dashed;"></div> 跨階段間接依賴</div>
@@ -1468,6 +1509,8 @@
 .kgyi-btn[data-kgphase="P2"].active{background:#2A6A8A;}
 .kgyi-btn[data-kgphase="P3"]{color:#7c3aed;border-color:#7c3aed;}
 .kgyi-btn[data-kgphase="P3"].active{background:#7c3aed;}
+.kgyi-btn[data-kgphase="P4"]{color:#c2410c;border-color:#c2410c;}
+.kgyi-btn[data-kgphase="P4"].active{background:#c2410c;}
 .kgyi-sep{width:1px;height:20px;background:var(--border);}
 #kgyi-graph-wrap{background:#fff;overflow:hidden;}
 svg#kgyi-graph{display:block;width:100%;cursor:grab;}
@@ -1494,10 +1537,10 @@ svg#kgyi-graph:active{cursor:grabbing;}
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
 (function(){
-const PC={P1:'#1a6b3c',P2:'#2A6A8A',P3:'#7c3aed'};
-const PX={P1:150,P2:490,P3:820};
-const PL={P1:'第一階段 後台核心',P2:'第二階段 前台+自動化',P3:'第三階段 商城+AI'};
-const W=980,H=800;
+const PC={P1:'#1a6b3c',P2:'#2A6A8A',P3:'#7c3aed',P4:'#c2410c'};
+const PX={P1:120,P2:380,P3:640,P4:900};
+const PL={P1:'第一階段 後台核心',P2:'第二階段 前台+自動化',P3:'第三階段 AI匯入',P4:'第四階段 商城'};
+const W=1050,H=800;
 const nodes=[
   {id:'M01',short:'帳號與權限',label:'帳號\n權限',phase:'P1',icon:'🔐',desc:'RBAC 角色自訂，六種預設角色，品牌資料範圍分開控管，所有帳號的基礎'},
   {id:'M02',short:'品牌管理',label:'品牌\n管理',phase:'P1',icon:'🏷️',desc:'建立 A/B 品牌，各自設定規則（點數/等級/前台類型），資料完全隔離'},
@@ -1517,8 +1560,8 @@ const nodes=[
   {id:'M16',short:'玉山金流',label:'玉山\n金流',phase:'P2',icon:'⚡',desc:'玉山信用卡 API 串接，刷卡付款/Webhook 入點/對帳全自動，M12 的基礎設施'},
   {id:'M17',short:'等級升級',label:'等級\n升級',phase:'P2',icon:'📈',desc:'系統自動判斷 A 品牌業績條件，達標即升等，不需人工審核'},
   {id:'M18',short:'通知提醒',label:'通知\n提醒',phase:'P2',icon:'🔔',desc:'LINE/Email 推送審核結果、點數不足提醒、長期未提貨警示'},
-  {id:'P3A',short:'消費者商城',label:'消費者\n商城',phase:'P3',icon:'🛍️',desc:'A 品牌經銷商專屬商城入口，消費者訪客瀏覽/下單，款項進公司'},
   {id:'P3B',short:'AI 匯入',label:'AI\n匯入',phase:'P3',icon:'🤖',desc:'上傳舊 Excel，AI 清洗格式/偵測重複，人工確認後正式匯入'},
+  {id:'P3A',short:'消費者商城',label:'消費者\n商城',phase:'P4',icon:'🛍️',desc:'A 品牌經銷商專屬商城入口，消費者訪客瀏覽/下單，款項進公司'},
 ];
 const links=[
   {source:'M01',target:'M02',type:'depends'},
@@ -1557,7 +1600,7 @@ Object.entries(LC).forEach(([type,color])=>{
     .attr('markerWidth',5).attr('markerHeight',5).attr('orient','auto')
     .append('path').attr('d','M0,-5L10,0L0,5').attr('fill',color).attr('fill-opacity',0.7);
 });
-const pxMap={P1:150,P2:490,P3:820};
+const pxMap={P1:120,P2:380,P3:640,P4:900};
 Object.entries(pxMap).forEach(([phase,cx])=>{
   g.append('rect').attr('class','kgyi-phase-bg').attr('x',cx-80).attr('y',40).attr('width',160).attr('height',H-52).attr('fill',PC[phase]).attr('rx',8);
   g.append('text').attr('class','kgyi-phase-lbl').attr('x',cx).attr('y',26).attr('fill',PC[phase]).text(PL[phase]);
