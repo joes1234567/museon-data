@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>會計師講座 · 7/30 執行計畫 v1</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent:  #3b82f6;
+    --p2:      #7c3aed;
+    --p3:      #f59e0b;
+    --p4:      #10b981;
+    --bg:      #f8fafc;
+    --card:    #ffffff;
+    --border:  #e2e8f0;
+    --text:    #1e293b;
+    --muted:   #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Noto Sans TC', sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    color: white; padding: 48px 40px 40px;
+  }
+  .header-inner { max-width: 920px; margin: 0 auto; }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px; padding: 4px 14px;
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header p  { font-size: 15px; opacity: .75; }
+  .header-meta { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .hm {
+    background: rgba(255,255,255,.1); border-radius: 10px; padding: 10px 16px;
+    font-size: 13px; min-width: 100px;
+  }
+  .hm strong { display: block; font-size: 18px; font-weight: 800; margin-bottom: 2px; }
+
+  .main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+
+  .gap-box {
+    background: #fff7ed; border: 1px solid #fed7aa;
+    border-left: 4px solid #f97316; border-radius: 10px;
+    padding: 18px 24px; margin-bottom: 44px;
+  }
+  .gap-box h3 {
+    font-size: 11px; color: #ea580c; text-transform: uppercase;
+    letter-spacing: .1em; margin-bottom: 8px;
+  }
+  .gap-box p { font-size: 14px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent);
+    margin: 48px 0 16px;
+  }
+  .section-label:first-of-type { margin-top: 0; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  }
+
+  .audience-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .audience-list li {
+    display: flex; align-items: center; gap: 12px;
+    background: #f8fafc; border-radius: 8px; padding: 12px 16px; font-size: 14px;
+  }
+  .a-rank {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px; color: white; flex-shrink: 0;
+  }
+  .r1 { background: var(--accent); }
+  .r2 { background: var(--p2); }
+  .r3 { background: var(--p3); }
+  .a-body strong { display: block; font-size: 14px; }
+  .a-body span { font-size: 12px; color: var(--muted); }
+
+  .agenda-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+    border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
+  }
+  .agenda-table th {
+    background: #f3f4f6; padding: 10px 14px; text-align: left;
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .agenda-table td { padding: 12px 14px; border-top: 1px solid var(--border); vertical-align: top; }
+  .agenda-table tr:nth-child(even) td { background: #fafafa; }
+  .t-cell { white-space: nowrap; font-weight: 600; color: var(--p2); min-width: 70px; }
+  .agenda-table tr.flex-row td { background: #fffbeb; }
+
+  .dbox {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border: 1px solid #86efac; border-radius: 10px;
+    padding: 14px 18px; font-size: 14px;
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-top: 20px;
+  }
+  .dbox-icon { font-size: 20px; flex-shrink: 0; }
+  .dbox strong { display: block; font-size: 11px; color: #15803d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+
+  .warn-box {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;
+    padding: 12px 16px; font-size: 13px; color: #92400e; margin-top: 16px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+
+  .divide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .divide-card { background: #f8fafc; border-radius: 10px; padding: 16px 18px; }
+  .divide-card h4 { font-size: 13px; margin-bottom: 8px; }
+  .divide-card p { font-size: 13px; color: var(--muted); }
+  .divide-card.blue h4 { color: #2563eb; }
+  .divide-card.purple h4 { color: #7c3aed; }
+  .fixed-line {
+    grid-column: 1 / -1;
+    background: #eff6ff; border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 14px; font-weight: 500; color: #1e40af;
+  }
+
+  .dm-block { display: flex; flex-direction: column; gap: 14px; }
+  .dm-item { display: flex; gap: 12px; align-items: flex-start; }
+  .dm-icon {
+    width: 28px; height: 28px; border-radius: 8px; background: var(--primary); color: white;
+    display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;
+  }
+  .dm-item strong { display: block; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+  .dm-item span { font-size: 14px; }
+  .hook-quote {
+    background: #f3e8ff; border-left: 3px solid var(--p2);
+    border-radius: 0 8px 8px 0; padding: 14px 18px; font-size: 15px; font-weight: 600; color: #581c87;
+    margin: 4px 0;
+  }
+
+  .open-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .open-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 12px 16px; font-size: 14px;
+  }
+  .open-icon { font-size: 16px; flex-shrink: 0; }
+
+  .footer {
+    text-align: center; color: var(--muted); font-size: 13px;
+    padding: 28px 24px; border-top: 1px solid var(--border); margin-top: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .divide-grid { grid-template-columns: 1fr; }
+    .header { padding: 36px 20px 30px; }
+    .main { padding: 28px 16px; }
+    .card { padding: 20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <span class="header-badge">執行計畫 v1</span>
+    <h1>會計師講座 · 7/30 半日場次</h1>
+    <p>會計師教認知，MUSEON 教應用 — 同一份示範數據串起兩段內容</p>
+    <div class="header-meta">
+      <div class="hm"><strong>7/30（四）</strong>日期</div>
+      <div class="hm"><strong>14:00–16:00</strong>時段</div>
+      <div class="hm"><strong>120 分</strong>總時長</div>
+      <div class="hm"><strong>代訂中</strong>地點</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="gap-box">
+    <h3>唯一缺口</h3>
+    <p>地點仍「代訂中」——流程與分工已可定案，但 DM 若要出稿，建議先抓一個暫定場地（BNI 固定聚會場地或熟悉地點）作初稿用，場地確定後再出更新版。</p>
+  </div>
+
+  <div class="section-label">受眾與信任基礎</div>
+  <div class="card">
+    <ul class="audience-list">
+      <li>
+        <div class="a-rank r1">1</div>
+        <div class="a-body"><strong>BNI 會員</strong><span>信任基礎最厚——本來就認識你，可直接談 MUSEON 能幫他們做什麼</span></div>
+      </li>
+      <li>
+        <div class="a-rank r2">2</div>
+        <div class="a-body"><strong>會計師客戶</strong><span>認識會計師、不認識你——MUSEON 需由會計師背書引入，定位成「會計師專業的延伸工具」</span></div>
+      </li>
+      <li>
+        <div class="a-rank r3">3</div>
+        <div class="a-body"><strong>外部中小企業老闆</strong><span>兩邊都陌生，信任基礎最薄——需要最強證據先行（真實上市櫃案例）</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section-label">流程表</div>
+  <div class="card">
+    <table class="agenda-table">
+      <thead>
+        <tr><th>時間</th><th>段落</th><th>內容概要</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="t-cell">10 分</td>
+          <td>開場破冰</td>
+          <td>丟一個「沒看報表 / 看錯報表就做錯決策」的真實案例，讓在場老闆先意識到問題確實存在——非誰主講</td>
+        </tr>
+        <tr>
+          <td class="t-cell">30 分</td>
+          <td>會計師教學段</td>
+          <td>純認知層：有哪些報表、看得到什麼數據、數據對應什麼決策——不涉及 AI</td>
+        </tr>
+        <tr>
+          <td class="t-cell">20 分</td>
+          <td>MUSEON 操作段</td>
+          <td>用同一份真實上市櫃示範數據，老闆親手操作，現場跑出摘要 / 判斷——全場唯一動手段落</td>
+        </tr>
+        <tr>
+          <td class="t-cell">10 分</td>
+          <td>Q&amp;A</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="t-cell">5 分</td>
+          <td>收尾＋雙軌 CTA</td>
+          <td>反問「你希望身邊有怎樣的會計師 / 顧問，能讓你的生意更有價值？」→ 加 LINE 約健檢 / 報名半日工作坊</td>
+        </tr>
+        <tr class="flex-row">
+          <td class="t-cell">45 分</td>
+          <td>彈性留白</td>
+          <td>先不卡用途，之後視報到人流或示範數據準備時間再分配</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warn-box">⏱ 已排 75 分鐘＋留白 45 分鐘 = 120 分鐘，與 14:00–16:00 時段對齊。</div>
+  </div>
+
+  <div class="section-label">分工定位</div>
+  <div class="card">
+    <div class="divide-grid">
+      <div class="divide-card blue">
+        <h4>會計師 → 認知層</h4>
+        <p>有哪些報表、看得到什麼數據、數據對應什麼決策——不涉及 AI</p>
+      </div>
+      <div class="divide-card purple">
+        <h4>MUSEON → 應用層</h4>
+        <p>怎麼把學到的報表知識，透過 MUSEON 變成判斷 / 摘要 / 對應報表——最終財務判斷仍以會計師確認為準</p>
+      </div>
+      <div class="fixed-line">固定台詞（自我介紹＋會計師介紹兩邊對稿）：「會計師教認知，MUSEON 教應用，最後財務判斷仍以會計師確認為準」——先把這句講清楚，避免外部老闆誤解成「MUSEON 要取代會計師判斷」</div>
+    </div>
+  </div>
+
+  <div class="section-label">示範數據 &amp; DM 素材</div>
+  <div class="card">
+    <div class="dm-block">
+      <div class="dm-item">
+        <div class="dm-icon">📊</div>
+        <div><strong>示範數據來源</strong><span>已定案：真實上市櫃公開案例</span></div>
+      </div>
+      <div class="dm-item">
+        <div class="dm-icon">🕐</div>
+        <div><strong>時間</strong><span>2026/07/30（四）14:00–16:00</span></div>
+      </div>
+      <div class="dm-item">
+        <div class="dm-icon">📍</div>
+        <div><strong>地點</strong><span>代訂中（建議先用暫定場地出初稿）</span></div>
+      </div>
+      <div class="dm-item">
+        <div class="dm-icon">🎯</div>
+        <div><strong>核心鉤子文案</strong></div>
+      </div>
+      <div class="hook-quote">「用真實上市櫃案例，現場示範怎麼從報表看出問題、抓出關鍵數據」</div>
+      <div class="dm-item">
+        <div class="dm-icon">➡️</div>
+        <div><strong>收尾 CTA（雙軌）</strong><span>加 LINE 約免費健檢／報名半日工作坊</span></div>
+      </div>
+    </div>
+    <div class="dbox">
+      <div class="dbox-icon">✅</div>
+      <div><strong>DM 資訊完成度</strong>已齊七成，只卡地點一項——地點一定，DM 文案可直接出完整稿</div>
+    </div>
+  </div>
+
+  <div class="section-label">還沒鎖定的事</div>
+  <div class="card">
+    <ul class="open-list">
+      <li><span class="open-icon">📍</span><span><strong>場地</strong> —— 唯一缺口，建議這週先抓暫定場地出 DM 初稿</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  MUSEON · 會計師講座執行計畫 v1 · 2026-07-06 生成
+</div>
+
+</body>
+</html>
