@@ -284,6 +284,8 @@
   .rsp2-head td { background: #2A6A8A; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; }
   .rsp3 { background: #F5F0FF; }
   .rsp3-head td { background: #7c3aed; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; }
+  .rsp4 { background: #F0EBF8; }
+  .rsp4-head td { background: #6A4A9A; color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; }
   .rsc { text-align: center; font-weight: 600; color: var(--ink); }
   .rsc-high { color: #e67e22; }
   .rsc-top { color: #c0392b; font-weight: 700; }
@@ -1024,12 +1026,30 @@
       </div>
     </div>
 
-    <!-- === 第三階段 消費者商城 + AI === -->
+    <!-- === 第三階段 AI 匯入 + 消費者商城 === -->
     <div style="margin: 48px 0 16px 0;">
       <div style="display: inline-flex; align-items: center; gap: 10px; background: #fdf4ff; border: 1.5px solid #7c3aed; border-radius: 8px; padding: 8px 16px;">
         <span style="font-size: 18px;">🛍️</span>
-        <span style="font-size: 16px; font-weight: 700; color: #7c3aed;">第三階段 — A 品牌消費者商城 + AI</span>
+        <span style="font-size: 16px; font-weight: 700; color: #7c3aed;">第三階段 — AI 匯入 + A 品牌消費者商城</span>
         <span style="font-size: 12px; color: var(--slate); margin-left: 4px;">3 個模組 · 業務規模成熟後啟動</span>
+      </div>
+    </div>
+
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon" style="background: #f3e8ff; font-size: 20px; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🤖</div>
+        <div class="func-title-group">
+          <div class="func-area-name">P3.1 AI 資料匯入</div>
+          <div class="func-area-desc">AI 協助整理舊資料</div>
+        </div>
+        <div class="func-modules-count">1 個模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-top"><div class="module-name">P3.1 AI 資料匯入</div><span class="phase-tag pt-3">第三階段</span></div>
+          <div class="module-value">上傳舊 Excel，AI 自動清洗格式/偵測重複，人工確認後正式匯入</div>
+          <div class="module-detail">Excel 上傳 · AI 格式清洗 · 重複/異常偵測 · 欄位對應 · 人工確認後匯入</div>
+        </div>
       </div>
     </div>
 
@@ -1037,26 +1057,21 @@
       <div class="func-header">
         <div class="func-icon" style="background: #f3e8ff; font-size: 20px; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🛒</div>
         <div class="func-title-group">
-          <div class="func-area-name">P3.1–P3.3 消費者商城 + AI 資料匯入</div>
-          <div class="func-area-desc">獨立商城 / 消費者自助下單 / AI 協助整理舊資料</div>
+          <div class="func-area-name">P4.1–P4.2 消費者商城</div>
+          <div class="func-area-desc">獨立商城 / 消費者自助下單</div>
         </div>
-        <div class="func-modules-count">3 個模組</div>
+        <div class="func-modules-count">2 個模組</div>
       </div>
       <div class="module-grid">
         <div class="module-card">
-          <div class="module-top"><div class="module-name">P3.1 獨立商城入口</div><span class="phase-tag pt-3">第三階段</span></div>
+          <div class="module-top"><div class="module-name">P4.1 獨立商城入口</div><span class="phase-tag pt-3">第三階段</span></div>
           <div class="module-value">每位 A 品牌經銷商有自己的商城網址，從現有網站跳轉</div>
           <div class="module-detail">子路徑/subdomain 識別 · 產品展示 · 不需登入可瀏覽 · 缺貨自動標示</div>
         </div>
         <div class="module-card">
-          <div class="module-top"><div class="module-name">P3.2 消費者自助下單</div><span class="phase-tag pt-3">第三階段</span></div>
+          <div class="module-top"><div class="module-name">P4.2 消費者自助下單</div><span class="phase-tag pt-3">第三階段</span></div>
           <div class="module-value">訪客可先瀏覽，下單才建帳，款項進公司，訂單歸屬對應經銷商</div>
           <div class="module-detail">訪客瀏覽 · 下單建帳 · 訂單自動歸屬經銷商 · 款項進公司玉山帳戶 · 會員邀請</div>
-        </div>
-        <div class="module-card">
-          <div class="module-top"><div class="module-name">P3.3 AI 資料匯入</div><span class="phase-tag pt-3">第三階段</span></div>
-          <div class="module-value">上傳舊 Excel，AI 自動清洗格式/偵測重複，人工確認後正式匯入</div>
-          <div class="module-detail">Excel 上傳 · AI 格式清洗 · 重複/異常偵測 · 欄位對應 · 人工確認後匯入</div>
         </div>
       </div>
     </div>
@@ -1299,10 +1314,11 @@
           <tr class="rsp2"><td>P2M16</td><td>玉山金流串接</td><td class="rsc">2.5</td><td class="rsc">4</td><td class="rsc rsc-top">1.50</td><td>金流、回呼、退款、對帳、錯誤防呆</td></tr>
           <tr class="rsp2"><td>P2M17</td><td>等級自動升級</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.35</td><td>條件設定、自動判斷、升級紀錄</td></tr>
           <tr class="rsp2"><td>P2M18</td><td>通知提醒</td><td class="rsc">1.5</td><td class="rsc">2</td><td class="rsc">1.15</td><td>儲值、提貨、合併、轉點、狀態通知</td></tr>
-          <tr class="rsp3-head"><td colspan="6">P3｜商城與 AI 匯入</td></tr>
-          <tr class="rsp3"><td>P3.1</td><td>A 品牌獨立商城入口</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>經銷商專屬商城、品牌/經銷商歸屬</td></tr>
-          <tr class="rsp3"><td>P3.2</td><td>消費者自助下單</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>訪客下單、會員下單、付款、取消、退款</td></tr>
-          <tr class="rsp3"><td>P3.3</td><td>AI 智慧資料匯入</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc">1.35</td><td>Excel 匯入、AI 整理、人工確認、異常標記</td></tr>
+          <tr class="rsp3-head"><td colspan="6">P3｜AI 匯入</td></tr>
+          <tr class="rsp3"><td>P3.1</td><td>AI 智慧資料匯入</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc">1.35</td><td>Excel 匯入、AI 整理、人工確認、異常標記</td></tr>
+          <tr class="rsp4-head"><td colspan="6">P4｜商城</td></tr>
+          <tr class="rsp4"><td>P4.1</td><td>A 品牌獨立商城入口</td><td class="rsc">2</td><td class="rsc">3</td><td class="rsc">1.30</td><td>經銷商專屬商城、品牌/經銷商歸屬</td></tr>
+          <tr class="rsp4"><td>P4.2</td><td>消費者自助下單</td><td class="rsc">3</td><td class="rsc">4</td><td class="rsc rsc-high">1.45</td><td>訪客下單、會員下單、付款、取消、退款</td></tr>
         </tbody>
       </table>
       <div style="font-size:12px;color:var(--mist);margin-top:8px;">係數說明：基準工時乘數，反映複雜度與風險緩衝。1.15 = 低複雜；1.35 = 中高複雜；1.45+ = 高風險模組（紅字）。</div>
@@ -1701,13 +1717,19 @@ document.getElementById('kgyi-btn-reset').addEventListener('click',()=>{svg.tran
         <span style="font-size:14px;font-weight:700;color:#2A6A8A;">NT$395,000</span>
       </div>
 
-      <div style="padding:8px 24px 6px;background:#f5f0ff;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7c3aed;">第三階段 消費者商城 + AI（3 個模組）</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">P3.1 A 品牌獨立商城入口</span><span class="calc-fee">NT$50,700</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">P3.2 消費者自助下單</span><span class="calc-fee">NT$81,200</span></div>
-      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">P3.3 AI 智慧資料匯入</span><span class="calc-fee">NT$75,600</span></div>
+      <div style="padding:8px 24px 6px;background:#f5f0ff;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7c3aed;">第三階段 AI 匯入（1 個模組）</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#7c3aed;">P3</span><span class="calc-name">P3.1 AI 智慧資料匯入</span><span class="calc-fee">NT$75,600</span></div>
       <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#faf6ff;border-bottom:1px solid var(--border);">
-        <span style="font-size:13px;color:var(--slate);">第三階段小計</span>
-        <span style="font-size:14px;font-weight:700;color:#7c3aed;">NT$207,500</span>
+        <span style="font-size:13px;color:var(--slate);">AI 匯入小計</span>
+        <span style="font-size:14px;font-weight:700;color:#7c3aed;">NT$75,600</span>
+      </div>
+
+      <div style="padding:8px 24px 6px;background:#F0EBF8;border-bottom:1px solid var(--border);"><span style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#6A4A9A;">第三階段 消費者商城（2 個模組）</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#6A4A9A;">P4</span><span class="calc-name">P4.1 A 品牌獨立商城入口</span><span class="calc-fee">NT$50,700</span></div>
+      <div class="calc-row"><span class="calc-badge" style="background:#6A4A9A;">P4</span><span class="calc-name">P4.2 消費者自助下單</span><span class="calc-fee">NT$81,200</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 24px;background:#f5f0fc;border-bottom:1px solid var(--border);">
+        <span style="font-size:13px;color:var(--slate);">消費者商城小計</span>
+        <span style="font-size:14px;font-weight:700;color:#6A4A9A;">NT$131,900</span>
       </div>
 
       <div style="padding:24px 28px;background:linear-gradient(135deg,#0a0a1a 0%,#12183a 60%,#1a2a5a 100%);display:flex;justify-content:space-between;align-items:center;">
