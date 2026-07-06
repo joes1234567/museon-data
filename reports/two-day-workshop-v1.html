@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>兩日班 · AI自動化實戰工作坊 課程設計 v1</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent:  #3b82f6;
+    --p2:      #7c3aed;
+    --p3:      #f59e0b;
+    --p4:      #10b981;
+    --bg:      #f8fafc;
+    --card:    #ffffff;
+    --border:  #e2e8f0;
+    --text:    #1e293b;
+    --muted:   #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Noto Sans TC', sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    color: white; padding: 48px 40px 40px;
+  }
+  .header-inner { max-width: 920px; margin: 0 auto; }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px; padding: 4px 14px;
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .header p  { font-size: 15px; opacity: .78; }
+  .header-meta { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .hm {
+    background: rgba(255,255,255,.1); border-radius: 10px; padding: 10px 16px;
+    font-size: 13px; min-width: 110px;
+  }
+  .hm strong { display: block; font-size: 16px; font-weight: 800; margin-bottom: 2px; }
+
+  .main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+
+  .gap-box {
+    background: #fff7ed; border: 1px solid #fed7aa;
+    border-left: 4px solid #f97316; border-radius: 10px;
+    padding: 18px 24px; margin-bottom: 40px;
+  }
+  .gap-box h3 {
+    font-size: 11px; color: #ea580c; text-transform: uppercase;
+    letter-spacing: .1em; margin-bottom: 8px;
+  }
+  .gap-box p { font-size: 14px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent);
+    margin: 48px 0 16px;
+  }
+  .section-label:first-of-type { margin-top: 0; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    margin-bottom: 20px;
+  }
+  .card p { font-size: 14px; margin-bottom: 8px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  .day-block { margin-bottom: 36px; }
+  .day-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 18px; font-weight: 800; margin-bottom: 14px;
+  }
+  .day-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--accent); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; flex-shrink: 0;
+  }
+  .day2 .day-num { background: var(--p2); }
+
+  .slot-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+    border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
+  }
+  .slot-table th {
+    background: #f3f4f6; padding: 10px 14px; text-align: left;
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .slot-table td { padding: 14px; border-top: 1px solid var(--border); vertical-align: top; }
+  .slot-table tr:nth-child(even) td { background: #fafafa; }
+  .t-cell { white-space: nowrap; font-weight: 700; color: var(--p2); min-width: 110px; }
+  .slot-table td strong { display: block; margin-bottom: 4px; }
+  .slot-table td span.tag {
+    display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 6px;
+    margin-bottom: 6px; font-weight: 700;
+  }
+  .tag-edu   { background: #eff6ff; color: var(--accent); }
+  .tag-do    { background: #fdf4ff; color: var(--p2); }
+  .tag-merge { background: #fffbeb; color: #b45309; }
+  .tag-final { background: #ecfdf5; color: #047857; }
+
+  .flow-strip {
+    display: flex; align-items: stretch; gap: 8px; margin: 18px 0 30px; flex-wrap: wrap;
+  }
+  .flow-step {
+    flex: 1; min-width: 130px;
+    background: #f8fafc; border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; font-size: 12.5px; text-align: center;
+  }
+  .flow-step strong { display: block; font-size: 13px; margin-bottom: 4px; }
+  .flow-arrow { display: flex; align-items: center; color: var(--muted); font-size: 18px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  .pill-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .pill-list li {
+    background: #f8fafc; border-radius: 8px; padding: 10px 14px; font-size: 13.5px;
+  }
+
+  .risk-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .risk-table td { padding: 10px 12px; border-top: 1px solid var(--border); vertical-align: top; }
+  .risk-table tr:first-child td { border-top: none; }
+  .risk-table td:first-child { font-weight: 700; color: #b91c1c; width: 30%; }
+
+  .decision-box {
+    background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid var(--p4);
+    border-radius: 10px; padding: 18px 24px; margin-top: 30px;
+  }
+  .decision-box h3 { font-size: 11px; color: #047857; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+  .decision-box ul { padding-left: 18px; font-size: 14px; }
+  .decision-box li { margin-bottom: 4px; }
+
+  footer { text-align: center; padding: 30px; font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <span class="header-badge">兩日班 · 課程設計 v1</span>
+    <h1>AI 自動化實戰工作坊</h1>
+    <p>會計師 + 數位員工共構 · 從認知到落地的 Capstone 式兩日課程</p>
+    <div class="header-meta">
+      <div class="hm"><strong>2 天</strong>共 4 個半天</div>
+      <div class="hm"><strong>中南部</strong>中小企業主</div>
+      <div class="hm"><strong>教育→產出→整合→應用</strong>Capstone 結構</div>
+      <div class="hm"><strong>終局</strong>簽約／健診預約</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="gap-box">
+    <h3>設計依據</h3>
+    <p>結構採 Capstone 式訓練營邏輯（教育 → 動手產出 → 整合 → 總結性應用），對齊你提出的排法，也對齊已查證的正統案例（TripleTen AI 自動化訓練營、Georgia Tech / Berkeley AI for Business）——只是把原本拉開數週的節奏濃縮進兩天。終局動作維持早上拍板的三選一：<strong>簽約 ／ 系統健診預約 ／ 留下健診預約時間</strong>，四個半天全部服務這個終局，不是各自獨立的教學單元。</p>
+  </div>
+
+  <div class="flow-strip">
+    <div class="flow-step"><strong>Day1 AM</strong>教育：建立框架</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Day1 PM</strong>產出：盤點自己公司</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Day2 AM</strong>教育＋整合：合而為一</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Day2 PM</strong>總功課：應用到公司</div>
+  </div>
+
+  <div class="section-label">Day 1 — 認知建立與自我診斷</div>
+
+  <div class="day-block">
+    <table class="slot-table">
+      <tr><th style="width:110px">時段</th><th>內容</th></tr>
+      <tr>
+        <td class="t-cell">上午<br>教育</td>
+        <td>
+          <span class="tag tag-edu">教育</span>
+          <strong>自動化基礎框架 + 真實案例拆解</strong>
+          用真實案例開場（財報／流程裡看不懂的警訊），建立「哪些工作可以被自動化」的判斷框架：重複性、規則明確、資料結構化，是三個可自動化的判準。過程中穿插輕量現場動作——每人用一張簡表，圈出自己公司目前 3–5 個「純手動」的流程（不是完整工作坊產出，是教育段落裡的暖身動手，讓老闆聽的同時已經在對照自己）。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">下午<br>產出</td>
+        <td>
+          <span class="tag tag-do">動手產出</span>
+          <strong>自動化流程盤點表</strong>
+          針對上午圈出的 3–5 個流程，逐一填：目前做法、卡關點、初步自動化可行性評分（1–5）。助教巡場協助，收尾前設一個品質門檻——每人至少完成 1 個「深度盤點」（含卡關根因，而非只填表面現象），避免帶進 Day2 的產出參差不齊。
+          <br><br>
+          <strong>Day1 帶得走的東西：</strong>一份屬於自己公司的「自動化流程盤點表」。
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section-label">Day 2 — 整合、教學深化、落地應用</div>
+
+  <div class="day-block day2">
+    <table class="slot-table">
+      <tr><th style="width:110px">時段</th><th>內容</th></tr>
+      <tr>
+        <td class="t-cell">上午<br>教育＋整合</td>
+        <td>
+          <span class="tag tag-edu">教育</span>
+          <strong>會計場景自動化工具與案例（對齊 Day1 下午盤點類別）</strong>
+          針對 Day1 下午盤點表裡最常出現的流程類型（發票／請款／報表彙整／對帳），教具體工具與做法，示範 1–2 個真實上市公司案例的自動化前後對比。
+          <br><br>
+          <span class="tag tag-merge">整合</span>
+          <strong>「合而為一」— 小組彙整</strong>
+          分組（3–4 人一組），先互評彼此 Day1 下午的盤點表，選出組內最值得優先處理的 1 個流程，講師逐組點評收斂。這一步把 Day1 分散的個人產出，收斂成 Day2 下午要實作的具體目標。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">下午<br>總功課</td>
+        <td>
+          <span class="tag tag-final">總結性應用</span>
+          <strong>自己公司的自動化行動方案</strong>
+          針對整合階段選出的目標流程，現場用示範工具／模板，設計一個初步自動化方案雛形，產出「我的公司自動化行動方案」一頁紙（含：目標流程、自動化做法、預期省下的時間／人力、下一步需要的資源）。
+          <br><br>
+          收尾直接對齊終局動作：現場開放簽約／系統健診預約／留下健診預約時間，三選一即算轉化成功。異業媒合環節可以放在這裡的休息時段——每人 3 分鐘自介＋資源快篩，把「認識同業合作對象」疊進兩日班的感知價值。
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section-label">課程摘要</div>
+  <div class="card">
+    <div class="two-col">
+      <div>
+        <p><strong>定位</strong>：數位員工 + 會計師共同帶課，不是純 AI 課，是「認知 + 落地」的實戰工作坊</p>
+        <p><strong>對象</strong>：中南部中小企業主（已通過 40 分鐘／半日班篩過的熱名單）</p>
+        <p><strong>調性</strong>：全程動手，不是坐著聽——教育段落也帶輕量現場對照動作</p>
+      </div>
+      <div>
+        <p><strong>終局動作</strong>：簽約／系統健診預約／留下健診預約時間（三選一）</p>
+        <p><strong>Day1 帶走</strong>：自動化流程盤點表</p>
+        <p><strong>Day2 帶走</strong>：我的公司自動化行動方案</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">風險與對應</div>
+  <div class="card">
+    <table class="risk-table">
+      <tr>
+        <td>產出品質參差</td>
+        <td>Day1 下午收尾設品質門檻，助教巡場確認每人至少 1 個深度盤點，避免 Day2 整合被拉低到最低共同分母</td>
+      </tr>
+      <tr>
+        <td>調性混淆</td>
+        <td>Day1 上午雖標「教育」，開場明講一句「今天邊聽邊對照自己公司」，避免老闆帶著純聽課心態進場</td>
+      </tr>
+      <tr>
+        <td>終局分散</td>
+        <td>三選一動作全部收斂在 Day2 下午最後 15 分鐘現場處理，避免現場不知道該收斂到哪個具體動作</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="decision-box">
+    <h3>還沒拍板，需要你們決定</h3>
+    <ul>
+      <li>兩日班要不要收費／收訂金當誠意門檻</li>
+      <li>Day2 涉及真實財務資料，要不要簽一份簡易保密承諾</li>
+      <li>具體定價階梯與會計師分潤結構</li>
+      <li>場地是否能分組（Day1 下午、Day2 上午都需要分組空間）</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>MUSEON 數位員工 · 課程設計 v1 · 兩日班 AI 自動化實戰工作坊</footer>
+
+</body>
+</html>
