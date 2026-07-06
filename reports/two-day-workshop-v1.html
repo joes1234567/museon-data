@@ -138,6 +138,33 @@
   .decision-box ul { padding-left: 18px; font-size: 14px; }
   .decision-box li { margin-bottom: 4px; }
 
+  .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .case-grid { grid-template-columns: 1fr; } }
+  .case-card {
+    background: #f8fafc; border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .case-card .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff;
+    font-size: 11px; font-weight: 800; margin-right: 8px;
+  }
+  .case-card strong { font-size: 13.5px; }
+  .case-card p { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+  .case-card .who { display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--p3); margin-top: 6px; }
+
+  .instr-note {
+    background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 14px 18px; margin-top: 16px; font-size: 13.5px;
+  }
+  .instr-note strong { color: #1d4ed8; }
+
+  .handoff {
+    display: flex; align-items: center; gap: 10px; margin: 14px 0;
+    font-size: 13px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px;
+    padding: 10px 16px;
+  }
+
   footer { text-align: center; padding: 30px; font-size: 12px; color: var(--muted); }
 </style>
 </head>
@@ -150,7 +177,7 @@
     <p>會計師 + 數位員工共構 · 從認知到落地的 Capstone 式兩日課程</p>
     <div class="header-meta">
       <div class="hm"><strong>2 天</strong>共 4 個半天</div>
-      <div class="hm"><strong>中南部</strong>中小企業主</div>
+      <div class="hm"><strong>餐飲／服務業</strong>中南部中小企業主</div>
       <div class="hm"><strong>教育→產出→整合→應用</strong>Capstone 結構</div>
       <div class="hm"><strong>終局</strong>簽約／健診預約</div>
     </div>
@@ -178,53 +205,176 @@
 
   <div class="day-block">
     <table class="slot-table">
-      <tr><th style="width:110px">時段</th><th>內容</th></tr>
+      <tr><th style="width:110px">時間</th><th>內容</th></tr>
       <tr>
-        <td class="t-cell">上午<br>教育</td>
+        <td class="t-cell">09:00–09:15</td>
         <td>
-          <span class="tag tag-edu">教育</span>
-          <strong>自動化基礎框架 + 真實案例拆解</strong>
-          用真實案例開場（財報／流程裡看不懂的警訊），建立「哪些工作可以被自動化」的判斷框架：重複性、規則明確、資料結構化，是三個可自動化的判準。過程中穿插輕量現場動作——每人用一張簡表，圈出自己公司目前 3–5 個「純手動」的流程（不是完整工作坊產出，是教育段落裡的暖身動手，讓老闆聽的同時已經在對照自己）。
+          <span class="tag tag-edu">開場定調</span>
+          <strong>校正參與心態，不重新破冰</strong>
+          不從零暖場，直接接回半日班留的鉤子（「你上一次真的看懂自己的財報，是什麼時候？」）。開場明講一句：「今天不是聽，是動手做」——先校正老闆的心態預期，因為今天稍後要他填數字、要分組討論，若他帶著聽課心態進場會措手不及。
         </td>
       </tr>
       <tr>
-        <td class="t-cell">下午<br>產出</td>
+        <td class="t-cell">09:15–10:15</td>
+        <td>
+          <span class="tag tag-edu">教育</span>
+          <strong>自動化基礎框架 + 在地案例拆解</strong>
+          建立「哪些工作可以被自動化」的判斷框架，三個判準：重複性、規則明確、資料結構化。框架用下方 7 個餐飲／服務業在地案例逐一講解落地（見「案例清單」），不用抽象科技業或國外案例——外地、大企業案例中南部老闆會自動免疫。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">10:15–10:30</td>
+        <td>休息</td>
+      </tr>
+      <tr>
+        <td class="t-cell">10:30–11:30</td>
+        <td>
+          <span class="tag tag-do">暖身動手</span>
+          <strong>圈選自己公司的手動流程</strong>
+          每人一張簡表，一邊聽案例一邊圈出自己公司目前 3–5 個「純手動」流程。這不是完整工作坊產出，是教育段落裡的暖身動手——讓老闆聽的同時已經在對照自己，而不是被動聽完才開始想。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">11:30–12:00</td>
+        <td>
+          <span class="tag tag-do">小組分享</span>
+          <strong>組內互相對照圈選結果</strong>
+          3–4 人一組，輪流講自己圈出的流程，互相補充彼此沒想到的手動流程類型。講師／助教巡場，抓幾個有代表性的案例公開簡短分享，強化「這跟我真的有關」的感受。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">12:00–13:00</td>
+        <td>午餐</td>
+      </tr>
+      <tr>
+        <td class="t-cell">13:00–14:15</td>
         <td>
           <span class="tag tag-do">動手產出</span>
-          <strong>自動化流程盤點表</strong>
-          針對上午圈出的 3–5 個流程，逐一填：目前做法、卡關點、初步自動化可行性評分（1–5）。助教巡場協助，收尾前設一個品質門檻——每人至少完成 1 個「深度盤點」（含卡關根因，而非只填表面現象），避免帶進 Day2 的產出參差不齊。
+          <strong>填寫「自動化流程盤點表」</strong>
+          針對上午圈出的 3–5 個流程，逐一填四個欄位：<strong>目前做法 / 卡關點 / 根因（往回追一層，例如「對帳常出錯」→「進銷貨資料格式不統一」）/ 初步自動化可行性評分（1–5）</strong>。這四個欄位就是 Day2 上午「合而為一」要用的原始素材，格式先在這裡定案，Day2 才有東西可以整合。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">14:15–14:30</td>
+        <td>休息</td>
+      </tr>
+      <tr>
+        <td class="t-cell">14:30–15:15</td>
+        <td>
+          <span class="tag tag-do">品質門檻</span>
+          <strong>助教巡場確認深度盤點</strong>
+          收尾前設一個品質門檻——每人至少完成 1 個「深度盤點」（含卡關根因，而非只填表面現象）。這一步是為了避免 Day2 上午分組整合時被拉低到最低共同分母：如果有人隨便填、有人填得深，小組互評時深度不對等，整合會卡住。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">15:15–16:00</td>
+        <td>
+          <span class="tag tag-final">收尾</span>
+          <strong>留缺口，交代回家作業</strong>
+          刻意不揭曉解法，只公布「你有幾個槓桿點，明天拆」。交代作業：回家帶一份真實財報或流程資料來——這個「帶資料回來」的動作是刻意設計的篩子，真的會帶回來的人，就是已經投入、真心想解決問題的熱名單。
           <br><br>
-          <strong>Day1 帶得走的東西：</strong>一份屬於自己公司的「自動化流程盤點表」。
+          <strong>Day1 帶得走的東西：</strong>一份屬於自己公司的「自動化流程盤點表」（含根因）。
         </td>
       </tr>
     </table>
   </div>
 
+  <div class="section-label">案例清單（Day1 上午教學素材）</div>
+  <div class="card">
+    <p style="margin-bottom:14px;">鎖定目前配合夥伴的客戶群——<strong>餐飲業與服務業</strong>——共通的行政／作業流程，避免抽象案例讓老闆自動免疫。</p>
+    <div class="case-grid">
+      <div class="case-card"><strong><span class="num">1</span>發票／請款對帳</strong><p>紙本發票手動輸入、月底人工核對進出帳，容易漏帳、對不上。</p><span class="who">餐飲＋服務業共通</span></div>
+      <div class="case-card"><strong><span class="num">2</span>進銷存與成本管理</strong><p>食材／耗材進貨手抄登記，food cost 靠感覺抓，抓不準毛利流失點。</p><span class="who">餐飲業重點</span></div>
+      <div class="case-card"><strong><span class="num">3</span>客服訊息／客訴回覆</strong><p>LINE／FB 大量重複詢問（營業時間、預約、退換），人力被瑣碎訊息卡住。</p><span class="who">服務業重點</span></div>
+      <div class="case-card"><strong><span class="num">4</span>排班與考勤</strong><p>排班靠 Excel 或群組喊人，請假調班溝通成本高，人力浪費在協調而非服務。</p><span class="who">餐飲＋服務業共通</span></div>
+      <div class="case-card"><strong><span class="num">5</span>文件歸檔與報表彙整</strong><p>發票、收據、月結單散落紙本／雲端各處，月底要花大量時間找資料湊報表。</p><span class="who">餐飲＋服務業共通</span></div>
+      <div class="case-card"><strong><span class="num">6</span>訂位／預約管理</strong><p>電話訂位、手寫預約本，容易重複訂位或漏記，尖峰時段接電話耽誤現場服務。</p><span class="who">餐飲、美容美髮等服務業</span></div>
+      <div class="case-card"><strong><span class="num">7</span>會員回購與行銷訊息</strong><p>老客戶回購靠老闆記性，沒有系統化提醒或行銷發送機制，流失了不知道。</p><span class="who">服務業重點</span></div>
+    </div>
+    <div class="instr-note">
+      <strong>講師提醒：</strong>這 7 個案例是「同業常見樣態」，不是「你們家一定如此」的權威答案。措辭上留餘地（例如「這是同業常見的做法，你們家不一定一樣」），避免老闆發現自己公司跟案例對不上時，反而質疑整堂課的可信度。實際 5–7 個要放的案例，可依報名狀況（餐飲／服務業比例）微調權重。
+    </div>
+  </div>
+
   <div class="section-label">Day 2 — 整合、教學深化、落地應用</div>
+
+  <div class="handoff">
+    <strong>入學門檻承接：</strong>Day1 收尾那句「你有幾個槓桿點，明天拆」+ 帶回來的真實財報／流程資料，就是 Day2 的入場券——Day2 不重新破冰，開場直接回應這個懸念。
+  </div>
 
   <div class="day-block day2">
     <table class="slot-table">
-      <tr><th style="width:110px">時段</th><th>內容</th></tr>
+      <tr><th style="width:110px">時間</th><th>內容</th></tr>
       <tr>
-        <td class="t-cell">上午<br>教育＋整合</td>
+        <td class="t-cell">09:00–09:15</td>
         <td>
-          <span class="tag tag-edu">教育</span>
-          <strong>會計場景自動化工具與案例（對齊 Day1 下午盤點類別）</strong>
-          針對 Day1 下午盤點表裡最常出現的流程類型（發票／請款／報表彙整／對帳），教具體工具與做法，示範 1–2 個真實上市公司案例的自動化前後對比。
-          <br><br>
-          <span class="tag tag-merge">整合</span>
-          <strong>「合而為一」— 小組彙整</strong>
-          分組（3–4 人一組），先互評彼此 Day1 下午的盤點表，選出組內最值得優先處理的 1 個流程，講師逐組點評收斂。這一步把 Day1 分散的個人產出，收斂成 Day2 下午要實作的具體目標。
+          <span class="tag tag-edu">開場</span>
+          <strong>回應 Day1 懸念</strong>
+          回應 Day1 收尾留下的缺口，點出「今天要解的，就是你昨天圈出的槓桿點」，把老闆帶回昨天的情緒鉤子上。
         </td>
       </tr>
       <tr>
-        <td class="t-cell">下午<br>總功課</td>
+        <td class="t-cell">09:15–10:15</td>
+        <td>
+          <span class="tag tag-edu">教育</span>
+          <strong>會計場景自動化工具與同業案例</strong>
+          針對 Day1 盤點表裡最常出現的流程類型（發票／請款對帳、報表彙整最普遍），教具體工具與做法。秀 2–3 個<strong>中南部同規模、同業（餐飲／服務業）</strong>案例的自動化前後對比——中南部老闆決策靠看得到的參照，抽象模型或外地案例說服力低。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">10:15–10:30</td>
+        <td>休息</td>
+      </tr>
+      <tr>
+        <td class="t-cell">10:30–11:30</td>
+        <td>
+          <span class="tag tag-merge">整合</span>
+          <strong>「合而為一」— 小組互評與收斂</strong>
+          維持 Day1 分組，互評彼此的「自動化流程盤點表」（目前做法／卡關點／根因／可行性評分四欄位），依可行性評分＋影響範圍，選出組內最值得優先處理的 <strong>1 個流程</strong>。這一步把 Day1 分散的個人產出，收斂成 Day2 下午要實作的具體目標。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">11:30–12:00</td>
+        <td>
+          <span class="tag tag-merge">整合</span>
+          <strong>講師逐組點評收斂</strong>
+          講師巡各組，針對選出的流程給具體回饋，確認每組收斂到的目標流程可行、範圍不要太大（避免下午總功課做不完）。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">12:00–13:00</td>
+        <td>
+          午餐 ＋ <span class="tag tag-do">異業媒合</span> 每人 3 分鐘自介＋資源快篩，現場配對潛在合作對象。中南部市場靠人脈槓桿，這段把兩日班的感知價值從「單一供應商關係」撐大成「認識了幾個潛在合作對象」，降低價格敏感度。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">13:00–14:30</td>
         <td>
           <span class="tag tag-final">總結性應用</span>
-          <strong>自己公司的自動化行動方案</strong>
-          針對整合階段選出的目標流程，現場用示範工具／模板，設計一個初步自動化方案雛形，產出「我的公司自動化行動方案」一頁紙（含：目標流程、自動化做法、預期省下的時間／人力、下一步需要的資源）。
+          <strong>總功課：我的公司自動化行動方案</strong>
+          針對整合階段選出的目標流程，現場用示範工具／模板，設計一個初步自動化方案雛形，產出「我的公司自動化行動方案」一頁紙（含：目標流程、自動化做法、預期省下的時間／人力、下一步需要的資源）。老闆帶著自己真實資料現場產出，看到的是「數字在動」，不是抽象概念。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">14:30–14:45</td>
+        <td>休息</td>
+      </tr>
+      <tr>
+        <td class="t-cell">14:45–15:30</td>
+        <td>
+          <span class="tag tag-edu">導入說明</span>
+          <strong>分階段導入路徑 + Before/After 對比</strong>
+          講清楚分階段、小額先行的導入路徑，拆解「一次要花大錢」的疑慮，Before/After 對比後直接收斂到報名／簽約，加一個限量名額或現場優惠製造立即行動誘因。
+        </td>
+      </tr>
+      <tr>
+        <td class="t-cell">15:30–16:00</td>
+        <td>
+          <span class="tag tag-final">收尾</span>
+          <strong>現場收斂終局動作</strong>
+          三選一即算轉化成功：<strong>簽約 ／ 系統健診預約 ／ 留下健診預約時間</strong>。全部收斂在最後這 30 分鐘現場處理，避免現場不知道該收斂到哪個具體動作。
           <br><br>
-          收尾直接對齊終局動作：現場開放簽約／系統健診預約／留下健診預約時間，三選一即算轉化成功。異業媒合環節可以放在這裡的休息時段——每人 3 分鐘自介＋資源快篩，把「認識同業合作對象」疊進兩日班的感知價值。
+          <strong>Day2 帶得走的東西：</strong>一份「我的公司自動化行動方案」＋一個明確的下一步約定。
         </td>
       </tr>
     </table>
@@ -235,7 +385,7 @@
     <div class="two-col">
       <div>
         <p><strong>定位</strong>：數位員工 + 會計師共同帶課，不是純 AI 課，是「認知 + 落地」的實戰工作坊</p>
-        <p><strong>對象</strong>：中南部中小企業主（已通過 40 分鐘／半日班篩過的熱名單）</p>
+        <p><strong>對象</strong>：中南部中小企業主，以餐飲業、服務業為主（已通過 40 分鐘／半日班篩過的熱名單）</p>
         <p><strong>調性</strong>：全程動手，不是坐著聽——教育段落也帶輕量現場對照動作</p>
       </div>
       <div>
