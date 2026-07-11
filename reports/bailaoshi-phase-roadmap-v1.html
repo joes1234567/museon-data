@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0081)https://joes1234567.github.io/museon-data/reports/bailaoshi-phase-roadmap-v1.html -->
+<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白老師國際語言中心 — 系統導入分期藍圖 v1.5</title>
+<title>白老師國際語言中心 — 系統導入分期藍圖 v1.4</title>
 <style>
   :root {
     --ember: #C4502A;
@@ -383,7 +383,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統導入規劃 v1.5 — 含互動式視覺化地圖 + 知識圖譜</div>
+  <div class="hero-tag">系統導入規劃 v1.4 — 含互動式視覺化地圖 + 知識圖譜</div>
   <h1>白老師國際語言中心<br><span>系統導入分期藍圖</span></h1>
   <p class="hero-sub">以「功能單位」為導入單位，從地基到 AI 智慧輔助七階段漸進，每期都有可驗收交付物，業主決定深度與節奏。</p>
   <div class="hero-meta">
@@ -396,11 +396,11 @@
       <span class="hero-meta-label">功能單位</span>
     </div>
     <div class="hero-meta-item">
-      <span class="hero-meta-value">39</span>
+      <span class="hero-meta-value">44</span>
       <span class="hero-meta-label">系統模組</span>
     </div>
     <div class="hero-meta-item">
-      <span class="hero-meta-value">v1.5</span>
+      <span class="hero-meta-value">v1.4</span>
       <span class="hero-meta-label">文件版本</span>
     </div>
   </div>
@@ -412,7 +412,7 @@
   <div class="notice">
     <strong>本文件用途</strong>：這份分期藍圖是系統導入的<strong>決策依據</strong>，說明「先做什麼、後做什麼、每期業主能拿到什麼」。<br>
     模組細節請參考《智慧營運系統規劃 v0.23》；本文件聚焦在導入順序與交付物定義。<br>
-    <strong>v1.5 更新</strong>：對齊《營運系統架構書 v2.2》共識版模組編號——MOD 01（學生/家長/老師/員工人員資料，含學生跨學年永久 ID）收斂為單一模組，不再拆 01a/01b；MOD 33 不拆出「教職員建檔」子模組（併入 MOD 01 人員資料，正職/外籍/外聘兼職 type 分流留在 MOD 33 外師管理本體）；MOD 12、MOD 18 在 P4 是既有模組的功能延伸/通路開通，不算獨立新模組。
+    <strong>v1.2 更新</strong>：L0 確認為 5 個模組（加入 MOD 01 人員基礎資料）；MOD 03 課程與班級管理確認歸 P1 核心業務；MOD 33 教職員建檔確認歸 P1 師資人資基礎，作為 person 表的職務延伸。
   </div>
 
   <!-- UNIT OVERVIEW -->
@@ -483,8 +483,8 @@
         <td>✅ 業主決定批次</td>
       </tr>
       <tr>
-        <td><strong>9. 家長/學生前台</strong></td>
-        <td>雙端 App（搜尋/對話式留言/學生入口）、通知系統、學習歷程/成績、家長一對一會談管理</td>
+        <td><strong>9. 家長（學生）/ 教職人員前台</strong></td>
+        <td>雙角色 App（家長含學生端 + 教職人員端）、通知系統、學習歷程/成績、家長一對一會談管理</td>
         <td><span class="phase-pill pill-p4">P4 前台</span></td>
         <td>✅ 業主決定批次</td>
       </tr>
@@ -502,6 +502,493 @@
       </tr>
     </tbody>
   </table>
+
+<!-- ===== KNOWLEDGE GRAPH ===== -->
+<div style="background:var(--parchment);border-top:2px solid var(--border);padding:40px 0 0;">
+  <div style="max-width:960px;margin:0 auto;padding:0 24px 20px;">
+    <div class="section-title">模組依賴知識圖譜</div>
+    <p style="font-size:13px;color:var(--slate);margin-bottom:12px;line-height:1.7;">
+      44 個模組節點，顏色對應 P0–P6。滑鼠移到節點查看說明；<strong>點擊節點</strong>鎖定並亮顯<strong>所有前置依賴鏈</strong>（往根回溯全部），再按一次或點空白處取消。滾輪縮放，拖曳平移。
+    </p>
+  </div>
+  <div class="kg-controls" id="kg-controls">
+    <button class="kg-btn active" data-kgphase="all">全部</button>
+    <div class="kg-sep"></div>
+    <button class="kg-btn" data-kgphase="P0">P0 底層</button>
+    <button class="kg-btn" data-kgphase="P1">P1 核心</button>
+    <button class="kg-btn" data-kgphase="P2">P2 財務合規</button>
+    <button class="kg-btn" data-kgphase="P3">P3 深化</button>
+    <button class="kg-btn" data-kgphase="P4">P4 前台</button>
+    <button class="kg-btn" data-kgphase="P5">P5 API</button>
+    <button class="kg-btn" data-kgphase="P6">P6 AI</button>
+    <div class="kg-sep"></div>
+    <button class="kg-btn" id="kg-btn-reset" style="color:var(--slate);">重置視圖</button>
+  </div>
+  <div id="kg-graph-wrap"><svg id="kg-graph" viewBox="0 0 1320 840" height="761"><g transform="translate(-528.631780747651,-256.86163203172396) scale(1.5157165665103984)"><rect class="kg-phase-bg" x="28" y="42" width="164" height="786" fill="#7C3AED" rx="8"></rect><text class="kg-phase-lbl" x="110" y="28" fill="#7C3AED">P0 系統底層</text><rect class="kg-phase-bg" x="213" y="42" width="164" height="786" fill="#C4502A" rx="8"></rect><text class="kg-phase-lbl" x="295" y="28" fill="#C4502A">P1 核心作業</text><rect class="kg-phase-bg" x="408" y="42" width="164" height="786" fill="#B8923A" rx="8"></rect><text class="kg-phase-lbl" x="490" y="28" fill="#B8923A">P2 財務合規</text><rect class="kg-phase-bg" x="598" y="42" width="164" height="786" fill="#2A7A6E" rx="8"></rect><text class="kg-phase-lbl" x="680" y="28" fill="#2A7A6E">P3 深化內部</text><rect class="kg-phase-bg" x="778" y="42" width="164" height="786" fill="#5A5A6E" rx="8"></rect><text class="kg-phase-lbl" x="860" y="28" fill="#5A5A6E">P4 對外前台</text><rect class="kg-phase-bg" x="948" y="42" width="164" height="786" fill="#6A4A9A" rx="8"></rect><text class="kg-phase-lbl" x="1030" y="28" fill="#6A4A9A">P5 API串接</text><rect class="kg-phase-bg" x="1123" y="42" width="164" height="786" fill="#D44422" rx="8"></rect><text class="kg-phase-lbl" x="1205" y="28" fill="#D44422">P6 AI智慧</text><g><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M134.93585262855328,207.1914910846995 A111.05701273328805,111.05701273328805 0 0,1 282.6826005038081,217.0609032389837"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M134.93585262855328,207.1914910846995 A175.87374495375113,175.87374495375113 0 0,1 287.2585005346883,385.4813565157149"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M134.93585262855328,207.1914910846995 A231.70115023094297,231.70115023094297 0 0,1 440.0503370391384,158.75696377751063"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M162.42621276710955,273.73577142445896 A99.70668084370072,99.70668084370072 0 0,1 282.6826005038081,217.0609032389837"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M162.42621276710955,273.73577142445896 A275.420725793393,275.420725793393 0 0,1 525.8377941087753,220.93276007756842"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M108.23724552418466,321.1441655031134 A184.1693356957676,184.1693356957676 0 0,1 344.45194194367065,254.04799726595957"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M204.79122278649388,386.27108279548565 A120.86909916416678,120.86909916416678 0 0,1 306.95933060135934,510.9058941595866"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M204.79122278649388,386.27108279548565 A144.242102773868,144.242102773868 0 0,1 344.45194194367065,254.04799726595957"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M204.79122278649388,386.27108279548565 A172.6577718285888,172.6577718285888 0 0,1 430.80829189517226,430.0100293467314"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M204.79122278649388,386.27108279548565 A215.2876365646535,215.2876365646535 0 0,1 473.09612377148324,488.3018974700648"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M204.79122278649388,386.27108279548565 A168.83873078427627,168.83873078427627 0 0,1 401.4803866061175,495.7773625387853"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M204.79122278649388,386.27108279548565 A218.96690555541397,218.96690555541397 0 0,1 443.675978913982,554.1171601883067"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M204.79122278649388,386.27108279548565 A294.81913547651766,294.81913547651766 0 0,1 593.3243677726275,326.5763784755538"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M204.79122278649388,386.27108279548565 A448.35154349428,448.35154349428 0 0,1 795.2692362293054,292.9811252408391"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M103.67121851654767,460.14415526559304 A148.641643879617,148.641643879617 0 0,1 287.2585005346883,385.4813565157149"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M282.6826005038081,217.0609032389837 A53.99737840758572,53.99737840758572 0 0,1 344.45194194367065,254.04799726595957"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M282.6826005038081,217.0609032389837 A126.36195320568454,126.36195320568454 0 0,1 287.2585005346883,385.4813565157149"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M282.6826005038081,217.0609032389837 A97.98432748036669,97.98432748036669 0 0,1 412.5987543591355,230.8489480420648"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M282.6826005038081,217.0609032389837 A125.86589707175013,125.86589707175013 0 0,1 440.0503370391384,158.75696377751063"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M282.6826005038081,217.0609032389837 A247.0358680932898,247.0358680932898 0 0,1 593.3243677726275,326.5763784755538"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M344.45194194367065,254.04799726595957 A53.99054045937772,53.99054045937772 0 0,1 412.5987543591355,230.8489480420648"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M344.45194194367065,254.04799726595957 A138.2879732427366,138.2879732427366 0 0,1 525.8377941087753,220.93276007756842"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M412.5987543591355,230.8489480420648 A100.72770464761882,100.72770464761882 0 0,1 309.5958505115028,317.03398407748807"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M412.5987543591355,230.8489480420648 A182.66273867636718,182.66273867636718 0 0,1 652.156079974363,186.92805032212112"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M287.2585005346883,385.4813565157149 A126.37957608194182,126.37957608194182 0 0,1 454.10601857273446,361.897210401768"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M306.95933060135934,510.9058941595866 A157.06320792630854,157.06320792630854 0 0,1 454.10601857273446,361.897210401768"></path><path class="kg-link extends dim" marker-end="url(#kg-ar-extends)" d="M306.95933060135934,510.9058941595866 A253.61995325909254,253.61995325909254 0 0,1 632.8312939330293,601.2364369747713"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M440.0503370391384,158.75696377751063 A79.46219892352494,79.46219892352494 0 0,1 525.8377941087753,220.93276007756842"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M525.8377941087753,220.93276007756842 A88.84634245381878,88.84634245381878 0 0,1 522.467434738049,339.3465952199524"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M525.8377941087753,220.93276007756842 A53.99999999932977,53.99999999932977 0 0,1 481.90156975159783,277.97316846589507"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M454.10601857273446,361.897210401768 A66.30541895356232,66.30541895356232 0 0,1 481.90156975159783,277.97316846589507"></path><path class="kg-link extends dim" marker-end="url(#kg-ar-extends)" d="M522.467434738049,339.3465952199524 A238.27192684915275,238.27192684915275 0 0,1 836.4561055416846,387.7387541959492"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M412.5987543591355,230.8489480420648 A164.0516181800309,164.0516181800309 0 0,1 629.2562993037785,260.9275650441558"></path><path class="kg-link extends dim" marker-end="url(#kg-ar-extends)" d="M309.5958505115028,317.03398407748807 A243.4102240829007,243.4102240829007 0 0,1 629.2562993037785,260.9275650441558"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M632.8312939330293,601.2364369747713 A72.53853592673515,72.53853592673515 0 0,1 682.9158725751172,683.9764863600523"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M632.8312939330293,601.2364369747713 A120.76674327465977,120.76674327465977 0 0,1 677.9593229999148,755.8056769186757"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M593.3243677726275,326.5763784755538 A118.22668799551533,118.22668799551533 0 0,1 695.8858111919623,446.2848897221584"></path><path class="kg-link extends dim" marker-end="url(#kg-ar-extends)" d="M695.8858111919623,446.2848897221584 A150.73427040906898,150.73427040906898 0 0,1 869.962421393308,546.7333997157245"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M525.8377941087753,220.93276007756842 A209.1737346580345,209.1737346580345 0 0,1 795.2692362293054,292.9811252408391"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M412.5987543591355,230.8489480420648 A343.62351935727486,343.62351935727486 0 0,1 862.0048948342452,320.00614817323435"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M862.0048948342452,320.00614817323435 A53.99999996839354,53.99999996839354 0 0,1 795.2692362293054,292.9811252408391"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M836.4561055416846,387.7387541959492 A77.49124871580008,77.49124871580008 0 0,1 795.2692362293054,292.9811252408391"></path><path class="kg-link api dim" marker-end="url(#kg-ar-api)" d="M344.45194194367065,254.04799726595957 A421.19152561135684,421.19152561135684 0 0,1 905.881754806481,240.69007407149212"></path><path class="kg-link api dim" marker-end="url(#kg-ar-api)" d="M412.5987543591355,230.8489480420648 A370.0358679090081,370.0358679090081 0 0,1 905.881754806481,240.69007407149212"></path><path class="kg-link api dim" marker-end="url(#kg-ar-api)" d="M287.2585005346883,385.4813565157149 A473.4584146638591,473.4584146638591 0 0,1 917.3341769504692,424.42248666966526"></path><path class="kg-link api dim" marker-end="url(#kg-ar-api)" d="M795.2692362293054,292.9811252408391 A166.44180033166862,166.44180033166862 0 0,1 1017.0219885460814,301.6568763883652"></path><path class="kg-link api dim" marker-end="url(#kg-ar-api)" d="M869.962421393308,546.7333997157245 A127.45688693147059,127.45688693147059 0 0,1 1035.8278935392912,583.7348032451067"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M508.3753164644002,409.95242732104 A452.88423056146996,452.88423056146996 0 0,1 1102.2840048497935,300.85601257031993"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M508.3753164644002,409.95242732104 A472.427684000658,472.427684000658 0 0,1 1138.237086723234,402.69510105119446"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M508.3753164644002,409.95242732104 A426.41476096981756,426.41476096981756 0 0,1 1075.3507133458238,367.6271420656968"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M508.3753164644002,409.95242732104 A438.4513223065822,438.4513223065822 0 0,1 1091.0727864673029,457.09985400726106"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M862.0048948342452,320.00614817323435 A180.7807729045158,180.7807729045158 0 0,1 1102.2840048497935,300.85601257031993"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M862.0048948342452,320.00614817323435 A200.2187941366719,200.2187941366719 0 0,1 1091.0727864673029,457.09985400726106"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M412.5987543591355,230.8489480420648 A459.8571664063184,459.8571664063184 0 0,1 1025.5641178291746,216.09547538735487"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M525.8377941087753,220.93276007756842 A374.8123014823983,374.8123014823983 0 0,1 1025.5641178291746,216.09547538735487"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M905.881754806481,240.69007407149212 A154.058441791923,154.058441791923 0 0,1 1102.2840048497935,300.85601257031993"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M905.881754806481,240.69007407149212 A91.63748575506855,91.63748575506855 0 0,1 1025.5641178291746,216.09547538735487"></path><path class="kg-link ai dim" marker-end="url(#kg-ar-ai)" d="M1017.0219885460814,301.6568763883652 A63.94933310015132,63.94933310015132 0 0,1 1102.2840048497935,300.85601257031993"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M1075.3507133458238,367.6271420656968 A217.3935019245472,217.3935019245472 0 0,1 795.2692362293054,292.9811252408391"></path><path class="kg-link depends dim" marker-end="url(#kg-ar-depends)" d="M1102.2840048497935,300.85601257031993 A230.33681018427865,230.33681018427865 0 0,1 795.2692362293054,292.9811252408391"></path></g><g><g class="kg-node dim" transform="translate(134.93585262855328,207.1914910846995)"><circle r="23" fill="#7C3AED" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🔐</text><text class="node-label" y="31">RBAC</text><text class="node-label" y="44">角色權限</text></g><g class="kg-node dim" transform="translate(162.42621276710955,273.73577142445896)"><circle r="23" fill="#7C3AED" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📅</text><text class="node-label" y="31">學年</text><text class="node-label" y="44">期別設定</text></g><g class="kg-node dim" transform="translate(108.23724552418466,321.1441655031134)"><circle r="23" fill="#7C3AED" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🆔</text><text class="node-label" y="31">學生</text><text class="node-label" y="44">永久 ID</text></g><g class="kg-node dim" transform="translate(103.67121851654767,460.14415526559304)"><circle r="23" fill="#7C3AED" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🏢</text><text class="node-label" y="31">分校</text><text class="node-label" y="44">基礎資料</text></g><g class="kg-node dim" transform="translate(204.79122278649388,386.27108279548565)"><circle r="23" fill="#7C3AED" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">👤</text><text class="node-label" y="31">人員</text><text class="node-label" y="44">基礎資料</text></g><g class="kg-node dim" transform="translate(282.6826005038081,217.0609032389837)"><circle r="23" fill="#C4502A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📚</text><text class="node-label" y="31">課程</text><text class="node-label" y="44">班級管理</text></g><g class="kg-node dim" transform="translate(344.45194194367065,254.04799726595957)"><circle r="23" fill="#C4502A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">✍️</text><text class="node-label" y="31">報名</text><text class="node-label" y="44">就讀管理</text></g><g class="kg-node dim" transform="translate(412.5987543591355,230.8489480420648)"><circle r="23" fill="#C4502A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">✅</text><text class="node-label" y="31">出缺席</text><text class="node-label" y="44">管理</text></g><g class="kg-node dim" transform="translate(309.5958505115028,317.03398407748807)"><circle r="23" fill="#C4502A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🔄</text><text class="node-label" y="31">補課</text><text class="node-label" y="44">管理</text></g><g class="kg-node dim" transform="translate(287.2585005346883,385.4813565157149)"><circle r="23" fill="#C4502A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📋</text><text class="node-label" y="31">排課</text><text class="node-label" y="44">管理</text></g><g class="kg-node dim" transform="translate(306.95933060135934,510.9058941595866)"><circle r="23" fill="#C4502A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">👨‍🏫</text><text class="node-label" y="31">教職員</text><text class="node-label" y="44">建檔</text></g><g class="kg-node dim" transform="translate(508.3753164644002,409.95242732104)"><circle r="23" fill="#C4502A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📖</text><text class="node-label" y="31">知識庫</text><text class="node-label" y="44">建置</text></g><g class="kg-node dim" transform="translate(440.0503370391384,158.75696377751063)"><circle r="23" fill="#B8923A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">💲</text><text class="node-label" y="31">定價</text><text class="node-label" y="44">費用規則</text></g><g class="kg-node dim" transform="translate(525.8377941087753,220.93276007756842)"><circle r="23" fill="#B8923A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🧾</text><text class="node-label" y="31">帳單</text><text class="node-label" y="44">繳費</text></g><g class="kg-node dim" transform="translate(522.467434738049,339.3465952199524)"><circle r="23" fill="#B8923A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📨</text><text class="node-label" y="31">通知</text><text class="node-label" y="44">Bus</text></g><g class="kg-node dim" transform="translate(481.90156975159783,277.97316846589507)"><circle r="23" fill="#B8923A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📊</text><text class="node-label" y="31">對帳</text><text class="node-label" y="44">財務報表</text></g><g class="kg-node dim" transform="translate(454.10601857273446,361.897210401768)"><circle r="23" fill="#B8923A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">💰</text><text class="node-label" y="31">薪資</text><text class="node-label" y="44">打卡排班</text></g><g class="kg-node dim" transform="translate(430.80829189517226,430.0100293467314)"><circle r="23" fill="#B8923A" fill-opacity="0.88" stroke="#fff"></circle><circle class="risk-ring" r="27" fill="none" stroke="#C4502A" stroke-width="1.8" stroke-dasharray="4,3" stroke-opacity="0.75"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🏥</text><text class="node-label" y="31">健康</text><text class="node-label" y="44">過敏紀錄</text></g><g class="kg-node dim" transform="translate(473.09612377148324,488.3018974700648)"><circle r="23" fill="#B8923A" fill-opacity="0.88" stroke="#fff"></circle><circle class="risk-ring" r="27" fill="none" stroke="#C4502A" stroke-width="1.8" stroke-dasharray="4,3" stroke-opacity="0.75"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">💊</text><text class="node-label" y="31">吃藥</text><text class="node-label" y="44">管理</text></g><g class="kg-node dim" transform="translate(401.4803866061175,495.7773625387853)"><circle r="23" fill="#B8923A" fill-opacity="0.88" stroke="#fff"></circle><circle class="risk-ring" r="27" fill="none" stroke="#C4502A" stroke-width="1.8" stroke-dasharray="4,3" stroke-opacity="0.75"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🚗</text><text class="node-label" y="31">接送授權</text><text class="node-label" y="44">管理</text></g><g class="kg-node dim" transform="translate(443.675978913982,554.1171601883067)"><circle r="23" fill="#B8923A" fill-opacity="0.88" stroke="#fff"></circle><circle class="risk-ring" r="27" fill="none" stroke="#C4502A" stroke-width="1.8" stroke-dasharray="4,3" stroke-opacity="0.75"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📝</text><text class="node-label" y="31">家長</text><text class="node-label" y="44">同意書</text></g><g class="kg-node dim" transform="translate(593.3243677726275,326.5763784755538)"><circle r="23" fill="#2A7A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🎯</text><text class="node-label" y="31">試聽</text><text class="node-label" y="44">諮詢管理</text></g><g class="kg-node dim" transform="translate(695.8858111919623,446.2848897221584)"><circle r="23" fill="#2A7A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📈</text><text class="node-label" y="31">招生</text><text class="node-label" y="44">行銷追蹤</text></g><g class="kg-node dim" transform="translate(652.156079974363,186.92805032212112)"><circle r="23" fill="#2A7A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🍱</text><text class="node-label" y="31">餐點</text><text class="node-label" y="44">代訂</text></g><g class="kg-node" transform="translate(688.2598920330904,544.6280136121071)"><circle r="23" fill="#2A7A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🎪</text><text class="node-label" y="31">活動</text><text class="node-label" y="44">管理</text></g><g class="kg-node dim" transform="translate(629.2562993037785,260.9275650441558)"><circle r="23" fill="#2A7A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🎬</text><text class="node-label" y="31">補課影片</text><text class="node-label" y="44">管理</text></g><g class="kg-node dim" transform="translate(703.5056208858299,614.9924542647648)"><circle r="23" fill="#2A7A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📦</text><text class="node-label" y="31">教材發放</text><text class="node-label" y="44">紀錄</text></g><g class="kg-node dim" transform="translate(632.8312939330293,601.2364369747713)"><circle r="23" fill="#2A7A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🌍</text><text class="node-label" y="31">外師管理</text><text class="node-label" y="44">（完整）</text></g><g class="kg-node dim" transform="translate(682.9158725751172,683.9764863600523)"><circle r="23" fill="#2A7A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🎓</text><text class="node-label" y="31">教師培訓</text><text class="node-label" y="44">管理</text></g><g class="kg-node dim" transform="translate(677.9593229999148,755.8056769186757)"><circle r="23" fill="#2A7A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">⭐</text><text class="node-label" y="31">教師行為</text><text class="node-label" y="44">積分系統</text></g><g class="kg-node dim" transform="translate(795.2692362293054,292.9811252408391)"><circle r="23" fill="#5A5A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📱</text><text class="node-label" y="31">家長（學生）</text><text class="node-label" y="44">教職人員 App</text></g><g class="kg-node dim" transform="translate(862.0048948342452,320.00614817323435)"><circle r="23" fill="#5A5A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📒</text><text class="node-label" y="31">學習歷程</text><text class="node-label" y="44">成績</text></g><g class="kg-node dim" transform="translate(836.4561055416846,387.7387541959492)"><circle r="23" fill="#5A5A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🔔</text><text class="node-label" y="31">通知系統</text><text class="node-label" y="44">擴充</text></g><g class="kg-node dim" transform="translate(869.962421393308,546.7333997157245)"><circle r="23" fill="#5A5A6E" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📣</text><text class="node-label" y="31">行銷</text><text class="node-label" y="44">（擴充）</text></g><g class="kg-node dim" transform="translate(905.881754806481,240.69007407149212)"><circle r="23" fill="#6A4A9A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🔌</text><text class="node-label" y="31">API</text><text class="node-label" y="44">行政串接</text></g><g class="kg-node dim" transform="translate(917.3341769504692,424.42248666966526)"><circle r="23" fill="#6A4A9A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🔌</text><text class="node-label" y="31">API</text><text class="node-label" y="44">總務串接</text></g><g class="kg-node dim" transform="translate(1017.0219885460814,301.6568763883652)"><circle r="23" fill="#6A4A9A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🔌</text><text class="node-label" y="31">API</text><text class="node-label" y="44">客服串接</text></g><g class="kg-node dim" transform="translate(1035.8278935392912,583.7348032451067)"><circle r="23" fill="#6A4A9A" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🔌</text><text class="node-label" y="31">API</text><text class="node-label" y="44">行銷串接</text></g><g class="kg-node dim" transform="translate(1102.2840048497935,300.85601257031993)"><circle r="23" fill="#D44422" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🤖</text><text class="node-label" y="31">AI</text><text class="node-label" y="44">學習助理</text></g><g class="kg-node dim" transform="translate(1138.237086723234,402.69510105119446)"><circle r="23" fill="#D44422" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📋</text><text class="node-label" y="31">AI</text><text class="node-label" y="44">作業批改</text></g><g class="kg-node dim" transform="translate(1075.3507133458238,367.6271420656968)"><circle r="23" fill="#D44422" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🎤</text><text class="node-label" y="31">AI</text><text class="node-label" y="44">口說練習</text></g><g class="kg-node dim" transform="translate(1025.5641178291746,216.09547538735487)"><circle r="23" fill="#D44422" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">🔍</text><text class="node-label" y="31">AI</text><text class="node-label" y="44">行政檢查</text></g><g class="kg-node dim" transform="translate(1091.0727864673029,457.09985400726106)"><circle r="23" fill="#D44422" fill-opacity="0.88" stroke="#fff"></circle><circle class="estimate-ring" r="31" fill="none" stroke="transparent" stroke-width="2.5" stroke-dasharray="none"></circle><text class="node-icon" dy="0.35em">📝</text><text class="node-label" y="31">AI</text><text class="node-label" y="44">客製出題</text></g></g></g><defs><marker id="kg-ar-depends" viewBox="0 -5 10 10" refX="26" refY="0" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,-5L10,0L0,5" fill="#b0b0be" fill-opacity="0.7"></path></marker><marker id="kg-ar-extends" viewBox="0 -5 10 10" refX="26" refY="0" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,-5L10,0L0,5" fill="#2A7A6E" fill-opacity="0.7"></path></marker><marker id="kg-ar-api" viewBox="0 -5 10 10" refX="26" refY="0" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,-5L10,0L0,5" fill="#6A4A9A" fill-opacity="0.7"></path></marker><marker id="kg-ar-ai" viewBox="0 -5 10 10" refX="26" refY="0" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,-5L10,0L0,5" fill="#D44422" fill-opacity="0.7"></path></marker></defs></svg></div>
+  <div class="kg-legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#7C3AED"></div> P0 底層</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#C4502A"></div> P1 核心</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#B8923A"></div> P2 財務合規</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#2A7A6E"></div> P3 深化</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#5A5A6E"></div> P4 前台</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#6A4A9A"></div> P5 API</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#D44422"></div> P6 AI</div>
+    <div class="kg-sep" style="height:18px;"></div>
+    <div class="leg-item"><div class="leg-line" style="border-color:#b0b0be;"></div> 資料依賴</div>
+    <div class="leg-item"><div class="leg-line" style="border-color:#2A7A6E;border-style:dashed;"></div> 功能延伸</div>
+    <div class="leg-item"><div class="leg-line" style="border-color:#6A4A9A;border-style:dashed;"></div> API串接</div>
+    <div class="leg-item"><div class="leg-line" style="border-color:#D44422;border-style:dotted;"></div> AI輸入</div>
+    <div style="color:var(--mist);font-size:11px;">← 滑鼠移到節點查看說明 · 點擊節點啟動估價計算器 · 滾輪縮放 · 拖曳平移</div>
+  </div>
+
+  <div id="kg-estimator" style="display: block; max-width: 960px; margin: 0px auto; padding: 20px 24px 36px;">
+    <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,0.07);">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px;">估價計算器</div>
+          <div id="kg-est-header" style="font-size:16px;font-weight:700;color:var(--ink);line-height:1.4;">已選 1 個目標模組</div>
+          <div style="font-size:11px;color:var(--mist);margin-top:4px;">多選目標 → 合併前置鏈，共用模組不重複計算</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:12px;">
+          <button onclick="selectAll()" style="padding:4px 12px;border-radius:6px;background:transparent;color:#1A5DC8;border:1px solid #1A5DC8;font-size:11px;cursor:pointer;">全選</button>
+          <button onclick="clearEstimate()" style="padding:4px 12px;border-radius:6px;background:transparent;color:var(--mist);border:1px solid var(--border);font-size:11px;cursor:pointer;">清除全選</button>
+          <span onclick="if(selectedForEstimate.size===0){document.getElementById(&#39;kg-estimator&#39;).style.display=&#39;none&#39;;}" style="cursor:pointer;color:var(--mist);font-size:22px;line-height:1;padding:2px 6px;">×</span>
+        </div>
+      </div>
+      <div id="kg-est-list" style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;max-height:320px;overflow-y:auto;"><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#7C3AED;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P0</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">人員基礎資料</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$32,200</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#7C3AED;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P0</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">學年期別設定</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$15,400</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#7C3AED;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P0</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">學生永久 ID</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$22,800</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#7C3AED;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P0</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">RBAC 角色權限</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$54,600</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#C4502A;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P1</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">報名/就讀管理</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$32,200</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#C4502A;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P1</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">出缺席管理</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$42,550</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#C4502A;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P1</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">知識庫建置</span></div><span style="font-size:10px;color:#7C3AED;background:#F3EEFF;border:1px solid #C4B5FD;border-radius:4px;padding:2px 8px;flex-shrink:0;margin-left:12px;font-weight:700;">MUSEON 負責</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#C4502A;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P1</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">課程/班級管理</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$50,400</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#B8923A;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P2</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">帳單/繳費</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$91,000</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#B8923A;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P2</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">定價/費用規則</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$78,400</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#B8923A;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P2</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">通知 Bus</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$33,600</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#EEF6FF;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#5A5A6E;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P4</span><span style="font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">家長（學生）/ 教職人員 App</span><button onclick="window.removeFromEstimate(" mod23")"="" style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1.5px solid #1A5DC8;border-radius:4px;padding:2px 7px;flex-shrink:0;cursor:pointer;font-weight:700;line-height:1.4;">✓ 已加入估價</button></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$253,500</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#5A5A6E;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P4</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">學習歷程/成績</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$63,750</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#5A5A6E;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P4</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">通知系統擴充</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$32,200</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#6A4A9A;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P5</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">API 行政串接</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$36,400</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#6A4A9A;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P5</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">API 客服串接</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$36,400</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#D44422;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P6</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">AI 口說練習</span></div><span style="font-size:12px;font-weight:600;color:#1A5DC8;flex-shrink:0;margin-left:12px;">NT$97,500</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:#F8F8FB;margin-bottom:1px;"><div style="display:flex;align-items:center;gap:8px;min-width:0;"><span style="font-size:10px;background:#D44422;color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">P6</span><span style="font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">AI 學習助理</span></div><span style="font-size:10px;color:#7C3AED;background:#F3EEFF;border:1px solid #C4B5FD;border-radius:4px;padding:2px 8px;flex-shrink:0;margin-left:12px;font-weight:700;">MUSEON 負責</span></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#EEF6FF 0%,#F0F4FF 100%);border-radius:10px;padding:14px 18px;margin-top:4px;">
+        <div>
+          <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">完整導入成本</div>
+          <div id="kg-est-count" style="font-size:12px;color:var(--slate);">18 個模組（目標 + 前置依賴）</div>
+        </div>
+        <div id="kg-est-total" style="font-size:22px;font-weight:800;color:#1A5DC8;">NT$972,900</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="kg-detail" style="display: none; position: fixed; right: 16px; top: 110px; width: 272px; background: rgb(255, 255, 255); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 32px; z-index: 200; font-size: 13px; max-height: calc(-130px + 100vh); overflow-y: auto;">
+  <span onclick="document.getElementById(&#39;kg-detail&#39;).style.display=&#39;none&#39;" style="position:absolute;right:12px;top:10px;cursor:pointer;color:var(--mist);font-size:18px;line-height:1;">×</span>
+  <div id="kg-d-phase" style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgb(42, 122, 110); margin-bottom: 6px;">P3 · 行政</div>
+  <div id="kg-d-name" style="font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.4;">活動管理</div>
+  <div id="kg-d-unit" style="font-size:12px;color:var(--slate);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);">建立/報名/名額控管/QR Code 電子報到</div>
+  <div id="kg-d-legal-badge" style="display:none;"><div style="display:inline-block;background:#FEF0EC;color:var(--ember);font-size:10px;border-radius:4px;padding:2px 8px;margin-bottom:8px;border:1px solid rgba(196,80,42,0.3);font-weight:600;">⚠️ 法律風險模組</div></div>
+  <div id="kg-d-deps-sec" style="display: none;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">前置依賴</div><ul id="kg-d-deps" style="list-style:none;display:flex;flex-direction:column;gap:4px;"><li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">教職員建檔</li></ul></div>
+  <div id="kg-d-enables-sec" style="display: none; margin-top: 2px;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">解鎖模組</div><ul id="kg-d-enables" style="list-style:none;display:flex;flex-direction:column;gap:4px;"><li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">教師培訓管理</li><li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">教師行為積分</li></ul></div>
+  <div id="kg-d-meta" style="display: block; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border);">
+    <div id="kg-d-metrics-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:5px;text-align:center;">
+      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">ROI 情境</div>
+        <div id="kg-d-roi" style="font-size:11px;font-weight:700;color:var(--ink);line-height:1.3;">省人省時</div>
+      </div>
+      <div id="kg-d-weeks-box" style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">週數</div>
+        <div id="kg-d-devweeks" style="font-size:12px;font-weight:700;color:var(--ink);">1週</div>
+      </div>
+      <div id="kg-d-acceptance-box" style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">驗收點</div>
+        <div id="kg-d-meetings" style="font-size:12px;font-weight:700;color:var(--ink);">2點</div>
+      </div>
+      <div id="kg-d-coeff-box" style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
+        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">係數</div>
+        <div id="kg-d-coeff" style="font-size:12px;font-weight:700;color:var(--ink);">×1.15</div>
+      </div>
+    </div>
+    <div id="kg-d-cost-box" style="margin-top: 5px; background: rgb(238, 246, 255); border-radius: 7px; padding: 8px 3px; text-align: center;">
+      <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">模組費用</div>
+      <div id="kg-d-cost" style="font-size:13px;font-weight:700;color:#1A5DC8;">NT$32,200</div>
+    </div>
+    <div id="kg-d-savings-box" style="margin-top: 4px; background: rgb(240, 244, 255); border-radius: 7px; padding: 8px 3px; text-align: center;">
+      <div id="kg-d-savings-label" style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">每月減輕負擔</div>
+      <div id="kg-d-savings" style="font-size: 13px; font-weight: 700; color: rgb(58, 95, 160);">省 2 小時/月，省去最瑣碎的追蹤工作</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);">
+    <button id="kg-add-to-estimate" onclick="addToEstimate()" style="width: 100%; padding: 9px; border-radius: 8px; background: rgb(26, 93, 200); color: rgb(255, 255, 255); border-width: medium; border-style: none; border-color: currentcolor; border-image: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s, color 0.15s;">+ 加入估價</button>
+  </div>
+</div>
+
+<style>
+.kg-controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;align-items:center;}
+.kg-btn{padding:5px 13px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid currentColor;background:transparent;transition:background 0.15s,color 0.15s;letter-spacing:0.3px;line-height:1.4;}
+.kg-btn.active{color:#fff!important;}
+.kg-btn[data-kgphase="all"]{color:var(--ink);border-color:var(--ink);}
+.kg-btn[data-kgphase="all"].active{background:var(--ink);}
+.kg-btn[data-kgphase="P0"]{color:#7C3AED;border-color:#7C3AED;}
+.kg-btn[data-kgphase="P0"].active{background:#7C3AED;}
+.kg-btn[data-kgphase="P1"]{color:var(--p1);border-color:var(--p1);}
+.kg-btn[data-kgphase="P1"].active{background:var(--p1);}
+.kg-btn[data-kgphase="P2"]{color:var(--gold);border-color:var(--gold);}
+.kg-btn[data-kgphase="P2"].active{background:var(--gold);}
+.kg-btn[data-kgphase="P3"]{color:var(--teal);border-color:var(--teal);}
+.kg-btn[data-kgphase="P3"].active{background:var(--teal);}
+.kg-btn[data-kgphase="P4"]{color:var(--slate);border-color:var(--slate);}
+.kg-btn[data-kgphase="P4"].active{background:var(--slate);}
+.kg-btn[data-kgphase="P5"]{color:#6A4A9A;border-color:#6A4A9A;}
+.kg-btn[data-kgphase="P5"].active{background:#6A4A9A;}
+.kg-btn[data-kgphase="P6"]{color:#D44422;border-color:#D44422;}
+.kg-btn[data-kgphase="P6"].active{background:#D44422;}
+.kg-sep{width:1px;height:20px;background:var(--border);}
+#kg-graph-wrap{background:#fff;overflow:hidden;}
+svg#kg-graph{display:block;width:100%;cursor:grab;}
+svg#kg-graph:active{cursor:grabbing;}
+.kg-node circle{stroke-width:2.5;cursor:pointer;}
+.kg-node .node-icon{font-size:13px;text-anchor:middle;pointer-events:none;dominant-baseline:central;}
+.kg-node .node-label{font-size:9.5px;fill:var(--ink);text-anchor:middle;pointer-events:none;font-weight:500;}
+.kg-node .risk-ring{pointer-events:none;}
+.kg-link{fill:none;}
+.kg-link.depends{stroke:#b0b0be;stroke-width:1.5;stroke-opacity:0.5;}
+.kg-link.extends{stroke:#2A7A6E;stroke-width:1.5;stroke-opacity:0.5;stroke-dasharray:5,3;}
+.kg-link.api{stroke:#6A4A9A;stroke-width:1.5;stroke-opacity:0.5;stroke-dasharray:4,2;}
+.kg-link.ai{stroke:#D44422;stroke-width:1.5;stroke-opacity:0.5;stroke-dasharray:2,2;}
+.kg-link.highlight{stroke-opacity:0.9!important;stroke-width:2.5!important;}
+.kg-link.dim{stroke-opacity:0.05!important;}
+.kg-node.dim circle{opacity:0.12;}
+.kg-node.dim .node-icon{opacity:0.12;}
+.kg-node.dim .node-label{opacity:0.12;}
+.kg-node.dim .risk-ring{opacity:0.12;}
+.kg-phase-bg{fill-opacity:0.025;}
+.kg-phase-lbl{font-size:11px;font-weight:700;letter-spacing:0.8px;fill-opacity:0.45;text-anchor:middle;}
+.kg-legend{display:flex;gap:16px;flex-wrap:wrap;padding:10px 24px;background:var(--parchment);border-top:1px solid var(--border);font-size:11.5px;color:var(--slate);align-items:center;justify-content:center;}
+.leg-item{display:flex;align-items:center;gap:5px;}
+.leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+.leg-line{display:inline-block;width:22px;height:0;border-top:2px solid;vertical-align:middle;flex-shrink:0;}
+.tt-phase{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.7;margin-bottom:4px;}
+.tt-name{font-size:13px;font-weight:700;margin-bottom:6px;}
+.tt-desc{font-size:12px;opacity:0.82;line-height:1.65;}
+</style>
+
+<script src="./d3.v7.min.js"></script>
+<script>
+(function(){
+const PC={P0:'#7C3AED',P1:'#C4502A',P2:'#B8923A',P3:'#2A7A6E',P4:'#5A5A6E',P5:'#6A4A9A',P6:'#D44422'};
+const PX={P0:110,P1:295,P2:490,P3:680,P4:860,P5:1030,P6:1205};
+const PL={P0:'P0 系統底層',P1:'P1 核心作業',P2:'P2 財務合規',P3:'P3 深化內部',P4:'P4 對外前台',P5:'P5 API串接',P6:'P6 AI智慧'};
+const W=1320,H=840;
+const nodeCost=n=>(n.museonOwned||!n.weeks||!n.acceptance||!n.coeff)?0:Math.round((n.weeks*18000+n.acceptance*5000)*n.coeff);
+const nodes=[
+  {id:'MOD14',short:'RBAC 角色權限',label:'RBAC\n角色權限',phase:'P0',unit:'L0 系統底層',icon:'🔐',desc:'所有模組的存取控制，正職/行政/家長/AI 各角色最小權限',legal:false,roi:'系統地基',weeks:1.5,acceptance:3,coeff:1.3},
+  {id:'MOD04',short:'學年期別設定',label:'學年\n期別設定',phase:'P0',unit:'L0 系統底層',icon:'📅',desc:'所有課程、班級、帳單的時間軸基礎，學年結束後資料不消失',legal:false,roi:'系統地基',weeks:0.5,acceptance:1,coeff:1.1},
+  {id:'MOD01a',short:'學生永久 ID',label:'學生\n永久 ID',phase:'P0',unit:'L0 系統底層',icon:'🆔',desc:'學生跨學年唯一識別碼，升學後學習歷程和繳費紀錄不斷檔',legal:false,roi:'系統地基',weeks:0.5,acceptance:2,coeff:1.2},
+  {id:'MOD02',short:'分校基礎資料',label:'分校\n基礎資料',phase:'P0',unit:'L0 系統底層',icon:'🏢',desc:'四校區（代碼/地址/教室數量），排課衝突偵測的空間地基',legal:false,roi:'系統地基',weeks:0.5,acceptance:1,coeff:1.0},
+  {id:'MOD01b',short:'人員基礎資料',label:'人員\n基礎資料',phase:'P0',unit:'L0 系統底層',icon:'👤',desc:'學生/家長/老師/員工的 person 主表，所有模組的人員掛載點',legal:false,roi:'系統地基',weeks:1,acceptance:2,coeff:1.15},
+  {id:'MOD03',short:'課程/班級管理',label:'課程\n班級管理',phase:'P1',unit:'課程與教學',icon:'📚',desc:'多班並存、班名年度更新，排課與帳單的核心資料來源',legal:false,roi:'省人省時',weeks:1.5,acceptance:3,coeff:1.2},
+  {id:'MOD06',short:'報名/就讀管理',label:'報名\n就讀管理',phase:'P1',unit:'課程與教學',icon:'✍️',desc:'一人多班的多對多關係，帳單計算的就讀人數依據',legal:false,roi:'省人省時',weeks:1,acceptance:2,coeff:1.15},
+  {id:'MOD08',short:'出缺席管理',label:'出缺席\n管理',phase:'P1',unit:'課程與教學',icon:'✅',desc:'出缺席紀錄，影響補課安排、帳單調整、家長通知三條鏈路',legal:false,roi:'省人省時',weeks:1.5,acceptance:2,coeff:1.15},
+  {id:'MOD09',short:'補課管理',label:'補課\n管理',phase:'P1',unit:'課程與教學',icon:'🔄',desc:'缺席自動觸發補課安排，補課影片分發的前置條件',legal:false,roi:'省人省時',weeks:1,acceptance:2,coeff:1.15},
+  {id:'MOD07',short:'排課管理',label:'排課\n管理',phase:'P1',unit:'師資人資基礎',icon:'📋',desc:'四校區衝突偵測，鐘點費計算的授課時數來源',legal:false,roi:'省人省時',weeks:2,acceptance:3,coeff:1.25},
+  {id:'MOD33b',short:'教職員建檔',label:'教職員\n建檔',phase:'P1',unit:'師資人資基礎',icon:'👨‍🏫',desc:'正職/外籍/外聘兼職分流（type欄位），掛在 person 主表上',legal:false,roi:'系統地基',weeks:0.5,acceptance:1,coeff:1.0},
+  {id:'MOD24',short:'知識庫建置',label:'知識庫\n建置',phase:'P1',unit:'知識庫（同步啟動）',icon:'📖',desc:'歷史 QA 教材向量化、教學 wiki，P6 AI 口說/出題的核心前置條件，越早積累品質越高',legal:false,roi:'AI 幫你做',weeks:1.5,acceptance:3,coeff:1.3,museonOwned:true},
+  {id:'MOD10',short:'定價/費用規則',label:'定價\n費用規則',phase:'P2',unit:'財務',icon:'💲',desc:'五種費用 × 多折扣組合的規則引擎，帳單計算的輸入',legal:false,roi:'帳款確實收到',weeks:2,acceptance:4,coeff:1.4},
+  {id:'MOD11',short:'帳單/繳費',label:'帳單\n繳費',phase:'P2',unit:'財務',icon:'🧾',desc:'部分繳款、暑期分期，家長 App 帳單頁的資料來源',legal:false,roi:'帳款確實收到',weeks:2.5,acceptance:4,coeff:1.4},
+  {id:'MOD12',short:'通知 Bus',label:'通知\nBus',phase:'P2',unit:'財務',icon:'📨',desc:'統一通知基礎設施，P4 LINE/App 推播的底層',legal:false,roi:'省人省時',weeks:1,acceptance:2,coeff:1.2},
+  {id:'MOD15',short:'對帳/財務報表',label:'對帳\n財務報表',phase:'P2',unit:'財務',icon:'📊',desc:'帳單與薪資整合，管理層跨校財務報表',legal:false,roi:'帳款確實收到',weeks:2,acceptance:3,coeff:1.35},
+  {id:'MOD16',short:'薪資/打卡排班',label:'薪資\n打卡排班',phase:'P2',unit:'財務',icon:'💰',desc:'最高複雜度：跨校薪資攤算、鐘點費依班級人數計算',legal:false,roi:'帳款確實收到',weeks:3,acceptance:4,coeff:1.45},
+  {id:'MOD29',short:'學生健康/過敏',label:'健康\n過敏紀錄',phase:'P2',unit:'學生安全照顧',icon:'🏥',desc:'⚠️ 法律責任：學生過敏資訊，緊急狀況時的關鍵依據',legal:true,roi:'踩雷防護',weeks:1,acceptance:2,coeff:1.3},
+  {id:'MOD27',short:'吃藥管理',label:'吃藥\n管理',phase:'P2',unit:'學生安全照顧',icon:'💊',desc:'⚠️ 法律責任：家長授權書、服藥執行紀錄、護理師確認流程',legal:true,roi:'踩雷防護',weeks:1,acceptance:3,coeff:1.4},
+  {id:'MOD30',short:'接送授權管理',label:'接送授權\n管理',phase:'P2',unit:'學生安全照顧',icon:'🚗',desc:'⚠️ 法律責任：長期授權 + 臨時委託，安全事故的文件依據',legal:true,roi:'踩雷防護',weeks:1,acceptance:3,coeff:1.4},
+  {id:'MOD31',short:'家長同意書',label:'家長\n同意書',phase:'P2',unit:'學生安全照顧',icon:'📝',desc:'電子簽署，活動/用藥/外出的合規文件存檔',legal:true,roi:'踩雷防護',weeks:1,acceptance:2,coeff:1.3},
+  {id:'MOD05',short:'試聽/諮詢管理',label:'試聽\n諮詢管理',phase:'P3',unit:'招生與 CRM',icon:'🎯',desc:'含預約子模組（官網/LINE/App入口、可選時段、到場/未到/來源追蹤）',legal:false,roi:'潛客變學生',weeks:1.5,acceptance:3,coeff:1.2},
+  {id:'MOD18',short:'招生/行銷追蹤',label:'招生\n行銷追蹤',phase:'P3',unit:'招生與 CRM',icon:'📈',desc:'潛在客戶 CRM：新名單→已聯絡→已預約→已試聽→已入班/未成交，含離校生回流',legal:false,roi:'潛客變學生',weeks:2,acceptance:3,coeff:1.25},
+  {id:'MOD13',short:'餐點代訂',label:'餐點\n代訂',phase:'P3',unit:'行政',icon:'🍱',desc:'儲值金預充、老師確認才扣款、請假自動不扣',legal:false,roi:'省人省時',weeks:1,acceptance:2,coeff:1.15},
+  {id:'MOD26',short:'活動管理',label:'活動\n管理',phase:'P3',unit:'行政',icon:'🎪',desc:'建立/報名/名額控管/QR Code 電子報到',legal:false,roi:'省人省時',weeks:1,acceptance:2,coeff:1.15},
+  {id:'MOD28',short:'補課影片管理',label:'補課影片\n管理',phase:'P3',unit:'行政',icon:'🎬',desc:'自動比對缺席名單，分發對應補課影片連結',legal:false,roi:'省人省時',weeks:1,acceptance:2,coeff:1.15},
+  {id:'MOD32',short:'教材發放紀錄',label:'教材發放\n紀錄',phase:'P3',unit:'行政',icon:'📦',desc:'教材發放與簽收紀錄，防止遺失糾紛',legal:false,roi:'省人省時',weeks:0.5,acceptance:1,coeff:1.0},
+  {id:'MOD33f',short:'外師管理（完整）',label:'外師管理\n（完整）',phase:'P3',unit:'師資進階培訓',icon:'🌍',desc:'外籍老師工作證效期追蹤、外聘兼職勞健保門檻，type 欄位分流',legal:false,roi:'踩雷防護',weeks:1,acceptance:2,coeff:1.3},
+  {id:'MOD34',short:'教師培訓管理',label:'教師培訓\n管理',phase:'P3',unit:'師資進階培訓',icon:'🎓',desc:'SOP/培訓影片/測驗/申論/主管審核/能力紀錄/新人 onboarding 系統化',legal:false,roi:'好老師留得住',weeks:2,acceptance:3,coeff:1.3},
+  {id:'MOD35',short:'教師行為積分',label:'教師行為\n積分系統',phase:'P3',unit:'師資進階培訓',icon:'⭐',desc:'三合一設計：每日任務五感恩 + 會議出席QR + 能量存摺積分連動獎金',legal:false,roi:'好老師留得住',weeks:1.5,acceptance:3,coeff:1.25},
+  {id:'MOD23',short:'家長（學生）/ 教職人員 App',label:'家長（學生）\n教職人員 App',phase:'P4',unit:'家長學生前台',icon:'📱',desc:'雙角色：家長（含學生）查成績/出席/帳單/對話留言/活動報名；教職人員端課表查詢/班級出席/學生資料快查/通知推送',legal:false,roi:'家長主動續班',weeks:8,acceptance:5,coeff:1.5},
+  {id:'MOD17',short:'學習歷程/成績',label:'學習歷程\n成績',phase:'P4',unit:'家長學生前台',icon:'📒',desc:'含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會前摘要',legal:false,roi:'家長主動續班',weeks:2,acceptance:3,coeff:1.25},
+  {id:'MOD12x',short:'通知系統擴充',label:'通知系統\n擴充',phase:'P4',unit:'家長學生前台',icon:'🔔',desc:'繳費/缺席/補課/活動通知，LINE + App 統一推播（MOD 12 延伸）',legal:false,roi:'省人省時',weeks:1,acceptance:2,coeff:1.15},
+  {id:'MOD18x',short:'行銷擴充',label:'行銷\n（擴充）',phase:'P4',unit:'行銷',icon:'📣',desc:'口碑來源追蹤、說明會/活動報名、各管道成交率分析（MOD 18 延伸）',legal:false,roi:'潛客變學生',weeks:1.5,acceptance:2,coeff:1.2},
+  {id:'API01',short:'API 行政串接',label:'API\n行政串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'學生建檔/出缺席/報名就讀，MUSEON 可做行政流程智能提醒',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
+  {id:'API02',short:'API 總務串接',label:'API\n總務串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'場地排課/設備管理，MUSEON 回答「今天哪間教室有空」',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
+  {id:'API03',short:'API 客服串接',label:'API\n客服串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'家長詢問/投訴紀錄，MUSEON 輔助快速查詢學生狀態',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
+  {id:'API04',short:'API 行銷串接',label:'API\n行銷串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'說明會報名/招生來源/活動成效，自動產製招生分析報告',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
+  {id:'MOD19',short:'AI 學習助理',label:'AI\n學習助理',phase:'P6',unit:'AI 智慧輔助',icon:'🤖',desc:'個人化學習建議/出席異常預警/每週進度摘要，主動推播家長不需問',legal:false,roi:'AI 幫你做',museonOwned:true},
+  {id:'MOD20',short:'AI 作業批改',label:'AI\n作業批改',phase:'P6',unit:'AI 智慧輔助',icon:'📋',desc:'AI 初評 + 老師最終審核，大幅縮短批改時間',legal:false,roi:'AI 幫你做',weeks:1.5,acceptance:3,coeff:1.35},
+  {id:'MOD21',short:'AI 口說練習',label:'AI\n口說練習',phase:'P6',unit:'AI 智慧輔助',icon:'🎤',desc:'⭐ 簽約前提 Demo：學生與 AI 對話練英文，評估發音/流暢度/進步軌跡',legal:false,roi:'AI 幫你做',weeks:2.5,acceptance:4,coeff:1.5},
+  {id:'MOD22',short:'AI 行政檢查',label:'AI\n行政檢查',phase:'P6',unit:'AI 智慧輔助',icon:'🔍',desc:'每日自動掃描異常：欠費未通知/出缺席異常/補課逾期，主動提醒行政',legal:false,roi:'AI 幫你做',museonOwned:true},
+  {id:'MOD25',short:'AI 客製出題',label:'AI\n客製出題',phase:'P6',unit:'AI 智慧輔助',icon:'📝',desc:'根據學員歷史識別弱點，生成個人化練習題，老師審核後發送',legal:false,roi:'AI 幫你做',museonOwned:true}
+];
+const links=[
+  {source:'MOD14',target:'MOD03',type:'depends'},{source:'MOD14',target:'MOD07',type:'depends'},{source:'MOD14',target:'MOD10',type:'depends'},
+  {source:'MOD04',target:'MOD03',type:'depends'},{source:'MOD04',target:'MOD11',type:'depends'},
+  {source:'MOD01a',target:'MOD06',type:'depends'},
+  {source:'MOD01b',target:'MOD33b',type:'depends'},{source:'MOD01b',target:'MOD06',type:'depends'},{source:'MOD01b',target:'MOD29',type:'depends'},
+  {source:'MOD01b',target:'MOD27',type:'depends'},{source:'MOD01b',target:'MOD30',type:'depends'},{source:'MOD01b',target:'MOD31',type:'depends'},
+  {source:'MOD01b',target:'MOD05',type:'depends'},{source:'MOD01b',target:'MOD23',type:'depends'},
+  {source:'MOD02',target:'MOD07',type:'depends'},
+  {source:'MOD03',target:'MOD06',type:'depends'},{source:'MOD03',target:'MOD07',type:'depends'},{source:'MOD03',target:'MOD08',type:'depends'},
+  {source:'MOD03',target:'MOD10',type:'depends'},{source:'MOD03',target:'MOD05',type:'depends'},
+  {source:'MOD06',target:'MOD08',type:'depends'},{source:'MOD06',target:'MOD11',type:'depends'},
+  {source:'MOD08',target:'MOD09',type:'depends'},{source:'MOD08',target:'MOD13',type:'depends'},
+  {source:'MOD07',target:'MOD16',type:'depends'},
+  {source:'MOD33b',target:'MOD16',type:'depends'},{source:'MOD33b',target:'MOD33f',type:'extends'},
+  {source:'MOD10',target:'MOD11',type:'depends'},
+  {source:'MOD11',target:'MOD12',type:'depends'},{source:'MOD11',target:'MOD15',type:'depends'},
+  {source:'MOD16',target:'MOD15',type:'depends'},
+  {source:'MOD12',target:'MOD12x',type:'extends'},
+  {source:'MOD08',target:'MOD28',type:'depends'},{source:'MOD09',target:'MOD28',type:'extends'},
+  {source:'MOD33f',target:'MOD34',type:'depends'},{source:'MOD33f',target:'MOD35',type:'depends'},
+  {source:'MOD05',target:'MOD18',type:'depends'},{source:'MOD18',target:'MOD18x',type:'extends'},
+  {source:'MOD11',target:'MOD23',type:'depends'},{source:'MOD08',target:'MOD17',type:'depends'},
+  {source:'MOD17',target:'MOD23',type:'depends'},{source:'MOD12x',target:'MOD23',type:'depends'},
+  {source:'MOD06',target:'API01',type:'api'},{source:'MOD08',target:'API01',type:'api'},
+  {source:'MOD07',target:'API02',type:'api'},{source:'MOD23',target:'API03',type:'api'},
+  {source:'MOD18x',target:'API04',type:'api'},
+  {source:'MOD24',target:'MOD19',type:'ai'},{source:'MOD24',target:'MOD20',type:'ai'},
+  {source:'MOD24',target:'MOD21',type:'ai'},{source:'MOD24',target:'MOD25',type:'ai'},
+  {source:'MOD17',target:'MOD19',type:'ai'},{source:'MOD17',target:'MOD25',type:'ai'},
+  {source:'MOD08',target:'MOD22',type:'ai'},{source:'MOD11',target:'MOD22',type:'ai'},
+  {source:'API01',target:'MOD19',type:'ai'},{source:'API01',target:'MOD22',type:'ai'},
+  {source:'API03',target:'MOD19',type:'ai'},
+  {source:'MOD21',target:'MOD23',type:'depends'},{source:'MOD19',target:'MOD23',type:'depends'},
+];
+const TOTAL_COST=nodes.reduce((s,n)=>s+nodeCost(n),0);
+const HOURLY_RATE=213;
+const SAVINGS_HR={'MOD03':4,'MOD06':3,'MOD07':4,'MOD08':6,'MOD09':3,'MOD10':4,'MOD12':4,'MOD12x':3,'MOD13':3,'MOD15':6,'MOD16':10,'MOD26':2,'MOD28':3,'MOD32':1,'MOD33f':6};
+const ROI_DIM={'MOD14':'成本節省','MOD04':'系統地基','MOD01a':'系統地基','MOD02':'系統地基','MOD01b':'系統地基','MOD03':'省時','MOD06':'省時','MOD08':'省時','MOD09':'省時','MOD07':'省時','MOD33b':'系統地基','MOD24':'效率倍增','MOD10':'省時','MOD11':'成本節省','MOD12':'省時','MOD15':'省時','MOD16':'省時','MOD29':'成本節省','MOD27':'成本節省','MOD30':'成本節省','MOD31':'成本節省','MOD05':'增收','MOD18':'增收','MOD13':'省時','MOD26':'省時','MOD28':'省時','MOD32':'省時','MOD33f':'省時','MOD34':'效率倍增','MOD35':'效率倍增','MOD23':'增收','MOD17':'增收','MOD12x':'省時','MOD18x':'增收','API01':'效率倍增','API02':'效率倍增','API03':'效率倍增','API04':'增收','MOD19':'效率倍增','MOD20':'效率倍增','MOD21':'增收','MOD22':'效率倍增','MOD25':'效率倍增'};
+const ROI_DETAIL={'MOD24':'AI 精準度隨材料累積持續成長','MOD34':'新人上手時間 -60%','MOD35':'教師積分連獎金，主動出席率 +80%','API01':'行政流程自動提醒，0 漏報','API02':'場地查詢 1 秒回覆，免電話','API03':'客服回應速度 ×3','MOD19':'每位老師追蹤學生量 ×3','MOD20':'作業批改時間 -80%','MOD22':'每日自動掃描異常，0 漏網','MOD25':'出題時間 -75%','MOD14':'資安事故潛在損失 NT$300,000+/年','MOD11':'壞帳與漏收款，每年少損 NT$60,000+','MOD29':'醫療糾紛法律費用 NT$200,000+/年','MOD27':'用藥糾紛風險 NT$150,000+/年','MOD30':'接送安全事故 NT$300,000+/年','MOD31':'合規文件缺失罰款 NT$50,000+/年','MOD05':'試聽轉入班率 +15% → 多 2 名/月','MOD18':'潛客流失 -30%，每月多 3 名','MOD23':'續班率 +20% → 每年多 NT$120,000','MOD17':'家長看到成長紀錄，續班決策快 2 週','MOD18x':'投放 ROI 精準 +40%','API04':'招生報告自動產製，省決策時間','MOD21':'差異化賣點 → 簽約率 +25%'};
+function showROI(id){
+  const savingsBox=document.getElementById('kg-d-savings-box');
+  const savingsLabel=document.getElementById('kg-d-savings-label');
+  const savingsVal=document.getElementById('kg-d-savings');
+  const dim=ROI_DIM[id]||'';
+  if(dim==='省時'&&SAVINGS_HR[id]){
+    const hrs=SAVINGS_HR[id];const amt=Math.round(hrs*HOURLY_RATE);
+    const nd=nodes.find(n=>n.id===id);const cost=nd?nodeCost(nd):0;
+    savingsBox.style.display='';
+    if(cost>0&&amt<cost/3){
+      savingsBox.style.background='#F0F4FF';
+      savingsLabel.textContent='每月減輕負擔';savingsVal.style.color='#3A5FA0';
+      const msg=hrs<=2?'省 '+hrs+' 小時/月，省去最瑣碎的追蹤工作':hrs<=4?'省 '+hrs+' 小時/月，夠多接待 '+Math.round(hrs*5)+' 位家長':'省 '+hrs+' 小時/月，相當於少雇 '+Math.round(hrs/8*10)/10+' 天臨時人力';
+      savingsVal.textContent=msg;
+    }else{
+      savingsBox.style.background='#FFF8E6';
+      savingsLabel.textContent='每月省人力費';savingsVal.style.color='#B45C00';
+      savingsVal.textContent='省 '+hrs+' 小時 → 約 NT$'+amt.toLocaleString()+'/月';
+    }
+  }else if((dim==='效率倍增'||dim==='成本節省'||dim==='增收')&&ROI_DETAIL[id]){
+    const cfg={'效率倍增':{bg:'#EEF9F8',label:'效率提升',color:'#1A7A6E'},'成本節省':{bg:'#FEF0EC',label:'每年避損估算',color:'#C4502A'},'增收':{bg:'#EEF6F0',label:'每月增收潛力',color:'#1A7A3A'}}[dim];
+    savingsBox.style.display='';savingsBox.style.background=cfg.bg;
+    savingsLabel.textContent=cfg.label;savingsVal.style.color=cfg.color;
+    savingsVal.textContent=ROI_DETAIL[id];
+  }else if(dim==='系統地基'){
+    const cnt=links.filter(l=>l.source.id===id).length;
+    savingsBox.style.display='';savingsBox.style.background='#F4F4F9';
+    savingsLabel.textContent='地基貢獻';savingsVal.style.color='#5A5A6E';
+    savingsVal.textContent=cnt?cnt+' 個模組建立在此之上':'系統基礎層';
+  }else{savingsBox.style.display='none';}
+}
+const svg=d3.select('svg#kg-graph').attr('viewBox',`0 0 ${W} ${H}`).attr('height',Math.min(840,window.innerHeight-150));
+const g=svg.append('g');
+const zoom=d3.zoom().scaleExtent([0.25,4]).on('zoom',e=>g.attr('transform',e.transform));
+svg.call(zoom);
+const defs=svg.append('defs');
+const LC={depends:'#b0b0be',extends:'#2A7A6E',api:'#6A4A9A',ai:'#D44422'};
+Object.entries(LC).forEach(([type,color])=>{
+  defs.append('marker').attr('id',`kg-ar-${type}`).attr('viewBox','0 -5 10 10').attr('refX',26).attr('refY',0)
+    .attr('markerWidth',5).attr('markerHeight',5).attr('orient','auto')
+    .append('path').attr('d','M0,-5L10,0L0,5').attr('fill',color).attr('fill-opacity',0.7);
+});
+Object.entries(PX).forEach(([phase,cx])=>{
+  g.append('rect').attr('class','kg-phase-bg').attr('x',cx-82).attr('y',42).attr('width',164).attr('height',H-54).attr('fill',PC[phase]).attr('rx',8);
+  g.append('text').attr('class','kg-phase-lbl').attr('x',cx).attr('y',28).attr('fill',PC[phase]).text(PL[phase]);
+});
+nodes.forEach(n=>{
+  const col=nodes.filter(m=>m.phase===n.phase);
+  const idx=col.indexOf(n);
+  const step=(H-120)/(col.length+1);
+  n.x=PX[n.phase]+(idx%2===0?0:14);
+  n.y=70+step*(idx+1);
+});
+const lSel=g.append('g').selectAll('.kg-link').data(links).join('path')
+  .attr('class',d=>`kg-link ${d.type}`).attr('marker-end',d=>`url(#kg-ar-${d.type})`);
+const nSel=g.append('g').selectAll('.kg-node').data(nodes).join('g').attr('class','kg-node')
+  .call(d3.drag().on('start',ds).on('drag',dd).on('end',de));
+nSel.append('circle').attr('r',23).attr('fill',d=>PC[d.phase]).attr('fill-opacity',0.88).attr('stroke','#fff');
+nSel.filter(d=>d.legal).append('circle').attr('class','risk-ring').attr('r',27)
+  .attr('fill','none').attr('stroke','#C4502A').attr('stroke-width',1.8).attr('stroke-dasharray','4,3').attr('stroke-opacity',0.75);
+nSel.append('circle').attr('class','estimate-ring').attr('r',31)
+  .attr('fill','none').attr('stroke','transparent').attr('stroke-width',2.5).attr('stroke-dasharray','none');
+nSel.append('text').attr('class','node-icon').attr('dy','0.35em').text(d=>d.icon);
+nSel.each(function(d){
+  d.label.split('\n').forEach((line,i)=>{
+    d3.select(this).append('text').attr('class','node-label').attr('y',31+i*13).text(line);
+  });
+});
+const sim=d3.forceSimulation(nodes)
+  .force('link',d3.forceLink(links).id(d=>d.id).distance(90).strength(0.25))
+  .force('charge',d3.forceManyBody().strength(-320))
+  .force('x',d3.forceX(d=>PX[d.phase]).strength(0.85))
+  .force('y',d3.forceY(H/2).strength(0.08))
+  .force('collide',d3.forceCollide(36))
+  .on('tick',tick);
+function tick(){
+  lSel.attr('d',d=>{
+    const dx=d.target.x-d.source.x,dy=d.target.y-d.source.y;
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
+    const dr=len*0.75;
+    return `M${d.source.x},${d.source.y} A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
+  });
+  nSel.attr('transform',d=>`translate(${d.x},${d.y})`);
+}
+function ds(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
+function dd(e,d){d.fx=e.x;d.fy=e.y;}
+function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
+let selNode=null,selAnc=new Set();
+let currentPanelNodeId=null,selectedForEstimate=new Set();
+function addToEstimate(){
+  if(!currentPanelNodeId)return;
+  const id=currentPanelNodeId;
+  if(selectedForEstimate.has(id))selectedForEstimate.delete(id);else selectedForEstimate.add(id);
+  refreshAddBtn();refreshEstimateRings();renderEstimator();
+}
+function clearEstimate(){
+  selectedForEstimate.clear();refreshAddBtn();refreshEstimateRings();renderEstimator();
+}
+function refreshAddBtn(){
+  const btn=document.getElementById('kg-add-to-estimate');if(!btn||!currentPanelNodeId)return;
+  let inEstimator=selectedForEstimate.has(currentPanelNodeId);
+  if(!inEstimator){selectedForEstimate.forEach(id=>{if(getAnc(id).has(currentPanelNodeId))inEstimator=true;});}
+  btn.textContent=inEstimator?'✓ 已加入估價':'+ 加入估價';
+  btn.style.background=inEstimator?'#EEF6FF':'#1A5DC8';btn.style.color=inEstimator?'#1A5DC8':'#fff';
+  btn.style.border=inEstimator?'1.5px solid #1A5DC8':'none';
+}
+function refreshEstimateRings(){
+  nSel.select('.estimate-ring').attr('stroke',n=>selectedForEstimate.has(n.id)?'#F59E0B':'transparent');
+}
+function renderEstimator(){
+  if(selectedForEstimate.size===0){document.getElementById('kg-estimator').style.display='none';return;}
+  const allAnc=new Set();
+  selectedForEstimate.forEach(id=>getAnc(id).forEach(a=>allAnc.add(a)));
+  const phOrd={P0:0,P1:1,P2:2,P3:3,P4:4,P5:5,P6:6};
+  const ancNodes=[...allAnc].map(id=>nodes.find(n=>n.id===id)).filter(Boolean);
+  ancNodes.sort((a,b)=>(phOrd[a.phase]||0)-(phOrd[b.phase]||0));
+  const totalCost=ancNodes.reduce((s,n)=>s+nodeCost(n),0);
+  document.getElementById('kg-est-header').textContent='已選 '+selectedForEstimate.size+' 個目標模組';
+  document.getElementById('kg-est-count').textContent=ancNodes.length+' 個模組（目標 + 前置依賴）';
+  document.getElementById('kg-est-list').innerHTML=ancNodes.map(n=>{
+    const c=nodeCost(n);const isTarget=selectedForEstimate.has(n.id);
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:'+(isTarget?'#EEF6FF':'#F8F8FB')+';margin-bottom:1px;">'
+      +'<div style="display:flex;align-items:center;gap:8px;min-width:0;">'
+      +'<span style="font-size:10px;background:'+PC[n.phase]+';color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">'+n.phase+'</span>'
+      +'<span style="font-size:12px;font-weight:'+(isTarget?700:500)+';color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+n.short+'</span>'
+      +(isTarget?'<button onclick="window.removeFromEstimate('+JSON.stringify(n.id)+')" style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1.5px solid #1A5DC8;border-radius:4px;padding:2px 7px;flex-shrink:0;cursor:pointer;font-weight:700;line-height:1.4;">✓ 已加入估價</button>':'')
+      +'</div>'
+      +(n.museonOwned?'<span style="font-size:10px;color:#7C3AED;background:#F3EEFF;border:1px solid #C4B5FD;border-radius:4px;padding:2px 8px;flex-shrink:0;margin-left:12px;font-weight:700;">MUSEON 負責</span>':'<span style="font-size:12px;font-weight:600;color:'+(c?'#1A5DC8':'var(--mist)')+';flex-shrink:0;margin-left:12px;">'+(c?'NT$'+c.toLocaleString():'—')+'</span>')
+      +'</div>';
+  }).join('');
+  document.getElementById('kg-est-total').textContent=totalCost?'NT$'+totalCost.toLocaleString():'—';
+  document.getElementById('kg-estimator').style.display='block';
+  setTimeout(()=>document.getElementById('kg-estimator').scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+function getAnc(id){
+  const s=new Set([id]);const q=[id];
+  while(q.length){const c=q.shift();links.forEach(l=>{if(l.target.id===c&&!s.has(l.source.id)){s.add(l.source.id);q.push(l.source.id);}});}
+  return s;
+}
+function applyAnc(s){
+  nSel.classed('dim',n=>!s.has(n.id));
+  lSel.classed('dim',l=>!s.has(l.source.id)||!s.has(l.target.id)).classed('highlight',l=>s.has(l.source.id)&&s.has(l.target.id));
+}
+nSel
+  .on('mouseenter',function(ev,d){
+    if(selNode){return;}
+    const conn=new Set([d.id]);
+    links.forEach(l=>{if(l.source.id===d.id)conn.add(l.target.id);if(l.target.id===d.id)conn.add(l.source.id);});
+    nSel.classed('dim',n=>!conn.has(n.id));
+    lSel.classed('dim',l=>l.source.id!==d.id&&l.target.id!==d.id).classed('highlight',l=>l.source.id===d.id||l.target.id===d.id);
+  })
+  .on('mouseleave',function(){if(selNode){applyAnc(selAnc);}else{nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);}})
+  .on('click',function(ev,d){
+    ev.stopPropagation();
+    if(selNode===d.id){selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';currentPanelNodeId=null;return;}
+    selNode=d.id;selAnc=getAnc(d.id);applyAnc(selAnc);
+    const panel=document.getElementById('kg-detail');
+    document.getElementById('kg-d-phase').textContent=`${d.phase} · ${d.unit}`;
+    document.getElementById('kg-d-phase').style.color=PC[d.phase];
+    document.getElementById('kg-d-name').textContent=d.short;
+    document.getElementById('kg-d-unit').textContent=d.desc;
+    document.getElementById('kg-d-legal-badge').style.display=d.legal?'block':'none';
+    if(d.roi||d.weeks||d.acceptance||d.coeff){
+      document.getElementById('kg-d-meta').style.display='block';
+      document.getElementById('kg-d-roi').textContent=d.roi||'—';
+      const hasM=!d.museonOwned&&!!(d.weeks||d.acceptance||d.coeff);
+      document.getElementById('kg-d-weeks-box').style.display=hasM?'':'none';
+      document.getElementById('kg-d-acceptance-box').style.display=hasM?'':'none';
+      document.getElementById('kg-d-coeff-box').style.display=hasM?'':'none';
+      document.getElementById('kg-d-metrics-grid').style.gridTemplateColumns=hasM?'1fr 1fr':'1fr';
+      if(hasM){
+        document.getElementById('kg-d-devweeks').textContent=d.weeks?d.weeks+'週':'—';
+        document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
+        document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
+      }
+      const cost=(!d.museonOwned&&d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
+      const costBox=document.getElementById('kg-d-cost-box');
+      if(cost){costBox.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost.toLocaleString();}else{costBox.style.display='none';}
+      showROI(d.id);
+    }else{document.getElementById('kg-d-meta').style.display='none';}
+    const deps=links.filter(l=>l.target.id===d.id);
+    const enables=links.filter(l=>l.source.id===d.id);
+    if(deps.length){
+      document.getElementById('kg-d-deps-sec').style.display='block';
+      document.getElementById('kg-d-deps').innerHTML=deps.map(l=>{const s=nodes.find(n=>n.id===l.source.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${s?s.short:l.source.id}</li>`;}).join('');
+    }else{document.getElementById('kg-d-deps-sec').style.display='none';}
+    if(enables.length){
+      document.getElementById('kg-d-enables-sec').style.display='block';
+      document.getElementById('kg-d-enables').innerHTML=enables.map(l=>{const t=nodes.find(n=>n.id===l.target.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${t?t.short:l.target.id}</li>`;}).join('');
+    }else{document.getElementById('kg-d-enables-sec').style.display='none';}
+    const meta=document.getElementById('kg-d-meta');
+    if(d.roi||d.weeks||d.acceptance||d.coeff){
+      document.getElementById('kg-d-roi').textContent=d.roi||'—';
+      const hasM2=!d.museonOwned&&!!(d.weeks||d.acceptance||d.coeff);
+      document.getElementById('kg-d-weeks-box').style.display=hasM2?'':'none';
+      document.getElementById('kg-d-acceptance-box').style.display=hasM2?'':'none';
+      document.getElementById('kg-d-coeff-box').style.display=hasM2?'':'none';
+      document.getElementById('kg-d-metrics-grid').style.gridTemplateColumns=hasM2?'1fr 1fr':'1fr';
+      if(hasM2){
+        document.getElementById('kg-d-devweeks').textContent=d.weeks?d.weeks+'週':'—';
+        document.getElementById('kg-d-meetings').textContent=d.acceptance?d.acceptance+'點':'—';
+        document.getElementById('kg-d-coeff').textContent=d.coeff?'×'+d.coeff:'—';
+      }
+      const cost2=(!d.museonOwned&&d.weeks&&d.acceptance&&d.coeff)?nodeCost(d):null;
+      const costBox2=document.getElementById('kg-d-cost-box');
+      if(cost2){costBox2.style.display='';document.getElementById('kg-d-cost').textContent='NT$'+cost2.toLocaleString();}else{costBox2.style.display='none';}
+      showROI(d.id);
+      meta.style.display='block';
+    }else{meta.style.display='none';}
+    panel.style.display='block';
+    currentPanelNodeId=d.id;refreshAddBtn();
+  });
+svg.on('click',()=>{selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';currentPanelNodeId=null;});
+let aP=null;
+document.querySelectorAll('.kg-btn[data-kgphase]').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const ph=this.dataset.kgphase;
+    document.querySelectorAll('.kg-btn[data-kgphase]').forEach(b=>b.classList.remove('active'));
+    if(ph==='all'||ph===aP){
+      aP=null;document.querySelector('[data-kgphase="all"]').classList.add('active');
+      nSel.classed('dim',false);lSel.classed('dim',false);
+    }else{
+      aP=ph;this.classList.add('active');
+      const show=new Set([ph]);
+      links.forEach(l=>{if(l.source.phase===ph)show.add(l.target.phase);if(l.target.phase===ph)show.add(l.source.phase);});
+      nSel.classed('dim',d=>!show.has(d.phase));
+      lSel.classed('dim',l=>!show.has(l.source.phase)||!show.has(l.target.phase));
+    }
+  });
+});
+document.getElementById('kg-btn-reset').addEventListener('click',()=>{svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);});
+function selectAll(){nodes.forEach(n=>selectedForEstimate.add(n.id));refreshAddBtn();refreshEstimateRings();renderEstimator();}
+window.addToEstimate=addToEstimate;
+window.clearEstimate=clearEstimate;
+window.selectAll=selectAll;
+window.removeFromEstimate=function(id){selectedForEstimate.delete(id);refreshAddBtn();refreshEstimateRings();renderEstimator();};
+})();
+</script>
 
   <!-- DEPENDENCY NOTE -->
   <div class="dep-note">
@@ -560,13 +1047,14 @@
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">🏗️</div>
-              <div class="unit-name">L0 系統底層 <span class="mod-count">4 模組</span></div>
+              <div class="unit-name">L0 系統底層 <span class="mod-count">5 模組</span></div>
             </div>
             <div class="unit-scope">
               <span>MOD 14 — RBAC 角色權限管理</span>
               <span>MOD 04 — 學年期別設定</span>
+              <span>MOD 01a — 學生永久 ID</span>
               <span>MOD 02 — 分校基礎資料</span>
-              <span>MOD 01 — 人員資料管理（學生/家長/老師/員工 person 主表，含學生跨學年永久 ID，所有模組的人員掛載點）</span>
+              <span>MOD 01b — 人員基礎資料（學生/家長/老師/員工 — person 主表，所有模組的人員掛載點）</span>
             </div>
           </div>
         </div>
@@ -610,17 +1098,18 @@
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">👨‍🏫</div>
-              <div class="unit-name">師資與人資（基礎） <span class="mod-count">2 模組</span></div>
+              <div class="unit-name">師資與人資（基礎） <span class="mod-count">3 模組</span></div>
             </div>
             <div class="unit-scope">
               <span>MOD 02 — 分校與教室管理（四校區、排課衝突偵測）</span>
               <span>MOD 07 — 排課管理</span>
+              <span>MOD 33 基礎 — 教職員建檔（正職/外籍/外聘兼職 type 分流）</span>
             </div>
           </div>
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">📖</div>
-              <div class="unit-name">知識庫建置（MOD 24）— 同步啟動</div>
+              <div class="unit-name">知識庫建置（MOD 24）（MUSEON 負責）— 同步啟動</div>
             </div>
             <div class="unit-scope">
               <span>歷史 QA 教材收集與整理</span>
@@ -736,7 +1225,7 @@
               <div class="unit-name">師資進階培訓 <span class="mod-count">3 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>MOD 33 — 外師管理（外籍老師工作證效期追蹤 / 外聘兼職勞健保門檻，type 欄位分流）</span>
+              <span>MOD 33 完整 — 外師管理（外籍老師工作證效期追蹤 / 外聘兼職勞健保門檻，type 欄位分流）</span>
               <span class="warn">⚠️ 雙類型設計</span>
               <span>MOD 34 — 教師培訓管理（SOP/培訓影片/測驗/申論/主管審核/能力紀錄/新人 onboarding）</span>
               <span>MOD 35 — 教師行為積分系統（每日任務五感恩 + 會議出席QRCode + 能量存摺積分連動獎金，共用 teacher_activity_log）</span>
@@ -758,7 +1247,7 @@
         <div class="phase-header">
           <span class="phase-badge">P4 — 對外前台</span>
           <div class="phase-title-wrap">
-            <div class="phase-name">家長/學生端 App + 行銷</div>
+            <div class="phase-name">家長（學生）/ 教職人員 App + 行銷</div>
             <div class="phase-desc">內部系統穩了，再開放對外介面。這樣家長看到的是可信賴的系統，不是半成品。</div>
           </div>
         </div>
@@ -770,21 +1259,21 @@
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">📱</div>
-              <div class="unit-name">家長/學生前台 <span class="mod-count">2 模組</span></div>
+              <div class="unit-name">家長（學生）/ 教職人員前台 <span class="mod-count">3 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>MOD 23 — 家長/學生 App（雙入口）：家長端查成績/出席/帳單/通知/搜尋/對話式留言（類LINE，客訴標記，主管可見高風險訊息）；學生端課程/作業/補課影片/AI 口說練習</span>
+              <span>MOD 23 — 家長（學生）/ 教職人員 App（雙角色）：家長端（含學生）查成績/出席/帳單/通知/搜尋/對話式留言（類LINE，客訴標記，主管可見高風險訊息），學生在家長帳號下看課程/作業/補課影片/AI 口說；教職人員端課表查詢/班級出席管理/學生資料快查/通知推送/吃藥確認執行紀錄</span>
               <span>MOD 17 — 學習歷程/成績（含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會談前摘要/會談後追蹤）</span>
-              <span>MOD 12（已於 P2 建置）通路開通 — 繳費提醒/缺席通知/吃藥提醒/補課影片上架/活動確認/停補課公告，LINE/App 統一推播</span>
+              <span>MOD 12 擴充 — 通知系統（繳費提醒/缺席通知/吃藥提醒/補課影片上架/活動確認/停補課公告，LINE/App 統一推播）</span>
             </div>
           </div>
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">📣</div>
-              <div class="unit-name">行銷 <span class="mod-count">0 新模組</span></div>
+              <div class="unit-name">行銷 <span class="mod-count">1 模組</span></div>
             </div>
             <div class="unit-scope">
-              <span>MOD 18（已於 P3 建置）通路開通 — 口碑來源追蹤</span>
+              <span>MOD 18 擴充 — 口碑來源追蹤</span>
               <span>說明會/活動報名</span>
               <span>對外知識庫（官網內容）</span>
               <span>各管道成交率分析</span>
@@ -889,592 +1378,21 @@
 
   <!-- SUMMARY NOTE -->
   <div class="notice" style="border-left-color: var(--teal);">
-    <strong>完整系統總覽（39 個模組，對齊《營運系統架構書 v2.2》共識版 35 核心 + 4 API）</strong><br>
-    L0 底層 4 個 → P1 核心 6 個（含 MOD 24 知識庫）→ P2 財務+安全 9 個 → P3 深化內部 9 個 → P4 對外前台 2 個新模組（另有 MOD 12、MOD 18 通路開通，非新模組）→ P5 API 串接 4 個 → P6 AI 輔助 5 個<br><br>
-    <strong>業主決策框架</strong>：P0–P2 是必做核心（19 個模組）；P3–P4 各子單位可由業主排序；P5–P6 依業主數位化成熟度推進，不影響 P1–P4 的正常上線。<br>
+    <strong>完整系統總覽（44 個模組）</strong><br>
+    L0 底層 5 個 → P1 核心 8 個（含 MOD 24 知識庫）→ P2 財務+安全 9 個 → P3 深化內部 9 個 → P4 對外前台 4 個 → P5 API 串接 4 個 → P6 AI 輔助 5 個<br><br>
+    <strong>業主決策框架</strong>：P0–P2 是必做核心（22 個模組）；P3–P4 各子單位可由業主排序；P5–P6 依業主數位化成熟度推進，不影響 P1–P4 的正常上線。<br>
     MOD 24 知識庫建議在 P1 就同步啟動——它是 P6 AI 品質的前置條件，越早啟動等於為未來 AI 儲值。
   </div>
 
 </div><!-- /container -->
 
-<!-- ===== SWIMLANE VISUAL MAP ===== -->
-<div style="background: #EFEDE7; border-top: 2px solid var(--border); padding: 56px 0 48px;">
-  <div style="max-width: 960px; margin: 0 auto; padding: 0 24px 0;">
-    <div class="section-title">導入順序視覺化地圖</div>
-    <p style="font-size: 13px; color: var(--slate); margin-bottom: 28px; line-height: 1.7;">
-      左到右 = 先到後，同一欄 = 同期可並行。滑鼠移到任一功能單位查看包含模組清單。右邊的階段必須等左邊完成才能啟動。
-    </p>
-  </div>
-
-  <div style="overflow-x: auto; padding: 0 24px 24px; -webkit-overflow-scrolling: touch;">
-    <div id="sl-row" style="display: flex; align-items: flex-start; min-width: 1320px; padding-bottom: 8px;">
-
-      <!-- P0 -->
-      <div class="sl-col">
-        <div class="sl-hdr" style="background: #7C3AED;">P0<br><small>動工前提</small></div>
-        <div class="sl-body">
-          <div class="sl-unit" data-modules="MOD 14 — RBAC 角色權限管理|MOD 04 — 學年期別設定|MOD 02 — 分校基礎資料|MOD 01 — 人員資料管理（person 主表，含學生跨學年永久 ID，所有模組的人員掛載點）">
-            <span class="sl-emoji">🏗️</span>
-            <span class="sl-name">L0 系統底層</span>
-            <span class="sl-cnt">4 模組</span>
-          </div>
-          <div class="sl-badge sl-req">❌ 無條件必做</div>
-        </div>
-      </div>
-
-      <div class="sl-arrow-col">▶</div>
-
-      <!-- P1 -->
-      <div class="sl-col sl-wide">
-        <div class="sl-hdr" style="background: #C4502A;">P1<br><small>核心作業</small></div>
-        <div class="sl-body">
-          <div class="sl-unit" data-modules="MOD 03 — 課程與班級管理（多班並存）|MOD 06 — 報名就讀管理（一人多班）|MOD 08 — 出缺席管理|MOD 09 — 補課管理">
-            <span class="sl-emoji">📚</span>
-            <span class="sl-name">課程與教學</span>
-            <span class="sl-cnt">4 模組</span>
-          </div>
-          <div class="sl-unit" data-modules="MOD 07 — 排課管理（四校區衝突偵測）|打卡紀錄 / 外師合規">
-            <span class="sl-emoji">👨‍🏫</span>
-            <span class="sl-name">師資人資基礎</span>
-            <span class="sl-cnt">1 模組</span>
-          </div>
-          <div class="sl-unit sl-unit-early" data-modules="MOD 24 — 歷史QA教材收集整理|統一格式（題目/標準答案/難度標籤）|教學 wiki 建立|向量化，供 P6 AI 口說與出題使用|⭐ 越早啟動，P6 AI 品質越高">
-            <span class="sl-emoji">📖</span>
-            <span class="sl-name">知識庫建置</span>
-            <span class="sl-cnt">同步啟動 ⭐</span>
-          </div>
-          <div class="sl-badge sl-req">❌ 必做</div>
-        </div>
-      </div>
-
-      <div class="sl-arrow-col">▶</div>
-
-      <!-- P2 -->
-      <div class="sl-col sl-wide">
-        <div class="sl-hdr" style="background: #B8923A;">P2<br><small>財務與合規</small></div>
-        <div class="sl-body">
-          <div class="sl-unit" data-modules="MOD 10 — 定價費用規則（五種費用×多折扣）|MOD 11 — 帳單繳費（部分繳款/分期）|MOD 12 — 統一通知 Bus|MOD 15 — 對帳財務報表|MOD 16 — 薪資打卡排班（跨校薪資攤算）">
-            <span class="sl-emoji">💰</span>
-            <span class="sl-name">財務</span>
-            <span class="sl-cnt">5 模組</span>
-          </div>
-          <div class="sl-unit sl-unit-legal" data-modules="MOD 29 — 學生健康與過敏紀錄|MOD 27 — 吃藥管理（含家長授權書、服藥執行紀錄）|MOD 30 — 接送授權管理（長期+臨時）|MOD 31 — 家長同意書（電子簽署）|⚠️ 法律風險，不能拖">
-            <span class="sl-emoji">🏥</span>
-            <span class="sl-name">學生安全照顧</span>
-            <span class="sl-cnt">4 模組 ⚠️ 法律</span>
-          </div>
-          <div class="sl-badge sl-req">❌ 必做</div>
-        </div>
-      </div>
-
-      <div class="sl-arrow-col">▶</div>
-
-      <!-- P3 -->
-      <div class="sl-col sl-wide">
-        <div class="sl-hdr" style="background: #2A7A6E;">P3<br><small>深化內部</small></div>
-        <div class="sl-body">
-          <div class="sl-unit" data-modules="MOD 05 — 試聽諮詢管理（含預約子模組：官網/LINE/App入口、來源追蹤）|MOD 18 — 招生行銷追蹤（潛在客戶CRM：新名單→已聯絡→已預約→已入班）">
-            <span class="sl-emoji">🎯</span>
-            <span class="sl-name">招生與 CRM</span>
-            <span class="sl-cnt">2 模組</span>
-          </div>
-          <div class="sl-unit" data-modules="MOD 13 — 餐點代訂（儲值金預充、請假自動不扣）|MOD 26 — 活動管理（報名/名額控管/QR Code電子報到）|MOD 28 — 補課影片管理（自動比對缺席名單）|MOD 32 — 教材發放紀錄">
-            <span class="sl-emoji">🗂️</span>
-            <span class="sl-name">行政</span>
-            <span class="sl-cnt">4 模組</span>
-          </div>
-          <div class="sl-unit" data-modules="MOD 33 — 外師管理（工作證效期追蹤/外聘勞健保門檻）|MOD 34 — 教師培訓管理（SOP/培訓影片/測驗/申論/主管審核/能力紀錄）|MOD 35 — 教師行為積分系統（每日任務+會議出席QR+能量存摺，三合一設計）">
-            <span class="sl-emoji">🎓</span>
-            <span class="sl-name">師資進階培訓</span>
-            <span class="sl-cnt">3 模組</span>
-          </div>
-          <div class="sl-badge sl-opt">✅ 業主決定批次</div>
-        </div>
-      </div>
-
-      <div class="sl-arrow-col">▶</div>
-
-      <!-- P4 -->
-      <div class="sl-col sl-wide">
-        <div class="sl-hdr" style="background: #5A5A6E;">P4<br><small>對外前台</small></div>
-        <div class="sl-body">
-          <div class="sl-unit" data-modules="MOD 23 — 家長/學生雙端App（查成績/出席/帳單/對話式留言/AI口說入口）|MOD 17 — 學習歷程成績（含家長一對一會談子模組：預約/會前摘要/會後追蹤）|MOD 12（已建置）通路開通 — 通知系統（繳費/缺席/補課/活動，LINE/App統一推播）">
-            <span class="sl-emoji">📱</span>
-            <span class="sl-name">家長/學生前台</span>
-            <span class="sl-cnt">2 模組</span>
-          </div>
-          <div class="sl-unit" data-modules="MOD 18（已建置）通路開通 — 口碑來源追蹤（各管道成交率）|說明會/活動報名|對外知識庫（官網可見內容）|各管道成交率分析報表">
-            <span class="sl-emoji">📣</span>
-            <span class="sl-name">行銷</span>
-            <span class="sl-cnt">0 新模組</span>
-          </div>
-          <div class="sl-badge sl-opt">✅ 業主決定批次</div>
-        </div>
-      </div>
-
-      <div class="sl-arrow-col">▶</div>
-
-      <!-- P5 -->
-      <div class="sl-col">
-        <div class="sl-hdr" style="background: #6A4A9A;">P5<br><small>智能對接</small></div>
-        <div class="sl-body">
-          <div class="sl-unit" data-modules="API 01 — 行政串接（學生建檔/出缺席/報名）|API 02 — 總務串接（場地排課，回答「今天哪間空」）|API 03 — 客服串接（家長詢問/投訴，快速查學生狀態）|API 04 — 行銷串接（說明會報名/招生來源/活動成效）|🔐 MUSEON_SVC 獨立帳號 + 最小權限 + 高風險人工確認">
-            <span class="sl-emoji">🔌</span>
-            <span class="sl-name">MUSEON API串接</span>
-            <span class="sl-cnt">4 個 API</span>
-          </div>
-          <div class="sl-badge sl-opt">✅ 業主決定</div>
-        </div>
-      </div>
-
-      <div class="sl-arrow-col">▶</div>
-
-      <!-- P6 -->
-      <div class="sl-col">
-        <div class="sl-hdr" style="background: #C4502A;">P6<br><small>AI 智慧</small></div>
-        <div class="sl-body">
-          <div class="sl-unit" data-modules="MOD 19 — AI 學習助理（個人化建議/出席異常預警/每週進度摘要，主動推播）|MOD 20 — AI 作業批改（AI初評+老師最終審核）|MOD 21 — AI 口說練習（學生與AI對話練英文，評估發音/流暢度）|MOD 22 — AI 行政檢查（每日掃描欠費未通知/出缺席異常/補課逾期）|MOD 25 — AI 客製出題與弱點分析（根據歷史生成個人化練習題）">
-            <span class="sl-emoji">🤖</span>
-            <span class="sl-name">AI 智慧輔助</span>
-            <span class="sl-cnt">5 個 AI 模組</span>
-          </div>
-          <div class="sl-badge sl-opt">✅ 資料積累後啟動</div>
-        </div>
-      </div>
-
-    </div><!-- /sl-row -->
-  </div><!-- /overflow-x -->
-
-  <!-- Legend -->
-  <div style="max-width: 960px; margin: 20px auto 0; padding: 0 24px; display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: var(--slate); align-items: center;">
-    <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 14px; height: 14px; background: #FEF0EC; border: 1px solid rgba(196,80,42,0.4); border-radius: 3px; display: inline-block; flex-shrink:0;"></span>法律風險模組</div>
-    <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 14px; height: 14px; background: rgba(42,122,110,0.1); border: 1px solid rgba(42,122,110,0.35); border-radius: 3px; display: inline-block; flex-shrink:0;"></span>建議提早啟動</div>
-    <div style="opacity: 0.7;">← 滑鼠移到卡片查看包含模組</div>
-    <div style="opacity: 0.7;">← 橫向滑動查看全圖</div>
-  </div>
-</div>
-
-<!-- Floating tooltip -->
-<div id="sl-tip" style="
-  position: fixed; display: none;
-  background: #12121A; color: rgba(255,255,255,0.92);
-  font-size: 12px; line-height: 1.85;
-  padding: 14px 18px; border-radius: 10px;
-  max-width: 300px; z-index: 9999;
-  pointer-events: none;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-"></div>
-
-<style>
-/* Swimlane styles */
-.sl-col { display: flex; flex-direction: column; width: 168px; flex-shrink: 0; }
-.sl-wide { width: 198px; }
-.sl-hdr {
-  color: #fff; padding: 12px 10px;
-  border-radius: 10px 10px 0 0;
-  text-align: center; font-size: 13px; font-weight: 700; line-height: 1.5;
-}
-.sl-hdr small { font-size: 10px; font-weight: 400; opacity: 0.82; letter-spacing: 0.3px; }
-.sl-body {
-  background: #fff; border: 1px solid var(--border); border-top: none;
-  border-radius: 0 0 10px 10px; padding: 12px;
-  display: flex; flex-direction: column; gap: 10px; flex: 1;
-}
-.sl-unit {
-  background: var(--parchment); border: 1px solid var(--border);
-  border-radius: 8px; padding: 12px 10px;
-  cursor: pointer; user-select: none;
-  transition: box-shadow 0.15s, transform 0.12s;
-  display: flex; flex-direction: column; gap: 4px;
-}
-.sl-unit:hover {
-  box-shadow: 0 4px 18px rgba(0,0,0,0.13);
-  transform: translateY(-2px);
-  border-color: rgba(0,0,0,0.18);
-}
-.sl-unit-legal  { border-color: rgba(196,80,42,0.35); background: #FEF0EC; }
-.sl-unit-early  { border-color: rgba(42,122,110,0.3); background: rgba(42,122,110,0.06); }
-.sl-emoji { font-size: 18px; line-height: 1; }
-.sl-name  { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.4; }
-.sl-cnt   { font-size: 11px; color: var(--mist); }
-.sl-badge {
-  text-align: center; padding: 5px 4px;
-  border-radius: 6px; font-size: 11px; font-weight: 600;
-}
-.sl-req { background: rgba(196,80,42,0.08); color: #C4502A; }
-.sl-opt { background: rgba(42,122,110,0.08); color: #2A7A6E; }
-.sl-arrow-col {
-  display: flex; align-items: flex-start; justify-content: center;
-  width: 30px; flex-shrink: 0; padding-top: 44px;
-  color: var(--mist); font-size: 18px;
-}
-</style>
-
-<script>
-(function () {
-  var tip = document.getElementById('sl-tip');
-  function pos(e) {
-    var x = e.clientX + 18, y = e.clientY - 12;
-    var tw = tip.offsetWidth, th = tip.offsetHeight;
-    tip.style.left = (x + tw > window.innerWidth - 8 ? e.clientX - tw - 18 : x) + 'px';
-    tip.style.top  = (y + th > window.innerHeight - 8 ? e.clientY - th - 12 : y) + 'px';
-  }
-  document.querySelectorAll('.sl-unit[data-modules]').forEach(function (el) {
-    el.addEventListener('mouseenter', function (e) {
-      tip.innerHTML = el.dataset.modules.split('|').map(function (m) {
-        return '<div style="padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.07)">· ' + m + '</div>';
-      }).join('');
-      tip.style.display = 'block';
-      pos(e);
-    });
-    el.addEventListener('mousemove', pos);
-    el.addEventListener('mouseleave', function () { tip.style.display = 'none'; });
-  });
-})();
-</script>
-
-<!-- ===== KNOWLEDGE GRAPH ===== -->
-<div style="background:var(--parchment);border-top:2px solid var(--border);padding:40px 0 0;">
-  <div style="max-width:960px;margin:0 auto;padding:0 24px 20px;">
-    <div class="section-title">模組依賴知識圖譜</div>
-    <p style="font-size:13px;color:var(--slate);margin-bottom:12px;line-height:1.7;">
-      39 個模組節點，顏色對應 P0–P6。滑鼠移到節點查看說明；<strong>點擊節點</strong>鎖定並亮顯<strong>所有前置依賴鏈</strong>（往根回溯全部），再按一次或點空白處取消。滾輪縮放，拖曳平移。
-    </p>
-  </div>
-  <div class="kg-controls" id="kg-controls">
-    <button class="kg-btn active" data-kgphase="all">全部</button>
-    <div class="kg-sep"></div>
-    <button class="kg-btn" data-kgphase="P0">P0 底層</button>
-    <button class="kg-btn" data-kgphase="P1">P1 核心</button>
-    <button class="kg-btn" data-kgphase="P2">P2 財務合規</button>
-    <button class="kg-btn" data-kgphase="P3">P3 深化</button>
-    <button class="kg-btn" data-kgphase="P4">P4 前台</button>
-    <button class="kg-btn" data-kgphase="P5">P5 API</button>
-    <button class="kg-btn" data-kgphase="P6">P6 AI</button>
-    <div class="kg-sep"></div>
-    <button class="kg-btn" id="kg-btn-reset" style="color:var(--slate);">重置視圖</button>
-  </div>
-  <div id="kg-graph-wrap"><svg id="kg-graph"></svg></div>
-  <div class="kg-legend">
-    <div class="leg-item"><div class="leg-dot" style="background:#7C3AED"></div> P0 底層</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#C4502A"></div> P1 核心</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#B8923A"></div> P2 財務合規</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#2A7A6E"></div> P3 深化</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#5A5A6E"></div> P4 前台</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#6A4A9A"></div> P5 API</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#D44422"></div> P6 AI</div>
-    <div class="kg-sep" style="height:18px;"></div>
-    <div class="leg-item"><div class="leg-line" style="border-color:#b0b0be;"></div> 資料依賴</div>
-    <div class="leg-item"><div class="leg-line" style="border-color:#2A7A6E;border-style:dashed;"></div> 功能延伸</div>
-    <div class="leg-item"><div class="leg-line" style="border-color:#6A4A9A;border-style:dashed;"></div> API串接</div>
-    <div class="leg-item"><div class="leg-line" style="border-color:#D44422;border-style:dotted;"></div> AI輸入</div>
-    <div style="color:var(--mist);font-size:11px;">← 滑鼠移到節點查看說明 · 點擊查看詳情 · 滾輪縮放 · 拖曳平移</div>
-  </div>
-</div>
-
-<div id="kg-tooltip" style="position:fixed;display:none;background:#12121A;color:rgba(255,255,255,0.92);font-size:12px;line-height:1.85;padding:12px 16px;border-radius:10px;max-width:280px;z-index:9999;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
-  <div class="tt-phase" id="kg-tt-phase"></div>
-  <div class="tt-name"  id="kg-tt-name"></div>
-  <div class="tt-desc"  id="kg-tt-desc"></div>
-</div>
-
-<div id="kg-detail" style="display:none;position:fixed;right:16px;top:110px;width:272px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;box-shadow:0 8px 32px rgba(0,0,0,0.12);z-index:200;font-size:13px;max-height:calc(100vh - 130px);overflow-y:auto;">
-  <span onclick="document.getElementById('kg-detail').style.display='none'" style="position:absolute;right:12px;top:10px;cursor:pointer;color:var(--mist);font-size:18px;line-height:1;">×</span>
-  <div id="kg-d-phase" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px;"></div>
-  <div id="kg-d-name"  style="font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.4;"></div>
-  <div id="kg-d-unit"  style="font-size:12px;color:var(--slate);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);"></div>
-  <div id="kg-d-legal-badge" style="display:none;"><div style="display:inline-block;background:#FEF0EC;color:var(--ember);font-size:10px;border-radius:4px;padding:2px 8px;margin-bottom:8px;border:1px solid rgba(196,80,42,0.3);font-weight:600;">⚠️ 法律風險模組</div></div>
-  <div id="kg-d-deps-sec" style="display:none;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">前置依賴</div><ul id="kg-d-deps" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
-  <div id="kg-d-enables-sec" style="display:none;margin-top:2px;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">解鎖模組</div><ul id="kg-d-enables" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
-  <div id="kg-d-meta" style="display:none;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;text-align:center;">
-      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
-        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">ROI 類型</div>
-        <div id="kg-d-roi" style="font-size:11px;font-weight:700;color:var(--ink);line-height:1.3;"></div>
-      </div>
-      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
-        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">製作時間</div>
-        <div id="kg-d-devweeks" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
-      </div>
-      <div style="background:#F8F8FB;border-radius:7px;padding:7px 3px;">
-        <div style="font-size:9px;letter-spacing:0.6px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">會議次數</div>
-        <div id="kg-d-meetings" style="font-size:12px;font-weight:700;color:var(--ink);"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<style>
-.kg-controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;align-items:center;}
-.kg-btn{padding:5px 13px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid currentColor;background:transparent;transition:background 0.15s,color 0.15s;letter-spacing:0.3px;line-height:1.4;}
-.kg-btn.active{color:#fff!important;}
-.kg-btn[data-kgphase="all"]{color:var(--ink);border-color:var(--ink);}
-.kg-btn[data-kgphase="all"].active{background:var(--ink);}
-.kg-btn[data-kgphase="P0"]{color:#7C3AED;border-color:#7C3AED;}
-.kg-btn[data-kgphase="P0"].active{background:#7C3AED;}
-.kg-btn[data-kgphase="P1"]{color:var(--p1);border-color:var(--p1);}
-.kg-btn[data-kgphase="P1"].active{background:var(--p1);}
-.kg-btn[data-kgphase="P2"]{color:var(--gold);border-color:var(--gold);}
-.kg-btn[data-kgphase="P2"].active{background:var(--gold);}
-.kg-btn[data-kgphase="P3"]{color:var(--teal);border-color:var(--teal);}
-.kg-btn[data-kgphase="P3"].active{background:var(--teal);}
-.kg-btn[data-kgphase="P4"]{color:var(--slate);border-color:var(--slate);}
-.kg-btn[data-kgphase="P4"].active{background:var(--slate);}
-.kg-btn[data-kgphase="P5"]{color:#6A4A9A;border-color:#6A4A9A;}
-.kg-btn[data-kgphase="P5"].active{background:#6A4A9A;}
-.kg-btn[data-kgphase="P6"]{color:#D44422;border-color:#D44422;}
-.kg-btn[data-kgphase="P6"].active{background:#D44422;}
-.kg-sep{width:1px;height:20px;background:var(--border);}
-#kg-graph-wrap{background:#fff;overflow:hidden;}
-svg#kg-graph{display:block;width:100%;cursor:grab;}
-svg#kg-graph:active{cursor:grabbing;}
-.kg-node circle{stroke-width:2.5;cursor:pointer;}
-.kg-node .node-icon{font-size:13px;text-anchor:middle;pointer-events:none;dominant-baseline:central;}
-.kg-node .node-label{font-size:9.5px;fill:var(--ink);text-anchor:middle;pointer-events:none;font-weight:500;}
-.kg-node .risk-ring{pointer-events:none;}
-.kg-link{fill:none;}
-.kg-link.depends{stroke:#b0b0be;stroke-width:1.5;stroke-opacity:0.5;}
-.kg-link.extends{stroke:#2A7A6E;stroke-width:1.5;stroke-opacity:0.5;stroke-dasharray:5,3;}
-.kg-link.api{stroke:#6A4A9A;stroke-width:1.5;stroke-opacity:0.5;stroke-dasharray:4,2;}
-.kg-link.ai{stroke:#D44422;stroke-width:1.5;stroke-opacity:0.5;stroke-dasharray:2,2;}
-.kg-link.highlight{stroke-opacity:0.9!important;stroke-width:2.5!important;}
-.kg-link.dim{stroke-opacity:0.05!important;}
-.kg-node.dim circle{opacity:0.12;}
-.kg-node.dim .node-icon{opacity:0.12;}
-.kg-node.dim .node-label{opacity:0.12;}
-.kg-node.dim .risk-ring{opacity:0.12;}
-.kg-phase-bg{fill-opacity:0.025;}
-.kg-phase-lbl{font-size:11px;font-weight:700;letter-spacing:0.8px;fill-opacity:0.45;text-anchor:middle;}
-.kg-legend{display:flex;gap:16px;flex-wrap:wrap;padding:10px 24px;background:var(--parchment);border-top:1px solid var(--border);font-size:11.5px;color:var(--slate);align-items:center;justify-content:center;}
-.leg-item{display:flex;align-items:center;gap:5px;}
-.leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
-.leg-line{display:inline-block;width:22px;height:0;border-top:2px solid;vertical-align:middle;flex-shrink:0;}
-.tt-phase{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.7;margin-bottom:4px;}
-.tt-name{font-size:13px;font-weight:700;margin-bottom:6px;}
-.tt-desc{font-size:12px;opacity:0.82;line-height:1.65;}
-</style>
-
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script>
-(function(){
-const PC={P0:'#7C3AED',P1:'#C4502A',P2:'#B8923A',P3:'#2A7A6E',P4:'#5A5A6E',P5:'#6A4A9A',P6:'#D44422'};
-const PX={P0:110,P1:295,P2:490,P3:680,P4:860,P5:1030,P6:1205};
-const PL={P0:'P0 系統底層',P1:'P1 核心作業',P2:'P2 財務合規',P3:'P3 深化內部',P4:'P4 對外前台',P5:'P5 API串接',P6:'P6 AI智慧'};
-const W=1320,H=840;
-const nodes=[
-  {id:'MOD14',short:'RBAC 角色權限',label:'RBAC\n角色權限',phase:'P0',unit:'L0 系統底層',icon:'🔐',desc:'所有模組的存取控制，正職/行政/家長/AI 各角色最小權限',legal:false,roi:'基礎建設',devWeeks:3,meetings:2},
-  {id:'MOD04',short:'學年期別設定',label:'學年\n期別設定',phase:'P0',unit:'L0 系統底層',icon:'📅',desc:'所有課程、班級、帳單的時間軸基礎，學年結束後資料不消失',legal:false,roi:'基礎建設',devWeeks:1,meetings:1},
-  {id:'MOD02',short:'分校基礎資料',label:'分校\n基礎資料',phase:'P0',unit:'L0 系統底層',icon:'🏢',desc:'四校區（代碼/地址/教室數量），排課衝突偵測的空間地基',legal:false,roi:'基礎建設',devWeeks:1,meetings:1},
-  {id:'MOD01',short:'人員資料管理',label:'人員\n資料管理',phase:'P0',unit:'L0 系統底層',icon:'👤',desc:'學生/家長/老師/員工的 person 主表，含學生跨學年永久 ID（升學後學習歷程和繳費紀錄不斷檔），所有模組的人員掛載點',legal:false,roi:'基礎建設',devWeeks:3,meetings:3},
-  {id:'MOD03',short:'課程/班級管理',label:'課程\n班級管理',phase:'P1',unit:'課程與教學',icon:'📚',desc:'多班並存、班名年度更新，排課與帳單的核心資料來源',legal:false,roi:'行政效率',devWeeks:3,meetings:3},
-  {id:'MOD06',short:'報名/就讀管理',label:'報名\n就讀管理',phase:'P1',unit:'課程與教學',icon:'✍️',desc:'一人多班的多對多關係，帳單計算的就讀人數依據',legal:false,roi:'行政效率',devWeeks:2,meetings:2},
-  {id:'MOD08',short:'出缺席管理',label:'出缺席\n管理',phase:'P1',unit:'課程與教學',icon:'✅',desc:'出缺席紀錄，影響補課安排、帳單調整、家長通知三條鏈路',legal:false,roi:'行政效率',devWeeks:3,meetings:2},
-  {id:'MOD09',short:'補課管理',label:'補課\n管理',phase:'P1',unit:'課程與教學',icon:'🔄',desc:'缺席自動觸發補課安排，補課影片分發的前置條件',legal:false,roi:'行政效率',devWeeks:2,meetings:2},
-  {id:'MOD07',short:'排課管理',label:'排課\n管理',phase:'P1',unit:'師資人資基礎',icon:'📋',desc:'四校區衝突偵測，鐘點費計算的授課時數來源',legal:false,roi:'行政效率',devWeeks:4,meetings:3},
-  {id:'MOD24',short:'知識庫建置',label:'知識庫\n建置',phase:'P1',unit:'知識庫（同步啟動）',icon:'📖',desc:'歷史 QA 教材向量化、教學 wiki，P6 AI 口說/出題的核心前置條件，越早積累品質越高',legal:false,roi:'AI 加速',devWeeks:3,meetings:2},
-  {id:'MOD10',short:'定價/費用規則',label:'定價\n費用規則',phase:'P2',unit:'財務',icon:'💲',desc:'五種費用 × 多折扣組合的規則引擎，帳單計算的輸入',legal:false,roi:'財務收益',devWeeks:4,meetings:3},
-  {id:'MOD11',short:'帳單/繳費',label:'帳單\n繳費',phase:'P2',unit:'財務',icon:'🧾',desc:'部分繳款、暑期分期，家長 App 帳單頁的資料來源',legal:false,roi:'財務收益',devWeeks:5,meetings:4},
-  {id:'MOD12',short:'通知 Bus',label:'通知\nBus',phase:'P2',unit:'財務',icon:'📨',desc:'統一通知基礎設施，P4 LINE/App 推播的底層',legal:false,roi:'行政效率',devWeeks:2,meetings:2},
-  {id:'MOD15',short:'對帳/財務報表',label:'對帳\n財務報表',phase:'P2',unit:'財務',icon:'📊',desc:'帳單與薪資整合，管理層跨校財務報表',legal:false,roi:'財務收益',devWeeks:4,meetings:3},
-  {id:'MOD16',short:'薪資/打卡排班',label:'薪資\n打卡排班',phase:'P2',unit:'財務',icon:'💰',desc:'最高複雜度：跨校薪資攤算、鐘點費依班級人數計算',legal:false,roi:'財務收益',devWeeks:6,meetings:4},
-  {id:'MOD29',short:'學生健康/過敏',label:'健康\n過敏紀錄',phase:'P2',unit:'學生安全照顧',icon:'🏥',desc:'⚠️ 法律責任：學生過敏資訊，緊急狀況時的關鍵依據',legal:true,roi:'合規法律',devWeeks:2,meetings:2},
-  {id:'MOD27',short:'吃藥管理',label:'吃藥\n管理',phase:'P2',unit:'學生安全照顧',icon:'💊',desc:'⚠️ 法律責任：家長授權書、服藥執行紀錄、護理師確認流程',legal:true,roi:'合規法律',devWeeks:2,meetings:2},
-  {id:'MOD30',short:'接送授權管理',label:'接送授權\n管理',phase:'P2',unit:'學生安全照顧',icon:'🚗',desc:'⚠️ 法律責任：長期授權 + 臨時委託，安全事故的文件依據',legal:true,roi:'合規法律',devWeeks:2,meetings:2},
-  {id:'MOD31',short:'家長同意書',label:'家長\n同意書',phase:'P2',unit:'學生安全照顧',icon:'📝',desc:'電子簽署，活動/用藥/外出的合規文件存檔',legal:true,roi:'合規法律',devWeeks:2,meetings:2},
-  {id:'MOD05',short:'試聽/諮詢管理',label:'試聽\n諮詢管理',phase:'P3',unit:'招生與 CRM',icon:'🎯',desc:'含預約子模組（官網/LINE/App入口、可選時段、到場/未到/來源追蹤）',legal:false,roi:'招生轉換',devWeeks:3,meetings:3},
-  {id:'MOD18',short:'招生/行銷追蹤',label:'招生\n行銷追蹤',phase:'P3',unit:'招生與 CRM',icon:'📈',desc:'潛在客戶 CRM：新名單→已聯絡→已預約→已試聽→已入班/未成交，含離校生回流',legal:false,roi:'招生轉換',devWeeks:4,meetings:3},
-  {id:'MOD13',short:'餐點代訂',label:'餐點\n代訂',phase:'P3',unit:'行政',icon:'🍱',desc:'儲值金預充、老師確認才扣款、請假自動不扣',legal:false,roi:'行政效率',devWeeks:2,meetings:2},
-  {id:'MOD26',short:'活動管理',label:'活動\n管理',phase:'P3',unit:'行政',icon:'🎪',desc:'建立/報名/名額控管/QR Code 電子報到',legal:false,roi:'行政效率',devWeeks:2,meetings:2},
-  {id:'MOD28',short:'補課影片管理',label:'補課影片\n管理',phase:'P3',unit:'行政',icon:'🎬',desc:'自動比對缺席名單，分發對應補課影片連結',legal:false,roi:'行政效率',devWeeks:2,meetings:2},
-  {id:'MOD32',short:'教材發放紀錄',label:'教材發放\n紀錄',phase:'P3',unit:'行政',icon:'📦',desc:'教材發放與簽收紀錄，防止遺失糾紛',legal:false,roi:'行政效率',devWeeks:1,meetings:1},
-  {id:'MOD33',short:'外師管理',label:'外師\n管理',phase:'P3',unit:'師資進階培訓',icon:'🌍',desc:'外籍老師工作證效期追蹤、外聘兼職勞健保門檻，正職/外籍/外聘兼職 type 欄位分流',legal:false,roi:'合規法律',devWeeks:2,meetings:2},
-  {id:'MOD34',short:'教師培訓管理',label:'教師培訓\n管理',phase:'P3',unit:'師資進階培訓',icon:'🎓',desc:'SOP/培訓影片/測驗/申論/主管審核/能力紀錄/新人 onboarding 系統化',legal:false,roi:'師資品質',devWeeks:4,meetings:3},
-  {id:'MOD35',short:'教師行為積分',label:'教師行為\n積分系統',phase:'P3',unit:'師資進階培訓',icon:'⭐',desc:'三合一設計：每日任務五感恩 + 會議出席QR + 能量存摺積分連動獎金',legal:false,roi:'師資品質',devWeeks:3,meetings:2},
-  {id:'MOD23',short:'家長/學生 App',label:'家長/學生\n前台 App',phase:'P4',unit:'家長學生前台',icon:'📱',desc:'雙入口：家長查成績/出席/帳單/對話留言；學生看課程/作業/AI口說',legal:false,roi:'家長黏著',devWeeks:8,meetings:4},
-  {id:'MOD17',short:'學習歷程/成績',label:'學習歷程\n成績',phase:'P4',unit:'家長學生前台',icon:'📒',desc:'含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會前摘要',legal:false,roi:'家長黏著',devWeeks:4,meetings:3},
-  {id:'API01',short:'API 行政串接',label:'API\n行政串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'學生建檔/出缺席/報名就讀，MUSEON 可做行政流程智能提醒',legal:false,roi:'AI 加速',devWeeks:2,meetings:2},
-  {id:'API02',short:'API 總務串接',label:'API\n總務串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'場地排課/設備管理，MUSEON 回答「今天哪間教室有空」',legal:false,roi:'AI 加速',devWeeks:2,meetings:2},
-  {id:'API03',short:'API 客服串接',label:'API\n客服串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'家長詢問/投訴紀錄，MUSEON 輔助快速查詢學生狀態',legal:false,roi:'AI 加速',devWeeks:2,meetings:2},
-  {id:'API04',short:'API 行銷串接',label:'API\n行銷串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'說明會報名/招生來源/活動成效，自動產製招生分析報告',legal:false,roi:'AI 加速',devWeeks:2,meetings:2},
-  {id:'MOD19',short:'AI 學習助理',label:'AI\n學習助理',phase:'P6',unit:'AI 智慧輔助',icon:'🤖',desc:'個人化學習建議/出席異常預警/每週進度摘要，主動推播家長不需問',legal:false,roi:'AI 加速',devWeeks:4,meetings:3},
-  {id:'MOD20',short:'AI 作業批改',label:'AI\n作業批改',phase:'P6',unit:'AI 智慧輔助',icon:'📋',desc:'AI 初評 + 老師最終審核，大幅縮短批改時間',legal:false,roi:'AI 加速',devWeeks:3,meetings:2},
-  {id:'MOD21',short:'AI 口說練習',label:'AI\n口說練習',phase:'P6',unit:'AI 智慧輔助',icon:'🎤',desc:'⭐ 簽約前提 Demo：學生與 AI 對話練英文，評估發音/流暢度/進步軌跡',legal:false,roi:'AI 加速',devWeeks:5,meetings:3},
-  {id:'MOD22',short:'AI 行政檢查',label:'AI\n行政檢查',phase:'P6',unit:'AI 智慧輔助',icon:'🔍',desc:'每日自動掃描異常：欠費未通知/出缺席異常/補課逾期，主動提醒行政',legal:false,roi:'AI 加速',devWeeks:3,meetings:2},
-  {id:'MOD25',short:'AI 客製出題',label:'AI\n客製出題',phase:'P6',unit:'AI 智慧輔助',icon:'📝',desc:'根據學員歷史識別弱點，生成個人化練習題，老師審核後發送',legal:false,roi:'AI 加速',devWeeks:3,meetings:2},
-];
-const links=[
-  {source:'MOD14',target:'MOD03',type:'depends'},{source:'MOD14',target:'MOD07',type:'depends'},{source:'MOD14',target:'MOD10',type:'depends'},
-  {source:'MOD04',target:'MOD03',type:'depends'},{source:'MOD04',target:'MOD11',type:'depends'},
-  {source:'MOD01',target:'MOD06',type:'depends'},{source:'MOD01',target:'MOD29',type:'depends'},
-  {source:'MOD01',target:'MOD27',type:'depends'},{source:'MOD01',target:'MOD30',type:'depends'},{source:'MOD01',target:'MOD31',type:'depends'},
-  {source:'MOD01',target:'MOD05',type:'depends'},{source:'MOD01',target:'MOD23',type:'depends'},
-  {source:'MOD02',target:'MOD07',type:'depends'},
-  {source:'MOD03',target:'MOD06',type:'depends'},{source:'MOD03',target:'MOD07',type:'depends'},{source:'MOD03',target:'MOD08',type:'depends'},
-  {source:'MOD03',target:'MOD10',type:'depends'},{source:'MOD03',target:'MOD05',type:'depends'},
-  {source:'MOD06',target:'MOD08',type:'depends'},{source:'MOD06',target:'MOD11',type:'depends'},
-  {source:'MOD08',target:'MOD09',type:'depends'},{source:'MOD08',target:'MOD13',type:'depends'},
-  {source:'MOD07',target:'MOD16',type:'depends'},
-  {source:'MOD01',target:'MOD16',type:'depends'},
-  {source:'MOD10',target:'MOD11',type:'depends'},
-  {source:'MOD11',target:'MOD12',type:'depends'},{source:'MOD11',target:'MOD15',type:'depends'},
-  {source:'MOD16',target:'MOD15',type:'depends'},
-  {source:'MOD08',target:'MOD28',type:'depends'},{source:'MOD09',target:'MOD28',type:'extends'},
-  {source:'MOD33',target:'MOD34',type:'depends'},{source:'MOD33',target:'MOD35',type:'depends'},
-  {source:'MOD05',target:'MOD18',type:'depends'},
-  {source:'MOD11',target:'MOD23',type:'depends'},{source:'MOD08',target:'MOD17',type:'depends'},
-  {source:'MOD17',target:'MOD23',type:'depends'},{source:'MOD12',target:'MOD23',type:'depends'},
-  {source:'MOD06',target:'API01',type:'api'},{source:'MOD08',target:'API01',type:'api'},
-  {source:'MOD07',target:'API02',type:'api'},{source:'MOD23',target:'API03',type:'api'},
-  {source:'MOD18',target:'API04',type:'api'},
-  {source:'MOD24',target:'MOD19',type:'ai'},{source:'MOD24',target:'MOD20',type:'ai'},
-  {source:'MOD24',target:'MOD21',type:'ai'},{source:'MOD24',target:'MOD25',type:'ai'},
-  {source:'MOD17',target:'MOD19',type:'ai'},{source:'MOD17',target:'MOD25',type:'ai'},
-  {source:'MOD08',target:'MOD22',type:'ai'},{source:'MOD11',target:'MOD22',type:'ai'},
-  {source:'API01',target:'MOD19',type:'ai'},{source:'API01',target:'MOD22',type:'ai'},
-  {source:'API03',target:'MOD19',type:'ai'},
-  {source:'MOD21',target:'MOD23',type:'depends'},{source:'MOD19',target:'MOD23',type:'depends'},
-];
-const svg=d3.select('svg#kg-graph').attr('viewBox',`0 0 ${W} ${H}`).attr('height',Math.min(840,window.innerHeight-150));
-const g=svg.append('g');
-const zoom=d3.zoom().scaleExtent([0.25,4]).on('zoom',e=>g.attr('transform',e.transform));
-svg.call(zoom);
-const defs=svg.append('defs');
-const LC={depends:'#b0b0be',extends:'#2A7A6E',api:'#6A4A9A',ai:'#D44422'};
-Object.entries(LC).forEach(([type,color])=>{
-  defs.append('marker').attr('id',`kg-ar-${type}`).attr('viewBox','0 -5 10 10').attr('refX',26).attr('refY',0)
-    .attr('markerWidth',5).attr('markerHeight',5).attr('orient','auto')
-    .append('path').attr('d','M0,-5L10,0L0,5').attr('fill',color).attr('fill-opacity',0.7);
-});
-Object.entries(PX).forEach(([phase,cx])=>{
-  g.append('rect').attr('class','kg-phase-bg').attr('x',cx-82).attr('y',42).attr('width',164).attr('height',H-54).attr('fill',PC[phase]).attr('rx',8);
-  g.append('text').attr('class','kg-phase-lbl').attr('x',cx).attr('y',28).attr('fill',PC[phase]).text(PL[phase]);
-});
-nodes.forEach(n=>{
-  const col=nodes.filter(m=>m.phase===n.phase);
-  const idx=col.indexOf(n);
-  const step=(H-120)/(col.length+1);
-  n.x=PX[n.phase]+(idx%2===0?0:14);
-  n.y=70+step*(idx+1);
-});
-const lSel=g.append('g').selectAll('.kg-link').data(links).join('path')
-  .attr('class',d=>`kg-link ${d.type}`).attr('marker-end',d=>`url(#kg-ar-${d.type})`);
-const nSel=g.append('g').selectAll('.kg-node').data(nodes).join('g').attr('class','kg-node')
-  .call(d3.drag().on('start',ds).on('drag',dd).on('end',de));
-nSel.append('circle').attr('r',23).attr('fill',d=>PC[d.phase]).attr('fill-opacity',0.88).attr('stroke','#fff');
-nSel.filter(d=>d.legal).append('circle').attr('class','risk-ring').attr('r',27)
-  .attr('fill','none').attr('stroke','#C4502A').attr('stroke-width',1.8).attr('stroke-dasharray','4,3').attr('stroke-opacity',0.75);
-nSel.append('text').attr('class','node-icon').attr('dy','0.35em').text(d=>d.icon);
-nSel.each(function(d){
-  d.label.split('\n').forEach((line,i)=>{
-    d3.select(this).append('text').attr('class','node-label').attr('y',31+i*13).text(line);
-  });
-});
-const sim=d3.forceSimulation(nodes)
-  .force('link',d3.forceLink(links).id(d=>d.id).distance(90).strength(0.25))
-  .force('charge',d3.forceManyBody().strength(-320))
-  .force('x',d3.forceX(d=>PX[d.phase]).strength(0.85))
-  .force('y',d3.forceY(H/2).strength(0.08))
-  .force('collide',d3.forceCollide(36))
-  .on('tick',tick);
-function tick(){
-  lSel.attr('d',d=>{
-    const dx=d.target.x-d.source.x,dy=d.target.y-d.source.y;
-    const len=Math.sqrt(dx*dx+dy*dy)||1;
-    const dr=len*0.75;
-    return `M${d.source.x},${d.source.y} A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
-  });
-  nSel.attr('transform',d=>`translate(${d.x},${d.y})`);
-}
-function ds(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
-function dd(e,d){d.fx=e.x;d.fy=e.y;}
-function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
-const tip=document.getElementById('kg-tooltip');
-const ttP=document.getElementById('kg-tt-phase');
-const ttN=document.getElementById('kg-tt-name');
-const ttD=document.getElementById('kg-tt-desc');
-let selNode=null,selAnc=new Set();
-function getAnc(id){
-  const s=new Set([id]);const q=[id];
-  while(q.length){const c=q.shift();links.forEach(l=>{if(l.target.id===c&&!s.has(l.source.id)){s.add(l.source.id);q.push(l.source.id);}});}
-  return s;
-}
-function applyAnc(s){
-  nSel.classed('dim',n=>!s.has(n.id));
-  lSel.classed('dim',l=>!s.has(l.source.id)||!s.has(l.target.id)).classed('highlight',l=>s.has(l.source.id)&&s.has(l.target.id));
-}
-nSel
-  .on('mouseenter',function(ev,d){
-    if(selNode){ttP.style.color=PC[d.phase];ttP.textContent=`${d.phase} · ${d.unit}`;ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';return;}
-    const conn=new Set([d.id]);
-    links.forEach(l=>{if(l.source.id===d.id)conn.add(l.target.id);if(l.target.id===d.id)conn.add(l.source.id);});
-    nSel.classed('dim',n=>!conn.has(n.id));
-    lSel.classed('dim',l=>l.source.id!==d.id&&l.target.id!==d.id).classed('highlight',l=>l.source.id===d.id||l.target.id===d.id);
-    ttP.style.color=PC[d.phase];ttP.textContent=`${d.phase} · ${d.unit}`;ttN.textContent=d.short;ttD.textContent=d.desc;tip.style.display='block';
-  })
-  .on('mousemove',function(ev){tip.style.left=Math.min(ev.clientX+18,window.innerWidth-300)+'px';tip.style.top=(ev.clientY-50)+'px';})
-  .on('mouseleave',function(){if(selNode){applyAnc(selAnc);}else{nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);}tip.style.display='none';})
-  .on('click',function(ev,d){
-    ev.stopPropagation();
-    if(selNode===d.id){selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';return;}
-    selNode=d.id;selAnc=getAnc(d.id);applyAnc(selAnc);
-    const panel=document.getElementById('kg-detail');
-    document.getElementById('kg-d-phase').textContent=`${d.phase} · ${d.unit}`;
-    document.getElementById('kg-d-phase').style.color=PC[d.phase];
-    document.getElementById('kg-d-name').textContent=d.short;
-    document.getElementById('kg-d-unit').textContent=d.desc;
-    document.getElementById('kg-d-legal-badge').style.display=d.legal?'block':'none';
-    if(d.roi||d.devWeeks||d.meetings){
-      document.getElementById('kg-d-meta').style.display='block';
-      document.getElementById('kg-d-roi').textContent=d.roi||'—';
-      document.getElementById('kg-d-devweeks').textContent=d.devWeeks?d.devWeeks+'週':'—';
-      document.getElementById('kg-d-meetings').textContent=d.meetings?d.meetings+'次':'—';
-    }else{document.getElementById('kg-d-meta').style.display='none';}
-    const deps=links.filter(l=>l.target.id===d.id);
-    const enables=links.filter(l=>l.source.id===d.id);
-    if(deps.length){
-      document.getElementById('kg-d-deps-sec').style.display='block';
-      document.getElementById('kg-d-deps').innerHTML=deps.map(l=>{const s=nodes.find(n=>n.id===l.source.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${s?s.short:l.source.id}</li>`;}).join('');
-    }else{document.getElementById('kg-d-deps-sec').style.display='none';}
-    if(enables.length){
-      document.getElementById('kg-d-enables-sec').style.display='block';
-      document.getElementById('kg-d-enables').innerHTML=enables.map(l=>{const t=nodes.find(n=>n.id===l.target.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${t?t.short:l.target.id}</li>`;}).join('');
-    }else{document.getElementById('kg-d-enables-sec').style.display='none';}
-    const meta=document.getElementById('kg-d-meta');
-    if(d.roi||d.devWeeks||d.meetings){
-      document.getElementById('kg-d-roi').textContent=d.roi||'—';
-      document.getElementById('kg-d-devweeks').textContent=d.devWeeks?d.devWeeks+'週':'—';
-      document.getElementById('kg-d-meetings').textContent=d.meetings?d.meetings+'次':'—';
-      meta.style.display='block';
-    }else{meta.style.display='none';}
-    panel.style.display='block';
-  });
-svg.on('click',()=>{selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';});
-let aP=null;
-document.querySelectorAll('.kg-btn[data-kgphase]').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    const ph=this.dataset.kgphase;
-    document.querySelectorAll('.kg-btn[data-kgphase]').forEach(b=>b.classList.remove('active'));
-    if(ph==='all'||ph===aP){
-      aP=null;document.querySelector('[data-kgphase="all"]').classList.add('active');
-      nSel.classed('dim',false);lSel.classed('dim',false);
-    }else{
-      aP=ph;this.classList.add('active');
-      const show=new Set([ph]);
-      links.forEach(l=>{if(l.source.phase===ph)show.add(l.target.phase);if(l.target.phase===ph)show.add(l.source.phase);});
-      nSel.classed('dim',d=>!show.has(d.phase));
-      lSel.classed('dim',l=>!show.has(l.source.phase)||!show.has(l.target.phase));
-    }
-  });
-});
-document.getElementById('kg-btn-reset').addEventListener('click',()=>{svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);});
-})();
-</script>
 
 <footer>
   <p>白老師國際語言中心 — 系統導入分期藍圖 v1.4 &nbsp;|&nbsp; 本文件為業主決策依據，請搭配《智慧營運系統規劃 v0.23》使用</p>
-  <p style="margin-top:8px;"><a href="bailaoshi-operations-v2.html">← 回到完整模組清單 v0.23</a> &nbsp;|&nbsp; <a href="bailaoshi-knowledge-graph-v1.html">獨立知識圖譜頁</a></p>
+  <p style="margin-top:8px;"><a href="https://joes1234567.github.io/museon-data/reports/bailaoshi-operations-v2.html">← 回到完整模組清單 v0.23</a> &nbsp;|&nbsp; <a href="https://joes1234567.github.io/museon-data/reports/bailaoshi-knowledge-graph-v1.html">獨立知識圖譜頁</a></p>
   <p style="margin-top:6px; font-size:12px; color: #b0b0b8;">v1.4 更新：新增「模組依賴知識圖譜」——互動式 D3 力導向圖，點擊節點查看前置依賴與解鎖關係</p>
 </footer>
 
-</body>
-</html>
+
+
+</body></html>
