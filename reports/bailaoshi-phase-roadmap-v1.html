@@ -377,6 +377,17 @@
     margin-left: 6px;
     vertical-align: middle;
   }
+
+  /* [修改] 隱藏知識圖譜中的圓圈視覺化 */
+  .kg-node circle {
+    display: none !important;
+  }
+  .kg-node .risk-ring {
+    display: none !important;
+  }
+  .kg-node .estimate-ring {
+    display: none !important;
+  }
 </style>
 </head>
 <body>
@@ -541,7 +552,7 @@
     <div style="color:var(--mist);font-size:11px;">← 滑鼠移到節點查看說明 · 點擊節點啟動估價計算器 · 滾輪縮放 · 拖曳平移</div>
   </div>
 
-  <div id="kg-estimator" style="display: block; max-width: 960px; margin: 0px auto; padding: 20px 24px 36px;">
+  <div id="kg-estimator" style="display: none; max-width: 960px; margin: 0px auto; padding: 20px 24px 36px;">
     <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,0.07);">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
         <div>
@@ -808,11 +819,13 @@ const lSel=g.append('g').selectAll('.kg-link').data(links).join('path')
   .attr('class',d=>`kg-link ${d.type}`).attr('marker-end',d=>`url(#kg-ar-${d.type})`);
 const nSel=g.append('g').selectAll('.kg-node').data(nodes).join('g').attr('class','kg-node')
   .call(d3.drag().on('start',ds).on('drag',dd).on('end',de));
+/* [修改] 移除圓圈視覺化 - 原始代碼已註釋
 nSel.append('circle').attr('r',23).attr('fill',d=>PC[d.phase]).attr('fill-opacity',0.88).attr('stroke','#fff');
 nSel.filter(d=>d.legal).append('circle').attr('class','risk-ring').attr('r',27)
   .attr('fill','none').attr('stroke','#C4502A').attr('stroke-width',1.8).attr('stroke-dasharray','4,3').attr('stroke-opacity',0.75);
 nSel.append('circle').attr('class','estimate-ring').attr('r',31)
   .attr('fill','none').attr('stroke','transparent').attr('stroke-width',2.5).attr('stroke-dasharray','none');
+*/
 nSel.append('text').attr('class','node-icon').attr('dy','0.35em').text(d=>d.icon);
 nSel.each(function(d){
   d.label.split('\n').forEach((line,i)=>{
@@ -987,6 +1000,8 @@ window.addToEstimate=addToEstimate;
 window.clearEstimate=clearEstimate;
 window.selectAll=selectAll;
 window.removeFromEstimate=function(id){selectedForEstimate.delete(id);refreshAddBtn();refreshEstimateRings();renderEstimator();};
+/* [修改] 計算器初始化歸零 */
+renderEstimator();
 })();
 </script>
 
