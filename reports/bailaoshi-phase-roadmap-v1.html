@@ -553,7 +553,7 @@
     <div style="color:var(--mist);font-size:11px;">← 滑鼠移到節點查看說明 · 點擊節點啟動估價計算器 · 滾輪縮放 · 拖曳平移</div>
   </div>
 
-  <div id="kg-estimator" style="max-width: 960px; margin: 0px auto; padding: 20px 24px 36px;">
+  <div id="kg-estimator" style="display: none; max-width: 960px; margin: 0px auto; padding: 20px 24px 36px;">
     <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,0.07);">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
         <div>
@@ -580,7 +580,7 @@
 </div>
 
 
-<div id="kg-detail" style="display: none; position: fixed; right: 16px; top: 110px; width: 272px; background: rgb(255, 255, 255); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 32px; z-index: 200; font-size: 13px; max-height: calc(-130px + 100vh); overflow-y: auto;">
+<div id="kg-detail" style="display: none; position: fixed; right: 16px; top: 110px; width: 272px; background: linear-gradient(135deg, #F0F4FF 0%, #F8F9FB 100%); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 32px; z-index: 200; font-size: 13px; max-height: calc(-130px + 100vh); overflow-y: auto;">
   <span onclick="document.getElementById(&#39;kg-detail&#39;).style.display=&#39;none&#39;" style="position:absolute;right:12px;top:10px;cursor:pointer;color:var(--mist);font-size:18px;line-height:1;">×</span>
   <div id="kg-d-phase" style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgb(42, 122, 110); margin-bottom: 6px;">P3 · 行政</div>
   <div id="kg-d-name" style="font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.4;">活動管理</div>
@@ -875,16 +875,15 @@ function refreshEstimateRings(){
   nSel.select('.estimate-ring').attr('stroke',n=>selectedForEstimate.has(n.id)?'#F59E0B':'transparent');
 }
 function renderEstimator(){
-  if(selectedForEstimate.size===0){document.getElementById('kg-estimator').style.display='none';return;}
   const allAnc=new Set();
   selectedForEstimate.forEach(id=>getAnc(id).forEach(a=>allAnc.add(a)));
   const phOrd={P0:0,P1:1,P2:2,P3:3,P4:4,P5:5,P6:6};
   const ancNodes=[...allAnc].map(id=>nodes.find(n=>n.id===id)).filter(Boolean);
   ancNodes.sort((a,b)=>(phOrd[a.phase]||0)-(phOrd[b.phase]||0));
   const totalCost=ancNodes.reduce((s,n)=>s+nodeCost(n),0);
-  document.getElementById('kg-est-header').textContent='已選 '+selectedForEstimate.size+' 個目標模組';
-  document.getElementById('kg-est-count').textContent=ancNodes.length+' 個模組（目標 + 前置依賴）';
-  document.getElementById('kg-est-list').innerHTML=ancNodes.map(n=>{
+  document.getElementById('kg-est-header').textContent='已選 '+(selectedForEstimate.size||'0')+' 個目標模組';
+  document.getElementById('kg-est-count').textContent=(ancNodes.length||'0')+' 個模組（目標 + 前置依賴）';
+  document.getElementById('kg-est-list').innerHTML=selectedForEstimate.size===0?'<div style="color:var(--mist);padding:20px;text-align:center;font-size:13px;">點擊左側知識圖譜的節點，選擇要導入的模組</div>':ancNodes.map(n=>{
     const c=nodeCost(n);const isTarget=selectedForEstimate.has(n.id);
     return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:'+(isTarget?'#EEF6FF':'#F8F8FB')+';margin-bottom:1px;">'
       +'<div style="display:flex;align-items:center;gap:8px;min-width:0;">'
@@ -897,7 +896,7 @@ function renderEstimator(){
   }).join('');
   document.getElementById('kg-est-total').textContent=totalCost?'NT$'+totalCost.toLocaleString():'—';
   document.getElementById('kg-estimator').style.display='block';
-  setTimeout(()=>document.getElementById('kg-estimator').scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+  if(selectedForEstimate.size>0){setTimeout(()=>document.getElementById('kg-estimator').scrollIntoView({behavior:'smooth',block:'nearest'}),50);}
 }
 function getAnc(id){
   const s=new Set([id]);const q=[id];
