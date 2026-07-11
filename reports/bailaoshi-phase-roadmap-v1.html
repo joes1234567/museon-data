@@ -1000,7 +1000,10 @@ window.addToEstimate=addToEstimate;
 window.clearEstimate=clearEstimate;
 window.selectAll=selectAll;
 window.removeFromEstimate=function(id){selectedForEstimate.delete(id);refreshAddBtn();refreshEstimateRings();renderEstimator();};
+/* [修改] 創建背景知識圖譜層 */
+setTimeout(()=>{const svg=d3.select('#kg-graph');const mainG=svg.select('g[transform]');const mainGNode=mainG.node();if(mainGNode){const bgG=mainG.insert('g',function(){return mainGNode.querySelector('g:nth-of-type(2)');}).attr('class','kg-background').style('opacity','0.25').style('pointer-events','none');const allGs=mainGNode.querySelectorAll('g');for(let i=0;i<allGs.length;i++){if(allGs[i].querySelector('path.kg-link')){bgG.append(function(){return allGs[i].cloneNode(true);});break;}}for(let i=0;i<allGs.length;i++){if(allGs[i].querySelector('g.kg-node')){bgG.append(function(){return allGs[i].cloneNode(true);});break;}}}},100);
 /* [修改] 計算器初始化歸零 */
+selectedForEstimate.clear();
 renderEstimator();
 })();
 </script>
