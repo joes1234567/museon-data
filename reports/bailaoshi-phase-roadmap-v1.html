@@ -378,16 +378,41 @@
     vertical-align: middle;
   }
 
-  /* [修改] 背景層圓圈恢復顯示 */
+  /* [修改] 隱藏前景圓圈，恢復背景層圖譜 */
   .kg-node circle {
-    fill-opacity: 0.3;
-    stroke-opacity: 0.4;
+    display: none !important;
   }
   .kg-node .risk-ring {
-    stroke-opacity: 0.2;
+    display: none !important;
   }
   .kg-node .estimate-ring {
-    stroke-opacity: 0.15;
+    display: none !important;
+  }
+  /* 背景層圓圈恢復顯示及樣式 */
+  .kg-background .kg-node circle {
+    display: block !important;
+    fill: #d9d9d9 !important;
+    fill-opacity: 0.45 !important;
+    stroke: #999 !important;
+    stroke-width: 1.2 !important;
+  }
+  .kg-background .kg-node .risk-ring {
+    display: block !important;
+    stroke: #ccc !important;
+    stroke-opacity: 0.3 !important;
+  }
+  .kg-background .kg-node .estimate-ring {
+    display: block !important;
+    stroke: #ccc !important;
+    stroke-opacity: 0.3 !important;
+  }
+  .kg-background path.kg-link {
+    opacity: 0.2 !important;
+    stroke: #bbb !important;
+  }
+  .kg-background text {
+    fill: #999 !important;
+    opacity: 0.15 !important;
   }
 </style>
 </head>
