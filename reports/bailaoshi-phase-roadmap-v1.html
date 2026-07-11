@@ -378,15 +378,16 @@
     vertical-align: middle;
   }
 
-  /* [修改] 隱藏知識圖譜中的圓圈視覺化 */
+  /* [修改] 背景層圓圈恢復顯示 */
   .kg-node circle {
-    display: none !important;
+    fill-opacity: 0.3;
+    stroke-opacity: 0.4;
   }
   .kg-node .risk-ring {
-    display: none !important;
+    stroke-opacity: 0.2;
   }
   .kg-node .estimate-ring {
-    display: none !important;
+    stroke-opacity: 0.15;
   }
 </style>
 </head>
