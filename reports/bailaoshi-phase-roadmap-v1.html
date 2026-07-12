@@ -473,7 +473,7 @@
       </tr>
       <tr>
         <td><strong>7. 行政</strong></td>
-        <td>教材發放紀錄、文件管理、活動管理（QR 報到）、餐點代訂、場地設備</td>
+        <td>教材發放紀錄、文件管理、活動管理（QR 報到）、餐點代訂、場地設備、學習歷程/成績、家長一對一會談管理</td>
         <td><span class="phase-pill pill-p3">P3 深化</span></td>
         <td>✅ 業主決定批次</td>
       </tr>
@@ -485,7 +485,7 @@
       </tr>
       <tr>
         <td><strong>9. 家長（學生）/ 教職人員前台</strong></td>
-        <td>雙角色 App（家長含學生端 + 教職人員端）、通知系統、學習歷程/成績、家長一對一會談管理</td>
+        <td>雙角色 App（家長含學生端 + 教職人員端）、通知系統</td>
         <td><span class="phase-pill pill-p4">P4 前台</span></td>
         <td>✅ 業主決定批次</td>
       </tr>
@@ -698,7 +698,7 @@ const nodes=[
   {id:'MOD34',short:'教師培訓管理',label:'教師培訓\n管理',phase:'P3',unit:'師資進階培訓',icon:'🎓',desc:'SOP/培訓影片/測驗/申論/主管審核/能力紀錄/新人 onboarding 系統化',legal:false,roi:'好老師留得住',weeks:2,acceptance:3,coeff:1.3},
   {id:'MOD35',short:'教師行為積分',label:'教師行為\n積分系統',phase:'P3',unit:'師資進階培訓',icon:'⭐',desc:'三合一設計：每日任務五感恩 + 會議出席QR + 能量存摺積分連動獎金',legal:false,roi:'好老師留得住',weeks:1.5,acceptance:3,coeff:1.25},
   {id:'MOD23',short:'家長（學生）/ 教職人員 App',label:'家長（學生）\n教職人員 App',phase:'P4',unit:'家長學生前台',icon:'📱',desc:'雙角色：家長（含學生）查成績/出席/帳單/對話留言/活動報名；教職人員端課表查詢/班級出席/學生資料快查/通知推送',legal:false,roi:'家長主動續班',weeks:8,acceptance:5,coeff:1.5},
-  {id:'MOD17',short:'學習歷程/成績',label:'學習歷程\n成績',phase:'P4',unit:'家長學生前台',icon:'📒',desc:'含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會前摘要',legal:false,roi:'家長主動續班',weeks:2,acceptance:3,coeff:1.25},
+  {id:'MOD17',short:'學習歷程/成績',label:'學習歷程\n成績',phase:'P3',unit:'行政',icon:'📒',desc:'含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會前摘要',legal:false,roi:'家長主動續班',weeks:2,acceptance:3,coeff:1.25},
   {id:'API01',short:'API 行政串接',label:'API\n行政串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'學生建檔/出缺席/報名就讀，MUSEON 可做行政流程智能提醒',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
   {id:'API02',short:'API 總務串接',label:'API\n總務串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'場地排課/設備管理，MUSEON 回答「今天哪間教室有空」',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
   {id:'API03',short:'API 客服串接',label:'API\n客服串接',phase:'P5',unit:'MUSEON API 串接',icon:'🔌',desc:'家長詢問/投訴紀錄，MUSEON 輔助快速查詢學生狀態',legal:false,roi:'AI 幫你做',weeks:1,acceptance:2,coeff:1.3},
@@ -1208,13 +1208,14 @@ renderEstimator();
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">🗂️</div>
-              <div class="unit-name">行政 <span class="mod-count">4 模組</span></div>
+              <div class="unit-name">行政 <span class="mod-count">5 模組</span></div>
             </div>
             <div class="unit-scope">
               <span>MOD 13 — 餐點代訂（儲值金預充、老師確認才扣款、請假自動不扣）</span>
               <span>MOD 26 — 活動管理（建立/報名/名額控管/QR Code 電子報到）</span>
               <span>MOD 28 — 補課影片管理（自動比對缺席名單分發影片）</span>
               <span>MOD 32 — 教材發放紀錄</span>
+              <span>MOD 17 — 學習歷程/成績（含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會談前摘要/會談後追蹤）</span>
             </div>
           </div>
           <div class="unit-item">
@@ -1257,11 +1258,10 @@ renderEstimator();
           <div class="unit-item">
             <div class="unit-header">
               <div class="unit-icon">📱</div>
-              <div class="unit-name">家長（學生）/ 教職人員前台 <span class="mod-count">2 模組</span></div>
+              <div class="unit-name">家長（學生）/ 教職人員前台 <span class="mod-count">1 模組</span></div>
             </div>
             <div class="unit-scope">
               <span>MOD 23 — 家長（學生）/ 教職人員 App（雙角色）：家長端（含學生）查成績/出席/帳單/通知/搜尋/對話式留言（類LINE，客訴標記，主管可見高風險訊息），學生在家長帳號下看課程/作業/補課影片/AI 口說；教職人員端課表查詢/班級出席管理/學生資料快查/通知推送/吃藥確認執行紀錄</span>
-              <span>MOD 17 — 學習歷程/成績（含家長一對一會談子模組：老師開放時段/家長預約/系統自動產製會談前摘要/會談後追蹤）</span>
             </div>
           </div>
         </div>
@@ -1364,7 +1364,7 @@ renderEstimator();
   <!-- SUMMARY NOTE -->
   <div class="notice" style="border-left-color: var(--teal);">
     <strong>完整系統總覽（39 個模組）</strong><br>
-    L0 底層 4 個 → P1 核心 6 個（含 MOD 24 知識庫）→ P2 財務+安全 9 個 → P3 深化內部 9 個 → P4 對外前台 2 個 → P5 API 串接 4 個 → P6 AI 輔助 5 個<br><br>
+    L0 底層 4 個 → P1 核心 6 個（含 MOD 24 知識庫）→ P2 財務+安全 9 個 → P3 深化內部 10 個 → P4 對外前台 1 個 → P5 API 串接 4 個 → P6 AI 輔助 5 個<br><br>
     <strong>業主決策框架</strong>：P0–P2 是必做核心（19 個模組）；P3–P4 各子單位可由業主排序；P5–P6 依業主數位化成熟度推進，不影響 P1–P4 的正常上線。<br>
     MOD 24 知識庫建議在 P1 就同步啟動——它是 P6 AI 品質的前置條件，越早啟動等於為未來 AI 儲值。
   </div>
