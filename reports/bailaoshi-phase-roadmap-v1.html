@@ -874,7 +874,7 @@ function renderEstimator(){
       +'<div style="display:flex;align-items:center;gap:8px;min-width:0;">'
       +'<span style="font-size:10px;background:'+PC[n.phase]+';color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">'+n.phase+'</span>'
       +'<span style="font-size:12px;font-weight:'+(isTarget?700:500)+';color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+n.short+'</span>'
-      +(isTarget?'<button onclick="window.removeFromEstimate('+JSON.stringify(n.id)+')" style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1.5px solid #1A5DC8;border-radius:4px;padding:2px 7px;flex-shrink:0;cursor:pointer;font-weight:700;line-height:1.4;">✓ 已加入估價</button>':'')
+      +(isTarget?'<button onclick="window.removeFromEstimate('+JSON.stringify(n.id)+')" onmouseover="this.textContent=&#39;✕ 移除&#39;;this.style.color=&#39;#C4402A&#39;;this.style.background=&#39;#FEF0EC&#39;;this.style.borderColor=&#39;#C4402A&#39;;" onmouseout="this.textContent=&#39;✓ 已加入估價&#39;;this.style.color=&#39;#1A5DC8&#39;;this.style.background=&#39;#EEF6FF&#39;;this.style.borderColor=&#39;#1A5DC8&#39;;" title="點擊移除此模組" style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1.5px solid #1A5DC8;border-radius:4px;padding:2px 7px;flex-shrink:0;cursor:pointer;font-weight:700;line-height:1.4;">✓ 已加入估價</button>':'')
       +'</div>'
       +(n.museonOwned?'<span style="font-size:10px;color:#7C3AED;background:#F3EEFF;border:1px solid #C4B5FD;border-radius:4px;padding:2px 8px;flex-shrink:0;margin-left:12px;font-weight:700;">MUSEON 負責</span>':'<span style="font-size:12px;font-weight:600;color:'+(c?'#1A5DC8':'var(--mist)')+';flex-shrink:0;margin-left:12px;">'+(c?'NT$'+c.toLocaleString():'—')+'</span>')
       +'</div>';
