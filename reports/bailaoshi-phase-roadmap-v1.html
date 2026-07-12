@@ -838,7 +838,7 @@ function ds(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
 function dd(e,d){d.fx=e.x;d.fy=e.y;}
 function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
 let selNode=null,selAnc=new Set();
-let currentPanelNodeId=null,selectedForEstimate=new Set();
+let currentPanelNodeId=null,selectedForEstimate=new Set(),excludedIds=new Set();
 function addToEstimate(){
   if(!currentPanelNodeId)return;
   const id=currentPanelNodeId;
@@ -846,12 +846,12 @@ function addToEstimate(){
   refreshAddBtn();refreshEstimateRings();renderEstimator();
 }
 function clearEstimate(){
-  selectedForEstimate.clear();refreshAddBtn();refreshEstimateRings();renderEstimator();
+  selectedForEstimate.clear();excludedIds.clear();refreshAddBtn();refreshEstimateRings();renderEstimator();
 }
 function refreshAddBtn(){
   const btn=document.getElementById('kg-add-to-estimate');if(!btn||!currentPanelNodeId)return;
   let inEstimator=selectedForEstimate.has(currentPanelNodeId);
-  if(!inEstimator){selectedForEstimate.forEach(id=>{if(getAnc(id).has(currentPanelNodeId))inEstimator=true;});}
+  if(!inEstimator&&!excludedIds.has(currentPanelNodeId)){selectedForEstimate.forEach(id=>{if(getAnc(id).has(currentPanelNodeId))inEstimator=true;});}
   btn.textContent=inEstimator?'✓ 已加入估價':'+ 加入估價';
   btn.style.background=inEstimator?'#EEF6FF':'#1A5DC8';btn.style.color=inEstimator?'#1A5DC8':'#fff';
   btn.style.border=inEstimator?'1.5px solid #1A5DC8':'none';
@@ -860,21 +860,25 @@ function refreshEstimateRings(){
   nSel.select('.estimate-ring').attr('stroke',n=>selectedForEstimate.has(n.id)?'#F59E0B':'transparent');
 }
 function renderEstimator(){
+  selectedForEstimate.forEach(id=>excludedIds.delete(id));
   const allAnc=new Set();
   selectedForEstimate.forEach(id=>getAnc(id).forEach(a=>allAnc.add(a)));
   const phOrd={P0:0,P1:1,P2:2,P3:3,P4:4,P5:5,P6:6};
-  const ancNodes=[...allAnc].map(id=>nodes.find(n=>n.id===id)).filter(Boolean);
+  const ancNodes=[...allAnc].filter(id=>!excludedIds.has(id)).map(id=>nodes.find(n=>n.id===id)).filter(Boolean);
   ancNodes.sort((a,b)=>(phOrd[a.phase]||0)-(phOrd[b.phase]||0));
   const totalCost=ancNodes.reduce((s,n)=>s+nodeCost(n),0);
   document.getElementById('kg-est-header').textContent='已選 '+(selectedForEstimate.size||'0')+' 個目標模組';
   document.getElementById('kg-est-count').textContent=(ancNodes.length||'0')+' 個模組（目標 + 前置依賴）';
   document.getElementById('kg-est-list').innerHTML=selectedForEstimate.size===0?'<div style="color:var(--mist);padding:20px;text-align:center;font-size:13px;">點擊左側知識圖譜的節點，選擇要導入的模組</div>':ancNodes.map(n=>{
     const c=nodeCost(n);const isTarget=selectedForEstimate.has(n.id);
+    const rmBtn=isTarget
+      ?'<button onclick="window.removeFromEstimate(&#39;'+n.id+'&#39;)" onmouseover="this.textContent=&#39;✕ 移除&#39;;this.style.color=&#39;#C4402A&#39;;this.style.background=&#39;#FEF0EC&#39;;this.style.borderColor=&#39;#C4402A&#39;;" onmouseout="this.textContent=&#39;✓ 已加入估價&#39;;this.style.color=&#39;#1A5DC8&#39;;this.style.background=&#39;#EEF6FF&#39;;this.style.borderColor=&#39;#1A5DC8&#39;;" title="點擊移除此模組" style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1.5px solid #1A5DC8;border-radius:4px;padding:2px 7px;flex-shrink:0;cursor:pointer;font-weight:700;line-height:1.4;">✓ 已加入估價</button>'
+      :'<button onclick="window.removeFromEstimate(&#39;'+n.id+'&#39;)" onmouseover="this.style.color=&#39;#C4402A&#39;;this.style.background=&#39;#FEF0EC&#39;;this.style.borderColor=&#39;#C4402A&#39;;" onmouseout="this.style.color=&#39;var(--mist)&#39;;this.style.background=&#39;transparent&#39;;this.style.borderColor=&#39;var(--border)&#39;;" title="點擊移除此模組（前置依賴）" style="font-size:9px;color:var(--mist);background:transparent;border:1.5px solid var(--border);border-radius:4px;padding:2px 7px;flex-shrink:0;cursor:pointer;font-weight:700;line-height:1.4;">✕ 移除</button>';
     return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:'+(isTarget?'#EEF6FF':'#F8F8FB')+';margin-bottom:1px;">'
       +'<div style="display:flex;align-items:center;gap:8px;min-width:0;">'
       +'<span style="font-size:10px;background:'+PC[n.phase]+';color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">'+n.phase+'</span>'
       +'<span style="font-size:12px;font-weight:'+(isTarget?700:500)+';color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+n.short+'</span>'
-      +(isTarget?'<button onclick="window.removeFromEstimate('+JSON.stringify(n.id)+')" onmouseover="this.textContent=&#39;✕ 移除&#39;;this.style.color=&#39;#C4402A&#39;;this.style.background=&#39;#FEF0EC&#39;;this.style.borderColor=&#39;#C4402A&#39;;" onmouseout="this.textContent=&#39;✓ 已加入估價&#39;;this.style.color=&#39;#1A5DC8&#39;;this.style.background=&#39;#EEF6FF&#39;;this.style.borderColor=&#39;#1A5DC8&#39;;" title="點擊移除此模組" style="font-size:9px;color:#1A5DC8;background:#EEF6FF;border:1.5px solid #1A5DC8;border-radius:4px;padding:2px 7px;flex-shrink:0;cursor:pointer;font-weight:700;line-height:1.4;">✓ 已加入估價</button>':'')
+      +rmBtn
       +'</div>'
       +(n.museonOwned?'<span style="font-size:10px;color:#7C3AED;background:#F3EEFF;border:1px solid #C4B5FD;border-radius:4px;padding:2px 8px;flex-shrink:0;margin-left:12px;font-weight:700;">MUSEON 負責</span>':'<span style="font-size:12px;font-weight:600;color:'+(c?'#1A5DC8':'var(--mist)')+';flex-shrink:0;margin-left:12px;">'+(c?'NT$'+c.toLocaleString():'—')+'</span>')
       +'</div>';
@@ -984,7 +988,7 @@ function selectAll(){nodes.forEach(n=>selectedForEstimate.add(n.id));refreshAddB
 window.addToEstimate=addToEstimate;
 window.clearEstimate=clearEstimate;
 window.selectAll=selectAll;
-window.removeFromEstimate=function(id){selectedForEstimate.delete(id);refreshAddBtn();refreshEstimateRings();renderEstimator();};
+window.removeFromEstimate=function(id){selectedForEstimate.delete(id);excludedIds.add(id);refreshAddBtn();refreshEstimateRings();renderEstimator();};
 /* [修改] 計算器初始化歸零 */
 renderEstimator();
 })();
