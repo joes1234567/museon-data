@@ -378,17 +378,6 @@
     vertical-align: middle;
   }
 
-  /* [修改] 背景層圓圈恢復顯示 */
-  .kg-node circle {
-    fill-opacity: 0.3;
-    stroke-opacity: 0.4;
-  }
-  .kg-node .risk-ring {
-    stroke-opacity: 0.2;
-  }
-  .kg-node .estimate-ring {
-    stroke-opacity: 0.15;
-  }
 </style>
 </head>
 <body>
@@ -820,13 +809,11 @@ const lSel=g.append('g').selectAll('.kg-link').data(links).join('path')
   .attr('class',d=>`kg-link ${d.type}`).attr('marker-end',d=>`url(#kg-ar-${d.type})`);
 const nSel=g.append('g').selectAll('.kg-node').data(nodes).join('g').attr('class','kg-node')
   .call(d3.drag().on('start',ds).on('drag',dd).on('end',de));
-/* [修改] 移除圓圈視覺化 - 原始代碼已註釋
 nSel.append('circle').attr('r',23).attr('fill',d=>PC[d.phase]).attr('fill-opacity',0.88).attr('stroke','#fff');
 nSel.filter(d=>d.legal).append('circle').attr('class','risk-ring').attr('r',27)
   .attr('fill','none').attr('stroke','#C4502A').attr('stroke-width',1.8).attr('stroke-dasharray','4,3').attr('stroke-opacity',0.75);
 nSel.append('circle').attr('class','estimate-ring').attr('r',31)
   .attr('fill','none').attr('stroke','transparent').attr('stroke-width',2.5).attr('stroke-dasharray','none');
-*/
 nSel.append('text').attr('class','node-icon').attr('dy','0.35em').text(d=>d.icon);
 nSel.each(function(d){
   d.label.split('\n').forEach((line,i)=>{
