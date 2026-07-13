@@ -514,7 +514,7 @@
           <li>材料流向全程可查：這批毛料做了哪些成品、剩多少、餘料在哪</li>
           <li>成本與毛利依訂單自動結算，含餘料價值認列</li>
         </ul>
-        <div class="ds-condition">條件：需先完成十六項待確認事項中的加工計價規則、餘料成本方法等共識</div>
+        <div class="ds-condition">條件：需先完成三項最優先待定案共識——毛料到半成品的記錄顆粒度、加工計價規則、餘料成本認列方式</div>
       </div>
     </div>
     <div class="highlight-box">
@@ -580,7 +580,7 @@
 <section style="background: var(--snow);">
   <div class="container">
     <div class="section-label">風險評估</div>
-    <h2 class="section-title">6 大風險與因應方案</h2>
+    <h2 class="section-title">7 大風險與因應方案</h2>
     <table class="risk-table">
       <thead><tr><th>風險</th><th>等級</th><th>說明</th><th>因應方案</th></tr></thead>
       <tbody>
@@ -589,6 +589,12 @@
           <td><span class="risk-label rl-high">高</span></td>
           <td>宗憲已指出現行漏洞：料用掉了沒有回報，庫存就不會更新。若上線後現場仍不回報，材料追蹤功能形同虛設</td>
           <td>簡化輸入方式（平板、一鍵選取常用工序、條碼），第一階段先驗證回報流程是否可落地</td>
+        </tr>
+        <tr class="risk-high">
+          <td>毛料到半成品的記錄顆粒度未定</td>
+          <td><span class="risk-label rl-high">高</span></td>
+          <td>宗憲反覆提及（逐字稿 704、734、995 行前後）自己也還沒決定：整批登記還是逐片登記（因寬度不一難量測）、半成品要不要獨立建卡、條碼是否划算。這個顆粒度不確定，「生產與加工追蹤」模組的資料結構就開不出來——不是製作細節，是地基問題</td>
+          <td>列為與加工計價規則、餘料成本認列方式同組的最優先待定案項目，開發前先與宗憲逐案例確認記錄方式</td>
         </tr>
         <tr class="risk-mid">
           <td>客製化計價規則尚未標準化</td>
