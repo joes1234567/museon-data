@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高豐木業 — 木料全流程營運管理系統規劃</title>
+<style>
+  :root {
+    --jade: #1a6b3c;
+    --jade-light: #2d9a5c;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --ink: #0f1a12;
+    --slate: #4A5A4E;
+    --mist: #8898A0;
+    --border: #DDE4DC;
+    --parchment: #F5F8F5;
+    --snow: #FBFDFB;
+    --success: #2D8A6E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .hero {
+    background: linear-gradient(135deg, #0a1a0e 0%, #12391e 60%, #1a5a30 100%);
+    color: #fff;
+    padding: 64px 40px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,107,60,0.28) 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 50%, rgba(42,122,110,0.15) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(45,154,92,0.25);
+    border: 1px solid rgba(45,154,92,0.5);
+    color: #5ecf85;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #5ecf85; }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    max-width: 520px;
+    margin: 0 auto 36px;
+  }
+  .hero-meta {
+    display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; position: relative;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .hero-meta-num { font-size: 30px; font-weight: 700; color: #5ecf85; }
+  .hero-meta-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--jade); font-weight: 600; margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(21px, 3vw, 29px); font-weight: 700;
+    color: var(--ink); margin-bottom: 10px; line-height: 1.3;
+  }
+  .section-desc { color: var(--slate); font-size: 15px; max-width: 640px; margin-bottom: 40px; }
+  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .pain-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+  .pain-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+  .pain-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pi-red { background: #FEF0EC; }
+  .pi-orange { background: #FFF5E6; }
+  .pi-blue { background: #EBF4F8; }
+  .pi-green { background: #E8F5EE; }
+  .pain-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--ink); }
+  .pain-desc { font-size: 13px; color: var(--slate); line-height: 1.6; }
+  .flow-wrapper {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px 28px; overflow-x: auto;
+  }
+  .flow-row { display: flex; align-items: center; gap: 0; flex-wrap: nowrap; min-width: 720px; }
+  .flow-step { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; min-width: 76px; }
+  .flow-circle {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0;
+  }
+  .flow-step-label { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.4; }
+  .flow-arrow { color: var(--mist); font-size: 16px; flex-shrink: 0; padding: 0 2px; margin-bottom: 22px; }
+  .bg-blue { background: #EBF4F8; }
+  .bg-teal { background: #E6F4F2; }
+  .bg-green { background: #E8F5EE; }
+  .bg-gold { background: #FBF4E6; }
+  .bg-ember { background: #FEF0EC; }
+  .bg-purple { background: #F0EBF8; }
+  .bg-lime { background: #F0F8E8; }
+  .func-area { margin-bottom: 44px; }
+  .func-header {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+    padding-bottom: 16px; border-bottom: 2px solid var(--border);
+  }
+  .func-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .fi-green { background: #E8F5EE; }
+  .fi-blue { background: #EBF4F8; }
+  .fi-purple { background: #F0EBF8; }
+  .fi-gold { background: #FBF4E6; }
+  .fi-gray { background: #F0F0F0; }
+  .func-title-group { flex: 1; }
+  .func-area-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+  .func-area-desc { font-size: 13px; color: var(--mist); margin-top: 2px; }
+  .func-modules-count {
+    font-size: 12px; font-weight: 600; color: var(--mist);
+    background: var(--parchment); border: 1px solid var(--border);
+    padding: 4px 14px; border-radius: 20px;
+  }
+  .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+  .module-card {
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px; position: relative;
+  }
+  .module-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.06); }
+  .module-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .module-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .phase-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 9px;
+    border-radius: 10px; white-space: nowrap; flex-shrink: 0; margin-left: 8px;
+  }
+  .pt-1 { background: #E8F5EE; color: #1a6b3c; border: 1px solid #c2deca; }
+  .pt-2 { background: #EBF4F8; color: #2A6A8A; border: 1px solid #b8d5e8; }
+  .pt-3 { background: #FBF4E6; color: #B8923A; border: 1px solid #e0ceA0; }
+  .pt-4 { background: #F0EBF8; color: #6A4A9A; border: 1px solid #c9b8e8; }
+  .module-value { font-size: 13px; color: var(--jade); font-weight: 600; margin-bottom: 6px; line-height: 1.5; }
+  .module-detail { font-size: 12px; color: var(--slate); line-height: 1.6; }
+  .module-note {
+    font-size: 11px; color: var(--mist); margin-top: 10px;
+    padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5;
+  }
+  .timeline-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+  }
+  .ts-phase { padding: 20px 18px; border-right: 1px solid var(--border); }
+  .ts-phase:last-child { border-right: none; }
+  .ts-p1 { background: linear-gradient(135deg, #E8F5EE, #F4FAF6); }
+  .ts-p2 { background: #FAFCFF; }
+  .ts-p3 { background: #FFFDF5; }
+  .ts-p4 { background: #FAF8FF; }
+  .ts-num { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .ts-p1 .ts-num { color: #1a6b3c; }
+  .ts-p2 .ts-num { color: #2A6A8A; }
+  .ts-p3 .ts-num { color: #B8923A; }
+  .ts-p4 .ts-num { color: #6A4A9A; }
+  .ts-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .ts-period { font-size: 12px; color: var(--mist); margin-bottom: 12px; }
+  .ts-milestone { font-size: 12px; padding: 8px 12px; border-radius: 8px; line-height: 1.6; font-weight: 600; }
+  .ts-p1 .ts-milestone { background: rgba(26,107,60,0.08); color: #1a6b3c; }
+  .ts-p2 .ts-milestone { background: rgba(42,106,138,0.08); color: #2A6A8A; }
+  .ts-p3 .ts-milestone { background: rgba(184,146,58,0.08); color: #B8923A; }
+  .ts-p4 .ts-milestone { background: rgba(106,74,154,0.08); color: #6A4A9A; }
+  .ts-list { list-style: none; margin-top: 10px; }
+  .ts-list li { font-size: 12px; color: var(--slate); padding: 2px 0; display: flex; gap: 6px; }
+  .ts-list li::before { content: '·'; color: var(--mist); }
+  .dispatch-stages {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 0;
+    background: var(--snow); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; margin-bottom: 28px;
+  }
+  .dispatch-stage { padding: 26px 24px; }
+  .ds-1 { background: #F4FAF6; }
+  .ds-2 { background: #F0F4FA; }
+  .dispatch-stage-arrow {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 4px; background: var(--snow);
+    border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+    color: var(--mist); font-size: 18px;
+  }
+  .ds-phase-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .ds-1 .ds-phase-tag { color: #1a6b3c; }
+  .ds-2 .ds-phase-tag { color: #2A6A8A; }
+  .ds-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .ds-desc { font-size: 13px; color: var(--slate); line-height: 1.7; margin-bottom: 12px; }
+  .ds-items { list-style: none; }
+  .ds-items li { font-size: 12px; color: var(--slate); padding: 2px 0; display: flex; gap: 6px; align-items: flex-start; }
+  .ds-1 .ds-items li::before { content: '✓'; color: #1a6b3c; font-weight: 700; flex-shrink: 0; }
+  .ds-2 .ds-items li::before { content: '◇'; color: #2A6A8A; font-weight: 700; flex-shrink: 0; }
+  .ds-condition { margin-top: 12px; padding: 10px 14px; background: rgba(42,106,138,0.08); border-radius: 8px; font-size: 12px; color: #2A6A8A; line-height: 1.6; }
+  .highlight-box {
+    background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%);
+    border: 1px solid #a8d8bc; border-radius: 14px; padding: 28px 32px;
+  }
+  .highlight-box h3 { font-size: 17px; font-weight: 700; color: #1a6b3c; margin-bottom: 10px; }
+  .highlight-box p { font-size: 14px; color: var(--slate); }
+  .risk-table { width: 100%; border-collapse: collapse; }
+  .risk-table th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-size: 13px; }
+  .risk-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--slate); vertical-align: top; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-high { background: #FFF5F5; }
+  .risk-mid { background: #FFFBF0; }
+  .risk-low { background: #F5FFF8; }
+  .risk-label { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  .rl-high { background: #FEE2E2; color: #B91C1C; }
+  .rl-mid { background: #FEF3C7; color: #92400E; }
+  .rl-low { background: #D1FAE5; color: #065F46; }
+  .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 32px; }
+  .roi-card { background: var(--snow); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .roi-num { font-size: 34px; font-weight: 800; color: var(--jade); line-height: 1.1; margin-bottom: 4px; }
+  .roi-unit { font-size: 13px; color: var(--mist); margin-bottom: 8px; }
+  .roi-label { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .roi-detail { font-size: 12px; color: var(--slate); line-height: 1.5; }
+  .roi-formula {
+    background: #0f1a12; color: #5ecf85;
+    border-radius: 10px; padding: 22px 28px;
+    font-family: 'Menlo', 'Monaco', monospace; font-size: 13px;
+    line-height: 2.2; margin: 0 0 20px;
+  }
+  .roi-formula .label { color: rgba(255,255,255,0.45); font-size: 11px; }
+  .footer {
+    background: var(--ink); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 32px 24px; font-size: 13px;
+  }
+  .footer strong { color: rgba(255,255,255,0.75); }
+  @media (max-width: 640px) {
+    .hero { padding: 40px 20px; }
+    section { padding: 40px 0; }
+    .timeline-strip { grid-template-columns: 1fr 1fr; }
+    .timeline-strip .ts-phase:nth-child(2) { border-right: none; }
+    .timeline-strip .ts-phase:nth-child(3) { border-top: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">系統規劃文件 v1.0</div>
+  <h1>高豐木業<br><span>木料全流程營運管理</span>系統規劃</h1>
+  <p class="hero-sub">從報價到收款，一次輸入、一路串接——把「宗憲跟宗憲太太腦中的經驗」變成公司可查詢、可交接的資產</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><div class="hero-meta-num">26</div><div class="hero-meta-label">功能模組</div></div>
+    <div class="hero-meta-item"><div class="hero-meta-num">3</div><div class="hero-meta-label">建置階段</div></div>
+    <div class="hero-meta-item"><div class="hero-meta-num">6</div><div class="hero-meta-label">庫存分類</div></div>
+    <div class="hero-meta-item"><div class="hero-meta-num">20,000+</div><div class="hero-meta-label">筆現有庫存資料待銜接</div></div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section>
+  <div class="container">
+    <div class="section-label">現況痛點</div>
+    <h2 class="section-title">宗憲太太與宗憲，同一筆訂單要在 6 個地方重複輸入</h2>
+    <p class="section-desc">7/13 需求訪談會議中確認：問題不是「沒有系統」，是市售進銷存系統的編碼邏輯，處理不了多樹種、多規格、多加工方式與餘料回收的木料產業現場。</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">🔁</div>
+        <div><div class="pain-title">同一筆需求重複輸入 6 次</div><div class="pain-desc">報價、訂單、加工待處理、進出貨、庫存、財務收款，各自獨立跑一次，資料無法延續，內容也可能彼此不一致。</div></div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-orange">🏷️</div>
+        <div><div class="pain-title">市售編碼邏輯不適用</div><div class="pain-desc">A001/B002 式流水編碼對現場人員沒有意義，公司習慣以「樹種＋品項＋長寬厚」直接辨識材料，硬套編碼反而增加查詢負擔。</div></div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-red">🕳️</div>
+        <div><div class="pain-title">原料用去哪裡，沒人說得準</div><div class="pain-desc">宗憲已明確指出現行漏洞：「你們有用掉了，沒有跟我們這邊說，我們也不會知道」——毛料到成品的中間流程完全依賴個人記憶回頭統整。</div></div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-gold pi-orange">🪵</div>
+        <div><div class="pain-title">餘料沒有成本、沒有系統管理</div><div class="pain-desc">工廠餘料、客戶餘料、廢料混雜在同一套邏輯裡處理，是否列入庫存、是否計算成本，目前全憑現場經驗判斷，沒有一致規則。</div></div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-blue">📋</div>
+        <div><div class="pain-title">庫存與現場常不同步</div><div class="pain-desc">已累積 20,000 多筆規格品庫存明細，分散在多個資料夾與 Excel 檔案，門市另有一套系統但庫存能力不足，仍須額外用 Excel 管理。</div></div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon pi-green">🧠</div>
+        <div><div class="pain-title">管理完全依賴兩人的個人經驗</div><div class="pain-desc">新進人員平均要花約 1 個月才能熟悉品項與規格，公司知識沒有被系統化保留，難以複製、難以規模化。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">完整業務流程</div>
+    <h2 class="section-title">從客戶詢價到收款與成本分析，全程一次輸入</h2>
+    <div class="flow-wrapper">
+      <div class="flow-row">
+        <div class="flow-step"><div class="flow-circle bg-blue">💬</div><div class="flow-step-label">客戶詢價</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-circle bg-teal">📝</div><div class="flow-step-label">報價<br>（規格品／客製）</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-circle bg-teal">✅</div><div class="flow-step-label">報價轉訂單</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-circle bg-green">📦</div><div class="flow-step-label">庫存選料</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-circle bg-green">🪚</div><div class="flow-step-label">加工／工序</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-circle bg-green">🧾</div><div class="flow-step-label">工單生產紀錄</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-circle bg-gold">🚚</div><div class="flow-step-label">出貨</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-circle bg-gold">💰</div><div class="flow-step-label">收款／應收帳款</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-circle bg-purple">📊</div><div class="flow-step-label">成本與營運分析</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCTION AREAS -->
+<section>
+  <div class="container">
+    <div class="section-label">系統功能全景</div>
+    <h2 class="section-title">6 大業務區塊，26 個功能模組</h2>
+    <p class="section-desc">依 7/13 訪談共識分階段建置：第一階段做「可標準化」的核心流程，第二階段處理客製化與材料追蹤，第三階段做成本分析與擴充。</p>
+
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-blue">🤝</div>
+        <div class="func-title-group"><div class="func-area-name">客戶與交易核心</div><div class="func-area-desc">報價、訂單、客戶專屬價格，一份資料延續到底</div></div>
+        <div class="func-modules-count">4 模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-top"><div class="module-name">客戶管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">客戶資料串連報價、訂單、出貨、收款、歷史交易</div><div class="module-detail">單一客戶主檔，避免資料散落各表格</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">報價管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">規格品自動帶價，客製品保留人工評估欄位</div><div class="module-detail">依規格品／半標準化／完全客製三種計價方式分流</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">客戶專屬價格</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">同一規格對不同客戶維持不同售價</div><div class="module-detail">支援不同數量、有效期間的價格設定</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">訂單管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">報價確認即轉訂單，不需重新輸入</div><div class="module-detail">追蹤未確認／生產中／待出貨／已收款等狀態</div></div>
+      </div>
+    </div>
+
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-green">📦</div>
+        <div class="func-title-group"><div class="func-area-name">產品與庫存管理</div><div class="func-area-desc">以樹種＋品項＋長寬厚辨識，取代無意義流水編碼</div></div>
+        <div class="func-modules-count">9 模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-top"><div class="module-name">產品與規格管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">同一品項所有尺寸規格一畫面呈現</div><div class="module-detail">比照現行樞紐表的查詢習慣設計</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">樹種與材料管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">紐松、三毛櫸等樹種與品項的主資料</div><div class="module-detail">定寬／不定寬材料分開處理</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">自動編碼與多條件查詢</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">系統自動產生內部編碼，人員不需背號碼</div><div class="module-detail">操作畫面仍以樹種／品項／尺寸顯示</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">規格品庫存</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">可正常銷售、持續管理的固定規格庫存</div><div class="module-detail">承接現有 20,000 多筆庫存明細</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">毛料／原料庫存</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">未加工整批原料，與規格成品分開管理</div><div class="module-detail">供領料、加工追蹤使用</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">半成品庫存</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">成品不足時可即時查到可加工的半成品</div><div class="module-detail">避免依賴人員記憶誤判現場仍有材料</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">餘料庫存</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">工廠餘料回庫可再利用，客戶餘料不列入公司庫存</div><div class="module-detail">依尺寸判斷轉入一般庫存或留在餘料庫存</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">廢料及損耗紀錄</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">無法再利用的材料，不計成本、不做移動</div><div class="module-detail">如有出售或回收需求可另行記錄</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">庫存異動紀錄</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">進貨、出貨、扣料、回庫全程留痕</div><div class="module-detail">解決庫存與現場狀況不同步的問題</div></div>
+      </div>
+    </div>
+
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-purple">⚙️</div>
+        <div class="func-title-group"><div class="func-area-name">生產與加工追蹤</div><div class="func-area-desc">毛料 → 領料 → 加工 → 半成品 → 成品 → 餘料／廢料，全程可查</div></div>
+        <div class="func-modules-count">5 模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-top"><div class="module-name">加工工序管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">裁切、倒邊、倒角、CNC 等工序建檔</div><div class="module-detail">可標準化工序先固定計價，客製工序保留人工調整</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">工單管理</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">訂單轉工單，記錄實際用料、完工與損耗</div><div class="module-detail">現場負責人、完工數量、產生餘料一併留存</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">進貨管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">毛料、製品、成品進貨與供應商請款串接</div><div class="module-detail">解決宗憲提到「進了多少料」目前有登記但缺追蹤</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">出貨管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">出貨明細直接延續自訂單與工單</div><div class="module-detail">不需另外重複登打</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">材料來源與流向追蹤</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">回答「這批原料做了哪些產品」「這批材料還剩多少」</div><div class="module-detail">解決宗憲指出的「用掉沒回報，庫存就不知道」漏洞</div></div>
+      </div>
+    </div>
+
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gold">💰</div>
+        <div class="func-title-group"><div class="func-area-name">財務與分析</div><div class="func-area-desc">收款狀態即時可查，成本與毛利有依有據</div></div>
+        <div class="func-modules-count">3 模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-top"><div class="module-name">應收款與收款管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">訂單與收款狀態連結，收完款訂單才算完成</div><div class="module-detail">未收款／部分收款／已結案狀態一目了然</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">成本與毛利分析</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">含餘料價值認列，讓每張訂單的實際毛利算得出來</div><div class="module-detail">待業主、會計與系統規劃方共同確認餘料成本計算方式</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">報表管理</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">材料利用率、營收與成本報表</div><div class="module-detail">建立在精準的前段資料輸入之上</div></div>
+      </div>
+    </div>
+
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gray">🔌</div>
+        <div class="func-title-group"><div class="func-area-name">擴充與資料遷移</div><div class="func-area-desc">歷史資料承接與薪資模組為第一階段必要工作，門市留待後續評估</div></div>
+        <div class="func-modules-count">3 模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-top"><div class="module-name">歷史資料匯入</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">現有庫存、客戶主檔、未完成訂單優先匯入</div><div class="module-detail">建議承接約 10 年資料，新舊系統並行核對後再切換</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">門市及分店擴充</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">安定廠為總公司主資料中心，門市可分階段串接</div><div class="module-detail">先預留擴充介面，視門市意願決定導入方式</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">薪資與獎金模組</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">依當月工作量、工作性質核發獎金的邏輯數位化，含薪資歷史資料匯入</div><div class="module-detail">7/13 會議釐清：業主表示可整合進去，非排除項目，納入第一階段範圍</div></div>
+      </div>
+    </div>
+
+    <div class="func-area">
+      <div class="func-header">
+        <div class="func-icon fi-gray">🔐</div>
+        <div class="func-title-group"><div class="func-area-name">系統管理</div><div class="func-area-desc">帳號與權限基礎建設，系統面預防性評估，非既有痛點修補</div></div>
+        <div class="func-modules-count">2 模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-top"><div class="module-name">帳號管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">建立獨立登入帳號，取代目前共用帳號操作</div><div class="module-detail">逐字稿未查得具體爭議事件，屬系統面預防性評估項目</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">權限控管</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">依角色（業主／業務內勤／現場加工／財務）分層設定可看、可改範圍</div><div class="module-detail">與客戶價格、成本毛利等敏感資料的存取邊界一併設計</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">交付時間表</div>
+    <h2 class="section-title">3 個階段，每個階段都有具體的里程碑</h2>
+    <div class="timeline-strip">
+      <div class="ts-phase ts-p1">
+        <div class="ts-num">Phase 1</div>
+        <div class="ts-name">核心營運流程</div>
+        <div class="ts-period">第 1–2 個月（納入薪資模組後，時程重新估算中）</div>
+        <div class="ts-milestone">報價 → 訂單 → 收款一次串接，取代 6 處重複輸入</div>
+        <ul class="ts-list">
+          <li>產品規格建檔＋自動編碼</li>
+          <li>客戶資料與規格品報價</li>
+          <li>報價轉訂單</li>
+          <li>進出貨與一般庫存</li>
+          <li>訂單與收款連結</li>
+          <li>現有庫存資料匯入</li>
+          <li>薪資與獎金計算邏輯（依工作量／工作性質）</li>
+          <li>薪資歷史資料匯入（約 10 年）</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p2">
+        <div class="ts-num">Phase 2</div>
+        <div class="ts-name">生產與客製化管理</div>
+        <div class="ts-period">第 3–4 個月</div>
+        <div class="ts-milestone">毛料 → 半成品 → 成品 → 餘料，材料流向全程可查</div>
+        <ul class="ts-list">
+          <li>客製化加工規則與工序表</li>
+          <li>工單與現場回報</li>
+          <li>材料批次追蹤</li>
+          <li>餘料回庫與庫存選料建議</li>
+          <li>實際用料與損耗記錄</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p3">
+        <div class="ts-num">Phase 3</div>
+        <div class="ts-name">分析與擴充</div>
+        <div class="ts-period">第 5–6 個月</div>
+        <div class="ts-milestone">成本與毛利報表上線，回答「這張訂單到底賺多少」</div>
+        <ul class="ts-list">
+          <li>成本計算模型（含餘料價值）</li>
+          <li>毛利分析報表</li>
+          <li>材料利用率分析</li>
+          <li>進階管理報表</li>
+        </ul>
+      </div>
+      <div class="ts-phase ts-p4">
+        <div class="ts-num">Phase 4</div>
+        <div class="ts-name">門市擴充（可選）</div>
+        <div class="ts-period">第 6 個月後，視需求</div>
+        <div class="ts-milestone">視門市意願評估是否導入</div>
+        <ul class="ts-list">
+          <li>門市既有系統串接評估</li>
+          <li>跨據點庫存整合</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISPATCH DEEP DIVE -->
+<section>
+  <div class="container">
+    <div class="section-label">核心差異化功能</div>
+    <h2 class="section-title">材料流向追蹤＋客製化半標準化報價</h2>
+    <div class="dispatch-stages">
+      <div class="dispatch-stage ds-1">
+        <div class="ds-phase-tag">現在能做</div>
+        <div class="ds-title">Phase 1 上線後</div>
+        <div class="ds-desc">取代重複輸入，把已經可以標準化的流程先跑起來。</div>
+        <ul class="ds-items">
+          <li>系統自動編碼，人員仍用樹種＋品項＋長寬厚查詢，不需背號碼</li>
+          <li>同一畫面看到一個品項所有尺寸與庫存數量</li>
+          <li>規格品報價直接帶價、直接轉訂單，不重新輸入</li>
+          <li>進出貨與一般庫存即時更新</li>
+        </ul>
+      </div>
+      <div class="dispatch-stage-arrow">→</div>
+      <div class="dispatch-stage ds-2">
+        <div class="ds-phase-tag">資料成熟後</div>
+        <div class="ds-title">Phase 2–3 累積規則與資料後</div>
+        <div class="ds-desc">客製化規則與材料流向逐步標準化，系統開始能替現場做判斷建議。</div>
+        <ul class="ds-items">
+          <li>依客戶需求尺寸，自動比對可用規格品／餘料／半成品候選清單</li>
+          <li>客製化工序組合出半標準化報價，人工只需微調</li>
+          <li>材料流向全程可查：這批毛料做了哪些成品、剩多少、餘料在哪</li>
+          <li>成本與毛利依訂單自動結算，含餘料價值認列</li>
+        </ul>
+        <div class="ds-condition">條件：需先完成三項最優先待定案共識——毛料到半成品的記錄顆粒度、加工計價規則、餘料成本認列方式</div>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <h3>這套系統真正在解決的問題</h3>
+      <p>不是取代 Excel，是把宗憲跟宗憲太太腦中「怎麼判斷用哪批料、怎麼估這道工序」的經驗，變成公司可查詢、可交接、可規模化的資產。現在漏一句「料用掉了」的交接，庫存就失真；系統上線後，材料流向從進貨到餘料全程留痕，不再依賴單一員工的記憶。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">投資回收分析</div>
+    <h2 class="section-title">導入後的實際回收——先看時間，再看金額</h2>
+    <div class="roi-grid">
+      <div class="roi-card">
+        <div class="roi-num">2-3hr → 1hr</div>
+        <div class="roi-unit">單筆作業時間</div>
+        <div class="roi-label">報價／訂單流程優化</div>
+        <div class="roi-detail">宗憲會議中原話：「原本我們要做可能兩三個小時，現在用系統優化，我們只要做一個小時」——前提是公司先把能固定的規則都確認清楚</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">6 → 1</div>
+        <div class="roi-unit">重複輸入次數</div>
+        <div class="roi-label">同一筆訂單資料延續</div>
+        <div class="roi-detail">報價、訂單、加工、進出貨、庫存、收款，從各自獨立輸入變成一次輸入、一路延續</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">~1 個月</div>
+        <div class="roi-unit">新人上手時間</div>
+        <div class="roi-label">品項與庫存熟悉度</div>
+        <div class="roi-detail">現行仰賴人工帶教約 1 個月才能上手；系統化查詢介面可縮短對品項規格的摸索時間</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">20,000+</div>
+        <div class="roi-unit">筆歷史庫存資料</div>
+        <div class="roi-label">一次整併，單一入口</div>
+        <div class="roi-detail">現分散在多個資料夾與 Excel 檔案，系統化後不需再靠人工彙整比對</div>
+      </div>
+    </div>
+    <div class="roi-formula">
+      <span class="label">// 目前可用真實數據推算的時間效益</span><br>
+      節省工時比例 ≈ (3hr − 1hr) ÷ 3hr ≈ 55–66%（依訂單複雜度而異）<br>
+      <span class="label">// 待業主方補充後可換算為年度金額效益</span><br>
+      年度效益 = 節省工時比例 × 月接單量 × 平均處理工時 × 人力時薪 × 12
+    </div>
+    <!-- TODO: 需要補充實際月接單量、平均人力時薪與現行年營收數據，才能將時間效益換算為具體金額 ROI -->
+    <p class="section-desc" style="margin-bottom:0;">情境回報：宗憲太太曾因備份操作失誤刪除檔案，導致 3 個月資料遺失，須一筆一筆重新輸入補救——這正是系統化＋定期備份要解決的風險。不做的代價：管理持續依賴兩人記憶與分散的 Excel 檔案，新人培養成本無法降低，庫存誤判與魚料成本黑洞會持續存在。</p>
+  </div>
+</section>
+
+<!-- OPERATING COSTS -->
+<section>
+  <div class="container">
+    <div class="section-label">年度運營費用</div>
+    <h2 class="section-title">系統跑起來之後，每年的維護成本</h2>
+    <!-- TODO: 需要補充正式報價（開發費用結構、雲端主機／資料庫費用、年度維護費），本次會議屬需求盤點階段，尚未進入報價程序 -->
+    <p class="section-desc" style="margin-bottom:0;">本次為第一輪需求訪談，尚未進入報價與技術架構選型階段。待第一階段範圍（產品規格、報價轉訂單、進出貨、一般庫存、收款串接）進一步確認後，將提供正式的開發費用與年度維運費用估算。</p>
+  </div>
+</section>
+
+<!-- RISK -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">風險評估</div>
+    <h2 class="section-title">7 大風險與因應方案</h2>
+    <table class="risk-table">
+      <thead><tr><th>風險</th><th>等級</th><th>說明</th><th>因應方案</th></tr></thead>
+      <tbody>
+        <tr class="risk-high">
+          <td>現場資料回報落實度</td>
+          <td><span class="risk-label rl-high">高</span></td>
+          <td>宗憲已指出現行漏洞：料用掉了沒有回報，庫存就不會更新。若上線後現場仍不回報，材料追蹤功能形同虛設</td>
+          <td>簡化輸入方式（平板、一鍵選取常用工序、條碼），第一階段先驗證回報流程是否可落地</td>
+        </tr>
+        <tr class="risk-high">
+          <td>毛料到半成品的記錄顆粒度未定</td>
+          <td><span class="risk-label rl-high">高</span></td>
+          <td>宗憲反覆提及（逐字稿 704、734、995 行前後）自己也還沒決定：整批登記還是逐片登記（因寬度不一難量測）、半成品要不要獨立建卡、條碼是否划算。這個顆粒度不確定，「生產與加工追蹤」模組的資料結構就開不出來——不是製作細節，是地基問題</td>
+          <td>列為與加工計價規則、餘料成本認列方式同組的最優先待定案項目，開發前先與宗憲逐案例確認記錄方式</td>
+        </tr>
+        <tr class="risk-mid">
+          <td>客製化計價規則尚未標準化</td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>目前僅初步盤點，裁切／CNC 等工序的實際計價依據、不同客戶折扣規則尚未確認</td>
+          <td>以「實際案例走查」方式（會議已建議 3–5 筆規格品案例＋3–5 筆客製案例）逐案例訪談收斂規則</td>
+        </tr>
+        <tr class="risk-mid">
+          <td>餘料成本計算方式未定案</td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>面積比例分攤、零成本入庫、參考價入庫等 5 種方案並列，尚未選定</td>
+          <td>列入第三階段前置工作，需業主、會計與系統規劃方共同決議後再開發成本模組</td>
+        </tr>
+        <tr class="risk-mid">
+          <td>歷史資料品質不一</td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>Excel 欄位、品項命名、尺寸格式可能不統一，且曾發生誤刪導致 3 個月資料遺失的紀錄</td>
+          <td>先做資料移轉評估，分「必須移轉／視品質移轉／可保留舊系統查詢」三類處理，上線前新舊系統並行核對</td>
+        </tr>
+        <tr class="risk-mid">
+          <td>新舊系統並行期資料落差</td>
+          <td><span class="risk-label rl-mid">中</span></td>
+          <td>上線初期舊系統資料仍在累積，若核對不確實，兩邊庫存可能不同步</td>
+          <td>明訂並行期核對頻率與截止條件，確認穩定後才停用舊系統建立新資料</td>
+        </tr>
+        <tr class="risk-low">
+          <td>門市整合意願未知</td>
+          <td><span class="risk-label rl-low">低</span></td>
+          <td>門市使用另一套既有系統（開單、記帳），是否願意導入新系統或串接尚未確認</td>
+          <td>列為第三／四階段可選項，先預留串接介面，不影響安定廠主線開發進度</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- NEXT CONFIRMATION -->
+<section style="background: var(--snow);">
+  <div class="container">
+    <div class="section-label">下次要確認的事項</div>
+    <h2 class="section-title">跟宗憲下一輪要拍板的清單</h2>
+    <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+      <li><span class="risk-label rl-high">優先</span>&nbsp; 毛料到半成品的記錄顆粒度</li>
+      <li><span class="risk-label rl-high">優先</span>&nbsp; 加工計價規則</li>
+      <li><span class="risk-label rl-high">優先</span>&nbsp; 餘料成本認列方式</li>
+      <li><span class="risk-label rl-low">待業主</span>&nbsp; 門市既有系統整合意願</li>
+      <li><span class="risk-label rl-mid">可延後</span>&nbsp; 正式報價與開發費用</li>
+      <li><span class="risk-label rl-mid">可延後</span>&nbsp; ROI 具體金額（月接單量、時薪、年營收）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>高豐木業 木料全流程營運管理系統規劃</strong> · v1.0 · 2026-07-13 · 準備人：MUSEON</p>
+</div>
+
+</body>
+</html>
