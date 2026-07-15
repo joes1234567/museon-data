@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI段 20分鐘課程架構（情境代入版）· 7/30 講座</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent:  #3b82f6;
+    --p2:      #7c3aed;
+    --p3:      #f59e0b;
+    --p4:      #10b981;
+    --bg:      #f8fafc;
+    --card:    #ffffff;
+    --border:  #e2e8f0;
+    --text:    #1e293b;
+    --muted:   #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Noto Sans TC', sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    color: white; padding: 48px 40px 40px;
+  }
+  .header-inner { max-width: 920px; margin: 0 auto; }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px; padding: 4px 14px;
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .header p  { font-size: 15px; opacity: .75; }
+  .header-meta { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .hm {
+    background: rgba(255,255,255,.1); border-radius: 10px; padding: 10px 16px;
+    font-size: 13px; min-width: 100px;
+  }
+  .hm strong { display: block; font-size: 18px; font-weight: 800; margin-bottom: 2px; }
+
+  .main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+
+  .gap-box {
+    background: #fff7ed; border: 1px solid #fed7aa;
+    border-left: 4px solid #f97316; border-radius: 10px;
+    padding: 18px 24px; margin-bottom: 44px;
+  }
+  .gap-box h3 {
+    font-size: 11px; color: #ea580c; text-transform: uppercase;
+    letter-spacing: .1em; margin-bottom: 8px;
+  }
+  .gap-box p { font-size: 14px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent);
+    margin: 48px 0 16px;
+  }
+  .section-label:first-of-type { margin-top: 0; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    margin-bottom: 16px;
+  }
+
+  .need-quote {
+    background: #eff6ff; border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; padding: 16px 18px; font-size: 15px; font-weight: 500; color: #1e40af;
+    line-height: 1.7;
+  }
+  .hook-quote {
+    background: #f3e8ff; border-left: 3px solid var(--p2);
+    border-radius: 0 8px 8px 0; padding: 14px 18px; font-size: 15px; font-weight: 600; color: #581c87;
+    margin: 4px 0;
+  }
+  .warn-box {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;
+    padding: 12px 16px; font-size: 13px; color: #92400e; margin-top: 16px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .dbox {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border: 1px solid #86efac; border-radius: 10px;
+    padding: 14px 18px; font-size: 14px;
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-top: 20px;
+  }
+  .dbox-icon { font-size: 20px; flex-shrink: 0; }
+  .dbox strong { display: block; font-size: 11px; color: #15803d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+
+  .agenda-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+    border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
+  }
+  .agenda-table th {
+    background: #f3f4f6; padding: 10px 14px; text-align: left;
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .agenda-table td { padding: 12px 14px; border-top: 1px solid var(--border); vertical-align: top; }
+  .agenda-table tr:nth-child(even) td { background: #fafafa; }
+  .t-cell { white-space: nowrap; font-weight: 600; color: var(--p2); min-width: 60px; }
+
+  /* 情境卡片組 */
+  .scenario-block {
+    border: 1px solid var(--border); border-radius: 14px;
+    margin-bottom: 20px; overflow: hidden;
+  }
+  .scenario-head {
+    padding: 16px 24px; color: white; display: flex; align-items: center; gap: 12px;
+  }
+  .scenario-head .s-num {
+    width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.2);
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0;
+  }
+  .scenario-head h3 { font-size: 16px; font-weight: 700; }
+  .scenario-head span.tag { font-size: 12px; opacity: .8; display: block; margin-top: 2px; }
+  .s1 .scenario-head { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+  .s2 .scenario-head { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+  .s3 .scenario-head { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+  .scenario-body { padding: 20px 24px; background: white; }
+  .s-row { display: flex; gap: 14px; padding: 12px 0; border-top: 1px solid var(--border); }
+  .s-row:first-child { border-top: none; padding-top: 0; }
+  .s-label {
+    flex-shrink: 0; width: 64px; font-size: 12px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .05em; padding-top: 2px;
+  }
+  .s-content { font-size: 14px; flex: 1; }
+  .s-content .pain { color: #b91c1c; font-weight: 600; }
+
+  .diff-table {
+    width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 10px;
+  }
+  .diff-table th {
+    padding: 10px 14px; text-align: left; font-size: 11.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .diff-table th.gpt { background: #f1f5f9; color: var(--muted); }
+  .diff-table th.emp { background: #ede9fe; color: #6d28d9; }
+  .diff-table td { padding: 10px 14px; border-top: 1px solid var(--border); vertical-align: top; }
+  .diff-table td.dim { font-weight: 700; color: var(--text); background: #fafafa; width: 90px; }
+
+  .scale-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .scale-item {
+    display: flex; align-items: center; gap: 14px;
+    background: #f8fafc; border-radius: 10px; padding: 12px 16px;
+  }
+  .scale-num {
+    width: 28px; height: 28px; border-radius: 8px; background: var(--accent); color: white;
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; flex-shrink: 0;
+  }
+  .scale-item strong { display: block; font-size: 13.5px; }
+  .scale-item span { font-size: 12.5px; color: var(--muted); }
+
+  .open-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .open-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 12px 16px; font-size: 14px;
+  }
+  .open-icon { font-size: 16px; flex-shrink: 0; }
+
+  .footer {
+    text-align: center; color: var(--muted); font-size: 13px;
+    padding: 28px 24px; border-top: 1px solid var(--border); margin-top: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .header { padding: 36px 20px 30px; }
+    .main { padding: 28px 16px; }
+    .card { padding: 20px 18px; }
+    .s-row { flex-direction: column; gap: 4px; }
+    .s-label { width: auto; }
+    .diff-table { font-size: 12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <span class="header-badge">課程架構 v1</span>
+    <h1>AI段 20分鐘課程架構 — 情境代入版</h1>
+    <p>先卡點 → 找方向 → 給方法 → 邀行動｜承接君親師心法與顧問式銷售四步驟</p>
+    <div class="header-meta">
+      <div class="hm"><strong>7/30（四）</strong>日期</div>
+      <div class="hm"><strong>20 分鐘</strong>本段時長</div>
+      <div class="hm"><strong>士維</strong>主講</div>
+      <div class="hm"><strong>財務段之後</strong>順序</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="section-label">核心邏輯</div>
+  <div class="card">
+    <div class="need-quote">不先講「AI能做什麼」，先讓老闆自己講出「我卡在哪」——三個情境對應三種卡點，聽眾在情境裡對號入座之後，數位員工三要素才登場當「印證」，不是開場的知識灌輸。</div>
+  </div>
+
+  <div class="section-label">開場提問（2分）</div>
+  <div class="card">
+    <div class="hook-quote">「你現在花最多時間在找資訊、做決策、還是救火執行？」</div>
+    <p style="font-size:14px;color:var(--muted);margin-top:8px;">用舉手或線上投票讓老闆自己選邊站——目的不是收集數據，是讓每個人在接下來的三個情境裡對號入座，同時也是給第五段「自評量表」埋的鉤子。</p>
+  </div>
+
+  <div class="section-label">三情境示範（12分，每段4分）— 情境 × 案例 × 痛點</div>
+
+  <div class="scenario-block s1">
+    <div class="scenario-head">
+      <div class="s-num">1</div>
+      <div><h3>找資訊卡點</h3><span class="tag">對應開場選項一</span></div>
+    </div>
+    <div class="scenario-body">
+      <div class="s-row">
+        <div class="s-label">情境</div>
+        <div class="s-content">客戶臨時來電要報價，老闆得先確認這個客戶過去買過什麼、上次談的條件、目前的成本結構——但這些資訊分散在 LINE 對話、Excel 報表、還有老闆自己的記憶裡。</div>
+      </div>
+      <div class="s-row">
+        <div class="s-label">案例</div>
+        <div class="s-content">一位老闆接到熟客電話問能不能比照上次的優惠價，他一邊講電話一邊翻手機 LINE 找半年前的對話紀錄，翻了快五分鐘才敢開口回覆，客戶在電話那頭已經開始不耐煩。</div>
+      </div>
+      <div class="s-row">
+        <div class="s-label">痛點</div>
+        <div class="s-content"><span class="pain">不是不知道答案，是答案找太慢</span>——老闆的專業判斷力沒問題，卡在資訊散落、調閱效率低，導致每次報價都要重新翻找一次。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-block s2">
+    <div class="scenario-head">
+      <div class="s-num">2</div>
+      <div><h3>做決策卡點</h3><span class="tag">對應開場選項二</span></div>
+    </div>
+    <div class="scenario-body">
+      <div class="s-row">
+        <div class="s-label">情境</div>
+        <div class="s-content">庫存要不要加、要不要接下這筆單、毛利下滑了但不確定原因——這類問題沒有標準答案，老闆習慣的做法是憑經驗跟直覺賭一把。</div>
+      </div>
+      <div class="s-row">
+        <div class="s-label">案例</div>
+        <div class="s-content">一位老闆發現這季毛利比上一季低了三個百分點，他猜是原物料漲價，也可能是接了太多低價急單，但沒有人幫他把數字拆開來看，最後只能憑感覺「先觀察看看」，一觀察又是一個月過去。</div>
+      </div>
+      <div class="s-row">
+        <div class="s-label">痛點</div>
+        <div class="s-content"><span class="pain">決策不是不敢做，是做的時候只有感覺、沒有依據</span>——猜對了是運氣，猜錯了要花更久時間才發現，中間的成本沒人算給他看。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-block s3">
+    <div class="scenario-head">
+      <div class="s-num">3</div>
+      <div><h3>救火執行卡點</h3><span class="tag">對應開場選項三</span></div>
+    </div>
+    <div class="scenario-body">
+      <div class="s-row">
+        <div class="s-label">情境</div>
+        <div class="s-content">客訴、臨時訂單、員工請假調度——這些事情一件一件冒出來，老闆整天被拖著到處救火，真正該做的規劃、該想的方向反而被排到最後面。</div>
+      </div>
+      <div class="s-row">
+        <div class="s-label">案例</div>
+        <div class="s-content">一位老闆早上進辦公室，還沒坐下就先處理一個客訴、回三通電話、排一個臨時調度，等到中午終於有空檔想想下季怎麼佈局，已經沒力氣了，這件事就這樣拖了兩個月沒動。</div>
+      </div>
+      <div class="s-row">
+        <div class="s-label">痛點</div>
+        <div class="s-content"><span class="pain">不是不想做長遠規劃，是連喘口氣的時間都被瑣事吃光</span>——老闆的時間被最急但不一定最重要的事情佔滿，真正該他做的事永遠排最後。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">收斂原理（3分）— 到底需要的是AI工具，還是數位員工？</div>
+  <div class="card">
+    <p style="font-size:14px;margin-bottom:6px;">三個情境講完，先把觀眾心裡那句話講白：</p>
+    <div class="hook-quote">「你可能會想，我用 GPT 不就好了？」</div>
+    <p style="font-size:14px;color:var(--muted);margin:10px 0 4px;">回答放在對比上——不是比誰功能多，是比剛剛三個情境裡，「誰真的能接住」：</p>
+    <table class="diff-table">
+      <thead>
+        <tr><th class="dim">判準</th><th class="gpt">AI 工具（如 GPT）</th><th class="emp">數位員工</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="dim">角色</td>
+          <td>萬能聊天視窗，什麼都能聊、什麼都不專精</td>
+          <td>有明確角色（財務助理／客服／業務），像公司裡的一個崗位</td>
+        </tr>
+        <tr>
+          <td class="dim">懂公司</td>
+          <td>每次打開都是新對話，不知道你公司的 SOP、歷史紀錄、客戶條件</td>
+          <td>持續記得公司資料、過去對話、客戶脈絡——情境一「找資訊」卡點靠這個解掉</td>
+        </tr>
+        <tr>
+          <td class="dim">主動性</td>
+          <td>你問它才答，你不問它就不動</td>
+          <td>能主動整理、主動提醒、主動把資料備好——情境三「救火執行」卡點靠這個解掉</td>
+        </tr>
+        <tr>
+          <td class="dim">決策協助</td>
+          <td>能聊，但不會針對你的數字持續追蹤、排序原因</td>
+          <td>能把數據跑出來、標甜頭與代價，讓老闆做「選擇」而非「猜測」——情境二「做決策」卡點靠這個解掉</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warn-box">💡 這段不加時間，只是把三個情境示範裡已經藏著的對比「點名」出來——工具是被動等你問，數位員工是主動幫你做，這個差異一講清楚，「AI只是工具」的框架自然鬆動。</div>
+  </div>
+
+  <div class="section-label">我目前對AI的需求到哪裡？（自評量表，呼應開場提問）</div>
+  <div class="card">
+    <p style="font-size:14px;margin-bottom:10px;">收斂原理講完後，回頭讓老闆對照自己剛剛選的那個情境，定位自己現在的階段——不是講給他們聽，是讓他們自己說出來：</p>
+    <div class="scale-grid">
+      <div class="scale-item">
+        <div class="scale-num">1</div>
+        <div><strong>還沒開始</strong><span>還在用 Google／問人／憑經驗，AI 對我來說還是「聽過但沒用過」</span></div>
+      </div>
+      <div class="scale-item">
+        <div class="scale-num">2</div>
+        <div><strong>把它當聊天工具</strong><span>會用 ChatGPT 問問題、寫個文案，但每次都要重新交代背景，用完就忘</span></div>
+      </div>
+      <div class="scale-item">
+        <div class="scale-num">3</div>
+        <div><strong>開始想找資訊的效率</strong><span>對應情境一——已經感覺到資料散落、調閱慢是問題，想要有人幫忙整理</span></div>
+      </div>
+      <div class="scale-item">
+        <div class="scale-num">4</div>
+        <div><strong>想要決策有依據</strong><span>對應情境二——已經在憑感覺做決定，想要有數據跟排序協助判斷</span></div>
+      </div>
+      <div class="scale-item">
+        <div class="scale-num">5</div>
+        <div><strong>想要有人幫忙擋第一線</strong><span>對應情境三——瑣事已經吃光時間，想要真正的「數位員工」主動接手</span></div>
+      </div>
+    </div>
+    <div class="warn-box">這五級不是「越高越好」的排名，是幫老闆自己定位現在卡在哪一格——階段 1-2 的人適合先從「情境一」切入，階段 4-5 的人已經準備好聽數位員工的完整概念。</div>
+  </div>
+
+  <div class="section-label">收尾 CTA（2分）</div>
+  <div class="card">
+    <div class="hook-quote">「你剛剛選的是哪一個？那就是你現在最該先解決的地方。」</div>
+    <p style="font-size:14px;color:var(--muted);margin-top:8px;">回扣開場那句提問，邀請老闆自己說出來，跟財務段 Roy 的收尾邏輯對齊——不是「該導入AI了」，是老闆自己講出他的下一步。</p>
+  </div>
+
+  <div class="section-label">其他補充</div>
+  <div class="card">
+    <p style="font-size:14px;font-weight:600;margin-bottom:10px;">三道台下常見顧慮，架構裡已內建的接法：</p>
+    <ul class="open-list">
+      <li><span class="open-icon">①</span><div><strong>老闆對AI的認知深淺不一</strong>——不用額外處理，開場那句選邊站的提問會自然分流，不同深度的人各自對號入座進三個情境裡。</div></li>
+      <li><span class="open-icon">②</span><div><strong>把AI當工具看，看不見可能性</strong>——收斂原理段講清楚「工具被動等你問／數位員工主動幫你做」的差異後，這個框架會自然鬆動，不需要正面說教。</div></li>
+      <li><span class="open-icon">③</span><div><strong>我用GPT就夠了，為什麼要數位員工</strong>——這是真正的火線，用對比表正面回答，每一列判準都對應剛剛某個情境裡GPT會卡住的地方。</div></li>
+    </ul>
+    <div class="warn-box">⏳ 待你確認：三個情境的案例要用真實客戶案例（風險是可能對號入座到現場的人），還是用現在這種去識別化的通用老闆情境（較安全但少一點真實感）？本稿先採用去識別化版本。</div>
+  </div>
+
+  <div class="dbox">
+    <div class="dbox-icon">✅</div>
+    <div><strong>時間分配</strong>開場提問 2 分＋三情境示範 12 分（每段 4 分）＋收斂原理 3 分＋收尾 CTA 2 分＝19 分鐘，留 1 分鐘緩衝，總時長對齊財務段之後的 20 分鐘配置</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  MUSEON · AI段課程架構 v1 · 2026-07-15
+</div>
+
+</body>
+</html>
