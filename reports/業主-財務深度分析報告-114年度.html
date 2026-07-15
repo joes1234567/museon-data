@@ -163,16 +163,16 @@
   .legend-item:hover { opacity: 0.7; }
   .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
   .chart-note { font-size: 0.82rem; color: var(--muted); margin-top: 10px; }
-  .donut-seg, .stack-seg {
+  .donut-seg, .stack-seg, .waterfall-seg {
     cursor: pointer;
     transition: opacity 0.15s, filter 0.15s;
     filter: drop-shadow(0 0 0 rgba(0,0,0,0));
   }
-  .donut-seg:hover, .stack-seg:hover {
+  .donut-seg:hover, .stack-seg:hover, .waterfall-seg:hover {
     opacity: 0.85;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
   }
-  .donut-seg.active, .stack-seg.active {
+  .donut-seg.active, .stack-seg.active, .waterfall-seg.active {
     opacity: 1;
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.25));
   }
@@ -292,48 +292,48 @@
 
 <h2>五、毛利到淨利瀑布分析</h2>
 <div class="chart-card">
-  <div class="chart-title">毛利率 76.3% 如何一路被吃到營業利益率 4.92%</div>
+  <div class="chart-title">毛利率 76.3% 如何一路被吃到營業利益率 4.92%<span style="font-size:0.8rem;color:#8b8580;margin-left:8px;">💡 點擊柱體查看詳情</span></div>
   <div class="chart-svg-wrap">
-    <svg width="620" height="300" viewBox="0 0 620 300">
+    <svg width="620" height="330" viewBox="0 -30 620 330">
       <line x1="0" y1="270" x2="620" y2="270" stroke="#ede8e0" stroke-width="1"/>
-      <rect x="10" y="10" width="56" height="260" fill="#ff6f5e"/>
+      <rect class="waterfall-seg" data-wf-id="0" x="10" y="10" width="56" height="260" fill="#ff6f5e"/>
       <text x="38" y="286" fill="#8b8580" font-size="10.5" text-anchor="middle">毛利率</text>
-      <text x="38" y="6" fill="#3d3935" font-size="12" text-anchor="middle" dy="-4">76.3%</text>
+      <text x="38" y="10" fill="#3d3935" font-size="12" text-anchor="middle" dy="-8">76.3%</text>
 
-      <rect x="78" y="10" width="56" height="71" fill="#ffa24c"/>
+      <rect class="waterfall-seg" data-wf-id="1" x="78" y="10" width="56" height="71" fill="#ffa24c"/>
       <text x="106" y="286" fill="#8b8580" font-size="10.5" text-anchor="middle">－佣金</text>
-      <text x="106" y="10" fill="#3d3935" font-size="11" text-anchor="middle" dy="-4">20.9%</text>
+      <text x="106" y="10" fill="#3d3935" font-size="11" text-anchor="middle" dy="-8">20.9%</text>
 
-      <rect x="146" y="81" width="56" height="69" fill="#ffb86b"/>
+      <rect class="waterfall-seg" data-wf-id="2" x="146" y="81" width="56" height="69" fill="#ffb86b"/>
       <text x="174" y="286" fill="#8b8580" font-size="10.5" text-anchor="middle">－薪資</text>
-      <text x="174" y="81" fill="#3d3935" font-size="11" text-anchor="middle" dy="-4">20.2%</text>
+      <text x="174" y="81" fill="#3d3935" font-size="11" text-anchor="middle" dy="-8">20.2%</text>
 
-      <rect x="214" y="150" width="56" height="42" fill="#ffd97d"/>
+      <rect class="waterfall-seg" data-wf-id="3" x="214" y="150" width="56" height="42" fill="#ffd97d"/>
       <text x="242" y="286" fill="#8b8580" font-size="10.5" text-anchor="middle">－其他費用</text>
-      <text x="242" y="150" fill="#3d3935" font-size="11" text-anchor="middle" dy="-4">12.3%</text>
+      <text x="242" y="150" fill="#3d3935" font-size="11" text-anchor="middle" dy="-8">12.3%</text>
 
-      <rect x="282" y="192" width="56" height="11" fill="#f7e3b5"/>
+      <rect class="waterfall-seg" data-wf-id="4" x="282" y="192" width="56" height="11" fill="#f7e3b5"/>
       <text x="310" y="286" fill="#8b8580" font-size="10.5" text-anchor="middle">－保費</text>
-      <text x="310" y="192" fill="#3d3935" font-size="11" text-anchor="middle" dy="-4">3.2%</text>
+      <text x="310" y="192" fill="#3d3935" font-size="11" text-anchor="middle" dy="-8">3.2%</text>
 
-      <rect x="350" y="203" width="56" height="8" fill="#e8c39e"/>
+      <rect class="waterfall-seg" data-wf-id="5" x="350" y="203" width="56" height="8" fill="#e8c39e"/>
       <text x="378" y="286" fill="#8b8580" font-size="10.5" text-anchor="middle">－租金</text>
-      <text x="378" y="203" fill="#3d3935" font-size="11" text-anchor="middle" dy="-4">2.4%</text>
+      <text x="378" y="203" fill="#3d3935" font-size="11" text-anchor="middle" dy="-8">2.4%</text>
 
-      <rect x="418" y="211" width="56" height="5" fill="#d9946b"/>
+      <rect class="waterfall-seg" data-wf-id="6" x="418" y="211" width="56" height="5" fill="#d9946b"/>
       <text x="446" y="286" fill="#8b8580" font-size="10.5" text-anchor="middle">－包裝加工</text>
-      <text x="446" y="211" fill="#3d3935" font-size="11" text-anchor="middle" dy="-4">1.5%</text>
+      <text x="446" y="211" fill="#3d3935" font-size="11" text-anchor="middle" dy="-8">1.5%</text>
 
-      <rect x="486" y="216" width="56" height="37" fill="#b97d53"/>
+      <rect class="waterfall-seg" data-wf-id="7" x="486" y="216" width="56" height="37" fill="#b97d53"/>
       <text x="514" y="286" fill="#8b8580" font-size="10.5" text-anchor="middle">－其他未列明</text>
-      <text x="514" y="216" fill="#3d3935" font-size="11" text-anchor="middle" dy="-4">11.0%</text>
+      <text x="514" y="216" fill="#3d3935" font-size="11" text-anchor="middle" dy="-8">11.0%</text>
 
-      <rect x="554" y="253" width="56" height="17" fill="#35c187"/>
+      <rect class="waterfall-seg" data-wf-id="8" x="554" y="253" width="56" height="17" fill="#35c187"/>
       <text x="582" y="286" fill="#8b8580" font-size="10.5" text-anchor="middle">營業利益率</text>
-      <text x="582" y="253" fill="#3d3935" font-size="12" text-anchor="middle" dy="-4">4.92%</text>
+      <text x="582" y="253" fill="#3d3935" font-size="12" text-anchor="middle" dy="-8">4.92%</text>
     </svg>
   </div>
-  <div class="chart-note">每一段落差都是一筆真實費用——「其他未列明」是損益表反推的餘額，佔比不小（11.0%），值得跟業主要明細釐清。</div>
+  <div class="chart-note">💡 圖上任一柱體皆可點擊，查看該段落的說明。每一段落差都是一筆真實費用——「其他未列明」是損益表反推的餘額，佔比不小（11.0%），值得跟業主要明細釐清。</div>
 </div>
 
 <h2>六、資金與股東動態</h2>
@@ -448,6 +448,23 @@ var donutSegments = [
   { id: 5, name: '包裝加工', amount: 73108, percentage: 2.1, color: '#d9946b', title: '包裝＋加工費用　73,108（2.1%）', body: '<p>包裝費 57,298 ＋ 加工費用 15,810。</p><p><b>解讀：</b>確認賣的是實體商品，非純服務業態，這塊費用隨銷量同步變動。</p>' },
   { id: 6, name: '其他未列明', amount: 524963, percentage: 15.4, color: '#b97d53', title: '其他未列明營業費用　524,963（15.4%）', body: '<p>由損益表營業利益（235,968）反推出的餘額，非單一科目。</p><p><b>建議：</b>待業主補齊「其他費用」明細後，這塊有機會進一步拆解釐清，是目前財務透明度的主要缺口之一。</p>' }
 ];
+
+// 毛利到淨利瀑布圖 項目定義
+var waterfallSegments = [
+  { id: 0, title: '毛利率　76.3%', body: '<p>賣 100 元的商品，扣掉 23.7 元進貨成本，還留 76.3 元毛利——獲利空間本質健康，問題不在賣得好不好，而在後面被吃掉多少。</p>' },
+  { id: 1, title: '－佣金　20.9 個百分點（998,096）', body: '<p>單一吃掉最多毛利的項目，是業務員／通路抽成驅動的銷售模式，屬於規模化下相對可控的變動成本。</p><p><b>建議：</b>優先啃這塊比砍薪資或租金更有效——拉高淨利率的最大槓桿點，但需配套設計（如階梯式抽成）以免影響業務端銷售動能。</p>' },
+  { id: 2, title: '－薪資　20.2 個百分點（967,320）', body: '<p>僅次於佣金，第二大吃掉毛利的項目，屬固定人事投入。</p><p><b>解讀：</b>是否有精簡空間，需搭配團隊編制與產值評估，不建議貿然調整。</p>' },
+  { id: 3, title: '－其他費用　12.3 個百分點（588,059）', body: '<p><b>狀況：</b>業主目前尚無法提供科目明細，這筆費用在損益表上是單一科目，無法進一步拆解為交通、廣告、樣品或其他子項。</p><p><b>影響：</b>報告無法對這 12.3 個百分點進行細項分析，是目前財務透明度的主要缺口。</p>' },
+  { id: 4, title: '－保費　3.2 個百分點（152,830）', body: '<p>佔比不算高，但值得留意。</p><p><b>建議：</b>確認是否為法定強制投保（如勞健保、產險），若非強制項目，可比價或議價，執行門檻低，適合當第一個快贏動作。</p>' },
+  { id: 5, title: '－租金　2.4 個百分點（113,564）', body: '<p>固定成本占比極低。</p><p><b>解讀：</b>代表拖累淨利的大宗是變動成本（佣金、薪資等業務相關支出），租金本身壓力不大。</p>' },
+  { id: 6, title: '－包裝加工　1.5 個百分點（73,108）', body: '<p>包裝費 57,298 ＋ 加工費用 15,810。</p><p><b>解讀：</b>確認賣的是實體商品，非純服務業態，這塊費用隨銷量同步變動。</p>' },
+  { id: 7, title: '－其他未列明　11.0 個百分點（524,963）', body: '<p>由損益表營業利益（235,968）反推出的餘額，非單一科目。</p><p><b>建議：</b>待業主補齊「其他費用」明細後，這塊有機會進一步拆解釐清，是目前財務透明度的另一主要缺口。</p>' },
+  { id: 8, title: '營業利益率　4.92%', body: '<p>76.3% 的毛利率，一路被上面七段費用吃到只剩 4.92%——賺錢能力沒問題，問題出在錢留不留得住。</p><p><b>解讀：</b>換算下來每賣 100 元，扣掉所有費用只留不到 5 元，是本報告最大的解讀焦點。</p>' }
+];
+
+function showWaterfallModal(segId) {
+  showModalFor(waterfallSegments, segId);
+}
 
 // 生成環形圖
 function createDonutChart() {
@@ -564,6 +581,18 @@ document.querySelectorAll('.legend-item[data-stack-segment]').forEach(function(i
     var segId = parseInt(item.getAttribute('data-stack-segment'));
     showStackModal(segId);
   });
+});
+
+// 瀑布圖柱體互動
+document.querySelectorAll('.waterfall-seg').forEach(function(rect) {
+  rect.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var segId = parseInt(rect.getAttribute('data-wf-id'));
+    showWaterfallModal(segId);
+  });
+  rect.addEventListener('mouseenter', function() { rect.classList.add('active'); });
+  rect.addEventListener('mouseleave', function() { rect.classList.remove('active'); });
 });
 
 // Modal 關閉按鈕
