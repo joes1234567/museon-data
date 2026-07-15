@@ -162,6 +162,8 @@
   .legend-item { display: flex; align-items: center; gap: 6px; color: var(--muted); }
   .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
   .chart-note { font-size: 0.82rem; color: var(--muted); margin-top: 10px; }
+  .donut-seg { cursor: pointer; transition: opacity 0.15s; }
+  .donut-seg:hover { opacity: 0.78; }
   footer {
     margin-top: 48px;
     padding-top: 20px;
@@ -260,13 +262,13 @@
   <div class="chart-svg-wrap">
     <svg width="260" height="260" viewBox="0 0 260 260">
       <g transform="rotate(-90 130 130)">
-        <circle cx="130" cy="130" r="90" fill="none" stroke="#ff6f5e" stroke-width="36" stroke-dasharray="165.1 400.4" stroke-dashoffset="0"/>
-        <circle cx="130" cy="130" r="90" fill="none" stroke="#ffa24c" stroke-width="36" stroke-dasharray="160.0 405.5" stroke-dashoffset="-165.1"/>
-        <circle cx="130" cy="130" r="90" fill="none" stroke="#ffd97d" stroke-width="36" stroke-dasharray="97.3 468.2" stroke-dashoffset="-325.1"/>
-        <circle cx="130" cy="130" r="90" fill="none" stroke="#f7e3b5" stroke-width="36" stroke-dasharray="25.3 540.2" stroke-dashoffset="-422.4"/>
-        <circle cx="130" cy="130" r="90" fill="none" stroke="#e8c39e" stroke-width="36" stroke-dasharray="18.8 546.7" stroke-dashoffset="-447.7"/>
-        <circle cx="130" cy="130" r="90" fill="none" stroke="#d9946b" stroke-width="36" stroke-dasharray="12.1 553.4" stroke-dashoffset="-466.5"/>
-        <circle cx="130" cy="130" r="90" fill="none" stroke="#b97d53" stroke-width="36" stroke-dasharray="86.9 478.6" stroke-dashoffset="-478.6"/>
+        <circle id="donutSeg0" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#ff6f5e" stroke-width="36" stroke-dasharray="165.1 400.4" stroke-dashoffset="0"/>
+        <circle id="donutSeg1" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#ffa24c" stroke-width="36" stroke-dasharray="160.0 405.5" stroke-dashoffset="-165.1"/>
+        <circle id="donutSeg2" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#ffd97d" stroke-width="36" stroke-dasharray="97.3 468.2" stroke-dashoffset="-325.1"/>
+        <circle id="donutSeg3" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#f7e3b5" stroke-width="36" stroke-dasharray="25.3 540.2" stroke-dashoffset="-422.4"/>
+        <circle id="donutSeg4" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#e8c39e" stroke-width="36" stroke-dasharray="18.8 546.7" stroke-dashoffset="-447.7"/>
+        <circle id="donutSeg5" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#d9946b" stroke-width="36" stroke-dasharray="12.1 553.4" stroke-dashoffset="-466.5"/>
+        <circle id="donutSeg6" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#b97d53" stroke-width="36" stroke-dasharray="86.9 478.6" stroke-dashoffset="-478.6"/>
       </g>
       <text x="130" y="126" fill="#3d3935" font-size="20" text-anchor="middle" font-weight="600">71.4%</text>
       <text x="130" y="146" fill="#8b8580" font-size="11" text-anchor="middle">佔營收費用率</text>
@@ -281,7 +283,7 @@
     <div class="legend-item"><span class="legend-dot" style="background:#d9946b"></span>包裝＋加工 73,108（2.1%）</div>
     <div class="legend-item"><span class="legend-dot" style="background:#b97d53"></span>其他未列明營業費用 524,963（15.4%）</div>
   </div>
-  <div class="chart-note">「其他未列明營業費用」是損益表營業利益（235,968）反推出的餘額，非單一科目，待業主補齊明細後可拆解。</div>
+  <div class="chart-note">💡 圖上任一色塊皆可點擊，查看該項目的說明。「其他未列明營業費用」是損益表營業利益（235,968）反推出的餘額，非單一科目，待業主補齊明細後可拆解。</div>
 </div>
 
 <h2>五、毛利到淨利瀑布分析</h2>
@@ -399,6 +401,15 @@
   </div>
 </div>
 
+<!-- 費用結構圓餅圖各色塊說明彈窗 -->
+<div id="donutModal" class="modal">
+  <div class="modal-content">
+    <h3 class="modal-title" id="donutModalTitle">—</h3>
+    <div class="modal-body" id="donutModalBody">—</div>
+    <button class="modal-close" id="donutModalClose">了解</button>
+  </div>
+</div>
+
 <script>
 document.getElementById('gapTrigger')?.addEventListener('click', function(e) {
   e.preventDefault();
@@ -411,6 +422,57 @@ document.getElementById('gapClose')?.addEventListener('click', function(e) {
 });
 document.getElementById('gapModal')?.addEventListener('click', function(e) {
   if(e.target === this) {
+    this.classList.remove('active');
+  }
+});
+
+var donutSegData = {
+  donutSeg0: {
+    title: '佣金支出　998,096（29.2%）',
+    body: '<p>單一最大費用項，是業務員／通路抽成驅動的銷售模式，屬於規模化下相對可控的變動成本。</p><p><b>建議：</b>優先啃這塊比砍薪資或租金更有效——拉高淨利率的最大槓桿點，但需配套設計（如階梯式抽成）以免影響業務端銷售動能。</p>'
+  },
+  donutSeg1: {
+    title: '薪資支出　967,320（28.3%）',
+    body: '<p>僅次於佣金的第二大費用項，屬固定人事投入。</p><p><b>建議：</b>是否有精簡空間，需搭配團隊編制與產值評估，不建議貿然調整。</p>'
+  },
+  donutSeg3: {
+    title: '保險費　152,830（4.5%）',
+    body: '<p>佔營收比 3.2%，佔比不算高，但值得留意。</p><p><b>建議：</b>確認是否為法定強制投保（如勞健保、產險），若非強制項目，可比價或議價，執行門檻低，適合當第一個快贏動作。</p>'
+  },
+  donutSeg4: {
+    title: '租金（固定成本）　113,564（3.3%）',
+    body: '<p>佔營收比 2.4%，固定成本占比極低。</p><p><b>解讀：</b>代表拖累淨利的大宗是變動成本（佣金、薪資等業務相關支出），租金本身壓力不大。</p>'
+  },
+  donutSeg5: {
+    title: '包裝＋加工費用　73,108（2.1%）',
+    body: '<p>包裝費 57,298 ＋ 加工費用 15,810。</p><p><b>解讀：</b>確認賣的是實體商品，非純服務業態，這塊費用隨銷量同步變動。</p>'
+  },
+  donutSeg6: {
+    title: '其他未列明營業費用　524,963（15.4%）',
+    body: '<p>由損益表營業利益（235,968）反推出的餘額，非單一科目。</p><p><b>建議：</b>待業主補齊「其他費用」明細後，這塊有機會進一步拆解釐清，是目前財務透明度的主要缺口之一。</p>'
+  }
+};
+document.querySelectorAll('.donut-seg').forEach(function(seg) {
+  seg.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (seg.id === 'donutSeg2') {
+      document.getElementById('gapModal').classList.add('active');
+      return;
+    }
+    var d = donutSegData[seg.id];
+    if (!d) return;
+    document.getElementById('donutModalTitle').textContent = d.title;
+    document.getElementById('donutModalBody').innerHTML = d.body;
+    document.getElementById('donutModal').classList.add('active');
+  });
+});
+document.getElementById('donutModalClose')?.addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('donutModal').classList.remove('active');
+});
+document.getElementById('donutModal')?.addEventListener('click', function(e) {
+  if (e.target === this) {
     this.classList.remove('active');
   }
 });
