@@ -159,11 +159,23 @@
   .chart-title { font-size: 0.92rem; color: var(--muted); margin-bottom: 12px; }
   .chart-svg-wrap { display: flex; justify-content: center; overflow-x: auto; }
   .legend { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 14px; font-size: 0.85rem; }
-  .legend-item { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+  .legend-item { display: flex; align-items: center; gap: 6px; color: var(--muted); cursor: pointer; transition: opacity 0.2s; }
+  .legend-item:hover { opacity: 0.7; }
   .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
   .chart-note { font-size: 0.82rem; color: var(--muted); margin-top: 10px; }
-  .donut-seg { cursor: pointer; transition: opacity 0.15s; }
-  .donut-seg:hover { opacity: 0.78; }
+  .donut-seg {
+    cursor: pointer;
+    transition: opacity 0.15s, filter 0.15s;
+    filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+  }
+  .donut-seg:hover {
+    opacity: 0.85;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+  }
+  .donut-seg.active {
+    opacity: 1;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.25));
+  }
   footer {
     margin-top: 48px;
     padding-top: 20px;
@@ -258,30 +270,22 @@
 <p>整體費用率 71.37%。固定成本占比低、變動成本（佣金、交通、廣告、樣品等業務相關支出）才是大宗——好處是規模化下的風險相對可控，壞處是規模做大不必然等於淨利同步放大。</p>
 
 <div class="chart-card">
-  <div class="chart-title">營業費用結構占比（總營業費用 3,417,940）</div>
+  <div class="chart-title">營業費用結構占比（總營業費用 3,417,940）<span style="font-size:0.8rem;color:#8b8580;margin-left:8px;">💡 點擊色段查看詳情</span></div>
   <div class="chart-svg-wrap">
-    <svg width="260" height="260" viewBox="0 0 260 260">
-      <g transform="rotate(-90 130 130)">
-        <circle id="donutSeg0" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#ff6f5e" stroke-width="36" stroke-dasharray="165.1 400.4" stroke-dashoffset="0"/>
-        <circle id="donutSeg1" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#ffa24c" stroke-width="36" stroke-dasharray="160.0 405.5" stroke-dashoffset="-165.1"/>
-        <circle id="donutSeg2" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#ffd97d" stroke-width="36" stroke-dasharray="97.3 468.2" stroke-dashoffset="-325.1"/>
-        <circle id="donutSeg3" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#f7e3b5" stroke-width="36" stroke-dasharray="25.3 540.2" stroke-dashoffset="-422.4"/>
-        <circle id="donutSeg4" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#e8c39e" stroke-width="36" stroke-dasharray="18.8 546.7" stroke-dashoffset="-447.7"/>
-        <circle id="donutSeg5" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#d9946b" stroke-width="36" stroke-dasharray="12.1 553.4" stroke-dashoffset="-466.5"/>
-        <circle id="donutSeg6" class="donut-seg" cx="130" cy="130" r="90" fill="none" stroke="#b97d53" stroke-width="36" stroke-dasharray="86.9 478.6" stroke-dashoffset="-478.6"/>
-      </g>
-      <text x="130" y="126" fill="#3d3935" font-size="20" text-anchor="middle" font-weight="600">71.4%</text>
-      <text x="130" y="146" fill="#8b8580" font-size="11" text-anchor="middle">佔營收費用率</text>
+    <svg width="280" height="280" viewBox="0 0 280 280" id="donutChart">
+      <g id="donutContainer"></g>
+      <text x="140" y="134" fill="#3d3935" font-size="20" text-anchor="middle" font-weight="600">71.4%</text>
+      <text x="140" y="154" fill="#8b8580" font-size="11" text-anchor="middle">佔營收費用率</text>
     </svg>
   </div>
   <div class="legend">
-    <div class="legend-item"><span class="legend-dot" style="background:#ff6f5e"></span>佣金 998,096（29.2%）</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#ffa24c"></span>薪資 967,320（28.3%）</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#ffd97d"></span>其他費用 588,059（17.2%）<span class="tag gap interactive" style="margin-left:4px;" id="gapTrigger">缺明細</span></div>
-    <div class="legend-item"><span class="legend-dot" style="background:#f7e3b5"></span>保費 152,830（4.5%）</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#e8c39e"></span>租金 113,564（3.3%）</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#d9946b"></span>包裝＋加工 73,108（2.1%）</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#b97d53"></span>其他未列明營業費用 524,963（15.4%）</div>
+    <div class="legend-item" data-segment="0"><span class="legend-dot" style="background:#ff6f5e"></span>佣金 998,096（29.2%）</div>
+    <div class="legend-item" data-segment="1"><span class="legend-dot" style="background:#ffa24c"></span>薪資 967,320（28.3%）</div>
+    <div class="legend-item" data-segment="2"><span class="legend-dot" style="background:#ffd97d"></span>其他費用 588,059（17.2%）<span class="tag gap" style="margin-left:4px;">缺明細</span></div>
+    <div class="legend-item" data-segment="3"><span class="legend-dot" style="background:#f7e3b5"></span>保費 152,830（4.5%）</div>
+    <div class="legend-item" data-segment="4"><span class="legend-dot" style="background:#e8c39e"></span>租金 113,564（3.3%）</div>
+    <div class="legend-item" data-segment="5"><span class="legend-dot" style="background:#d9946b"></span>包裝＋加工 73,108（2.1%）</div>
+    <div class="legend-item" data-segment="6"><span class="legend-dot" style="background:#b97d53"></span>其他未列明營業費用 524,963（15.4%）</div>
   </div>
   <div class="chart-note">💡 圖上任一色塊皆可點擊，查看該項目的說明。「其他未列明營業費用」是損益表營業利益（235,968）反推出的餘額，非單一科目，待業主補齊明細後可拆解。</div>
 </div>
@@ -411,11 +415,7 @@
 </div>
 
 <script>
-document.getElementById('gapTrigger')?.addEventListener('click', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  document.getElementById('gapModal').classList.add('active');
-});
+// 舊 gapModal 相關事件（已移至統一的 modal 系統）
 document.getElementById('gapClose')?.addEventListener('click', function(e) {
   e.preventDefault();
   document.getElementById('gapModal').classList.remove('active');
@@ -426,56 +426,120 @@ document.getElementById('gapModal')?.addEventListener('click', function(e) {
   }
 });
 
-var donutSegData = {
-  donutSeg0: {
-    title: '佣金支出　998,096（29.2%）',
-    body: '<p>單一最大費用項，是業務員／通路抽成驅動的銷售模式，屬於規模化下相對可控的變動成本。</p><p><b>建議：</b>優先啃這塊比砍薪資或租金更有效——拉高淨利率的最大槓桿點，但需配套設計（如階梯式抽成）以免影響業務端銷售動能。</p>'
-  },
-  donutSeg1: {
-    title: '薪資支出　967,320（28.3%）',
-    body: '<p>僅次於佣金的第二大費用項，屬固定人事投入。</p><p><b>建議：</b>是否有精簡空間，需搭配團隊編制與產值評估，不建議貿然調整。</p>'
-  },
-  donutSeg3: {
-    title: '保險費　152,830（4.5%）',
-    body: '<p>佔營收比 3.2%，佔比不算高，但值得留意。</p><p><b>建議：</b>確認是否為法定強制投保（如勞健保、產險），若非強制項目，可比價或議價，執行門檻低，適合當第一個快贏動作。</p>'
-  },
-  donutSeg4: {
-    title: '租金（固定成本）　113,564（3.3%）',
-    body: '<p>佔營收比 2.4%，固定成本占比極低。</p><p><b>解讀：</b>代表拖累淨利的大宗是變動成本（佣金、薪資等業務相關支出），租金本身壓力不大。</p>'
-  },
-  donutSeg5: {
-    title: '包裝＋加工費用　73,108（2.1%）',
-    body: '<p>包裝費 57,298 ＋ 加工費用 15,810。</p><p><b>解讀：</b>確認賣的是實體商品，非純服務業態，這塊費用隨銷量同步變動。</p>'
-  },
-  donutSeg6: {
-    title: '其他未列明營業費用　524,963（15.4%）',
-    body: '<p>由損益表營業利益（235,968）反推出的餘額，非單一科目。</p><p><b>建議：</b>待業主補齊「其他費用」明細後，這塊有機會進一步拆解釐清，是目前財務透明度的主要缺口之一。</p>'
-  }
-};
-document.querySelectorAll('.donut-seg').forEach(function(seg) {
-  seg.addEventListener('click', function(e) {
+// 費用項目定義
+var donutSegments = [
+  { id: 0, name: '佣金', amount: 998096, percentage: 29.2, color: '#ff6f5e', title: '佣金支出　998,096（29.2%）', body: '<p>單一最大費用項，是業務員／通路抽成驅動的銷售模式，屬於規模化下相對可控的變動成本。</p><p><b>建議：</b>優先啃這塊比砍薪資或租金更有效——拉高淨利率的最大槓桿點，但需配套設計（如階梯式抽成）以免影響業務端銷售動能。</p>' },
+  { id: 1, name: '薪資', amount: 967320, percentage: 28.3, color: '#ffa24c', title: '薪資支出　967,320（28.3%）', body: '<p>僅次於佣金的第二大費用項，屬固定人事投入。</p><p><b>建議：</b>是否有精簡空間，需搭配團隊編制與產值評估，不建議貿然調整。</p>' },
+  { id: 2, name: '其他費用', amount: 588059, percentage: 17.2, color: '#ffd97d', isGap: true, title: '其他費用　588,059（17.2%）', body: '<p><b>項目：</b>其他費用 588,059 元</p><p><b>狀況：</b>業主目前尚無法提供科目明細。這筆費用在損益表上是單一科目，無法進一步拆解為交通、廣告、樣品或其他子項。</p><p><b>影響：</b>報告無法對這 12.3% 的營收占比進行細項分析，致使財務透明度與成本管理可視性受限。</p><p><b>下一步：</b>建議業主整理相關憑證與結帳單據，逐項補齊明細。待補齊後，可更新報告相關段落，更精準地識別可控與不可控費用。</p>' },
+  { id: 3, name: '保費', amount: 152830, percentage: 4.5, color: '#f7e3b5', title: '保險費　152,830（4.5%）', body: '<p>佔營收比 3.2%，佔比不算高，但值得留意。</p><p><b>建議：</b>確認是否為法定強制投保（如勞健保、產險），若非強制項目，可比價或議價，執行門檻低，適合當第一個快贏動作。</p>' },
+  { id: 4, name: '租金', amount: 113564, percentage: 3.3, color: '#e8c39e', title: '租金（固定成本）　113,564（3.3%）', body: '<p>佔營收比 2.4%，固定成本占比極低。</p><p><b>解讀：</b>代表拖累淨利的大宗是變動成本（佣金、薪資等業務相關支出），租金本身壓力不大。</p>' },
+  { id: 5, name: '包裝加工', amount: 73108, percentage: 2.1, color: '#d9946b', title: '包裝＋加工費用　73,108（2.1%）', body: '<p>包裝費 57,298 ＋ 加工費用 15,810。</p><p><b>解讀：</b>確認賣的是實體商品，非純服務業態，這塊費用隨銷量同步變動。</p>' },
+  { id: 6, name: '其他未列明', amount: 524963, percentage: 15.4, color: '#b97d53', title: '其他未列明營業費用　524,963（15.4%）', body: '<p>由損益表營業利益（235,968）反推出的餘額，非單一科目。</p><p><b>建議：</b>待業主補齊「其他費用」明細後，這塊有機會進一步拆解釐清，是目前財務透明度的主要缺口之一。</p>' }
+];
+
+// 生成環形圖
+function createDonutChart() {
+  var cx = 140, cy = 140;
+  var outerR = 108, innerR = 72;
+  var container = document.getElementById('donutContainer');
+  var currentAngle = -Math.PI / 2; // 從 -90° (12點位置) 開始
+
+  donutSegments.forEach(function(seg) {
+    var angle = (seg.percentage / 100) * 2 * Math.PI;
+    var startAngle = currentAngle;
+    var endAngle = currentAngle + angle;
+
+    // 計算四個點
+    var outerStart = {
+      x: cx + outerR * Math.cos(startAngle),
+      y: cy + outerR * Math.sin(startAngle)
+    };
+    var outerEnd = {
+      x: cx + outerR * Math.cos(endAngle),
+      y: cy + outerR * Math.sin(endAngle)
+    };
+    var innerEnd = {
+      x: cx + innerR * Math.cos(endAngle),
+      y: cy + innerR * Math.sin(endAngle)
+    };
+    var innerStart = {
+      x: cx + innerR * Math.cos(startAngle),
+      y: cy + innerR * Math.sin(startAngle)
+    };
+
+    // 判斷是否為大弧 (>180°)
+    var largeArcFlag = angle > Math.PI ? 1 : 0;
+
+    // 構建 path
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    var pathData = 'M ' + outerStart.x.toFixed(1) + ' ' + outerStart.y.toFixed(1) +
+                   ' A ' + outerR + ' ' + outerR + ' 0 ' + largeArcFlag + ' 1 ' + outerEnd.x.toFixed(1) + ' ' + outerEnd.y.toFixed(1) +
+                   ' L ' + innerEnd.x.toFixed(1) + ' ' + innerEnd.y.toFixed(1) +
+                   ' A ' + innerR + ' ' + innerR + ' 0 ' + largeArcFlag + ' 0 ' + innerStart.x.toFixed(1) + ' ' + innerStart.y.toFixed(1) +
+                   ' Z';
+
+    path.setAttribute('d', pathData);
+    path.setAttribute('fill', seg.color);
+    path.setAttribute('class', 'donut-seg');
+    path.setAttribute('data-segment-id', seg.id);
+
+    path.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      showSegmentModal(seg.id);
+    });
+
+    path.addEventListener('mouseenter', function() {
+      path.classList.add('active');
+    });
+
+    path.addEventListener('mouseleave', function() {
+      path.classList.remove('active');
+    });
+
+    container.appendChild(path);
+    currentAngle = endAngle;
+  });
+}
+
+// 顯示費用項目 modal
+function showSegmentModal(segId) {
+  var seg = donutSegments.find(function(s) { return s.id === segId; });
+  if (!seg) return;
+
+  var titleEl = document.getElementById('donutModalTitle');
+  var bodyEl = document.getElementById('donutModalBody');
+
+  titleEl.textContent = seg.title;
+  bodyEl.innerHTML = seg.body;
+
+  document.getElementById('donutModal').classList.add('active');
+}
+
+// Legend 互動
+document.querySelectorAll('.legend-item[data-segment]').forEach(function(item) {
+  item.addEventListener('click', function(e) {
     e.preventDefault();
-    e.stopPropagation();
-    if (seg.id === 'donutSeg2') {
-      document.getElementById('gapModal').classList.add('active');
-      return;
-    }
-    var d = donutSegData[seg.id];
-    if (!d) return;
-    document.getElementById('donutModalTitle').textContent = d.title;
-    document.getElementById('donutModalBody').innerHTML = d.body;
-    document.getElementById('donutModal').classList.add('active');
+    var segId = parseInt(item.getAttribute('data-segment'));
+    showSegmentModal(segId);
   });
 });
+
+// Modal 關閉按鈕
 document.getElementById('donutModalClose')?.addEventListener('click', function(e) {
   e.preventDefault();
   document.getElementById('donutModal').classList.remove('active');
 });
+
+// Modal 背景點擊關閉
 document.getElementById('donutModal')?.addEventListener('click', function(e) {
   if (e.target === this) {
     this.classList.remove('active');
   }
 });
+
+// 初始化環形圖
+createDonutChart();
 </script>
 
 </body>
