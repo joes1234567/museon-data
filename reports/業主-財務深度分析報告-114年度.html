@@ -163,16 +163,16 @@
   .legend-item:hover { opacity: 0.7; }
   .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
   .chart-note { font-size: 0.82rem; color: var(--muted); margin-top: 10px; }
-  .donut-seg {
+  .donut-seg, .stack-seg {
     cursor: pointer;
     transition: opacity 0.15s, filter 0.15s;
     filter: drop-shadow(0 0 0 rgba(0,0,0,0));
   }
-  .donut-seg:hover {
+  .donut-seg:hover, .stack-seg:hover {
     opacity: 0.85;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
   }
-  .donut-seg.active {
+  .donut-seg.active, .stack-seg.active {
     opacity: 1;
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.25));
   }
@@ -217,35 +217,35 @@
 </table>
 
 <div class="chart-card">
-  <div class="chart-title">資產 vs 負債＋權益結構（單位：元）</div>
+  <div class="chart-title">資產 vs 負債＋權益結構（單位：元）<span style="font-size:0.8rem;color:#8b8580;margin-left:8px;">💡 點擊色塊查看詳情</span></div>
   <div class="chart-svg-wrap">
     <svg width="400" height="300" viewBox="0 0 400 300">
       <line x1="30" y1="250" x2="380" y2="250" stroke="#ede8e0" stroke-width="1"/>
       <!-- 資產欄 -->
-      <rect x="60" y="223.3" width="100" height="26.7" fill="#ffd97d"/>
-      <rect x="60" y="107.9" width="100" height="115.4" fill="#ffa24c"/>
-      <rect x="60" y="88.2" width="100" height="19.7" fill="#f7e3b5"/>
-      <rect x="60" y="10" width="100" height="78.2" fill="#e8c39e"/>
+      <rect class="stack-seg" data-seg-id="0" x="60" y="223.3" width="100" height="26.7" fill="#ffd97d"/>
+      <rect class="stack-seg" data-seg-id="1" x="60" y="107.9" width="100" height="115.4" fill="#ffa24c"/>
+      <rect class="stack-seg" data-seg-id="2" x="60" y="88.2" width="100" height="19.7" fill="#f7e3b5"/>
+      <rect class="stack-seg" data-seg-id="3" x="60" y="10" width="100" height="78.2" fill="#e8c39e"/>
       <text x="110" y="268" fill="#8b8580" font-size="12" text-anchor="middle">資產 1,069,042</text>
       <!-- 負債+權益欄 -->
-      <rect x="240" y="221.1" width="100" height="28.9" fill="#f7e3b5"/>
-      <rect x="240" y="187.4" width="100" height="33.7" fill="#ff6f5e"/>
-      <rect x="240" y="52.7" width="100" height="134.7" fill="#ffa24c"/>
-      <rect x="240" y="10" width="100" height="42.7" fill="#35c187"/>
+      <rect class="stack-seg" data-seg-id="4" x="240" y="221.1" width="100" height="28.9" fill="#f7e3b5"/>
+      <rect class="stack-seg" data-seg-id="5" x="240" y="187.4" width="100" height="33.7" fill="#ff6f5e"/>
+      <rect class="stack-seg" data-seg-id="6" x="240" y="52.7" width="100" height="134.7" fill="#ffa24c"/>
+      <rect class="stack-seg" data-seg-id="7" x="240" y="10" width="100" height="42.7" fill="#35c187"/>
       <text x="290" y="268" fill="#8b8580" font-size="12" text-anchor="middle">負債＋權益 1,069,042</text>
     </svg>
   </div>
   <div class="legend">
-    <div class="legend-item"><span class="legend-dot" style="background:#ffd97d"></span>現金 118,999</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#ffa24c"></span>銀行存款 513,917</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#f7e3b5"></span>存出保證金 88,000</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#e8c39e"></span>預付租金＋其他資產 348,126</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#f7e3b5"></span>其他流動負債 128,963</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#ff6f5e"></span>股東往來（墊款）150,000</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#ffa24c"></span>資本 600,000</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#35c187"></span>保留盈餘 190,079</div>
+    <div class="legend-item" data-stack-segment="0"><span class="legend-dot" style="background:#ffd97d"></span>現金 118,999</div>
+    <div class="legend-item" data-stack-segment="1"><span class="legend-dot" style="background:#ffa24c"></span>銀行存款 513,917</div>
+    <div class="legend-item" data-stack-segment="2"><span class="legend-dot" style="background:#f7e3b5"></span>存出保證金 88,000</div>
+    <div class="legend-item" data-stack-segment="3"><span class="legend-dot" style="background:#e8c39e"></span>預付租金＋其他資產 348,126</div>
+    <div class="legend-item" data-stack-segment="4"><span class="legend-dot" style="background:#f7e3b5"></span>其他流動負債 128,963</div>
+    <div class="legend-item" data-stack-segment="5"><span class="legend-dot" style="background:#ff6f5e"></span>股東往來（墊款）150,000</div>
+    <div class="legend-item" data-stack-segment="6"><span class="legend-dot" style="background:#ffa24c"></span>資本 600,000</div>
+    <div class="legend-item" data-stack-segment="7"><span class="legend-dot" style="background:#35c187"></span>保留盈餘 190,079</div>
   </div>
-  <div class="chart-note">股東往來（珊瑚色）在負債欄裡的位置一眼可見——不是業務欠款，是老闆自己墊的錢。</div>
+  <div class="chart-note">💡 圖上任一色塊皆可點擊，查看該項目的說明。股東往來（珊瑚色）在負債欄裡的位置一眼可見——不是業務欠款，是老闆自己墊的錢。</div>
 </div>
 
 <h2>三、營運模式解讀</h2>
@@ -426,6 +426,18 @@ document.getElementById('gapModal')?.addEventListener('click', function(e) {
   }
 });
 
+// 資產／負債＋權益 堆疊圖項目定義
+var stackSegments = [
+  { id: 0, title: '現金　118,999', body: '<p>資產負債表流動性最高的項目，隨時可動用。</p><p><b>解讀：</b>與銀行存款合計 632,916，覆蓋流動負債 278,963 約 2.3 倍，短期償債能力健康。</p>' },
+  { id: 1, title: '銀行存款　513,917', body: '<p>流動資產中占比最大的單一項目，是短期償債能力的主要來源。</p><p><b>解讀：</b>加計現金後合計 632,916，覆蓋流動負債綽綽有餘。</p>' },
+  { id: 2, title: '存出保證金　88,000', body: '<p>通常對應租賃合約押金或業務合作保證金，流動性較低，短期內不會回收。</p>' },
+  { id: 3, title: '預付租金＋其他資產　348,126', body: '<p>資產總額中占比第二大的項目（約 32.6%），代表已預付但尚未認列費用的租金與其他資產。</p><p><b>解讀：</b>非現金項目，評估流動性時應排除，不能拿來償債。</p>' },
+  { id: 4, title: '其他流動負債　128,963', body: '<p>短期須清償的雜項負債，多屬應付款項或暫收款。</p>' },
+  { id: 5, title: '股東往來（墊款）　150,000', body: '<p>不是業務欠款，是業主自己墊付的資金，代表營運初期現金周轉曾經吃緊。</p><p><b>解讀：</b>這筆墊款未來可能需要正式歸還或轉列增資，是明年資金規劃該優先確認的項目。</p>' },
+  { id: 6, title: '資本　600,000', body: '<p>公司設立時股東投入的資本額，是權益結構的基礎。</p>' },
+  { id: 7, title: '保留盈餘　190,079', body: '<p>首年即轉正獲利，全數計入保留盈餘，尚未分配。</p><p><b>解讀：</b>與稅後損益 190,079 一致，代表首年獲利完整保留在公司內，尚未配息。</p>' }
+];
+
 // 費用項目定義
 var donutSegments = [
   { id: 0, name: '佣金', amount: 998096, percentage: 29.2, color: '#ff6f5e', title: '佣金支出　998,096（29.2%）', body: '<p>單一最大費用項，是業務員／通路抽成驅動的銷售模式，屬於規模化下相對可控的變動成本。</p><p><b>建議：</b>優先啃這塊比砍薪資或租金更有效——拉高淨利率的最大槓桿點，但需配套設計（如階梯式抽成）以免影響業務端銷售動能。</p>' },
@@ -502,9 +514,9 @@ function createDonutChart() {
   });
 }
 
-// 顯示費用項目 modal
-function showSegmentModal(segId) {
-  var seg = donutSegments.find(function(s) { return s.id === segId; });
+// 顯示項目說明 modal（通用，供環形圖／堆疊圖共用）
+function showModalFor(segments, segId) {
+  var seg = segments.find(function(s) { return s.id === segId; });
   if (!seg) return;
 
   var titleEl = document.getElementById('donutModalTitle');
@@ -516,12 +528,41 @@ function showSegmentModal(segId) {
   document.getElementById('donutModal').classList.add('active');
 }
 
-// Legend 互動
+function showSegmentModal(segId) {
+  showModalFor(donutSegments, segId);
+}
+
+function showStackModal(segId) {
+  showModalFor(stackSegments, segId);
+}
+
+// Legend 互動（費用結構環形圖）
 document.querySelectorAll('.legend-item[data-segment]').forEach(function(item) {
   item.addEventListener('click', function(e) {
     e.preventDefault();
     var segId = parseInt(item.getAttribute('data-segment'));
     showSegmentModal(segId);
+  });
+});
+
+// 堆疊圖色塊互動
+document.querySelectorAll('.stack-seg').forEach(function(rect) {
+  rect.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var segId = parseInt(rect.getAttribute('data-seg-id'));
+    showStackModal(segId);
+  });
+  rect.addEventListener('mouseenter', function() { rect.classList.add('active'); });
+  rect.addEventListener('mouseleave', function() { rect.classList.remove('active'); });
+});
+
+// 堆疊圖 legend 互動
+document.querySelectorAll('.legend-item[data-stack-segment]').forEach(function(item) {
+  item.addEventListener('click', function(e) {
+    e.preventDefault();
+    var segId = parseInt(item.getAttribute('data-stack-segment'));
+    showStackModal(segId);
   });
 });
 
