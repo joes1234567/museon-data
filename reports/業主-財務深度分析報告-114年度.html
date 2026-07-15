@@ -14,6 +14,13 @@
     --accent: #4f8cff;
     --good: #35c187;
     --warn: #f2b84b;
+    --c-coral: #ff6f5e;
+    --c-orange: #ffa24c;
+    --c-yellow: #ffd97d;
+    --c-cream: #f7e3b5;
+    --c-tan: #e8c39e;
+    --c-terracotta: #d9946b;
+    --c-brown: #b97d53;
   }
   * { box-sizing: border-box; }
   body {
@@ -81,6 +88,23 @@
     background: rgba(242,184,75,0.15);
     color: var(--warn);
   }
+  .tag.new {
+    background: rgba(255,111,94,0.15);
+    color: var(--c-coral);
+  }
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px 16px;
+    margin: 14px 0;
+  }
+  .chart-title { font-size: 0.92rem; color: var(--muted); margin-bottom: 12px; }
+  .chart-svg-wrap { display: flex; justify-content: center; overflow-x: auto; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 14px; font-size: 0.85rem; }
+  .legend-item { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .chart-note { font-size: 0.82rem; color: var(--muted); margin-top: 10px; }
   footer {
     margin-top: 48px;
     padding-top: 20px;
@@ -103,7 +127,7 @@
 </header>
 
 <div class="confirm-banner">
-  <b>資訊缺口：其他費用 588,059 無科目明細</b> —— 業主目前無法提供，本報告先以「已知缺口」呈現，待明細補齊後可更新第四、六段。
+  <b>資訊缺口：其他費用 588,059 無科目明細</b> —— 業主目前無法提供，本報告先以「已知缺口」呈現，待明細補齊後可更新對應段落。
 </div>
 
 <h2>一、執行摘要</h2>
@@ -120,6 +144,38 @@
   <tr><td>流動性覆蓋比</td><td>約 2.3 倍</td><td>銀行存款 513,917 ＋ 現金 118,999 = 632,916，對比流動負債 278,963，短期無壓力</td></tr>
   <tr><td>毛利率 → 營業利益率</td><td>76.3% → 4.92%</td><td>中間 71 個百分點被費用吃掉，是本報告最大解讀焦點</td></tr>
 </table>
+
+<div class="chart-card">
+  <div class="chart-title">資產 vs 負債＋權益結構（單位：元）</div>
+  <div class="chart-svg-wrap">
+    <svg width="400" height="300" viewBox="0 0 400 300">
+      <line x1="30" y1="250" x2="380" y2="250" stroke="#2a2e38" stroke-width="1"/>
+      <!-- 資產欄 -->
+      <rect x="60" y="223.3" width="100" height="26.7" fill="#ffd97d"/>
+      <rect x="60" y="107.9" width="100" height="115.4" fill="#ffa24c"/>
+      <rect x="60" y="88.2" width="100" height="19.7" fill="#f7e3b5"/>
+      <rect x="60" y="10" width="100" height="78.2" fill="#e8c39e"/>
+      <text x="110" y="268" fill="#9aa1ac" font-size="12" text-anchor="middle">資產 1,069,042</text>
+      <!-- 負債+權益欄 -->
+      <rect x="240" y="221.1" width="100" height="28.9" fill="#f7e3b5"/>
+      <rect x="240" y="187.4" width="100" height="33.7" fill="#ff6f5e"/>
+      <rect x="240" y="52.7" width="100" height="134.7" fill="#ffa24c"/>
+      <rect x="240" y="10" width="100" height="42.7" fill="#35c187"/>
+      <text x="290" y="268" fill="#9aa1ac" font-size="12" text-anchor="middle">負債＋權益 1,069,042</text>
+    </svg>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#ffd97d"></span>現金 118,999</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ffa24c"></span>銀行存款 513,917</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#f7e3b5"></span>存出保證金 88,000</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#e8c39e"></span>預付租金＋其他資產 348,126</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#f7e3b5"></span>其他流動負債 128,963</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ff6f5e"></span>股東往來（墊款）150,000</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ffa24c"></span>資本 600,000</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#35c187"></span>保留盈餘 190,079</div>
+  </div>
+  <div class="chart-note">股東往來（珊瑚色）在負債欄裡的位置一眼可見——不是業務欠款，是老闆自己墊的錢。</div>
+</div>
 
 <h2>三、營運模式解讀</h2>
 <div class="card">
@@ -138,10 +194,86 @@
   <tr><td>其他費用</td><td>588,059</td><td>12.3%</td><td class="tag gap">無明細，財務透明度缺口</td></tr>
   <tr><td>保險費</td><td>152,830</td><td>3.2%</td><td>偏高，需確認是否為法定強制投保或可議價項目</td></tr>
   <tr><td>租金（固定成本）</td><td>113,564</td><td>2.4%</td><td>固定成本占比極低，變動成本才是大宗</td></tr>
+  <tr><td>包裝＋加工費用</td><td>73,108</td><td>1.5%</td><td>確認實體商品業態</td></tr>
 </table>
 <p>整體費用率 71.37%。固定成本占比低、變動成本（佣金、交通、廣告、樣品等業務相關支出）才是大宗——好處是規模化下的風險相對可控，壞處是規模做大不必然等於淨利同步放大。</p>
 
-<h2>五、資金與股東動態</h2>
+<div class="chart-card">
+  <div class="chart-title">營業費用結構占比（總營業費用 3,417,940）</div>
+  <div class="chart-svg-wrap">
+    <svg width="260" height="260" viewBox="0 0 260 260">
+      <g transform="rotate(-90 130 130)">
+        <circle cx="130" cy="130" r="90" fill="none" stroke="#ff6f5e" stroke-width="36" stroke-dasharray="165.1 400.4" stroke-dashoffset="0"/>
+        <circle cx="130" cy="130" r="90" fill="none" stroke="#ffa24c" stroke-width="36" stroke-dasharray="160.0 405.5" stroke-dashoffset="-165.1"/>
+        <circle cx="130" cy="130" r="90" fill="none" stroke="#ffd97d" stroke-width="36" stroke-dasharray="97.3 468.2" stroke-dashoffset="-325.1"/>
+        <circle cx="130" cy="130" r="90" fill="none" stroke="#f7e3b5" stroke-width="36" stroke-dasharray="25.3 540.2" stroke-dashoffset="-422.4"/>
+        <circle cx="130" cy="130" r="90" fill="none" stroke="#e8c39e" stroke-width="36" stroke-dasharray="18.8 546.7" stroke-dashoffset="-447.7"/>
+        <circle cx="130" cy="130" r="90" fill="none" stroke="#d9946b" stroke-width="36" stroke-dasharray="12.1 553.4" stroke-dashoffset="-466.5"/>
+        <circle cx="130" cy="130" r="90" fill="none" stroke="#b97d53" stroke-width="36" stroke-dasharray="86.9 478.6" stroke-dashoffset="-478.6"/>
+      </g>
+      <text x="130" y="126" fill="#e6e8ec" font-size="20" text-anchor="middle" font-weight="600">71.4%</text>
+      <text x="130" y="146" fill="#9aa1ac" font-size="11" text-anchor="middle">佔營收費用率</text>
+    </svg>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#ff6f5e"></span>佣金 998,096（29.2%）</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ffa24c"></span>薪資 967,320（28.3%）</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ffd97d"></span>其他費用 588,059（17.2%）<span class="tag gap" style="margin-left:4px;">缺明細</span></div>
+    <div class="legend-item"><span class="legend-dot" style="background:#f7e3b5"></span>保費 152,830（4.5%）</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#e8c39e"></span>租金 113,564（3.3%）</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#d9946b"></span>包裝＋加工 73,108（2.1%）</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#b97d53"></span>其他未列明營業費用 524,963（15.4%）</div>
+  </div>
+  <div class="chart-note">「其他未列明營業費用」是損益表營業利益（235,968）反推出的餘額，非單一科目，待業主補齊明細後可拆解。</div>
+</div>
+
+<h2>五、毛利到淨利瀑布分析</h2>
+<div class="chart-card">
+  <div class="chart-title">毛利率 76.3% 如何一路被吃到營業利益率 4.92%</div>
+  <div class="chart-svg-wrap">
+    <svg width="620" height="300" viewBox="0 0 620 300">
+      <line x1="0" y1="270" x2="620" y2="270" stroke="#2a2e38" stroke-width="1"/>
+      <rect x="10" y="10" width="56" height="260" fill="#ff6f5e"/>
+      <text x="38" y="286" fill="#9aa1ac" font-size="10.5" text-anchor="middle">毛利率</text>
+      <text x="38" y="6" fill="#e6e8ec" font-size="12" text-anchor="middle" dy="-4">76.3%</text>
+
+      <rect x="78" y="10" width="56" height="71" fill="#ffa24c"/>
+      <text x="106" y="286" fill="#9aa1ac" font-size="10.5" text-anchor="middle">－佣金</text>
+      <text x="106" y="10" fill="#e6e8ec" font-size="11" text-anchor="middle" dy="-4">20.9%</text>
+
+      <rect x="146" y="81" width="56" height="69" fill="#ffb86b"/>
+      <text x="174" y="286" fill="#9aa1ac" font-size="10.5" text-anchor="middle">－薪資</text>
+      <text x="174" y="81" fill="#e6e8ec" font-size="11" text-anchor="middle" dy="-4">20.2%</text>
+
+      <rect x="214" y="150" width="56" height="42" fill="#ffd97d"/>
+      <text x="242" y="286" fill="#9aa1ac" font-size="10.5" text-anchor="middle">－其他費用</text>
+      <text x="242" y="150" fill="#e6e8ec" font-size="11" text-anchor="middle" dy="-4">12.3%</text>
+
+      <rect x="282" y="192" width="56" height="11" fill="#f7e3b5"/>
+      <text x="310" y="286" fill="#9aa1ac" font-size="10.5" text-anchor="middle">－保費</text>
+      <text x="310" y="192" fill="#e6e8ec" font-size="11" text-anchor="middle" dy="-4">3.2%</text>
+
+      <rect x="350" y="203" width="56" height="8" fill="#e8c39e"/>
+      <text x="378" y="286" fill="#9aa1ac" font-size="10.5" text-anchor="middle">－租金</text>
+      <text x="378" y="203" fill="#e6e8ec" font-size="11" text-anchor="middle" dy="-4">2.4%</text>
+
+      <rect x="418" y="211" width="56" height="5" fill="#d9946b"/>
+      <text x="446" y="286" fill="#9aa1ac" font-size="10.5" text-anchor="middle">－包裝加工</text>
+      <text x="446" y="211" fill="#e6e8ec" font-size="11" text-anchor="middle" dy="-4">1.5%</text>
+
+      <rect x="486" y="216" width="56" height="37" fill="#b97d53"/>
+      <text x="514" y="286" fill="#9aa1ac" font-size="10.5" text-anchor="middle">－其他未列明</text>
+      <text x="514" y="216" fill="#e6e8ec" font-size="11" text-anchor="middle" dy="-4">11.0%</text>
+
+      <rect x="554" y="253" width="56" height="17" fill="#35c187"/>
+      <text x="582" y="286" fill="#9aa1ac" font-size="10.5" text-anchor="middle">營業利益率</text>
+      <text x="582" y="253" fill="#e6e8ec" font-size="12" text-anchor="middle" dy="-4">4.92%</text>
+    </svg>
+  </div>
+  <div class="chart-note">每一段落差都是一筆真實費用——「其他未列明」是損益表反推的餘額，佔比不小（11.0%），值得跟業主要明細釐清。</div>
+</div>
+
+<h2>六、資金與股東動態</h2>
 <div class="card">
   <ul>
     <li><b>業主（股東）往來 150,000</b>：除登記資本 600,000 外，股東另外墊款，代表營運初期現金周轉曾經吃緊，需要自掏腰包補</li>
@@ -149,19 +281,45 @@
   </ul>
 </div>
 
-<h2>六、風險與缺口清單</h2>
+<h2>七、客戶集中度與名單風險 <span class="tag new">新增</span></h2>
+<div class="card">
+  76% 毛利率但獲利薄，如果營收集中在少數幾個大客戶身上，抽成驅動的銷售模式下，業務離職或客戶流失的風險會比帳面數字看到的更高——業務員帶走的不只是提成，還有客戶關係本身。<b>報表本身看不出這個資訊</b>，但建議直接向業主確認：前三大客戶占營收比重多少？主力業務員手上的客戶是否有簽約或轉介限制？這兩個答案會決定「佣金結構要不要調整」這個建議的優先順序。
+</div>
+
+<h2>八、單位經濟 <span class="tag new">新增</span></h2>
+<div class="card">
+  把總額換算成「每賣 100 元」更容易抓到槓桿位置：
+  <table style="margin-top:10px;">
+    <tr><th>每 100 元營收</th><th>金額</th></tr>
+    <tr><td>扣進貨成本</td><td>23.7 元</td></tr>
+    <tr><td>＝ 毛利</td><td>76.3 元</td></tr>
+    <tr><td>扣營業費用（佣金＋薪資＋其他）</td><td>71.4 元</td></tr>
+    <tr><td>＝ 營業利益</td><td>4.9 元</td></tr>
+  </table>
+  這條線比看總額更能抓到規模化後的槓桿：<b>營收每多 100 元，目前的成本結構只留下不到 5 元</b>。如果佣金比率不變，業績翻倍不會讓淨利同步翻倍——除非佣金／薪資這兩塊隨規模成長的邊際費用率能往下壓，否則規模化的甜頭主要落在現金週轉速度，不在淨利率。
+</div>
+
+<h2>九、明年資金展望 <span class="tag new">新增</span></h2>
+<div class="card">
+  這是首年（僅 9 個月）就轉正獲利的公司，體質不差，但明年如果要擴大營收，佣金與薪資都會隨營收線性成長，代表<b>現金需求會同步放大</b>。股東這一年已經墊款 150,000，這代表營運初期現金周轉曾經吃緊過一次——明年若要衝營收規模，是否需要正式增資，或先談一筆週轉借款額度，這是現在報表回答不了、但決策上該先想的問題。甜頭：提前備好資金彈性，業務擴張不會被現金卡住；代價：增資稀釋股權、借款則多一筆利息與還款壓力，兩條路業主需要先選邊。
+</div>
+
+<h2>十、風險與缺口清單</h2>
 <table>
   <tr><th>風險 / 缺口</th><th>影響</th></tr>
   <tr><td class="tag gap">其他費用 588,059 無明細</td><td>財務透明度缺口，建議向業主索取科目明細，直接影響本報告能寫多深</td></tr>
   <tr><td>保險費占比偏高（3.2%）</td><td>需確認是否可議價或屬強制項目</td></tr>
   <tr><td>存貨為 0 的模式</td><td>對供應端／通路端依賴度高，斷貨風險需另外評估（報表本身看不出供應穩定性）</td></tr>
+  <tr><td>客戶集中度未知</td><td>抽成模式下，業務離職或大客戶流失的實際風險可能高於帳面數字</td></tr>
 </table>
 
-<h2>七、策略建議</h2>
+<h2>十一、策略建議</h2>
 <ol>
   <li><b>優先啃佣金結構</b>（占營收 20.8%）——拉高淨利率最大槓桿，比砍薪資或租金更有效。甜頭：直接提升營業利益率。代價：可能影響業務端銷售動能，需配套設計（如階梯式抽成、留才誘因不變）。</li>
   <li><b>向業主要 588,059 的明細</b>——不釐清就無法管理。甜頭：抓出隱藏的可控費用。代價：業主需額外時間整理憑證，短期內看不到直接效益。</li>
   <li><b>保費 152,830 比價或確認必要性</b>——甜頭：立即現金流改善，執行門檻低，適合當第一個快贏動作。代價：若屬法定強制投保，空間有限。</li>
+  <li><b>釐清客戶集中度</b>——甜頭：提早看見業務／客戶流失的實際風險，而非等出事才知道。代價：需要業主整理客戶名單，短期內是額外工作量。</li>
+  <li><b>明年擴張前先談好資金彈性</b>（增資或借款額度）——甜頭：業務擴張不會被現金卡住。代價：增資稀釋股權或借款背負利息，兩者都要業主先決定方向。</li>
 </ol>
 
 <footer>
