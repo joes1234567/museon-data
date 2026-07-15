@@ -89,6 +89,62 @@
     background: rgba(242,184,75,0.15);
     color: var(--warn);
   }
+  .tag.gap.interactive {
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .tag.gap.interactive:hover {
+    background: rgba(242,184,75,0.25);
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal.active {
+    display: flex;
+  }
+  .modal-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .modal-title {
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin: 0 0 14px;
+    font-weight: 600;
+  }
+  .modal-body {
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0 0 20px;
+  }
+  .modal-close {
+    background: var(--warn);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .modal-close:hover {
+    opacity: 0.8;
+  }
   .tag.new {
     background: rgba(255,111,94,0.15);
     color: var(--c-coral);
@@ -219,7 +275,7 @@
   <div class="legend">
     <div class="legend-item"><span class="legend-dot" style="background:#ff6f5e"></span>佣金 998,096（29.2%）</div>
     <div class="legend-item"><span class="legend-dot" style="background:#ffa24c"></span>薪資 967,320（28.3%）</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#ffd97d"></span>其他費用 588,059（17.2%）<span class="tag gap" style="margin-left:4px;">缺明細</span></div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ffd97d"></span>其他費用 588,059（17.2%）<span class="tag gap interactive" style="margin-left:4px;" onclick="openGapModal()">缺明細</span></div>
     <div class="legend-item"><span class="legend-dot" style="background:#f7e3b5"></span>保費 152,830（4.5%）</div>
     <div class="legend-item"><span class="legend-dot" style="background:#e8c39e"></span>租金 113,564（3.3%）</div>
     <div class="legend-item"><span class="legend-dot" style="background:#d9946b"></span>包裝＋加工 73,108（2.1%）</div>
@@ -328,5 +384,29 @@
 </footer>
 
 </div>
+
+<!-- 資訊缺口說明彈窗 -->
+<div id="gapModal" class="modal" onclick="if(event.target === this) closeGapModal()">
+  <div class="modal-content">
+    <h3 class="modal-title">資訊缺口說明</h3>
+    <div class="modal-body">
+      <p><b>項目：</b>其他費用 588,059 元</p>
+      <p><b>狀況：</b>業主目前尚無法提供科目明細。這筆費用在損益表上是單一科目，無法進一步拆解為交通、廣告、樣品或其他子項。</p>
+      <p><b>影響：</b>報告無法對這 12.3% 的營收占比進行細項分析，致使財務透明度與成本管理可視性受限。</p>
+      <p><b>下一步：</b>建議業主整理相關憑證與結帳單據，逐項補齊明細。待補齊後，可更新報告相關段落，更精準地識別可控與不可控費用。</p>
+    </div>
+    <button class="modal-close" onclick="closeGapModal()">了解</button>
+  </div>
+</div>
+
+<script>
+function openGapModal() {
+  document.getElementById('gapModal').classList.add('active');
+}
+function closeGapModal() {
+  document.getElementById('gapModal').classList.remove('active');
+}
+</script>
+
 </body>
 </html>
