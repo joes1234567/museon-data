@@ -275,7 +275,7 @@
   <div class="legend">
     <div class="legend-item"><span class="legend-dot" style="background:#ff6f5e"></span>佣金 998,096（29.2%）</div>
     <div class="legend-item"><span class="legend-dot" style="background:#ffa24c"></span>薪資 967,320（28.3%）</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#ffd97d"></span>其他費用 588,059（17.2%）<span class="tag gap interactive" style="margin-left:4px;" onclick="openGapModal()">缺明細</span></div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ffd97d"></span>其他費用 588,059（17.2%）<span class="tag gap interactive" style="margin-left:4px;" id="gapTrigger">缺明細</span></div>
     <div class="legend-item"><span class="legend-dot" style="background:#f7e3b5"></span>保費 152,830（4.5%）</div>
     <div class="legend-item"><span class="legend-dot" style="background:#e8c39e"></span>租金 113,564（3.3%）</div>
     <div class="legend-item"><span class="legend-dot" style="background:#d9946b"></span>包裝＋加工 73,108（2.1%）</div>
@@ -386,7 +386,7 @@
 </div>
 
 <!-- 資訊缺口說明彈窗 -->
-<div id="gapModal" class="modal" onclick="if(event.target === this) closeGapModal()">
+<div id="gapModal" class="modal">
   <div class="modal-content">
     <h3 class="modal-title">資訊缺口說明</h3>
     <div class="modal-body">
@@ -395,17 +395,25 @@
       <p><b>影響：</b>報告無法對這 12.3% 的營收占比進行細項分析，致使財務透明度與成本管理可視性受限。</p>
       <p><b>下一步：</b>建議業主整理相關憑證與結帳單據，逐項補齊明細。待補齊後，可更新報告相關段落，更精準地識別可控與不可控費用。</p>
     </div>
-    <button class="modal-close" onclick="closeGapModal()">了解</button>
+    <button class="modal-close" id="gapClose">了解</button>
   </div>
 </div>
 
 <script>
-function openGapModal() {
+document.getElementById('gapTrigger')?.addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
   document.getElementById('gapModal').classList.add('active');
-}
-function closeGapModal() {
+});
+document.getElementById('gapClose')?.addEventListener('click', function(e) {
+  e.preventDefault();
   document.getElementById('gapModal').classList.remove('active');
-}
+});
+document.getElementById('gapModal')?.addEventListener('click', function(e) {
+  if(e.target === this) {
+    this.classList.remove('active');
+  }
+});
 </script>
 
 </body>
