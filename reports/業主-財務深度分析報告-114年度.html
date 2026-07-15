@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>財務深度分析報告｜114年度（首個會計年度）</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #171a21;
+    --border: #2a2e38;
+    --text: #e6e8ec;
+    --muted: #9aa1ac;
+    --accent: #4f8cff;
+    --good: #35c187;
+    --warn: #f2b84b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  header { margin-bottom: 32px; }
+  h1 { font-size: 1.6rem; margin: 0 0 8px; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .confirm-banner {
+    background: linear-gradient(135deg, rgba(242,184,75,0.15), rgba(242,184,75,0.05));
+    border: 1px solid var(--warn);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 0.95rem;
+  }
+  .confirm-banner b { color: var(--warn); }
+  h2 {
+    font-size: 1.15rem;
+    margin: 40px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    color: var(--accent);
+  }
+  h3 { font-size: 1rem; margin: 24px 0 10px; color: var(--text); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--card); color: var(--muted); font-weight: 600; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  ul, ol { padding-left: 22px; }
+  li { margin: 6px 0; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 14px 0;
+  }
+  .tag {
+    display: inline-block;
+    background: rgba(79,140,255,0.15);
+    color: var(--accent);
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-size: 0.8rem;
+    margin-right: 6px;
+  }
+  .tag.gap {
+    background: rgba(242,184,75,0.15);
+    color: var(--warn);
+  }
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>財務深度分析報告｜114年度（首個會計年度）</h1>
+  <div class="meta">
+    整理日期：2026-07-15　｜　資料期間：114/4/2（設立）～114/12/31（約9個月）<br>
+    資料來源：業主提供之資產負債表、綜合損益表（截圖）<br>
+    限制說明：本報告基於業主提供之財報數字整理判讀，非會計師簽證意見，「其他費用」科目缺明細，相關段落標註為待補資訊
+  </div>
+</header>
+
+<div class="confirm-banner">
+  <b>資訊缺口：其他費用 588,059 無科目明細</b> —— 業主目前無法提供，本報告先以「已知缺口」呈現，待明細補齊後可更新第四、六段。
+</div>
+
+<h2>一、執行摘要</h2>
+<div class="card">
+  首年即轉正獲利，稅後損益 190,079，年化營收約 640 萬。核心觀察：毛利率高達 76.3%，但受業務抽成與費用結構拖累，落到營業利益率僅 4.92%——<b>賺錢能力沒問題，問題出在錢留不留得住</b>。短期償債能力健康（現金覆蓋負債約 2.3 倍），但股東已額外墊款 150,000，代表營運初期現金周轉曾經吃緊。
+</div>
+
+<h2>二、財務體質總覽</h2>
+<table>
+  <tr><th>項目</th><th>金額 / 比率</th><th>解讀</th></tr>
+  <tr><td>資產總額</td><td>1,069,042</td><td>—</td></tr>
+  <tr><td>負債總額</td><td>278,963</td><td>—</td></tr>
+  <tr><td>權益總額</td><td>790,079</td><td>資本 600,000 ＋ 保留盈餘 190,079</td></tr>
+  <tr><td>流動性覆蓋比</td><td>約 2.3 倍</td><td>銀行存款 513,917 ＋ 現金 118,999 = 632,916，對比流動負債 278,963，短期無壓力</td></tr>
+  <tr><td>毛利率 → 營業利益率</td><td>76.3% → 4.92%</td><td>中間 71 個百分點被費用吃掉，是本報告最大解讀焦點</td></tr>
+</table>
+
+<h2>三、營運模式解讀</h2>
+<div class="card">
+  <ul>
+    <li><b>佣金支出 998,096</b> 是單一最大費用項，超過薪資支出 967,320——這是業務員／通路抽成驅動的銷售模式，不是自營品牌操盤</li>
+    <li>進貨 1,134,631，期初期末存貨皆為 0，代表買進即賣出，資金週轉快、無囤貨風險，但也代表沒有庫存緩衝，銷售一旦斷貨即斷收入</li>
+    <li>包裝費 57,298 ＋ 加工費用 15,810，確認賣的是實體商品，非純服務業態</li>
+  </ul>
+</div>
+
+<h2>四、成本結構深挖 <span class="tag gap">含資訊缺口</span></h2>
+<table>
+  <tr><th>項目</th><th>金額</th><th>占營收比</th><th>解讀</th></tr>
+  <tr><td>佣金支出</td><td>998,096</td><td>20.8%</td><td>最大槓桿點，規模化下風險相對可控，但毛利持續被銷售端吃掉</td></tr>
+  <tr><td>薪資支出</td><td>967,320</td><td>20.2%</td><td>—</td></tr>
+  <tr><td>其他費用</td><td>588,059</td><td>12.3%</td><td class="tag gap">無明細，財務透明度缺口</td></tr>
+  <tr><td>保險費</td><td>152,830</td><td>3.2%</td><td>偏高，需確認是否為法定強制投保或可議價項目</td></tr>
+  <tr><td>租金（固定成本）</td><td>113,564</td><td>2.4%</td><td>固定成本占比極低，變動成本才是大宗</td></tr>
+</table>
+<p>整體費用率 71.37%。固定成本占比低、變動成本（佣金、交通、廣告、樣品等業務相關支出）才是大宗——好處是規模化下的風險相對可控，壞處是規模做大不必然等於淨利同步放大。</p>
+
+<h2>五、資金與股東動態</h2>
+<div class="card">
+  <ul>
+    <li><b>業主（股東）往來 150,000</b>：除登記資本 600,000 外，股東另外墊款，代表營運初期現金周轉曾經吃緊，需要自掏腰包補</li>
+    <li>預付租金 348,000 ＋ 存出保證金 88,000，合計 436,000 鎖在租約相關支出，屬於不易收回的沉沒成本，若未來考慮縮編或轉型要留意這塊流動性</li>
+  </ul>
+</div>
+
+<h2>六、風險與缺口清單</h2>
+<table>
+  <tr><th>風險 / 缺口</th><th>影響</th></tr>
+  <tr><td class="tag gap">其他費用 588,059 無明細</td><td>財務透明度缺口，建議向業主索取科目明細，直接影響本報告能寫多深</td></tr>
+  <tr><td>保險費占比偏高（3.2%）</td><td>需確認是否可議價或屬強制項目</td></tr>
+  <tr><td>存貨為 0 的模式</td><td>對供應端／通路端依賴度高，斷貨風險需另外評估（報表本身看不出供應穩定性）</td></tr>
+</table>
+
+<h2>七、策略建議</h2>
+<ol>
+  <li><b>優先啃佣金結構</b>（占營收 20.8%）——拉高淨利率最大槓桿，比砍薪資或租金更有效。甜頭：直接提升營業利益率。代價：可能影響業務端銷售動能，需配套設計（如階梯式抽成、留才誘因不變）。</li>
+  <li><b>向業主要 588,059 的明細</b>——不釐清就無法管理。甜頭：抓出隱藏的可控費用。代價：業主需額外時間整理憑證，短期內看不到直接效益。</li>
+  <li><b>保費 152,830 比價或確認必要性</b>——甜頭：立即現金流改善，執行門檻低，適合當第一個快贏動作。代價：若屬法定強制投保，空間有限。</li>
+</ol>
+
+<footer>
+  MUSEON 自動整理｜本報告基於業主提供之財報截圖判讀，非會計師簽證意見，僅供內部決策參考
+</footer>
+
+</div>
+</body>
+</html>
