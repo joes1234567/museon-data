@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台南首購族軟裝預算市場調查報告</title>
+<style>
+  :root {
+    --ink: #1c1c1e;
+    --ink-soft: #4a4a4d;
+    --line: #e5e3df;
+    --paper: #fdfcfa;
+    --card: #ffffff;
+    --accent: #a8763e;
+    --accent-soft: #f4ead9;
+    --blue: #3a6ea5;
+    --gold: #c99a3f;
+    --warn-bg: #fdf3e7;
+    --warn-line: #e0a856;
+    --disclose-bg: #f2f4f6;
+    --disclose-line: #8a97a6;
+    --track: #e9e6e0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+  header.title-block {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  header.title-block h1 {
+    font-size: 1.9rem;
+    margin: 0 0 8px;
+    letter-spacing: 0.02em;
+  }
+  header.title-block .subtitle {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    margin: 0 0 4px;
+  }
+  header.title-block .date {
+    color: #9a9a9d;
+    font-size: 0.85rem;
+    margin-top: 12px;
+  }
+  h2 {
+    font-size: 1.25rem;
+    margin: 48px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  h3 {
+    font-size: 1.05rem;
+    margin: 28px 0 12px;
+    color: var(--ink);
+  }
+  p { margin: 0 0 14px; color: var(--ink-soft); }
+  strong { color: var(--ink); }
+  a { color: var(--blue); }
+  ol, ul { color: var(--ink-soft); }
+  li { margin-bottom: 6px; }
+
+  .conclusion-card {
+    background: linear-gradient(135deg, var(--accent-soft), #fff);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+    margin: 0 0 20px;
+  }
+  .conclusion-card .label {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .conclusion-card .price {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  .conclusion-card .price small {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+  .conclusion-card ul { margin: 0; padding-left: 20px; }
+  .conclusion-card p:last-child { margin-bottom: 0; }
+
+  .callout {
+    border-left: 4px solid var(--warn-line);
+    background: var(--warn-bg);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 18px 0;
+    font-size: 0.92rem;
+  }
+  .callout strong { color: var(--ink); }
+
+  .disclose {
+    border-left: 4px solid var(--disclose-line);
+    background: var(--disclose-bg);
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 0.92rem;
+  }
+  .disclose p:last-child { margin-bottom: 0; }
+
+  .note {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    background: #f7f6f3;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.9rem;
+    background: var(--card);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    background: var(--ink);
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr.highlight td {
+    background: var(--accent-soft);
+    font-weight: 600;
+  }
+
+  .card-info {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 4px 20px;
+    margin: 12px 0 20px;
+  }
+  .card-info table { box-shadow: none; margin: 8px 0; }
+  .card-info th { display: none; }
+
+  .chart-block {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px 16px;
+    margin: 16px 0 22px;
+  }
+  .chart-block .chart-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .chart-block .chart-sub {
+    font-size: 0.78rem;
+    color: #9a9a9d;
+    margin-bottom: 10px;
+  }
+  .chart-block svg { display: block; width: 100%; height: auto; }
+  .chart-legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-top: 10px;
+  }
+  .chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .chart-legend .dot {
+    width: 11px; height: 11px; border-radius: 3px;
+    display: inline-block;
+  }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: #9a9a9d;
+  }
+  footer ul { padding-left: 18px; margin: 8px 0 0; }
+  footer li { margin-bottom: 4px; }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 28px 16px 64px; }
+    h1 { font-size: 1.5rem; }
+    table { font-size: 0.78rem; }
+    th, td { padding: 8px 8px; }
+    .conclusion-card .price { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title-block">
+    <h1>台南房市首購族生活型態市場調查報告</h1>
+    <p class="subtitle">聚焦：軟裝總預算規模與願付價格區間</p>
+    <p class="date">調查日期：2026年7月16日</p>
+  </header>
+
+  <section>
+    <div class="card-info">
+    <table>
+      <tr><th>項目</th><th>內容</th></tr>
+      <tr><td>調查範圍</td><td>台南市首購族（25–35 歲為主）購屋負擔能力、生活型態、軟裝（家具／家電／窗簾燈具／軟裝飾品）預算結構</td></tr>
+      <tr><td>資料性質</td><td>官方統計＋房仲業調查＋裝潢業行情資料交叉比對，<strong>非台南首購族軟裝支出的直接問卷調查</strong>（詳見第 7 節資料侷限）</td></tr>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>一、研究目的與範圍</h2>
+    <p>這份報告要回答三個問題：① 台南首購族是誰——年齡、所得、購屋動機、負擔能力大概什麼樣子？② 他們買完房子之後，軟裝（不含硬體工程）大概願意／能夠花多少錢？③ 這個預算會被什麼因素往上或往下拉？</p>
+    <div class="callout"><strong>先講結論</strong>：台灣目前沒有任何官方或房仲機構針對「台南首購族軟裝支出」做過直接問卷調查——這是一塊資料空白。這份報告用「台南購屋負擔能力數據」交叉「全國/六都裝潢軟裝行情」的方式推估合理區間，不是引用一份現成的市調報告數字。這點會在每個推估段落標註清楚。</div>
+  </section>
+
+  <section>
+    <h2>二、台南首購族輪廓</h2>
+
+    <h3>2.1 年齡與購屋力道</h3>
+    <p>永慶房產集團統計聯徵中心資料顯示，近 5 年六都 25–35 歲年輕族群購屋占比「全數上升」，台南市以 <strong>5 年增幅 2.8%</strong> 排名六都第 2（僅次桃園市 4.4%），高於新北市（2.6%）。永慶指出，年輕族群購屋動機緊扣「交通建設、產業動能、房價親民」三大關鍵——這和台南近年南科（南部科學園區）就業磁吸效應吻合。<a href="https://knowhow.yungching.com.tw/article/4787" target="_blank">[永慶房產]</a></p>
+    <p>信義房屋觀察安南區市場：首購族與換屋族「各占一半」，主力產品是屋齡約 10 年、25–30 坪的透天，總價 1,500–1,800 萬。南部買方明顯偏好透天勝過大樓產品。<a href="https://money.udn.com/money/story/12276/9590122" target="_blank">[信義房屋]</a></p>
+    <p><strong>推論</strong>：台南首購族典型輪廓落在 25–35 歲、產業聚落（南科／科技業）就業，家庭結構以新婚或育有 0–1 幼兒的小家庭為主，購屋坪數集中在 25–30 坪區間。</p>
+
+    <h3>2.2 購屋負擔能力（六都比較）</h3>
+    <table>
+      <tr><th>指標</th><th>台南市</th><th>六都排名</th><th>對照</th></tr>
+      <tr><td>房價所得比</td><td>約 8.5 倍</td><td>第 2 低（僅高於高雄 8 倍）</td><td>台北市 16 倍</td></tr>
+      <tr><td>房貸負擔率（2025 Q3）</td><td>39.65%</td><td>第 2 低（僅高於桃園 37.13%）</td><td>台北市 65.47%、全國平均 43.12%</td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:#9a9a9d;margin-top:-10px;">資料來源：內政部不動產資訊平台／政大不動產研究中心。<a href="https://figure.tw/property/housing-price-to-income-ratio-2026/" target="_blank">[Figure]</a> <a href="https://pip.moi.gov.tw/Publicize/Info/E1050" target="_blank">[內政部]</a></p>
+
+    <div class="chart-block">
+      <div class="chart-title">房貸負擔率比較（2025 Q3）</div>
+      <div class="chart-sub">比例愈低代表買房後每月房貸支出占家庭所得愈輕鬆</div>
+      <svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="房貸負擔率比較：桃園37.13%，台南39.65%，全國平均43.12%，台北65.47%">
+        <line x1="411.6" y1="0" x2="411.6" y2="170" stroke="#c9c5be" stroke-width="1" stroke-dasharray="4 3"/>
+        <text x="411.6" y="184" font-size="11" fill="#9a9a9d" text-anchor="middle">全國平均 43.12%</text>
+
+        <text x="150" y="26" font-size="13" fill="var(--ink-soft)" text-anchor="end">桃園市</text>
+        <rect x="160" y="12" width="217.5" height="22" rx="4" fill="#d8d4cc"/>
+        <text x="385" y="27" font-size="13" fill="var(--ink)">37.13%</text>
+
+        <text x="150" y="66" font-size="13" fill="var(--ink)" font-weight="600" text-anchor="end">台南市</text>
+        <rect x="160" y="52" width="232.3" height="22" rx="4" fill="#a8763e"/>
+        <text x="400" y="67" font-size="13" fill="var(--ink)" font-weight="600">39.65%</text>
+
+        <text x="150" y="106" font-size="13" fill="var(--ink-soft)" text-anchor="end">全國平均</text>
+        <rect x="160" y="92" width="252.6" height="22" rx="4" fill="#d8d4cc"/>
+        <text x="420" y="107" font-size="13" fill="var(--ink)">43.12%</text>
+
+        <text x="150" y="146" font-size="13" fill="var(--ink-soft)" text-anchor="end">台北市</text>
+        <rect x="160" y="132" width="383.6" height="22" rx="4" fill="#c9c5be"/>
+        <text x="550" y="147" font-size="13" fill="var(--ink)">65.47%</text>
+      </svg>
+      <div class="chart-legend">
+        <span><i class="dot" style="background:#a8763e;"></i>台南市（本報告主體）</span>
+        <span><i class="dot" style="background:#c9c5be;"></i>其他六都對照</span>
+      </div>
+    </div>
+
+    <div class="chart-block">
+      <div class="chart-title">房價所得比比較</div>
+      <div class="chart-sub">代表不吃不喝需要幾年所得才能買下一戶房子</div>
+      <svg viewBox="0 0 640 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="房價所得比：高雄8倍，台南8.5倍，台北16倍">
+        <text x="150" y="26" font-size="13" fill="var(--ink-soft)" text-anchor="end">高雄市</text>
+        <rect x="160" y="12" width="182.2" height="22" rx="4" fill="#d8d4cc"/>
+        <text x="352" y="27" font-size="13" fill="var(--ink)">8.0 倍</text>
+
+        <text x="150" y="66" font-size="13" fill="var(--ink)" font-weight="600" text-anchor="end">台南市</text>
+        <rect x="160" y="52" width="193.6" height="22" rx="4" fill="#a8763e"/>
+        <text x="363" y="67" font-size="13" fill="var(--ink)" font-weight="600">8.5 倍</text>
+
+        <text x="150" y="106" font-size="13" fill="var(--ink-soft)" text-anchor="end">台北市</text>
+        <rect x="160" y="92" width="364.4" height="22" rx="4" fill="#c9c5be"/>
+        <text x="534" y="107" font-size="13" fill="var(--ink)">16.0 倍</text>
+      </svg>
+      <div class="chart-legend">
+        <span><i class="dot" style="background:#a8763e;"></i>台南市（本報告主體）</span>
+        <span><i class="dot" style="background:#c9c5be;"></i>其他都會對照</span>
+      </div>
+    </div>
+
+    <p>這代表什麼：台南首購族在六都裡「相對」不是壓力最大的一群——房貸負擔率比台北低了 26 個百分點。這個餘裕，理論上會轉化成裝修／軟裝可動用的預算空間，但實際會不會轉化，取決於個別家庭是否把餘裕拿去存款、生養小孩，還是花在居家品質上（這是個人選擇變數，不是數據能回答的）。</p>
+
+    <h3>2.3 貸款政策槓桿</h3>
+    <p>新青安貸款是 2026 年首購族最主要的政策工具：最低利率 1.775% 起、貸款年限最長 40 年、寬限期最長 5 年。<a href="https://knowhow.yungching.com.tw/article/4787" target="_blank">[永慶房產]</a></p>
+    <p>寬限期期間只繳息不還本，會直接放大交屋後前幾年的現金流餘裕——這是首購族軟裝預算的一個隱藏槓桿：如果善用寬限期，前 3–5 年的月付壓力較低，軟裝／家具家電可以有更寬的預算或分期採購空間。</p>
+  </section>
+
+  <section>
+    <h2>三、軟裝／裝潢預算行情（全國通用資料）</h2>
+    <p>台南沒有專屬的裝潢預算調查，以下是全國性裝潢業行情資料，作為推估基礎。</p>
+
+    <h3>3.1 整體裝潢預算佔房屋總價比例</h3>
+    <p>裝潢業界的通用建議：裝修預算抓房屋總價的 <strong>10%–15%</strong>。例如 1,000 萬房子，裝修預算 100–150 萬。<a href="https://ciaocasa.com.tw/blogs/linkae73s3fk" target="_blank">[巧寓舍]</a></p>
+
+    <h3>3.2 裝潢預算內部分配（硬裝 vs 軟裝）</h3>
+    <p>兩種常見拆法，數字略有出入但方向一致：</p>
+    <table>
+      <tr><th>拆法</th><th>硬裝／工程</th><th>家電＋家具</th><th>軟裝飾品</th></tr>
+      <tr><td>拆法一</td><td>60–65%（室內設計＋裝潢工程）</td><td>各 15%</td><td>5–10%</td></tr>
+      <tr><td>拆法二</td><td>40–70%（工程費用）</td><td>10–30%（家電家具購買）</td><td>5–10%（氛圍裝飾）</td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:#9a9a9d;margin-top:-10px;"><a href="https://www.100.com.tw/article/8014" target="_blank">[100室內設計]</a> <a href="https://www.amourwood.com.tw/blog/decoration-cost" target="_blank">[Amourwood]</a></p>
+
+    <div class="chart-block">
+      <div class="chart-title">裝潢預算內部分配（兩種拆法區間比較）</div>
+      <div class="chart-sub">橫條代表業界報價的浮動範圍（最低～最高），非單一數字；家電＋家具拆法一為固定 30%（15%+15%），以圓點標示</div>
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="裝潢預算內部分配區間比較圖">
+        <rect x="200" y="8" width="400" height="242" fill="none"/>
+        <!-- track backgrounds -->
+        <rect x="200" y="12" width="400" height="22" rx="4" fill="var(--track)"/>
+        <rect x="200" y="52" width="400" height="22" rx="4" fill="var(--track)"/>
+        <rect x="200" y="92" width="400" height="22" rx="4" fill="var(--track)"/>
+        <rect x="200" y="132" width="400" height="22" rx="4" fill="var(--track)"/>
+        <rect x="200" y="172" width="400" height="22" rx="4" fill="var(--track)"/>
+        <rect x="200" y="212" width="400" height="22" rx="4" fill="var(--track)"/>
+
+        <text x="190" y="27" font-size="12.5" fill="var(--ink-soft)" text-anchor="end">硬裝／工程（拆法一）</text>
+        <rect x="542.9" y="12" width="28.6" height="22" rx="4" fill="#a8763e"/>
+        <text x="580" y="27" font-size="12" fill="var(--ink)">60–65%</text>
+
+        <text x="190" y="67" font-size="12.5" fill="var(--ink-soft)" text-anchor="end">硬裝／工程（拆法二）</text>
+        <rect x="428.6" y="52" width="171.4" height="22" rx="4" fill="#a8763e" opacity="0.55"/>
+        <text x="605" y="67" font-size="12" fill="var(--ink)">40–70%</text>
+
+        <text x="190" y="107" font-size="12.5" fill="var(--ink-soft)" text-anchor="end">家電＋家具（拆法一）</text>
+        <circle cx="371.4" cy="103" r="7" fill="#3a6ea5"/>
+        <text x="386" y="107" font-size="12" fill="var(--ink)">固定 30%</text>
+
+        <text x="190" y="147" font-size="12.5" fill="var(--ink-soft)" text-anchor="end">家電＋家具（拆法二）</text>
+        <rect x="257.1" y="132" width="114.3" height="22" rx="4" fill="#3a6ea5" opacity="0.55"/>
+        <text x="378" y="147" font-size="12" fill="var(--ink)">10–30%</text>
+
+        <text x="190" y="187" font-size="12.5" fill="var(--ink-soft)" text-anchor="end">軟裝飾品（拆法一）</text>
+        <rect x="228.6" y="172" width="28.6" height="22" rx="4" fill="#c99a3f"/>
+        <text x="264" y="187" font-size="12" fill="var(--ink)">5–10%</text>
+
+        <text x="190" y="227" font-size="12.5" fill="var(--ink-soft)" text-anchor="end">軟裝飾品（拆法二）</text>
+        <rect x="228.6" y="212" width="28.6" height="22" rx="4" fill="#c99a3f" opacity="0.55"/>
+        <text x="264" y="227" font-size="12" fill="var(--ink)">5–10%</text>
+      </svg>
+      <div class="chart-legend">
+        <span><i class="dot" style="background:#a8763e;"></i>硬裝／工程</span>
+        <span><i class="dot" style="background:#3a6ea5;"></i>家電＋家具</span>
+        <span><i class="dot" style="background:#c99a3f;"></i>軟裝飾品</span>
+        <span style="color:#9a9a9d;">（實色＝拆法一／淡色＝拆法二）</span>
+      </div>
+    </div>
+
+    <h3>3.3 依坪數／品質分級的每坪行情（新成屋）</h3>
+    <table>
+      <tr><th>品質等級</th><th>每坪造價</th><th>特徵</th></tr>
+      <tr><td>基礎款</td><td>6–8 萬/坪</td><td>天地壁基礎裝潢，簡約少木作、不動格局</td></tr>
+      <tr><td>中階款</td><td>8–10 萬/坪</td><td>完整收納機能＋設計感</td></tr>
+      <tr><td>高階款</td><td>10–12 萬/坪</td><td>獨特設計感、個人風格</td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:#9a9a9d;margin-top:-10px;">老屋翻新則跳到 16–22 萬/坪（含拆除、管線、格局變更），首購族多買新成屋或屋齡較輕物件，這個級距參考價值較低。<a href="https://www.100.com.tw/article/7448" target="_blank">[100室內設計]</a></p>
+
+    <h3>3.4 軟裝專項預算（新成屋）</h3>
+    <div class="callout">若只抓「軟裝」（不含硬體工程）：新成屋軟裝預算約 <strong>2.5–6 萬/坪</strong>，涵蓋設計費、採買費、安裝運輸、代購手續費。<a href="https://www.uwood.com.tw/blog.php?categoryid=6&id=370" target="_blank">[Uwood]</a></div>
+
+    <h3>3.5 家電實際花費案例（PTT／Dcard 討論交叉驗證）</h3>
+    <ul>
+      <li>三房兩廳新房：光冷氣就破 10 萬，加洗衣機、冰箱、濾水器、空氣清淨機、微波爐、烤箱、電子鍋、掃地機器人，合理總預算約 <strong>50 萬</strong></li>
+      <li>大型家電＋安裝：<strong>35–55 萬</strong>屬正常範圍；預算緊縮在 25–30 萬需要取捨，但仍可運作</li>
+      <li>優先順序：冰箱、洗衣機、冷氣三大件先搞定，其他慢慢補</li>
+    </ul>
+    <p style="font-size:0.85rem;color:#9a9a9d;margin-top:-10px;"><a href="https://www.ptt.cc/bbs/WomenTalk/M.1717930610.A.D33.html" target="_blank">[PTT WomenTalk]</a></p>
+
+    <h3>3.6 系統家具行情</h3>
+    <ul>
+      <li>系統櫃計價基準：$2,500–$8,000/尺，依品牌、板材、五金而定</li>
+      <li>實際案例：30 坪住宅（主臥 2 大衣櫃＋2 間房衣櫃＋雜物櫃＋鞋櫃等全套），總費用約 <strong>31 萬</strong></li>
+    </ul>
+    <p style="font-size:0.85rem;color:#9a9a9d;margin-top:-10px;"><a href="https://www.pro360.com.tw/price/premade_cabinet_installtion" target="_blank">[PRO360]</a></p>
+  </section>
+
+  <section>
+    <h2>四、軟裝願付價格區間試算（依坪數分級）</h2>
+    <p>把第三節的行情套進台南首購族典型坪數（25–30 坪），試算三種情境：</p>
+    <table>
+      <tr><th>情境</th><th>坪數</th><th>軟裝預算（2.5–6萬/坪計）</th><th>家具家電（PTT交叉案例）</th><th>合計願付區間</th></tr>
+      <tr><td>精簡型（三大件優先）</td><td>25 坪</td><td>62.5–150 萬</td><td>25–30 萬（僅家電）</td><td><strong>約 60–90 萬</strong></td></tr>
+      <tr><td>標準型（家具家電齊全）</td><td>28 坪</td><td>70–168 萬</td><td>35–55 萬</td><td><strong>約 90–150 萬</strong></td></tr>
+      <tr class="highlight"><td>完整型（含系統櫃全屋收納）</td><td>30 坪</td><td>75–180 萬</td><td>系統櫃 31 萬＋家電 40 萬+</td><td><strong>約 130–200 萬</strong></td></tr>
+    </table>
+
+    <div class="chart-block">
+      <div class="chart-title">軟裝合計願付區間試算（單位：萬元）</div>
+      <div class="chart-sub">依 25–30 坪典型首購坪數，三種採購情境的推估區間</div>
+      <svg viewBox="0 0 640 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="軟裝願付區間：精簡型60至90萬，標準型90至150萬，完整型130至200萬">
+        <line x1="265.5" y1="0" x2="265.5" y2="140" stroke="#e5e3df" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="361.4" y1="0" x2="361.4" y2="140" stroke="#e5e3df" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="457.3" y1="0" x2="457.3" y2="140" stroke="#e5e3df" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="553.2" y1="0" x2="553.2" y2="140" stroke="#e5e3df" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="265.5" y="155" font-size="10.5" fill="#9a9a9d" text-anchor="middle">50萬</text>
+        <text x="361.4" y="155" font-size="10.5" fill="#9a9a9d" text-anchor="middle">100萬</text>
+        <text x="457.3" y="155" font-size="10.5" fill="#9a9a9d" text-anchor="middle">150萬</text>
+        <text x="553.2" y="155" font-size="10.5" fill="#9a9a9d" text-anchor="middle">200萬</text>
+
+        <text x="160" y="30" font-size="13" fill="var(--ink-soft)" text-anchor="end">精簡型</text>
+        <rect x="284.5" y="14" width="60.3" height="24" rx="5" fill="#a8763e" opacity="0.55"/>
+        <text x="355" y="30" font-size="12.5" fill="var(--ink)">60–90 萬</text>
+
+        <text x="160" y="74" font-size="13" fill="var(--ink)" font-weight="600" text-anchor="end">標準型</text>
+        <rect x="341.8" y="58" width="114.6" height="24" rx="5" fill="#a8763e" opacity="0.8"/>
+        <text x="467" y="74" font-size="12.5" fill="var(--ink)">90–150 萬</text>
+
+        <text x="160" y="118" font-size="13" fill="var(--ink-soft)" text-anchor="end">完整型</text>
+        <rect x="418.2" y="102" width="133.6" height="24" rx="5" fill="#a8763e"/>
+        <text x="563" y="118" font-size="12.5" fill="var(--ink)">130–200 萬</text>
+      </svg>
+      <div class="chart-legend">
+        <span><i class="dot" style="background:#a8763e;opacity:0.55;"></i>精簡型（三大件優先）</span>
+        <span><i class="dot" style="background:#a8763e;opacity:0.8;"></i>標準型（家具家電齊全）</span>
+        <span><i class="dot" style="background:#a8763e;"></i>完整型（含系統櫃全屋收納）</span>
+      </div>
+    </div>
+
+    <p><strong>怎麼讀這張表</strong>：這不是「台南首購族實際花了多少錢」的調查結果，是拿全國裝潢行情套用台南典型坪數算出來的「合理區間」。真實個案會因為裝潢公司報價、二手／全新家具選擇、是否請設計師等變數上下浮動 30% 以上。</p>
+    <p>對照第 2.2 節：台南首購族房貸負擔率 39.65%（六都倒數第二低），代表相對北部首購族，台南首購族在「標準型」甚至「完整型」區間有較高機率負擔得起——但這是負擔能力層面的推論，不是「他們實際會不會這樣花」的行為預測。</p>
+  </section>
+
+  <section>
+    <h2>五、影響軟裝預算彈性的關鍵變數</h2>
+    <ol>
+      <li><strong>貸款結構</strong>：是否用足新青安寬限期（最長 5 年）——用了，前期現金流鬆，軟裝預算彈性大；沒用，軟裝可能被壓到「三大件優先」情境</li>
+      <li><strong>家庭組成</strong>：新婚無子 vs 已有幼兒——有幼兒的家庭家電清單會多出濾水器、空氣清淨機等健康類品項，預算上修</li>
+      <li><strong>產品型態</strong>：透天 vs 大樓——安平／安南透天坪數通常大於大樓，軟裝總金額隨坪數線性放大，但每坪單價可能因為透天格局分散（一樓、樓梯間、頂樓）而拉低</li>
+      <li><strong>裝潢時程壓力</strong>：交屋即入住 vs 有緩衝期——有緩衝期的家庭較有機會分批採購、比價，總花費通常低於「急裝急住」的家庭</li>
+      <li><strong>雙薪 vs 單薪</strong>：影響的不是購屋負擔率本身（那已反映在房貸負擔率），而是軟裝這類「非剛性支出」的心理預算上限</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>六、結論</h2>
+    <div class="conclusion-card">
+      <div class="label">軟裝合計願付價格帶（25–30 坪級距）</div>
+      <div class="price">精簡 60–90 萬 ／ 標準 90–150 萬 ／ 完整 130–200 萬</div>
+      <p>台南首購族在購屋負擔能力上，是六都裡相對從容的一群（房貸負擔率 39.65%，僅次桃園）；典型輪廓是 25–35 歲、25–30 坪產品、常見透天為主的購屋型態。套用全國裝潢／軟裝行情估算，得出上述三種情境的合理願付區間。</p>
+    </div>
+    <p>這個區間比較可信的用法是「拿去跟業主／客戶對焦預算級距時的參考錨點」，不建議直接當成「台南首購族平均花費」寫進正式對外文件——因為它是交叉推估值，不是直接調查結果。</p>
+  </section>
+
+  <section>
+    <h2>七、資料侷限（誠實揭露）</h2>
+    <div class="disclose">
+      <p><strong>沒有找到</strong>任何機構（內政部、房仲業者、裝潢業公會）針對「台南首購族軟裝支出」做過的直接問卷或統計調查——這塊市場情報目前是空白。</p>
+      <p>第三節的裝潢／軟裝行情資料是<strong>全國性</strong>的裝潢業界公開資訊（部落格、廠商報價頁），不是台南在地樣本，也不是學術或官方統計，數字有廠商行銷傾向的可能性。</p>
+      <p>第四節的「願付價格區間」是本報告用兩組不同來源資料交叉試算出來的<strong>推估值</strong>，不是實測數據。</p>
+      <p>家庭收支調查（行政院主計總處 113 年）雖然有調查家庭消費支出，但公開檢索沒有找到「台南市」拆分後的最新可支配所得數字，也沒有「裝潢／軟裝」這個消費類別的獨立統計。</p>
+      <p>591、內政部實價登錄平台目前<strong>沒有公開</strong>買方年齡層／首購比例的台南專屬統計頁面，本報告引用的年齡數據來自永慶房產集團的媒體發布，非原始政府數據。</p>
+    </div>
+    <div class="note"><strong>下一步建議</strong>：如果這份報告要拿去做正式提案或對外簡報，建議下一步是找台南在地 2–3 位剛完成新成屋裝潢的首購族做半結構訪談，用真實個案校準第四節的試算表——這比再挖掘更多二手網路資料更能逼近真實數字。</div>
+  </section>
+
+  <footer>
+    <strong>附註：資料來源彙整</strong>
+    <ul>
+      <li><a href="https://figure.tw/property/housing-price-to-income-ratio-2026/" target="_blank">房價所得比2026｜北中南六大城市比較 - Figure</a></li>
+      <li><a href="https://pip.moi.gov.tw/Publicize/Info/E1050" target="_blank">房價負擔能力統計 - 內政部不動產資訊平台</a></li>
+      <li><a href="https://www.cna.com.tw/business/chinese/432406" target="_blank">永慶：年輕人買不起房？六都25-35歲購屋占比竟全數上升 - 中央社</a></li>
+      <li><a href="https://knowhow.yungching.com.tw/article/4787" target="_blank">2026第一季永慶房屋趨勢前瞻報告</a></li>
+      <li><a href="https://money.udn.com/money/story/12276/9590122" target="_blank">信義房屋觀察：安南剛需買方 偏好選透天 - 經濟日報</a></li>
+      <li><a href="https://ciaocasa.com.tw/blogs/linkae73s3fk" target="_blank">裝潢預算怎麼抓？2026最新裝潢費用分配表 - 巧寓舍</a></li>
+      <li><a href="https://www.uwood.com.tw/blog.php?categoryid=6&id=370" target="_blank">2026裝潢預算如何評估？新舊屋工程項目、花費佔比解析 - Uwood</a></li>
+      <li><a href="https://www.100.com.tw/article/8014" target="_blank">裝潢不再燒腦！2026完整版裝修預算表 - 100室內設計</a></li>
+      <li><a href="https://www.100.com.tw/article/7448" target="_blank">20坪內小宅裝潢必看 - 100室內設計</a></li>
+      <li><a href="https://www.ptt.cc/bbs/WomenTalk/M.1717930610.A.D33.html" target="_blank">搬新家買電器都抓多少預算？ - PTT WomenTalk</a></li>
+      <li><a href="https://www.pro360.com.tw/price/premade_cabinet_installtion" target="_blank">系統櫃價格怎麼算？2026最新系統家具價格表 - PRO360達人網</a></li>
+    </ul>
+  </footer>
+
+</div>
+</body>
+</html>
