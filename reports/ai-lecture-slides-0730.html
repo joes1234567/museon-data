@@ -126,15 +126,6 @@
   .criteria-table td { padding: 11px 14px; border-top: 1px solid #e2e8f0; vertical-align: top; line-height: 1.55; }
   .criteria-table td.dim { font-weight: 700; color: #1a1a2e; background: #fafafa; }
 
-  .distance-row { display: flex; gap: 14px; margin: 8px 0 20px; }
-  .distance-card { flex: 1; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
-  .distance-card .dc-who { font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
-  .distance-card.gpt .dc-who { color: #64748b; }
-  .distance-card.agent .dc-who { color: #1d4ed8; }
-  .distance-card.emp .dc-who { color: #6d28d9; }
-  .distance-card .dc-rel { font-size: 20px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
-  .distance-card p.dc-desc { font-size: 16px; color: #64748b; line-height: 1.55; }
-
   .scale-grid { display: flex; flex-direction: column; gap: 10px; }
   .scale-item { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 18px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
   .scale-num { width: 30px; height: 30px; border-radius: 8px; background: #3b82f6; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; flex-shrink: 0; }
@@ -173,7 +164,6 @@
   .corner-icon svg { width: 46px; height: 46px; }
   .flow-step .step-icon svg { width: 34px; height: 34px; margin: 0 auto 8px; display: block; }
   .flow-step.emp .step-icon svg circle, .flow-step.emp .step-icon svg path, .flow-step.emp .step-icon svg rect { stroke: #fff; }
-  .distance-card .dc-icon svg { width: 40px; height: 40px; margin-bottom: 10px; }
   .closing-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: .07; pointer-events: none; }
   .closing-decor svg { width: 60%; max-width: 480px; height: auto; }
   .closing-decor img { width: 55%; max-width: 440px; height: auto; border-radius: 24px; }
@@ -181,7 +171,7 @@
   @media (max-width: 900px) {
     .slide { padding: 32px 22px; }
     .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
-    .flow-row, .distance-row { flex-direction: column; }
+    .flow-row { flex-direction: column; }
     .criteria-table { font-size: 14.5px; }
     .slide-body { flex-direction: column; }
     .slide-visual svg { max-width: 180px; }
@@ -346,12 +336,6 @@
         <tr><td class="dim">決策協助</td><td>能聊，不會持續追蹤排序</td><td>能跑出單一流程結果</td><td>標甜頭與代價，讓你「選擇」而非「猜測」</td></tr>
       </tbody>
     </table>
-    <div class="note-line">最後一列——距離感</div>
-    <div class="distance-row">
-      <div class="distance-card gpt"><div class="dc-icon"><svg viewBox="0 0 60 30" fill="none"><circle cx="12" cy="15" r="7" fill="#94a3b8"/><circle cx="48" cy="15" r="7" fill="#cbd5e1"/></svg></div><div class="dc-who">AI 工具</div><div class="dc-rel">交易關係</div><p class="dc-desc">你問我答，各自站在各自的立場</p></div>
-      <div class="distance-card agent"><div class="dc-icon"><svg viewBox="0 0 60 30" fill="none"><circle cx="21" cy="15" r="7" fill="#3b82f6"/><circle cx="39" cy="15" r="7" fill="#93c5fd"/></svg></div><div class="dc-who">Agent</div><div class="dc-rel">陪伴關係</div><p class="dc-desc">同步而行，仍是兩個獨立視角在對話</p></div>
-      <div class="distance-card emp"><div class="dc-icon"><svg viewBox="0 0 60 30" fill="none"><circle cx="30" cy="15" r="10" fill="#7c3aed"/><circle cx="30" cy="15" r="10" fill="#a78bfa" opacity=".6"/></svg></div><div class="dc-who">數位員工</div><div class="dc-rel">視角合一</div><p class="dc-desc">站在你的角度思考並執行，距離感消失</p></div>
-    </div>
   </div>
 
   <!-- 08: 現場實測 -->
