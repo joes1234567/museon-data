@@ -177,6 +177,7 @@
   .slide-text { flex: 1.35; min-width: 0; }
   .slide-visual { flex: 1; display: flex; align-items: center; justify-content: center; }
   .slide-visual svg { width: 100%; max-width: 300px; height: auto; }
+  .slide-visual img { width: 100%; max-width: 300px; height: auto; border-radius: 18px; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
   .corner-icon { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); opacity: .9; }
   .corner-icon svg { width: 46px; height: 46px; }
   .flow-step .step-icon svg { width: 34px; height: 34px; margin: 0 auto 8px; display: block; }
@@ -184,8 +185,10 @@
   .distance-card .dc-icon svg { width: 40px; height: 40px; margin-bottom: 10px; }
   .cover-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: .35; pointer-events: none; }
   .cover-decor svg { width: 70%; max-width: 560px; height: auto; }
+  .cover-decor img { width: 60%; max-width: 480px; height: auto; border-radius: 24px; }
   .closing-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: .07; pointer-events: none; }
   .closing-decor svg { width: 60%; max-width: 480px; height: auto; }
+  .closing-decor img { width: 55%; max-width: 440px; height: auto; border-radius: 24px; }
 
   @media (max-width: 900px) {
     .slide { padding: 32px 22px; }
@@ -205,23 +208,7 @@
   <!-- 01: 封面 -->
   <div class="slide slide-cover active" data-slide="1">
     <div class="cover-decor">
-      <svg viewBox="0 0 400 300" fill="none">
-        <circle cx="200" cy="150" r="26" fill="#93c5fd"/>
-        <circle cx="90" cy="80" r="12" fill="#93c5fd"/>
-        <circle cx="320" cy="70" r="10" fill="#93c5fd"/>
-        <circle cx="70" cy="220" r="10" fill="#93c5fd"/>
-        <circle cx="330" cy="230" r="14" fill="#93c5fd"/>
-        <circle cx="200" cy="40" r="8" fill="#93c5fd"/>
-        <circle cx="200" cy="260" r="8" fill="#93c5fd"/>
-        <g stroke="#93c5fd" stroke-width="1.5">
-          <line x1="200" y1="150" x2="90" y2="80"/>
-          <line x1="200" y1="150" x2="320" y2="70"/>
-          <line x1="200" y1="150" x2="70" y2="220"/>
-          <line x1="200" y1="150" x2="330" y2="230"/>
-          <line x1="200" y1="150" x2="200" y2="40"/>
-          <line x1="200" y1="150" x2="200" y2="260"/>
-        </g>
-      </svg>
+      <img src="ai-lecture-slides-0730-img01-cover.png" alt="">
     </div>
     <div class="subtitle-tag">MUSEON · 7/30 講座 · AI段</div>
     <h1>找到你的<br>第一位數位員工</h1>
@@ -253,13 +240,7 @@
         </div>
       </div>
       <div class="slide-visual">
-        <svg viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="90" fill="#eff6ff"/>
-          <path d="M100 40 L100 100 L145 130" stroke="#3b82f6" stroke-width="6" stroke-linecap="round" fill="none"/>
-          <circle cx="100" cy="100" r="8" fill="#3b82f6"/>
-          <path d="M45 55 Q40 40 55 38" stroke="#93c5fd" stroke-width="4" stroke-linecap="round" fill="none"/>
-          <path d="M155 55 Q160 40 145 38" stroke="#93c5fd" stroke-width="4" stroke-linecap="round" fill="none"/>
-        </svg>
+        <img src="ai-lecture-slides-0730-img02-opening.png" alt="">
       </div>
     </div>
   </div>
@@ -285,15 +266,7 @@
         </div>
       </div>
       <div class="slide-visual">
-        <svg viewBox="0 0 200 200" fill="none">
-          <rect x="45" y="30" width="70" height="90" rx="6" fill="#fff" stroke="#bfdbfe" stroke-width="2" transform="rotate(-8 80 75)"/>
-          <rect x="65" y="45" width="70" height="90" rx="6" fill="#fff" stroke="#93c5fd" stroke-width="2" transform="rotate(6 100 90)"/>
-          <line x1="82" y1="70" x2="118" y2="70" stroke="#cbd5e1" stroke-width="3" transform="rotate(6 100 90)"/>
-          <line x1="82" y1="85" x2="118" y2="85" stroke="#cbd5e1" stroke-width="3" transform="rotate(6 100 90)"/>
-          <line x1="82" y1="100" x2="108" y2="100" stroke="#cbd5e1" stroke-width="3" transform="rotate(6 100 90)"/>
-          <circle cx="128" cy="120" r="28" fill="#eff6ff" stroke="#3b82f6" stroke-width="5"/>
-          <line x1="148" y1="140" x2="168" y2="160" stroke="#3b82f6" stroke-width="7" stroke-linecap="round"/>
-        </svg>
+        <img src="ai-lecture-slides-0730-img03-scenario1.png" alt="">
       </div>
     </div>
   </div>
@@ -319,16 +292,7 @@
         </div>
       </div>
       <div class="slide-visual">
-        <svg viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="70" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
-          <circle cx="100" cy="100" r="6" fill="#7c3aed"/>
-          <path d="M100 100 L130 55" stroke="#7c3aed" stroke-width="6" stroke-linecap="round"/>
-          <path d="M100 100 L100 55" stroke="#ddd6fe" stroke-width="4" stroke-linecap="round"/>
-          <path d="M100 100 L70 55" stroke="#ddd6fe" stroke-width="4" stroke-linecap="round"/>
-          <path d="M100 100 L145 100" stroke="#ddd6fe" stroke-width="4" stroke-linecap="round"/>
-          <path d="M100 100 L55 100" stroke="#ddd6fe" stroke-width="4" stroke-linecap="round"/>
-          <text x="130" y="48" font-size="14" fill="#6d28d9" font-weight="700">✓</text>
-        </svg>
+        <img src="ai-lecture-slides-0730-img04-scenario2.png" alt="">
       </div>
     </div>
   </div>
@@ -355,13 +319,7 @@
         <div class="note-line">⚠️ 上列兩項為概念示範案例，非 MUSEON 現行可展示的可執行功能，台上請勿宣稱「現在就能跑」</div>
       </div>
       <div class="slide-visual">
-        <svg viewBox="0 0 200 200" fill="none">
-          <rect x="55" y="90" width="90" height="65" rx="8" fill="#fff" stroke="#fecaca" stroke-width="2"/>
-          <path d="M55 100 L100 130 L145 100" stroke="#fecaca" stroke-width="2" fill="none"/>
-          <path d="M95 40 C80 55 78 70 90 78 C88 68 94 64 98 56 C100 66 108 70 106 80 C118 74 120 58 108 46 C110 52 106 52 103 48 C102 42 98 40 95 40Z" fill="#dc2626"/>
-          <circle cx="100" cy="122" r="10" fill="#fca5a5"/>
-          <text x="100" y="127" font-size="12" text-anchor="middle" fill="#991b1b" font-weight="700">3</text>
-        </svg>
+        <img src="ai-lecture-slides-0730-img05-scenario3.png" alt="">
       </div>
     </div>
   </div>
@@ -458,13 +416,7 @@
         </div>
       </div>
       <div class="slide-visual">
-        <svg viewBox="0 0 200 140" fill="none">
-          <path d="M20 120 A80 80 0 0 1 180 120" stroke="#e2e8f0" stroke-width="14" stroke-linecap="round"/>
-          <path d="M20 120 A80 80 0 0 1 145 45" stroke="#3b82f6" stroke-width="14" stroke-linecap="round"/>
-          <circle cx="145" cy="45" r="10" fill="#1a1a2e"/>
-          <text x="100" y="120" font-size="13" text-anchor="middle" fill="#94a3b8">1</text>
-          <text x="176" y="90" font-size="13" text-anchor="middle" fill="#94a3b8">5</text>
-        </svg>
+        <img src="ai-lecture-slides-0730-img06-selfcheck.png" alt="">
       </div>
     </div>
   </div>
@@ -514,12 +466,7 @@
         <div class="dbox"><div class="dbox-icon">🏷️</div><div><strong>Slogan</strong><p>不是導入AI，而是替公司找到第一位數位員工。</p></div></div>
       </div>
       <div class="slide-visual">
-        <svg viewBox="0 0 200 160" fill="none">
-          <circle cx="65" cy="80" r="34" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
-          <circle cx="65" cy="68" r="12" fill="#93c5fd"/>
-          <path d="M45 100c0-13 9-20 20-20s20 7 20 20" fill="#93c5fd"/>
-          <path d="M100 80h55M140 62l18 18-18 18" stroke="#3b82f6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
+        <img src="ai-lecture-slides-0730-img07-cta.png" alt="">
       </div>
     </div>
   </div>
@@ -528,12 +475,7 @@
   <div class="slide slide-standard" data-slide="13">
     <div class="slide-number">13 / 13</div>
     <div class="closing-decor">
-      <svg viewBox="0 0 300 300" fill="none">
-        <circle cx="150" cy="150" r="130" stroke="#3b82f6" stroke-width="2"/>
-        <circle cx="150" cy="150" r="90" stroke="#7c3aed" stroke-width="2"/>
-        <circle cx="150" cy="150" r="50" stroke="#10b981" stroke-width="2"/>
-        <circle cx="150" cy="150" r="8" fill="#1a1a2e"/>
-      </svg>
+      <img src="ai-lecture-slides-0730-img08-closing.png" alt="">
     </div>
     <div class="slide-tag">CLOSING</div>
     <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
