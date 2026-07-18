@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI段課程簡報 · 7/30 講座</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Noto Sans TC', sans-serif;
+    background: #F6F7FB;
+    color: #1A1A2E;
+    overflow: hidden;
+  }
+
+  .slide-container { width: 100vw; height: 100vh; position: relative; }
+
+  .slide {
+    display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0;
+    padding: 56px 76px; flex-direction: column; justify-content: center;
+  }
+  .slide.active { display: flex; }
+
+  /* ===== 封面 ===== */
+  .slide-cover {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    align-items: center; text-align: center; color: #fff;
+  }
+  .slide-cover .subtitle-tag {
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28);
+    color: #93c5fd; padding: 6px 20px; border-radius: 20px;
+    font-size: 18px; letter-spacing: 3px; margin-bottom: 32px;
+  }
+  .slide-cover h1 {
+    font-size: 50px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff, #93c5fd);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .slide-cover .desc { font-size: 19px; color: #a8b1c7; margin-bottom: 44px; line-height: 1.7; }
+  .slide-cover .meta-row { display: flex; gap: 36px; justify-content: center; flex-wrap: wrap; }
+  .meta-item { text-align: center; }
+  .meta-item .label { font-size: 13px; color: #8891ab; letter-spacing: 2px; margin-bottom: 6px; text-transform: uppercase; }
+  .meta-item .value { font-size: 18px; color: #93c5fd; font-weight: 700; }
+
+  /* ===== 通用版型 ===== */
+  .slide-standard { background: #F6F7FB; }
+  .slide-number { position: absolute; top: 26px; right: 40px; font-size: 13px; color: #b3b9c9; letter-spacing: 2px; }
+  .slide-tag { font-size: 13px; letter-spacing: 3px; color: #3b82f6; margin-bottom: 14px; text-transform: uppercase; font-weight: 700; }
+  .slide-tag.p2 { color: #7c3aed; }
+  .slide-tag.p3 { color: #dc2626; }
+  .slide-tag.p4 { color: #10b981; }
+
+  h2 { font-size: 32px; font-weight: 800; margin-bottom: 26px; line-height: 1.3; color: #1a1a2e; }
+  h2 .accent { color: #3b82f6; }
+  h2 .accent2 { color: #7c3aed; }
+  h2 .accent3 { color: #dc2626; }
+
+  .lead { font-size: 16px; color: #64748b; margin-bottom: 18px; line-height: 1.7; }
+
+  .card-grid { display: grid; gap: 16px; }
+  .card-grid-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 22px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  }
+  .card-icon { font-size: 24px; margin-bottom: 10px; }
+  .card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; }
+  .card p { font-size: 14.5px; color: #64748b; line-height: 1.65; }
+  .card.accent-left { border-left: 3px solid #3b82f6; }
+  .card.accent-purple { border-left: 3px solid #7c3aed; }
+  .card.accent-red { border-left: 3px solid #dc2626; }
+
+  .arch-box {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px;
+    margin-bottom: 12px; display: flex; align-items: flex-start; gap: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  }
+  .arch-box .arch-icon { font-size: 20px; width: 34px; flex-shrink: 0; text-align: center; }
+  .arch-box .arch-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; color: #94a3b8; text-transform: uppercase; letter-spacing: .06em; }
+  .arch-box .arch-desc { font-size: 15px; color: #1e293b; line-height: 1.65; }
+
+  .pain-box {
+    background: #fef2f2; border: 1px solid #fecaca; border-left: 3px solid #dc2626;
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 14px;
+  }
+  .pain-box .pb-label { font-size: 11px; font-weight: 800; color: #dc2626; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .pain-box p { font-size: 15px; color: #991b1b; font-weight: 600; line-height: 1.6; }
+
+  .question-card {
+    background: #fff; border: 1px solid #3b82f6; border-radius: 14px; padding: 22px 26px;
+    text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.05); margin-bottom: 16px;
+  }
+  .question-card .qc-tag { font-size: 11px; font-weight: 800; letter-spacing: .1em; color: #3b82f6; text-transform: uppercase; margin-bottom: 8px; }
+  .question-card h3 { font-size: 19px; font-weight: 700; line-height: 1.5; color: #1a1a2e; }
+  .question-card p { font-size: 13.5px; color: #64748b; margin-top: 8px; line-height: 1.6; }
+
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .tech-tag {
+    background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.3); color: #1d4ed8;
+    padding: 5px 13px; border-radius: 20px; font-size: 13px; font-weight: 600;
+  }
+  .note-line { font-size: 12px; color: #94a3b8; margin-top: 10px; font-style: italic; }
+
+  .flow-row { display: flex; align-items: center; gap: 12px; margin: 18px 0 24px; }
+  .flow-step {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px;
+    flex: 1; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  }
+  .flow-step.emp { background: linear-gradient(135deg, #7c3aed, #6d28d9); border-color: transparent; }
+  .flow-step .step-title { font-size: 18px; font-weight: 800; color: #1a1a2e; }
+  .flow-step.emp .step-title { color: #fff; }
+  .flow-step .step-desc { font-size: 13px; color: #64748b; margin-top: 4px; }
+  .flow-step.emp .step-desc { color: rgba(255,255,255,.8); }
+  .flow-arrow { color: #cbd5e1; font-size: 22px; }
+
+  .criteria-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .criteria-table th {
+    padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .05em;
+  }
+  .criteria-table th.dim { background: #f1f5f9; color: #94a3b8; width: 90px; }
+  .criteria-table th.gpt { background: #f1f5f9; color: #64748b; }
+  .criteria-table th.agent { background: #dbeafe; color: #1d4ed8; }
+  .criteria-table th.emp { background: #ede9fe; color: #6d28d9; }
+  .criteria-table td { padding: 11px 14px; border-top: 1px solid #e2e8f0; vertical-align: top; line-height: 1.55; }
+  .criteria-table td.dim { font-weight: 700; color: #1a1a2e; background: #fafafa; }
+
+  .highlight-box {
+    background: rgba(59,130,246,.06); border: 1px solid rgba(59,130,246,.25); border-radius: 10px;
+    padding: 16px 20px; margin-top: 18px;
+  }
+  .highlight-box .hl-label { font-size: 11px; color: #3b82f6; letter-spacing: .08em; text-transform: uppercase; font-weight: 800; margin-bottom: 6px; }
+  .highlight-box p { font-size: 14px; color: #1a1a2e; line-height: 1.7; }
+
+  .distance-row { display: flex; gap: 14px; margin: 8px 0 20px; }
+  .distance-card { flex: 1; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+  .distance-card .dc-who { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+  .distance-card.gpt .dc-who { color: #64748b; }
+  .distance-card.agent .dc-who { color: #1d4ed8; }
+  .distance-card.emp .dc-who { color: #6d28d9; }
+  .distance-card .dc-rel { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+  .distance-card p.dc-desc { font-size: 13px; color: #64748b; line-height: 1.55; }
+
+  .scale-grid { display: flex; flex-direction: column; gap: 10px; }
+  .scale-item { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 18px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+  .scale-num { width: 30px; height: 30px; border-radius: 8px; background: #3b82f6; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; flex-shrink: 0; }
+  .scale-item strong { font-size: 14.5px; color: #1a1a2e; }
+  .scale-item span { font-size: 12.5px; color: #64748b; display: block; margin-top: 2px; }
+
+  .quiz-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+  .quiz-card .qn { display: inline-flex; width: 20px; height: 20px; border-radius: 6px; background: #7c3aed; color: #fff; font-size: 11px; align-items: center; justify-content: center; margin-right: 8px; }
+  .quiz-card .quiz-q { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; line-height: 1.5; }
+  .quiz-card .quiz-purpose { font-size: 11px; color: #94a3b8; margin-bottom: 8px; }
+  .quiz-opts { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .quiz-opts li { font-size: 12.5px; color: #475569; background: #f8fafc; border-radius: 6px; padding: 6px 10px; }
+  .quiz-opts li b { color: #7c3aed; margin-right: 5px; }
+
+  .dbox { background: linear-gradient(135deg,#f0fdf4,#ecfdf5); border: 1px solid #86efac; border-radius: 10px; padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+  .dbox .dbox-icon { font-size: 20px; flex-shrink: 0; }
+  .dbox strong { display: block; font-size: 11px; color: #15803d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+  .dbox p { font-size: 13.5px; color: #1a1a2e; line-height: 1.6; }
+
+  .closing-quote { font-size: 22px; font-weight: 700; color: #1a1a2e; text-align: center; line-height: 1.6; margin-bottom: 14px; }
+  .closing-sub { font-size: 15px; color: #64748b; text-align: center; }
+
+  .nav { position: fixed; bottom: 26px; right: 34px; display: flex; gap: 10px; align-items: center; z-index: 100; }
+  .nav-btn { background: #fff; border: 1px solid #e2e8f0; color: #64748b; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .nav-btn:hover { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+  .nav-counter { font-size: 13px; color: #94a3b8; }
+  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: #3b82f6; transition: width .3s ease; z-index: 100; }
+
+  @media (max-width: 900px) {
+    .slide { padding: 32px 22px; }
+    .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
+    .flow-row, .distance-row { flex-direction: column; }
+    .criteria-table { font-size: 11.5px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="slide-container">
+
+  <!-- 01: 封面 -->
+  <div class="slide slide-cover active" data-slide="1">
+    <div class="subtitle-tag">MUSEON · 7/30 講座 · AI段</div>
+    <h1>找到你的<br>第一位數位員工</h1>
+    <p class="desc">先卡點 → 找方向 → 給方法 → 邀行動｜情境代入版</p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="label">日期</div><div class="value">7/30（四）</div></div>
+      <div class="meta-item"><div class="label">主講</div><div class="value">士維</div></div>
+      <div class="meta-item"><div class="label">順序</div><div class="value">財務段之後</div></div>
+      <div class="meta-item"><div class="label">定位</div><div class="value">情境代入版</div></div>
+    </div>
+    <div class="slide-number">01 / 12</div>
+  </div>
+
+  <!-- 02: 開場提問 -->
+  <div class="slide slide-standard" data-slide="2">
+    <div class="slide-number">02 / 12</div>
+    <div class="slide-tag">OPENING · 起</div>
+    <h2>先問一句<span class="accent">「你卡在哪？」</span></h2>
+    <div class="question-card">
+      <div class="qc-tag">現場提問</div>
+      <h3>「你現在花最多時間在找資訊、做決策、還是救火執行？」</h3>
+      <p>舉手或線上投票——目的不是收集數據，是讓每個人接下來對號入座，也是給第五段「自評量表」埋的鉤子。</p>
+    </div>
+    <div class="card-grid card-grid-3">
+      <div class="card accent-left"><div class="card-icon">🔎</div><h3>找資訊</h3><p>資料散落，翻找耗時</p></div>
+      <div class="card accent-purple"><div class="card-icon">🧭</div><h3>做決策</h3><p>只能憑感覺賭</p></div>
+      <div class="card accent-red"><div class="card-icon">🔥</div><h3>救火執行</h3><p>瑣事吃光時間</p></div>
+    </div>
+  </div>
+
+  <!-- 03: 情境一 找資訊 -->
+  <div class="slide slide-standard" data-slide="3">
+    <div class="slide-number">03 / 12</div>
+    <div class="slide-tag">SCENARIO 1 · 承</div>
+    <h2>找資訊<span class="accent">卡點</span></h2>
+    <div class="arch-box">
+      <div class="arch-icon">📋</div>
+      <div><div class="arch-title">情境 × 案例</div><div class="arch-desc">客戶臨時來電要報價，老闆得先確認過去買過什麼、上次談的條件——但資訊分散在 LINE、Excel、腦子裡。一位老闆得翻半年前對話才敢回覆，客戶已經不耐煩。</div></div>
+    </div>
+    <div class="pain-box"><div class="pb-label">痛點</div><p>不是不知道答案，是答案找太慢——專業判斷力沒問題，卡在資訊散落、調閱效率低。</p></div>
+    <div class="question-card">
+      <div class="qc-tag">假設情境</div>
+      <h3>「如果接起電話的那一秒，AI 就把客戶三年交易紀錄、上次報價、毛利率全部整理好放在你面前」</h3>
+    </div>
+    <div class="tech-tags">
+      <span class="tech-tag">跨國接單</span><span class="tech-tag">合約翻譯</span><span class="tech-tag">客服知識庫</span>
+    </div>
+  </div>
+
+  <!-- 04: 情境二 做決策 -->
+  <div class="slide slide-standard" data-slide="4">
+    <div class="slide-number">04 / 12</div>
+    <div class="slide-tag p2">SCENARIO 2 · 承</div>
+    <h2>做決策<span class="accent2">卡點</span></h2>
+    <div class="arch-box">
+      <div class="arch-icon">📋</div>
+      <div><div class="arch-title">情境 × 案例</div><div class="arch-desc">庫存要不要加、要不要接單、毛利下滑原因不明——這類問題沒有標準答案。一位老闆發現毛利比上季低 3%，猜不出原因，只能「先觀察看看」，一觀察又是一個月。</div></div>
+    </div>
+    <div class="pain-box"><div class="pb-label">痛點</div><p>決策不是不敢做，是做的時候只有感覺、沒有依據——猜對是運氣，猜錯要更久才發現。</p></div>
+    <div class="question-card">
+      <div class="qc-tag">假設情境</div>
+      <h3>「如果晚上十二點 AI 自己發現毛利掉了 3%，明天八點就把原因整理好放在你桌上」</h3>
+    </div>
+    <div class="tech-tags">
+      <span class="tech-tag">超級幕僚</span><span class="tech-tag">會議筆記分析</span><span class="tech-tag">提案草擬</span>
+    </div>
+  </div>
+
+  <!-- 05: 情境三 救火執行 -->
+  <div class="slide slide-standard" data-slide="5">
+    <div class="slide-number">05 / 12</div>
+    <div class="slide-tag p3">SCENARIO 3 · 承</div>
+    <h2>救火執行<span class="accent3">卡點</span></h2>
+    <div class="arch-box">
+      <div class="arch-icon">📋</div>
+      <div><div class="arch-title">情境 × 案例</div><div class="arch-desc">客訴、臨時訂單、調度——事情一件件冒出來，真正該做的規劃永遠排最後。一位老闆早上進辦公室先處理客訴、回電話，等有空想下季佈局已經沒力氣，拖了兩個月。</div></div>
+    </div>
+    <div class="pain-box"><div class="pb-label">痛點</div><p>不是不想做長遠規劃，是連喘口氣的時間都被瑣事吃光。</p></div>
+    <div class="question-card">
+      <div class="qc-tag">假設情境</div>
+      <h3>「你在工廠忙的時候，AI 已經幫你接了三張訂單」——不是「AI可以回LINE」，是訂單已經進來了</h3>
+    </div>
+    <div class="tech-tags">
+      <span class="tech-tag">業務開拓自動回應</span><span class="tech-tag">品管影像辨識</span>
+    </div>
+    <div class="note-line">⚠️ 上列兩項為概念示範案例，非 MUSEON 現行可展示的可執行功能，台上請勿宣稱「現在就能跑」</div>
+  </div>
+
+  <!-- 06: 收斂原理 Part 1 -->
+  <div class="slide slide-standard" data-slide="6">
+    <div class="slide-number">06 / 12</div>
+    <div class="slide-tag p2">CONVERGENCE · 轉</div>
+    <h2>到底需要的是<span class="accent2">工具、Agent，還是數位員工？</span></h2>
+    <div class="flow-row">
+      <div class="flow-step"><div class="step-title">ChatGPT</div><div class="step-desc">幫你回答</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="step-title">Agent</div><div class="step-desc">幫你做事</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step emp"><div class="step-title">數位員工</div><div class="step-desc">幫你上班</div></div>
+    </div>
+    <div class="question-card">
+      <div class="qc-tag">台下心裡話</div>
+      <h3>「你可能會想，我用 GPT 不就好了？設個 Agent 不就夠了？」</h3>
+      <p>回答放在三方對比上——不是比誰功能多，是比三個情境裡「誰真的能接住」。</p>
+    </div>
+  </div>
+
+  <!-- 07: 收斂原理 Part 2 判準表 -->
+  <div class="slide slide-standard" data-slide="7">
+    <div class="slide-number">07 / 12</div>
+    <div class="slide-tag p2">CONVERGENCE · 轉</div>
+    <h2>誰真的能<span class="accent2">接住</span></h2>
+    <table class="criteria-table">
+      <thead><tr><th class="dim">判準</th><th class="gpt">AI 工具</th><th class="agent">Agent</th><th class="emp">數位員工</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">角色</td><td>萬能聊天視窗，什麼都聊、什麼都不專精</td><td>綁定單一任務的自動化流程</td><td>有明確角色，多任務、能協作</td></tr>
+        <tr><td class="dim">懂公司</td><td>每次都是新對話，不知道公司脈絡</td><td>只懂自己負責的那一段</td><td>持續記得公司資料與客戶脈絡</td></tr>
+        <tr><td class="dim">主動性</td><td>你問它才答</td><td>條件觸發就動，但不跨情境串接</td><td>主動整理、提醒、跨情境串接</td></tr>
+        <tr><td class="dim">決策協助</td><td>能聊，不會持續追蹤排序</td><td>能跑出單一流程結果</td><td>標甜頭與代價，讓你「選擇」而非「猜測」</td></tr>
+      </tbody>
+    </table>
+    <div class="highlight-box"><div class="hl-label">口播提示</div><p>這段不加時間，只是把三情境裡已經藏著的對比「點名」出來——工具被動、Agent 單一流程、數位員工主動全局判斷。</p></div>
+  </div>
+
+  <!-- 08: 收斂原理 Part 3 距離感 -->
+  <div class="slide slide-standard" data-slide="8">
+    <div class="slide-number">08 / 12</div>
+    <div class="slide-tag p2">CONVERGENCE · 轉</div>
+    <h2>最後一列——<span class="accent2">距離感</span></h2>
+    <div class="distance-row">
+      <div class="distance-card gpt"><div class="dc-who">AI 工具</div><div class="dc-rel">交易關係</div><p class="dc-desc">你問我答，各自站在各自的立場</p></div>
+      <div class="distance-card agent"><div class="dc-who">Agent</div><div class="dc-rel">陪伴關係</div><p class="dc-desc">同步而行，仍是兩個獨立視角在對話</p></div>
+      <div class="distance-card emp"><div class="dc-who">數位員工</div><div class="dc-rel">視角合一</div><p class="dc-desc">站在你的角度思考並執行，距離感消失</p></div>
+    </div>
+    <div class="highlight-box"><div class="hl-label">🎤 現場口播</div><p>這列是感受不是功能實據，前四列照投影片唸即可。講完「視角合一」多留一拍，補一句：「這條界線我們設計時就卡在最前面——每個數位員工都保留『給你看它怎麼想』這一步，不是直接吃掉你的判斷」，把台下「那我還剩下什麼」的警覺收回成信任。</p></div>
+  </div>
+
+  <!-- 09: 自評量表 -->
+  <div class="slide slide-standard" data-slide="9">
+    <div class="slide-number">09 / 12</div>
+    <div class="slide-tag p4">SELF-CHECK · 合</div>
+    <h2>我目前對 AI 的<span class="accent">需求到哪裡？</span></h2>
+    <div class="scale-grid">
+      <div class="scale-item"><div class="scale-num">1</div><div><strong>還沒開始</strong><span>還在用 Google／問人／憑經驗</span></div></div>
+      <div class="scale-item"><div class="scale-num">2</div><div><strong>把它當聊天工具</strong><span>會用 ChatGPT，但每次要重新交代背景</span></div></div>
+      <div class="scale-item"><div class="scale-num">3</div><div><strong>想找資訊的效率</strong><span>對應情境一——想要有人幫忙整理</span></div></div>
+      <div class="scale-item"><div class="scale-num">4</div><div><strong>想要決策有依據</strong><span>對應情境二——想要數據協助判斷</span></div></div>
+      <div class="scale-item"><div class="scale-num">5</div><div><strong>想要有人幫忙擋第一線</strong><span>對應情境三——想要真正的「數位員工」主動接手</span></div></div>
+    </div>
+  </div>
+
+  <!-- 10: 互動問卷 -->
+  <div class="slide slide-standard" data-slide="10">
+    <div class="slide-number">10 / 12</div>
+    <div class="slide-tag p4">INTERACTIVE POLL · 合</div>
+    <h2>現場<span class="accent">快問快答</span></h2>
+    <div class="card-grid card-grid-2">
+      <div class="quiz-card">
+        <div class="quiz-q"><span class="qn">1</span>你現在對 AI 的使用經驗比較接近哪一種？</div>
+        <div class="quiz-purpose">目的：分流認知深淺</div>
+        <ul class="quiz-opts"><li><b>A</b>幾乎沒用過</li><li><b>B</b>會用但每次要交代背景</li><li><b>C</b>已用某種自動化流程</li><li><b>D</b>已有類似數位員工在跑</li></ul>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-q"><span class="qn">2</span>三個情境裡，哪一個最貼近你？</div>
+        <div class="quiz-purpose">目的：驗證卡點分佈</div>
+        <ul class="quiz-opts"><li><b>A</b>找資訊</li><li><b>B</b>做決策</li><li><b>C</b>救火執行</li></ul>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-q"><span class="qn">3</span>聽到「數位員工」，第一反應是？</div>
+        <div class="quiz-purpose">目的：探測火線顧慮</div>
+        <ul class="quiz-opts"><li><b>A</b>好奇</li><li><b>B</b>懷疑，跟 GPT/Agent 差不多</li><li><b>C</b>擔心取代員工</li><li><b>D</b>先聽完再說</li></ul>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-q"><span class="qn">4</span>如果先解決一個卡點，你會選哪一個？</div>
+        <div class="quiz-purpose">目的：CTA 暖身、留名單</div>
+        <ul class="quiz-opts"><li><b>A</b>找資訊</li><li><b>B</b>做決策</li><li><b>C</b>救火執行</li><li><b>D</b>還不確定，想聊聊</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11: 收尾 CTA -->
+  <div class="slide slide-standard" data-slide="11">
+    <div class="slide-number">11 / 12</div>
+    <div class="slide-tag p4">CALL TO ACTION · 合</div>
+    <h2>你剛剛選的<span class="accent">是哪一個？</span></h2>
+    <div class="question-card">
+      <h3>「你剛剛選的是哪一個？那就是你現在最該先解決的地方。」</h3>
+      <p>回扣開場提問，邀請老闆自己說出下一步——不是「該導入AI了」。</p>
+    </div>
+    <div class="dbox"><div class="dbox-icon">💬</div><div><strong>權威背書</strong><p>前 Google 台灣董事長簡立峰：「要從老闆自己開始——先痛苦幾天、親自去玩 ChatGPT 或 Claude，找出哪些瑣事最煩人，再把 AI 帶進公司。」</p></div></div>
+    <div class="dbox"><div class="dbox-icon">🏷️</div><div><strong>Slogan</strong><p>不是導入AI，而是替公司找到第一位數位員工。</p></div></div>
+  </div>
+
+  <!-- 12: 結尾 -->
+  <div class="slide slide-standard" data-slide="12">
+    <div class="slide-number">12 / 12</div>
+    <div class="slide-tag">CLOSING</div>
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+      <div class="closing-quote">「以前請一個員工是增加一個人的能力，<br>現在多一位AI員工是放大整間公司的能力。」</div>
+      <div class="closing-sub">員工做判斷，AI員工做重複 — 謝謝聆聽</div>
+    </div>
+    <div class="note-line" style="text-align:center;">情境案例為去識別化示範；未來畫面為假設情境口語提醒，非真實統計數據。MUSEON · 2026-07-18</div>
+  </div>
+
+</div>
+
+<div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">←</button>
+  <span class="nav-counter" id="navCounter">1 / 12</span>
+  <button class="nav-btn" onclick="nextSlide()">→</button>
+</div>
+
+<script>
+let current = 1;
+const total = 12;
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector('[data-slide="' + n + '"]').classList.add('active');
+  document.getElementById('navCounter').textContent = n + ' / ' + total;
+  document.getElementById('progressBar').style.width = ((n / total) * 100) + '%';
+  current = n;
+}
+
+function nextSlide() { if (current < total) showSlide(current + 1); }
+function prevSlide() { if (current > 1) showSlide(current - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+showSlide(1);
+</script>
+</body>
+</html>
