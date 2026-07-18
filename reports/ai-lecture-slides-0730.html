@@ -172,11 +172,28 @@
   .nav-counter { font-size: 13px; color: #94a3b8; }
   .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: #3b82f6; transition: width .3s ease; z-index: 100; }
 
+  /* ===== 配圖 ===== */
+  .slide-body { display: flex; gap: 40px; align-items: center; flex: 1; min-height: 0; }
+  .slide-text { flex: 1.35; min-width: 0; }
+  .slide-visual { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .slide-visual svg { width: 100%; max-width: 300px; height: auto; }
+  .corner-icon { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); opacity: .9; }
+  .corner-icon svg { width: 46px; height: 46px; }
+  .flow-step .step-icon svg { width: 34px; height: 34px; margin: 0 auto 8px; display: block; }
+  .flow-step.emp .step-icon svg circle, .flow-step.emp .step-icon svg path, .flow-step.emp .step-icon svg rect { stroke: #fff; }
+  .distance-card .dc-icon svg { width: 40px; height: 40px; margin-bottom: 10px; }
+  .cover-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: .35; pointer-events: none; }
+  .cover-decor svg { width: 70%; max-width: 560px; height: auto; }
+  .closing-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: .07; pointer-events: none; }
+  .closing-decor svg { width: 60%; max-width: 480px; height: auto; }
+
   @media (max-width: 900px) {
     .slide { padding: 32px 22px; }
     .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
     .flow-row, .distance-row { flex-direction: column; }
     .criteria-table { font-size: 11.5px; }
+    .slide-body { flex-direction: column; }
+    .slide-visual svg { max-width: 180px; }
   }
 </style>
 </head>
@@ -187,6 +204,25 @@
 
   <!-- 01: 封面 -->
   <div class="slide slide-cover active" data-slide="1">
+    <div class="cover-decor">
+      <svg viewBox="0 0 400 300" fill="none">
+        <circle cx="200" cy="150" r="26" fill="#93c5fd"/>
+        <circle cx="90" cy="80" r="12" fill="#93c5fd"/>
+        <circle cx="320" cy="70" r="10" fill="#93c5fd"/>
+        <circle cx="70" cy="220" r="10" fill="#93c5fd"/>
+        <circle cx="330" cy="230" r="14" fill="#93c5fd"/>
+        <circle cx="200" cy="40" r="8" fill="#93c5fd"/>
+        <circle cx="200" cy="260" r="8" fill="#93c5fd"/>
+        <g stroke="#93c5fd" stroke-width="1.5">
+          <line x1="200" y1="150" x2="90" y2="80"/>
+          <line x1="200" y1="150" x2="320" y2="70"/>
+          <line x1="200" y1="150" x2="70" y2="220"/>
+          <line x1="200" y1="150" x2="330" y2="230"/>
+          <line x1="200" y1="150" x2="200" y2="40"/>
+          <line x1="200" y1="150" x2="200" y2="260"/>
+        </g>
+      </svg>
+    </div>
     <div class="subtitle-tag">MUSEON · 7/30 講座 · AI段</div>
     <h1>找到你的<br>第一位數位員工</h1>
     <p class="desc">先卡點 → 找方向 → 給方法 → 邀行動</p>
@@ -203,15 +239,28 @@
     <div class="slide-number">02 / 13</div>
     <div class="slide-tag">OPENING · 起</div>
     <h2>先問一句<span class="accent">「你卡在哪？」</span></h2>
-    <div class="question-card">
-      <div class="qc-tag">現場提問</div>
-      <h3>「你現在花最多時間在找資訊、做決策、還是救火執行？」</h3>
-      <p>舉手或線上投票——目的不是收集數據，是讓每個人接下來對號入座，也是給第五段「自評量表」埋的鉤子。</p>
-    </div>
-    <div class="card-grid card-grid-3">
-      <div class="card accent-left"><div class="card-icon">🔎</div><h3>找資訊</h3><p>資料散落，翻找耗時</p></div>
-      <div class="card accent-purple"><div class="card-icon">🧭</div><h3>做決策</h3><p>只能憑感覺賭</p></div>
-      <div class="card accent-red"><div class="card-icon">🔥</div><h3>救火執行</h3><p>瑣事吃光時間</p></div>
+    <div class="slide-body">
+      <div class="slide-text">
+        <div class="question-card">
+          <div class="qc-tag">現場提問</div>
+          <h3>「你現在花最多時間在找資訊、做決策、還是救火執行？」</h3>
+          <p>舉手或線上投票——目的不是收集數據，是讓每個人接下來對號入座，也是給第五段「自評量表」埋的鉤子。</p>
+        </div>
+        <div class="card-grid card-grid-3">
+          <div class="card accent-left"><div class="card-icon">🔎</div><h3>找資訊</h3><p>資料散落，翻找耗時</p></div>
+          <div class="card accent-purple"><div class="card-icon">🧭</div><h3>做決策</h3><p>只能憑感覺賭</p></div>
+          <div class="card accent-red"><div class="card-icon">🔥</div><h3>救火執行</h3><p>瑣事吃光時間</p></div>
+        </div>
+      </div>
+      <div class="slide-visual">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="90" fill="#eff6ff"/>
+          <path d="M100 40 L100 100 L145 130" stroke="#3b82f6" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="100" cy="100" r="8" fill="#3b82f6"/>
+          <path d="M45 55 Q40 40 55 38" stroke="#93c5fd" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M155 55 Q160 40 145 38" stroke="#93c5fd" stroke-width="4" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -220,17 +269,32 @@
     <div class="slide-number">03 / 13</div>
     <div class="slide-tag">SCENARIO 1 · 承</div>
     <h2>找資訊<span class="accent">卡點</span></h2>
-    <div class="arch-box">
-      <div class="arch-icon">📋</div>
-      <div><div class="arch-title">情境 × 案例</div><div class="arch-desc">客戶臨時來電要報價，老闆得先確認過去買過什麼、上次談的條件——但資訊分散在 LINE、Excel、腦子裡。一位老闆得翻半年前對話才敢回覆，客戶已經不耐煩。</div></div>
-    </div>
-    <div class="pain-box"><div class="pb-label">痛點</div><p>不是不知道答案，是答案找太慢——專業判斷力沒問題，卡在資訊散落、調閱效率低。</p></div>
-    <div class="question-card">
-      <div class="qc-tag">假設情境</div>
-      <h3>「如果接起電話的那一秒，AI 就把客戶三年交易紀錄、上次報價、毛利率全部整理好放在你面前」</h3>
-    </div>
-    <div class="tech-tags">
-      <span class="tech-tag">跨國接單</span><span class="tech-tag">合約翻譯</span><span class="tech-tag">客服知識庫</span>
+    <div class="slide-body">
+      <div class="slide-text">
+        <div class="arch-box">
+          <div class="arch-icon">📋</div>
+          <div><div class="arch-title">情境 × 案例</div><div class="arch-desc">客戶臨時來電要報價，老闆得先確認過去買過什麼、上次談的條件——但資訊分散在 LINE、Excel、腦子裡。一位老闆得翻半年前對話才敢回覆，客戶已經不耐煩。</div></div>
+        </div>
+        <div class="pain-box"><div class="pb-label">痛點</div><p>不是不知道答案，是答案找太慢——專業判斷力沒問題，卡在資訊散落、調閱效率低。</p></div>
+        <div class="question-card">
+          <div class="qc-tag">假設情境</div>
+          <h3>「如果接起電話的那一秒，AI 就把客戶三年交易紀錄、上次報價、毛利率全部整理好放在你面前」</h3>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">跨國接單</span><span class="tech-tag">合約翻譯</span><span class="tech-tag">客服知識庫</span>
+        </div>
+      </div>
+      <div class="slide-visual">
+        <svg viewBox="0 0 200 200" fill="none">
+          <rect x="45" y="30" width="70" height="90" rx="6" fill="#fff" stroke="#bfdbfe" stroke-width="2" transform="rotate(-8 80 75)"/>
+          <rect x="65" y="45" width="70" height="90" rx="6" fill="#fff" stroke="#93c5fd" stroke-width="2" transform="rotate(6 100 90)"/>
+          <line x1="82" y1="70" x2="118" y2="70" stroke="#cbd5e1" stroke-width="3" transform="rotate(6 100 90)"/>
+          <line x1="82" y1="85" x2="118" y2="85" stroke="#cbd5e1" stroke-width="3" transform="rotate(6 100 90)"/>
+          <line x1="82" y1="100" x2="108" y2="100" stroke="#cbd5e1" stroke-width="3" transform="rotate(6 100 90)"/>
+          <circle cx="128" cy="120" r="28" fill="#eff6ff" stroke="#3b82f6" stroke-width="5"/>
+          <line x1="148" y1="140" x2="168" y2="160" stroke="#3b82f6" stroke-width="7" stroke-linecap="round"/>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -239,17 +303,33 @@
     <div class="slide-number">04 / 13</div>
     <div class="slide-tag p2">SCENARIO 2 · 承</div>
     <h2>做決策<span class="accent2">卡點</span></h2>
-    <div class="arch-box">
-      <div class="arch-icon">📋</div>
-      <div><div class="arch-title">情境 × 案例</div><div class="arch-desc">庫存要不要加、要不要接單、毛利下滑原因不明——這類問題沒有標準答案。一位老闆發現毛利比上季低 3%，猜不出原因，只能「先觀察看看」，一觀察又是一個月。</div></div>
-    </div>
-    <div class="pain-box"><div class="pb-label">痛點</div><p>決策不是不敢做，是做的時候只有感覺、沒有依據——猜對是運氣，猜錯要更久才發現。</p></div>
-    <div class="question-card">
-      <div class="qc-tag">假設情境</div>
-      <h3>「如果晚上十二點 AI 自己發現毛利掉了 3%，明天八點就把原因整理好放在你桌上」</h3>
-    </div>
-    <div class="tech-tags">
-      <span class="tech-tag">超級幕僚</span><span class="tech-tag">會議筆記分析</span><span class="tech-tag">提案草擬</span>
+    <div class="slide-body">
+      <div class="slide-text">
+        <div class="arch-box">
+          <div class="arch-icon">📋</div>
+          <div><div class="arch-title">情境 × 案例</div><div class="arch-desc">庫存要不要加、要不要接單、毛利下滑原因不明——這類問題沒有標準答案。一位老闆發現毛利比上季低 3%，猜不出原因，只能「先觀察看看」，一觀察又是一個月。</div></div>
+        </div>
+        <div class="pain-box"><div class="pb-label">痛點</div><p>決策不是不敢做，是做的時候只有感覺、沒有依據——猜對是運氣，猜錯要更久才發現。</p></div>
+        <div class="question-card">
+          <div class="qc-tag">假設情境</div>
+          <h3>「如果晚上十二點 AI 自己發現毛利掉了 3%，明天八點就把原因整理好放在你桌上」</h3>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">超級幕僚</span><span class="tech-tag">會議筆記分析</span><span class="tech-tag">提案草擬</span>
+        </div>
+      </div>
+      <div class="slide-visual">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="70" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2"/>
+          <circle cx="100" cy="100" r="6" fill="#7c3aed"/>
+          <path d="M100 100 L130 55" stroke="#7c3aed" stroke-width="6" stroke-linecap="round"/>
+          <path d="M100 100 L100 55" stroke="#ddd6fe" stroke-width="4" stroke-linecap="round"/>
+          <path d="M100 100 L70 55" stroke="#ddd6fe" stroke-width="4" stroke-linecap="round"/>
+          <path d="M100 100 L145 100" stroke="#ddd6fe" stroke-width="4" stroke-linecap="round"/>
+          <path d="M100 100 L55 100" stroke="#ddd6fe" stroke-width="4" stroke-linecap="round"/>
+          <text x="130" y="48" font-size="14" fill="#6d28d9" font-weight="700">✓</text>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -258,19 +338,32 @@
     <div class="slide-number">05 / 13</div>
     <div class="slide-tag p3">SCENARIO 3 · 承</div>
     <h2>救火執行<span class="accent3">卡點</span></h2>
-    <div class="arch-box">
-      <div class="arch-icon">📋</div>
-      <div><div class="arch-title">情境 × 案例</div><div class="arch-desc">客訴、臨時訂單、調度——事情一件件冒出來，真正該做的規劃永遠排最後。一位老闆早上進辦公室先處理客訴、回電話，等有空想下季佈局已經沒力氣，拖了兩個月。</div></div>
+    <div class="slide-body">
+      <div class="slide-text">
+        <div class="arch-box">
+          <div class="arch-icon">📋</div>
+          <div><div class="arch-title">情境 × 案例</div><div class="arch-desc">客訴、臨時訂單、調度——事情一件件冒出來，真正該做的規劃永遠排最後。一位老闆早上進辦公室先處理客訴、回電話，等有空想下季佈局已經沒力氣，拖了兩個月。</div></div>
+        </div>
+        <div class="pain-box"><div class="pb-label">痛點</div><p>不是不想做長遠規劃，是連喘口氣的時間都被瑣事吃光。</p></div>
+        <div class="question-card">
+          <div class="qc-tag">假設情境</div>
+          <h3>「你在工廠忙的時候，AI 已經幫你接了三張訂單」——不是「AI可以回LINE」，是訂單已經進來了</h3>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">業務開拓自動回應</span><span class="tech-tag">品管影像辨識</span>
+        </div>
+        <div class="note-line">⚠️ 上列兩項為概念示範案例，非 MUSEON 現行可展示的可執行功能，台上請勿宣稱「現在就能跑」</div>
+      </div>
+      <div class="slide-visual">
+        <svg viewBox="0 0 200 200" fill="none">
+          <rect x="55" y="90" width="90" height="65" rx="8" fill="#fff" stroke="#fecaca" stroke-width="2"/>
+          <path d="M55 100 L100 130 L145 100" stroke="#fecaca" stroke-width="2" fill="none"/>
+          <path d="M95 40 C80 55 78 70 90 78 C88 68 94 64 98 56 C100 66 108 70 106 80 C118 74 120 58 108 46 C110 52 106 52 103 48 C102 42 98 40 95 40Z" fill="#dc2626"/>
+          <circle cx="100" cy="122" r="10" fill="#fca5a5"/>
+          <text x="100" y="127" font-size="12" text-anchor="middle" fill="#991b1b" font-weight="700">3</text>
+        </svg>
+      </div>
     </div>
-    <div class="pain-box"><div class="pb-label">痛點</div><p>不是不想做長遠規劃，是連喘口氣的時間都被瑣事吃光。</p></div>
-    <div class="question-card">
-      <div class="qc-tag">假設情境</div>
-      <h3>「你在工廠忙的時候，AI 已經幫你接了三張訂單」——不是「AI可以回LINE」，是訂單已經進來了</h3>
-    </div>
-    <div class="tech-tags">
-      <span class="tech-tag">業務開拓自動回應</span><span class="tech-tag">品管影像辨識</span>
-    </div>
-    <div class="note-line">⚠️ 上列兩項為概念示範案例，非 MUSEON 現行可展示的可執行功能，台上請勿宣稱「現在就能跑」</div>
   </div>
 
   <!-- 06: 收斂原理 Part 1 -->
@@ -279,11 +372,20 @@
     <div class="slide-tag p2">CONVERGENCE · 轉</div>
     <h2>到底需要的是<span class="accent2">工具、Agent，還是數位員工？</span></h2>
     <div class="flow-row">
-      <div class="flow-step"><div class="step-title">ChatGPT</div><div class="step-desc">幫你回答</div></div>
+      <div class="flow-step">
+        <div class="step-icon"><svg viewBox="0 0 40 40" fill="none"><path d="M8 12h24a4 4 0 014 4v10a4 4 0 01-4 4H18l-8 6v-6H8a4 4 0 01-4-4V16a4 4 0 014-4z" stroke="#64748b" stroke-width="2.5"/></svg></div>
+        <div class="step-title">ChatGPT</div><div class="step-desc">幫你回答</div>
+      </div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step"><div class="step-title">Agent</div><div class="step-desc">幫你做事</div></div>
+      <div class="flow-step">
+        <div class="step-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="10" y="14" width="20" height="16" rx="4" stroke="#3b82f6" stroke-width="2.5"/><circle cx="16" cy="21" r="2" fill="#3b82f6"/><circle cx="24" cy="21" r="2" fill="#3b82f6"/><path d="M20 14V8" stroke="#3b82f6" stroke-width="2.5"/><circle cx="20" cy="6" r="2" fill="#3b82f6"/></svg></div>
+        <div class="step-title">Agent</div><div class="step-desc">幫你做事</div>
+      </div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step emp"><div class="step-title">數位員工</div><div class="step-desc">幫你上班</div></div>
+      <div class="flow-step emp">
+        <div class="step-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="13" r="6" stroke="#fff" stroke-width="2.5"/><path d="M8 32c0-7 5-11 12-11s12 4 12 11" stroke="#fff" stroke-width="2.5"/></svg></div>
+        <div class="step-title">數位員工</div><div class="step-desc">幫你上班</div>
+      </div>
     </div>
     <div class="question-card">
       <div class="qc-tag">台下心裡話</div>
@@ -295,6 +397,7 @@
   <!-- 07: 收斂原理 Part 2 判準表 -->
   <div class="slide slide-standard" data-slide="7">
     <div class="slide-number">07 / 13</div>
+    <div class="corner-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="9" y="7" width="22" height="28" rx="3" stroke="#7c3aed" stroke-width="2.5"/><rect x="15" y="4" width="10" height="6" rx="2" fill="#7c3aed"/><path d="M13 18l4 4 8-9" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="27" x2="27" y2="27" stroke="#c4b5fd" stroke-width="2"/></svg></div>
     <div class="slide-tag p2">CONVERGENCE · 轉</div>
     <h2>誰真的能<span class="accent2">接住</span></h2>
     <table class="criteria-table">
@@ -315,9 +418,9 @@
     <div class="slide-tag p2">CONVERGENCE · 轉</div>
     <h2>最後一列——<span class="accent2">距離感</span></h2>
     <div class="distance-row">
-      <div class="distance-card gpt"><div class="dc-who">AI 工具</div><div class="dc-rel">交易關係</div><p class="dc-desc">你問我答，各自站在各自的立場</p></div>
-      <div class="distance-card agent"><div class="dc-who">Agent</div><div class="dc-rel">陪伴關係</div><p class="dc-desc">同步而行，仍是兩個獨立視角在對話</p></div>
-      <div class="distance-card emp"><div class="dc-who">數位員工</div><div class="dc-rel">視角合一</div><p class="dc-desc">站在你的角度思考並執行，距離感消失</p></div>
+      <div class="distance-card gpt"><div class="dc-icon"><svg viewBox="0 0 60 30" fill="none"><circle cx="12" cy="15" r="7" fill="#94a3b8"/><circle cx="48" cy="15" r="7" fill="#cbd5e1"/></svg></div><div class="dc-who">AI 工具</div><div class="dc-rel">交易關係</div><p class="dc-desc">你問我答，各自站在各自的立場</p></div>
+      <div class="distance-card agent"><div class="dc-icon"><svg viewBox="0 0 60 30" fill="none"><circle cx="21" cy="15" r="7" fill="#3b82f6"/><circle cx="39" cy="15" r="7" fill="#93c5fd"/></svg></div><div class="dc-who">Agent</div><div class="dc-rel">陪伴關係</div><p class="dc-desc">同步而行，仍是兩個獨立視角在對話</p></div>
+      <div class="distance-card emp"><div class="dc-icon"><svg viewBox="0 0 60 30" fill="none"><circle cx="30" cy="15" r="10" fill="#7c3aed"/><circle cx="30" cy="15" r="10" fill="#a78bfa" opacity=".6"/></svg></div><div class="dc-who">數位員工</div><div class="dc-rel">視角合一</div><p class="dc-desc">站在你的角度思考並執行，距離感消失</p></div>
     </div>
     <div class="highlight-box"><div class="hl-label">🎤 現場口播</div><p>這列是感受不是功能實據，前四列照投影片唸即可。講完「視角合一」多留一拍，補一句：「這條界線我們設計時就卡在最前面——每個數位員工都保留『給你看它怎麼想』這一步，不是直接吃掉你的判斷」，把台下「那我還剩下什麼」的警覺收回成信任。</p></div>
   </div>
@@ -325,6 +428,7 @@
   <!-- 09: 現場實測 -->
   <div class="slide slide-standard" data-slide="9">
     <div class="slide-number">09 / 13</div>
+    <div class="corner-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="5" y="9" width="30" height="22" rx="3" stroke="#dc2626" stroke-width="2.5"/><path d="M11 16l5 4-5 4" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="24" x2="28" y2="24" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/></svg></div>
     <div class="slide-tag p3">LIVE DEMO · 轉→合</div>
     <h2>現在，<span class="accent3">直接讓你看</span></h2>
     <div class="lead">剛剛聽的三個情境，現在現場跑一次——不是看結果，是看過程。</div>
@@ -343,18 +447,32 @@
     <div class="slide-number">10 / 13</div>
     <div class="slide-tag p4">SELF-CHECK · 合</div>
     <h2>我目前對 AI 的<span class="accent">需求到哪裡？</span></h2>
-    <div class="scale-grid">
-      <div class="scale-item"><div class="scale-num">1</div><div><strong>還沒開始</strong><span>還在用 Google／問人／憑經驗</span></div></div>
-      <div class="scale-item"><div class="scale-num">2</div><div><strong>把它當聊天工具</strong><span>會用 ChatGPT，但每次要重新交代背景</span></div></div>
-      <div class="scale-item"><div class="scale-num">3</div><div><strong>想找資訊的效率</strong><span>對應情境一——想要有人幫忙整理</span></div></div>
-      <div class="scale-item"><div class="scale-num">4</div><div><strong>想要決策有依據</strong><span>對應情境二——想要數據協助判斷</span></div></div>
-      <div class="scale-item"><div class="scale-num">5</div><div><strong>想要有人幫忙擋第一線</strong><span>對應情境三——想要真正的「數位員工」主動接手</span></div></div>
+    <div class="slide-body">
+      <div class="slide-text">
+        <div class="scale-grid">
+          <div class="scale-item"><div class="scale-num">1</div><div><strong>還沒開始</strong><span>還在用 Google／問人／憑經驗</span></div></div>
+          <div class="scale-item"><div class="scale-num">2</div><div><strong>把它當聊天工具</strong><span>會用 ChatGPT，但每次要重新交代背景</span></div></div>
+          <div class="scale-item"><div class="scale-num">3</div><div><strong>想找資訊的效率</strong><span>對應情境一——想要有人幫忙整理</span></div></div>
+          <div class="scale-item"><div class="scale-num">4</div><div><strong>想要決策有依據</strong><span>對應情境二——想要數據協助判斷</span></div></div>
+          <div class="scale-item"><div class="scale-num">5</div><div><strong>想要有人幫忙擋第一線</strong><span>對應情境三——想要真正的「數位員工」主動接手</span></div></div>
+        </div>
+      </div>
+      <div class="slide-visual">
+        <svg viewBox="0 0 200 140" fill="none">
+          <path d="M20 120 A80 80 0 0 1 180 120" stroke="#e2e8f0" stroke-width="14" stroke-linecap="round"/>
+          <path d="M20 120 A80 80 0 0 1 145 45" stroke="#3b82f6" stroke-width="14" stroke-linecap="round"/>
+          <circle cx="145" cy="45" r="10" fill="#1a1a2e"/>
+          <text x="100" y="120" font-size="13" text-anchor="middle" fill="#94a3b8">1</text>
+          <text x="176" y="90" font-size="13" text-anchor="middle" fill="#94a3b8">5</text>
+        </svg>
+      </div>
     </div>
   </div>
 
   <!-- 11: 互動問卷 -->
   <div class="slide slide-standard" data-slide="11">
     <div class="slide-number">11 / 13</div>
+    <div class="corner-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="7" y="15" width="7" height="18" rx="1.5" fill="#7c3aed"/><rect x="17" y="7" width="7" height="26" rx="1.5" fill="#a78bfa"/><rect x="27" y="20" width="7" height="13" rx="1.5" fill="#c4b5fd"/></svg></div>
     <div class="slide-tag p4">INTERACTIVE POLL · 合</div>
     <h2>現場<span class="accent">快問快答</span></h2>
     <div class="card-grid card-grid-2">
@@ -386,17 +504,37 @@
     <div class="slide-number">12 / 13</div>
     <div class="slide-tag p4">CALL TO ACTION · 合</div>
     <h2>你剛剛選的<span class="accent">是哪一個？</span></h2>
-    <div class="question-card">
-      <h3>「你剛剛選的是哪一個？那就是你現在最該先解決的地方。」</h3>
-      <p>回扣開場提問，邀請老闆自己說出下一步——不是「該導入AI了」。</p>
+    <div class="slide-body">
+      <div class="slide-text">
+        <div class="question-card">
+          <h3>「你剛剛選的是哪一個？那就是你現在最該先解決的地方。」</h3>
+          <p>回扣開場提問，邀請老闆自己說出下一步——不是「該導入AI了」。</p>
+        </div>
+        <div class="dbox"><div class="dbox-icon">💬</div><div><strong>權威背書</strong><p>前 Google 台灣董事長簡立峰：「要從老闆自己開始——先痛苦幾天、親自去玩 ChatGPT 或 Claude，找出哪些瑣事最煩人，再把 AI 帶進公司。」</p></div></div>
+        <div class="dbox"><div class="dbox-icon">🏷️</div><div><strong>Slogan</strong><p>不是導入AI，而是替公司找到第一位數位員工。</p></div></div>
+      </div>
+      <div class="slide-visual">
+        <svg viewBox="0 0 200 160" fill="none">
+          <circle cx="65" cy="80" r="34" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+          <circle cx="65" cy="68" r="12" fill="#93c5fd"/>
+          <path d="M45 100c0-13 9-20 20-20s20 7 20 20" fill="#93c5fd"/>
+          <path d="M100 80h55M140 62l18 18-18 18" stroke="#3b82f6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
     </div>
-    <div class="dbox"><div class="dbox-icon">💬</div><div><strong>權威背書</strong><p>前 Google 台灣董事長簡立峰：「要從老闆自己開始——先痛苦幾天、親自去玩 ChatGPT 或 Claude，找出哪些瑣事最煩人，再把 AI 帶進公司。」</p></div></div>
-    <div class="dbox"><div class="dbox-icon">🏷️</div><div><strong>Slogan</strong><p>不是導入AI，而是替公司找到第一位數位員工。</p></div></div>
   </div>
 
   <!-- 13: 結尾 -->
   <div class="slide slide-standard" data-slide="13">
     <div class="slide-number">13 / 13</div>
+    <div class="closing-decor">
+      <svg viewBox="0 0 300 300" fill="none">
+        <circle cx="150" cy="150" r="130" stroke="#3b82f6" stroke-width="2"/>
+        <circle cx="150" cy="150" r="90" stroke="#7c3aed" stroke-width="2"/>
+        <circle cx="150" cy="150" r="50" stroke="#10b981" stroke-width="2"/>
+        <circle cx="150" cy="150" r="8" fill="#1a1a2e"/>
+      </svg>
+    </div>
     <div class="slide-tag">CLOSING</div>
     <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
       <div class="closing-quote">「以前請一個員工是增加一個人的能力，<br>現在多一位AI員工是放大整間公司的能力。」</div>
