@@ -24,32 +24,30 @@
 
   /* ===== 封面 ===== */
   .slide-cover {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
-    align-items: center; text-align: center; color: #fff;
+    background: linear-gradient(135deg, #2b1810 0%, #4a2416 55%, #7c3f1e 100%);
+    flex-direction: row; align-items: center; justify-content: space-between;
+    text-align: left; color: #fff; gap: 48px;
   }
-  .slide-cover .subtitle-tag {
-    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28);
-    color: #93c5fd; padding: 6px 20px; border-radius: 20px;
-    font-size: 18px; letter-spacing: 3px; margin-bottom: 32px;
+  .cover-content { flex: 1.2; min-width: 0; }
+  .cover-visual { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .cover-visual img {
+    width: 100%; max-width: 380px; height: auto; border-radius: 20px;
+    box-shadow: 0 16px 36px rgba(0,0,0,.35);
   }
   .slide-cover h1 {
     font-size: 50px; font-weight: 700; line-height: 1.25; margin-bottom: 20px;
-    background: linear-gradient(135deg, #ffffff, #93c5fd);
+    background: linear-gradient(135deg, #fff8f0, #f4a962);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
-  .slide-cover .desc { font-size: 19px; color: #a8b1c7; margin-bottom: 44px; line-height: 1.7; }
-  .slide-cover .meta-row { display: flex; gap: 36px; justify-content: center; flex-wrap: wrap; }
-  .meta-item { text-align: center; }
-  .meta-item .label { font-size: 13px; color: #8891ab; letter-spacing: 2px; margin-bottom: 6px; text-transform: uppercase; }
-  .meta-item .value { font-size: 18px; color: #93c5fd; font-weight: 700; }
+  .slide-cover .desc { font-size: 19px; color: #e0c9b3; margin-bottom: 44px; line-height: 1.7; }
+  .slide-cover .meta-row { display: flex; gap: 36px; justify-content: flex-start; flex-wrap: wrap; }
+  .meta-item { text-align: left; }
+  .meta-item .label { font-size: 13px; color: #b89a7c; letter-spacing: 2px; margin-bottom: 6px; text-transform: uppercase; }
+  .meta-item .value { font-size: 18px; color: #f4a962; font-weight: 700; }
 
   /* ===== 通用版型 ===== */
   .slide-standard { background: #F6F7FB; }
   .slide-number { position: absolute; top: 26px; right: 40px; font-size: 13px; color: #b3b9c9; letter-spacing: 2px; }
-  .slide-tag { font-size: 13px; letter-spacing: 3px; color: #3b82f6; margin-bottom: 14px; text-transform: uppercase; font-weight: 700; }
-  .slide-tag.p2 { color: #7c3aed; }
-  .slide-tag.p3 { color: #dc2626; }
-  .slide-tag.p4 { color: #10b981; }
 
   h2 { font-size: 32px; font-weight: 800; margin-bottom: 26px; line-height: 1.3; color: #1a1a2e; }
   h2 .accent { color: #3b82f6; }
@@ -128,13 +126,6 @@
   .criteria-table td { padding: 11px 14px; border-top: 1px solid #e2e8f0; vertical-align: top; line-height: 1.55; }
   .criteria-table td.dim { font-weight: 700; color: #1a1a2e; background: #fafafa; }
 
-  .highlight-box {
-    background: rgba(59,130,246,.06); border: 1px solid rgba(59,130,246,.25); border-radius: 10px;
-    padding: 16px 20px; margin-top: 18px;
-  }
-  .highlight-box .hl-label { font-size: 11px; color: #3b82f6; letter-spacing: .08em; text-transform: uppercase; font-weight: 800; margin-bottom: 6px; }
-  .highlight-box p { font-size: 14px; color: #1a1a2e; line-height: 1.7; }
-
   .distance-row { display: flex; gap: 14px; margin: 8px 0 20px; }
   .distance-card { flex: 1; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
   .distance-card .dc-who { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
@@ -174,6 +165,7 @@
 
   /* ===== 配圖 ===== */
   .slide-body { display: flex; gap: 40px; align-items: center; flex: 1; min-height: 0; }
+  .slide-body.reverse { flex-direction: row-reverse; }
   .slide-text { flex: 1.35; min-width: 0; }
   .slide-visual { flex: 1; display: flex; align-items: center; justify-content: center; }
   .slide-visual svg { width: 100%; max-width: 300px; height: auto; }
@@ -183,9 +175,6 @@
   .flow-step .step-icon svg { width: 34px; height: 34px; margin: 0 auto 8px; display: block; }
   .flow-step.emp .step-icon svg circle, .flow-step.emp .step-icon svg path, .flow-step.emp .step-icon svg rect { stroke: #fff; }
   .distance-card .dc-icon svg { width: 40px; height: 40px; margin-bottom: 10px; }
-  .cover-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: .35; pointer-events: none; }
-  .cover-decor svg { width: 70%; max-width: 560px; height: auto; }
-  .cover-decor img { width: 60%; max-width: 480px; height: auto; border-radius: 24px; }
   .closing-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: .07; pointer-events: none; }
   .closing-decor svg { width: 60%; max-width: 480px; height: auto; }
   .closing-decor img { width: 55%; max-width: 440px; height: auto; border-radius: 24px; }
@@ -207,16 +196,16 @@
 
   <!-- 01: 封面 -->
   <div class="slide slide-cover active" data-slide="1">
-    <div class="cover-decor">
-      <img src="ai-lecture-slides-0730-img01-cover.png" alt="">
+    <div class="cover-content">
+      <h1>找到你的<br>第一位數位員工</h1>
+      <p class="desc">先卡點 → 找方向 → 給方法 → 邀行動</p>
+      <div class="meta-row">
+        <div class="meta-item"><div class="label">日期</div><div class="value">7/30（四）</div></div>
+        <div class="meta-item"><div class="label">主講</div><div class="value">士維</div></div>
+      </div>
     </div>
-    <div class="subtitle-tag">MUSEON · 7/30 講座 · AI段</div>
-    <h1>找到你的<br>第一位數位員工</h1>
-    <p class="desc">先卡點 → 找方向 → 給方法 → 邀行動</p>
-    <div class="meta-row">
-      <div class="meta-item"><div class="label">日期</div><div class="value">7/30（四）</div></div>
-      <div class="meta-item"><div class="label">主講</div><div class="value">士維</div></div>
-      <div class="meta-item"><div class="label">順序</div><div class="value">財務段之後</div></div>
+    <div class="cover-visual">
+      <img src="ai-lecture-slides-0730-img01-cover.png" alt="">
     </div>
     <div class="slide-number">01 / 13</div>
   </div>
@@ -224,7 +213,6 @@
   <!-- 02: 開場提問 -->
   <div class="slide slide-standard" data-slide="2">
     <div class="slide-number">02 / 13</div>
-    <div class="slide-tag">OPENING · 起</div>
     <h2>先問一句<span class="accent">「你卡在哪？」</span></h2>
     <div class="slide-body">
       <div class="slide-text">
@@ -248,9 +236,8 @@
   <!-- 03: 情境一 找資訊 -->
   <div class="slide slide-standard" data-slide="3">
     <div class="slide-number">03 / 13</div>
-    <div class="slide-tag">SCENARIO 1 · 承</div>
     <h2>找資訊<span class="accent">卡點</span></h2>
-    <div class="slide-body">
+    <div class="slide-body reverse">
       <div class="slide-text">
         <div class="arch-box">
           <div class="arch-icon">📋</div>
@@ -274,7 +261,6 @@
   <!-- 04: 情境二 做決策 -->
   <div class="slide slide-standard" data-slide="4">
     <div class="slide-number">04 / 13</div>
-    <div class="slide-tag p2">SCENARIO 2 · 承</div>
     <h2>做決策<span class="accent2">卡點</span></h2>
     <div class="slide-body">
       <div class="slide-text">
@@ -300,9 +286,8 @@
   <!-- 05: 情境三 救火執行 -->
   <div class="slide slide-standard" data-slide="5">
     <div class="slide-number">05 / 13</div>
-    <div class="slide-tag p3">SCENARIO 3 · 承</div>
     <h2>救火執行<span class="accent3">卡點</span></h2>
-    <div class="slide-body">
+    <div class="slide-body reverse">
       <div class="slide-text">
         <div class="arch-box">
           <div class="arch-icon">📋</div>
@@ -327,7 +312,6 @@
   <!-- 06: 收斂原理 Part 1 -->
   <div class="slide slide-standard" data-slide="6">
     <div class="slide-number">06 / 13</div>
-    <div class="slide-tag p2">CONVERGENCE · 轉</div>
     <h2>到底需要的是<span class="accent2">工具、Agent，還是數位員工？</span></h2>
     <div class="flow-row">
       <div class="flow-step">
@@ -356,7 +340,6 @@
   <div class="slide slide-standard" data-slide="7">
     <div class="slide-number">07 / 13</div>
     <div class="corner-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="9" y="7" width="22" height="28" rx="3" stroke="#7c3aed" stroke-width="2.5"/><rect x="15" y="4" width="10" height="6" rx="2" fill="#7c3aed"/><path d="M13 18l4 4 8-9" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="27" x2="27" y2="27" stroke="#c4b5fd" stroke-width="2"/></svg></div>
-    <div class="slide-tag p2">CONVERGENCE · 轉</div>
     <h2>誰真的能<span class="accent2">接住</span></h2>
     <table class="criteria-table">
       <thead><tr><th class="dim">判準</th><th class="gpt">AI 工具</th><th class="agent">Agent</th><th class="emp">數位員工</th></tr></thead>
@@ -367,27 +350,23 @@
         <tr><td class="dim">決策協助</td><td>能聊，不會持續追蹤排序</td><td>能跑出單一流程結果</td><td>標甜頭與代價，讓你「選擇」而非「猜測」</td></tr>
       </tbody>
     </table>
-    <div class="highlight-box"><div class="hl-label">口播提示</div><p>這段不加時間，只是把三情境裡已經藏著的對比「點名」出來——工具被動、Agent 單一流程、數位員工主動全局判斷。</p></div>
   </div>
 
   <!-- 08: 收斂原理 Part 3 距離感 -->
   <div class="slide slide-standard" data-slide="8">
     <div class="slide-number">08 / 13</div>
-    <div class="slide-tag p2">CONVERGENCE · 轉</div>
     <h2>最後一列——<span class="accent2">距離感</span></h2>
     <div class="distance-row">
       <div class="distance-card gpt"><div class="dc-icon"><svg viewBox="0 0 60 30" fill="none"><circle cx="12" cy="15" r="7" fill="#94a3b8"/><circle cx="48" cy="15" r="7" fill="#cbd5e1"/></svg></div><div class="dc-who">AI 工具</div><div class="dc-rel">交易關係</div><p class="dc-desc">你問我答，各自站在各自的立場</p></div>
       <div class="distance-card agent"><div class="dc-icon"><svg viewBox="0 0 60 30" fill="none"><circle cx="21" cy="15" r="7" fill="#3b82f6"/><circle cx="39" cy="15" r="7" fill="#93c5fd"/></svg></div><div class="dc-who">Agent</div><div class="dc-rel">陪伴關係</div><p class="dc-desc">同步而行，仍是兩個獨立視角在對話</p></div>
       <div class="distance-card emp"><div class="dc-icon"><svg viewBox="0 0 60 30" fill="none"><circle cx="30" cy="15" r="10" fill="#7c3aed"/><circle cx="30" cy="15" r="10" fill="#a78bfa" opacity=".6"/></svg></div><div class="dc-who">數位員工</div><div class="dc-rel">視角合一</div><p class="dc-desc">站在你的角度思考並執行，距離感消失</p></div>
     </div>
-    <div class="highlight-box"><div class="hl-label">🎤 現場口播</div><p>這列是感受不是功能實據，前四列照投影片唸即可。講完「視角合一」多留一拍，補一句：「這條界線我們設計時就卡在最前面——每個數位員工都保留『給你看它怎麼想』這一步，不是直接吃掉你的判斷」，把台下「那我還剩下什麼」的警覺收回成信任。</p></div>
   </div>
 
   <!-- 09: 現場實測 -->
   <div class="slide slide-standard" data-slide="9">
     <div class="slide-number">09 / 13</div>
     <div class="corner-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="5" y="9" width="30" height="22" rx="3" stroke="#dc2626" stroke-width="2.5"/><path d="M11 16l5 4-5 4" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="24" x2="28" y2="24" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-    <div class="slide-tag p3">LIVE DEMO · 轉→合</div>
     <h2>現在，<span class="accent3">直接讓你看</span></h2>
     <div class="lead">剛剛聽的三個情境，現在現場跑一次——不是看結果，是看過程。</div>
     <div class="card-grid card-grid-3">
@@ -397,13 +376,11 @@
       <div class="card accent-purple"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">做決策</span><div class="card-icon">🕵️</div><h3>盡職調查快篩</h3><p>丟一間公司名稱或合作案情境，跑出風險／甜頭／代價的結構化判斷，比「憑感覺賭」扎實。</p></div>
       <div class="card accent-red"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">救火執行</span><div class="card-icon">📨</div><h3>背景派工</h3><p>現場丟一句複雜指令，秒回「收到」，背景處理完再主動通知結果——不用一直盯著。</p></div>
     </div>
-    <div class="note-line">⚠️ 以上 5 項為 MUSEON 現行可執行功能，適合現場實測；情境三提過的「業務開拓自動回應」「品管影像辨識」為概念示範，非現行可展示功能，已排除在外。</div>
   </div>
 
   <!-- 10: 自評量表 -->
   <div class="slide slide-standard" data-slide="10">
     <div class="slide-number">10 / 13</div>
-    <div class="slide-tag p4">SELF-CHECK · 合</div>
     <h2>我目前對 AI 的<span class="accent">需求到哪裡？</span></h2>
     <div class="slide-body">
       <div class="slide-text">
@@ -425,7 +402,6 @@
   <div class="slide slide-standard" data-slide="11">
     <div class="slide-number">11 / 13</div>
     <div class="corner-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="7" y="15" width="7" height="18" rx="1.5" fill="#7c3aed"/><rect x="17" y="7" width="7" height="26" rx="1.5" fill="#a78bfa"/><rect x="27" y="20" width="7" height="13" rx="1.5" fill="#c4b5fd"/></svg></div>
-    <div class="slide-tag p4">INTERACTIVE POLL · 合</div>
     <h2>現場<span class="accent">快問快答</span></h2>
     <div class="card-grid card-grid-2">
       <div class="quiz-card">
@@ -454,9 +430,8 @@
   <!-- 12: 收尾 CTA -->
   <div class="slide slide-standard" data-slide="12">
     <div class="slide-number">12 / 13</div>
-    <div class="slide-tag p4">CALL TO ACTION · 合</div>
     <h2>你剛剛選的<span class="accent">是哪一個？</span></h2>
-    <div class="slide-body">
+    <div class="slide-body reverse">
       <div class="slide-text">
         <div class="question-card">
           <h3>「你剛剛選的是哪一個？那就是你現在最該先解決的地方。」</h3>
@@ -477,7 +452,6 @@
     <div class="closing-decor">
       <img src="ai-lecture-slides-0730-img08-closing.png" alt="">
     </div>
-    <div class="slide-tag">CLOSING</div>
     <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
       <div class="closing-quote">「以前請一個員工是增加一個人的能力，<br>現在多一位AI員工是放大整間公司的能力。」</div>
       <div class="closing-sub">員工做判斷，AI員工做重複 — 謝謝聆聽</div>
