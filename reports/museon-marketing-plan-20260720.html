@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSEON 行銷化方案規劃書</title>
+<style>
+  :root{
+    --bg:#0b0d12; --panel:#12151c; --panel2:#171b24; --line:#232836;
+    --text:#e7e9ee; --sub:#98a1b3; --accent:#7c9eff; --accent2:#7be0c0;
+    --warn:#f3b25c; --danger:#f37878;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",Segoe UI,sans-serif;
+    line-height:1.7;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:48px 24px 96px}
+  header{margin-bottom:40px;border-bottom:1px solid var(--line);padding-bottom:32px}
+  h1{font-size:28px;margin:0 0 8px;letter-spacing:.5px}
+  .meta{color:var(--sub);font-size:14px}
+  h2{
+    font-size:20px;margin-top:56px;margin-bottom:16px;
+    display:flex;align-items:center;gap:10px;color:var(--text);
+  }
+  h2 .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:28px;height:28px;border-radius:8px;background:var(--accent);
+    color:#0b0d12;font-size:14px;font-weight:700;flex-shrink:0;
+  }
+  h3{font-size:16px;color:var(--accent2);margin-top:28px;margin-bottom:10px}
+  p{color:var(--sub);margin:8px 0}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:20px 24px;margin:16px 0;
+  }
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:720px){.grid2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--sub);font-weight:600;background:var(--panel2)}
+  td{color:var(--text)}
+  ul{padding-left:20px;color:var(--text)}
+  li{margin:6px 0}
+  .tag{
+    display:inline-block;font-size:12px;padding:3px 10px;border-radius:999px;
+    background:rgba(124,158,255,.15);color:var(--accent);margin-right:6px;
+  }
+  .tag.warn{background:rgba(243,178,92,.15);color:var(--warn)}
+  .tag.ok{background:rgba(123,224,192,.15);color:var(--accent2)}
+  .cost{font-size:13px;color:var(--sub)}
+  .pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0}
+  @media (max-width:720px){.pros-cons{grid-template-columns:1fr}}
+  .pros,.cons{border-radius:10px;padding:14px 16px;font-size:14px}
+  .pros{background:rgba(123,224,192,.08);border:1px solid rgba(123,224,192,.25)}
+  .cons{background:rgba(243,120,120,.08);border:1px solid rgba(243,120,120,.25)}
+  .pros b{color:var(--accent2)} .cons b{color:var(--danger)}
+  .phase{
+    border-left:3px solid var(--accent);padding-left:16px;margin:20px 0;
+  }
+  .phase .when{color:var(--accent);font-size:13px;font-weight:600}
+  footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);color:var(--sub);font-size:13px}
+  code{background:var(--panel2);padding:2px 6px;border-radius:4px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>MUSEON 行銷化方案規劃書</h1>
+  <div class="meta">為 Feng 規劃 · 2026-07-20 · arch-planner 分析</div>
+</header>
+
+<div class="card">
+  <b>核心問題：</b>MUSEON 目前是內部個人 AI 助理架構（L1/L2/L4 + 記憶結晶系統），要轉型成「能對外做行銷」的產品，
+  代表需要新增三種對外能力：<span class="tag">內容生成</span><span class="tag">影音製作</span><span class="tag">社群帳號管理</span>，
+  並補上一塊你沒提到但行銷閉環必要的 <span class="tag warn">成效追蹤</span>。
+  下面依你給的四點展開，第 4 點是我補的建議。
+</div>
+
+<h2><span class="num">1</span>行銷能力（內容 / 文案 / 策略）</h2>
+
+<h3>要具備什麼</h3>
+<ul>
+  <li><b>受眾洞察</b>：從既有客戶對話 / 產業資料萃取目標受眾輪廓（TA persona）</li>
+  <li><b>內容產出</b>：貼文文案、廣告文案、部落格 / SEO 長文、Email 行銷內容</li>
+  <li><b>行銷策略建議</b>：檔期規劃、活動企劃、A/B 文案測試建議</li>
+  <li><b>品牌一致性</b>：語氣、視覺風格守則（brand voice guide），避免不同貼文人格分裂</li>
+</ul>
+
+<h3>怎麼做（技術落地）</h3>
+<table>
+  <tr><th>模組</th><th>做法</th><th>備註</th></tr>
+  <tr><td>Marketing Skill</td><td>新增 <code>marketing-copywriter</code> skill（比照現有 arch-planner 結構：Discussion → Final 兩階段）</td><td>可複用你現有 Skill 框架，不需重建</td></tr>
+  <tr><td>品牌記憶</td><td>建立 <code>brand_voice.json</code> 結晶，記錄語氣 / 禁用詞 / slogan</td><td>比照 ANIMA 人格結晶機制</td></tr>
+  <tr><td>行事曆</td><td>行銷檔期寫入 <code>data/_system/</code> 底下的排程結構，跟 Nightly 對齊</td><td>可視覺化成內容日曆</td></tr>
+</table>
+
+<div class="pros-cons">
+  <div class="pros"><b>甜頭：</b>文案產出速度從「小時」變「分鐘」，且風格可控（結晶化後不會每次語氣飄移）</div>
+  <div class="cons"><b>代價：</b>初期需要花時間餵品牌語料（至少 20-30 篇既有內容）才會準，否則產出會偏通用 AI 腔</div>
+</div>
+
+<h2><span class="num">2</span>影片製作能力</h2>
+
+<p>你提到「我給你的那個方式或方案」——這份規劃先假設是<b>腳本化 + 素材生成 + 自動剪輯</b>的組合流程（若跟你原本指的方案不同，請補充，我會修正這一節）。</p>
+
+<h3>建議的製作流程</h3>
+<div class="phase">
+  <div class="when">Step 1 · 腳本</div>
+  MUSEON 依產品 / 檔期自動生成短影音腳本（15-60秒，含分鏡、字幕稿、口播稿）
+</div>
+<div class="phase">
+  <div class="when">Step 2 · 素材</div>
+  串接圖片 / 影片生成 API（如 Runway、Pika、或你既有素材庫）產出畫面，或用既有實拍素材配腳本剪
+</div>
+<div class="phase">
+  <div class="when">Step 3 · 剪輯合成</div>
+  用自動化剪輯工具（如 <code>ffmpeg</code> pipeline 或 CapCut API）把素材 + 字幕 + 配樂自動組裝
+</div>
+<div class="phase">
+  <div class="when">Step 4 · 審核</div>
+  產出後先進「待審核」佇列，人工過目再放行 —— <b>不建議一開始就全自動發布</b>
+</div>
+
+<div class="pros-cons">
+  <div class="pros"><b>甜頭：</b>單支素材成本大幅下降，能維持每週穩定產出頻率（演算法喜歡穩定發文）</div>
+  <div class="cons"><b>代價：</b>AI 生成影片目前在「真人出鏡感」「品牌質感」上仍有落差，適合當作補量工具而非取代主打影片</div>
+</div>
+
+<p class="cost">⚠️ 需要你確認：你說的「那個方式或方案」具體是哪個工具 / 流程？確認後我會把這節換成對應的實際串接規劃。</p>
+
+<h2><span class="num">3</span>IG / FB 管理能力</h2>
+
+<h3>要具備什麼</h3>
+<ul>
+  <li><b>排程發文</b>：內容日曆 → 自動排程發布到 IG / FB</li>
+  <li><b>互動管理</b>：留言 / 私訊初步分類回覆（常見問題自動回，複雜的轉真人）</li>
+  <li><b>成效回讀</b>：觸及、互動率、追蹤數成長回寫成資料，餵給下一輪內容策略</li>
+</ul>
+
+<h3>技術路徑</h3>
+<table>
+  <tr><th>需求</th><th>方案</th><th>限制</th></tr>
+  <tr><td>發文 / 排程</td><td>Meta Graph API（IG Business + FB Page）</td><td>需要 Business 帳號 + App 審核，正式上線前有審查期</td></tr>
+  <tr><td>留言/私訊自動回</td><td>Webhook 接 MUSEON L2，用既有意圖判斷邏輯做分流</td><td>需設「人工介入」safety net，避免誤回敏感訊息</td></tr>
+  <tr><td>數據回收</td><td>Graph API Insights 端點，定期寫回 data/_system 供分析</td><td>需另建 dashboard 呈現</td></tr>
+</table>
+
+<div class="pros-cons">
+  <div class="pros"><b>甜頭：</b>排程 + 自動初篩留言後，可以省下每天盯後台的時間，且數據會自動回饋優化下一輪內容</div>
+  <div class="cons"><b>代價：</b>Meta API 審核 + 權限申請通常要 1-2 週，且政策變動快，需要有人定期維護串接不能全丟給自動化</div>
+</div>
+
+<h2><span class="num">4</span>補充建議：成效閉環 + 風險護欄</h2>
+<p>這是你沒明講但整個行銷方案要成立必須有的第四塊——沒有這塊，前三塊都是各做各的，無法形成「做了會變好」的迴圈。</p>
+
+<h3>4.1 成效追蹤與回饋</h3>
+<ul>
+  <li>建一個簡單的「行銷儀表板」：每週自動彙整觸及 / 互動 / 轉換，寫成週報</li>
+  <li>把成效數據餵回內容策略 skill，讓下一輪文案 / 腳本自動參考「上週什麼類型的貼文表現好」</li>
+</ul>
+
+<h3>4.2 發布前護欄（強烈建議）</h3>
+<ul>
+  <li>所有對外發布（貼文 / 影片 / 自動回覆）走「草稿 → 人工確認 → 發布」三段式，至少頭 1-2 個月不要全自動</li>
+  <li>品牌敏感詞 / 法規紅線（醫療、金融誇大不實用語等）要有關鍵字擋一層，避免自動發文出包</li>
+</ul>
+
+<h3>4.3 為什麼這塊不能省</h3>
+<div class="card">
+  沒有成效回饋，MUSEON 的行銷產出會停在「量產」而不會「變聰明」；沒有發布護欄，自動化程度越高、出包的殺傷力越大（一則失言貼文的公關成本，遠高於它省下的人工時間）。
+</div>
+
+<h2><span class="num">5</span>建議推進順序</h2>
+<table>
+  <tr><th>階段</th><th>內容</th><th>為什麼先做這個</th></tr>
+  <tr><td>Phase 1</td><td>行銷文案 skill + 品牌語氣結晶</td><td>成本最低、立即可用，且是後面兩塊的內容來源</td></tr>
+  <tr><td>Phase 2</td><td>IG/FB 排程發文（不含自動回覆）</td><td>API 申請週期長，先啟動流程；發文比留言互動風險低</td></tr>
+  <tr><td>Phase 3</td><td>影片製作 pipeline（先人工審核）</td><td>技術複雜度最高，等前兩塊跑順、有內容素材再做</td></tr>
+  <tr><td>Phase 4</td><td>留言自動回覆 + 成效儀表板</td><td>風險較高／依賴前面數據量，放最後</td></tr>
+</table>
+
+<footer>
+  MUSEON 規劃文件 · arch-planner 產出 · 如需調整任何一節請直接回覆指出，我會針對該節重新規劃。
+</footer>
+
+</div>
+</body>
+</html>
