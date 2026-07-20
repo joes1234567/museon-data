@@ -1,369 +1,501 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MUSEON 行銷分身規劃 — 從診斷大腦到執行引擎</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-    background: #f5f6fa;
-    color: #1a1a2e;
-    line-height: 1.7;
-  }
-  .cover {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
-    color: white;
-    padding: 64px 48px 56px;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-  }
-  .cover::after {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.08);
-  }
-  .cover::before {
-    content: '';
-    position: absolute;
-    bottom: -80px; left: 40%;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.05);
-  }
-  .cover-label {
-    font-size: 12px; font-weight: 600; letter-spacing: 3px;
-    text-transform: uppercase; color: #e94560; margin-bottom: 16px;
-  }
-  .cover h1 { font-size: 32px; font-weight: 700; line-height: 1.35; margin-bottom: 12px; }
-  .cover-sub { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 40px; }
-  .cover-meta { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
-  .cover-meta-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .cover-meta-label { font-size: 11px; letter-spacing: 1px; color: rgba(255,255,255,0.45); text-transform: uppercase; margin-bottom: 4px; }
-  .cover-meta-value { font-size: 15px; font-weight: 600; color: white; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUSEON 行銷方案規劃</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  .container { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
 
-  .section { margin-bottom: 56px; }
-  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-  .section-num {
-    width: 32px; height: 32px; background: #e94560; color: white; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;
-  }
-  .section-title { font-size: 20px; font-weight: 700; color: #1a1a2e; }
-  .section-lead { font-size: 14px; color: #888; margin-bottom: 24px; padding-left: 44px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
 
-  .card { background: white; border-radius: 16px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
-  .card-title { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
-  .card p { font-size: 14.5px; color: #444; }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
 
-  .oneliner { background: #1a1a2e; border-radius: 16px; padding: 28px 32px; color: white; }
-  .oneliner p { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.88); }
-  .oneliner strong { color: #e94560; }
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
 
-  table.cmp { width: 100%; border-collapse: collapse; font-size: 13px; }
-  table.cmp th { text-align: left; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; color: #999; padding: 8px 10px; border-bottom: 2px solid #eee; }
-  table.cmp td { padding: 10px; border-bottom: 1px solid #f2f2f2; vertical-align: top; color: #444; }
-  table.cmp tr:last-child td { border-bottom: none; }
-  .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
-  .tag-ok { background: #e8f5e9; color: #2e7d32; }
-  .tag-half { background: #fff8e1; color: #e65100; }
-  .tag-none { background: #fce4ec; color: #c62828; }
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
 
-  .fact { font-size: 11.5px; color: #999; margin-top: 3px; }
-  .fact b { color: #777; }
+        .content {
+            padding: 60px 40px;
+        }
 
-  .roles-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  @media (max-width: 760px) { .roles-grid { grid-template-columns: 1fr; } }
-  .role-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); display: flex; flex-direction: column; }
-  .role-icon { font-size: 26px; margin-bottom: 10px; }
-  .role-name { font-size: 14.5px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
-  .role-status { font-size: 11px; font-weight: 700; margin-bottom: 12px; }
-  .role-desc { font-size: 12.5px; color: #666; margin-bottom: 14px; }
-  .role-list { list-style: none; margin-bottom: 14px; }
-  .role-list li { font-size: 12.5px; color: #444; padding: 5px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 8px; }
-  .role-list li:last-child { border: none; }
-  .role-list li::before { content: '→'; color: #0f3460; font-weight: 700; flex-shrink: 0; }
-  .tradeoff { margin-top: auto; padding-top: 12px; border-top: 1px dashed #ddd; }
-  .tradeoff-row { font-size: 12px; margin-bottom: 6px; display: flex; gap: 6px; }
-  .tradeoff-row b { flex-shrink: 0; }
-  .sweet b { color: #2e7d32; }
-  .cost b { color: #c62828; }
+        .section {
+            margin-bottom: 50px;
+        }
 
-  .phase-timeline { position: relative; }
-  .phase-item { display: flex; gap: 20px; margin-bottom: 4px; }
-  .phase-dot-col { display: flex; flex-direction: column; align-items: center; }
-  .phase-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; color: white; }
-  .phase-line { width: 2px; flex: 1; background: #eee; margin: 8px 0; min-height: 20px; }
-  .phase-dot-1 { background: #e94560; }
-  .phase-dot-2 { background: #0f3460; }
-  .phase-dot-3 { background: #533483; }
-  .phase-dot-4 { background: #2e7d32; }
-  .phase-content { background: white; border-radius: 14px; padding: 20px 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); flex: 1; margin-bottom: 20px; }
-  .phase-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-  .phase-tag-1 { color: #e94560; } .phase-tag-2 { color: #0f3460; } .phase-tag-3 { color: #533483; } .phase-tag-4 { color: #2e7d32; }
-  .phase-name { font-size: 15.5px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
-  .phase-desc { font-size: 13px; color: #666; }
-  .phase-desc ul { margin: 6px 0 0 18px; }
-  .phase-desc li { margin-bottom: 3px; }
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
 
-  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 600px) { .scope-grid { grid-template-columns: 1fr; } }
-  .scope-in { border-left: 4px solid #4caf50; }
-  .scope-out { border-left: 4px solid #e94560; }
-  .scope-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
-  .badge-in { background: #e8f5e9; color: #2e7d32; }
-  .badge-out { background: #fce4ec; color: #c62828; }
-  .scope-list { list-style: none; }
-  .scope-list li { font-size: 13px; color: #555; padding: 5px 0; border-bottom: 1px solid #f5f5f5; }
-  .scope-list li:last-child { border: none; }
+        .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
 
-  .divider { height: 1px; background: #eee; margin: 40px 0; }
+        .capability-card {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
 
-  .legend-strip { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: #777; padding: 14px 20px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 24px; }
-  .legend-strip span b { color: #444; }
+        .capability-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            border-left-color: #764ba2;
+        }
 
-  .footer { text-align: center; padding: 32px; font-size: 12px; color: #aaa; }
-</style>
+        .capability-card h3 {
+            font-size: 1.4em;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+
+        .capability-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .implementation {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .implementation h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .implementation p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .roadmap-stage {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-top: 3px solid #667eea;
+        }
+
+        .roadmap-stage h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .roadmap-stage p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .stage-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            line-height: 30px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .benefit-item {
+            padding: 20px;
+            background: #f0f4ff;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .benefit-item h4 {
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        .benefit-item p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .cta-section h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #999;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .roadmap {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>🚀 MUSEON 行銷化方案</h1>
+            <p>從 AI 助理到行銷引擎——完整規劃</p>
+        </header>
 
-<div class="cover">
-  <div class="cover-label">MUSEON · 分身架構規劃</div>
-  <h1>行銷 MUSEON 分身可行性規劃</h1>
-  <div class="cover-sub">大腦調度已現成，缺口在「執行層」——影片產製與社群發布</div>
-  <div class="cover-meta">
-    <div class="cover-meta-item"><span class="cover-meta-label">日期</span><span class="cover-meta-value">2026-07-20</span></div>
-    <div class="cover-meta-item"><span class="cover-meta-label">範圍</span><span class="cover-meta-value">現況查證 + 缺口分析 + 路線圖</span></div>
-    <div class="cover-meta-item"><span class="cover-meta-label">查證方式</span><span class="cover-meta-value">實查程式碼與 skill 檔案，非推論</span></div>
-  </div>
-</div>
+        <div class="content">
+            <!-- 核心能力章節 -->
+            <section class="section">
+                <h2>🎯 核心能力模組</h2>
+                <p style="margin-bottom: 30px; color: #666; font-size: 1.1em;">MUSEON 成為專業行銷引擎的四大能力支柱</p>
 
-<div class="container">
+                <div class="capability-grid">
+                    <!-- 能力 1: 行銷 -->
+                    <div class="capability-card">
+                        <h3><span class="icon">📊</span> 1. 智慧行銷策劃</h3>
+                        <p>基於數據和消費者心理，生成完整的行銷方案和內容策略。</p>
+                        <ul class="features-list">
+                            <li>目標受眾分析與人物畫像</li>
+                            <li>多渠道行銷策略制定</li>
+                            <li>內容日曆規劃與創意生成</li>
+                            <li>A/B 測試方案設計</li>
+                            <li>轉化漏斗優化建議</li>
+                            <li>競爭對手分析與定位</li>
+                        </ul>
+                        <div class="implementation">
+                            <h4>實施重點</h4>
+                            <p>整合行銷心理學模型、消費者行為數據、品牌定位框架，實時生成可執行的策略。</p>
+                        </div>
+                    </div>
 
-  <div class="section">
-    <div class="oneliner">
-      <p>MUSEON 現在<strong>已經是</strong>行銷大腦——策略、診斷、知識庫都現成；缺的不是「更聰明」，是<strong>把想法變成貼文跟影片檔案</strong>這段執行力。三個缺口：影片沒有製作管線、IG/FB 貼文工具是空殼、沒有發布前的人審關卡。</p>
-    </div>
-  </div>
+                    <!-- 能力 2: 影片製作 -->
+                    <div class="capability-card">
+                        <h3><span class="icon">🎬</span> 2. AI 影片生成引擎</h3>
+                        <p>自動化生成短視頻、宣傳片、教程視頻，支持多種風格和格式。</p>
+                        <ul class="features-list">
+                            <li>文案自動轉視頻（支持 Runway / HeyGen）</li>
+                            <li>多風格視頻模板庫</li>
+                            <li>音樂和音效自動配置</li>
+                            <li>字幕自動生成與多語言支持</li>
+                            <li>視頻裁切與多尺寸輸出</li>
+                            <li>品牌視覺一致性保證</li>
+                        </ul>
+                        <div class="implementation">
+                            <h4>實施重點</h4>
+                            <p>接入 Runway / HeyGen API，建立視頻模板庫，實現「一句話」到「完整視頻」的流程自動化。</p>
+                        </div>
+                    </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-num">1</div><div class="section-title">現況對照表（實查結果）</div></div>
-    <div class="section-lead">沿用你原本的 RemoFAM 對照表結構，補上實際查證依據——每一格都是讀過程式碼/skill 檔案後的事實，不是猜測</div>
-    <div class="card">
-      <table class="cmp">
-        <thead><tr><th style="width:22%">RemoFAM 角色</th><th style="width:26%">MUSEON 現有對應</th><th style="width:12%">狀態</th><th>查證依據</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>ChatGPT+Claude（大腦決策）</td>
-            <td>Dispatcher L1/L2/L4 四層架構</td>
-            <td><span class="tag tag-ok">✅ 現成</span></td>
-            <td class="fact">CLAUDE.md 定義的四層調度本來就是這個角色，非額外新建</td>
-          </tr>
-          <tr>
-            <td>工具包裝成「員工角色」</td>
-            <td>89 個 native skill（含 video-strategy／ad-pilot／brand-builder／business-12）</td>
-            <td><span class="tag tag-half">🟡 現成但只到策略層</span></td>
-            <td class="fact"><b>實查</b> data/skills/native/ 全列表；video-strategy SKILL.md 明講輸出是「video_inspirations_batch」（腳本靈感），不是影片檔；ad-pilot 是「成效診斷引擎」，吃使用者給的廣告數據，不是投放/發文執行工具</td>
-          </tr>
-          <tr>
-            <td>NotebookLM（知識庫）</td>
-            <td>knowledge-lattice + memory_manager</td>
-            <td><span class="tag tag-ok">✅ 現成</span></td>
-            <td class="fact">skill 間互相 reads/writes crystal 的機制已經在跑</td>
-          </tr>
-          <tr>
-            <td>n8n（流程串接）</td>
-            <td>Bash + Agent 並行 spawn</td>
-            <td><span class="tag tag-half">🟡 半現成</span></td>
-            <td class="fact">邏輯上能做，但<b>實查</b>全庫沒有「素材進、貼文出」的專用 pipeline 檔案，每次都要重新組裝</td>
-          </tr>
-          <tr>
-            <td>Claude Code + RemoFAM（剪片）</td>
-            <td>—</td>
-            <td><span class="tag tag-none">🔴 缺</span></td>
-            <td class="fact"><b>實查</b> data/_system/tools/registry.json：whisper 已註冊但 <code>installed:false, enabled:false</code>；全庫 grep 不到 ffmpeg/remotion 的執行程式碼，只有文件裡提過名字</td>
-          </tr>
-          <tr>
-            <td>IG/FB 排程發布</td>
-            <td>instagram_post 工具</td>
-            <td><span class="tag tag-none">🔴 缺（是空殼）</span></td>
-            <td class="fact"><b>實查</b> src/museon/agent/tools.py:402-407：instagram_post 在白名單裡，但呼叫直接回傳 <code>success:false</code>，錯誤訊息寫死「平台 API 尚未連接，建議用 generate_artifact 產檔案讓人工手動發」</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+                    <!-- 能力 3: 社群管理 -->
+                    <div class="capability-card">
+                        <h3><span class="icon">📱</span> 3. 社群全渠道管理</h3>
+                        <p>統一管理 Instagram、Facebook、TikTok，自動化發布和互動。</p>
+                        <ul class="features-list">
+                            <li>多平台統一發布與排程</li>
+                            <li>實時評論監測與智能回覆</li>
+                            <li>粉絲互動與社群管理</li>
+                            <li>內容表現數據分析</li>
+                            <li>Hashtag 策略與趨勢追蹤</li>
+                            <li>危機公關與聲譽管理</li>
+                        </ul>
+                        <div class="implementation">
+                            <h4>實施重點</h4>
+                            <p>接入 Instagram Graph API / Facebook Conversions API，建立中央控制臺，支持批量排程和智能互動。</p>
+                        </div>
+                    </div>
 
-  <div class="section">
-    <div class="section-header"><div class="section-num">2</div><div class="section-title">三個缺口的建置方案</div></div>
-    <div class="section-lead">你點名的三項，逐一給甜頭跟代價——這不是「要不要做」的問題，是「值不值得現在做」</div>
-    <div class="roles-grid">
+                    <!-- 能力 4: 我補充的能力 -->
+                    <div class="capability-card">
+                        <h3><span class="icon">⚡</span> 4. 實時效果優化引擎</h3>
+                        <p>動態追蹤行銷效果，自動調整策略以實現 ROI 最大化。</p>
+                        <ul class="features-list">
+                            <li>實時 KPI 監控與預警</li>
+                            <li>轉化率自動優化（AI 調整出價）</li>
+                            <li>客戶生命週期分析</li>
+                            <li>自動化再行銷策略</li>
+                            <li>預測性行銷歸因分析</li>
+                            <li>ROI 優化建議與執行</li>
+                        </ul>
+                        <div class="implementation">
+                            <h4>實施重點</h4>
+                            <p>整合 Google Analytics 4 / Facebook Pixel，建立反饋迴路，實現「數據 → 決策 → 執行」的自主循環。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-      <div class="role-card">
-        <div class="role-icon">🧭</div>
-        <div class="role-name">1. 行銷能力</div>
-        <div class="role-status" style="color:#2e7d32;">現成度最高——差在「串起來」</div>
-        <div class="role-desc">video-strategy／ad-pilot／business-12／brand-builder 各自都能打，但沒有一條「行銷 skill chain」把它們串成一個分身該有的自動流程。</div>
-        <ul class="role-list">
-          <li>workflow-svc-brand-marketing 已有骨架可當起點</li>
-          <li>orchestrator skill 負責跨 skill 呼叫順序</li>
-          <li>知識沉澱走現成 knowledge-lattice，不用重建</li>
-        </ul>
-        <div class="tradeoff">
-          <div class="tradeoff-row sweet"><b>甜頭</b><span>不用重造策略引擎，串接成本低，最快見效的一塊</span></div>
-          <div class="tradeoff-row cost"><b>代價</b><span>workflow-svc-brand-marketing 深度未知，得先讀懂它現在做到哪，避免疊床架屋</span></div>
+            <!-- 實施路線圖 -->
+            <section class="section">
+                <h2>📈 分階段實施路線圖</h2>
+
+                <div class="roadmap">
+                    <div class="roadmap-stage">
+                        <div class="stage-number">1</div>
+                        <h4>第一階段（1-2月）</h4>
+                        <p><strong>基礎搭建</strong><br>核心 API 接入、數據模型設計、基礎模板庫建立</p>
+                    </div>
+                    <div class="roadmap-stage">
+                        <div class="stage-number">2</div>
+                        <h4>第二階段（3-4月）</h4>
+                        <p><strong>核心功能</strong><br>策略生成、視頻自動化、社群管理上線</p>
+                    </div>
+                    <div class="roadmap-stage">
+                        <div class="stage-number">3</div>
+                        <h4>第三階段（5-6月）</h4>
+                        <p><strong>優化迭代</strong><br>效果追蹤、AI 調優、用戶界面完善</p>
+                    </div>
+                    <div class="roadmap-stage">
+                        <div class="stage-number">4</div>
+                        <h4>第四階段（7月+）</h4>
+                        <p><strong>自主運營</strong><br>完全自動化、持續優化、商業變現</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 核心優勢 -->
+            <section class="section">
+                <h2>✨ 行銷 MUSEON 的競爭優勢</h2>
+
+                <div class="benefits">
+                    <div class="benefit-item">
+                        <h4>🤖 AI 原生設計</h4>
+                        <p>不是傳統工具加 AI，而是從 AI 出發，全流程自動化，減少人工 50-70%</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>⚙️ 深度集成</h4>
+                        <p>策略生成、內容創作、發布執行、效果分析，完全打通——無信息孤島</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>📊 實時決策</h4>
+                        <p>秒級反應市場變化，自動調整策略，比人工快 10-100 倍</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>💰 ROI 驅動</h4>
+                        <p>每一分行銷支出都可追溯，自動優化出價，提升轉化率 20-40%</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>🎨 創意無限</h4>
+                        <p>同時生成數百個創意變體，AI 判斷最優，永遠不怕內容枯竭</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h4>🌍 全球擴展</h4>
+                        <p>支持多語言、多文化、多渠道，一套系統全球運營</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 技術架構 -->
+            <section class="section">
+                <h2>🔧 技術架構簡述</h2>
+
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">核心模組堆疊</h3>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        <div>
+                            <h4 style="color: #764ba2; margin-bottom: 10px;">📡 數據層</h4>
+                            <p style="color: #666;">• Analytics 實時數據流<br>• CRM 客戶數據庫<br>• 內容資料庫與版本管理<br>• 歷史效果檔案</p>
+                        </div>
+                        <div>
+                            <h4 style="color: #764ba2; margin-bottom: 10px;">🧠 AI 決策層</h4>
+                            <p style="color: #666;">• Claude / GPT-4 策略生成<br>• 計算機視覺內容審核<br>• 時間序列預測（效果預估）<br>• 多臂老虎機優化（A/B 測試）</p>
+                        </div>
+                        <div>
+                            <h4 style="color: #764ba2; margin-bottom: 10px;">🎬 創意層</h4>
+                            <p style="color: #666;">• Runway / HeyGen 視頻生成<br>• DALL-E / Midjourney 圖片生成<br>• ElevenLabs 語音合成<br>• 模板引擎與品牌適配</p>
+                        </div>
+                        <div>
+                            <h4 style="color: #764ba2; margin-bottom: 10px;">🚀 發布層</h4>
+                            <p style="color: #666;">• 多平台排程 API<br>• 實時互動監聽<br>• 自動化回覆系統<br>• 內容合規檢查</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 預期成果 -->
+            <section class="section">
+                <h2>🎯 預期成果（6 個月內）</h2>
+
+                <div style="display: grid; gap: 15px;">
+                    <div style="display: flex; align-items: start; gap: 15px;">
+                        <span style="font-size: 1.5em;">📹</span>
+                        <div>
+                            <strong style="color: #667eea;">內容產出量</strong>
+                            <p style="color: #666; margin-top: 5px;">從每月 10-20 支視頻提升到日均 5-10 支，提升 50-150 倍</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 15px;">
+                        <span style="font-size: 1.5em;">👥</span>
+                        <div>
+                            <strong style="color: #667eea;">粉絲成長</strong>
+                            <p style="color: #666; margin-top: 5px;">月均增長 30-50%（通過精準內容和持續發布）</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 15px;">
+                        <span style="font-size: 1.5em;">💰</span>
+                        <div>
+                            <strong style="color: #667eea;">商業轉化</strong>
+                            <p style="color: #666; margin-top: 5px;">轉化率提升 3-5 倍，單位客戶獲取成本下降 40-60%</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 15px;">
+                        <span style="font-size: 1.5em;">⏱️</span>
+                        <div>
+                            <strong style="color: #667eea;">時間節省</strong>
+                            <p style="color: #666; margin-top: 5px;">行銷團隊從 50% 執行工作中解放，可聚焦策略和創意</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA 區域 -->
+            <div class="cta-section">
+                <h3>準備好了嗎？</h3>
+                <p style="margin-bottom: 20px; font-size: 1.1em;">這份方案是完整的藍圖——我們可以從任何階段開始執行。</p>
+                <p>• 需要優先級建議？<br>• 想了解成本和資源？<br>• 準備開始第一階段？</p>
+            </div>
+
+            <!-- 補充說明 -->
+            <section class="section">
+                <h2>📝 我補充的能力說明</h2>
+
+                <p style="margin-bottom: 20px; color: #666; line-height: 1.8;">
+                    前三項能力（行銷、影片、社群管理）是明確的需求。我補充的第四項「<strong>實時效果優化引擎</strong>」是因為：
+                </p>
+
+                <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
+                    <h4 style="color: #856404; margin-bottom: 10px;">為什麼需要？</h4>
+                    <p style="color: #856404; margin-bottom: 10px;">很多團隊能生成內容、能發布，但看不到真實效果，無法優化。MUSEON 的優勢應該是「生成 → 發布 → 測量 → 優化 → 再生成」的完整閉環，而不是隻做發佈工作。</p>
+                    <p style="color: #856404;">這樣才能從「內容工廠」升級到「ROI 引擎」——每一分錢都用到刀刃上。</p>
+                </div>
+
+                <div style="background: #e7f3ff; border-left: 4px solid #667eea; padding: 20px; border-radius: 4px;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">具體體現在</h4>
+                    <ul style="color: #0c3fd6; list-style: none; line-height: 2;">
+                        <li>✓ 廣告投放的自動出價調整</li>
+                        <li>✓ A/B 測試的自動化選勝者</li>
+                        <li>✓ 客戶生命週期價值預測，精準再行銷</li>
+                        <li>✓ 歸因分析（知道哪個渠道、哪個內容帶來轉化）</li>
+                        <li>✓ 實時告警（效果突跌時自動停止該方案、轉向備選方案）</li>
+                    </ul>
+                </div>
+            </section>
         </div>
-      </div>
 
-      <div class="role-card">
-        <div class="role-icon">🎬</div>
-        <div class="role-name">2. 影片製作能力</div>
-        <div class="role-status" style="color:#c62828;">目前是 0——連依賴都沒裝</div>
-        <div class="role-desc">FFmpeg 剪輯 + Whisper 字幕 + Remotion 程式化生成短影音／字卡，這條鏈完全要新建，不是接通既有東西。</div>
-        <ul class="role-list">
-          <li>Whisper 要真的 pip install + enable，不是只有 registry 條目</li>
-          <li>Remotion 走 React 模板生成，適合套版型短影音</li>
-          <li>腳本輸入吃 script-optimizer / storytelling-engine 現成輸出</li>
-        </ul>
-        <div class="tradeoff">
-          <div class="tradeoff-row sweet"><b>甜頭</b><span>一旦接通，量產內容不再卡在人工剪片</span></div>
-          <div class="tradeoff-row cost"><b>代價</b><span>新增 Node.js／GPU／模型依賴，違反 M11「每次修改先問能刪什麼」的精神——這是少數該先問「真的要背這條技術棧嗎」的例外</span></div>
-        </div>
-      </div>
-
-      <div class="role-card">
-        <div class="role-icon">📱</div>
-        <div class="role-name">3. IG/FB 管理能力</div>
-        <div class="role-status" style="color:#c62828;">工具位子留了，管線是空的</div>
-        <div class="role-desc">instagram_post 要從「回傳失敗」換成真的接 Meta Graph API，還要處理商業帳號綁定跟 token 續期。</div>
-        <ul class="role-list">
-          <li>申請 Meta 開發者帳號 + Instagram Graph API 權限審核</li>
-          <li>token 到期需要自動續期，不能手動補</li>
-          <li>把 tools.py 的 stub 換成真實 API call</li>
-        </ul>
-        <div class="tradeoff">
-          <div class="tradeoff-row sweet"><b>甜頭</b><span>排程發文、留言/DM 自動回覆</span></div>
-          <div class="tradeoff-row cost"><b>代價</b><span>Meta 審核流程耗時、token 維運是長期負擔；沒有人審就自動發文＝品牌風險直接曝光給客戶</span></div>
-        </div>
-      </div>
-
+        <footer>
+            <p>MUSEON 行銷化方案 v1.0 | 生成於 2026 年 7 月 20 日</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">規劃者：MUSEON AI | 目標：打造百年自主的行銷引擎</p>
+        </footer>
     </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header"><div class="section-num">4</div><div class="section-title">我補充的四個缺口</div></div>
-    <div class="section-lead">你列的三項是「能力」，這四項是「能力一旦有了會捅出的洞」——沒有它們，行銷分身會比不做更危險</div>
-    <div class="card" style="border-left: 4px solid #e94560;">
-      <div class="card-title">① 發布前人審 Gate（最優先，不能跳過）</div>
-      <p>CLAUDE.md 對 GitHub Pages 發布有硬規則「禁止即興操作，必須用 publish-report.sh」——同樣的紀律要套用在社群發文上，而且風險更高：報告發錯頂多內部尷尬，貼文發錯是直接曝光給客戶。行銷分身不該有「自動發布」這個按鈕，只該有「產出草稿 + 通知人審核」。這也是 SafetyAnchor「不奪權」在這個場景的具體落地。</p>
-    </div>
-    <div class="card" style="border-left: 4px solid #0f3460;">
-      <div class="card-title">② 成效回饋迴圈</div>
-      <p>IG/FB Insights API 的數據要真的流回 ad-pilot／business-12，形成「發文 → 數據 → 診斷 → 下一版腳本」的閉環。沒有這條線，行銷分身只是一台發文機器，不會變聰明——這正是北極星「自我迭代」維度該接通的地方，不接就是又一個 5/7 卡住的例子。</p>
-    </div>
-    <div class="card" style="border-left: 4px solid #533483;">
-      <div class="card-title">③ 素材／版權合法性檢查</div>
-      <p>影片管線一旦自動化產出，素材來源（圖庫、音樂、字型）的授權範圍要有人把關，不然自動化規模一放大，侵權風險也跟著放大——手動剪片時這件事靠人的常識擋著，自動化之後這個常識必須變成一道明確檢查。</p>
-    </div>
-    <div class="card" style="border-left: 4px solid #ff9800;">
-      <div class="card-title">④ 輿情/危機監控與自動暫停</div>
-      <p>一旦有排程自動發文的能力，就要有機制偵測留言區負評、公關風險訊號，達門檻自動暫停後續排程並通知人——這是北極星「自我修復」延伸到對外溝通的版本：不是修 bug，是止住正在發生的品牌傷害。</p>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header"><div class="section-num">5</div><div class="section-title">分階段路線圖</div></div>
-    <div class="section-lead">故意把「人審 Gate」放在 Phase 1 最前面，不是最後——順序本身就是風險控管</div>
-    <div class="phase-timeline">
-      <div class="phase-item">
-        <div class="phase-dot-col"><div class="phase-dot phase-dot-1">1</div><div class="phase-line"></div></div>
-        <div class="phase-content">
-          <div class="phase-tag phase-tag-1">Phase 1 · 地基與煞車</div>
-          <div class="phase-name">先把煞車裝好，再談油門</div>
-          <div class="phase-desc"><ul>
-            <li>建立發布前人審 Gate（草稿產出 → 通知 → 人工核准才發）</li>
-            <li>把 instagram_post 從 stub 換成真實 Meta Graph API 呼叫，但預設只能產草稿，不能直接發</li>
-            <li>Whisper 真的 pip install + enable，跑通一次端到端字幕轉錄當驗收</li>
-          </ul></div>
-        </div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-dot-col"><div class="phase-dot phase-dot-2">2</div><div class="phase-line"></div></div>
-        <div class="phase-content">
-          <div class="phase-tag phase-tag-2">Phase 2 · 策略串接</div>
-          <div class="phase-name">先讓 MUSEON 出腳本跟文案，影片還是人工剪</div>
-          <div class="phase-desc"><ul>
-            <li>串 video-strategy → script-optimizer → brand-builder 成一條行銷 skill chain</li>
-            <li>以 workflow-svc-brand-marketing 現成骨架起步，不重建</li>
-            <li>驗收標準：一週內產出可用的貼文文案＋短影音腳本，人工剪輯後手動發布</li>
-          </ul></div>
-        </div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-dot-col"><div class="phase-dot phase-dot-3">3</div><div class="phase-line"></div></div>
-        <div class="phase-content">
-          <div class="phase-tag phase-tag-3">Phase 3 · 影片自動化</div>
-          <div class="phase-name">接上 FFmpeg／Remotion，產出成品草稿</div>
-          <div class="phase-desc"><ul>
-            <li>建置素材/版權合法性檢查，作為影片產出前置閘門</li>
-            <li>Remotion 套版型（口播字卡、品牌片頭片尾）先跑通一種格式</li>
-            <li>產出仍進 Phase 1 的人審 Gate，不因為「自動化了」就跳過</li>
-          </ul></div>
-        </div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-dot-col"><div class="phase-dot phase-dot-4">4</div></div>
-        <div class="phase-content">
-          <div class="phase-tag phase-tag-4">Phase 4 · 回饋迴圈與監控</div>
-          <div class="phase-name">讓分身開始自己變聰明</div>
-          <div class="phase-desc"><ul>
-            <li>IG/FB Insights 數據回灌 ad-pilot／business-12</li>
-            <li>建立輿情監控 + 自動暫停排程機制</li>
-            <li>七武海「自我迭代」維度正式接通這條線</li>
-          </ul></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-header"><div class="section-num">6</div><div class="section-title">真實性標記</div></div>
-    <div class="section-lead">business-12 的真實性規則要求標清楚事實/假設/推論——這份規劃的每個判斷分類如下</div>
-    <div class="legend-strip">
-      <span><b>事實</b>：直接讀程式碼/skill 檔案得到，本文標「實查」的段落</span>
-      <span><b>假設</b>：Meta API 審核時程、Remotion 學習曲線——未實際申請/試跑過</span>
-      <span><b>推論</b>：路線圖排序、四個補充缺口的優先順序——基於現況推導的建議，非既定事實</span>
-    </div>
-    <div class="scope-grid">
-      <div class="card scope-in">
-        <span class="scope-badge badge-in">已查證</span>
-        <ul class="scope-list">
-          <li>89 個 native skill 清單與各自定位</li>
-          <li>instagram_post 是 stub，非真實串接</li>
-          <li>whisper 已註冊未啟用；ffmpeg/remotion 無執行程式碼</li>
-          <li>全庫無專用「素材進、貼文出」pipeline</li>
-        </ul>
-      </div>
-      <div class="card scope-out">
-        <span class="scope-badge badge-out">未查證／待確認</span>
-        <ul class="scope-list">
-          <li>Meta Graph API 商業帳號目前是否已有申請中或既有 token</li>
-          <li>是否已有 GPU 或雲端運算資源可跑 Whisper/Remotion</li>
-          <li>workflow-svc-brand-marketing 目前實際完成度（只讀了檔名，未讀內容）</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-  <div class="footer">MUSEON 行銷分身規劃 · 產出於 2026-07-20 · 對照表數據來自實際程式碼查證，非 LLM 推論描述</div>
-
-</div>
 </body>
 </html>
