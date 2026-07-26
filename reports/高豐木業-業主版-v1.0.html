@@ -510,6 +510,37 @@
     padding: 10px 14px;
     margin-top: 16px;
   }
+  .dep-note + .dep-note { margin-top: 10px; }
+
+  /* Tier grouping (核心 / 基礎應用 / 綜合應用) */
+  .dep-tier {
+    border-radius: 14px;
+    padding: 18px 20px 6px;
+    margin-bottom: 20px;
+  }
+  .dep-tier-core { background: #f4f8fb; border: 1px solid #dce8f2; }
+  .dep-tier-basic { background: #f4faf6; border: 1px solid #d3ebd9; }
+  .dep-tier-comprehensive { background: #fdf9f0; border: 1px solid #f0e2c0; }
+  .dep-tier-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .dep-tier-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .dep-tier-title { font-size: 14px; font-weight: 800; color: #1a1a2e; }
+  .dep-tier-sub { font-size: 11.5px; color: #888; }
 </style>
 </head>
 <body>
@@ -545,7 +576,7 @@
     <span class="rf-arrow">→</span>
     <span class="rf-step">3 四階段路線</span>
     <span class="rf-arrow">→</span>
-    <span class="rf-step">模組依賴圖</span>
+    <span class="rf-step">系統全景圖</span>
     <span class="rf-arrow">→</span>
     <span class="rf-step">4 P1 功能細節</span>
     <span class="rf-arrow">→</span>
@@ -662,10 +693,10 @@
         </div>
         <div class="phase-content">
           <div class="phase-tag phase-tag-2">核心流程穩定後 · 生產與材料追蹤</div>
-          <div class="phase-name">生產與客製化管理（6 個模組）</div>
+          <div class="phase-name">生產與客製化管理（8 個模組）</div>
           <div class="phase-desc">
-            導入毛料／半成品／餘料／廢料分層庫存、工單管理與材料來源流向追蹤，
-            讓「這批毛料做了哪些成品、剩多少」全程可查，不再依賴單一員工記憶。約第 3–4 個月。
+            導入毛料／半成品／餘料／廢料分層庫存、原料轉換紀錄、工單管理、材料來源流向追蹤與區域式庫位管理，
+            讓「這批毛料做了哪些成品、剩多少、放在哪」全程可查，不再依賴單一員工記憶。約第 3–4 個月。
           </div>
         </div>
       </div>
@@ -699,12 +730,12 @@
     </div>
   </div>
 
-  <!-- 3.5 模組依賴總覽圖 -->
+  <!-- 3.5 模組全景圖 -->
   <div class="dep-bridge">
     <div class="dep-bridge-icon">🗺️</div>
     <div>
-      <div class="dep-bridge-label">模組依賴總覽圖 — 誰先誰後</div>
-      <div class="dep-bridge-desc">四階段路線是「什麼時候做」；這張圖是「先做完什麼，下一個才能動」——由上到下依資料流排列，顏色代表所屬階段（綠 P1／藍 P2／金 P3／紫 P4），不代表先後順序</div>
+      <div class="dep-bridge-label">系統全景圖 — 從核心到綜合應用，先後順序一次看懂</div>
+      <div class="dep-bridge-desc">全系統共 31 個模組，分三層堆疊：<strong>核心</strong>（身份與主檔資料，誰都要先有）→ <strong>基礎應用</strong>（每天在跑的營運交易）→ <strong>綜合應用</strong>（把交易資料串起來看到的洞察與智慧）。下層先蓋穩，上層才蓋得住——這條順序跟 P1→P2→P3→P4 的階段路線是同一件事的兩種看法，顏色仍代表所屬階段（綠 P1／藍 P2／金 P3／紫 P4）</div>
     </div>
   </div>
 
@@ -712,92 +743,111 @@
     <div class="dep-graph-container" id="depGraphContainer">
       <svg id="depSvg"></svg>
 
-      <div class="dep-layer">
-        <div class="dep-layer-label">最先建立・基礎資料</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p1" id="dep-acct">帳號管理</div>
-          <div class="dep-node dep-node-p1" id="dep-employee">員工模組</div>
-          <div class="dep-node dep-node-p1" id="dep-customer">客戶管理</div>
-          <div class="dep-node dep-node-p1" id="dep-material">樹種與材料管理</div>
-          <div class="dep-node dep-node-p1" id="dep-history">歷史資料匯入</div>
+      <!-- TIER 1：核心 -->
+      <div class="dep-tier dep-tier-core">
+        <div class="dep-tier-header">
+          <span class="dep-tier-num" style="background:#2A6A8A;">1</span>
+          <span class="dep-tier-title">核心層</span>
+          <span class="dep-tier-sub">誰都要先有的身份與主檔資料・9 個模組・全部 P1</span>
+        </div>
+        <div class="dep-layer">
+          <div class="dep-layer-label">身份與角色</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p1" id="dep-acct">帳號管理</div>
+            <div class="dep-node dep-node-p1" id="dep-employee">員工模組</div>
+            <div class="dep-node dep-node-p1" id="dep-perm">權限控管</div>
+          </div>
+        </div>
+        <div class="dep-layer">
+          <div class="dep-layer-label">主檔資料</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p1" id="dep-customer">客戶管理</div>
+            <div class="dep-node dep-node-p1" id="dep-material">樹種與材料管理</div>
+            <div class="dep-node dep-node-p1" id="dep-prodspec">產品與規格管理</div>
+            <div class="dep-node dep-node-p1" id="dep-custprice">客戶專屬價格</div>
+          </div>
+        </div>
+        <div class="dep-layer" style="margin-bottom: 4px;">
+          <div class="dep-layer-label">資料基礎設施</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p1" id="dep-autocode">自動編碼與多條件查詢</div>
+            <div class="dep-node dep-node-p1" id="dep-history">歷史資料匯入</div>
+          </div>
         </div>
       </div>
 
-      <div class="dep-layer">
-        <div class="dep-layer-label">規則與定價基礎</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p1" id="dep-perm">權限控管</div>
-          <div class="dep-node dep-node-p1" id="dep-prodspec">產品與規格管理</div>
-          <div class="dep-node dep-node-p1" id="dep-stock">規格品庫存</div>
-          <div class="dep-node dep-node-p1" id="dep-custprice">客戶專屬價格</div>
+      <!-- TIER 2：基礎應用 -->
+      <div class="dep-tier dep-tier-basic">
+        <div class="dep-tier-header">
+          <span class="dep-tier-num" style="background:#1a6b3c;">2</span>
+          <span class="dep-tier-title">基礎應用層</span>
+          <span class="dep-tier-sub">每天在跑的營運交易・10 個模組・全部 P1・核心蓋好後接著做</span>
+        </div>
+        <div class="dep-layer">
+          <div class="dep-layer-label">交易前置</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p1" id="dep-quote">報價管理</div>
+            <div class="dep-node dep-node-p1" id="dep-procstep">加工工序管理</div>
+            <div class="dep-node dep-node-p1" id="dep-purchase">進貨管理</div>
+          </div>
+        </div>
+        <div class="dep-layer">
+          <div class="dep-layer-label">交易成立與庫存</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p1" id="dep-order">訂單管理</div>
+            <div class="dep-node dep-node-p1" id="dep-stock">規格品庫存</div>
+            <div class="dep-node dep-node-p1" id="dep-toolgoods">工具類商品管理</div>
+          </div>
+        </div>
+        <div class="dep-layer" style="margin-bottom: 4px;">
+          <div class="dep-layer-label">執行與紀錄</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p1" id="dep-shipment">出貨管理</div>
+            <div class="dep-node dep-node-p1" id="dep-finance">記帳功能（訂單軌＋月結軌）</div>
+            <div class="dep-node dep-node-p1" id="dep-stocklog">庫存異動紀錄</div>
+            <div class="dep-node dep-node-p1" id="dep-payroll">薪資與獎金模組</div>
+          </div>
         </div>
       </div>
 
-      <div class="dep-layer">
-        <div class="dep-layer-label">交易前置</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p1" id="dep-autocode">自動編碼與多條件查詢</div>
-          <div class="dep-node dep-node-p1" id="dep-quote">報價管理</div>
-          <div class="dep-node dep-node-p1" id="dep-procstep">加工工序管理</div>
-          <div class="dep-node dep-node-p1" id="dep-purchase">進貨管理</div>
+      <!-- TIER 3：綜合應用 -->
+      <div class="dep-tier dep-tier-comprehensive" style="margin-bottom: 0;">
+        <div class="dep-tier-header">
+          <span class="dep-tier-num" style="background:#B8923A;">3</span>
+          <span class="dep-tier-title">綜合應用層</span>
+          <span class="dep-tier-sub">把交易資料串起來看到的洞察與智慧・12 個模組・P2／P3／P4・基礎應用穩定後接著做</span>
         </div>
-      </div>
-
-      <div class="dep-layer">
-        <div class="dep-layer-label">交易成立</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p1" id="dep-order">訂單管理</div>
-          <div class="dep-node dep-node-p2" id="dep-rawstock">毛料／原料庫存</div>
-          <div class="dep-node dep-node-p1" id="dep-toolgoods">工具類商品管理</div>
+        <div class="dep-layer">
+          <div class="dep-layer-label">原料到半成品</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p2" id="dep-rawstock">毛料／原料庫存</div>
+            <div class="dep-node dep-node-p2" id="dep-convert">原料轉換紀錄</div>
+            <div class="dep-node dep-node-p2" id="dep-semistock">半成品庫存</div>
+            <div class="dep-node dep-node-p2" id="dep-workorder">工單管理</div>
+          </div>
         </div>
-      </div>
-
-      <div class="dep-layer">
-        <div class="dep-layer-label">執行與紀錄</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p1" id="dep-finance">記帳功能（訂單軌＋月結軌）</div>
-          <div class="dep-node dep-node-p1" id="dep-shipment">出貨管理</div>
-          <div class="dep-node dep-node-p2" id="dep-workorder">工單管理</div>
-          <div class="dep-node dep-node-p1" id="dep-stocklog">庫存異動紀錄</div>
-          <div class="dep-node dep-node-p1" id="dep-payroll">薪資與獎金模組</div>
+        <div class="dep-layer">
+          <div class="dep-layer-label">材料流向與庫位</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p2" id="dep-traceability">材料來源與流向追蹤</div>
+            <div class="dep-node dep-node-p2" id="dep-locmgmt">庫位管理</div>
+            <div class="dep-node dep-node-p2" id="dep-leftover">餘料庫存</div>
+            <div class="dep-node dep-node-p2" id="dep-waste">廢料及損耗紀錄</div>
+          </div>
         </div>
-      </div>
-
-      <div class="dep-layer">
-        <div class="dep-layer-label">材料流向追蹤</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p2" id="dep-semistock">半成品庫存</div>
-          <div class="dep-node dep-node-p2" id="dep-traceability">材料來源與流向追蹤</div>
+        <div class="dep-layer">
+          <div class="dep-layer-label">分析與擴充</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p3" id="dep-costanalysis">成本與毛利分析</div>
+            <div class="dep-node dep-node-p3" id="dep-report">報表管理</div>
+            <div class="dep-node dep-node-p3 dep-node-dashed" id="dep-bizstore">門市及分店擴充</div>
+          </div>
         </div>
-      </div>
-
-      <div class="dep-layer">
-        <div class="dep-layer-label">材料收尾</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p2" id="dep-leftover">餘料庫存</div>
-          <div class="dep-node dep-node-p2" id="dep-waste">廢料及損耗紀錄</div>
-        </div>
-      </div>
-
-      <div class="dep-layer">
-        <div class="dep-layer-label">財務分析</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p3" id="dep-costanalysis">成本與毛利分析</div>
-        </div>
-      </div>
-
-      <div class="dep-layer" style="margin-bottom: 0;">
-        <div class="dep-layer-label">報表輸出</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p3" id="dep-report">報表管理</div>
-        </div>
-      </div>
-
-      <div class="dep-layer dep-standalone" style="margin-bottom: 0;">
-        <div class="dep-layer-label">平行／暫緩（不卡主線，條件到才評估或串接）</div>
-        <div class="dep-layer-row">
-          <div class="dep-node dep-node-p3 dep-node-dashed" id="dep-bizstore">門市及分店擴充</div>
-          <div class="dep-node dep-node-p4 dep-node-dashed" id="dep-aiselect">AI 輔助選料評估</div>
+        <div class="dep-layer dep-standalone" style="margin-bottom: 0;">
+          <div class="dep-layer-label">條件式評估（不卡主線，條件到才評估）</div>
+          <div class="dep-layer-row">
+            <div class="dep-node dep-node-p4 dep-node-dashed" id="dep-aiselect">AI 輔助選料評估</div>
+          </div>
         </div>
       </div>
     </div>
@@ -808,6 +858,7 @@
       <div class="dep-legend-item"><span class="dep-legend-dot" style="background:#B8923A;"></span>P3 分析與擴充</div>
       <div class="dep-legend-item"><span class="dep-legend-dot" style="background:#6A4A9A;"></span>P4 條件式評估</div>
     </div>
+    <div class="dep-note">🆕 本次依 7/22 訪談補上兩個原本沒被記錄到的模組：<strong>原料轉換紀錄</strong>（原料篩選分類、裁切加工的過程紀錄，銜接「原料進貨」跟「半成品入庫」中間目前完全沒被數據化的空白）與<strong>庫位管理</strong>（甲／乙／丙／丁等區域式庫位＋異動紀錄，解決材料搬動後找不到、只有宗憲一人知道位置的問題）——兩者都歸在 P2，因為都要先有 P1 的原料與庫存主檔資料才能動。</div>
     <div class="dep-note">⚠️ 有一條連線是我方推導、尚待宗憲確認：「員工模組 → 薪資與獎金模組」是確定的（算薪資要有員工資料）；圖上另外畫了「工單管理 → 薪資與獎金模組」這條線，是假設獎金依「當月工單量」核算——如果獎金邏輯其實跟工單無關（例如純算出勤時數），這條線要拿掉，麻煩簡報前跟宗憲核對一次。</div>
   </div>
 
@@ -1022,14 +1073,14 @@
       <div class="section-num">6</div>
       <div class="section-title">第二階段預覽</div>
     </div>
-    <div class="section-lead">P1 的功能和邊界都清楚了。P2 在核心流程跑穩之後啟動，把毛料到成品的材料流向拆成可追蹤的分層庫存，並用工單記錄現場實際加工過程。</div>
+    <div class="section-lead">P1 的功能和邊界都清楚了。P2 在核心流程跑穩之後啟動，把毛料到成品的材料流向拆成可追蹤的分層庫存，並用工單記錄現場實際加工過程；同時補上原料轉換紀錄與庫位管理，解決「料放在哪、變成什麼」目前完全依賴宗憲個人記憶的空白。</div>
 
     <div class="future-phase-block">
       <div class="future-phase-header">
         <div class="future-phase-dot phase-dot-2">P2</div>
         <div>
           <div class="future-phase-title">生產與材料追蹤</div>
-          <div class="future-phase-subtitle">核心流程穩定後啟動 · 6 個模組</div>
+          <div class="future-phase-subtitle">核心流程穩定後啟動 · 8 個模組</div>
         </div>
       </div>
       <div class="future-features-row">
@@ -1041,24 +1092,17 @@
           </div>
         </div>
         <div class="future-feature-pill">
+          <div class="icon">🪓</div>
+          <div>
+            <div class="name">原料轉換紀錄</div>
+            <div class="desc">記錄原料篩選分類、裁切加工怎麼變成半成品／可用邊材／廢料，銜接進貨與半成品入庫中間的空白</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
           <div class="icon">🧩</div>
           <div>
             <div class="name">半成品庫存</div>
             <div class="desc">成品不足時可即時查到可加工的半成品，避免依賴人員記憶誤判</div>
-          </div>
-        </div>
-        <div class="future-feature-pill">
-          <div class="icon">♻️</div>
-          <div>
-            <div class="name">餘料庫存</div>
-            <div class="desc">依尺寸判斷轉入一般庫存或留在餘料庫存，工廠與客戶餘料分開處理</div>
-          </div>
-        </div>
-        <div class="future-feature-pill">
-          <div class="icon">🗑️</div>
-          <div>
-            <div class="name">廢料及損耗紀錄</div>
-            <div class="desc">無法再利用的材料，不計成本、不做移動</div>
           </div>
         </div>
         <div class="future-feature-pill">
@@ -1073,6 +1117,27 @@
           <div>
             <div class="name">材料來源與流向追蹤</div>
             <div class="desc">回答「這批原料做了哪些產品」「還剩多少」，解決料用掉沒回報的漏洞</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">📍</div>
+          <div>
+            <div class="name">庫位管理</div>
+            <div class="desc">甲／乙／丙／丁區域式庫位＋異動紀錄，解決材料搬動後找不到、只有宗憲一人知道位置的問題</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">♻️</div>
+          <div>
+            <div class="name">餘料庫存</div>
+            <div class="desc">依尺寸判斷轉入一般庫存或留在餘料庫存，工廠與客戶餘料分開處理</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🗑️</div>
+          <div>
+            <div class="name">廢料及損耗紀錄</div>
+            <div class="desc">無法再利用的材料，不計成本、不做移動</div>
           </div>
         </div>
       </div>
@@ -1224,7 +1289,16 @@
     ['traceability', 'costanalysis'],
     ['finance', 'costanalysis'],
     ['leftover', 'costanalysis'],
-    ['costanalysis', 'report']
+    ['costanalysis', 'report'],
+    ['rawstock', 'convert'],
+    ['procstep', 'convert'],
+    ['convert', 'semistock'],
+    ['convert', 'leftover'],
+    ['convert', 'waste'],
+    ['stock', 'locmgmt'],
+    ['rawstock', 'locmgmt'],
+    ['semistock', 'locmgmt'],
+    ['stocklog', 'locmgmt']
   ];
   var SVG_NS = 'http://www.w3.org/2000/svg';
 
