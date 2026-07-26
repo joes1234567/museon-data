@@ -268,12 +268,12 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v1.0</div>
+  <div class="hero-tag">系統規劃文件 v1.1</div>
   <h1>高豐木業<br><span>木料全流程營運管理</span>系統規劃</h1>
   <p class="hero-sub">從報價到收款，一次輸入、一路串接——把「宗憲跟宗憲太太腦中的經驗」變成公司可查詢、可交接的資產</p>
   <div class="hero-meta">
-    <div class="hero-meta-item"><div class="hero-meta-num">27</div><div class="hero-meta-label">功能模組</div></div>
-    <div class="hero-meta-item"><div class="hero-meta-num">3</div><div class="hero-meta-label">建置階段</div></div>
+    <div class="hero-meta-item"><div class="hero-meta-num">28</div><div class="hero-meta-label">功能模組</div></div>
+    <div class="hero-meta-item"><div class="hero-meta-num">4</div><div class="hero-meta-label">建置階段</div></div>
     <div class="hero-meta-item"><div class="hero-meta-num">6</div><div class="hero-meta-label">庫存分類</div></div>
     <div class="hero-meta-item"><div class="hero-meta-num">20,000+</div><div class="hero-meta-label">筆現有庫存資料待銜接</div></div>
   </div>
@@ -347,8 +347,8 @@
 <section>
   <div class="container">
     <div class="section-label">系統功能全景</div>
-    <h2 class="section-title">6 大業務區塊，27 個功能模組</h2>
-    <p class="section-desc">依 7/13 訪談共識分階段建置：第一階段做「可標準化」的核心流程，第二階段處理客製化與材料追蹤，第三階段做成本分析與擴充。</p>
+    <h2 class="section-title">7 大業務區塊，28 個功能模組</h2>
+    <p class="section-desc">依 7/13～7/23 訪談共識分階段建置：第一階段做「可標準化」的核心流程，第二階段處理客製化與材料追蹤，第三階段做成本分析與擴充。第四階段（AI 輔助選料）為進場條件制的評估階段，非承諾交付，需 P1／P2／P3 三項條件全數達成後才評估。</p>
 
     <div class="func-area">
       <div class="func-header">
@@ -414,6 +414,17 @@
 
     <div class="func-area">
       <div class="func-header">
+        <div class="func-icon fi-gold">🧰</div>
+        <div class="func-title-group"><div class="func-area-name">工具類商品管理</div><div class="func-area-desc">一般進銷存模式，獨立於木料規格邏輯之外的第三條底層流程</div></div>
+        <div class="func-modules-count">1 模組</div>
+      </div>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-top"><div class="module-name">工具類商品進銷存</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">一般進銷存模式，含大包裝拆小包裝獨立編碼</div><div class="module-detail">7/23 業主確認：支援多倉庫（庫存表新增「倉別」欄位）；大小包裝進貨與售價分開計算；不套用木料規格＋長寬厚辨識邏輯，品項數持續變動，採可擴充搜尋分類設計</div></div>
+      </div>
+    </div>
+
+    <div class="func-area">
+      <div class="func-header">
         <div class="func-icon fi-gray">🔌</div>
         <div class="func-title-group"><div class="func-area-name">擴充與資料遷移</div><div class="func-area-desc">歷史資料承接與薪資模組為第一階段必要工作，門市留待後續評估</div></div>
         <div class="func-modules-count">3 模組</div>
@@ -443,7 +454,7 @@
 <section style="background: var(--snow);">
   <div class="container">
     <div class="section-label">交付時間表</div>
-    <h2 class="section-title">3 個階段，每個階段都有具體的里程碑</h2>
+    <h2 class="section-title">4 個階段，每個階段都有具體的里程碑</h2>
     <div class="timeline-strip">
       <div class="ts-phase ts-p1">
         <div class="ts-num">Phase 1</div>
@@ -460,6 +471,7 @@
           <li>現有庫存資料匯入</li>
           <li>薪資與獎金計算邏輯（依工作量／工作性質）</li>
           <li>薪資歷史資料匯入（約 10 年）</li>
+          <li>工具類商品進銷存（獨立編碼，含大小包裝拆分、多倉庫）</li>
         </ul>
       </div>
       <div class="ts-phase ts-p2">
@@ -485,16 +497,18 @@
           <li>毛利分析報表</li>
           <li>材料利用率分析</li>
           <li>進階管理報表</li>
+          <li>門市及分店資料串接評估（7/23 業主確認：暫不導入新系統或串接，僅預留擴充介面）</li>
         </ul>
       </div>
       <div class="ts-phase ts-p4">
         <div class="ts-num">Phase 4</div>
-        <div class="ts-name">門市擴充（可選）</div>
-        <div class="ts-period">第 6 個月後，視需求</div>
-        <div class="ts-milestone">視門市意願評估是否導入</div>
+        <div class="ts-name">AI 輔助選料評估</div>
+        <div class="ts-period">非日期制，視 P1／P2／P3 達標時間而定</div>
+        <div class="ts-milestone">進場條件全數達成後才評估，非承諾交付</div>
         <ul class="ts-list">
-          <li>門市既有系統串接評估</li>
-          <li>跨據點庫存整合</li>
+          <li>規格自由文字 → 結構化條件（判斷需 LLM，已定案）</li>
+          <li>庫存比對：材質篩選→尺寸比對→數量批號校驗（規則引擎，非 LLM）</li>
+          <li>進場條件：P1 資料結構化驗證＋P2／P3 規則引擎達準確率標準（數字待定）</li>
         </ul>
       </div>
     </div>
@@ -529,7 +543,7 @@
           <li>材料流向全程可查：這批毛料做了哪些成品、剩多少、餘料在哪</li>
           <li>成本與毛利依訂單自動結算，含餘料價值認列</li>
         </ul>
-        <div class="ds-condition">條件：需先完成三項最優先待定案共識——毛料到半成品的記錄顆粒度、加工計價規則、餘料成本認列方式</div>
+        <div class="ds-condition">條件：需先完成兩項待定案共識——加工計價規則、餘料成本認列方式（毛料到半成品記錄顆粒度已於 7/23 定案）</div>
       </div>
     </div>
     <div class="highlight-box">
@@ -605,11 +619,11 @@
           <td>宗憲已指出現行漏洞：料用掉了沒有回報，庫存就不會更新。若上線後現場仍不回報，材料追蹤功能形同虛設</td>
           <td>簡化輸入方式（平板、一鍵選取常用工序、條碼），第一階段先驗證回報流程是否可落地</td>
         </tr>
-        <tr class="risk-high">
-          <td>毛料到半成品的記錄顆粒度未定</td>
-          <td><span class="risk-label rl-high">高</span></td>
-          <td>宗憲反覆提及（逐字稿 704、734、995 行前後）自己也還沒決定：整批登記還是逐片登記（因寬度不一難量測）、半成品要不要獨立建卡、條碼是否划算。這個顆粒度不確定，「生產與加工追蹤」模組的資料結構就開不出來——不是製作細節，是地基問題</td>
-          <td>列為與加工計價規則、餘料成本認列方式同組的最優先待定案項目，開發前先與宗憲逐案例確認記錄方式</td>
+        <tr class="risk-low">
+          <td>毛料到半成品的記錄顆粒度</td>
+          <td><span class="risk-label rl-low">已解決</span></td>
+          <td>原列高風險項目，7/23 已與業主確認定案：原料以批次為主，半成品以規格＋數量＋區域管理，僅高價／特殊材料才單件標示，不逐片貼碼（避免現場負擔過重、標籤易脫落失真）</td>
+          <td>「生產與加工追蹤」（P2）模組資料結構可依此定案展開設計，無需再列為待定案項目</td>
         </tr>
         <tr class="risk-mid">
           <td>客製化計價規則尚未標準化</td>
@@ -652,20 +666,21 @@
     <div class="section-label">下次要確認的事項</div>
     <h2 class="section-title">跟宗憲下一輪要拍板的清單</h2>
     <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
-      <li><span class="risk-label rl-high">優先</span>&nbsp; 毛料到半成品的記錄顆粒度</li>
-      <li><span class="risk-label rl-high">優先</span>&nbsp; 加工計價規則</li>
-      <li><span class="risk-label rl-high">優先</span>&nbsp; 餘料成本認列方式</li>
-      <li><span class="risk-label rl-mid">待業主</span>&nbsp; 月結軌（薪資／房租／水電）科目分類清單，決定是否 7/28 前定案列入 P1</li>
-      <li><span class="risk-label rl-low">待業主</span>&nbsp; 發票（統一發票）開立方式：人工紙本／電子發票平台／外包記帳士處理</li>
+      <li><span class="risk-label rl-mid">不卡 P1</span>&nbsp; 加工計價規則（裁切／CNC 等工序計價依據、客戶折扣規則）與成本分攤方式，開發階段確認即可</li>
+      <li><span class="risk-label rl-mid">不卡 P1</span>&nbsp; 餘料成本認列方式與成本計算方法（移動平均／批次成本等方案擇一），開發階段確認即可</li>
+      <li><span class="risk-label rl-low">待業主</span>&nbsp; 電子發票系統處理深度：已確認電子發票與手開三聯式發票兩軌並存，待確認系統只記分類即可、或需串接電子發票平台 API 自動開立上傳</li>
+      <li><span class="risk-label rl-low">待業主</span>&nbsp; 確認薪資獎金計算規則細節（工作量、工作性質分級標準），重新估算納入後的 P1 時程</li>
+      <li><span class="risk-label rl-mid">不卡 P1</span>&nbsp; 盤點實際庫存資料格式（欄位是否標準化、有無不一致 Excel），驗證⑮庫存比對規則引擎草案是否成立；格式不一致時優先加「資料正規化」前處理層，而非改動比對邏輯——此為 P4 AI 評估的進場條件之一</li>
       <li><span class="risk-label rl-mid">可延後</span>&nbsp; 正式報價與開發費用</li>
       <li><span class="risk-label rl-mid">可延後</span>&nbsp; ROI 具體金額（月接單量、時薪、年營收）</li>
+      <li><span class="risk-label rl-high">會議</span>&nbsp; 2026/7/28（二）下午 1:30 完整系統架構、模組說明與初步費用範圍簡報，確認第一階段開發範圍後啟動開發</li>
     </ul>
   </div>
 </section>
 
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>高豐木業 木料全流程營運管理系統規劃</strong> · v1.0（2026-07-23 更新財務模組） · 首版 2026-07-13 · 準備人：MUSEON</p>
+  <p><strong>高豐木業 木料全流程營運管理系統規劃</strong> · v1.1（2026-07-26 同步四階段結構＋AI 第四階段＋新增工具類商品模組） · 首版 2026-07-13 · 準備人：MUSEON</p>
 </div>
 
 </body>
