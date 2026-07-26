@@ -474,7 +474,7 @@
     <span class="rf-arrow">→</span>
     <span class="rf-step">2 使用者</span>
     <span class="rf-arrow">→</span>
-    <span class="rf-step">3 三階段路線</span>
+    <span class="rf-step">3 四階段路線</span>
     <span class="rf-arrow">→</span>
     <span class="rf-step">4 P1 功能細節</span>
     <span class="rf-arrow">→</span>
@@ -484,7 +484,9 @@
     <span class="rf-arrow">→</span>
     <span class="rf-step">7 P3 預覽</span>
     <span class="rf-arrow">→</span>
-    <span class="rf-step">8 下一步</span>
+    <span class="rf-step">8 P4 預覽</span>
+    <span class="rf-arrow">→</span>
+    <span class="rf-step">9 下一步</span>
   </div>
 </div>
 
@@ -561,13 +563,13 @@
     </div>
   </div>
 
-  <!-- 3. 三階段發展路徑（總覽） -->
+  <!-- 3. 四階段發展路徑（總覽） -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">3</div>
-      <div class="section-title">三階段發展路徑</div>
+      <div class="section-title">四階段發展路徑</div>
     </div>
-    <div class="section-lead">使用者確認了，現在拉高視角看整體節奏。系統分三個階段推進，每一階段都是下一階段的地基。第 4、5 節會聚焦拉近 P1 細節，第 6、7 節再拉回全局看 P2、P3。</div>
+    <div class="section-lead">使用者確認了，現在拉高視角看整體節奏。系統分四個階段推進，每一階段都是下一階段的地基；P4（AI 應用）是條件式評估階段，非承諾交付。第 4、5 節會聚焦拉近 P1 細節，第 6、7、8 節再拉回全局看 P2、P3、P4。</div>
     <div class="phase-timeline">
       <div class="phase-item">
         <div class="phase-dot-col">
@@ -599,6 +601,7 @@
       <div class="phase-item">
         <div class="phase-dot-col">
           <div class="phase-dot phase-dot-3">P3</div>
+          <div class="phase-line"></div>
         </div>
         <div class="phase-content">
           <div class="phase-tag phase-tag-3">材料規則穩定後 · 成本與分析</div>
@@ -606,6 +609,19 @@
           <div class="phase-desc">
             建立含餘料價值認列的成本與毛利分析模型，加上材料利用率與進階管理報表，
             同時評估門市及分店的資料串接方式。約第 5–6 個月。
+          </div>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-dot-col">
+          <div class="phase-dot phase-dot-4">P4</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-tag phase-tag-4">P1／P2／P3 全數完成後 · 條件式評估</div>
+          <div class="phase-name">AI 輔助選料評估（進場條件制，非承諾交付）</div>
+          <div class="phase-desc">
+            不是固定時間點，是位置：P1（庫存資料結構化驗證完成）＋ P2／P3（規則引擎穩定運行並達準確率標準，數字待定）三項全數達成後才評估是否導入。
+            用意是先確認規則引擎能不能立住，再回頭問「規則搞不定、只有 AI 能補位」的場景還剩下什麼，避免在未驗證的地基上疊未驗證假設。
           </div>
         </div>
       </div>
@@ -870,13 +886,6 @@
             <div class="desc">回答「這批原料做了哪些產品」「還剩多少」，解決料用掉沒回報的漏洞</div>
           </div>
         </div>
-        <div class="future-feature-pill">
-          <div class="icon">🤖</div>
-          <div>
-            <div class="name">AI 輔助選料（評估中）</div>
-            <div class="desc">原料／半成品資料穩定後，AI 協助篩選候選庫存與預估用量損耗，最終仍由現場人員確認，不自動完成領料或生產決策</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -923,13 +932,55 @@
     </div>
   </div>
 
-  <!-- 8. 建議下一步 -->
+  <!-- 8. 第四階段預覽 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">8</div>
+      <div class="section-title">第四階段預覽</div>
+    </div>
+    <div class="section-lead">P1／P2／P3 是承諾交付的三個階段；P4 不是——它是「條件達成後才評估」，列在這裡是讓範圍完整可見，不代表已排入開發時程。</div>
+
+    <div class="future-phase-block">
+      <div class="future-phase-header">
+        <div class="future-phase-dot phase-dot-4">P4</div>
+        <div>
+          <div class="future-phase-title">AI 輔助選料（評估中，非承諾交付）</div>
+          <div class="future-phase-subtitle">P1／P2／P3 三項進場條件全數達成後才評估 · 1 個模組</div>
+        </div>
+      </div>
+      <div class="future-features-row">
+        <div class="future-feature-pill">
+          <div class="icon">📝</div>
+          <div>
+            <div class="name">規格自由文字 → 結構化條件</div>
+            <div class="desc">客戶自然語言描述（如「同色系」「長度大概 1.2 米」）轉換成尺寸、材質、公差等結構化條件，固定表單規則無法窮舉所有講法，判斷已定案需要 LLM</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🧮</div>
+          <div>
+            <div class="name">庫存比對（規則引擎，非 LLM）</div>
+            <div class="desc">材質篩選 → 尺寸比對 → 數量批號校驗三步走，屬規則式自動計算（鋸路排版最佳化＋公式運算），前提是庫存資料已結構化驗證</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🚦</div>
+          <div>
+            <div class="name">進場條件（三項全數達成才評估）</div>
+            <div class="desc">P1 庫存資料結構化驗證完成 ＋ P2／P3 規則引擎穩定運行並達準確率標準（數字待 P1／P2／P3 執行時另訂）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. 建議下一步 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
       <div class="section-title">建議下一步</div>
     </div>
-    <div class="section-lead">整份文件走完了：目標 → 使用者 → 三階段路線 → P1 功能與邊界 → P2 ／ P3 預覽。骨架已清晰，接下來只剩幾件事需要跟宗憲確認——確認完就可以啟動開發。</div>
+    <div class="section-lead">整份文件走完了：目標 → 使用者 → 四階段路線 → P1 功能與邊界 → P2／P3／P4 預覽。骨架已清晰，接下來只剩幾件事需要跟宗憲確認——確認完就可以啟動開發。</div>
     <ol class="next-list">
       <li>加工計價規則（裁切／CNC 等工序的計價依據、客戶折扣規則）與成本分攤方式（人工、機器、廢料、可回收邊材）——不影響 P1 啟動，開發階段確認即可</li>
       <li>餘料成本認列方式與成本計算方法（移動平均／批次成本等方案中選定一種）——不影響 P1 啟動，開發階段確認即可</li>
