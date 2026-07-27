@@ -406,7 +406,7 @@
       </div>
       <div class="module-grid">
         <div class="module-card"><div class="module-top"><div class="module-name">訂單軌應收應付管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">應收款／應付款／預收款／訂金，跟訂單狀態連結，收完款訂單才算完成</div><div class="module-detail">未收款／已收款／部分收款／已結案狀態一目了然，7/23 業主確認：做記帳功能、不做複式記帳；不需串接現有會計系統（無現有系統，全公司用 Excel 處理）；發票（統一發票）開立方式待業主確認</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">月結軌記帳（資料結構）</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">薪資／房租／水電等無訂單編號的固定週期收支，與訂單軌共用同一套狀態機</div><div class="module-detail">Plan B 範圍：本階段僅預留可擴充欄位，邏輯待業主 Excel 科目分類到手後於 7/28 前評估是否列入 P1</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">月結軌記帳</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">薪資／房租／水電等無訂單編號的固定週期收支，與訂單軌共用同一套狀態機</div><div class="module-detail">✓ 已定案列入 P1，採受控清單設計：使用者可自行新增分類，新增後成為共用選項供之後選用，不再逐筆手打自由文字；新增時若偵測到相近名稱（如「水電」與「水電費」）會自動反白既有選項，避免重複建立；上線前需先整理業主現有 Excel 舊分類、合併同義寫法後再匯入</div></div>
         <div class="module-card"><div class="module-top"><div class="module-name">成本與毛利分析</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">含餘料價值認列，讓每張訂單的實際毛利算得出來</div><div class="module-detail">待業主、會計與系統規劃方共同確認餘料成本計算方式</div></div>
         <div class="module-card"><div class="module-top"><div class="module-name">報表管理</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">材料利用率、營收與成本報表</div><div class="module-detail">建立在精準的前段資料輸入之上</div></div>
       </div>
@@ -467,7 +467,7 @@
           <li>報價轉訂單</li>
           <li>進出貨與一般庫存</li>
           <li>訂單軌記帳：應收／應付／預收／訂金</li>
-          <li>月結軌記帳：資料結構預留（薪資／房租／水電）</li>
+          <li>月結軌記帳：薪資／房租／水電，已定案列入 P1 受控清單設計</li>
           <li>現有庫存資料匯入</li>
           <li>薪資與獎金計算邏輯（依工作量／工作性質）</li>
           <li>薪資歷史資料匯入（約 10 年）</li>
