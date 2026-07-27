@@ -582,9 +582,9 @@
     <span class="rf-arrow">→</span>
     <span class="rf-step">5 第一階段邊界確認</span>
     <span class="rf-arrow">→</span>
-    <span class="rf-step">6 第二階段預覽</span>
+    <span class="rf-step">6 第二階段</span>
     <span class="rf-arrow">→</span>
-    <span class="rf-step">7 第三階段預覽</span>
+    <span class="rf-step">7 第三階段</span>
     <span class="rf-arrow">→</span>
     <span class="rf-step">8 第四階段預覽</span>
     <span class="rf-arrow">→</span>
@@ -679,9 +679,9 @@
           <div class="phase-line"></div>
         </div>
         <div class="phase-content phase-content-active">
-          <div class="phase-name">核心營運流程（19 個模組）</div>
+          <div class="phase-name">核心營運流程（20 個模組）</div>
           <div class="phase-desc">
-            建立產品規格＋自動編碼、客戶與報價、訂單、規格品庫存、進出貨、應收應付與預收款管理、工具類商品進銷存、員工資料、薪資與獎金計算邏輯、帳號與權限管理，
+            建立產品規格＋自動編碼、客戶與供應商主資料、報價、訂單、規格品庫存、進出貨、應收應付與預收款管理、工具類商品進銷存、員工資料、薪資與獎金計算邏輯、帳號與權限管理，
             讓報價 → 訂單 → 收款一次串接，取代現行 6 處重複輸入，同步匯入現有 20,000 多筆歷史庫存與薪資歷史資料。木料規格／一般工具商品／帳務三種模式底層流程分開設計、整合在同一套系統。納入薪資模組後，時程重新估算中。
           </div>
         </div>
@@ -735,7 +735,7 @@
     <div class="dep-bridge-icon">🗺️</div>
     <div>
       <div class="dep-bridge-label">系統全景圖 — 從核心到綜合應用，先後順序一次看懂</div>
-      <div class="dep-bridge-desc">全系統共 31 個模組，分三層堆疊：<strong>核心</strong>（身份與主檔資料，誰都要先有）→ <strong>基礎應用</strong>（每天在跑的營運交易）→ <strong>綜合應用</strong>（把交易資料串起來看到的洞察與智慧）。下層先蓋穩，上層才蓋得住——這條順序跟 P1→P2→P3→P4 的階段路線是同一件事的兩種看法，顏色仍代表所屬階段（綠 P1／藍 P2／金 P3／紫 P4）</div>
+      <div class="dep-bridge-desc">全系統共 32 個模組，分三層堆疊：<strong>核心</strong>（身份與主檔資料，誰都要先有）→ <strong>基礎應用</strong>（每天在跑的營運交易）→ <strong>綜合應用</strong>（把交易資料串起來看到的洞察與智慧）。下層先蓋穩，上層才蓋得住——這條順序跟 P1→P2→P3→P4 的階段路線是同一件事的兩種看法，顏色仍代表所屬階段（綠 P1／藍 P2／金 P3／紫 P4）</div>
     </div>
   </div>
 
@@ -748,7 +748,7 @@
         <div class="dep-tier-header">
           <span class="dep-tier-num" style="background:#2A6A8A;">1</span>
           <span class="dep-tier-title">核心層</span>
-          <span class="dep-tier-sub">誰都要先有的身份與主檔資料・9 個模組・全部 P1</span>
+          <span class="dep-tier-sub">誰都要先有的身份與主檔資料・10 個模組・全部 P1</span>
         </div>
         <div class="dep-layer">
           <div class="dep-layer-label">身份與角色</div>
@@ -762,6 +762,7 @@
           <div class="dep-layer-label">主檔資料</div>
           <div class="dep-layer-row">
             <div class="dep-node dep-node-p1" id="dep-customer">客戶管理</div>
+            <div class="dep-node dep-node-p1" id="dep-supplier">供應商模組</div>
             <div class="dep-node dep-node-p1" id="dep-material">樹種與材料管理</div>
             <div class="dep-node dep-node-p1" id="dep-prodspec">產品與規格管理</div>
             <div class="dep-node dep-node-p1" id="dep-custprice">客戶專屬價格</div>
@@ -867,7 +868,7 @@
     <div class="p1-bridge-icon">🔍</div>
     <div>
       <div class="p1-bridge-label">接下來兩節聚焦 P1 細節</div>
-      <div class="p1-bridge-desc">第 4 節：19 個功能模組逐一展開　　第 5 節：做與不做的邊界</div>
+      <div class="p1-bridge-desc">第 4 節：20 個功能模組逐一展開　　第 5 節：做與不做的邊界</div>
     </div>
     <div class="p1-bridge-badge">P1 放大鏡</div>
   </div>
@@ -878,18 +879,23 @@
       <div class="section-num">4</div>
       <div class="section-title">第一階段：核心營運流程功能</div>
     </div>
-    <div class="section-lead">三個階段的路線確認了，鏡頭現在拉近到 P1。這節把 19 個功能模組逐一攤開，讓你看清楚第一版到底做到哪裡、怎麼把 6 處重複輸入收斂成一次。</div>
+    <div class="section-lead">三個階段的路線確認了，鏡頭現在拉近到 P1。這節把 20 個功能模組逐一攤開，讓你看清楚第一版到底做到哪裡、怎麼把 6 處重複輸入收斂成一次。</div>
 
     <div class="phase-label-bar phase-label-bar-p1" style="margin-bottom:14px;">
       <span class="phase-label-badge">全員使用</span>
       <span class="phase-label-name">業主／業務內勤／現場人員／財務共用</span>
-      <span class="phase-label-count">19 個模組</span>
+      <span class="phase-label-count">20 個模組</span>
     </div>
     <div class="features-grid" style="margin-bottom:28px;">
       <div class="feature-item">
         <div class="icon">🤝</div>
         <div class="name">客戶管理</div>
         <div class="desc">客戶資料串連報價、訂單、出貨、收款、歷史交易</div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🏢</div>
+        <div class="name">供應商模組</div>
+        <div class="desc">供應商主資料建檔，串連進貨與請款對帳</div>
       </div>
       <div class="feature-item">
         <div class="icon">📝</div>
@@ -997,6 +1003,7 @@
         <span class="scope-badge badge-in">第一階段做</span>
         <ul class="scope-list">
           <li>✓ 客戶資料與報價管理（含客戶專屬價格）</li>
+          <li>✓ 供應商主資料建檔，串連進貨與請款對帳</li>
           <li>✓ 報價轉訂單，一次輸入不重複登打</li>
           <li>✓ 產品規格建檔＋自動編碼（樹種＋品項＋長寬厚查詢）</li>
           <li>✓ 規格品庫存與庫存異動紀錄</li>
@@ -1024,11 +1031,11 @@
     </div>
   </div>
 
-  <!-- 6. 第二階段預覽 -->
+  <!-- 6. 第二階段 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">6</div>
-      <div class="section-title">第二階段預覽</div>
+      <div class="section-title">第二階段</div>
     </div>
     <div class="section-lead">P1 的功能和邊界都清楚了。P2 在核心流程跑穩之後啟動，把毛料到成品的材料流向拆成可追蹤的分層庫存，並用工單記錄現場實際加工過程；同時補上原料轉換紀錄與庫位管理，解決「料放在哪、變成什麼」目前完全依賴宗憲個人記憶的空白。</div>
 
@@ -1101,11 +1108,11 @@
     </div>
   </div>
 
-  <!-- 7. 第三階段預覽 -->
+  <!-- 7. 第三階段 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">7</div>
-      <div class="section-title">第三階段預覽</div>
+      <div class="section-title">第三階段</div>
     </div>
     <div class="section-lead">P2 讓材料流向全程可查之後，P3 回頭把這些資料變成看得懂的成本與毛利數字，同時評估門市是否要串接進同一套系統。</div>
 
@@ -1266,6 +1273,7 @@
     ['stock', 'quote'],
     ['prodspec', 'autocode'],
     ['material', 'purchase'],
+    ['supplier', 'purchase'],
     ['quote', 'order'],
     ['purchase', 'rawstock'],
     ['order', 'finance'],
