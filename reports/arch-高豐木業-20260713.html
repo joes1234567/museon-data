@@ -268,11 +268,11 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">系統規劃文件 v1.2</div>
+  <div class="hero-tag">系統規劃文件 v1.3</div>
   <h1>高豐木業<br><span>木料全流程營運管理</span>系統規劃</h1>
   <p class="hero-sub">從報價到收款，一次輸入、一路串接——把「宗憲跟宗憲太太腦中的經驗」變成公司可查詢、可交接的資產</p>
   <div class="hero-meta">
-    <div class="hero-meta-item"><div class="hero-meta-num">28</div><div class="hero-meta-label">功能模組</div></div>
+    <div class="hero-meta-item"><div class="hero-meta-num">32</div><div class="hero-meta-label">功能模組</div></div>
     <div class="hero-meta-item"><div class="hero-meta-num">4</div><div class="hero-meta-label">建置階段</div></div>
     <div class="hero-meta-item"><div class="hero-meta-num">6</div><div class="hero-meta-label">庫存分類</div></div>
     <div class="hero-meta-item"><div class="hero-meta-num">20,000+</div><div class="hero-meta-label">筆現有庫存資料待銜接</div></div>
@@ -343,48 +343,71 @@
   </div>
 </section>
 
-<!-- 7/28 PRIORITY DECISION -->
+<!-- 7/28 FINAL DECISION -->
 <section style="background: var(--snow);">
   <div class="container">
-    <div class="section-label">7/28 開會前定案</div>
-    <h2 class="section-title">交付優先順序：第一階段 9 個模組先做，其餘 13 個後移</h2>
-    <p class="section-desc">下方「7 大業務區塊」與「交付時間表」的分層說明（核心地基／基礎應用／綜合應用、Phase 1–4）維持不變，僅供參考建置邏輯；<strong>實際交付順序以本次定案為準</strong>——先把可獨立運作的核心 9 模組打通，其餘 13 個模組全部後移至第二階段。</p>
+    <div class="section-label">7/28 定案</div>
+    <h2 class="section-title">三層架構定案：核心層 10／基礎應用層 10／綜合應用層 11／條件式評估 1</h2>
+    <p class="section-desc">7/28 當天歷經三輪修正（9 vs 13 模組 → 業主版 P1/P2 分批標籤 → 三層架構正式命名），<strong>本節取代舊版「第一階段 9 個先做、其餘 13 個後移」的分法</strong>，與業主版報告（<code>高豐木業-業主版-v1.0.html</code>）完全對齊，為目前唯一交付順序依據。下方「系統功能全景」與「交付時間表」章節已同步改用此結構。</p>
     <div class="dispatch-stages">
       <div class="dispatch-stage ds-1">
-        <div class="ds-phase-tag">第一階段 · 先做（9）</div>
+        <div class="ds-phase-tag">第一階段：核心層（10）</div>
         <ul class="ds-items">
-          <li>帳號與權限管理（含帳號管理＋權限控管）</li>
-          <li>樹種與材料管理</li>
-          <li>客戶管理</li>
+          <li>帳號管理</li>
           <li>員工模組</li>
-          <li>歷史資料匯入</li>
+          <li>權限控管</li>
+          <li>客戶管理</li>
+          <li>供應商模組</li>
+          <li>樹種與材料管理</li>
           <li>產品與規格管理</li>
-          <li>自動編碼與多條件查詢</li>
           <li>客戶專屬價格</li>
-          <li>供應商管理</li>
+          <li>自動編碼與多條件查詢</li>
+          <li>歷史資料匯入</li>
         </ul>
       </div>
       <div class="dispatch-stage-arrow">→</div>
       <div class="dispatch-stage ds-2">
-        <div class="ds-phase-tag">第二階段 · 後移（13）</div>
+        <div class="ds-phase-tag">第二階段：基礎應用層（10）</div>
         <ul class="ds-items">
-          <li>規格品庫存</li>
-          <li>加工工序管理</li>
-          <li>折扣與優惠管理</li>
           <li>報價管理</li>
           <li>訂單管理</li>
+          <li>規格品庫存</li>
+          <li>庫存異動紀錄</li>
+          <li>加工工序管理</li>
           <li>進貨管理</li>
           <li>出貨管理</li>
-          <li>庫存異動紀錄</li>
           <li>記帳功能（訂單軌＋月結軌）</li>
           <li>工具類商品管理</li>
-          <li>訂單變更與退貨管理</li>
-          <li>工單管理</li>
           <li>薪資與獎金模組</li>
         </ul>
       </div>
     </div>
-    <div class="ds-condition" style="margin-top:14px;">⚠️ 核對落差：「員工模組」「供應商管理」「折扣與優惠管理」「訂單變更與退貨管理」這 4 個名字，在下方 7 大業務區塊的既有模組卡片中還沒有獨立卡片對應——需另行補列或確認是否併入既有模組。</div>
+    <div class="dispatch-stages" style="margin-top:16px;">
+      <div class="dispatch-stage ds-1" style="background:#FBF4E6;">
+        <div class="ds-phase-tag" style="color:#B8923A;">第三階段：綜合應用層（11）</div>
+        <ul class="ds-items" style="margin-bottom:10px;">
+          <li>毛料／原料庫存</li>
+          <li>原料轉換紀錄</li>
+          <li>半成品庫存</li>
+          <li>工單管理</li>
+          <li>材料來源與流向追蹤</li>
+          <li>庫位管理</li>
+          <li>餘料庫存</li>
+          <li>廢料及損耗紀錄</li>
+          <li>成本與毛利分析</li>
+          <li>報表管理</li>
+          <li>門市及分店擴充</li>
+        </ul>
+      </div>
+      <div class="dispatch-stage-arrow">→</div>
+      <div class="dispatch-stage ds-2" style="background:#F0EBF8;">
+        <div class="ds-phase-tag" style="color:#6A4A9A;">第四階段：條件式評估（1）</div>
+        <ul class="ds-items">
+          <li>AI 輔助選料評估（P1/P2/P3 三項進場條件全數達成後才評估，非承諾交付）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ds-condition" style="margin-top:14px;">⚠️ 舊版「P1模組優先級規劃.md」22 模組草案中的「折扣與優惠管理」「訂單變更與退貨管理」兩個名字，未出現在業主版最終確認的 32 個模組清單中——目前狀態未知，需向宗憲確認是否為獨立需求、併入既有模組（如折扣併入報價管理、變更退貨併入訂單管理），或本次直接排除。</div>
   </div>
 </section>
 
@@ -392,104 +415,88 @@
 <section>
   <div class="container">
     <div class="section-label">系統功能全景</div>
-    <h2 class="section-title">7 大業務區塊，28 個功能模組</h2>
-    <p class="section-desc">依 7/13～7/23 訪談共識分階段建置：第一階段做「可標準化」的核心流程，第二階段處理客製化與材料追蹤，第三階段做成本分析與擴充。第四階段（AI 輔助選料）為進場條件制的評估階段，非承諾交付，需 P1／P2／P3 三項條件全數達成後才評估。下方 phase 標籤為原始建置邏輯分層，與上方 7/28 定案的交付優先順序為兩套獨立排序，交付順序以 7/28 定案為準。</p>
+    <h2 class="section-title">三層架構，32 個功能模組</h2>
+    <p class="section-desc">7/28 定案：建置邏輯分層與交付優先順序合一，不再分兩套排序——核心層（P1）先蓋身份與主檔地基，基礎應用層（P2）接續做每天在跑的營運交易，綜合應用層（P3）處理材料追蹤與成本分析，條件式評估（P4，AI 輔助選料）需 P1／P2／P3 三項條件全數達成後才評估，非承諾交付。下方 phase 標籤即為實際交付順序，與業主版報告完全對齊。</p>
 
     <div class="func-area">
       <div class="func-header">
-        <div class="func-icon fi-blue">🤝</div>
-        <div class="func-title-group"><div class="func-area-name">客戶與交易核心</div><div class="func-area-desc">報價、訂單、客戶專屬價格，一份資料延續到底</div></div>
-        <div class="func-modules-count">4 模組</div>
+        <div class="func-icon fi-green">🧭</div>
+        <div class="func-title-group"><div class="func-area-name">核心層 — 身份與主檔資料</div><div class="func-area-desc">誰都要先有的地基：誰能用、誰是誰、東西叫什麼</div></div>
+        <div class="func-modules-count">10 模組</div>
       </div>
       <div class="module-grid">
+        <div class="module-card"><div class="module-top"><div class="module-name">帳號管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">建立獨立登入帳號，取代目前共用帳號操作</div><div class="module-detail">逐字稿未查得具體爭議事件，屬系統面預防性評估項目</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">員工模組</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">建立員工主資料（到職日、部門職務）</div><div class="module-detail">供 P2 薪資獎金計算與 P3 工單工時登記使用</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">權限控管</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">依角色（業主／業務內勤／現場加工／財務）分層設定可看、可改範圍</div><div class="module-detail">與客戶價格、成本毛利等敏感資料的存取邊界一併設計</div></div>
         <div class="module-card"><div class="module-top"><div class="module-name">客戶管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">客戶資料串連報價、訂單、出貨、收款、歷史交易</div><div class="module-detail">單一客戶主檔，避免資料散落各表格</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">報價管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">規格品自動帶價，客製品保留人工評估欄位</div><div class="module-detail">依規格品／半標準化／完全客製三種計價方式分流</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">供應商模組</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">供應商主資料建檔</div><div class="module-detail">串連進貨與請款對帳</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">樹種與材料管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">紐松、三毛櫸等樹種與品項的主資料</div><div class="module-detail">定寬／不定寬材料分開處理</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">產品與規格管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">同一品項所有尺寸規格一畫面呈現</div><div class="module-detail">比照現行樞紐表的查詢習慣設計</div></div>
         <div class="module-card"><div class="module-top"><div class="module-name">客戶專屬價格</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">同一規格對不同客戶維持不同售價</div><div class="module-detail">支援不同數量、有效期間的價格設定</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">訂單管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">報價確認即轉訂單，不需重新輸入</div><div class="module-detail">追蹤未確認／生產中／待出貨／已收款等狀態</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">自動編碼與多條件查詢</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">系統自動產生內部編碼，人員不需背號碼</div><div class="module-detail">操作畫面仍以樹種／品項／尺寸顯示</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">歷史資料匯入</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">現有庫存、客戶主檔、未完成訂單優先匯入</div><div class="module-detail">建議承接約 10 年資料，新舊系統並行核對後再切換</div></div>
       </div>
     </div>
 
     <div class="func-area">
       <div class="func-header">
-        <div class="func-icon fi-green">📦</div>
-        <div class="func-title-group"><div class="func-area-name">產品與庫存管理</div><div class="func-area-desc">以樹種＋品項＋長寬厚辨識，取代無意義流水編碼</div></div>
-        <div class="func-modules-count">9 模組</div>
+        <div class="func-icon fi-blue">💼</div>
+        <div class="func-title-group"><div class="func-area-name">基礎應用層 — 核心營運交易</div><div class="func-area-desc">每天在跑的營運交易：報價 → 訂單 → 收款一次串接</div></div>
+        <div class="func-modules-count">10 模組</div>
       </div>
       <div class="module-grid">
-        <div class="module-card"><div class="module-top"><div class="module-name">產品與規格管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">同一品項所有尺寸規格一畫面呈現</div><div class="module-detail">比照現行樞紐表的查詢習慣設計</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">樹種與材料管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">紐松、三毛櫸等樹種與品項的主資料</div><div class="module-detail">定寬／不定寬材料分開處理</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">自動編碼與多條件查詢</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">系統自動產生內部編碼，人員不需背號碼</div><div class="module-detail">操作畫面仍以樹種／品項／尺寸顯示</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">規格品庫存</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">可正常銷售、持續管理的固定規格庫存</div><div class="module-detail">承接現有 20,000 多筆庫存明細</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">毛料／原料庫存</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">未加工整批原料，與規格成品分開管理</div><div class="module-detail">供領料、加工追蹤使用</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">半成品庫存</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">成品不足時可即時查到可加工的半成品</div><div class="module-detail">避免依賴人員記憶誤判現場仍有材料</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">餘料庫存</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">工廠餘料回庫可再利用，客戶餘料不列入公司庫存</div><div class="module-detail">依尺寸判斷轉入一般庫存或留在餘料庫存</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">廢料及損耗紀錄</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">無法再利用的材料，不計成本、不做移動</div><div class="module-detail">如有出售或回收需求可另行記錄</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">庫存異動紀錄</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">進貨、出貨、扣料、回庫全程留痕</div><div class="module-detail">解決庫存與現場狀況不同步的問題</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">報價管理</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">規格品自動帶價，客製品保留人工評估欄位</div><div class="module-detail">依規格品／半標準化／完全客製三種計價方式分流</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">訂單管理</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">報價確認即轉訂單，不需重新輸入</div><div class="module-detail">追蹤未確認／生產中／待出貨／已收款等狀態</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">規格品庫存</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">可正常銷售、持續管理的固定規格庫存</div><div class="module-detail">承接現有 20,000 多筆庫存明細</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">庫存異動紀錄</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">進貨、出貨、扣料、回庫全程留痕</div><div class="module-detail">解決庫存與現場狀況不同步的問題</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">加工工序管理</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">裁切、倒邊、倒角、CNC 等工序建檔</div><div class="module-detail">可標準化工序先固定計價，客製工序保留人工調整</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">進貨管理</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">毛料、製品、成品進貨與供應商請款串接</div><div class="module-detail">解決宗憲提到「進了多少料」目前有登記但缺追蹤</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">出貨管理</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">出貨明細直接延續自訂單與工單</div><div class="module-detail">不需另外重複登打</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">記帳功能（訂單軌＋月結軌）</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">訂單軌：應收／應付／預收／訂金跟訂單狀態連結，收完款訂單才算完成；月結軌：薪資／房租／水電等無訂單編號的固定週期收支</div><div class="module-detail">7/23 業主確認：做記帳功能、不做複式記帳，不需串接現有會計系統；月結軌已定案採受控清單設計，新增分類後成為共用選項，偵測相近名稱（如「水電」與「水電費」）自動反白既有選項避免重複建立，上線前需先整理業主現有 Excel 舊分類、合併同義寫法後再匯入</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">工具類商品管理</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">一般進銷存模式，含大包裝拆小包裝獨立編碼</div><div class="module-detail">7/23 業主確認：支援多倉庫（庫存表新增「倉別」欄位）；大小包裝進貨與售價分開計算；不套用木料規格＋長寬厚辨識邏輯，品項數持續變動，採可擴充搜尋分類設計</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">薪資與獎金模組</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">人工輸入每月薪資與獎金核發結果，含薪資歷史資料匯入</div><div class="module-detail">7/28 澄清：完整版架構書規定薪資獎金一律由授權人員人工輸入，不依工單／出勤／產量自動核算——原「依當月工作量核算」認知與此衝突，需與宗憲重新核對</div></div>
       </div>
     </div>
 
     <div class="func-area">
       <div class="func-header">
         <div class="func-icon fi-purple">⚙️</div>
-        <div class="func-title-group"><div class="func-area-name">生產與加工追蹤</div><div class="func-area-desc">毛料 → 領料 → 加工 → 半成品 → 成品 → 餘料／廢料，全程可查</div></div>
-        <div class="func-modules-count">5 模組</div>
+        <div class="func-title-group"><div class="func-area-name">綜合應用層 — 生產與材料追蹤</div><div class="func-area-desc">毛料 → 領料 → 加工 → 半成品 → 成品 → 餘料／廢料，全程可查</div></div>
+        <div class="func-modules-count">8 模組</div>
       </div>
       <div class="module-grid">
-        <div class="module-card"><div class="module-top"><div class="module-name">加工工序管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">裁切、倒邊、倒角、CNC 等工序建檔</div><div class="module-detail">可標準化工序先固定計價，客製工序保留人工調整</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">工單管理</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">訂單轉工單，記錄實際用料、完工與損耗</div><div class="module-detail">現場負責人、完工數量、產生餘料一併留存</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">進貨管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">毛料、製品、成品進貨與供應商請款串接</div><div class="module-detail">解決宗憲提到「進了多少料」目前有登記但缺追蹤</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">出貨管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">出貨明細直接延續自訂單與工單</div><div class="module-detail">不需另外重複登打</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">材料來源與流向追蹤</div><span class="phase-tag pt-2">第二階段</span></div><div class="module-value">回答「這批原料做了哪些產品」「這批材料還剩多少」</div><div class="module-detail">解決宗憲指出的「用掉沒回報，庫存就不知道」漏洞</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">毛料／原料庫存</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">未加工整批原料，與規格成品分開管理</div><div class="module-detail">供領料、加工追蹤使用</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">原料轉換紀錄</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">記錄原料篩選分類、裁切加工怎麼變成半成品／可用邊材／廢料</div><div class="module-detail">7/22 訪談新增：銜接「原料進貨」跟「半成品入庫」中間目前完全沒被數據化的空白</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">半成品庫存</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">成品不足時可即時查到可加工的半成品</div><div class="module-detail">避免依賴人員記憶誤判現場仍有材料</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">工單管理</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">訂單轉工單，記錄實際用料、完工與損耗</div><div class="module-detail">現場負責人、完工數量、產生餘料一併留存</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">材料來源與流向追蹤</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">回答「這批原料做了哪些產品」「這批材料還剩多少」</div><div class="module-detail">解決宗憲指出的「用掉沒回報，庫存就不知道」漏洞</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">庫位管理</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">甲／乙／丙／丁等區域式庫位＋異動紀錄</div><div class="module-detail">7/22 訪談新增：解決材料搬動後找不到、只有宗憲一人知道位置的問題</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">餘料庫存</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">工廠餘料回庫可再利用，客戶餘料不列入公司庫存</div><div class="module-detail">依尺寸判斷轉入一般庫存或留在餘料庫存</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">廢料及損耗紀錄</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">無法再利用的材料，不計成本、不做移動</div><div class="module-detail">如有出售或回收需求可另行記錄；廢料是否完全認列損耗仍待與宗憲重新核對</div></div>
       </div>
     </div>
 
     <div class="func-area">
       <div class="func-header">
         <div class="func-icon fi-gold">💰</div>
-        <div class="func-title-group"><div class="func-area-name">財務與分析</div><div class="func-area-desc">記帳功能（非複式記帳）：訂單軌＋月結軌雙軌並行，收款狀態即時可查，成本與毛利有依有據</div></div>
-        <div class="func-modules-count">4 模組</div>
-      </div>
-      <div class="module-grid">
-        <div class="module-card"><div class="module-top"><div class="module-name">訂單軌應收應付管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">應收款／應付款／預收款／訂金，跟訂單狀態連結，收完款訂單才算完成</div><div class="module-detail">未收款／已收款／部分收款／已結案狀態一目了然，7/23 業主確認：做記帳功能、不做複式記帳；不需串接現有會計系統（無現有系統，全公司用 Excel 處理）；發票（統一發票）開立方式待業主確認</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">月結軌記帳</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">薪資／房租／水電等無訂單編號的固定週期收支，與訂單軌共用同一套狀態機</div><div class="module-detail">✓ 已定案列入 P1，採受控清單設計：使用者可自行新增分類，新增後成為共用選項供之後選用，不再逐筆手打自由文字；新增時若偵測到相近名稱（如「水電」與「水電費」）會自動反白既有選項，避免重複建立；上線前需先整理業主現有 Excel 舊分類、合併同義寫法後再匯入</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">成本與毛利分析</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">含餘料價值認列，讓每張訂單的實際毛利算得出來</div><div class="module-detail">待業主、會計與系統規劃方共同確認餘料成本計算方式</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">報表管理</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">材料利用率、營收與成本報表</div><div class="module-detail">建立在精準的前段資料輸入之上</div></div>
-      </div>
-    </div>
-
-    <div class="func-area">
-      <div class="func-header">
-        <div class="func-icon fi-gold">🧰</div>
-        <div class="func-title-group"><div class="func-area-name">工具類商品管理</div><div class="func-area-desc">一般進銷存模式，獨立於木料規格邏輯之外的第三條底層流程</div></div>
-        <div class="func-modules-count">1 模組</div>
-      </div>
-      <div class="module-grid">
-        <div class="module-card"><div class="module-top"><div class="module-name">工具類商品進銷存</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">一般進銷存模式，含大包裝拆小包裝獨立編碼</div><div class="module-detail">7/23 業主確認：支援多倉庫（庫存表新增「倉別」欄位）；大小包裝進貨與售價分開計算；不套用木料規格＋長寬厚辨識邏輯，品項數持續變動，採可擴充搜尋分類設計</div></div>
-      </div>
-    </div>
-
-    <div class="func-area">
-      <div class="func-header">
-        <div class="func-icon fi-gray">🔌</div>
-        <div class="func-title-group"><div class="func-area-name">擴充與資料遷移</div><div class="func-area-desc">歷史資料承接與薪資模組為第一階段必要工作，門市留待後續評估</div></div>
+        <div class="func-title-group"><div class="func-area-name">綜合應用層 — 成本分析與擴充評估</div><div class="func-area-desc">材料規則穩定後啟動，把交易資料變成看得懂的成本與毛利數字</div></div>
         <div class="func-modules-count">3 模組</div>
       </div>
       <div class="module-grid">
-        <div class="module-card"><div class="module-top"><div class="module-name">歷史資料匯入</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">現有庫存、客戶主檔、未完成訂單優先匯入</div><div class="module-detail">建議承接約 10 年資料，新舊系統並行核對後再切換</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">門市及分店擴充</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">安定廠為總公司主資料中心，門市可分階段串接</div><div class="module-detail">先預留擴充介面，視門市意願決定導入方式</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">薪資與獎金模組</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">依當月工作量、工作性質核發獎金的邏輯數位化，含薪資歷史資料匯入</div><div class="module-detail">7/13 會議釐清：業主表示可整合進去，非排除項目，納入第一階段範圍</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">成本與毛利分析</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">含餘料價值認列，讓每張訂單的實際毛利算得出來</div><div class="module-detail">待業主、會計與系統規劃方共同確認餘料成本計算方式</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">報表管理</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">材料利用率、營收與成本報表</div><div class="module-detail">建立在精準的前段資料輸入之上</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">門市及分店擴充</div><span class="phase-tag pt-3">第三階段</span></div><div class="module-value">安定廠為總公司主資料中心，門市可分階段串接</div><div class="module-detail">7/23 業主確認：暫不導入新系統或串接，僅預留擴充介面，視門市意願決定導入方式</div></div>
       </div>
     </div>
 
     <div class="func-area">
       <div class="func-header">
-        <div class="func-icon fi-gray">🔐</div>
-        <div class="func-title-group"><div class="func-area-name">系統管理</div><div class="func-area-desc">帳號與權限基礎建設，系統面預防性評估，非既有痛點修補</div></div>
-        <div class="func-modules-count">2 模組</div>
+        <div class="func-icon fi-gray">🤖</div>
+        <div class="func-title-group"><div class="func-area-name">條件式評估 — AI 輔助選料</div><div class="func-area-desc">非承諾交付，P1／P2／P3 三項進場條件全數達成後才評估</div></div>
+        <div class="func-modules-count">1 模組</div>
       </div>
       <div class="module-grid">
-        <div class="module-card"><div class="module-top"><div class="module-name">帳號管理</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">建立獨立登入帳號，取代目前共用帳號操作</div><div class="module-detail">逐字稿未查得具體爭議事件，屬系統面預防性評估項目</div></div>
-        <div class="module-card"><div class="module-top"><div class="module-name">權限控管</div><span class="phase-tag pt-1">第一階段</span></div><div class="module-value">依角色（業主／業務內勤／現場加工／財務）分層設定可看、可改範圍</div><div class="module-detail">與客戶價格、成本毛利等敏感資料的存取邊界一併設計</div></div>
+        <div class="module-card"><div class="module-top"><div class="module-name">AI 輔助選料評估</div><span class="phase-tag pt-4">第四階段</span></div><div class="module-value">規格自由文字 → 結構化條件（判斷需 LLM，已定案）＋ 庫存比對（材質篩選→尺寸比對→數量批號校驗，規則引擎，非 LLM）</div><div class="module-detail">進場條件：P1 庫存資料結構化驗證完成＋P2／P3 規則引擎穩定運行並達準確率標準（數字待定）</div></div>
       </div>
     </div>
   </div>
@@ -503,45 +510,45 @@
     <div class="timeline-strip">
       <div class="ts-phase ts-p1">
         <div class="ts-num">Phase 1</div>
-        <div class="ts-name">核心營運流程</div>
-        <div class="ts-period">第 1–2 個月（納入薪資模組後，時程重新估算中）</div>
-        <div class="ts-milestone">報價 → 訂單 → 收款一次串接，取代 6 處重複輸入</div>
+        <div class="ts-name">核心層：身份與主檔資料</div>
+        <div class="ts-period">第 1–2 個月（10 模組，時程依此重新估算）</div>
+        <div class="ts-milestone">帳號、權限、員工、客戶、供應商、樹種材料、產品規格、客戶專屬價格、編碼與歷史資料地基蓋穩</div>
         <ul class="ts-list">
-          <li>產品規格建檔＋自動編碼</li>
-          <li>客戶資料與規格品報價</li>
-          <li>報價轉訂單</li>
-          <li>進出貨與一般庫存</li>
-          <li>訂單軌記帳：應收／應付／預收／訂金</li>
-          <li>月結軌記帳：薪資／房租／水電，已定案列入 P1 受控清單設計</li>
-          <li>現有庫存資料匯入</li>
-          <li>薪資與獎金計算邏輯（依工作量／工作性質）</li>
-          <li>薪資歷史資料匯入（約 10 年）</li>
-          <li>工具類商品進銷存（獨立編碼，含大小包裝拆分、多倉庫）</li>
+          <li>帳號管理＋權限控管</li>
+          <li>員工主資料建檔</li>
+          <li>客戶主資料＋客戶專屬價格</li>
+          <li>供應商主資料</li>
+          <li>樹種與材料管理＋產品規格建檔</li>
+          <li>自動編碼與多條件查詢</li>
+          <li>現有客戶與庫存主檔資料匯入（約 10 年）</li>
         </ul>
       </div>
       <div class="ts-phase ts-p2">
         <div class="ts-num">Phase 2</div>
-        <div class="ts-name">生產與客製化管理</div>
-        <div class="ts-period">第 3–4 個月</div>
-        <div class="ts-milestone">毛料 → 半成品 → 成品 → 餘料，材料流向全程可查</div>
+        <div class="ts-name">基礎應用層：核心營運交易</div>
+        <div class="ts-period">核心層交付後接續（10 模組）</div>
+        <div class="ts-milestone">報價 → 訂單 → 收款一次串接，取代 6 處重複輸入</div>
         <ul class="ts-list">
-          <li>客製化加工規則與工序表</li>
-          <li>工單與現場回報</li>
-          <li>材料批次追蹤</li>
-          <li>餘料回庫與庫存選料建議</li>
-          <li>實際用料與損耗記錄</li>
+          <li>報價轉訂單</li>
+          <li>規格品庫存＋庫存異動紀錄</li>
+          <li>加工工序建檔</li>
+          <li>進出貨管理</li>
+          <li>記帳功能：訂單軌（應收／應付／預收／訂金）＋月結軌（薪資／房租／水電，受控清單設計）</li>
+          <li>工具類商品進銷存（獨立編碼，含大小包裝拆分、多倉庫）</li>
+          <li>薪資與獎金人工輸入＋薪資歷史資料匯入（約 10 年）</li>
         </ul>
       </div>
       <div class="ts-phase ts-p3">
         <div class="ts-num">Phase 3</div>
-        <div class="ts-name">分析與擴充</div>
-        <div class="ts-period">第 5–6 個月</div>
-        <div class="ts-milestone">成本與毛利報表上線，回答「這張訂單到底賺多少」</div>
+        <div class="ts-name">綜合應用層：材料追蹤與分析</div>
+        <div class="ts-period">基礎應用層穩定後接續（11 模組）</div>
+        <div class="ts-milestone">毛料 → 半成品 → 成品 → 餘料材料流向全程可查，成本與毛利報表上線</div>
         <ul class="ts-list">
-          <li>成本計算模型（含餘料價值）</li>
-          <li>毛利分析報表</li>
-          <li>材料利用率分析</li>
-          <li>進階管理報表</li>
+          <li>毛料／半成品／餘料／廢料分層庫存＋原料轉換紀錄</li>
+          <li>工單與現場回報</li>
+          <li>材料來源與流向追蹤＋區域式庫位管理</li>
+          <li>成本計算模型（含餘料價值）＋毛利分析報表</li>
+          <li>材料利用率分析、進階管理報表</li>
           <li>門市及分店資料串接評估（7/23 業主確認：暫不導入新系統或串接，僅預留擴充介面）</li>
         </ul>
       </div>
@@ -714,7 +721,7 @@
       <li><span class="risk-label rl-mid">不卡 P1</span>&nbsp; 加工計價規則（裁切／CNC 等工序計價依據、客戶折扣規則）與成本分攤方式，開發階段確認即可</li>
       <li><span class="risk-label rl-mid">不卡 P1</span>&nbsp; 餘料成本認列方式與成本計算方法（移動平均／批次成本等方案擇一），開發階段確認即可</li>
       <li><span class="risk-label rl-low">待業主</span>&nbsp; 電子發票系統處理深度：已確認電子發票與手開三聯式發票兩軌並存，待確認系統只記分類即可、或需串接電子發票平台 API 自動開立上傳</li>
-      <li><span class="risk-label rl-low">待業主</span>&nbsp; 確認薪資獎金計算規則細節（工作量、工作性質分級標準），重新估算納入後的 P1 時程</li>
+      <li><span class="risk-label rl-low">待業主</span>&nbsp; 確認薪資獎金計算規則細節：完整版架構書規定人工輸入、不依工作量自動核算，與原認知衝突，需重新核對後估算納入後的 P2 時程</li>
       <li><span class="risk-label rl-mid">不卡 P1</span>&nbsp; 盤點實際庫存資料格式（欄位是否標準化、有無不一致 Excel），驗證⑮庫存比對規則引擎草案是否成立；格式不一致時優先加「資料正規化」前處理層，而非改動比對邏輯——此為 P4 AI 評估的進場條件之一</li>
       <li><span class="risk-label rl-mid">可延後</span>&nbsp; 正式報價與開發費用</li>
       <li><span class="risk-label rl-mid">可延後</span>&nbsp; ROI 具體金額（月接單量、時薪、年營收）</li>
@@ -725,7 +732,7 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  <p><strong>高豐木業 木料全流程營運管理系統規劃</strong> · v1.2（2026-07-28 定案第一階段 9 模組 vs 第二階段 13 模組交付優先順序） · 首版 2026-07-13 · 準備人：MUSEON</p>
+  <p><strong>高豐木業 木料全流程營運管理系統規劃</strong> · v1.3（2026-07-28 定案三層架構：核心層 10／基礎應用層 10／綜合應用層 11／條件式評估 1，共 32 模組，與業主版 v1.0 對齊） · 首版 2026-07-13 · 準備人：MUSEON</p>
 </div>
 
 </body>
