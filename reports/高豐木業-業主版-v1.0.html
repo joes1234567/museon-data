@@ -657,7 +657,7 @@
         <div class="role-desc">全公司記帳功能（訂單軌＋月結軌），流水帳等級，P3 起加上成本分析</div>
         <ul class="role-list">
           <li>訂單軌：應收款／應付款／預收款／訂金，跟訂單狀態連結</li>
-          <li>月結軌：薪資／房租／水電等無訂單編號的固定週期收支（P1 先預留資料結構，邏輯視 7/28 範圍決定）</li>
+          <li>月結軌：薪資／房租／水電等無訂單編號的固定週期收支（依 7/28 定案，記帳功能整體含月結軌排入 P2）</li>
           <li>訂單與收款狀態連結，收完款才算完成</li>
           <li>P3 起查看含餘料價值認列的毛利分析</li>
           <li>供應商請款與進貨對帳</li>
@@ -680,10 +680,10 @@
           <div class="phase-line"></div>
         </div>
         <div class="phase-content phase-content-active">
-          <div class="phase-name">核心營運流程（20 個模組）</div>
+          <div class="phase-name">核心身份與主檔資料（10 個模組）</div>
           <div class="phase-desc">
-            建立產品規格＋自動編碼、客戶與供應商主資料、報價、訂單、規格品庫存、進出貨、應收應付與預收款管理、工具類商品進銷存、員工資料、薪資與獎金計算邏輯、帳號與權限管理，
-            讓報價 → 訂單 → 收款一次串接，取代現行 6 處重複輸入，同步匯入現有 20,000 多筆歷史庫存與薪資歷史資料。木料規格／一般工具商品／帳務三種模式底層流程分開設計、整合在同一套系統。納入薪資模組後，時程重新估算中。
+            建立帳號與權限管理、員工資料、客戶與供應商主資料、客戶專屬價格、產品規格＋樹種材料＋自動編碼、歷史資料匯入，
+            把「誰能用、誰是誰、東西叫什麼」這個地基先蓋穩，同步匯入現有客戶與庫存主檔歷史資料。依 7/28 定案，報價、訂單、進出貨、庫存、記帳、工具商品、薪資與獎金等日常交易類模組排入 P2 接續交付。
           </div>
         </div>
       </div>
@@ -693,11 +693,10 @@
           <div class="phase-line"></div>
         </div>
         <div class="phase-content">
-          <div class="phase-tag phase-tag-2">核心流程穩定後 · 生產與材料追蹤</div>
-          <div class="phase-name">生產與客製化管理（8 個模組）</div>
+          <div class="phase-tag phase-tag-2">核心地基完成後 · 日常交易＋生產材料追蹤</div>
+          <div class="phase-name">核心營運交易與生產材料追蹤（18 個模組）</div>
           <div class="phase-desc">
-            導入毛料／半成品／餘料／廢料分層庫存、原料轉換紀錄、工單管理、材料來源流向追蹤與區域式庫位管理，
-            讓「這批毛料做了哪些成品、剩多少、放在哪」全程可查，不再依賴單一員工記憶。約第 3–4 個月。
+            兩部分接續交付：① 日常交易模組——報價、訂單、規格品庫存與異動紀錄、進出貨、加工工序建檔、記帳功能（訂單軌＋月結軌）、工具類商品進銷存、薪資與獎金計算＋歷史資料匯入，讓報價 → 訂單 → 收款一次串接，取代現行 6 處重複輸入；② 導入毛料／半成品／餘料／廢料分層庫存、原料轉換紀錄、工單管理、材料來源流向追蹤與區域式庫位管理，讓「這批毛料做了哪些成品、剩多少、放在哪」全程可查，不再依賴單一員工記憶。
           </div>
         </div>
       </div>
@@ -736,7 +735,7 @@
     <div class="dep-bridge-icon">🗺️</div>
     <div>
       <div class="dep-bridge-label">系統全景圖 — 從核心到綜合應用，先後順序一次看懂</div>
-      <div class="dep-bridge-desc">全系統共 32 個模組，分三層堆疊：<strong>核心</strong>（身份與主檔資料，誰都要先有）→ <strong>基礎應用</strong>（每天在跑的營運交易）→ <strong>綜合應用</strong>（把交易資料串起來看到的洞察與智慧）。下層先蓋穩，上層才蓋得住——這條順序跟 P1→P2→P3→P4 的階段路線是同一件事的兩種看法，顏色仍代表所屬階段（綠 P1／藍 P2／金 P3／紫 P4）</div>
+      <div class="dep-bridge-desc">全系統共 32 個模組，分三層堆疊：<strong>核心</strong>（身份與主檔資料，誰都要先有）→ <strong>基礎應用</strong>（每天在跑的營運交易）→ <strong>綜合應用</strong>（把交易資料串起來看到的洞察與智慧）。下層先蓋穩，上層才蓋得住——這是技術依賴順序，顏色代表 7/28 定案後實際所屬交付階段（綠 P1／藍 P2／金 P3／紫 P4）；基礎應用層雖是技術地基，交付批次依定案排在 P2</div>
     </div>
   </div>
 
@@ -783,31 +782,31 @@
         <div class="dep-tier-header">
           <span class="dep-tier-num" style="background:#1a6b3c;">2</span>
           <span class="dep-tier-title">基礎應用層</span>
-          <span class="dep-tier-sub">每天在跑的營運交易・10 個模組・全部 P1・核心蓋好後接著做</span>
+          <span class="dep-tier-sub">每天在跑的營運交易・10 個模組・全部 P2・技術地基蓋好後接著做</span>
         </div>
         <div class="dep-layer">
           <div class="dep-layer-label">交易前置</div>
           <div class="dep-layer-row">
-            <div class="dep-node dep-node-p1" id="dep-quote">報價管理</div>
-            <div class="dep-node dep-node-p1" id="dep-procstep">加工工序管理</div>
-            <div class="dep-node dep-node-p1" id="dep-purchase">進貨管理</div>
+            <div class="dep-node dep-node-p2" id="dep-quote">報價管理</div>
+            <div class="dep-node dep-node-p2" id="dep-procstep">加工工序管理</div>
+            <div class="dep-node dep-node-p2" id="dep-purchase">進貨管理</div>
           </div>
         </div>
         <div class="dep-layer">
           <div class="dep-layer-label">交易成立與庫存</div>
           <div class="dep-layer-row">
-            <div class="dep-node dep-node-p1" id="dep-order">訂單管理</div>
-            <div class="dep-node dep-node-p1" id="dep-stock">規格品庫存</div>
-            <div class="dep-node dep-node-p1" id="dep-toolgoods">工具類商品管理</div>
+            <div class="dep-node dep-node-p2" id="dep-order">訂單管理</div>
+            <div class="dep-node dep-node-p2" id="dep-stock">規格品庫存</div>
+            <div class="dep-node dep-node-p2" id="dep-toolgoods">工具類商品管理</div>
           </div>
         </div>
         <div class="dep-layer" style="margin-bottom: 4px;">
           <div class="dep-layer-label">執行與紀錄</div>
           <div class="dep-layer-row">
-            <div class="dep-node dep-node-p1" id="dep-shipment">出貨管理</div>
-            <div class="dep-node dep-node-p1" id="dep-finance">記帳功能（訂單軌＋月結軌）</div>
-            <div class="dep-node dep-node-p1" id="dep-stocklog">庫存異動紀錄</div>
-            <div class="dep-node dep-node-p1" id="dep-payroll">薪資與獎金模組</div>
+            <div class="dep-node dep-node-p2" id="dep-shipment">出貨管理</div>
+            <div class="dep-node dep-node-p2" id="dep-finance">記帳功能（訂單軌＋月結軌）</div>
+            <div class="dep-node dep-node-p2" id="dep-stocklog">庫存異動紀錄</div>
+            <div class="dep-node dep-node-p2" id="dep-payroll">薪資與獎金模組</div>
           </div>
         </div>
       </div>
@@ -878,22 +877,22 @@
   <div class="p1-bridge" style="background:#f4faf6; border-color:rgba(26,107,60,0.25);">
     <div class="p1-bridge-icon">📌</div>
     <div>
-      <div class="p1-bridge-label">7/28 開會前定案 — P1 內部交付批次</div>
-      <div class="p1-bridge-desc">P1 範圍仍是這 20 個模組，不變；這次定案的是「先做哪 10 個、後做哪 10 個」。第一批跟第二批下面已經拆成兩個獨立區塊，不是同一張表裡標籤區分。</div>
+      <div class="p1-bridge-label">7/28 開會前定案 — P1／P2 範圍重新劃分</div>
+      <div class="p1-bridge-desc">P1 範圍縮小為 10 個核心身份與主檔模組；原本規劃在 P1 的另外 10 個日常交易模組，依這次定案改列入 P2，跟原有的生產材料追蹤模組一起交付，詳見第 6 節。</div>
     </div>
-    <div class="p1-bridge-badge">批次拆分</div>
+    <div class="p1-bridge-badge">範圍重定</div>
   </div>
 
-  <!-- 4. 第一階段：核心營運流程功能（P1） -->
+  <!-- 4. 第一階段：核心身份與主檔資料（P1） -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">4</div>
-      <div class="section-title">第一階段：核心營運流程功能</div>
+      <div class="section-title">第一階段：核心身份與主檔資料</div>
     </div>
-    <div class="section-lead">三個階段的路線確認了，鏡頭現在拉近到 P1。這節把 20 個功能模組逐一攤開，讓你看清楚第一版到底做到哪裡、怎麼把 6 處重複輸入收斂成一次；下面依 7/28 定案拆成第一批（優先交付）跟第二批（P1 內接續交付）兩個區塊。</div>
+    <div class="section-lead">三個階段的路線確認了，鏡頭現在拉近到 P1。依 7/28 定案，第一版聚焦這 10 個核心身份與主檔模組——先把「誰能用、誰是誰、東西叫什麼」的地基蓋穩；報價、訂單等日常交易模組改列入 P2，見第 6 節。</div>
 
     <div class="phase-label-bar phase-label-bar-p1" style="margin-bottom:14px;">
-      <span class="phase-label-badge">第一批 · 優先交付</span>
+      <span class="phase-label-badge">P1 · 核心身份與主檔資料</span>
       <span class="phase-label-name">業主／業務內勤／現場人員／財務共用</span>
       <span class="phase-label-count">10 個模組</span>
     </div>
@@ -950,64 +949,6 @@
       </div>
     </div>
 
-    <div class="phase-label-bar phase-label-bar-batch2" style="margin-bottom:14px;">
-      <span class="phase-label-badge">第二批 · P1 內接續交付</span>
-      <span class="phase-label-name">仍屬第一階段範圍，排在第一批之後開發</span>
-      <span class="phase-label-count">10 個模組</span>
-    </div>
-    <div class="features-grid" style="margin-bottom:28px;">
-      <div class="feature-item">
-        <div class="icon">📝</div>
-        <div class="name">報價管理</div>
-        <div class="desc">規格品自動帶價，客製品保留人工評估欄位</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">✅</div>
-        <div class="name">訂單管理</div>
-        <div class="desc">報價確認即轉訂單，追蹤生產／待出貨／收款狀態</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">📦</div>
-        <div class="name">規格品庫存</div>
-        <div class="desc">可正常銷售、持續管理的固定規格庫存，承接現有 20,000+ 筆明細</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🔄</div>
-        <div class="name">庫存異動紀錄</div>
-        <div class="desc">進貨、出貨、扣料、回庫全程留痕，解決庫存與現場不同步</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🪚</div>
-        <div class="name">加工工序管理</div>
-        <div class="desc">裁切、倒邊、倒角、CNC 等可標準化工序先固定計價</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">📥</div>
-        <div class="name">進貨管理</div>
-        <div class="desc">毛料、製品、成品進貨與供應商請款串接</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🚚</div>
-        <div class="name">出貨管理</div>
-        <div class="desc">出貨明細直接延續自訂單與工單，不需重複登打</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">💰</div>
-        <div class="name">記帳功能（訂單軌＋月結軌）</div>
-        <div class="desc">訂單軌：應收應付與預收款跟訂單狀態連結；月結軌：薪資／房租／水電等固定週期收支，皆為流水帳等級，非複式記帳</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🧰</div>
-        <div class="name">工具類商品管理</div>
-        <div class="desc">一般進銷存模式，含大包裝拆小包裝獨立編碼，不套用木料規格邏輯</div>
-      </div>
-      <div class="feature-item">
-        <div class="icon">🧮</div>
-        <div class="name">薪資與獎金模組</div>
-        <div class="desc">依當月工作量、工作性質核發獎金，含薪資歷史資料匯入</div>
-      </div>
-    </div>
-
   </div>
 
   <!-- 5. 第一階段範圍（做與不做） -->
@@ -1021,25 +962,24 @@
       <div class="card scope-in">
         <span class="scope-badge badge-in">第一階段做</span>
         <ul class="scope-list">
-          <li>✓ 客戶資料與報價管理（含客戶專屬價格）</li>
-          <li>✓ 供應商主資料建檔，串連進貨與請款對帳</li>
-          <li>✓ 報價轉訂單，一次輸入不重複登打</li>
+          <li>✓ 客戶主資料建檔（含客戶專屬價格）</li>
+          <li>✓ 供應商主資料建檔</li>
           <li>✓ 產品規格建檔＋自動編碼（樹種＋品項＋長寬厚查詢）</li>
-          <li>✓ 規格品庫存與庫存異動紀錄</li>
-          <li>✓ 進貨、出貨管理</li>
-          <li>✓ 可標準化加工工序建檔</li>
-          <li>✓ 訂單軌應收應付款與收款連結（含預收款、訂金），做到完整交付</li>
-          <li>✓ 月結軌（薪資／房租／水電等非訂單開銷）資料結構預留可擴充欄位，邏輯留待後續補齊</li>
-          <li>✓ 工具類商品進銷存（獨立於木料規格邏輯，可拆大包裝為小包裝）</li>
-          <li>✓ 現有庫存資料匯入（約 10 年歷史資料）</li>
-          <li>✓ 員工主資料建檔（到職日、部門職務），供薪資獎金與工單工時登記使用</li>
-          <li>✓ 薪資與獎金計算邏輯（依當月工作量／工作性質）＋薪資歷史資料匯入</li>
+          <li>✓ 現有客戶與庫存主檔資料匯入（約 10 年歷史資料）</li>
+          <li>✓ 員工主資料建檔（到職日、部門職務），供 P2 薪資獎金與工單工時登記使用</li>
           <li>✓ 帳號管理與角色權限控管（業主／業務內勤／現場加工／財務分層）</li>
         </ul>
       </div>
       <div class="card scope-out">
         <span class="scope-badge badge-out">第一階段不做</span>
         <ul class="scope-list">
+          <li>✗ 報價、訂單管理（P2 做）</li>
+          <li>✗ 規格品庫存與庫存異動紀錄（P2 做）</li>
+          <li>✗ 進貨、出貨管理（P2 做）</li>
+          <li>✗ 加工工序建檔（P2 做）</li>
+          <li>✗ 記帳功能，訂單軌＋月結軌（P2 做）</li>
+          <li>✗ 工具類商品進銷存（P2 做）</li>
+          <li>✗ 薪資與獎金計算邏輯＋薪資歷史資料匯入（P2 做）</li>
           <li>✗ 毛料／半成品／餘料／廢料分層庫存管理（P2 做）</li>
           <li>✗ 工單管理與材料來源流向追蹤（P2 做）</li>
           <li>✗ 客製化半標準化報價自動建議（P2 做）</li>
@@ -1056,14 +996,96 @@
       <div class="section-num">6</div>
       <div class="section-title">第二階段</div>
     </div>
-    <div class="section-lead">P1 的功能和邊界都清楚了。P2 在核心流程跑穩之後啟動，把毛料到成品的材料流向拆成可追蹤的分層庫存，並用工單記錄現場實際加工過程；同時補上原料轉換紀錄與庫位管理，解決「料放在哪、變成什麼」目前完全依賴宗憲個人記憶的空白。</div>
+    <div class="section-lead">P1 的功能和邊界都清楚了。依 7/28 定案，P2 共 18 個模組，分兩部分接續交付：先是報價、訂單、庫存、進出貨、記帳、工具商品、薪資等日常交易模組；接著是毛料到成品的材料流向與分層庫存，用工單記錄現場實際加工過程，同時補上原料轉換紀錄與庫位管理，解決「料放在哪、變成什麼」目前完全依賴宗憲個人記憶的空白。</div>
+
+    <div class="future-phase-block">
+      <div class="future-phase-header">
+        <div class="future-phase-dot phase-dot-2">P2</div>
+        <div>
+          <div class="future-phase-title">核心營運交易模組</div>
+          <div class="future-phase-subtitle">P1 交付後接續開發 · 10 個模組</div>
+        </div>
+      </div>
+      <div class="future-features-row">
+        <div class="future-feature-pill">
+          <div class="icon">📝</div>
+          <div>
+            <div class="name">報價管理</div>
+            <div class="desc">規格品自動帶價，客製品保留人工評估欄位</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">✅</div>
+          <div>
+            <div class="name">訂單管理</div>
+            <div class="desc">報價確認即轉訂單，追蹤生產／待出貨／收款狀態</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">📦</div>
+          <div>
+            <div class="name">規格品庫存</div>
+            <div class="desc">可正常銷售、持續管理的固定規格庫存，承接現有 20,000+ 筆明細</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🔄</div>
+          <div>
+            <div class="name">庫存異動紀錄</div>
+            <div class="desc">進貨、出貨、扣料、回庫全程留痕，解決庫存與現場不同步</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🪚</div>
+          <div>
+            <div class="name">加工工序管理</div>
+            <div class="desc">裁切、倒邊、倒角、CNC 等可標準化工序先固定計價</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">📥</div>
+          <div>
+            <div class="name">進貨管理</div>
+            <div class="desc">毛料、製品、成品進貨與供應商請款串接</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🚚</div>
+          <div>
+            <div class="name">出貨管理</div>
+            <div class="desc">出貨明細直接延續自訂單與工單，不需重複登打</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">💰</div>
+          <div>
+            <div class="name">記帳功能（訂單軌＋月結軌）</div>
+            <div class="desc">訂單軌：應收應付與預收款跟訂單狀態連結；月結軌：薪資／房租／水電等固定週期收支，皆為流水帳等級，非複式記帳</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🧰</div>
+          <div>
+            <div class="name">工具類商品管理</div>
+            <div class="desc">一般進銷存模式，含大包裝拆小包裝獨立編碼，不套用木料規格邏輯</div>
+          </div>
+        </div>
+        <div class="future-feature-pill">
+          <div class="icon">🧮</div>
+          <div>
+            <div class="name">薪資與獎金模組</div>
+            <div class="desc">依當月工作量、工作性質核發獎金，含薪資歷史資料匯入</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="future-phase-block">
       <div class="future-phase-header">
         <div class="future-phase-dot phase-dot-2">P2</div>
         <div>
           <div class="future-phase-title">生產與材料追蹤</div>
-          <div class="future-phase-subtitle">核心流程穩定後啟動 · 8 個模組</div>
+          <div class="future-phase-subtitle">核心營運交易模組穩定後接續 · 8 個模組</div>
         </div>
       </div>
       <div class="future-features-row">
@@ -1222,9 +1244,9 @@
       <li>加工計價規則（裁切／CNC 等工序的計價依據、客戶折扣規則）與成本分攤方式（人工、機器、廢料、可回收邊材）——不影響 P1 啟動，開發階段確認即可</li>
       <li>餘料成本認列方式與成本計算方法（移動平均／批次成本等方案中選定一種）——不影響 P1 啟動，開發階段確認即可</li>
       <li>確認電子發票的系統處理深度（已確認電子發票與手開三聯式發票兩軌並存；待確認系統只記錄分類即可，或需串接電子發票平台 API 自動開立上傳）</li>
-      <li>月結軌科目分類清單已確認列入 P1，採受控清單設計（使用者可自建分類、防重複）；上線前需先整理業主現有 Excel 舊分類、合併同義寫法後再匯入</li>
+      <li>月結軌科目分類清單已確認採受控清單設計（使用者可自建分類、防重複），依 7/28 定案隨記帳功能整體排入 P2；上線前需先整理業主現有 Excel 舊分類、合併同義寫法後再匯入</li>
       <li>確認門市既有系統整合意願</li>
-      <li>確認薪資獎金計算規則細節（工作量、工作性質分級標準），重新估算納入後的 P1 時程</li>
+      <li>確認薪資獎金計算規則細節（工作量、工作性質分級標準），據此估算納入後的 P2 時程</li>
       <li>盤點實際庫存資料格式（欄位是否標準化、有無不一致 Excel），驗證下方「⚠️ 尚待確認」⑮已列出的「材質篩選→尺寸比對→數量批號校驗」初步規則引擎草案是否成立，格式不一致時優先加資料正規化前處理層而非改動比對邏輯——不影響 P1 啟動，AI 應用已列入第四階段，此為進場條件之一，P2／P3 完成後需先確認才進入評估</li>
       <li>2026/7/28（二）下午 1:30 進行完整系統架構、模組說明與初步費用範圍簡報，確認第一階段開發範圍後啟動開發</li>
     </ol>
@@ -1238,14 +1260,14 @@
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">④</td><td style="padding:6px 8px 6px 0;">廢料怎麼處理</td><td style="color:#2e7d32; font-weight:600;">✓ 不計成本、不做移動，如有出售或回收需求另行記錄</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑤</td><td style="padding:6px 8px 6px 0;">編碼方式怎麼設計</td><td style="color:#2e7d32; font-weight:600;">✓ 系統自動編碼，操作畫面仍以樹種／品項／尺寸顯示，人員不背號碼</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑥</td><td style="padding:6px 8px 6px 0;">歷史資料承接範圍</td><td style="color:#2e7d32; font-weight:600;">✓ 建議約承接 10 年資料，新舊系統並行核對後再切換</td></tr>
-          <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑦</td><td style="padding:6px 8px 6px 0;">薪資獎金是否列入第一階段</td><td style="color:#2e7d32; font-weight:600;">✓ 仍列入 P1，含薪資計算＋獎金邏輯（依當月工作量／工作性質）＋薪資歷史資料匯入；依 7/28 定案排入 P1 第二批交付（非第一批優先做）</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑦</td><td style="padding:6px 8px 6px 0;">薪資獎金列入哪個階段</td><td style="color:#2e7d32; font-weight:600;">✓ 含薪資計算＋獎金邏輯（依當月工作量／工作性質）＋薪資歷史資料匯入；依 7/28 最終定案，改列入 P2</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑧</td><td style="padding:6px 8px 6px 0;">帳號與權限管理是否列入第一階段</td><td style="color:#2e7d32; font-weight:600;">✓ 列入，屬系統面預防性評估，逐字稿未查得具體爭議事件，非既有痛點修補</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑨</td><td style="padding:6px 8px 6px 0;">毛料到半成品的記錄顆粒度與條碼方式</td><td style="color:#2e7d32; font-weight:600;">✓ 原料以批次為主，半成品以規格＋數量＋區域管理，僅高價／特殊材料才單件標示，不逐片貼碼（避免現場負擔過重、標籤易脫落失真）</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑩</td><td style="padding:6px 8px 6px 0;">木料／工具商品／帳務是否共用同一套邏輯</td><td style="color:#2e7d32; font-weight:600;">✓ 三種模式分流設計（木料規格與客製、一般工具商品、帳務與款項），底層流程與畫面各自獨立，整合在同一套系統</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑪</td><td style="padding:6px 8px 6px 0;">帳務要做記帳功能還是完整會計系統</td><td style="color:#2e7d32; font-weight:600;">✓ 做記帳功能，不做複式記帳會計系統；範圍涵蓋全公司收支（訂單軌＋月結軌），深度為流水帳等級（未收/已收/部分收/到期），正式報稅仍由現有記帳士／事務所處理</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑯</td><td style="padding:6px 8px 6px 0;">工具類商品是否支援多倉庫／多門市庫存</td><td style="color:#2e7d32; font-weight:600;">✓ 支援，庫存表新增「倉別」欄位管理</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑰</td><td style="padding:6px 8px 6px 0;">帳務系統是否需串接現有會計系統</td><td style="color:#2e7d32; font-weight:600;">✓ 不需要，業主目前無會計系統，全部使用 Excel 處理</td></tr>
-          <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑱</td><td style="padding:6px 8px 6px 0;">月結軌科目分類清單怎麼建立</td><td style="color:#2e7d32; font-weight:600;">✓ 列入 P1，採受控清單設計：使用者可自行新增分類，新增後成為共用選項供之後選用，不再逐筆手打自由文字；新增時若偵測到相近名稱（如「水電」與「水電費」）會自動反白既有選項，避免重複建立；上線前需先整理業主現有 Excel 舊分類、合併同義寫法後再匯入</td></tr>
+          <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑱</td><td style="padding:6px 8px 6px 0;">月結軌科目分類清單怎麼建立</td><td style="color:#2e7d32; font-weight:600;">✓ 採受控清單設計：使用者可自行新增分類，新增後成為共用選項供之後選用，不再逐筆手打自由文字；新增時若偵測到相近名稱（如「水電」與「水電費」）會自動反白既有選項，避免重複建立；隨記帳功能整體排入 P2；上線前需先整理業主現有 Excel 舊分類、合併同義寫法後再匯入</td></tr>
           <tr style="border-bottom:1px solid #f0f0f0;"><td style="padding:6px 4px 6px 0;">⑲</td><td style="padding:6px 8px 6px 0;">門市既有系統整合意願</td><td style="color:#2e7d32; font-weight:600;">✓ 暫不導入新系統或串接，僅預留未來擴充介面供門市分類對接</td></tr>
           <tr><td style="padding:6px 4px 6px 0;">㉑</td><td style="padding:6px 8px 6px 0;">工具類商品大小包裝進貨／售價是否分開計算</td><td style="color:#2e7d32; font-weight:600;">✓ 分開計算，大包裝進貨與小包裝售出價各自獨立設定</td></tr>
         </tbody>
