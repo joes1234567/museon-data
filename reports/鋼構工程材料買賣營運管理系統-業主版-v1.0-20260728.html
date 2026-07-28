@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鋼構工程暨材料買賣｜雙公司營運管理系統 — 業主規劃版</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    background: #f5f6fa;
+    color: #1a1a2e;
+    line-height: 1.7;
+  }
+  .cover {
+    background: linear-gradient(135deg, #050e18 0%, #0d2a44 55%, #1a4d75 100%);
+    color: white;
+    padding: 64px 48px 56px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.08);
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .cover-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #5aa6e0;
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .cover-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 40px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cover-meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .cover-meta-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .cover-meta-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .section { margin-bottom: 56px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .section-num {
+    width: 32px; height: 32px;
+    background: #163f66;
+    color: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+  .section-lead { font-size: 14px; color: #888; margin-bottom: 24px; padding-left: 44px; }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+  .card-title { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+  .card p { font-size: 15px; color: #444; }
+
+  .oneliner { background: #0c1c2c; border-radius: 16px; padding: 28px 32px; color: white; }
+  .oneliner p { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.88); }
+  .oneliner strong { color: #5aa6e0; }
+
+  .co-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 720px) { .co-grid { grid-template-columns: 1fr; } }
+  .co-card { background: white; border-radius: 16px; padding: 22px 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .co-card.future { border: 1.5px dashed #ccc; background: #fafafa; }
+  .co-icon { font-size: 26px; margin-bottom: 8px; }
+  .co-name { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+  .co-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 20px; margin-bottom: 10px; }
+  .co-tag.existing { background: #e8f0fe; color: #163f66; }
+  .co-tag.new { background: #e6f4f1; color: #0f766e; }
+  .co-tag.later { background: #f0f0f0; color: #888; }
+  .co-list { list-style: none; }
+  .co-list li { font-size: 12.5px; color: #555; padding: 4px 0; border-bottom: 1px solid #f5f5f5; }
+  .co-list li:last-child { border: none; }
+
+  .roles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .roles-grid { grid-template-columns: 1fr; } }
+  .role-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .role-icon { font-size: 28px; margin-bottom: 10px; }
+  .role-name { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+  .role-desc { font-size: 13px; color: #666; margin-bottom: 14px; }
+  .role-list { list-style: none; }
+  .role-list li { font-size: 13px; color: #444; padding: 5px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 8px; }
+  .role-list li:last-child { border: none; }
+  .role-list li::before { content: '✓'; color: #2f74b5; font-weight: 700; flex-shrink: 0; }
+
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .scope-grid { grid-template-columns: 1fr; } }
+  .scope-in { border-left: 4px solid #2f74b5; }
+  .scope-out { border-left: 4px solid #999; }
+  .scope-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
+  .badge-in { background: #e8f0fe; color: #163f66; }
+  .badge-out { background: #f0f0f0; color: #777; }
+  .scope-list { list-style: none; }
+  .scope-list li { font-size: 13px; color: #555; padding: 5px 0; border-bottom: 1px solid #f5f5f5; }
+  .scope-list li:last-child { border: none; }
+
+  .phase-timeline { position: relative; }
+  .phase-item { display: flex; gap: 20px; margin-bottom: 20px; }
+  .phase-dot-col { display: flex; flex-direction: column; align-items: center; }
+  .phase-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .phase-line { width: 2px; flex: 1; background: #eee; margin: 8px 0; min-height: 30px; }
+  .phase-dot-1 { background: #163f66; color: white; }
+  .phase-dot-2 { background: #0f766e; color: white; }
+  .phase-dot-3 { background: #92400e; color: white; }
+  .phase-dot-4 { background: #5b21b6; color: white; }
+  .phase-content { background: white; border-radius: 14px; padding: 20px 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); flex: 1; margin-bottom: 20px; }
+  .phase-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .phase-tag-1 { color: #163f66; } .phase-tag-2 { color: #0f766e; } .phase-tag-3 { color: #92400e; } .phase-tag-4 { color: #5b21b6; }
+  .phase-name { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+  .phase-desc { font-size: 13px; color: #666; }
+
+  .phase-label-bar { display: flex; align-items: center; gap: 12px; padding: 12px 20px; border-radius: 10px; margin-bottom: 16px; }
+  .phase-label-bar-p1 { background: #163f66; } .phase-label-bar-p2 { background: #0f766e; } .phase-label-bar-p3 { background: #92400e; } .phase-label-bar-p4 { background: #5b21b6; }
+  .phase-label-badge { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; background: rgba(255,255,255,0.22); color: white; padding: 3px 9px; border-radius: 20px; }
+  .phase-label-name { font-size: 15px; font-weight: 700; color: white; }
+  .phase-label-count { margin-left: auto; font-size: 12px; color: rgba(255,255,255,0.7); text-align: right; }
+
+  .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 8px; }
+  @media (max-width: 700px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+  .feature-item { background: white; border-radius: 12px; padding: 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center; }
+  .feature-item .icon { font-size: 24px; margin-bottom: 8px; }
+  .feature-item .name { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 5px; }
+  .feature-item .desc { font-size: 11.5px; color: #888; margin-bottom: 8px; }
+  .feature-item .fee { font-size: 12px; font-weight: 700; color: #2f74b5; }
+  .feature-item .fee.reserved { color: #aaa; font-weight: 500; }
+
+  .phase-subtotal { text-align: right; font-size: 12.5px; color: #888; margin-bottom: 40px; padding-right: 4px; }
+  .phase-subtotal strong { color: #163f66; font-size: 14px; }
+
+  .total-card { background: #0c1c2c; border-radius: 16px; padding: 28px 32px; color: white; }
+  .total-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
+  .total-row:last-child { border: none; }
+  .total-row .label { color: rgba(255,255,255,0.7); }
+  .total-row .value { font-weight: 700; }
+  .total-row.grand { padding-top: 18px; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.25); }
+  .total-row.grand .label { font-size: 16px; color: white; font-weight: 700; }
+  .total-row.grand .value { font-size: 22px; color: #5aa6e0; }
+  .total-note { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 16px; }
+
+  .next-list { list-style: none; counter-reset: next; }
+  .next-list li { counter-increment: next; background: white; border-radius: 12px; padding: 18px 24px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; align-items: flex-start; gap: 14px; font-size: 14px; color: #333; }
+  .next-list li::before { content: counter(next); width: 26px; height: 26px; background: #163f66; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  .risk-list { list-style: none; }
+  .risk-item { background: white; border-radius: 12px; padding: 18px 22px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 4px solid #b3541e; }
+  .risk-title { font-size: 13.5px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+  .risk-desc { font-size: 13px; color: #666; }
+
+  .confirm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 600px) { .confirm-grid { grid-template-columns: 1fr; } }
+  .confirm-card { background: white; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .confirm-cat { font-size: 12.5px; font-weight: 700; color: #163f66; margin-bottom: 8px; }
+  .confirm-card ul { list-style: none; }
+  .confirm-card li { font-size: 12px; color: #666; padding: 2px 0; }
+  .confirm-card li::before { content: '·'; margin-right: 6px; color: #bbb; }
+
+  .footer { text-align: center; padding: 32px; font-size: 12px; color: #aaa; }
+  .divider { height: 1px; background: #eee; margin: 40px 0; }
+
+  .reading-flow-strip { background: white; border-bottom: 1px solid #eee; padding: 14px 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .reading-flow-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .rf-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #bbb; margin-right: 8px; white-space: nowrap; }
+  .rf-step { background: #efefef; border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: #666; white-space: nowrap; }
+  .rf-arrow { color: #ccc; font-size: 13px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-label">系統規劃書 — 業主版</div>
+  <h1>鋼構工程暨材料買賣｜<br>雙公司營運管理系統</h1>
+  <div class="cover-sub">工程公司與材料公司同平台切換，財務與權限確實隔離——把工程進度、階段請款、材料裁切餘料，變成可查詢、可交接的公司資產</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><span class="cover-meta-label">版本</span><span class="cover-meta-value">v1.0</span></div>
+    <div class="cover-meta-item"><span class="cover-meta-label">文件性質</span><span class="cover-meta-value">系統規劃說明＋分期概算</span></div>
+    <div class="cover-meta-item"><span class="cover-meta-label">日期</span><span class="cover-meta-value">2026 年 7 月</span></div>
+    <div class="cover-meta-item"><span class="cover-meta-label">交付方向</span><span class="cover-meta-value">客製化買斷</span></div>
+  </div>
+</div>
+
+<div class="reading-flow-strip">
+  <div class="reading-flow-inner">
+    <span class="rf-label">閱讀路線</span>
+    <span class="rf-step">1 目標</span><span class="rf-arrow">→</span>
+    <span class="rf-step">2 雙公司定位</span><span class="rf-arrow">→</span>
+    <span class="rf-step">3 使用者</span><span class="rf-arrow">→</span>
+    <span class="rf-step">4 範圍界線</span><span class="rf-arrow">→</span>
+    <span class="rf-step">5 四階段路線</span><span class="rf-arrow">→</span>
+    <span class="rf-step">6 買斷交付範圍</span><span class="rf-arrow">→</span>
+    <span class="rf-step">7 概算總覽</span><span class="rf-arrow">→</span>
+    <span class="rf-step">8 風險提醒</span><span class="rf-arrow">→</span>
+    <span class="rf-step">9 待確認事項</span><span class="rf-arrow">→</span>
+    <span class="rf-step">10 下一步</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 1 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">1</div><div class="section-title">我們在做什麼</div></div>
+    <div class="section-lead">這是整份文件的起點。後面每一個模組、每一分費用，都從這個答案長出來。</div>
+    <div class="oneliner">
+      <p>
+        建立一套<strong>雙公司營運管理系統</strong>，讓工程公司與材料公司在<strong>同一平台切換</strong>，
+        但帳務、報表與權限<strong>確實隔離</strong>——工程進度、施工報告、階段性請款、收款確認形成
+        <strong>可追蹤的閉環</strong>；鋼材採購、裁切、使用與餘料形成<strong>可信任的庫存紀錄</strong>。
+        採客製化買斷、分階段建置、以真實案件逐步驗證上線。
+      </p>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">2</div><div class="section-title">雙公司業務定位</div></div>
+    <div class="section-lead">兩家公司由同一經營者管理、業務互相連動，但稅務、股東交代與公司治理要求財務清楚分開——這是整套系統設計的第一前提。</div>
+    <div class="co-grid">
+      <div class="co-card">
+        <div class="co-icon">🏗️</div>
+        <div class="co-tag new">2026/08 新設立</div>
+        <div class="co-name">工程公司</div>
+        <ul class="co-list">
+          <li>承接鋼構工程案件（聚焦鋼構主結構，非一般統包）</li>
+          <li>管理合約、訂單、進度與階段請款</li>
+          <li>材料需求交由材料公司採購供料</li>
+          <li>加工外包，施工回報與驗收結案</li>
+        </ul>
+      </div>
+      <div class="co-card">
+        <div class="co-icon">📦</div>
+        <div class="co-tag existing">既有公司</div>
+        <div class="co-name">材料公司</div>
+        <ul class="co-list">
+          <li>承接工程公司材料需求＋既有外部客戶</li>
+          <li>拆圖、用料整理、供應商採購</li>
+          <li>入庫、裁切、出庫、餘料管理</li>
+          <li>不只是內部供料單位，仍需對外銷售</li>
+        </ul>
+      </div>
+      <div class="co-card future">
+        <div class="co-icon">🏭</div>
+        <div class="co-tag later">另案規劃</div>
+        <div class="co-name">未來加工廠</div>
+        <ul class="co-list">
+          <li>BOM、製程工序、部件、排程</li>
+          <li>工時設備、外籍勞工管理</li>
+          <li>複雜度較高，不併入第一版系統</li>
+          <li>本規劃僅預留資料交換介面</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">3</div><div class="section-title">誰在用這套系統</div></div>
+    <div class="section-lead">六大角色採最小權限設計，不因同平台而任意查看另一家公司或其他部門的敏感資料。</div>
+    <div class="roles-grid">
+      <div class="role-card">
+        <div class="role-icon">🧭</div>
+        <div class="role-name">業主／經營者</div>
+        <div class="role-desc">雙公司全局掌握，最終決策與買斷驗收</div>
+        <ul class="role-list">
+          <li>查看兩家公司營運摘要與損益</li>
+          <li>審核公司間往來與例外放行</li>
+          <li>確認第一階段範圍與各項待確認事項</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📐</div>
+        <div class="role-name">工程專案負責人</div>
+        <div class="role-desc">合約、進度、請款節點的主要操作者</div>
+        <ul class="role-list">
+          <li>建立專案、設定階段與請款條件</li>
+          <li>審核施工報告、追蹤異常事項</li>
+          <li>掌握收款狀態，決定是否可進下一階段</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">✂️</div>
+        <div class="role-name">拆圖／採購人員</div>
+        <div class="role-desc">材料公司核心作業，串連工程需求與供應商</div>
+        <ul class="role-list">
+          <li>依圖面拆解材料需求表</li>
+          <li>建立採購單、管理入庫與裁切</li>
+          <li>追蹤餘料規格與可再用庫存</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">👷</div>
+        <div class="role-name">現場施工主管</div>
+        <div class="role-desc">紙本填寫＋照片上傳，系統負責彙整與審核</div>
+        <ul class="role-list">
+          <li>上傳每日施工報告與現場照片</li>
+          <li>記錄異常、延誤與待處理事項</li>
+          <li>手機瀏覽器查看進度、待請款項目</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">💼</div>
+        <div class="role-name">財務／會計人員</div>
+        <div class="role-desc">雙公司帳務隔離的最終把關者</div>
+        <ul class="role-list">
+          <li>收支登錄、應收應付、公司間往來對帳</li>
+          <li>產出月／年損益表、專案損益</li>
+          <li>匯出可供會計師使用的資料</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🗂️</div>
+        <div class="role-name">人事人員</div>
+        <div class="role-desc">紙本＋系統雙軌保存人事資料</div>
+        <ul class="role-list">
+          <li>員工合約、證照、簽署文件管理</li>
+          <li>請假、加班、出勤紀錄</li>
+          <li>薪資計算與薪資單產出</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">4</div><div class="section-title">系統範圍界線</div></div>
+    <div class="section-lead">會議共識：核心是「雙公司營運管理＋工程專案管理＋材料進銷存」，不是單一庫存系統，也不是一次做到 MES 等級。</div>
+    <div class="scope-grid">
+      <div class="card scope-in">
+        <span class="scope-badge badge-in">✓ 本次納入</span>
+        <ul class="scope-list">
+          <li>雙公司切換＋公司別資料與財務隔離</li>
+          <li>工程專案管理＋階段性請款＋收款後才進下一階段</li>
+          <li>每日施工報告＋照片＋主管審核</li>
+          <li>材料規格、採購、供應商管理</li>
+          <li>庫存、裁切及餘料追蹤</li>
+          <li>客戶訂單＋公司間供料</li>
+          <li>人事資料、合約、請假加班薪資</li>
+          <li>文件上傳保存＋損益與管理報表</li>
+          <li>Web 響應式介面（電腦／平板／手機）</li>
+          <li>雲端主機（優先台灣區域）＋客製化買斷</li>
+        </ul>
+      </div>
+      <div class="card scope-out">
+        <span class="scope-badge badge-out">✗ 暫不納入第一階段</span>
+        <ul class="scope-list">
+          <li>加工廠完整 MES／生產管理、複雜 BOM 與製程排程</li>
+          <li>IoT 設備串接、原生手機 App</li>
+          <li>AI 自動拆圖、AI 自動估價</li>
+          <li>完整 ERP 總帳及稅務申報</li>
+          <li>複雜排班、跨廠生產協同</li>
+          <li>自建主機房、大型商業智慧平台</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">5</div><div class="section-title">四階段導入路線</div></div>
+    <div class="section-lead">不做一次到位，先跑通一個真實案件的核心流程，驗收後再加下一個模組，避免公司案件量增加後才重整資料。每個模組費用 = 開發週數與驗收複雜度換算，屬初步規劃概算。</div>
+
+    <div class="phase-timeline">
+      <div class="phase-item">
+        <div class="phase-dot-col"><div class="phase-dot phase-dot-1">P1</div><div class="phase-line"></div></div>
+        <div class="phase-content"><div class="phase-tag phase-tag-1">營運核心</div><div class="phase-name">Phase 1｜工程進度與階段請款先跑通</div><div class="phase-desc">公司切換與權限、客戶供應商主檔、工程專案、階段請款鎖定、施工報告、基礎文件——這是 A 公司 8 月上線的 critical path。</div></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-dot-col"><div class="phase-dot phase-dot-2">P2</div><div class="phase-line"></div></div>
+        <div class="phase-content"><div class="phase-tag phase-tag-2">材料與庫存</div><div class="phase-name">Phase 2｜拆圖到餘料的完整鏈路</div><div class="phase-desc">材料規格、拆圖需求、採購、入出庫、裁切餘料、客戶訂單——材料公司既有業務與工程供料同時支援。</div></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-dot-col"><div class="phase-dot phase-dot-3">P3</div><div class="phase-line"></div></div>
+        <div class="phase-content"><div class="phase-tag phase-tag-3">財務與人資</div><div class="phase-name">Phase 3｜雙公司帳務與人事制度化</div><div class="phase-desc">收支、應收應付、公司間往來、損益報表、員工合約、請假加班、薪資——等 P1 跑出真實案件數據後再鎖規則會更準。</div></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-dot-col"><div class="phase-dot phase-dot-4">P4</div></div>
+        <div class="phase-content"><div class="phase-tag phase-tag-4">管理分析與整合</div><div class="phase-name">Phase 4｜把數據變成決策依據</div><div class="phase-desc">專案損益分析、管理儀表板、會計軟體串接、通知提醒、報表優化，加工廠資料交換介面預留但不列入報價。</div></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- P1 modules -->
+    <div class="phase-label-bar phase-label-bar-p1">
+      <span class="phase-label-badge">P1</span><span class="phase-label-name">營運核心（6 模組）</span>
+      <span class="phase-label-count">合計 12 週<br>NT$261,775</span>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item"><div class="icon">🔐</div><div class="name">雙公司切換與權限控管</div><div class="desc">公司別畫面＋強制帶入公司識別條件，避免跨公司誤查誤改</div><div class="fee">2 週・NT$44,550</div></div>
+      <div class="feature-item"><div class="icon">🤝</div><div class="name">客戶與供應商主檔</div><div class="desc">客戶案場、供應商報價與付款條件、往來紀錄</div><div class="fee">1.5 週・NT$34,200</div></div>
+      <div class="feature-item"><div class="icon">🏗️</div><div class="name">工程專案建檔</div><div class="desc">合約金額、負責人、階段里程碑、進度百分比</div><div class="fee">2 週・NT$41,250</div></div>
+      <div class="feature-item"><div class="icon">💰</div><div class="name">工程階段與請款設定</div><div class="desc">依專案自訂階段、金額／百分比、未收款不得進下一階段</div><div class="fee">2.5 週・NT$59,500</div></div>
+      <div class="feature-item"><div class="icon">📋</div><div class="name">施工報告管理</div><div class="desc">紙本掃描＋照片上傳、主管審核退回補件、版本保留</div><div class="fee">2.5 週・NT$55,250</div></div>
+      <div class="feature-item"><div class="icon">🗂️</div><div class="name">基礎文件管理</div><div class="desc">合約、施工報告等文件分類、上傳下載權限</div><div class="fee">1.5 週・NT$27,025</div></div>
+    </div>
+    <div class="phase-subtotal">P1 小計：<strong>12 週・NT$261,775</strong></div>
+
+    <!-- P2 modules -->
+    <div class="phase-label-bar phase-label-bar-p2">
+      <span class="phase-label-badge">P2</span><span class="phase-label-name">材料與庫存（7 模組）</span>
+      <span class="phase-label-count">合計 11.5 週<br>NT$232,975</span>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item"><div class="icon">📐</div><div class="name">材料規格主檔</div><div class="desc">材質、厚度、寬度、長度、斷面、批號來源</div><div class="fee">1.5 週・NT$28,200</div></div>
+      <div class="feature-item"><div class="icon">✂️</div><div class="name">拆圖需求管理</div><div class="desc">依圖面拆解材料需求，產生材料需求表</div><div class="fee">1.5 週・NT$28,200</div></div>
+      <div class="feature-item"><div class="icon">📥</div><div class="name">採購管理</div><div class="desc">供應商詢價、採購單、到貨驗收入庫</div><div class="fee">1.5 週・NT$27,025</div></div>
+      <div class="feature-item"><div class="icon">📦</div><div class="name">入庫管理</div><div class="desc">整支／整顆／原始長料入庫紀錄</div><div class="fee">1 週・NT$20,900</div></div>
+      <div class="feature-item"><div class="icon">🚚</div><div class="name">出庫管理</div><div class="desc">交付工程公司或加工廠、記錄實際使用量</div><div class="fee">1 週・NT$20,900</div></div>
+      <div class="feature-item"><div class="icon">🪚</div><div class="name">裁切與餘料庫存</div><div class="desc">一支切多片、餘料規格位置、可否再用、報廢損耗</div><div class="fee">3 週・NT$68,150</div></div>
+      <div class="feature-item"><div class="icon">🧾</div><div class="name">客戶訂單管理</div><div class="desc">材料公司對外銷售，非只服務工程公司內部</div><div class="fee">2 週・NT$39,600</div></div>
+    </div>
+    <div class="phase-subtotal">P2 小計：<strong>11.5 週・NT$232,975</strong></div>
+
+    <!-- P3 modules -->
+    <div class="phase-label-bar phase-label-bar-p3">
+      <span class="phase-label-badge">P3</span><span class="phase-label-name">財務與人資（7 模組）</span>
+      <span class="phase-label-count">合計 12.5 週<br>NT$265,175</span>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item"><div class="icon">💵</div><div class="name">收支登錄與憑證</div><div class="desc">收入支出科目、憑證上傳</div><div class="fee">1.5 週・NT$27,025</div></div>
+      <div class="feature-item"><div class="icon">📑</div><div class="name">應收應付管理</div><div class="desc">工程請款、採購付款、收款確認</div><div class="fee">2 週・NT$41,250</div></div>
+      <div class="feature-item"><div class="icon">🔄</div><div class="name">公司間往來帳</div><div class="desc">兩家公司交易單據與帳務對齊，非僅畫面切換</div><div class="fee">1.5 週・NT$37,050</div></div>
+      <div class="feature-item"><div class="icon">📊</div><div class="name">損益報表</div><div class="desc">月／年度損益、專案損益、可供會計師匯出</div><div class="fee">2 週・NT$39,600</div></div>
+      <div class="feature-item"><div class="icon">👤</div><div class="name">員工主檔與合約</div><div class="desc">勞動契約、簽署文件、證照附件</div><div class="fee">1.5 週・NT$25,850</div></div>
+      <div class="feature-item"><div class="icon">🕒</div><div class="name">請假與加班管理</div><div class="desc">出勤資料、請假加班申請與紀錄</div><div class="fee">1.5 週・NT$32,775</div></div>
+      <div class="feature-item"><div class="icon">💳</div><div class="name">薪資與薪資單</div><div class="desc">薪資計算、PDF 薪資單、簽收確認紀錄</div><div class="fee">2.5 週・NT$61,625</div></div>
+    </div>
+    <div class="phase-subtotal">P3 小計：<strong>12.5 週・NT$265,175</strong></div>
+
+    <!-- P4 modules -->
+    <div class="phase-label-bar phase-label-bar-p4">
+      <span class="phase-label-badge">P4</span><span class="phase-label-name">管理分析與整合（6 模組，1 項預留不報價）</span>
+      <span class="phase-label-count">合計 7 週<br>NT$123,150</span>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item"><div class="icon">📈</div><div class="name">專案損益分析</div><div class="desc">工程總額與成本比較、現金流概況</div><div class="fee">1.5 週・NT$28,200</div></div>
+      <div class="feature-item"><div class="icon">🖥️</div><div class="name">管理儀表板</div><div class="desc">主管遠端掌握各工程進度、施工與請款節點</div><div class="fee">2 週・NT$33,600</div></div>
+      <div class="feature-item"><div class="icon">🔗</div><div class="name">會計軟體串接</div><div class="desc">與既有會計軟體介接，或匯出制式格式</div><div class="fee">1.5 週・NT$30,550</div></div>
+      <div class="feature-item"><div class="icon">🔔</div><div class="name">通知與提醒</div><div class="desc">請款節點提醒、文件到期提醒</div><div class="fee">1 週・NT$15,400</div></div>
+      <div class="feature-item"><div class="icon">📤</div><div class="name">報表優化</div><div class="desc">依實際使用回饋調整報表呈現</div><div class="fee">1 週・NT$15,400</div></div>
+      <div class="feature-item"><div class="icon">🏭</div><div class="name">加工廠資料交換介面</div><div class="desc">為未來加工廠系統預留串接點，本身另案規劃</div><div class="fee reserved">預留・不列入報價</div></div>
+    </div>
+    <div class="phase-subtotal">P4 小計：<strong>7 週・NT$123,150</strong>（不含預留模組）</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">6</div><div class="section-title">買斷制交付範圍</div></div>
+    <div class="section-lead">會議中客戶最關心的是「若廠商停止營運，系統是否仍可持續使用」。買斷不是口頭承諾，需在合約中明確列出以下交付項目。</div>
+    <ol class="next-list">
+      <li>原始碼完整交付（含版本控管紀錄）</li>
+      <li>資料庫結構與資料字典</li>
+      <li>部署文件與建置腳本</li>
+      <li>系統管理帳號與權限交接</li>
+      <li>雲端帳號歸屬（歸屬客戶名下，非廠商帳號代管）</li>
+      <li>網域歸屬</li>
+      <li>第三方元件授權清單（避免日後授權爭議）</li>
+      <li>備份與還原文件（含還原演練紀錄）</li>
+      <li>操作手冊與 API 文件</li>
+      <li>後續維護交接方式（若需委外維護，另立維護合約）</li>
+    </ol>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">7</div><div class="section-title">概算總覽</div></div>
+    <div class="section-lead">以下為初步規劃概算，非正式報價——正式報價需待第 9 節待確認事項與真實案件流程盤點後修正。</div>
+    <div class="total-card">
+      <div class="total-row"><span class="label">P1 營運核心（6 模組）</span><span class="value">12 週・NT$261,775</span></div>
+      <div class="total-row"><span class="label">P2 材料與庫存（7 模組）</span><span class="value">11.5 週・NT$232,975</span></div>
+      <div class="total-row"><span class="label">P3 財務與人資（7 模組）</span><span class="value">12.5 週・NT$265,175</span></div>
+      <div class="total-row"><span class="label">P4 管理分析與整合（5 模組，不含預留）</span><span class="value">7 週・NT$123,150</span></div>
+      <div class="total-row grand"><span class="label">25 個承諾交付模組合計</span><span class="value">43 週・NT$883,075</span></div>
+      <div class="total-note">週數為開發工時累加，非日曆天數——部分模組可平行進行；加工廠資料交換介面為預留擴充點，不計入本次報價。實際報價待廠商完成流程盤點、雙方確認第 9 節待確認事項後正式提出。</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">8</div><div class="section-title">風險與提醒</div></div>
+    <div class="section-lead">會議紀錄中客戶與廠商都已點出的風險，先攤開來，比事後補救便宜。</div>
+    <ul class="risk-list">
+      <li class="risk-item"><div class="risk-title">範圍過大風險</div><div class="risk-desc">目前需求已接近中型 ERP＋工程專案管理系統，一次全做容易時程失控、驗收困難。建議嚴守第一階段最小可用範圍。</div></li>
+      <li class="risk-item"><div class="risk-title">公司間帳務風險</div><div class="risk-desc">兩家公司雖同一經營者，仍是不同法律主體。不能只靠畫面切換，資料、權限、報表、單據層面都要確實隔離。</div></li>
+      <li class="risk-item"><div class="risk-title">請款流程鎖定的例外風險</div><div class="risk-desc">「未收款不得進入下一階段」可能因現場緊急施工需要例外。若允許例外，需授權人員、填寫原因、留存稽核紀錄。</div></li>
+      <li class="risk-item"><div class="risk-title">庫存計算風險</div><div class="risk-desc">鋼材裁切與餘料不是一般商品數量扣減，若未先定義尺寸、單位、損耗與餘料規則，庫存容易失真。</div></li>
+      <li class="risk-item"><div class="risk-title">文件與照片容量風險</div><div class="risk-desc">長期累積施工照片與合約掃描檔，雲端儲存與備份成本會持續增加，需及早設定壓縮、保存年限與封存政策。</div></li>
+      <li class="risk-item"><div class="risk-title">法令風險</div><div class="risk-desc">出勤、加班、薪資、個資與財務資料涉及合規要求，系統不應設計成可隱藏或任意刪改紀錄，異動須留操作軌跡。</div></li>
+      <li class="risk-item"><div class="risk-title">供應商依賴風險</div><div class="risk-desc">即使採買斷模式，若未交付原始碼、部署文件、資料庫與備份方式，仍可能高度依賴原廠——對應第 6 節交付清單。</div></li>
+    </ul>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">9</div><div class="section-title">尚待確認事項</div></div>
+    <div class="section-lead">正式報價前，以下七大類問題需要客戶與廠商共同確認，多數建議在「以真實案件走一次完整流程」的下次會議中一併釐清。</div>
+    <div class="confirm-grid">
+      <div class="confirm-card"><div class="confirm-cat">組織與公司資料</div><ul><li>兩家公司正式名稱與法定關係</li><li>公司間交易的發票與定價方式</li><li>各公司實際使用人數與角色權限</li></ul></div>
+      <div class="confirm-card"><div class="confirm-cat">工程流程</div><ul><li>標準工程階段與是否可自訂</li><li>請款比例、收款確認方式</li><li>工程變更追加減、保固、分包商管理</li></ul></div>
+      <div class="confirm-card"><div class="confirm-cat">施工報告</div><ul><li>紙本格式、必填欄位、簽名需求</li><li>照片數量分類、審核層級</li><li>是否需正式 PDF、定位或時間戳記</li></ul></div>
+      <div class="confirm-card"><div class="confirm-cat">材料與庫存</div><ul><li>材料編碼方式、規格欄位</li><li>裁切餘料計算、損耗規則</li><li>庫位管理、盤點流程、退料報廢</li></ul></div>
+      <div class="confirm-card"><div class="confirm-cat">財務與會計</div><ul><li>現有會計軟體、是否需電子發票</li><li>會計科目、專案損益算法</li><li>會計師匯出格式</li></ul></div>
+      <div class="confirm-card"><div class="confirm-cat">人事與薪資</div><ul><li>員工人數、薪資類型、打卡方式</li><li>加班請假規則、津貼扣款</li><li>是否串接勞健保或薪資軟體</li></ul></div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">10</div><div class="section-title">下一步</div></div>
+    <div class="section-lead">目前仍屬需求探索及廠商評估階段，尚未正式確認承接範圍、價格、時程或交付條件。</div>
+    <ol class="next-list">
+      <li>以一個真實鋼構工程案件走完整流程，驗證第 5 節四階段拆法是否成立</li>
+      <li>確認材料編碼、裁切與餘料算法（第 2 節材料公司核心痛點）</li>
+      <li>確認兩家公司間交易單據與定價方式</li>
+      <li>確認財務、人事與會計軟體邊界（是否自建管理會計或串接既有系統）</li>
+      <li>確認系統部署、所有權與第 6 節交付內容細節，落實為合約條款</li>
+      <li>依確認範圍出具 P1 正式報價，作為股東比稿依據</li>
+    </ol>
+  </div>
+
+  <div class="footer">鋼構工程暨材料買賣營運管理系統 — 業主規劃版 v1.0 ｜ 本文件依 2026/07/24 需求訪談會議紀錄與逐字稿整理，僅供內部規劃與比稿參考，正式報價以雙方確認後之合約為準。</div>
+
+</div>
+</body>
+</html>
