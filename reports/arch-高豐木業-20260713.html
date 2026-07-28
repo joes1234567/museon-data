@@ -953,6 +953,323 @@
   </div>
 </section>
 
+<!-- INTERACTIVE KNOWLEDGE GRAPH（互動式模組依賴知識圖譜，參考 bailaoshi-phase-roadmap-v1.html 樣式改建） -->
+<style>
+.kg-controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;align-items:center;}
+.kg-btn{padding:5px 13px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid currentColor;background:transparent;transition:background 0.15s,color 0.15s;letter-spacing:0.3px;line-height:1.4;}
+.kg-btn.active{color:#fff!important;}
+.kg-btn[data-kgphase="all"]{color:var(--ink,#1a1a1a);border-color:var(--ink,#1a1a1a);}
+.kg-btn[data-kgphase="all"].active{background:var(--ink,#1a1a1a);}
+.kg-btn[data-kgphase="P1"]{color:#1a6b3c;border-color:#1a6b3c;}
+.kg-btn[data-kgphase="P1"].active{background:#1a6b3c;}
+.kg-btn[data-kgphase="P2"]{color:#2A6A8A;border-color:#2A6A8A;}
+.kg-btn[data-kgphase="P2"].active{background:#2A6A8A;}
+.kg-btn[data-kgphase="P3"]{color:#B8923A;border-color:#B8923A;}
+.kg-btn[data-kgphase="P3"].active{background:#B8923A;}
+.kg-btn[data-kgphase="P4"]{color:#6A4A9A;border-color:#6A4A9A;}
+.kg-btn[data-kgphase="P4"].active{background:#6A4A9A;}
+.kg-sep{width:1px;height:20px;background:var(--border);}
+#kg-graph-wrap{background:#fff;overflow:hidden;}
+svg#kg-graph{display:block;width:100%;cursor:grab;}
+svg#kg-graph:active{cursor:grabbing;}
+.kg-node circle{stroke-width:2.5;cursor:pointer;}
+.kg-node .node-icon{font-size:13px;text-anchor:middle;pointer-events:none;dominant-baseline:central;}
+.kg-node .node-label{font-size:9.5px;fill:var(--ink,#1a1a1a);text-anchor:middle;pointer-events:none;font-weight:500;}
+.kg-link{fill:none;stroke:#b0b0be;stroke-width:1.5;stroke-opacity:0.5;}
+.kg-link.highlight{stroke-opacity:0.9!important;stroke-width:2.5!important;}
+.kg-link.dim{stroke-opacity:0.05!important;}
+.kg-node.dim circle{opacity:0.12;}
+.kg-node.dim .node-icon{opacity:0.12;}
+.kg-node.dim .node-label{opacity:0.12;}
+.kg-phase-bg{fill-opacity:0.025;}
+.kg-phase-lbl{font-size:11px;font-weight:700;letter-spacing:0.8px;fill-opacity:0.45;text-anchor:middle;}
+.kg-legend{display:flex;gap:16px;flex-wrap:wrap;padding:10px 24px;background:var(--parchment,#faf8f4);border-top:1px solid var(--border);font-size:11.5px;color:var(--slate);align-items:center;justify-content:center;}
+.leg-item{display:flex;align-items:center;gap:5px;}
+.leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+.leg-line{display:inline-block;width:22px;height:0;border-top:2px solid;vertical-align:middle;flex-shrink:0;}
+</style>
+<section>
+  <div class="container">
+    <div class="section-label">互動知識圖譜</div>
+    <h2 class="section-title">模組依賴知識圖譜（互動版）</h2>
+    <p class="section-desc">32 個模組節點，顏色對應核心層／基礎應用層／綜合應用層／條件式評估四層。滑鼠移到節點看相鄰依賴，<strong>點擊節點</strong>鎖定並亮顯所有前置依賴鏈（往根回溯全部），再點一次或點空白處取消。依賴連線資料與上方「系統全景圖」同一份（EDGES），不是另外編的兩套。</p>
+  </div>
+  <div class="kg-controls" id="kg-controls">
+    <button class="kg-btn active" data-kgphase="all">全部</button>
+    <div class="kg-sep"></div>
+    <button class="kg-btn" data-kgphase="P1">P1 核心層</button>
+    <button class="kg-btn" data-kgphase="P2">P2 基礎應用層</button>
+    <button class="kg-btn" data-kgphase="P3">P3 綜合應用層</button>
+    <button class="kg-btn" data-kgphase="P4">P4 條件式評估</button>
+    <div class="kg-sep"></div>
+    <button class="kg-btn" id="kg-btn-reset" style="color:var(--slate);">重置視圖</button>
+  </div>
+  <div id="kg-graph-wrap"><svg id="kg-graph" viewBox="0 0 1200 820"></svg></div>
+  <div class="kg-legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#1a6b3c"></div> P1 核心層</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#2A6A8A"></div> P2 基礎應用層</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#B8923A"></div> P3 綜合應用層</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#6A4A9A"></div> P4 條件式評估</div>
+    <div class="kg-sep" style="height:18px;"></div>
+    <div class="leg-item"><div class="leg-line" style="border-color:#b0b0be;"></div> 依賴關係</div>
+    <div style="color:var(--mist);font-size:11px;">← 滑鼠移到節點查看說明 · 點擊節點啟動估價清單 · 滾輪縮放 · 拖曳平移</div>
+  </div>
+
+  <div id="kg-estimator" style="max-width: 1248px; margin: 0px auto; padding: 20px 24px 36px; display:none;">
+    <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,0.07);">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px;">估價清單（尚無報價基礎，先列邏輯與依賴，數字待業主與宗憲核對後填入）</div>
+          <div id="kg-est-header" style="font-size:16px;font-weight:700;color:var(--ink,#1a1a1a);line-height:1.4;">已選 0 個目標模組</div>
+          <div style="font-size:11px;color:var(--mist);margin-top:4px;">多選目標 → 合併前置鏈，共用模組不重複計算</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:12px;">
+          <button onclick="hfSelectAll()" style="padding:4px 12px;border-radius:6px;background:transparent;color:#1A5DC8;border:1px solid #1A5DC8;font-size:11px;cursor:pointer;">全選</button>
+          <button onclick="hfClearEstimate()" style="padding:4px 12px;border-radius:6px;background:transparent;color:var(--mist);border:1px solid var(--border);font-size:11px;cursor:pointer;">清除全選</button>
+          <span onclick="if(hfSelectedForEstimate.size===0){document.getElementById('kg-estimator').style.display='none';}" style="cursor:pointer;color:var(--mist);font-size:22px;line-height:1;padding:2px 6px;">×</span>
+        </div>
+      </div>
+      <div id="kg-est-list" style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;max-height:320px;overflow-y:auto;"><div style="color:var(--mist);padding:20px;text-align:center;font-size:13px;">點擊左側知識圖譜的節點，選擇要導入的模組</div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#EEF6FF 0%,#F0F4FF 100%);border-radius:10px;padding:14px 18px;margin-top:4px;">
+        <div>
+          <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--mist);margin-bottom:3px;">合計模組數（目標＋前置依賴）</div>
+          <div id="kg-est-count" style="font-size:12px;color:var(--slate);">0 個模組</div>
+        </div>
+        <div id="kg-est-total" style="font-size:14px;font-weight:700;color:#1A5DC8;">報價待補</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="kg-detail" style="display: none; position: fixed; right: 16px; top: 110px; width: 272px; background: linear-gradient(135deg, #F0F4FF 0%, #F8F9FB 100%); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 32px; z-index: 200; font-size: 13px; max-height: calc(-130px + 100vh); overflow-y: auto;">
+  <span onclick="document.getElementById('kg-detail').style.display='none'" style="position:absolute;right:12px;top:10px;cursor:pointer;color:var(--mist);font-size:18px;line-height:1;">×</span>
+  <div id="kg-d-phase" style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #1a6b3c; margin-bottom: 6px;">P1 · 身份與角色</div>
+  <div id="kg-d-name" style="font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.4;">帳號管理</div>
+  <div id="kg-d-unit" style="font-size:12px;color:var(--slate);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);">建立獨立登入帳號，取代目前共用帳號操作</div>
+  <div id="kg-d-deps-sec" style="display: none;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">前置依賴</div><ul id="kg-d-deps" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
+  <div id="kg-d-enables-sec" style="display: none; margin-top: 2px;"><div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin:10px 0 5px;">解鎖模組</div><ul id="kg-d-enables" style="list-style:none;display:flex;flex-direction:column;gap:4px;"></ul></div>
+  <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);">
+    <button id="kg-add-to-estimate" onclick="hfAddToEstimate()" style="width: 100%; padding: 9px; border-radius: 8px; background: #1A5DC8; color: #fff; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s, color 0.15s;">+ 加入估價清單</button>
+  </div>
+</div>
+
+<script src="./d3.v7.min.js"></script>
+<script>
+(function(){
+const PC={P1:'#1a6b3c',P2:'#2A6A8A',P3:'#B8923A',P4:'#6A4A9A'};
+const PX={P1:170,P2:460,P3:750,P4:1040};
+const PL={P1:'P1 核心層',P2:'P2 基礎應用層',P3:'P3 綜合應用層',P4:'P4 條件式評估'};
+const W=1200,H=820;
+const nodes=[
+  {id:'acct',short:'帳號管理',label:'帳號\n管理',phase:'P1',unit:'身份與角色',icon:'🔐',desc:'建立獨立登入帳號，取代目前共用帳號操作'},
+  {id:'employee',short:'員工模組',label:'員工\n模組',phase:'P1',unit:'身份與角色',icon:'👤',desc:'建立員工主資料（到職日、部門職務），供薪資獎金計算與工單工時登記使用'},
+  {id:'perm',short:'權限控管',label:'權限\n控管',phase:'P1',unit:'身份與角色',icon:'🛡️',desc:'依角色（業主／業務內勤／現場加工／財務）分層設定可看、可改範圍'},
+  {id:'customer',short:'客戶管理',label:'客戶\n管理',phase:'P1',unit:'主檔資料',icon:'🤝',desc:'客戶資料串連報價、訂單、出貨、收款、歷史交易，單一客戶主檔'},
+  {id:'supplier',short:'供應商模組',label:'供應商\n模組',phase:'P1',unit:'主檔資料',icon:'📦',desc:'供應商主資料建檔，串連進貨與請款對帳'},
+  {id:'material',short:'樹種與材料管理',label:'樹種與\n材料管理',phase:'P1',unit:'主檔資料',icon:'🌲',desc:'紐松、三毛櫸等樹種與品項的主資料，定寬／不定寬材料分開處理'},
+  {id:'prodspec',short:'產品與規格管理',label:'產品與\n規格管理',phase:'P1',unit:'主檔資料',icon:'📐',desc:'同一品項所有尺寸規格一畫面呈現，比照現行樞紐表查詢習慣設計'},
+  {id:'custprice',short:'客戶專屬價格',label:'客戶專屬\n價格',phase:'P1',unit:'主檔資料',icon:'💲',desc:'同一規格對不同客戶維持不同售價，支援不同數量、有效期間的價格設定'},
+  {id:'autocode',short:'自動編碼與多條件查詢',label:'自動編碼\n查詢',phase:'P1',unit:'資料基礎設施',icon:'🔢',desc:'系統自動產生內部編碼，人員不需背號碼，操作畫面仍以樹種／品項／尺寸顯示'},
+  {id:'history',short:'歷史資料匯入',label:'歷史資料\n匯入',phase:'P1',unit:'資料基礎設施',icon:'🗂️',desc:'現有庫存、客戶主檔、未完成訂單優先匯入，建議承接約 10 年資料'},
+  {id:'quote',short:'報價管理',label:'報價\n管理',phase:'P2',unit:'交易前置',icon:'📝',desc:'規格品自動帶價，客製品保留人工評估欄位'},
+  {id:'procstep',short:'加工工序管理',label:'加工工序\n管理',phase:'P2',unit:'交易前置',icon:'🔧',desc:'裁切、倒邊、倒角、CNC 等工序建檔，可標準化工序先固定計價'},
+  {id:'purchase',short:'進貨管理',label:'進貨\n管理',phase:'P2',unit:'交易前置',icon:'📥',desc:'毛料、製品、成品進貨與供應商請款串接'},
+  {id:'order',short:'訂單管理',label:'訂單\n管理',phase:'P2',unit:'交易成立與庫存',icon:'🧾',desc:'報價確認即轉訂單，不需重新輸入，追蹤未確認／生產中／待出貨／已收款等狀態'},
+  {id:'stock',short:'規格品庫存',label:'規格品\n庫存',phase:'P2',unit:'交易成立與庫存',icon:'📦',desc:'可正常銷售、持續管理的固定規格庫存，承接現有 20,000 多筆庫存明細'},
+  {id:'toolgoods',short:'工具類商品管理',label:'工具類\n商品管理',phase:'P2',unit:'交易成立與庫存',icon:'🧰',desc:'一般進銷存模式，含大包裝拆小包裝獨立編碼，支援多倉庫'},
+  {id:'shipment',short:'出貨管理',label:'出貨\n管理',phase:'P2',unit:'執行與紀錄',icon:'🚚',desc:'出貨明細直接延續自訂單與工單，不需另外重複登打'},
+  {id:'finance',short:'記帳功能（訂單軌＋月結軌）',label:'記帳\n功能',phase:'P2',unit:'執行與紀錄',icon:'💰',desc:'訂單軌：應收應付跟訂單狀態連結；月結軌：薪資／房租／水電等固定週期收支'},
+  {id:'stocklog',short:'庫存異動紀錄',label:'庫存異動\n紀錄',phase:'P2',unit:'執行與紀錄',icon:'🔄',desc:'進貨、出貨、扣料、回庫全程留痕，解決庫存與現場狀況不同步的問題'},
+  {id:'payroll',short:'薪資與獎金模組',label:'薪資與\n獎金模組',phase:'P2',unit:'執行與紀錄',icon:'💵',desc:'人工輸入每月薪資與獎金核發結果，含薪資歷史資料匯入'},
+  {id:'rawstock',short:'毛料／原料庫存',label:'毛料／原料\n庫存',phase:'P3',unit:'原料到半成品',icon:'🪵',desc:'未加工整批原料，與規格成品分開管理，供領料、加工追蹤使用'},
+  {id:'convert',short:'原料轉換紀錄',label:'原料轉換\n紀錄',phase:'P3',unit:'原料到半成品',icon:'♻️',desc:'記錄原料篩選分類、裁切加工怎麼變成半成品／可用邊材／廢料'},
+  {id:'semistock',short:'半成品庫存',label:'半成品\n庫存',phase:'P3',unit:'原料到半成品',icon:'🧱',desc:'成品不足時可即時查到可加工的半成品，避免依賴人員記憶誤判'},
+  {id:'workorder',short:'工單管理',label:'工單\n管理',phase:'P3',unit:'原料到半成品',icon:'🛠️',desc:'訂單轉工單，記錄實際用料、完工與損耗，現場負責人、完工數量一併留存'},
+  {id:'traceability',short:'材料來源與流向追蹤',label:'材料來源\n與流向追蹤',phase:'P3',unit:'材料流向與庫位',icon:'🔍',desc:'回答「這批原料做了哪些產品」「這批材料還剩多少」'},
+  {id:'locmgmt',short:'庫位管理',label:'庫位\n管理',phase:'P3',unit:'材料流向與庫位',icon:'📍',desc:'甲／乙／丙／丁等區域式庫位＋異動紀錄'},
+  {id:'leftover',short:'餘料庫存',label:'餘料\n庫存',phase:'P3',unit:'材料流向與庫位',icon:'🪚',desc:'工廠餘料回庫可再利用，客戶餘料不列入公司庫存'},
+  {id:'waste',short:'廢料及損耗紀錄',label:'廢料及\n損耗紀錄',phase:'P3',unit:'材料流向與庫位',icon:'🗑️',desc:'無法再利用的材料，不計成本、不做移動'},
+  {id:'costanalysis',short:'成本與毛利分析',label:'成本與\n毛利分析',phase:'P3',unit:'分析與擴充',icon:'📊',desc:'含餘料價值認列，讓每張訂單的實際毛利算得出來'},
+  {id:'report',short:'報表管理',label:'報表\n管理',phase:'P3',unit:'分析與擴充',icon:'📈',desc:'材料利用率、營收與成本報表，建立在精準的前段資料輸入之上'},
+  {id:'bizstore',short:'門市及分店擴充',label:'門市及\n分店擴充',phase:'P3',unit:'分析與擴充',icon:'🏬',desc:'安定廠為總公司主資料中心，門市可分階段串接（非承諾交付，僅預留擴充介面）'},
+  {id:'aiselect',short:'AI 輔助選料評估',label:'AI 輔助\n選料評估',phase:'P4',unit:'條件式評估',icon:'🤖',desc:'規格自由文字→結構化條件＋庫存比對（規則引擎），非承諾交付，需 P1／P2／P3 條件全數達成後才評估'}
+];
+const links=[
+  ['acct','perm'],['material','prodspec'],['prodspec','stock'],['history','stock'],
+  ['customer','custprice'],['customer','quote'],['prodspec','quote'],['custprice','quote'],['stock','quote'],
+  ['prodspec','autocode'],['material','purchase'],['supplier','purchase'],['quote','order'],
+  ['purchase','rawstock'],['order','finance'],['order','shipment'],['stock','shipment'],
+  ['order','workorder'],['procstep','workorder'],['rawstock','workorder'],
+  ['stock','stocklog'],['rawstock','stocklog'],['purchase','stocklog'],['shipment','stocklog'],
+  ['employee','payroll'],['workorder','payroll'],['workorder','semistock'],['workorder','traceability'],
+  ['rawstock','traceability'],['semistock','leftover'],['workorder','leftover'],['workorder','waste'],
+  ['traceability','costanalysis'],['finance','costanalysis'],['leftover','costanalysis'],['costanalysis','report'],
+  ['rawstock','convert'],['procstep','convert'],['convert','semistock'],['convert','leftover'],['convert','waste'],
+  ['stock','locmgmt'],['rawstock','locmgmt'],['semistock','locmgmt'],['stocklog','locmgmt']
+].map(([source,target])=>({source,target}));
+const svg=d3.select('svg#kg-graph').attr('viewBox',`0 0 ${W} ${H}`).attr('height',Math.min(820,window.innerHeight-150));
+const g=svg.append('g');
+const zoom=d3.zoom().scaleExtent([0.25,4]).on('zoom',e=>g.attr('transform',e.transform));
+svg.call(zoom);
+const defs=svg.append('defs');
+defs.append('marker').attr('id','kg-ar-depends').attr('viewBox','0 -5 10 10').attr('refX',26).attr('refY',0)
+  .attr('markerWidth',5).attr('markerHeight',5).attr('orient','auto')
+  .append('path').attr('d','M0,-5L10,0L0,5').attr('fill','#b0b0be').attr('fill-opacity',0.7);
+Object.entries(PX).forEach(([phase,cx])=>{
+  g.append('rect').attr('class','kg-phase-bg').attr('x',cx-92).attr('y',42).attr('width',184).attr('height',H-54).attr('fill',PC[phase]).attr('rx',8);
+  g.append('text').attr('class','kg-phase-lbl').attr('x',cx).attr('y',28).attr('fill',PC[phase]).text(PL[phase]);
+});
+nodes.forEach(n=>{
+  const col=nodes.filter(m=>m.phase===n.phase);
+  const idx=col.indexOf(n);
+  const step=(H-120)/(col.length+1);
+  n.x=PX[n.phase]+(idx%2===0?0:14);
+  n.y=70+step*(idx+1);
+});
+const lSel=g.append('g').selectAll('.kg-link').data(links).join('path')
+  .attr('class','kg-link').attr('marker-end','url(#kg-ar-depends)');
+const nSel=g.append('g').selectAll('.kg-node').data(nodes).join('g').attr('class','kg-node')
+  .call(d3.drag().on('start',ds).on('drag',dd).on('end',de));
+nSel.append('circle').attr('r',23).attr('fill',d=>PC[d.phase]).attr('fill-opacity',0.88).attr('stroke','#fff');
+nSel.append('circle').attr('class','estimate-ring').attr('r',31)
+  .attr('fill','none').attr('stroke','transparent').attr('stroke-width',2.5);
+nSel.append('text').attr('class','node-icon').attr('dy','0.35em').text(d=>d.icon);
+nSel.each(function(d){
+  d.label.split('\n').forEach((line,i)=>{
+    d3.select(this).append('text').attr('class','node-label').attr('y',31+i*13).text(line);
+  });
+});
+const sim=d3.forceSimulation(nodes)
+  .force('link',d3.forceLink(links).id(d=>d.id).distance(90).strength(0.25))
+  .force('charge',d3.forceManyBody().strength(-320))
+  .force('x',d3.forceX(d=>PX[d.phase]).strength(0.85))
+  .force('y',d3.forceY(H/2).strength(0.08))
+  .force('collide',d3.forceCollide(36))
+  .on('tick',tick);
+function tick(){
+  lSel.attr('d',d=>{
+    const dx=d.target.x-d.source.x,dy=d.target.y-d.source.y;
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
+    const dr=len*0.75;
+    return `M${d.source.x},${d.source.y} A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
+  });
+  nSel.attr('transform',d=>`translate(${d.x},${d.y})`);
+}
+function ds(e,d){if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
+function dd(e,d){d.fx=e.x;d.fy=e.y;}
+function de(e,d){if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}
+let selNode=null,selAnc=new Set();
+let currentPanelNodeId=null,hfSelectedForEstimate=new Set(),hfExcludedIds=new Set();
+function hfAddToEstimate(){
+  if(!currentPanelNodeId)return;
+  const id=currentPanelNodeId;
+  if(hfSelectedForEstimate.has(id))hfSelectedForEstimate.delete(id);else hfSelectedForEstimate.add(id);
+  refreshAddBtn();refreshEstimateRings();renderEstimator();
+}
+function hfClearEstimate(){
+  hfSelectedForEstimate.clear();hfExcludedIds.clear();refreshAddBtn();refreshEstimateRings();renderEstimator();
+}
+function refreshAddBtn(){
+  const btn=document.getElementById('kg-add-to-estimate');if(!btn||!currentPanelNodeId)return;
+  let inEstimator=hfSelectedForEstimate.has(currentPanelNodeId);
+  if(!inEstimator&&!hfExcludedIds.has(currentPanelNodeId)){hfSelectedForEstimate.forEach(id=>{if(getAnc(id).has(currentPanelNodeId))inEstimator=true;});}
+  btn.textContent=inEstimator?'✓ 已加入估價清單':'+ 加入估價清單';
+  btn.style.background=inEstimator?'#EEF6FF':'#1A5DC8';btn.style.color=inEstimator?'#1A5DC8':'#fff';
+  btn.style.border=inEstimator?'1.5px solid #1A5DC8':'none';
+}
+function refreshEstimateRings(){
+  nSel.select('.estimate-ring').attr('stroke',n=>hfSelectedForEstimate.has(n.id)?'#F59E0B':'transparent');
+}
+function renderEstimator(){
+  hfSelectedForEstimate.forEach(id=>hfExcludedIds.delete(id));
+  const allAnc=new Set();
+  hfSelectedForEstimate.forEach(id=>getAnc(id).forEach(a=>allAnc.add(a)));
+  const phOrd={P1:0,P2:1,P3:2,P4:3};
+  const ancNodes=[...allAnc].filter(id=>!hfExcludedIds.has(id)).map(id=>nodes.find(n=>n.id===id)).filter(Boolean);
+  ancNodes.sort((a,b)=>(phOrd[a.phase]||0)-(phOrd[b.phase]||0));
+  document.getElementById('kg-est-header').textContent='已選 '+(hfSelectedForEstimate.size||'0')+' 個目標模組';
+  document.getElementById('kg-est-count').textContent=(ancNodes.length||'0')+' 個模組（目標 + 前置依賴）';
+  document.getElementById('kg-est-list').innerHTML=hfSelectedForEstimate.size===0?'<div style="color:var(--mist);padding:20px;text-align:center;font-size:13px;">點擊左側知識圖譜的節點，選擇要導入的模組</div>':ancNodes.map(n=>{
+    const isTarget=hfSelectedForEstimate.has(n.id);
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:7px;background:'+(isTarget?'#EEF6FF':'#F8F8FB')+';margin-bottom:1px;">'
+      +'<div style="display:flex;align-items:center;gap:8px;min-width:0;">'
+      +'<span style="font-size:10px;background:'+PC[n.phase]+';color:#fff;border-radius:4px;padding:1px 7px;flex-shrink:0;font-weight:700;">'+n.phase+'</span>'
+      +'<span style="font-size:12px;font-weight:'+(isTarget?700:500)+';color:var(--ink,#1a1a1a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+n.short+'</span>'
+      +'<button onclick="window.hfRemoveFromEstimate(\''+n.id+'\')" style="font-size:9px;color:var(--mist);background:transparent;border:1.5px solid var(--border);border-radius:4px;padding:2px 7px;flex-shrink:0;cursor:pointer;font-weight:700;line-height:1.4;">✕ 移除</button>'
+      +'</div>'
+      +'<span style="font-size:11px;color:var(--mist);flex-shrink:0;margin-left:12px;">報價待補</span>'
+      +'</div>';
+  }).join('');
+  document.getElementById('kg-estimator').style.display='block';
+  if(hfSelectedForEstimate.size>0){setTimeout(()=>document.getElementById('kg-estimator').scrollIntoView({behavior:'smooth',block:'nearest'}),50);}
+}
+function getAnc(id){
+  const s=new Set([id]);const q=[id];
+  while(q.length){const c=q.shift();links.forEach(l=>{if(l.target.id===c&&!s.has(l.source.id)){s.add(l.source.id);q.push(l.source.id);}});}
+  return s;
+}
+function applyAnc(s){
+  nSel.classed('dim',n=>!s.has(n.id));
+  lSel.classed('dim',l=>!s.has(l.source.id)||!s.has(l.target.id)).classed('highlight',l=>s.has(l.source.id)&&s.has(l.target.id));
+}
+nSel
+  .on('mouseenter',function(ev,d){
+    if(selNode){return;}
+    const conn=new Set([d.id]);
+    links.forEach(l=>{if(l.source.id===d.id)conn.add(l.target.id);if(l.target.id===d.id)conn.add(l.source.id);});
+    nSel.classed('dim',n=>!conn.has(n.id));
+    lSel.classed('dim',l=>l.source.id!==d.id&&l.target.id!==d.id).classed('highlight',l=>l.source.id===d.id||l.target.id===d.id);
+  })
+  .on('mouseleave',function(){if(selNode){applyAnc(selAnc);}else{nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);}})
+  .on('click',function(ev,d){
+    ev.stopPropagation();
+    if(selNode===d.id){selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';currentPanelNodeId=null;return;}
+    selNode=d.id;selAnc=getAnc(d.id);applyAnc(selAnc);
+    const panel=document.getElementById('kg-detail');
+    document.getElementById('kg-d-phase').textContent=`${d.phase} · ${d.unit}`;
+    document.getElementById('kg-d-phase').style.color=PC[d.phase];
+    document.getElementById('kg-d-name').textContent=d.short;
+    document.getElementById('kg-d-unit').textContent=d.desc;
+    const deps=links.filter(l=>l.target.id===d.id);
+    const enables=links.filter(l=>l.source.id===d.id);
+    if(deps.length){
+      document.getElementById('kg-d-deps-sec').style.display='block';
+      document.getElementById('kg-d-deps').innerHTML=deps.map(l=>{const s=nodes.find(n=>n.id===l.source.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${s?s.short:l.source.id}</li>`;}).join('');
+    }else{document.getElementById('kg-d-deps-sec').style.display='none';}
+    if(enables.length){
+      document.getElementById('kg-d-enables-sec').style.display='block';
+      document.getElementById('kg-d-enables').innerHTML=enables.map(l=>{const t=nodes.find(n=>n.id===l.target.id);return`<li style="font-size:12px;color:var(--slate);padding-left:14px;position:relative;line-height:1.5;">${t?t.short:l.target.id}</li>`;}).join('');
+    }else{document.getElementById('kg-d-enables-sec').style.display='none';}
+    panel.style.display='block';
+    currentPanelNodeId=d.id;refreshAddBtn();
+  });
+svg.on('click',()=>{selNode=null;selAnc=new Set();nSel.classed('dim',false);lSel.classed('dim',false).classed('highlight',false);document.getElementById('kg-detail').style.display='none';currentPanelNodeId=null;});
+let aP=null;
+document.querySelectorAll('#kg-controls .kg-btn[data-kgphase]').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const ph=this.dataset.kgphase;
+    document.querySelectorAll('#kg-controls .kg-btn[data-kgphase]').forEach(b=>b.classList.remove('active'));
+    if(ph==='all'||ph===aP){
+      aP=null;document.querySelector('#kg-controls [data-kgphase="all"]').classList.add('active');
+      nSel.classed('dim',false);lSel.classed('dim',false);
+    }else{
+      aP=ph;this.classList.add('active');
+      const show=new Set([ph]);
+      links.forEach(l=>{if(l.source.phase===ph)show.add(l.target.phase);if(l.target.phase===ph)show.add(l.source.phase);});
+      nSel.classed('dim',d=>!show.has(d.phase));
+      lSel.classed('dim',l=>!show.has(l.source.phase)||!show.has(l.target.phase));
+    }
+  });
+});
+document.getElementById('kg-btn-reset').addEventListener('click',()=>{svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);});
+function hfSelectAll(){nodes.forEach(n=>hfSelectedForEstimate.add(n.id));refreshAddBtn();refreshEstimateRings();renderEstimator();}
+window.hfAddToEstimate=hfAddToEstimate;
+window.hfClearEstimate=hfClearEstimate;
+window.hfSelectAll=hfSelectAll;
+window.hfRemoveFromEstimate=function(id){hfSelectedForEstimate.delete(id);hfExcludedIds.add(id);refreshAddBtn();refreshEstimateRings();renderEstimator();};
+})();
+</script>
+
 <!-- NEXT CONFIRMATION -->
 <section style="background: var(--snow);">
   <div class="container">
