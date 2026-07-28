@@ -648,7 +648,7 @@
         <ul class="role-list">
           <li>依樹種／品項／尺寸查詢庫存與規格</li>
           <li>回報實際用料、完工數量與產生的餘料</li>
-          <li>P2 起使用工單記錄加工工序</li>
+          <li>P3 起使用工單記錄加工工序</li>
         </ul>
       </div>
       <div class="role-card">
@@ -693,10 +693,10 @@
           <div class="phase-line"></div>
         </div>
         <div class="phase-content">
-          <div class="phase-tag phase-tag-2">核心地基完成後 · 日常交易＋生產材料追蹤</div>
-          <div class="phase-name">核心營運交易與生產材料追蹤（18 個模組）</div>
+          <div class="phase-tag phase-tag-2">核心地基完成後 · 日常交易模組</div>
+          <div class="phase-name">核心營運交易模組（10 個模組）</div>
           <div class="phase-desc">
-            兩部分接續交付：① 日常交易模組——報價、訂單、規格品庫存與異動紀錄、進出貨、加工工序建檔、記帳功能（訂單軌＋月結軌）、工具類商品進銷存、薪資與獎金計算＋歷史資料匯入，讓報價 → 訂單 → 收款一次串接，取代現行 6 處重複輸入；② 導入毛料／半成品／餘料／廢料分層庫存、原料轉換紀錄、工單管理、材料來源流向追蹤與區域式庫位管理，讓「這批毛料做了哪些成品、剩多少、放在哪」全程可查，不再依賴單一員工記憶。
+            報價、訂單、規格品庫存與異動紀錄、進出貨、加工工序建檔、記帳功能（訂單軌＋月結軌）、工具類商品進銷存、薪資與獎金計算＋歷史資料匯入，讓報價 → 訂單 → 收款一次串接，取代現行 6 處重複輸入。依 7/28 定案，毛料到成品的材料流向與分層庫存改列入 P3，見下一階段。
           </div>
         </div>
       </div>
@@ -706,11 +706,10 @@
           <div class="phase-line"></div>
         </div>
         <div class="phase-content">
-          <div class="phase-tag phase-tag-3">材料規則穩定後 · 成本與分析</div>
-          <div class="phase-name">分析與擴充（3 個模組）</div>
+          <div class="phase-tag phase-tag-3">日常交易穩定後 · 材料追蹤與分析</div>
+          <div class="phase-name">生產材料追蹤與分析擴充（11 個模組）</div>
           <div class="phase-desc">
-            建立含餘料價值認列的成本與毛利分析模型，加上材料利用率與進階管理報表，
-            同時評估門市及分店的資料串接方式。約第 5–6 個月。
+            依 7/28 定案，兩部分接續交付：① 導入毛料／半成品／餘料／廢料分層庫存、原料轉換紀錄、工單管理、材料來源流向追蹤與區域式庫位管理，讓「這批毛料做了哪些成品、剩多少、放在哪」全程可查，不再依賴單一員工記憶；② 建立含餘料價值認列的成本與毛利分析模型，加上材料利用率與進階管理報表，同時評估門市及分店的資料串接方式。
           </div>
         </div>
       </div>
@@ -816,24 +815,24 @@
         <div class="dep-tier-header">
           <span class="dep-tier-num" style="background:#B8923A;">3</span>
           <span class="dep-tier-title">綜合應用層</span>
-          <span class="dep-tier-sub">把交易資料串起來看到的洞察與智慧・12 個模組・P2／P3／P4・基礎應用穩定後接著做</span>
+          <span class="dep-tier-sub">把交易資料串起來看到的洞察與智慧・12 個模組・P3／P4・基礎應用穩定後接著做</span>
         </div>
         <div class="dep-layer">
           <div class="dep-layer-label">原料到半成品</div>
           <div class="dep-layer-row">
-            <div class="dep-node dep-node-p2" id="dep-rawstock">毛料／原料庫存</div>
-            <div class="dep-node dep-node-p2" id="dep-convert">原料轉換紀錄</div>
-            <div class="dep-node dep-node-p2" id="dep-semistock">半成品庫存</div>
-            <div class="dep-node dep-node-p2" id="dep-workorder">工單管理</div>
+            <div class="dep-node dep-node-p3" id="dep-rawstock">毛料／原料庫存</div>
+            <div class="dep-node dep-node-p3" id="dep-convert">原料轉換紀錄</div>
+            <div class="dep-node dep-node-p3" id="dep-semistock">半成品庫存</div>
+            <div class="dep-node dep-node-p3" id="dep-workorder">工單管理</div>
           </div>
         </div>
         <div class="dep-layer">
           <div class="dep-layer-label">材料流向與庫位</div>
           <div class="dep-layer-row">
-            <div class="dep-node dep-node-p2" id="dep-traceability">材料來源與流向追蹤</div>
-            <div class="dep-node dep-node-p2" id="dep-locmgmt">庫位管理</div>
-            <div class="dep-node dep-node-p2" id="dep-leftover">餘料庫存</div>
-            <div class="dep-node dep-node-p2" id="dep-waste">廢料及損耗紀錄</div>
+            <div class="dep-node dep-node-p3" id="dep-traceability">材料來源與流向追蹤</div>
+            <div class="dep-node dep-node-p3" id="dep-locmgmt">庫位管理</div>
+            <div class="dep-node dep-node-p3" id="dep-leftover">餘料庫存</div>
+            <div class="dep-node dep-node-p3" id="dep-waste">廢料及損耗紀錄</div>
           </div>
         </div>
         <div class="dep-layer">
@@ -855,11 +854,11 @@
 
     <div class="dep-legend">
       <div class="dep-legend-item"><span class="dep-legend-dot" style="background:#1a6b3c;"></span>P1 核心營運流程</div>
-      <div class="dep-legend-item"><span class="dep-legend-dot" style="background:#2A6A8A;"></span>P2 生產與材料追蹤</div>
-      <div class="dep-legend-item"><span class="dep-legend-dot" style="background:#B8923A;"></span>P3 分析與擴充</div>
+      <div class="dep-legend-item"><span class="dep-legend-dot" style="background:#2A6A8A;"></span>P2 核心營運交易</div>
+      <div class="dep-legend-item"><span class="dep-legend-dot" style="background:#B8923A;"></span>P3 生產材料追蹤與分析擴充</div>
       <div class="dep-legend-item"><span class="dep-legend-dot" style="background:#6A4A9A;"></span>P4 條件式評估</div>
     </div>
-    <div class="dep-note">🆕 本次依 7/22 訪談補上兩個原本沒被記錄到的模組：<strong>原料轉換紀錄</strong>（原料篩選分類、裁切加工的過程紀錄，銜接「原料進貨」跟「半成品入庫」中間目前完全沒被數據化的空白）與<strong>庫位管理</strong>（甲／乙／丙／丁等區域式庫位＋異動紀錄，解決材料搬動後找不到、只有宗憲一人知道位置的問題）——兩者都歸在 P2，因為都要先有 P1 的原料與庫存主檔資料才能動。</div>
+    <div class="dep-note">🆕 本次依 7/22 訪談補上兩個原本沒被記錄到的模組：<strong>原料轉換紀錄</strong>（原料篩選分類、裁切加工的過程紀錄，銜接「原料進貨」跟「半成品入庫」中間目前完全沒被數據化的空白）與<strong>庫位管理</strong>（甲／乙／丙／丁等區域式庫位＋異動紀錄，解決材料搬動後找不到、只有宗憲一人知道位置的問題）——兩者都歸在 P3，因為都要先有 P1 的原料與庫存主檔資料才能動。</div>
     <div class="dep-note">⚠️ 有一條連線是我方推導、尚待宗憲確認：「員工模組 → 薪資與獎金模組」是確定的（算薪資要有員工資料）；圖上另外畫了「工單管理 → 薪資與獎金模組」這條線，是假設獎金依「當月工單量」核算——如果獎金邏輯其實跟工單無關（例如純算出勤時數），這條線要拿掉，麻煩簡報前跟宗憲核對一次。</div>
   </div>
 
@@ -878,7 +877,7 @@
     <div class="p1-bridge-icon">📌</div>
     <div>
       <div class="p1-bridge-label">7/28 開會前定案 — P1／P2 範圍重新劃分</div>
-      <div class="p1-bridge-desc">P1 範圍縮小為 10 個核心身份與主檔模組；原本規劃在 P1 的另外 10 個日常交易模組，依這次定案改列入 P2，跟原有的生產材料追蹤模組一起交付，詳見第 6 節。</div>
+      <div class="p1-bridge-desc">P1 範圍縮小為 10 個核心身份與主檔模組；原本規劃在 P1 的另外 10 個日常交易模組，依這次定案改列入 P2（詳見第 6 節）；原有的生產材料追蹤模組則另外改列入 P3（詳見第 7 節）。</div>
     </div>
     <div class="p1-bridge-badge">範圍重定</div>
   </div>
@@ -966,7 +965,7 @@
           <li>✓ 供應商主資料建檔</li>
           <li>✓ 產品規格建檔＋自動編碼（樹種＋品項＋長寬厚查詢）</li>
           <li>✓ 現有客戶與庫存主檔資料匯入（約 10 年歷史資料）</li>
-          <li>✓ 員工主資料建檔（到職日、部門職務），供 P2 薪資獎金與工單工時登記使用</li>
+          <li>✓ 員工主資料建檔（到職日、部門職務），供 P2 薪資獎金與 P3 工單工時登記使用</li>
           <li>✓ 帳號管理與角色權限控管（業主／業務內勤／現場加工／財務分層）</li>
         </ul>
       </div>
@@ -980,8 +979,8 @@
           <li>✗ 記帳功能，訂單軌＋月結軌（P2 做）</li>
           <li>✗ 工具類商品進銷存（P2 做）</li>
           <li>✗ 薪資與獎金計算邏輯＋薪資歷史資料匯入（P2 做）</li>
-          <li>✗ 毛料／半成品／餘料／廢料分層庫存管理（P2 做）</li>
-          <li>✗ 工單管理與材料來源流向追蹤（P2 做）</li>
+          <li>✗ 毛料／半成品／餘料／廢料分層庫存管理（P3 做）</li>
+          <li>✗ 工單管理與材料來源流向追蹤（P3 做）</li>
           <li>✗ 客製化半標準化報價自動建議（P2 做）</li>
           <li>✗ 成本與毛利分析、材料利用率報表（P3 做）</li>
           <li>✗ 門市及分店資料串接（P3 做）</li>
@@ -996,7 +995,7 @@
       <div class="section-num">6</div>
       <div class="section-title">第二階段</div>
     </div>
-    <div class="section-lead">P1 的功能和邊界都清楚了。依 7/28 定案，P2 共 18 個模組，分兩部分接續交付：先是報價、訂單、庫存、進出貨、記帳、工具商品、薪資等日常交易模組；接著是毛料到成品的材料流向與分層庫存，用工單記錄現場實際加工過程，同時補上原料轉換紀錄與庫位管理，解決「料放在哪、變成什麼」目前完全依賴宗憲個人記憶的空白。</div>
+    <div class="section-lead">P1 的功能和邊界都清楚了。依 7/28 定案，P2 共 10 個模組，聚焦報價、訂單、庫存、進出貨、記帳、工具商品、薪資等日常交易模組。原本併在這一批的生產與材料追蹤模組，改列入第 7 節第三階段。</div>
 
     <div class="future-phase-block">
       <div class="future-phase-header">
@@ -1080,9 +1079,19 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- 7. 第三階段 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">第三階段</div>
+    </div>
+    <div class="section-lead">依 7/28 定案，P2 日常交易模組穩定後，P3 先導入毛料到成品的材料流向與分層庫存追蹤，接著回頭把這些資料變成看得懂的成本與毛利數字，同時評估門市是否要串接進同一套系統。</div>
+
     <div class="future-phase-block">
       <div class="future-phase-header">
-        <div class="future-phase-dot phase-dot-2">P2</div>
+        <div class="future-phase-dot phase-dot-3">P3</div>
         <div>
           <div class="future-phase-title">生產與材料追蹤</div>
           <div class="future-phase-subtitle">核心營運交易模組穩定後接續 · 8 個模組</div>
@@ -1147,15 +1156,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- 7. 第三階段 -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-num">7</div>
-      <div class="section-title">第三階段</div>
-    </div>
-    <div class="section-lead">P2 讓材料流向全程可查之後，P3 回頭把這些資料變成看得懂的成本與毛利數字，同時評估門市是否要串接進同一套系統。</div>
 
     <div class="future-phase-block">
       <div class="future-phase-header">
