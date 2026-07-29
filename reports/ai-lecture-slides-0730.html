@@ -70,6 +70,8 @@
   .card.accent-left { border-left: 3px solid #3b82f6; }
   .card.accent-purple { border-left: 3px solid #7c3aed; }
   .card.accent-red { border-left: 3px solid #dc2626; }
+  .card.demo-pick { border-left-width: 6px; box-shadow: 0 8px 24px rgba(0,0,0,.14); }
+  .card.demo-secondary { opacity: .55; }
 
   .arch-box {
     background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px;
@@ -125,6 +127,8 @@
   .criteria-table th.emp { background: #ede9fe; color: #6d28d9; }
   .criteria-table td { padding: 11px 14px; border-top: 1px solid #e2e8f0; vertical-align: top; line-height: 1.55; }
   .criteria-table td.dim { font-weight: 700; color: #1a1a2e; background: #fafafa; }
+  .criteria-table.compact th { padding: 8px 12px; font-size: 13px; }
+  .criteria-table.compact td { padding: 8px 12px; font-size: 15px; line-height: 1.5; }
 
   .scale-grid { display: flex; flex-direction: column; gap: 10px; }
   .scale-item { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 18px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
@@ -196,35 +200,101 @@
     <div class="cover-visual">
       <img src="ai-lecture-slides-0730-img01-cover.jpg" alt="">
     </div>
-    <div class="slide-number">01 / 13</div>
+    <div class="slide-number">01 / 18</div>
   </div>
 
   <!-- 02: 什麼是數位員工 -->
   <div class="slide slide-standard" data-slide="2">
-    <div class="slide-number">02 / 13</div>
+    <div class="slide-number">02 / 18</div>
     <h2>什麼是<span class="accent2">數位員工？</span></h2>
     <div class="card-grid card-grid-3">
       <div class="card accent-left">
         <div class="card-icon">🧬</div>
-        <h3>什麼是數位員工</h3>
-        <p>不是萬能聊天視窗，也不是綁死單一任務的自動化流程——是有記憶、懂公司脈絡、能主動跨情境串接的 AI 角色，像新進同事一樣融入公司運作。</p>
+        <h3>它記得你的公司，不用你每次重講一遍</h3>
+        <p>跟 GPT 最大的差別，不是功能多寡——是你不用每次打開都重新交代背景。它記得你的客戶、你的報價、你上次做過的決定，站在你這邊看事情，不是兩個腦袋在對話。</p>
       </div>
       <div class="card accent-purple">
         <div class="card-icon">🛠️</div>
-        <h3>能為企業做什麼</h3>
-        <p>把三個卡點一次接住：找資訊時秒速整理脈絡、做決策時主動標出甜頭與代價、救火執行時在背後把事情處理掉，不用你一直盯著。</p>
+        <h3>接住你現在正卡住的地方</h3>
+        <p>你花最多時間在找資訊、做決策、還是救火？這三件事它都能接手：資訊不用你翻、決策不用你猜、瑣事不用你一直盯著擋。</p>
       </div>
       <div class="card accent-red">
         <div class="card-icon">🎯</div>
-        <h3>它的定位</h3>
-        <p>不取代員工的判斷，是放大員工的能力——員工做判斷，數位員工做重複，把人從瑣事拉回真正該花腦力的地方。</p>
+        <h3>不是取代員工，是幫你把力氣留給該用腦的地方</h3>
+        <p>它不搶判斷，只接走重複跟瑣事——讓你跟員工都能把時間留在真正該花腦力的決定上，不是被瑣事一直拖著走。</p>
       </div>
     </div>
   </div>
 
-  <!-- 03: 開場提問 -->
+  <!-- 03: 數位員工實際上能做什麼 -->
   <div class="slide slide-standard" data-slide="3">
-    <div class="slide-number">03 / 13</div>
+    <div class="slide-number">03 / 18</div>
+    <h2>數位員工<span class="accent2">實際上能做什麼？</span></h2>
+    <div class="lead">不跟你比較市面上的工具清單——你現在看的這份投影片，就是今天現場正在發生的證據。</div>
+    <div class="arch-box">
+      <div class="arch-icon">🧠</div>
+      <div><div class="arch-title">記得整段脈絡</div><div class="arch-desc">從封面改字、換圖，到後面一路加頁、調頁碼，中間沒有一次要你重講一遍「我要的是什麼」——它自己記得。</div></div>
+    </div>
+    <div class="arch-box">
+      <div class="arch-icon">🔁</div>
+      <div><div class="arch-title">聽得懂「换個角度重來」</div><div class="arch-desc">一句「你有站在業主角度想嗎？」，它直接把整頁文字從介紹功能，改寫成對著台下的人說話——不用你逐句改稿。</div></div>
+    </div>
+    <div class="arch-box">
+      <div class="arch-icon">✋</div>
+      <div><div class="arch-title">直接動手，不是給建議</div><div class="arch-desc">你不用打開檔案自己編輯——它自己新增頁面、調整順序、同步所有頁碼，你只需要說要什麼、看結果。</div></div>
+    </div>
+    <div class="dbox">
+      <div class="dbox-icon">💡</div>
+      <div><strong>這不是功能清單，是你剛剛親身經歷的過程</strong><p>你正在看的這份投影片，從第一頁到現在，全部由 MUSEON 現場跟你來回做出來——這就是「數位員工」最直接的答案。</p></div>
+    </div>
+  </div>
+
+  <!-- 04: 系統 vs 數位員工分工對照 -->
+  <div class="slide slide-standard" data-slide="4">
+    <div class="slide-number">04 / 18</div>
+    <h2>系統 vs 數位員工<span class="accent">分工對照</span></h2>
+    <div class="lead">不是選擇題，是理解兩者怎麼協作——系統執行規則，數位員工判斷方向。</div>
+    <div class="card-grid card-grid-2">
+      <div class="card" style="background: linear-gradient(135deg, #dbeafe, #f0f9ff); border-left: 3px solid #3b82f6;">
+        <div class="card-icon">⚙️</div>
+        <h3 style="color: #1d4ed8;">系統</h3>
+        <div style="font-size: 16px; color: #0c4a6e; font-weight: 700; margin-bottom: 12px;">「你驅動它」</div>
+        <p style="font-size: 16px; color: #1e40af; margin-bottom: 14px;">你決定規則、輸入資料，系統按部就班執行——就像一部機器，你要先發動它。</p>
+        <div style="background: rgba(59,130,246,.1); border-radius: 8px; padding: 12px; margin-top: 10px;">
+          <div style="font-size: 14px; font-weight: 700; color: #1d4ed8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em;">主要負責</div>
+          <ul style="list-style: none; font-size: 15px; color: #0c4a6e; line-height: 1.8;">
+            <li>✓ 執行標準化流程</li>
+            <li>✓ 計算 & 統計</li>
+            <li>✓ 資料儲存 & 查詢</li>
+            <li>✓ 記錄交易痕跡</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="background: linear-gradient(135deg, #ede9fe, #f5f3ff); border-left: 3px solid #7c3aed;">
+        <div class="card-icon">👥</div>
+        <h3 style="color: #6d28d9;">數位員工</h3>
+        <div style="font-size: 16px; color: #581c87; font-weight: 700; margin-bottom: 12px;">「它主動接住你」</div>
+        <p style="font-size: 16px; color: #7c3aed; margin-bottom: 14px;">記得公司脈絡、自己判斷該做什麼、主動提醒——更像一位有經驗的同事。</p>
+        <div style="background: rgba(124,58,237,.1); border-radius: 8px; padding: 12px; margin-top: 10px;">
+          <div style="font-size: 14px; font-weight: 700; color: #6d28d9; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em;">主要負責</div>
+          <ul style="list-style: none; font-size: 15px; color: #581c87; line-height: 1.8;">
+            <li>✓ 理解 & 判斷</li>
+            <li>✓ 跨情境協作</li>
+            <li>✓ 主動提醒 & 整理</li>
+            <li>✓ 操作系統達成目標</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="dbox" style="background: linear-gradient(135deg, #fef3c7, #fef9e7); border: 1px solid #fcd34d; border-left: 3px solid #f59e0b; margin-top: 18px;">
+      <div class="dbox-icon">🔗</div>
+      <div><strong style="color: #92400e;">核心概念</strong><p style="color: #78350f;">數位員工是「系統的駕駛手」——系統只會按既定規則跑，數位員工記得你的目標、判斷該用哪個系統、甚至教員工怎麼用系統。一個懂規則，一個懂目標。</p></div>
+    </div>
+  </div>
+
+  <!-- 05: 開場提問 -->
+  <div class="slide slide-standard" data-slide="5">
+    <div class="slide-number">05 / 18</div>
     <h2>先問一句<span class="accent">「你卡在哪？」</span></h2>
     <div class="slide-body">
       <div class="slide-text">
@@ -233,9 +303,9 @@
           <h3>「你現在花最多時間在找資訊、做決策、還是救火執行？」</h3>
         </div>
         <div class="card-grid card-grid-3">
-          <div class="card accent-left"><div class="card-icon">🔎</div><h3>找資訊</h3><p>資料散落，翻找耗時</p></div>
-          <div class="card accent-purple"><div class="card-icon">🧭</div><h3>做決策</h3><p>只能憑感覺賭</p></div>
-          <div class="card accent-red"><div class="card-icon">🔥</div><h3>救火執行</h3><p>瑣事吃光時間</p></div>
+          <div class="card accent-left"><div class="card-icon">🔎</div><h3>找資訊</h3><p>客戶在電話那頭等，你翻著半年前的 LINE 對話找報價依據，翻到客戶已經不耐煩掛電話——這單可能就飛了</p></div>
+          <div class="card accent-purple"><div class="card-icon">🧭</div><h3>做決策</h3><p>毛利莫名掉了 3%，你盯著報表想不出是哪個環節，只能先「觀察看看」，結果一觀察又是一個月，錢是月月在流</p></div>
+          <div class="card accent-red"><div class="card-icon">🔥</div><h3>救火執行</h3><p>客訴電話一通接一通，員工搞不定只能你自己下場，原本排好的下季規劃又往後延</p></div>
         </div>
       </div>
       <div class="slide-visual">
@@ -244,9 +314,9 @@
     </div>
   </div>
 
-  <!-- 03: 情境一 找資訊 -->
-  <div class="slide slide-standard" data-slide="4">
-    <div class="slide-number">04 / 13</div>
+  <!-- 06: 情境一 找資訊 -->
+  <div class="slide slide-standard" data-slide="6">
+    <div class="slide-number">06 / 18</div>
     <h2>找資訊<span class="accent">卡點</span></h2>
     <div class="slide-body reverse">
       <div class="slide-text">
@@ -269,9 +339,9 @@
     </div>
   </div>
 
-  <!-- 04: 情境二 做決策 -->
-  <div class="slide slide-standard" data-slide="5">
-    <div class="slide-number">05 / 13</div>
+  <!-- 07: 情境二 做決策 -->
+  <div class="slide slide-standard" data-slide="7">
+    <div class="slide-number">07 / 18</div>
     <h2>做決策<span class="accent2">卡點</span></h2>
     <div class="slide-body">
       <div class="slide-text">
@@ -294,9 +364,9 @@
     </div>
   </div>
 
-  <!-- 05: 情境三 救火執行 -->
-  <div class="slide slide-standard" data-slide="6">
-    <div class="slide-number">06 / 13</div>
+  <!-- 08: 情境三 救火執行 -->
+  <div class="slide slide-standard" data-slide="8">
+    <div class="slide-number">08 / 18</div>
     <h2>救火執行<span class="accent3">卡點</span></h2>
     <div class="slide-body reverse">
       <div class="slide-text">
@@ -319,9 +389,9 @@
     </div>
   </div>
 
-  <!-- 06: 收斂原理 Part 1 -->
-  <div class="slide slide-standard" data-slide="7">
-    <div class="slide-number">07 / 13</div>
+  <!-- 09: 收斂原理 Part 1 -->
+  <div class="slide slide-standard" data-slide="9">
+    <div class="slide-number">09 / 18</div>
     <h2>到底需要的是<span class="accent2">工具、Agent，還是數位員工？</span></h2>
     <div class="flow-row">
       <div class="flow-step">
@@ -345,11 +415,12 @@
     </div>
   </div>
 
-  <!-- 07: 收斂原理 Part 2+3 判準表 -->
-  <div class="slide slide-standard" data-slide="8">
-    <div class="slide-number">08 / 13</div>
+  <!-- 10: 收斂原理 Part 2+3 判準表 -->
+  <div class="slide slide-standard" data-slide="10">
+    <div class="slide-number">10 / 18</div>
     <div class="corner-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="9" y="7" width="22" height="28" rx="3" stroke="#7c3aed" stroke-width="2.5"/><rect x="15" y="4" width="10" height="6" rx="2" fill="#7c3aed"/><path d="M13 18l4 4 8-9" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="27" x2="27" y2="27" stroke="#c4b5fd" stroke-width="2"/></svg></div>
     <h2>誰真的能<span class="accent2">接住</span></h2>
+    <div class="lead">不是比誰功能多，是比剛剛三個情境裡，「誰真的能接住」。</div>
     <table class="criteria-table">
       <thead><tr><th class="dim">判準</th><th class="gpt">AI 工具</th><th class="agent">Agent</th><th class="emp">數位員工</th></tr></thead>
       <tbody>
@@ -357,48 +428,163 @@
         <tr><td class="dim">懂公司</td><td>每次都是新對話，不知道公司脈絡</td><td>只懂自己負責的那一段</td><td>持續記得公司資料與客戶脈絡</td></tr>
         <tr><td class="dim">主動性</td><td>你問它才答</td><td>條件觸發就動，但不跨情境串接</td><td>主動整理、提醒、跨情境串接</td></tr>
         <tr><td class="dim">決策協助</td><td>能聊，不會持續追蹤排序</td><td>能跑出單一流程結果</td><td>標甜頭與代價，讓你「選擇」而非「猜測」</td></tr>
+        <tr><td class="dim">距離感</td><td>交易關係 — 你問我答，各自站在各自的立場</td><td>陪伴關係 — 同步而行，但仍是兩個獨立視角在對話</td><td>視角合一 — 站在你的角度思考並執行，距離感消失，不再是兩個腦袋在對話</td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- 08: 現場實測 -->
-  <div class="slide slide-standard" data-slide="9">
-    <div class="slide-number">09 / 13</div>
+  <!-- 11: 現場實測 -->
+  <div class="slide slide-standard" data-slide="11">
+    <div class="slide-number">11 / 18</div>
     <div class="corner-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="5" y="9" width="30" height="22" rx="3" stroke="#dc2626" stroke-width="2.5"/><path d="M11 16l5 4-5 4" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="24" x2="28" y2="24" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/></svg></div>
     <h2>現在，<span class="accent3">直接讓你看</span></h2>
     <div class="lead">剛剛聽的三個情境，現在現場跑一次——不是看結果，是看過程。</div>
     <div class="card-grid card-grid-3">
-      <div class="card accent-left"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">找資訊</span><div class="card-icon">🧠</div><h3>即時記憶回溯</h3><p>現場問一句「我們之前聊過關於___的內容」，從記憶庫精準拉出脈絡——GPT 開新對話沒有這個。</p></div>
-      <div class="card accent-left"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">找資訊</span><div class="card-icon">🔍</div><h3>即時網路查證</h3><p>現場問一個當下的產業／競品問題，查資料後給結論，不是憑訓練資料瞎猜。</p></div>
-      <div class="card accent-purple"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">做決策</span><div class="card-icon">📊</div><h3>產一份可發佈的分析報告</h3><p>丟一個假設客戶情境，現場產出結構化報告並發佈到公開網址，全場當場拿手機打開看。</p></div>
-      <div class="card accent-purple"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">做決策</span><div class="card-icon">🕵️</div><h3>盡職調查快篩</h3><p>丟一間公司名稱或合作案情境，跑出風險／甜頭／代價的結構化判斷，比「憑感覺賭」扎實。</p></div>
-      <div class="card accent-red"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">救火執行</span><div class="card-icon">📨</div><h3>背景派工</h3><p>現場丟一句複雜指令，秒回「收到」，背景處理完再主動通知結果——不用一直盯著。</p></div>
+      <div class="card accent-left demo-pick"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">找資訊</span><div class="card-icon">🧠</div><h3>即時記憶回溯</h3><p>現場問一句「我們之前聊過關於___的內容」，從記憶庫精準拉出脈絡——GPT 開新對話沒有這個。</p></div>
+      <div class="card accent-left demo-pick"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">找資訊</span><div class="card-icon">🔍</div><h3>即時網路查證</h3><p>現場問一個當下的產業／競品問題，查資料後給結論，不是憑訓練資料瞎猜。</p></div>
+      <div class="card accent-purple demo-pick"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">做決策</span><div class="card-icon">📊</div><h3>產一份可發佈的分析報告</h3><p>丟一個假設客戶情境，現場產出結構化報告並發佈到公開網址，全場當場拿手機打開看。</p></div>
+      <div class="card accent-purple demo-pick"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">做決策</span><div class="card-icon">🕵️</div><h3>盡職調查快篩</h3><p>丟一間公司名稱或合作案情境，跑出風險／甜頭／代價的結構化判斷，比「憑感覺賭」扎實。</p></div>
+      <div class="card accent-red demo-secondary"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">救火執行</span><div class="card-icon">📨</div><h3>背景派工</h3><p>現場丟一句複雜指令，秒回「收到」，背景處理完再主動通知結果——不用一直盯著。</p></div>
     </div>
   </div>
 
-  <!-- 10: 自評量表 -->
-  <div class="slide slide-standard" data-slide="10">
-    <div class="slide-number">10 / 13</div>
-    <h2>我目前對 AI 的<span class="accent">需求到哪裡？</span></h2>
-    <div class="slide-body">
-      <div class="slide-text">
-        <div class="scale-grid">
-          <div class="scale-item"><div class="scale-num">1</div><div><strong>還沒開始</strong><span>還在用 Google／問人／憑經驗</span></div></div>
-          <div class="scale-item"><div class="scale-num">2</div><div><strong>把它當聊天工具</strong><span>會用 ChatGPT，但每次要重新交代背景</span></div></div>
-          <div class="scale-item"><div class="scale-num">3</div><div><strong>想找資訊的效率</strong><span>對應情境一——想要有人幫忙整理</span></div></div>
-          <div class="scale-item"><div class="scale-num">4</div><div><strong>想要決策有依據</strong><span>對應情境二——想要數據協助判斷</span></div></div>
-          <div class="scale-item"><div class="scale-num">5</div><div><strong>想要有人幫忙擋第一線</strong><span>對應情境三——想要真正的「數位員工」主動接手</span></div></div>
-        </div>
+  <!-- 12: 真實情境數據錨點 -->
+  <div class="slide slide-standard" data-slide="12">
+    <div class="slide-number">12 / 18</div>
+    <h2>你不是落後，<span class="accent">是還沒開始</span></h2>
+    <div class="lead">2026 年中小企業實態調查：多數人卡住的不是能力，是不知道從哪裡開始。</div>
+    <div class="card-grid card-grid-3" style="margin-bottom: 16px;">
+      <div class="card accent-left" style="text-align:center;">
+        <div style="font-size: 34px; font-weight: 800; color: #3b82f6;">12~20%</div>
+        <p style="margin-top:4px;">中小企業已導入 AI，大型企業則是 40%</p>
       </div>
-      <div class="slide-visual">
-        <img src="ai-lecture-slides-0730-img06-selfcheck.png" alt="">
+      <div class="card accent-purple" style="text-align:center;">
+        <div style="font-size: 34px; font-weight: 800; color: #7c3aed;">62%</div>
+        <p style="margin-top:4px;">卡在「不知道從哪裡開始」，不是不想用</p>
       </div>
+      <div class="card accent-red" style="text-align:center;">
+        <div style="font-size: 34px; font-weight: 800; color: #dc2626;">87%</div>
+        <p style="margin-top:4px;">導入 AI 的目的是「省時間」</p>
+      </div>
+    </div>
+    <div class="card-grid card-grid-3">
+      <div class="card accent-left"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">找資訊</span><div class="card-icon">🔍</div><h3>你現在還在翻半年前的紀錄找答案嗎？</h3><p>最常見的起手式是文件整理與資料自動化（38%）——先把這一步交給數位員工，是多數企業真正的第一步。</p></div>
+      <div class="card accent-purple"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">做決策</span><div class="card-icon">📊</div><h3>判斷常常只能「先觀察看看」嗎？</h3><p>62% 的企業不是不想用 AI 幫決策，是不知道從哪裡切入——這正是數位員工能先接住的一步。</p></div>
+      <div class="card accent-red"><span class="tech-tag" style="display:inline-block;margin-bottom:8px;">救火執行</span><div class="card-icon">🧯</div><h3>多數時間在處理臨時狀況，而不是往前規劃？</h3><p>87% 導入 AI 的企業，圖的就是把時間還給該做的事，而不是一直救火。</p></div>
+    </div>
+    <div class="dbox" style="margin-top: 16px;">
+      <div class="dbox-icon">💡</div>
+      <div><strong>不孤單</strong><p>八成中小企業還沒真正導入 AI——卡點不是能力不夠，是還沒找到起點。</p></div>
+    </div>
+    <div class="note-line">資料來源：獨立行政法人中小企業基盤整備機構《中小企業のAI等の利活用に係る実態調査》（2026年3月）</div>
+  </div>
+
+  <!-- 13: 為什麼數位員工可以工作 -->
+  <div class="slide slide-standard" data-slide="13">
+    <div class="slide-number">13 / 18</div>
+    <h2>數位員工<span class="accent">為什麼能工作？</span></h2>
+    <div class="lead">不是一個模型全包，是三層拼起來——思考、動手、記得——才撐得住一個真正能上班的角色。</div>
+    <div class="card-grid card-grid-2">
+      <div class="card accent-purple">
+        <div class="card-icon">🧠</div>
+        <h3>思考型 SKILL</h3>
+        <p>判斷、分析、策略推演——負責「該怎麼做」。就像今天示範裡的盡職調查快篩、報告結構化分析，看不見過程，但每個決策背後都是它在跑。</p>
+      </div>
+      <div class="card accent-left">
+        <div class="card-icon">🛠️</div>
+        <h3>工具型 SKILL</h3>
+        <p>接上你原本在用的工具動手做——負責「真的去做」。查資料、發佈網頁、串起表單或系統，思考型 SKILL 想清楚之後，交給它執行落地。</p>
+      </div>
+    </div>
+    <div class="card-grid card-grid-2" style="margin-top:18px;">
+      <div class="arch-box" style="margin-bottom:0;">
+        <div class="arch-icon">🔁</div>
+        <div><div class="arch-title">工作流</div><div class="arch-desc">先思考判斷該做什麼，再交給工具動手，做完回頭檢查結果——像今天現場做投影片，一路都是這個循環。</div></div>
+      </div>
+      <div class="arch-box" style="margin-bottom:0;">
+        <div class="arch-icon">🧬</div>
+        <div><div class="arch-title">記憶</div><div class="arch-desc">不是做完就砍掉重練——它記得你的公司脈絡、上次的決定，下一次接著疊加，不是每次都從零開始。</div></div>
+      </div>
+    </div>
+    <div class="dbox" style="margin-top:18px;">
+      <div class="dbox-icon">💡</div>
+      <div><strong>MUSEON 就是這樣運作的</strong><p>今天這份投影片，從第一頁到現在，就是思考型 SKILL 判斷方向、工具型 SKILL 動手改頁、工作流串起每一步、記憶讓它記得你要什麼——現場跑出來的，不是預錄的 demo。</p></div>
     </div>
   </div>
 
-  <!-- 11: 互動問卷 -->
-  <div class="slide slide-standard" data-slide="11">
-    <div class="slide-number">11 / 13</div>
+  <!-- 14: 如何製作 SKILL 和工作流 -->
+  <div class="slide slide-standard" data-slide="14">
+    <div class="slide-number">14 / 18</div>
+    <h2>怎麼<span class="accent">做出一位數位員工？</span></h2>
+    <div class="lead">不是寫程式，是把「怎麼判斷、怎麼做」講清楚——這件事本身，也是數位員工能幫你做的。</div>
+    <div class="card-grid card-grid-2">
+      <div class="card accent-purple">
+        <div class="card-icon">📝</div>
+        <h3>製作 SKILL</h3>
+        <p>寫一份說明書，不是寫程式：目標是什麼、參考什麼資料、遇到什麼情況要怎麼處理、做完長什麼樣子算對。AI 讀懂這份說明書，就照著判斷或動手。</p>
+      </div>
+      <div class="card accent-left">
+        <div class="card-icon">🔗</div>
+        <h3>製作工作流</h3>
+        <p>把多個 SKILL 串成一條線：先做什麼、後做什麼、誰的產出接誰的輸入、卡住了要停下來問人還是繼續往下走。工作流決定的是順序跟交接，不是單一步驟怎麼做。</p>
+      </div>
+    </div>
+    <div class="arch-box" style="margin-top:18px;">
+      <div class="arch-icon">🌱</div>
+      <div><div class="arch-title">從一件小事開始</div><div class="arch-desc">先讓它把一件小事做對，再慢慢往上疊——今天做這份投影片的過程，也是從「找資料」這個小 SKILL 開始，一步步疊出現在這一整份。</div></div>
+    </div>
+    <div class="dbox" style="margin-top:6px;">
+      <div class="dbox-icon">💡</div>
+      <div><strong>你不用自己寫</strong><p>你只要講清楚「你要什麼、卡在哪」——寫 SKILL、串工作流這件事，本身也是數位員工能接手的工作，不用你自己動手寫程式。</p></div>
+    </div>
+  </div>
+
+  <!-- 15: 數位員工能做哪些事 -->
+  <div class="slide slide-standard" data-slide="15">
+    <div class="slide-number">15 / 18</div>
+    <h2>數位員工<span class="accent">能做哪些事？</span></h2>
+    <div class="lead">不是抽象能力清單——這些都是 MUSEON 真實做過、正在做的事情。</div>
+    <div class="card-grid card-grid-3">
+      <div class="card accent-left">
+        <div class="card-icon">📊</div>
+        <h3>報表與數據整理</h3>
+        <p>把分散在 Excel、LINE 對話裡的數字，整理成一份結構化報表，現場產出、直接發佈到公開網址——就是第 11 頁 demo 那份。</p>
+      </div>
+      <div class="card accent-purple">
+        <div class="card-icon">💰</div>
+        <h3>財務／毛利分析</h3>
+        <p>自動比對每月毛利變化，抓出下滑的環節，隔天早上把原因整理好放在桌上，不用你自己盯著報表找異常——其他客戶專案中已實際執行過，不是本次 demo 展示的項目。</p>
+      </div>
+      <div class="card accent-red">
+        <div class="card-icon">📣</div>
+        <h3>行銷提案／文案</h3>
+        <p>從產品定位到客群語言，一次產出提案初稿與文案，你調整方向就好，不用從零開始寫——同樣是其他客戶專案中實際交付過的成果。</p>
+      </div>
+      <div class="card accent-left">
+        <div class="card-icon">🕵️</div>
+        <h3>盡職調查快篩</h3>
+        <p>丟一個合作對象名稱或案件情境，跑出風險／甜頭／代價的結構化判斷，比「憑感覺賭」扎實——第 11 頁已現場示範。</p>
+      </div>
+      <div class="card accent-purple">
+        <div class="card-icon">🔧</div>
+        <h3>版本迭代與內容維護</h3>
+        <p>一頁一頁改文件、換順序、加內容，每次改完自己檢查有沒有跑版、頁碼對不對——就是這份投影片今天被改了十幾次，全程都沒出錯的原因。</p>
+      </div>
+      <div class="card accent-red">
+        <div class="card-icon">🎨</div>
+        <h3>簡報／文件現場製作</h3>
+        <p>你現在看的這份投影片，從封面到現在每一頁的增刪調整，全部由 MUSEON 即時完成——不是預錄的 demo。</p>
+      </div>
+    </div>
+    <div class="dbox" style="margin-top:18px;">
+      <div class="dbox-icon">💡</div>
+      <div><strong>這不是功能清單</strong><p>這份投影片本身，就是數位員工從頭到尾參與完成的其中一項成果——你今天看到的每一頁，都是證據。</p></div>
+    </div>
+  </div>
+
+  <!-- 16: 互動問卷 -->
+  <div class="slide slide-standard" data-slide="16">
+    <div class="slide-number">16 / 18</div>
     <div class="corner-icon"><svg viewBox="0 0 40 40" fill="none"><rect x="7" y="15" width="7" height="18" rx="1.5" fill="#7c3aed"/><rect x="17" y="7" width="7" height="26" rx="1.5" fill="#a78bfa"/><rect x="27" y="20" width="7" height="13" rx="1.5" fill="#c4b5fd"/></svg></div>
     <h2>現場<span class="accent">快問快答</span></h2>
     <div class="card-grid card-grid-2">
@@ -421,9 +607,9 @@
     </div>
   </div>
 
-  <!-- 12: 收尾 CTA -->
-  <div class="slide slide-standard" data-slide="12">
-    <div class="slide-number">12 / 13</div>
+  <!-- 17: 收尾 CTA -->
+  <div class="slide slide-standard" data-slide="17">
+    <div class="slide-number">17 / 18</div>
     <h2>你剛剛選的<span class="accent">是哪一個？</span></h2>
     <div class="slide-body reverse">
       <div class="slide-text">
@@ -439,9 +625,9 @@
     </div>
   </div>
 
-  <!-- 13: 結尾 -->
-  <div class="slide slide-standard" data-slide="13">
-    <div class="slide-number">13 / 13</div>
+  <!-- 18: 結尾 -->
+  <div class="slide slide-standard" data-slide="18">
+    <div class="slide-number">18 / 18</div>
     <div class="closing-decor">
       <img src="ai-lecture-slides-0730-img08-closing.png" alt="">
     </div>
@@ -456,13 +642,13 @@
 
 <div class="nav">
   <button class="nav-btn" onclick="prevSlide()">←</button>
-  <span class="nav-counter" id="navCounter">1 / 13</span>
+  <span class="nav-counter" id="navCounter">1 / 18</span>
   <button class="nav-btn" onclick="nextSlide()">→</button>
 </div>
 
 <script>
 let current = 1;
-const total = 13;
+const total = 18;
 
 function showSlide(n) {
   document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
