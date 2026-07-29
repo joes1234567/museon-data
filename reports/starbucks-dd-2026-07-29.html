@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星巴克（SBUX）盡職調查報告 — 2026/07/29</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --border: #262b35;
+    --text: #e8eaed;
+    --muted: #9aa3b2;
+    --accent: #00704A; /* Starbucks green */
+    --accent-soft: rgba(0,112,74,0.18);
+    --warn: #d97706;
+    --risk: #dc2626;
+    --good: #16a34a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 96px; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 32px; }
+  header .kicker { color: var(--accent); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
+  header h1 { font-size: 30px; margin: 8px 0 4px; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; margin-right: 6px;
+  }
+  .badge.risk { background: rgba(220,38,38,0.15); color: #f87171; }
+  .badge.warn { background: rgba(217,119,6,0.15); color: #fbbf24; }
+  .badge.good { background: rgba(22,163,74,0.15); color: #4ade80; }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 24px 0 36px; }
+  .kpi {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .kpi .label { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+  .kpi .value { font-size: 22px; font-weight: 700; }
+  .kpi .sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+  section { margin-bottom: 36px; }
+  h2 {
+    font-size: 18px; color: var(--text); border-left: 3px solid var(--accent);
+    padding-left: 10px; margin-bottom: 14px;
+  }
+  h3 { font-size: 15px; color: var(--muted); margin: 18px 0 8px; }
+  p { margin: 8px 0; }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 6px 0; }
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 22px; margin-bottom: 12px;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .callout {
+    border: 1px solid var(--accent); background: var(--accent-soft);
+    border-radius: 10px; padding: 14px 18px; font-size: 14px;
+  }
+  .callout.risk { border-color: var(--risk); background: rgba(220,38,38,0.1); }
+  footer { color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px; }
+  a { color: #7dd3fc; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Due Diligence Memo</div>
+  <h1>星巴克（Starbucks Corp, NASDAQ: SBUX）盡職調查</h1>
+  <div class="meta">
+    製作日期：2026-07-29　｜　資料基準：FY2026 Q3（截至 2026-07-29 財報公布前後公開資訊）　｜　狀態：初稿（未指定用途，假設為一般投資評估視角）
+  </div>
+</header>
+
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="label">今日事件</div>
+    <div class="value">FY2026 Q3 財報</div>
+    <div class="sub">2026/07/29 公布，市場關鍵驗證點</div>
+  </div>
+  <div class="kpi">
+    <div class="label">市場預期 EPS</div>
+    <div class="value">$0.66</div>
+    <div class="sub">較去年同期 $0.50 增 32%</div>
+  </div>
+  <div class="kpi">
+    <div class="label">市場預期營收</div>
+    <div class="value">$9.44B</div>
+    <div class="sub">年減約 0.2%（另一派估計 $9.12B，年減 3.6%）</div>
+  </div>
+  <div class="kpi">
+    <div class="label">近四季表現</div>
+    <div class="value">1/4 勝率</div>
+    <div class="sub">過去 4 季 3 度不如預期，平均落差 4.6%</div>
+  </div>
+</div>
+
+<section>
+  <h2>1. 摘要與初步判斷</h2>
+  <div class="callout">
+    星巴克正處於「Back to Starbucks」轉型（CEO Brian Niccol 主導）的第一次市場驗證關卡。
+    美國本土營運面出現回穩訊號，但中國市場已實質「棄守控股權」轉為合資輕資產模式，
+    加上勞工爭議與品牌價值下滑，執行風險集中在「美國基本盤是否撐得住展店計畫的槓桿」。
+    <br><br>
+    <b>本報告目前假設為一般投資評估視角撰寫。</b>若實際用途是加盟/授權評估或供應鏈盡調，
+    深挖重點需轉向區域授權條件與單店經濟模型，建議先確認後再擴充。
+  </div>
+</section>
+
+<section>
+  <h2>2. 營運面：轉型是否落地</h2>
+  <table>
+    <tr><th>指標</th><th>數值</th><th>備註</th></tr>
+    <tr><td>Q2 FY2026 同店銷售年增</td><td>+6.2%</td><td>主要由美國本土拉動</td></tr>
+    <tr><td>Q2 FY2026 營收</td><td>$9.5B（+9% YoY）</td><td>轉型計畫初見成效</td></tr>
+    <tr><td>Q3 FY2026 展望（市場共識）</td><td>EPS $0.66／營收 $9.44B</td><td>年增幅度可觀，惟營收年減預期並存（估計分歧）</td></tr>
+    <tr><td>年度展店計畫</td><td>600–650 家新店</td><td>在基本盤尚未完全穩定下加速展店</td></tr>
+  </table>
+  <p>觀察重點：同店銷售回升是否為「效率提升 + 客單價」驅動、還是「促銷讓利」驅動，決定這波回升的可持續性。財報中的美國區客流量（traffic）與客單價（ticket）拆分數字，是驗證轉型真假的關鍵，需在財報公布後補上實際數字。</p>
+</section>
+
+<section>
+  <h2>3. 中國市場：從直營到合資輕資產</h2>
+  <div class="card">
+    <ul>
+      <li><b>交易結構</b>：2026/03/30 交易完成，Boyu Capital 旗下基金取得中國零售業務 <b>60%</b> 股權，星巴克保留 <b>40%</b>，並繼續持有品牌與智財授權。</li>
+      <li><b>規模</b>：合資公司涵蓋 7,991 間原直營門市，轉為授權營運模式；雙方共同長期目標展店至 <b>20,000 家</b>。</li>
+      <li><b>估值</b>：交易金額約 <b>$4B</b>；星巴克官方估算中國業務整體價值 <b>逾 $13B</b>（含股權出售收益 + 保留權益 + 未來授權金）。</li>
+      <li><b>競爭壓力</b>：本土品牌 Luckin Coffee 持續以低價高密度門市策略侵蝕市佔，是星巴克選擇「棄控股、留品牌」的核心驅動因素。</li>
+    </ul>
+  </div>
+  <p class="callout risk">
+    盡調角度：這是「策略性撤退」而非單純擴張——星巴克用股權換取資本效率與在地執行力，
+    但代價是喪失中國市場的營運控制權。若中國未來營收認列方式改變（權益法 vs 併表），
+    對集團財報的營收/利潤結構會有實質影響，需在財報公布後確認會計處理方式。
+  </p>
+</section>
+
+<section>
+  <h2>4. 風險面盤點</h2>
+  <div class="card">
+    <span class="badge risk">高</span> <b>勞工組織爭議</b>——Workers United 相關爭議尚未解決，存在門市層級營運中斷與品牌形象風險。
+  </div>
+  <div class="card">
+    <span class="badge warn">中</span> <b>品牌價值下滑</b>——近年品牌價值排名下滑約 30 名，反映消費者心佔率被競品（含 Luckin、獨立咖啡品牌）稀釋。
+  </div>
+  <div class="card">
+    <span class="badge warn">中</span> <b>展店執行風險</b>——年度 600–650 家新店計畫，若美國本土客流/毛利未能同步走強，等同在尚未完全穩固的基本盤上加槓桿，可能拖累單店經濟模型與資本報酬率。
+  </div>
+  <div class="card">
+    <span class="badge good">留意</span> <b>財報預期分歧本身即為訊號</b>——市場對 Q3 營收估計出現 $9.44B 與 $9.12B 兩派，顯示分析師對「轉型效果 vs 中國業務重分類」的解讀尚未收斂，波動風險偏高。
+  </div>
+</section>
+
+<section>
+  <h2>5. 待補資訊 / 下一步</h2>
+  <ul>
+    <li>財報公布後（今日稍晚）補上：實際 EPS/營收、美國區客流與客單價拆分、中國業務會計認列方式、管理層對 FY2026 展望的最新指引。</li>
+    <li><b>需先確認用途</b>：本報告目前以「一般投資評估」視角撰寫。若目的是（a）投資標的評估 → 建議加深現金流、估值倍數、與同業（Luckin、Dunkin、Costa）比較；（b）加盟/授權對象評估 → 轉向區域授權條件與單店損益模型；（c）供應鏈或商業合作盡調 → 需另立範疇。</li>
+    <li>現金流與資本結構（負債水位、回購與配息政策）尚未涵蓋，建議下一版補齊。</li>
+  </ul>
+</section>
+
+<footer>
+  本報告基於公開市場資訊與分析師預期整理，非投資建議。數據截至 2026-07-29 財報公布前，公布後建議更新關鍵數字。<br>
+  資料來源：Starbucks 官方投資人關係公告、SEC 10-Q 申報、公開財經媒體（Yahoo Finance、CNBC、Restaurant Dive 等）分析師預期彙整。
+</footer>
+
+</div>
+</body>
+</html>
