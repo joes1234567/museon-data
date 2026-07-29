@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>財務報表分析報告 — 2026-07-29</title>
+<style>
+  :root{
+    --ink:#1c2128; --sub:#57606a; --bg:#f6f8fa; --card:#ffffff;
+    --line:#d0d7de; --accent:#0969da; --good:#1a7f37; --bad:#cf222e; --warn:#9a6700;
+    --bad-bg:#fff1f0; --good-bg:#f0fdf4; --warn-bg:#fff8e6;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;
+       background:var(--bg);color:var(--ink);line-height:1.6;}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 80px;}
+  header{margin-bottom:32px;}
+  header h1{font-size:26px;margin:0 0 6px;}
+  header p{color:var(--sub);margin:0;font-size:14px;}
+  .badge{display:inline-block;background:var(--warn-bg);color:var(--warn);border:1px solid #f2cc60;
+         border-radius:6px;padding:3px 10px;font-size:12px;margin-top:10px;}
+  section{margin-bottom:36px;}
+  h2{font-size:18px;border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:16px;}
+  h3{font-size:15px;margin:20px 0 10px;color:var(--ink);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;}
+  .stat .label{font-size:12px;color:var(--sub);margin-bottom:6px;}
+  .stat .value{font-size:22px;font-weight:700;}
+  .stat .sub{font-size:12px;color:var(--sub);margin-top:4px;}
+  .pos{color:var(--good);} .neg{color:var(--bad);}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);}
+  th:first-child,td:first-child{text-align:left;}
+  thead th{color:var(--sub);font-weight:600;font-size:12px;}
+  tr.total td{font-weight:700;border-top:2px solid var(--ink);}
+  .barrow{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:13px;}
+  .barrow .lbl{width:150px;flex-shrink:0;color:var(--sub);}
+  .barrow .track{flex:1;background:#eaeef2;border-radius:4px;height:16px;overflow:hidden;}
+  .barrow .fill{height:100%;border-radius:4px;}
+  .barrow .num{width:110px;text-align:right;flex-shrink:0;}
+  .callout{border-radius:10px;padding:16px 18px;margin:14px 0;font-size:14px;}
+  .callout.bad{background:var(--bad-bg);border:1px solid #ffb3ab;}
+  .callout.warn{background:var(--warn-bg);border:1px solid #f2cc60;}
+  .callout.good{background:var(--good-bg);border:1px solid #9be0ad;}
+  .callout b{display:block;margin-bottom:4px;}
+  ol,ul{padding-left:20px;}
+  li{margin-bottom:8px;}
+  footer{color:var(--sub);font-size:12px;text-align:center;margin-top:60px;}
+  .flag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;}
+  .flag.high{background:var(--bad-bg);color:var(--bad);}
+  .flag.mid{background:var(--warn-bg);color:var(--warn);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>財務報表分析報告</h1>
+  <p>資產負債表（民國114年12月31日）＋ 綜合損益表（114年9月24日～114年12月31日）</p>
+  <span class="badge">⚠️ 原始報表未列示公司名稱，以下以「該公司」代稱；若需要正式標註，請提供公司抬頭</span>
+</header>
+
+<section>
+  <h2>一句話結論</h2>
+  <div class="callout bad">
+    <b>公司剛成立約 3 個月（114/9/24 設立），毛利率健康（64.4%），但薪資等營業費用吃掉九成營收，首季已虧損 40.7 萬，帳上淨值已轉負（-20.7 萬），目前完全靠股東往來（207 萬）在撐，而非自有資本。</b>
+    這不是「做不起來」，而是「費用結構跟營收規模還沒配平」——尤其人事費用一項就佔營收 65.8%。
+  </div>
+</section>
+
+<section>
+  <h2>公司基本資訊</h2>
+  <table>
+    <tr><td>設立/報表起始日</td><td>民國114年9月24日</td></tr>
+    <tr><td>報表截止日</td><td>民國114年12月31日（首個會計期間，約99天）</td></tr>
+    <tr><td>登記資本額</td><td>NT$ 200,000</td></tr>
+    <tr><td>製表日期</td><td>民國115年4月13日</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>關鍵指標速覽</h2>
+  <div class="grid">
+    <div class="stat">
+      <div class="label">營業收入（首季）</div>
+      <div class="value">$1,472,888</div>
+      <div class="sub">約 99 天，日均營收 ≈ $14,878</div>
+    </div>
+    <div class="stat">
+      <div class="label">毛利率</div>
+      <div class="value pos">64.38%</div>
+      <div class="sub">毛利 $948,253 — 本業產品/服務體質健康</div>
+    </div>
+    <div class="stat">
+      <div class="label">營業利益（虧損）</div>
+      <div class="value neg">-$406,749</div>
+      <div class="sub">營業利益率 -27.61%</div>
+    </div>
+    <div class="stat">
+      <div class="label">權益總額</div>
+      <div class="value neg">-$206,623</div>
+      <div class="sub">資本額 20 萬已被虧損侵蝕殆盡，轉為負值</div>
+    </div>
+    <div class="stat">
+      <div class="label">流動比率</div>
+      <div class="value neg">5.5%</div>
+      <div class="sub">流動資產 $115,603 ÷ 流動負債 $2,094,967</div>
+    </div>
+    <div class="stat">
+      <div class="label">股東往來 ÷ 資本額</div>
+      <div class="value">10.4 倍</div>
+      <div class="sub">公司實質靠股東借款週轉，非登記資本</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>資產負債表結構</h2>
+  <div class="card">
+    <h3>資產結構（總額 $1,888,344）</h3>
+    <div class="barrow"><div class="lbl">現金</div><div class="track"><div class="fill" style="width:1.1%;background:#0969da"></div></div><div class="num">$20,030</div></div>
+    <div class="barrow"><div class="lbl">銀行存款</div><div class="track"><div class="fill" style="width:1.5%;background:#0969da"></div></div><div class="num">$28,517</div></div>
+    <div class="barrow"><div class="lbl">留抵稅額+進項稅額</div><div class="track"><div class="fill" style="width:3.6%;background:#54aeff"></div></div><div class="num">$67,056</div></div>
+    <div class="barrow"><div class="lbl">存出保證金</div><div class="track"><div class="fill" style="width:1.7%;background:#8250df"></div></div><div class="num">$32,000</div></div>
+    <div class="barrow"><div class="lbl">未攤銷費用</div><div class="track"><div class="fill" style="width:92.2%;background:#cf222e"></div></div><div class="num">$1,740,741</div></div>
+
+    <h3>負債與權益結構（總額 $1,888,344）</h3>
+    <div class="barrow"><div class="lbl">業主(股東)往來</div><div class="track"><div class="fill" style="width:100%;background:#cf222e"></div></div><div class="num">$2,070,000</div></div>
+    <div class="barrow"><div class="lbl">代收款項</div><div class="track"><div class="fill" style="width:1.2%;background:#e16f24"></div></div><div class="num">$24,967</div></div>
+    <div class="barrow"><div class="lbl">資本</div><div class="track"><div class="fill" style="width:9.7%;background:#1a7f37"></div></div><div class="num">$200,000</div></div>
+    <div class="barrow"><div class="lbl">保留盈餘（累積虧損）</div><div class="track"><div class="fill" style="width:19.6%;background:#cf222e"></div></div><div class="num">-$406,623</div></div>
+  </div>
+
+  <div class="callout bad">
+    <span class="flag high">高關注</span>
+    <b>「未攤銷費用」$1,740,741 佔總資產 92.2%</b>
+    這通常是開辦費、裝潢/工程款或franchise相關費用分期攤銷的科目。金額佔比極高且遠超流動資產，代表公司幾乎所有資源都鎖在「還沒認列完的前期支出」裡，真正能週轉的現金只有約 4.9 萬。建議確認攤銷年限與內容明細，否則無法判斷未來每期還要吃掉多少利潤。
+  </div>
+  <div class="callout warn">
+    <span class="flag mid">中度關注</span>
+    <b>股東往來 $2,070,000 是登記資本額的 10.4 倍</b>
+    公司實際營運資金幾乎完全由股東無息（或未列息）借款支撐，而非股權資本。這種結構常見於小型新設公司（節省驗資/增資成本），但代表帳面資本適足性偏弱，若未來要融資或引入外部投資人，會被視為高槓桿。
+  </div>
+</section>
+
+<section>
+  <h2>綜合損益表分析（114/9/24 ～ 114/12/31）</h2>
+  <table>
+    <thead><tr><th>項目</th><th>金額</th><th>佔營收%</th></tr></thead>
+    <tr><td>營業收入淨額</td><td>$1,472,888</td><td>100.00%</td></tr>
+    <tr><td>銷貨成本</td><td>$524,635</td><td>35.61%</td></tr>
+    <tr class="total"><td>營業毛利</td><td class="pos">$948,253</td><td class="pos">64.38%</td></tr>
+    <tr><td colspan="3" style="border:none;padding-top:14px;color:var(--sub);font-size:12px;">— 營業費用明細 —</td></tr>
+    <tr><td>薪資支出</td><td>$969,382</td><td>65.81%</td></tr>
+    <tr><td>租金支出</td><td>$96,000</td><td>6.52%</td></tr>
+    <tr><td>各項耗竭及攤提</td><td>$49,735</td><td>3.38%</td></tr>
+    <tr><td>其他費用</td><td>$84,797</td><td>5.76%</td></tr>
+    <tr><td>修繕費</td><td>$65,367</td><td>4.44%</td></tr>
+    <tr><td>水電瓦斯費</td><td>$27,409</td><td>1.86%</td></tr>
+    <tr><td>雜項購置</td><td>$16,741</td><td>1.14%</td></tr>
+    <tr><td>保險費</td><td>$18,864</td><td>1.28%</td></tr>
+    <tr><td>文具用品／交際／包裝／交通／執行業務報酬（合計）</td><td>$26,707</td><td>1.81%</td></tr>
+    <tr class="total"><td>營業費用總額</td><td>$1,355,002</td><td>91.99%</td></tr>
+    <tr class="total"><td>營業利益（損失）</td><td class="neg">-$406,749</td><td class="neg">-27.61%</td></tr>
+  </table>
+
+  <div class="callout warn">
+    <span class="flag mid">中度關注</span>
+    <b>人事成本是唯一真正的「大洞」</b>
+    毛利 $948,253 幾乎可以完全覆蓋除薪資外的所有費用（$385,620）；真正把公司打入虧損的，是薪資支出 $969,382（佔營收 65.8%）。換算下來，光薪資就比毛利多出約 2.1 萬。這代表兩條路：① 人力配置相對目前營收規模偏重（可能是為未來擴張先佈局人力）② 營收還在爬升期，尚未追上既定的人力成本基礎。兩者需要分辨清楚才能判斷是「暫時陣痛」還是「結構性問題」。
+  </div>
+</section>
+
+<section>
+  <h2>風險與觀察摘要</h2>
+  <ol>
+    <li><b>負淨值（Equity = -$206,623）</b>：技術上已資不抵債，若要對外融資、投標或申請信用額度，這是第一個會被檢視的紅字。</li>
+    <li><b>流動比率僅 5.5%</b>：帳上現金+存款僅 $48,547，若股東往來被要求收回，公司立即無力償還。目前的「安全網」完全建立在股東不抽單的默契上。</li>
+    <li><b>未攤銷費用佔資產 92%</b>：需確認攤銷期間與內容（開辦費？裝潢？授權金？），這決定了未來每季還要背多久的攤銷費用，才能判斷何時轉盈。</li>
+    <li><b>營運才 3 個月，尚不能下「經營失敗」的結論</b>：毛利率 64% 顯示產品/服務本身有議價力，問題出在費用結構（尤其人事），這通常是新設公司常見的「先佈局後追上」陣痛期，但需要設定停損時間點來驗證。</li>
+  </ol>
+</section>
+
+<section>
+  <h2>建議下一步</h2>
+  <ul>
+    <li>拿到「未攤銷費用 $1,740,741」的明細與攤銷年限，才能算出未來每期還要提列多少費用、何時可以轉正。</li>
+    <li>盤點薪資支出 $969,382 的人力配置——是否有可調整的兼職/委外空間，或這是為了衝營收刻意超前佈署的人力。</li>
+    <li>設一個「損益兩平所需月營收」的具體數字：以目前費用結構回推，月營收需達約 $684,700（=月固定費用 ÷ 64.38% 毛利率）才能打平，可作為下一季追蹤指標。</li>
+    <li>確認股東往來 $2,070,000 的性質（借款/增資前置款），若計畫增資或找外部資金，建議先處理負淨值問題。</li>
+  </ul>
+</section>
+
+<footer>
+  由 MUSEON 自動分析生成 · 2026-07-29 · 分析基於使用者提供之財務報表圖檔，未經第三方查核，僅供內部參考
+</footer>
+
+</div>
+</body>
+</html>
