@@ -3,179 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>星巴克（SBUX）盡職調查報告 — 2026/07/29</title>
+<title>星巴克（Starbucks）盡職調查報告 — 2026-07-29</title>
 <style>
-  :root {
-    --bg: #0f1115;
-    --panel: #171a21;
-    --border: #262b35;
-    --text: #e8eaed;
-    --muted: #9aa3b2;
-    --accent: #00704A; /* Starbucks green */
-    --accent-soft: rgba(0,112,74,0.18);
-    --warn: #d97706;
-    --risk: #dc2626;
-    --good: #16a34a;
-  }
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    background: #f5f6fa;
+    color: #1a1a2e;
+    line-height: 1.75;
   }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 96px; }
-  header { border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 32px; }
-  header .kicker { color: var(--accent); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
-  header h1 { font-size: 30px; margin: 8px 0 4px; }
-  header .meta { color: var(--muted); font-size: 14px; }
-  .badge {
-    display: inline-block; padding: 3px 10px; border-radius: 999px;
-    font-size: 12px; font-weight: 600; margin-right: 6px;
+  .cover {
+    background: linear-gradient(135deg, #04211a 0%, #0c3d2c 55%, #0f6b46 100%);
+    color: white;
+    padding: 64px 48px 56px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
   }
-  .badge.risk { background: rgba(220,38,38,0.15); color: #f87171; }
-  .badge.warn { background: rgba(217,119,6,0.15); color: #fbbf24; }
-  .badge.good { background: rgba(22,163,74,0.15); color: #4ade80; }
-
-  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 24px 0 36px; }
-  .kpi {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
-    padding: 16px 18px;
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.08);
   }
-  .kpi .label { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
-  .kpi .value { font-size: 22px; font-weight: 700; }
-  .kpi .sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
-
-  section { margin-bottom: 36px; }
+  .cover::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .cover-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #7fe3ac;
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .cover-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 40px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cover-meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .cover-meta-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .cover-meta-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  .disclaimer {
+    background: #fff4e5;
+    border: 1px solid #f0c37a;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: -28px 0 32px;
+    font-size: 13.5px;
+    color: #7a5210;
+  }
+  section {
+    background: white;
+    border-radius: 14px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
   h2 {
-    font-size: 18px; color: var(--text); border-left: 3px solid var(--accent);
-    padding-left: 10px; margin-bottom: 14px;
+    font-size: 20px;
+    color: #0c3d2c;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e4f3ea;
   }
-  h3 { font-size: 15px; color: var(--muted); margin: 18px 0 8px; }
-  p { margin: 8px 0; }
-  ul { margin: 8px 0; padding-left: 22px; }
-  li { margin: 6px 0; }
-  .card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
-    padding: 18px 22px; margin-bottom: 12px;
+  h3 {
+    font-size: 15.5px;
+    color: #12391e;
+    margin: 20px 0 8px;
   }
-  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
-  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
-  .callout {
-    border: 1px solid var(--accent); background: var(--accent-soft);
-    border-radius: 10px; padding: 14px 18px; font-size: 14px;
+  p, li { font-size: 14.5px; color: #33344a; }
+  ul { padding-left: 20px; margin-bottom: 8px; }
+  li { margin-bottom: 6px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 12px 0;
   }
-  .callout.risk { border-color: var(--risk); background: rgba(220,38,38,0.1); }
-  footer { color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 40px; }
-  a { color: #7dd3fc; }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #eceef2;
+  }
+  th {
+    color: #5a5b70;
+    font-weight: 600;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-right: 6px;
+  }
+  .tag-risk { background: #fde8e8; color: #a12727; }
+  .tag-watch { background: #fff3d6; color: #8a5b00; }
+  .tag-ok { background: #e1f6e8; color: #12703f; }
+  .risk-row {
+    margin-bottom: 18px;
+  }
+  .risk-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1a1a2e;
+  }
+  .risk-bar-track {
+    background: #eceef2;
+    border-radius: 999px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .risk-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+  }
+  .risk-note { font-size: 12.5px; color: #6a6b80; margin-top: 6px; }
+  .fill-market { background: linear-gradient(90deg,#f0a63a,#e0762a); }
+  .fill-exec { background: linear-gradient(90deg,#e0a02a,#c9432f); }
+  .fill-fin { background: linear-gradient(90deg,#5ecf85,#e0a02a); }
+  .fill-overall { background: linear-gradient(90deg,#0f6b46,#c9432f); }
+  .chain {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+    color: #33344a;
+  }
+  .chain-step {
+    padding: 10px 14px;
+    background: #f5faf7;
+    border-left: 3px solid #0f6b46;
+    border-radius: 0 6px 6px 0;
+  }
+  .chain-arrow {
+    text-align: center;
+    color: #9ba0ab;
+    font-size: 13px;
+  }
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  .stat-card {
+    background: #f7f9fc;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .stat-card .v { font-size: 20px; font-weight: 700; color: #0c3d2c; }
+  .stat-card .l { font-size: 12px; color: #6a6b80; margin-top: 2px; }
+  .branch {
+    border: 1px solid #e4e6ec;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .branch h4 { font-size: 14.5px; color: #0c3d2c; margin-bottom: 6px; }
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: #9ba0ab;
+    padding: 24px 0 8px;
+  }
+  .src { font-size: 11.5px; color: #9ba0ab; }
+  .src a { color: #6a8f7c; }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<header>
-  <div class="kicker">Due Diligence Memo</div>
-  <h1>星巴克（Starbucks Corp, NASDAQ: SBUX）盡職調查</h1>
-  <div class="meta">
-    製作日期：2026-07-29　｜　資料基準：FY2026 Q3（截至 2026-07-29 財報公布前後公開資訊）　｜　狀態：初稿（未指定用途，假設為一般投資評估視角）
-  </div>
-</header>
-
-<div class="kpi-grid">
-  <div class="kpi">
-    <div class="label">今日事件</div>
-    <div class="value">FY2026 Q3 財報</div>
-    <div class="sub">2026/07/29 公布，市場關鍵驗證點</div>
-  </div>
-  <div class="kpi">
-    <div class="label">市場預期 EPS</div>
-    <div class="value">$0.66</div>
-    <div class="sub">較去年同期 $0.50 增 32%</div>
-  </div>
-  <div class="kpi">
-    <div class="label">市場預期營收</div>
-    <div class="value">$9.44B</div>
-    <div class="sub">年減約 0.2%（另一派估計 $9.12B，年減 3.6%）</div>
-  </div>
-  <div class="kpi">
-    <div class="label">近四季表現</div>
-    <div class="value">1/4 勝率</div>
-    <div class="sub">過去 4 季 3 度不如預期，平均落差 4.6%</div>
+<div class="cover">
+  <div class="cover-label">DUE DILIGENCE REPORT · 商業模式健檢</div>
+  <h1>星巴克（Starbucks Corp.）盡職調查</h1>
+  <div class="cover-sub">FY2026 Q3 轉型驗證關卡 — 系統姿態、風險指數與槓桿判讀</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Ticker</div>
+      <div class="cover-meta-value">NASDAQ: SBUX</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">報告日期</div>
+      <div class="cover-meta-value">2026-07-29</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">資料模式</div>
+      <div class="cover-meta-value">Mode B（Lite・公開資訊）</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">整體風險</div>
+      <div class="cover-meta-value">56 / 100（中度偏高）</div>
+    </div>
   </div>
 </div>
 
-<section>
-  <h2>1. 摘要與初步判斷</h2>
-  <div class="callout">
-    星巴克正處於「Back to Starbucks」轉型（CEO Brian Niccol 主導）的第一次市場驗證關卡。
-    美國本土營運面出現回穩訊號，但中國市場已實質「棄守控股權」轉為合資輕資產模式，
-    加上勞工爭議與品牌價值下滑，執行風險集中在「美國基本盤是否撐得住展店計畫的槓桿」。
-    <br><br>
-    <b>本報告目前假設為一般投資評估視角撰寫。</b>若實際用途是加盟/授權評估或供應鏈盡調，
-    深挖重點需轉向區域授權條件與單店經濟模型，建議先確認後再擴充。
+<div class="container">
+
+  <div class="disclaimer">
+    ⚠️ 本報告基於公開財報、新聞與 SEC 公開文件整理，屬「系統姿態健檢」性質，<b>非投資建議、非承銷/估值報告</b>。Q3 FY2026 實際財報於今日（7/29）美股盤後公布，本報告成文時點為盤前，財務數字以「已公布 Q2 實績 + 市場對 Q3 的共識預期」為主，兩者已於內文標明區別。若要據此做投資或商業決策，建議另行取得會計師/財顧簽核的正式 DD。
   </div>
-</section>
 
-<section>
-  <h2>2. 營運面：轉型是否落地</h2>
-  <table>
-    <tr><th>指標</th><th>數值</th><th>備註</th></tr>
-    <tr><td>Q2 FY2026 同店銷售年增</td><td>+6.2%</td><td>主要由美國本土拉動</td></tr>
-    <tr><td>Q2 FY2026 營收</td><td>$9.5B（+9% YoY）</td><td>轉型計畫初見成效</td></tr>
-    <tr><td>Q3 FY2026 展望（市場共識）</td><td>EPS $0.66／營收 $9.44B</td><td>年增幅度可觀，惟營收年減預期並存（估計分歧）</td></tr>
-    <tr><td>年度展店計畫</td><td>600–650 家新店</td><td>在基本盤尚未完全穩定下加速展店</td></tr>
-  </table>
-  <p>觀察重點：同店銷售回升是否為「效率提升 + 客單價」驅動、還是「促銷讓利」驅動，決定這波回升的可持續性。財報中的美國區客流量（traffic）與客單價（ticket）拆分數字，是驗證轉型真假的關鍵，需在財報公布後補上實際數字。</p>
-</section>
+  <section>
+    <h2>摘要</h2>
+    <p>星巴克正處於「Back to Starbucks」轉型（CEO Brian Niccol 主導）第一次接受市場驗證的節點：美國本土同店銷售止跌回升，但中國市場已在 3/30 完成與 Boyu Capital 的合資重組（讓出 60% 控股、換取資本與在地執行力），財務結構則因多年高額買回庫藏股而出現罕見的<b>股東權益為負</b>。整體判讀：<span class="tag tag-watch">轉型中度風險</span> — 故事在修復，但槓桿與執行負擔同步在墊高，Q3 實際數字（今晚公布）將是關鍵驗證點。</p>
+  </section>
 
-<section>
-  <h2>3. 中國市場：從直營到合資輕資產</h2>
-  <div class="card">
+  <section>
+    <h2>公司速覽</h2>
+    <div class="grid2">
+      <div class="stat-card"><div class="v">Q2 FY2026 同店銷售 +6.2%</div><div class="l">已公布實績，優於市場預期</div></div>
+      <div class="stat-card"><div class="v">Q2 FY2026 營收 $9.5B（+9%）</div><div class="l">已公布實績</div></div>
+      <div class="stat-card"><div class="v">Q3 EPS 共識預期 $0.66</div><div class="l">尚未公布（今晚盤後）／年增 32%</div></div>
+      <div class="stat-card"><div class="v">Q3 營收共識預期 $9.44B</div><div class="l">尚未公布／年減 0.2%</div></div>
+      <div class="stat-card"><div class="v">FY2026 展店計畫 600–650 家</div><div class="l">執行負擔來源之一</div></div>
+      <div class="stat-card"><div class="v">中國股權結構 40 / 60</div><div class="l">星巴克保留 40%＋品牌授權金；Boyu 持股 60%</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>結構性事件：中國市場重組（Boyu Capital JV）</h2>
+    <p>2026/3/30 交易正式完成：Boyu Capital 旗下基金取得星巴克中國零售business 60% 股權，星巴克保留 40% 及品牌/IP 授權金，交易對中國事業體的估值約 40 億美元（星巴克方面稱含股權+權利金的總值逾 130 億美元）。原 7,991 家直營門市轉為授權經營模式，雙方共同目標長期展店至 2 萬家。</p>
+    <p><b>白話：</b>星巴克在中國打不贏 Luckin（門市數已被超車、主打低價策略），選擇「以退為進」——讓出經營控制權換取在地資本與執行力，自己收品牌租金，把中國從「自己扛的戰場」變成「收租的股權部位」。這是財務工程解法，不是市場份額解法。</p>
+    <h3>風險標示</h3>
     <ul>
-      <li><b>交易結構</b>：2026/03/30 交易完成，Boyu Capital 旗下基金取得中國零售業務 <b>60%</b> 股權，星巴克保留 <b>40%</b>，並繼續持有品牌與智財授權。</li>
-      <li><b>規模</b>：合資公司涵蓋 7,991 間原直營門市，轉為授權營運模式；雙方共同長期目標展店至 <b>20,000 家</b>。</li>
-      <li><b>估值</b>：交易金額約 <b>$4B</b>；星巴克官方估算中國業務整體價值 <b>逾 $13B</b>（含股權出售收益 + 保留權益 + 未來授權金）。</li>
-      <li><b>競爭壓力</b>：本土品牌 Luckin Coffee 持續以低價高密度門市策略侵蝕市佔，是星巴克選擇「棄控股、留品牌」的核心驅動因素。</li>
+      <li><span class="tag tag-risk">誤判風險</span>「中國止血」不等於「中國止跌」——JV 整合期（品牌一致性、加盟商管理移交）本身有 12–24 個月執行摩擦期，不會立刻反映在數字上。</li>
+      <li><span class="tag tag-watch">觀察點</span>40% 股權 + 權利金模式下，星巴克對中國營運已失去直接控制權，未來財報中國區數字的「可比較性」會下降（權益法認列 vs 過去合併認列）。</li>
     </ul>
-  </div>
-  <p class="callout risk">
-    盡調角度：這是「策略性撤退」而非單純擴張——星巴克用股權換取資本效率與在地執行力，
-    但代價是喪失中國市場的營運控制權。若中國未來營收認列方式改變（權益法 vs 併表），
-    對集團財報的營收/利潤結構會有實質影響，需在財報公布後確認會計處理方式。
-  </p>
-</section>
+  </section>
 
-<section>
-  <h2>4. 風險面盤點</h2>
-  <div class="card">
-    <span class="badge risk">高</span> <b>勞工組織爭議</b>——Workers United 相關爭議尚未解決，存在門市層級營運中斷與品牌形象風險。
-  </div>
-  <div class="card">
-    <span class="badge warn">中</span> <b>品牌價值下滑</b>——近年品牌價值排名下滑約 30 名，反映消費者心佔率被競品（含 Luckin、獨立咖啡品牌）稀釋。
-  </div>
-  <div class="card">
-    <span class="badge warn">中</span> <b>展店執行風險</b>——年度 600–650 家新店計畫，若美國本土客流/毛利未能同步走強，等同在尚未完全穩固的基本盤上加槓桿，可能拖累單店經濟模型與資本報酬率。
-  </div>
-  <div class="card">
-    <span class="badge good">留意</span> <b>財報預期分歧本身即為訊號</b>——市場對 Q3 營收估計出現 $9.44B 與 $9.12B 兩派，顯示分析師對「轉型效果 vs 中國業務重分類」的解讀尚未收斂，波動風險偏高。
-  </div>
-</section>
+  <section>
+    <h2>財務體質</h2>
+    <table>
+      <tr><th>指標</th><th>數值</th><th>判讀</th></tr>
+      <tr><td>總負債</td><td>約 $16.1B</td><td><span class="tag tag-watch">偏高</span></td></tr>
+      <tr><td>現金及短期投資</td><td>約 $3.6B</td><td>覆蓋率偏薄</td></tr>
+      <tr><td>現金/負債比</td><td>0.07（歷史中位數以下 59%）</td><td><span class="tag tag-risk">槓桿升高</span></td></tr>
+      <tr><td>股東權益</td><td>約 -$8.4B（負值）</td><td><span class="tag tag-risk">多年高額買回庫藏股所致</span></td></tr>
+      <tr><td>EBIT 利息覆蓋倍數</td><td>7.8x</td><td><span class="tag tag-ok">尚屬健康</span></td></tr>
+      <tr><td>營運現金流覆蓋負債</td><td>26.5%</td><td><span class="tag tag-ok">尚可</span></td></tr>
+      <tr><td>信用評等</td><td>S&P BBB+／Moody's Baa1</td><td><span class="tag tag-ok">投資等級</span></td></tr>
+      <tr><td>股東回饋</td><td>FY2025 配息 $2.8B，連續 15 年增息（CAGR ~17.5%）</td><td>股東信任的基石，也是負權益的來源</td></tr>
+    </table>
+    <p><b>白話：</b>負股東權益聽起來嚇人，但成因是「賺的錢拿去買回股票」而非「虧到資不抵債」——這是財務工程結果，不是經營失敗信號。真正要看的是：投資等級評等還在、利息覆蓋倍數健康，代表市場（債權人角度）還信任它的現金流。但槓桿確實比歷史均值高，代表容錯空間變小——如果 Q3 實績不如預期，融資彈性會比三年前更緊。</p>
+  </section>
 
-<section>
-  <h2>5. 待補資訊 / 下一步</h2>
-  <ul>
-    <li>財報公布後（今日稍晚）補上：實際 EPS/營收、美國區客流與客單價拆分、中國業務會計認列方式、管理層對 FY2026 展望的最新指引。</li>
-    <li><b>需先確認用途</b>：本報告目前以「一般投資評估」視角撰寫。若目的是（a）投資標的評估 → 建議加深現金流、估值倍數、與同業（Luckin、Dunkin、Costa）比較；（b）加盟/授權對象評估 → 轉向區域授權條件與單店損益模型；（c）供應鏈或商業合作盡調 → 需另立範疇。</li>
-    <li>現金流與資本結構（負債水位、回購與配息政策）尚未涵蓋，建議下一版補齊。</li>
-  </ul>
-</section>
+  <section>
+    <h2>系統姿態快照（SSA Lite）</h2>
+    <p>套用商模十二力框架做快速掃描（僅標示公開資訊可判讀的力，非完整 12 力盤點）：</p>
+    <ul>
+      <li><b>需求力</b>：美國本土同店銷售由負轉正（+6.2%），代表核心市場需求正在修復，但仍需 Q3 驗證是否為一次性反彈或趨勢反轉。</li>
+      <li><b>差異化力</b>：品牌價值排名近年下滑約 30 名，在中國被 Luckin 的低價策略正面壓制，差異化優勢主要靠「第三空間」體驗與品牌情感，在價格敏感市場承壓明顯。</li>
+      <li><b>執行力</b>：600–650 家新店 + 中國 JV 整合 + 勞資爭議（Workers United）三線同時推進，屬於「轉型期高密度執行」姿態，容錯空間小。</li>
+      <li><b>資本結構力</b>：負股東權益 + 投資等級評等並存，代表資本市場信任仍在，但財務彈性已比歷史均值薄。</li>
+    </ul>
+    <h3>姿態判定</h3>
+    <p><span class="tag tag-watch">轉型修復期・高執行密度・槓桿升高</span> — 不是危機姿態，但屬於「多線程同時執行、容錯空間收窄」的中度風險姿態。</p>
+  </section>
 
-<footer>
-  本報告基於公開市場資訊與分析師預期整理，非投資建議。數據截至 2026-07-29 財報公布前，公布後建議更新關鍵數字。<br>
-  資料來源：Starbucks 官方投資人關係公告、SEC 10-Q 申報、公開財經媒體（Yahoo Finance、CNBC、Restaurant Dive 等）分析師預期彙整。
-</footer>
+  <section>
+    <h2>因果鏈分析</h2>
+    <div class="chain">
+      <div class="chain-step">疫後品牌力與客流下滑，同店銷售連續數季走軟</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">Niccol 上任推「Back to Starbucks」，靠菜單簡化、服務體驗、行銷重砸拉回美國本土客流</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">美國本土回升（Q2 +6.2%），但中國持續被 Luckin 蠶食 → 選擇讓出中國控制權換取資本與 JV 執行力</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">同時間仍維持 600–650 家的高展店節奏，等於在「美國修復尚未完全驗證」的基礎上疊加執行負擔</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">多年買回庫藏股形成的負股東權益，讓公司在轉型期的資本彈性天生比同業薄，一旦 Q3 或後續數字不如預期，市場容忍度會比過去更緊</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>三維風險指數</h2>
+    <div class="risk-row">
+      <div class="risk-label"><span>市場風險 Market Risk</span><span>62 / 100</span></div>
+      <div class="risk-bar-track"><div class="risk-bar-fill fill-market" style="width:62%"></div></div>
+      <div class="risk-note">中國份額持續流失給 Luckin、品牌力排名下滑，美國本土回升的持續性尚待驗證。</div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-label"><span>執行風險 Execution Risk</span><span>58 / 100</span></div>
+      <div class="risk-bar-track"><div class="risk-bar-fill fill-exec" style="width:58%"></div></div>
+      <div class="risk-note">展店計畫、中國 JV 整合、勞資爭議三線並行，屬於高密度執行姿態。</div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-label"><span>財務風險 Financial Risk</span><span>47 / 100</span></div>
+      <div class="risk-bar-track"><div class="risk-bar-fill fill-fin" style="width:47%"></div></div>
+      <div class="risk-note">槓桿升高、負股東權益，但投資等級評等與利息覆蓋倍數仍健康，屬「偏緊但可控」。</div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-label"><span>整體風險 Overall Risk</span><span>56 / 100</span></div>
+      <div class="risk-bar-track"><div class="risk-bar-fill fill-overall" style="width:56%"></div></div>
+      <div class="risk-note">中度偏高——轉型正在發生且有初步驗證訊號，但非低風險標的，Q3 實績是關鍵拐點。</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>槓桿辨識</h2>
+    <ul>
+      <li><b>中國 JV 是財務槓桿，不是市場槓桿</b>：讓出控制權換取資本與執行力，短期改善現金與風險敞口，但不解決「打不贏 Luckin」的根本問題——只是把這個問題轉嫁給合資夥伴。</li>
+      <li><b>美國本土回升是估值槓桿的錨</b>：市場對「Back to Starbucks」故事的信心，幾乎全繫於美國同店銷售能否連續數季維持正成長，這是觀察優先順序第一位的指標。</li>
+      <li><b>股息與買回歷史是短期容忍度槓桿</b>：15 年連續增息建立的股東信任，讓市場願意給轉型期更多耐心，但也是負股東權益的根源，槓桿用久了會反噬財務彈性。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>結論與交接建議</h2>
+    <p>這份 DD 目前是「公開資訊等級」的系統健檢——骨架完整，但沒有鎖定使用情境。要往下走，需要先確認 DD 用途，因為分析重心會完全不同：</p>
+    <div class="branch">
+      <h4>情境一：當投資標的評估</h4>
+      <p>下一步要深挖：估值模型（DCF/可比公司）、Q3 實際財報公布後的一致性驗證、中國 JV 權益法認列對 EPS 的實際影響、機構持股與空頭部位變化。</p>
+    </div>
+    <div class="branch">
+      <h4>情境二：當加盟/授權合作對象評估</h4>
+      <p>下一步要深挖：區域授權條件、單店經濟模型（現金投報期）、品牌方對加盟商的支援強度、中國 JV 模式是否會外溢到其他區域授權條款。</p>
+    </div>
+    <div class="branch">
+      <h4>情境三：當供應商/合作夥伴評估</h4>
+      <p>下一步要深挖：採購政策穩定性、展店 600–650 家對供應鏈需求的實際拉動、付款條件與供應商集中度風險。</p>
+    </div>
+    <p>SSA 三天能力層判定：本報告已完成 <b>D1（現況掃描）＋ D2（風險判讀）</b>；<b>D3（執行建議）</b>需視上述情境確認後才能收斂到具體行動方案。</p>
+  </section>
+
+  <footer>
+    <p>本報告由 MUSEON biz-diagnostic 引擎產出・資料截至 2026-07-29（Q3 FY2026 財報公布前）</p>
+    <p class="src">
+      資料來源：
+      <a href="https://investor.starbucks.com/news/financial-releases/news-details/2026/Starbucks-Announces-Q3-Fiscal-Year-2026-Results-Conference-Call/default.aspx">Starbucks Investor Relations</a> ·
+      <a href="https://www.sec.gov/Archives/edgar/data/0000829224/000082922426000080/sbux-20260329.htm">SEC 10-Q FY2026</a> ·
+      <a href="https://finance.yahoo.com/markets/stocks/articles/starbucks-q3-earnings-ahead-buy-141100893.html">Yahoo Finance Q3 Preview</a> ·
+      <a href="https://www.restaurantdive.com/news/starbucks-china-controlling-stake-boyu-capital-4B/804609/">Restaurant Dive - China JV</a> ·
+      <a href="https://www.gurufocus.com/term/cash-to-debt/SBUX">GuruFocus Cash-to-Debt</a> ·
+      <a href="https://simplywall.st/stocks/us/consumer-services/nasdaq-sbux/starbucks/health">Simply Wall St 財務健康</a> ·
+      <a href="https://investmentgrade.com/starbucks-credit-rating-nnn-cap-rate/">信用評等</a>
+    </p>
+  </footer>
 
 </div>
 </body>
