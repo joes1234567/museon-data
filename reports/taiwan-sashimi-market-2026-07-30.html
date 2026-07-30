@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台灣生魚片市場調查報告 — 2026-07-30</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    background: #f5f6fa;
+    color: #1a1a2e;
+    line-height: 1.75;
+  }
+  .cover {
+    background: linear-gradient(135deg, #04211a 0%, #0b3450 55%, #14608f 100%);
+    color: white;
+    padding: 64px 48px 56px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.08);
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .cover-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #7fc7e3;
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .cover-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 40px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cover-meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .cover-meta-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .cover-meta-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  .disclaimer {
+    background: #fff4e5;
+    border: 1px solid #f0c37a;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: -28px 0 32px;
+    font-size: 13.5px;
+    color: #7a5210;
+  }
+  section {
+    background: white;
+    border-radius: 14px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  h2 {
+    font-size: 20px;
+    color: #0b3450;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e4eef3;
+  }
+  h3 {
+    font-size: 15.5px;
+    color: #123c4d;
+    margin: 20px 0 8px;
+  }
+  p, li { font-size: 14.5px; color: #33344a; }
+  ul { padding-left: 20px; margin-bottom: 8px; }
+  li { margin-bottom: 6px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 12px 0;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #eceef2;
+  }
+  th {
+    color: #5a5b70;
+    font-weight: 600;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-right: 6px;
+  }
+  .tag-risk { background: #fde8e8; color: #a12727; }
+  .tag-watch { background: #fff3d6; color: #8a5b00; }
+  .tag-ok { background: #e1f0f6; color: #0d5b7a; }
+  .tag-op { background: #e1f6e8; color: #12703f; }
+  .risk-row { margin-bottom: 18px; }
+  .risk-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1a1a2e;
+  }
+  .risk-bar-track {
+    background: #eceef2;
+    border-radius: 999px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .risk-bar-fill { height: 100%; border-radius: 999px; }
+  .risk-note { font-size: 12.5px; color: #6a6b80; margin-top: 6px; }
+  .fill-supply { background: linear-gradient(90deg,#f0a63a,#e0762a); }
+  .fill-safety { background: linear-gradient(90deg,#5ecf85,#e0a02a); }
+  .fill-competition { background: linear-gradient(90deg,#4fa8d6,#0b3450); }
+  .fill-overall { background: linear-gradient(90deg,#0d5b7a,#c9432f); }
+  .chain {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+    color: #33344a;
+  }
+  .chain-step {
+    padding: 10px 14px;
+    background: #f4f9fb;
+    border-left: 3px solid #0d5b7a;
+    border-radius: 0 6px 6px 0;
+  }
+  .chain-arrow { text-align: center; color: #9ba0ab; font-size: 13px; }
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  .stat-card { background: #f7f9fc; border-radius: 10px; padding: 14px 16px; }
+  .stat-card .v { font-size: 20px; font-weight: 700; color: #0b3450; }
+  .stat-card .l { font-size: 12px; color: #6a6b80; margin-top: 2px; }
+  .branch {
+    border: 1px solid #e4e6ec;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .branch h4 { font-size: 14.5px; color: #0b3450; margin-bottom: 6px; }
+  footer { text-align: center; font-size: 12px; color: #9ba0ab; padding: 24px 0 8px; }
+  .src { font-size: 11.5px; color: #9ba0ab; }
+  .src a { color: #6a8f9f; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-label">MARKET SCAN · 市場調查報告</div>
+  <h1>台灣生魚片市場調查</h1>
+  <div class="cover-sub">供應鏈、通路格局、食安風險與成長機會 — 全景掃描</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">報告日期</div>
+      <div class="cover-meta-value">2026-07-30</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">資料模式</div>
+      <div class="cover-meta-value">Mode B（Lite・公開資訊）</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">主導品項</div>
+      <div class="cover-meta-value">鮭魚（進口魚類第一名）</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">整體機會分</div>
+      <div class="cover-meta-value">58 / 100（利基可切，門檻不低）</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="disclaimer">
+    ⚠️ 本報告基於公開新聞、農業部/漁業署公開統計、產業地圖與海外市場研究機構報告整理，屬「市場現況掃描」性質，<b>非投資建議、非正式產業分析報告</b>。台灣生魚片市場缺乏官方統一的產值/規模統計，本報告以「鮭魚進口量、通路產業地圖、國際同類市場規模」交叉推估，數字有一定推估成分，如需精確市場規模，建議另行委託專業市場研究機構調查。
+  </div>
+
+  <section>
+    <h2>摘要</h2>
+    <p>台灣生魚片市場沒有官方統一的產值統計，但可以從三個側面拼出全貌：<b>供給端</b>由進口鮭魚獨大（2020 年進口 3.4 萬噸、產值 70 億台幣，粗估 1 萬噸做成生魚片）；<b>通路端</b>正在經歷「生鮮電商 + 超市自營到府」的結構重組，全聯、家樂福、愛上新鮮等新舊玩家同場競爭；<b>需求端</b>受食安事件（如「鮭魚之亂」）與地緣政治（日本核處理水排放）反覆衝擊消費信心，但整體仍隨全球生魚片市場（估 CAGR 5–10%）同步成長。整體判讀：<span class="tag tag-watch">利基成長市場</span> — 沒有巨頭壟斷，但供應鏈穩定性與食安信任是決定性門檻，不是行銷力。</p>
+  </section>
+
+  <section>
+    <h2>市場速覽</h2>
+    <div class="grid2">
+      <div class="stat-card"><div class="v">鮭魚年進口量 ~3.4 萬噸</div><div class="l">2020 年海關統計，含冷凍冷藏養殖/野生鮭魚</div></div>
+      <div class="stat-card"><div class="v">進口鮭魚產值 ~70 億台幣</div><div class="l">粗估其中 1 萬噸做成生魚片用途</div></div>
+      <div class="stat-card"><div class="v">全球生魚片市場 CAGR 5–10%</div><div class="l">各研究機構估值差異大，方向一致向上</div></div>
+      <div class="stat-card"><div class="v">亞太區占全球市場 60%+</div><div class="l">台灣屬核心需求區域之一</div></div>
+      <div class="stat-card"><div class="v">生食用魚介類衛生標準</div><div class="l">生菌數 ≤10⁵ CFU/g，大腸桿菌需陰性</div></div>
+      <div class="stat-card"><div class="v">全聯生鮮處理中心 7 座</div><div class="l">通路龍頭供應鏈基礎設施規模</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>供應鏈結構：為什麼是鮭魚獨霸</h2>
+    <p>台灣生魚片市場長年由「進口鮭魚」主導，而非本土鮪魚或其他漁獲，關鍵不是口味，是<b>供應穩定性</b>。挪威、智利兩國養殖鮭魚占全球產量 50% 以上，透過成熟的冷鏈物流與規模化養殖，能提供全年穩定、品質一致的原料——這是台灣本土海洋捕撈漁獲（受天候、漁汛、漁場波動影響大）難以比擬的商業優勢。</p>
+    <h3>白話</h3>
+    <p>做生魚片生意，第一關不是「找到好吃的魚」，是「找到穩定的魚」。這也是為什麼台灣本土「隱藏版生魚片」（如點仔魚、正鰹等）一直只能停留在懂行老饕的小眾圈子——供應量與穩定性撐不起規模化通路。</p>
+    <ul>
+      <li><span class="tag tag-watch">觀察點</span>鮭魚集中度風險：主要仰賴挪威/智利兩地供應，若遇到疫病（如智利鮭魚曾爆發過傳染性貧血）或運輸中斷，台灣市場沒有本土替代供給可即時填補。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>通路與競爭格局</h2>
+    <table>
+      <tr><th>通路類型</th><th>代表玩家</th><th>競爭優勢</th></tr>
+      <tr><td>超市自營到府</td><td>全聯小時達、家樂福家速配</td><td>7 座生鮮處理中心、1,000+ 門市、會員規模、客單 800–1,000 元</td></tr>
+      <tr><td>生鮮電商</td><td>愛上新鮮（營收破十億）</td><td>自有品牌拉高毛利，三級警戒期單日破萬訂單驗證需求彈性</td></tr>
+      <tr><td>垂直海鮮電商</td><td>漁爸海鮮、就是愛海鮮、94iseafood</td><td>專注水產品類、社群/團購導向，客群黏著但規模受限</td></tr>
+      <tr><td>便利商店快超市</td><td>7-ELEVEN OPEN NOW</td><td>密集據點即時取貨，切入衝動性消費場景</td></tr>
+      <tr><td>傳統市場/現切</td><td>台北漁產零批場、濱江市場</td><td>價格與新鮮度優勢，但無法規模化與品牌化</td></tr>
+    </table>
+    <p><b>白話：</b>這個市場目前沒有出現「生魚片專屬品牌」的絕對龍頭——贏家反而是把生魚片當作生鮮版圖裡一塊拼圖的綜合型玩家（全聯、家樂福、愛上新鮮）。純垂直海鮮電商活得下來，但規模天花板明顯，除非做出自有品牌或差異化冷鏈技術。</p>
+  </section>
+
+  <section>
+    <h2>食安與法規門檻</h2>
+    <ul>
+      <li><b>強制性標準</b>：衛福部《生食用食品類衛生標準》規定生食用魚介類生菌數需 ≤10⁵ CFU/g，大腸桿菌須陰性，大腸桿菌群 ≤10³ MPN/g。2003 年起水產業納入強制 HACCP 管制。</li>
+      <li><b>CAS 認證</b>：漁業署 2005 年起輔導的優良水產品驗證體系，屬自願性加值標章，非強制門檻，但是通路採購的重要篩選條件。</li>
+      <li><b>寄生蟲控制是法規空白帶</b>：現行標準管制生菌數與腐敗，但<b>沒有強制規範急速冷凍殺蟲的處理程序</b>——國際食品法典（CODEX）建議 -20°C 冷凍 7 天或 -35°C 冷凍 20 小時以上殺死寄生蟲，台灣廠商是否落實，缺乏強制稽核，屬於自律範疇。</li>
+      <li><span class="tag tag-risk">信心風險</span>「鮭魚之亂」（2021）+「日本核處理水排放」（2023）兩次事件顯示：這個市場的消費信心對食安/地緣新聞高度敏感，一次事件可能讓需求短期急凍。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>三維機會與風險指數</h2>
+    <div class="risk-row">
+      <div class="risk-label"><span>供應鏈穩定性風險 Supply Risk</span><span>60 / 100</span></div>
+      <div class="risk-bar-track"><div class="risk-bar-fill fill-supply" style="width:60%"></div></div>
+      <div class="risk-note">高度集中於挪威/智利兩地進口鮭魚，本土替代供給薄弱，冷鏈斷點影響大。</div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-label"><span>食安信任風險 Safety/Trust Risk</span><span>55 / 100</span></div>
+      <div class="risk-bar-track"><div class="risk-bar-fill fill-safety" style="width:55%"></div></div>
+      <div class="risk-note">寄生蟲處理無強制稽核；歷史上兩次事件證明消費信心脆弱，易受單一新聞衝擊。</div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-label"><span>通路競爭強度 Competition Intensity</span><span>50 / 100</span></div>
+      <div class="risk-bar-track"><div class="risk-bar-fill fill-competition" style="width:50%"></div></div>
+      <div class="risk-note">綜合型生鮮電商與超市把生魚片當附屬品類經營，沒有絕對龍頭，垂直玩家仍有切入空間但規模天花板明顯。</div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-label"><span>整體機會分 Overall Opportunity</span><span>58 / 100</span></div>
+      <div class="risk-bar-track"><div class="risk-bar-fill fill-overall" style="width:58%"></div></div>
+      <div class="risk-note">利基成長市場——全球同類市場穩定成長、台灣通路格局未定型，但供應鏈與食安是硬門檻，不是靠行銷就能繞過去。</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>因果鏈分析</h2>
+    <div class="chain">
+      <div class="chain-step">本土漁獲供應不穩定（天候/漁汛波動）→ 通路轉向進口鮭魚尋求全年穩定供應</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">挪威/智利規模化養殖 + 成熟冷鏈 → 鮭魚成為台灣生魚片市場事實上的「基準品項」，長期壓縮本土漁獲的市場空間</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">供給高度集中在少數國家 → 一旦爆發疫病/貿易摩擦/運輸中斷，市場沒有快速替代供給，價格與供應同步震盪</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">同時食安法規對「處理程序」（如殺寄生蟲冷凍規範）僅有建議、無強制稽核 → 消費信心的護城河其實建立在廠商自律，而非制度保證</div>
+      <div class="chain-arrow">↓</div>
+      <div class="chain-step">一旦類似「鮭魚之亂」的事件重演，衝擊的不只是單一品牌，是整個品類的信任度——這是所有生魚片玩家共同承擔的系統性風險</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>結論與交接建議</h2>
+    <p>這份市場調查目前是「公開資訊等級」的全景掃描——供應鏈、通路、法規骨架完整，但沒有鎖定使用情境。要往下深挖，方向取決於你要拿它做什麼：</p>
+    <div class="branch">
+      <h4>情境一：評估自己切入（開店/代理進口/自有品牌）</h4>
+      <p>下一步要深挖：進口成本結構（含關稅、冷鏈物流費）、CAS 認證申請門檻與時程、通路上架條件與毛利分成、單店/單一 SKU 經濟模型。</p>
+    </div>
+    <div class="branch">
+      <h4>情境二：協助既有餐飲客戶做菜單或供應鏈評估</h4>
+      <p>下一步要深挖：台灣消費者當令魚種偏好調查、食安法規實際稽核落地情形、替代供應商名單與風險分散策略。</p>
+    </div>
+    <div class="branch">
+      <h4>情境三：單純市場掃描給決策層看方向</h4>
+      <p>本報告已可作為第一層簡報素材；若要更精準的市場規模數字，需另委託專業市場研究機構做台灣在地產值調查（目前官方統計是空白）。</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>本報告由 MUSEON 市場調查引擎產出・資料截至 2026-07-30</p>
+    <p class="src">
+      資料來源：
+      <a href="https://www.newsmarket.com.tw/blog/149390/">上下游新聞 - 鮭魚之亂看門道</a> ·
+      <a href="https://vocus.cc/article/652a8fb7fd89780001a251a5">長佔進口魚類第一名，台灣人這麼喜歡鮭魚?</a> ·
+      <a href="https://www.moa.gov.tw/ws.php?id=2503330">農業部 - 拓銷水產品國際市場</a> ·
+      <a href="https://www.mirai.com.tw/2022-taiwan-fresh-ecommerce-industry-map/">未來流通研究所 - 台灣生鮮電商產業地圖</a> ·
+      <a href="https://www.bnext.com.tw/article/74011/tw-spmk-230207">數位時代 - 全聯家樂福生鮮電商割據</a> ·
+      <a href="https://www.cw.com.tw/article/5117556">天下雜誌 - 愛上新鮮生鮮電商</a> ·
+      <a href="https://www.fsi.net.tw/upload/20201123140442.pdf">衛福部食藥署 - 供應生食食品衛生安全操作手冊</a> ·
+      <a href="https://www.agriharvest.tw/archives/16473/">農傳媒 - 吃生魚片不是新鮮就安全</a> ·
+      <a href="https://www.globalgrowthinsights.com/market-reports/sashimi-market-102724">Global Growth Insights - Sashimi Market Forecast</a> ·
+      <a href="https://www.cna.com.tw/topic/newstopic/3510.aspx">中央社 - 福島核處理水新聞專題</a>
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>
