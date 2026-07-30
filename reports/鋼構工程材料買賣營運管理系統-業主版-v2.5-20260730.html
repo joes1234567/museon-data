@@ -397,7 +397,7 @@
   <!-- 4 -->
   <div class="section">
     <div class="section-header"><div class="section-num">4</div><div class="section-title">系統範圍界線</div></div>
-    <div class="section-lead">v2.4 更新：依業主裁示，正式會計帳改由外部會計 SaaS 處理，系統只保留「營運帳」並負責資料交換；其餘範圍界線沿用 2026/07/29 會議共識——第一階段不追求企業級 ERP，以「文件歸檔＋流程數位化＋半自動」為原則。</div>
+    <div class="section-lead">正式會計帳改由外部會計 SaaS 處理，系統只保留「營運帳」並負責資料交換；第一階段不追求企業級 ERP，以「文件歸檔＋流程數位化＋半自動」為原則。</div>
     <div class="scope-grid">
       <div class="card scope-in">
         <span class="scope-badge badge-in">✓ 本次納入</span>
@@ -442,13 +442,13 @@
   <!-- 5 -->
   <div class="section">
     <div class="section-header"><div class="section-num">5</div><div class="section-title">系統範圍（24 模組・全數必要）</div></div>
-    <div class="section-lead">v2.4 調整依據：正式會計帳改由外部會計 SaaS 處理，原完整會計 10 模組整批移除，系統新增 2 個會計資料交換模組；其餘 A／B／C／D 四大分類與 v2.3 相同，必要模組數由 32 降為 24。</div>
+    <div class="section-lead">分類邏輯：A、B 公司各自的專屬系統之外，其餘系統雙公司共用；正式會計帳改由外部會計 SaaS 處理，系統保留資料交換與稽核管理；管理分析與整合 4 個模組列為必要項目；人事異動流程不列入第一階段範圍。</div>
 
     <div class="card" style="border-left: 4px solid #2f74b5; margin-bottom: 24px;">
       <div class="card-title">拆分邏輯：A／B 專屬 vs 共用最小值 vs 會計 SaaS 交換 vs 管理分析</div>
-      <p style="margin-bottom: 10px;"><strong>A 公司專屬（6 項，含雙公司共用基礎，不可再砍）</strong>——工程專案建檔＋工程階段與請款設定＋施工報告管理，合起來是「進度＋文件＋請款聯動」的最小核心；加上雙公司切換權限、客戶供應商主檔、基礎文件管理三項共用基礎，是 A 公司 8 月上線的 critical path。</p>
+      <p style="margin-bottom: 10px;"><strong>A 公司專屬（6 項，含雙公司共用基礎，不可再砍）</strong>——工程專案建檔＋工程階段與請款設定＋施工報告管理，合起來是「進度＋文件＋請款聯動」的最小核心；加上雙公司切換權限、客戶供應商主檔、基礎文件管理三項共用基礎。</p>
       <p style="margin-bottom: 10px;"><strong>B 公司專屬（7 項，已是最小完整鏈路）</strong>——材料規格、拆圖需求、採購、入庫、出庫、裁切餘料、客戶訂單。這是材料公司對外銷售的既有主業務，7 項組成一條完整鏈路，沒有再砍的空間。</p>
-      <p style="margin-bottom: 10px;"><strong>人資（5 項，雙公司共用最小值）</strong>——員工主檔、出勤、請假加班、基礎薪資、薪資單生成；人事異動經確認不列入第一階段，已移出範圍。</p>
+      <p style="margin-bottom: 10px;"><strong>人資（5 項，雙公司共用最小值）</strong>——員工主檔、出勤、請假加班、基礎薪資、薪資單生成；人事異動不列入第一階段，已移出範圍。</p>
       <p style="margin-bottom: 10px;"><strong>會計 SaaS 交換（新增 2 項，取代原完整會計 10 項）</strong>——正式會計帳（總帳、傳票、試算表、資產負債表、報稅匯出等）改由外部會計 SaaS 處理後，系統移除這 10 個高複雜度、高風險自建功能，新增「會計資料對照與匯出」「匯出批次與稽核管理」2 個模組，負責把工程、採購、訂單、收付款資料整理成標準格式，交會計人員人工匯入 SaaS。系統仍保留「營運帳」——請款、收付款狀態、材料成本、專案概算損益，這些是工程與庫存流程的必要條件，不因改用 SaaS 而移除。</p>
       <p><strong>管理分析與整合（4 項，維持必要）</strong>——專案損益分析、管理儀表板、通知與提醒、報表優化，與 v2.3 相同，與核心模組同步建置。</p>
     </div>
@@ -554,7 +554,6 @@
   <!-- 6 -->
   <div class="section">
     <div class="section-header"><div class="section-num">6</div><div class="section-title">買斷制交付範圍</div></div>
-    <div class="section-lead">會議中客戶最關心的是「若廠商停止營運，系統是否仍可持續使用」。買斷不是口頭承諾，需在合約中明確列出以下交付項目。</div>
     <ol class="next-list">
       <li>原始碼完整交付（含版本控管紀錄）</li>
       <li>資料庫結構與資料字典</li>
@@ -589,7 +588,7 @@
       <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2);">
         <div class="total-row"><span class="label">系統維護費（月，建議）</span><span class="value">NT$8,000</span></div>
       </div>
-      <div style="margin-top: 16px; font-size: 13px; opacity: 0.75;">建議值，涵蓋每月例行 bug 修復、小幅調整與勞基法法規異動追蹤，不含新功能開發；不計入五年營運成本小計，因其性質為委外維護服務費（本公司收入），非外部代收代付項目，正式金額與服務範圍（回應時效、涵蓋工時）需另立維護合約議定。</div>
+      <div style="margin-top: 16px; font-size: 13px; opacity: 0.75;">建議值，涵蓋每月例行 bug 修復、小幅調整與勞基法法規異動追蹤，不含新功能開發；不計入五年營運成本小計，因其性質為委外維護服務費，非外部代收代付項目，正式金額與服務範圍（回應時效、涵蓋工時）需另立維護合約議定。</div>
     </div>
 
     <div class="divider"></div>
@@ -628,7 +627,6 @@
   <!-- 8 -->
   <div class="section">
     <div class="section-header"><div class="section-num">8</div><div class="section-title">風險與提醒</div></div>
-    <div class="section-lead">會議紀錄中客戶與廠商都已點出的風險，先攤開來，比事後補救便宜。</div>
     <ul class="risk-list">
       <li class="risk-item"><div class="risk-title">範圍反覆變動風險</div><div class="risk-desc">系統範圍歷經多次討論與調整，最新一次是將完整會計功能改為外部 SaaS 交換，模組數由 32 降為 24，總價定為 NT$826,000。正式報價前建議雙方以本版模組清單與總價為最終基準書面確認，避免報價與範圍再度脫鉤。</div></li>
       <li class="risk-item"><div class="risk-title">會計 SaaS 依賴風險</div><div class="risk-desc">正式帳務交由外部 SaaS 處理，第一階段系統與 SaaS 之間僅靠人工 CSV／Excel 匯出入，若操作疏漏或延遲匯入，可能造成帳務資料與營運帳落差；建議明訂每月對帳流程、匯出批次核對與異常回報機制，並儘早選定 SaaS 廠商以取得其匯入格式規格。</div></li>
@@ -645,20 +643,18 @@
   <!-- 9 -->
   <div class="section">
     <div class="section-header"><div class="section-num">9</div><div class="section-title">尚待確認事項</div></div>
-    <div class="section-lead">正式報價前，以下事項需要客戶與廠商共同確認；標示「客戶方待提供」者為 07/29 會議紀錄中已列出的正式待辦事項編號。</div>
     <div class="confirm-grid">
       <div class="confirm-card"><div class="confirm-cat">範圍與報價（廠商方待辦）</div><ul><li>依本次會議重新拆分系統模組（A01）</li><li>將前次大型規劃縮減為第一階段版本（A02）</li><li>重新評估建置方式及價格（A03）</li><li>整理 A、B 公司共用與專屬功能對照（A04）</li></ul></div>
       <div class="confirm-card"><div class="confirm-cat">範本待客戶提供</div><ul><li>施工報告正式範本（A06）</li><li>工程合約範本（A07）</li><li>採購單及供應商回簽單範本（A08）</li><li>薪資表及內部請款單範本（A09）</li></ul></div>
       <div class="confirm-card"><div class="confirm-cat">流程細節待雙方確認</div><ul><li>工程請款階段及逾期停工規則——自動或人工執行（A10）</li><li>選用之會計 SaaS 平台名稱與匯出／匯入格式規格（含科目代碼對照表，A11 更新為 SaaS 對接規格，需會計人員一併確認）</li><li>系統第一階段交付範圍最終定案（A05，雙方）</li></ul></div>
       <div class="confirm-card"><div class="confirm-cat">未來擴充</div><ul><li>加工廠系統擴充方式，待未來需求明確後另行規劃（A12）</li><li>電子發票串接財政部平台的啟用時機</li><li>會計 SaaS 由 CSV／Excel 人工匯出入升級為 API 自動串接的時機</li></ul></div>
-      <div class="confirm-card"><div class="confirm-cat">下次會議建議議題（會議紀錄原列）</div><ul><li>逐一確認功能屬於系統產生／使用者輸入／文件上傳／主管審核</li><li>確認 A、B 公司切換與權限、工程請款完整流程</li><li>確認人事與薪資計算欄位、會計資料匯出欄位與 SaaS 對接規格</li><li>確認正式報價依據與第一階段開發邊界</li></ul></div>
+      <div class="confirm-card"><div class="confirm-cat">下次會議建議議題</div><ul><li>逐一確認功能屬於系統產生／使用者輸入／文件上傳／主管審核</li><li>確認 A、B 公司切換與權限、工程請款完整流程</li><li>確認人事與薪資計算欄位、會計資料匯出欄位與 SaaS 對接規格</li><li>確認正式報價依據與第一階段開發邊界</li></ul></div>
     </div>
   </div>
 
   <!-- 10 -->
   <div class="section">
     <div class="section-header"><div class="section-num">10</div><div class="section-title">下一步</div></div>
-    <div class="section-lead">目前仍屬需求探索及廠商評估階段。本版（v2.4）「必要 24 模組・NT$826,000（不含稅）」作為本次正式提案基準，前次完整規劃可作為未來發展藍圖，但不作為第一階段全部開發範圍。</div>
     <ol class="next-list">
       <li>以「必要 24 模組・NT$826,000（不含稅）」作為本次正式提案基準，取代 v2.3 沿用的舊基準金額</li>
       <li>確認客戶選用之會計 SaaS 平台，取得其匯出／匯入格式規格與科目代碼對照表</li>
