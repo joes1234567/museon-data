@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>財務分析報告 — 113年度 vs 114年度</title>
+<style>
+  :root{
+    --bg:#0f1216; --panel:#171b21; --panel2:#1e232b; --line:#2a313c;
+    --text:#e8ecf1; --sub:#9aa5b1; --accent:#5b8def; --accent2:#7c5cff;
+    --good:#3fb97f; --bad:#e2574c; --warn:#e0a13d;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",Segoe UI,sans-serif;line-height:1.6;}
+  .wrap{max-width:980px;margin:0 auto;padding:40px 24px 80px;}
+  header{margin-bottom:36px;}
+  header h1{font-size:26px;margin:0 0 6px;font-weight:700;}
+  header p{color:var(--sub);margin:0;font-size:14px;}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--sub);
+    font-size:12px;padding:3px 10px;border-radius:999px;margin-top:10px;}
+
+  .alert{background:linear-gradient(135deg,#2a1a1a,#241016);border:1px solid #5c2a2a;border-radius:12px;
+    padding:20px 22px;margin:28px 0;}
+  .alert h3{margin:0 0 8px;color:#ff8a80;font-size:15px;}
+  .alert p{margin:0;color:#f0d5d2;font-size:14px;}
+  .alert b{color:#ffb3aa;}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:24px 0 36px;}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+  .kpi .label{color:var(--sub);font-size:12.5px;margin-bottom:8px;}
+  .kpi .value{font-size:22px;font-weight:700;}
+  .kpi .delta{font-size:12.5px;margin-top:4px;}
+  .up{color:var(--good);} .down{color:var(--bad);} .flat{color:var(--sub);}
+
+  section{margin:44px 0;}
+  h2{font-size:18px;border-left:4px solid var(--accent);padding-left:10px;margin:0 0 18px;}
+  h3{font-size:14.5px;color:var(--sub);margin:24px 0 10px;font-weight:600;}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;background:var(--panel);border-radius:10px;overflow:hidden;}
+  th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--line);}
+  th:first-child,td:first-child{text-align:left;color:var(--sub);}
+  thead th{background:var(--panel2);color:var(--sub);font-weight:600;font-size:12px;}
+  tr.total td{font-weight:700;background:rgba(91,141,239,.08);}
+  tr.section td{font-weight:700;color:var(--accent);background:transparent;padding-top:16px;border-bottom:1px solid var(--line);}
+  .neg{color:var(--bad);}
+  .pos{color:var(--good);}
+
+  .bars{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;}
+  .bar-row{margin:16px 0;}
+  .bar-row .lbl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;}
+  .bar-row .lbl span:last-child{color:var(--sub);}
+  .bar-track{background:var(--panel2);border-radius:6px;height:20px;position:relative;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:11px;color:#0f1216;font-weight:700;}
+  .fill-114{background:var(--accent);}
+  .fill-113{background:#4a5568;}
+
+  .legend{display:flex;gap:18px;font-size:12px;color:var(--sub);margin-top:10px;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:720px){.grid2{grid-template-columns:1fr;}}
+
+  .findings{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 22px;}
+  .findings li{margin:16px 0;font-size:14px;}
+  .findings b{color:var(--text);}
+
+  footer{margin-top:60px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);padding-top:18px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>財務分析報告</h1>
+  <p>資產負債表 × 綜合損益表 期間比較｜113年度(2024) vs 114年度(2025)</p>
+  <span class="badge">資料來源：使用者上傳之會計師事務所報表照片（第 1 頁）｜產出日期 2026-07-30</span>
+</header>
+
+<div class="alert">
+  <h3>⚠ 最需要注意的一件事</h3>
+  <p>114年度營收成長 <b>17.68%</b>（達 6,447,330 元），表面上看很健康。但把營業費用一起算進去會發現：
+  <b>本業其實由盈轉虧</b> — 113年度營業利益還有 <b>+208,309 元</b>，114年度變成 <b>−23,841 元</b>。
+  最終帳上稅後淨利有 34,954 元，是靠「營業毛利之外」的項目撐起來的（本報告未取得業外收支明細，僅第一頁資料）。
+  換句話說：<b>營收在漲，但賺錢能力在退步</b>，主因是薪資支出年增 23.6%，成長速度超過營收成長速度。</p>
+</div>
+
+<section>
+  <h2>一、關鍵指標總覽</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="label">營業收入淨額</div>
+      <div class="value">6,447,330</div>
+      <div class="delta up">▲ 17.68%（+968,544）</div>
+    </div>
+    <div class="kpi">
+      <div class="label">營業毛利率</div>
+      <div class="value">98.93%</div>
+      <div class="delta up">▲ 0.03 個百分點</div>
+    </div>
+    <div class="kpi">
+      <div class="label">營業利益（估）</div>
+      <div class="value neg">−23,841</div>
+      <div class="delta down">由盈轉虧（113年度 +208,309）</div>
+    </div>
+    <div class="kpi">
+      <div class="label">稅後淨利</div>
+      <div class="value">34,954</div>
+      <div class="delta down">▼ 79.55%（113年度 170,886）</div>
+    </div>
+    <div class="kpi">
+      <div class="label">資產總額</div>
+      <div class="value">996,174</div>
+      <div class="delta up">▲ 6.75%</div>
+    </div>
+    <div class="kpi">
+      <div class="label">負債總額</div>
+      <div class="value">927,967</div>
+      <div class="delta up">▲ 3.12%（負債比率 93.15%）</div>
+    </div>
+    <div class="kpi">
+      <div class="label">權益總額</div>
+      <div class="value pos">68,207</div>
+      <div class="delta up">▲ 105.12%（113年度 33,253）</div>
+    </div>
+    <div class="kpi">
+      <div class="label">流動比率</div>
+      <div class="value">80.27%</div>
+      <div class="delta down">▼ 113年度 85.06%</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>二、營收與獲利結構對比</h2>
+  <div class="bars">
+    <div class="bar-row">
+      <div class="lbl"><span>營業收入淨額</span><span>114：6,447,330 ｜ 113：5,478,786</span></div>
+      <div class="bar-track"><div class="bar-fill fill-114" style="width:100%"></div></div>
+      <div class="bar-track" style="margin-top:4px;"><div class="bar-fill fill-113" style="width:84.98%"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="lbl"><span>營業毛利</span><span>114：6,378,304 ｜ 113：5,418,321</span></div>
+      <div class="bar-track"><div class="bar-fill fill-114" style="width:100%"></div></div>
+      <div class="bar-track" style="margin-top:4px;"><div class="bar-fill fill-113" style="width:84.95%"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="lbl"><span>營業費用</span><span>114：6,402,145 ｜ 113：5,210,012</span></div>
+      <div class="bar-track"><div class="bar-fill fill-114" style="width:100%"></div></div>
+      <div class="bar-track" style="margin-top:4px;"><div class="bar-fill fill-113" style="width:81.38%"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="lbl"><span>稅後淨利</span><span>114：34,954 ｜ 113：170,886</span></div>
+      <div class="bar-track"><div class="bar-fill fill-114" style="width:20.46%"></div></div>
+      <div class="bar-track" style="margin-top:4px;"><div class="bar-fill fill-113" style="width:100%"></div></div>
+    </div>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--accent);"></i>114年度（2025）</span>
+      <span><i class="dot" style="background:#4a5568;"></i>113年度（2024）</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>三、資產負債表（期間比較）</h2>
+  <table>
+    <thead><tr><th>項目</th><th>114年度 金額</th><th>比率%</th><th>113年度 金額</th><th>比率%</th><th>增減金額</th><th>增減%</th></tr></thead>
+    <tbody>
+      <tr class="section"><td colspan="7">流動資產</td></tr>
+      <tr><td>現金</td><td>538,908</td><td>47.81</td><td>588,339</td><td>52.19</td><td class="neg">(49,431)</td><td class="neg">(8.40)</td></tr>
+      <tr><td>銀行存款_玉山</td><td>58,438</td><td>29.35</td><td>140,648</td><td>70.65</td><td class="neg">(82,210)</td><td class="neg">(58.45)</td></tr>
+      <tr><td>銀行存款_凱基</td><td>134,165</td><td>86.41</td><td>21,103</td><td>13.59</td><td class="pos">113,062</td><td class="pos">535.76</td></tr>
+      <tr><td>銀行存款_第一</td><td>5,915</td><td>27.88</td><td>15,304</td><td>72.12</td><td class="neg">(9,389)</td><td class="neg">(61.35)</td></tr>
+      <tr><td>進項稅額</td><td>7,439</td><td>99.27</td><td>55</td><td>0.73</td><td class="pos">7,384</td><td class="pos">13,425.45</td></tr>
+      <tr class="total"><td>流動資產總額</td><td>744,865</td><td>49.32</td><td>765,449</td><td>50.68</td><td class="neg">(20,584)</td><td class="neg">(2.69)</td></tr>
+
+      <tr class="section"><td colspan="7">非流動資產</td></tr>
+      <tr><td>房屋及建築</td><td>132,000</td><td>50.00</td><td>132,000</td><td>50.00</td><td>0</td><td>0.00</td></tr>
+      <tr><td>減：累計折舊</td><td>(16,000)</td><td>80.00</td><td>(4,000)</td><td>20.00</td><td class="neg">(12,000)</td><td class="neg">300.00</td></tr>
+      <tr class="total"><td>不動產、廠房及設備總額</td><td>116,000</td><td>47.54</td><td>128,000</td><td>52.46</td><td class="neg">(12,000)</td><td class="neg">(9.38)</td></tr>
+      <tr><td>存出保證金</td><td>130,000</td><td>100.00</td><td>0</td><td>0.00</td><td class="pos">130,000</td><td>—</td></tr>
+      <tr><td>未攤銷費用</td><td>5,309</td><td>11.79</td><td>39,718</td><td>88.21</td><td class="neg">(34,409)</td><td class="neg">(86.63)</td></tr>
+      <tr class="total"><td>其他非流動資產總額</td><td>135,309</td><td>77.31</td><td>39,718</td><td>22.69</td><td class="pos">95,591</td><td class="pos">240.67</td></tr>
+      <tr class="total"><td>非流動資產總額</td><td>251,309</td><td>59.97</td><td>167,718</td><td>40.03</td><td class="pos">83,591</td><td class="pos">49.84</td></tr>
+      <tr class="total"><td><b>資產總額</b></td><td><b>996,174</b></td><td>51.63</td><td><b>933,167</b></td><td>48.37</td><td class="pos">63,007</td><td class="pos">6.75</td></tr>
+
+      <tr class="section"><td colspan="7">流動負債</td></tr>
+      <tr><td>銀行借款</td><td>593,650</td><td>42.89</td><td>790,437</td><td>57.11</td><td class="neg">(196,787)</td><td class="neg">(24.90)</td></tr>
+      <tr><td>應付費用</td><td>0</td><td>0.00</td><td>54,362</td><td>100.00</td><td class="neg">(54,362)</td><td class="neg">(100.00)</td></tr>
+      <tr><td>應付稅捐</td><td>38,283</td><td>40.99</td><td>55,115</td><td>59.01</td><td class="neg">(16,832)</td><td class="neg">(30.54)</td></tr>
+      <tr><td>業主(股東)往來</td><td>200,000</td><td>100.00</td><td>0</td><td>0.00</td><td class="pos">200,000</td><td>—</td></tr>
+      <tr><td>應納稅額</td><td>1,570</td><td>100.00</td><td>0</td><td>0.00</td><td class="pos">1,570</td><td>—</td></tr>
+      <tr><td>代收稅款</td><td>78,000</td><td>100.00</td><td>0</td><td>0.00</td><td class="pos">78,000</td><td>—</td></tr>
+      <tr><td>代收款項</td><td>16,464</td><td>100.00</td><td>0</td><td>0.00</td><td class="pos">16,464</td><td>—</td></tr>
+      <tr class="total"><td><b>負債總額</b></td><td><b>927,967</b></td><td>50.77</td><td><b>899,914</b></td><td>49.23</td><td class="pos">28,053</td><td class="pos">3.12</td></tr>
+
+      <tr class="section"><td colspan="7">權益</td></tr>
+      <tr><td>普通股股本</td><td>250,000</td><td>50.00</td><td>250,000</td><td>50.00</td><td>0</td><td>0.00</td></tr>
+      <tr><td>累積盈虧(87年度以後)</td><td>(216,747)</td><td>35.86</td><td>(387,633)</td><td>64.14</td><td class="pos">170,886</td><td class="pos">(44.08)</td></tr>
+      <tr><td>本期損益(稅後)</td><td>34,954</td><td>16.98</td><td>170,886</td><td>83.02</td><td class="neg">(135,932)</td><td class="neg">(79.55)</td></tr>
+      <tr class="total"><td>保留盈餘總額</td><td>(181,793)</td><td>45.61</td><td>(216,747)</td><td>54.39</td><td class="pos">34,954</td><td class="pos">(16.13)</td></tr>
+      <tr class="total"><td><b>權益總額</b></td><td><b>68,207</b></td><td>67.23</td><td><b>33,253</b></td><td>32.77</td><td class="pos">34,954</td><td class="pos">105.12</td></tr>
+      <tr class="total"><td><b>負債及權益總額</b></td><td><b>996,174</b></td><td>51.63</td><td><b>933,167</b></td><td>48.37</td><td class="pos">63,007</td><td class="pos">6.75</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>四、綜合損益表（期間比較）</h2>
+  <table>
+    <thead><tr><th>項目</th><th>114年度 金額</th><th>比率%</th><th>113年度 金額</th><th>比率%</th><th>增減金額</th><th>增減%</th></tr></thead>
+    <tbody>
+      <tr><td>銷貨收入 / 營業收入淨額</td><td>6,447,330</td><td>100.00</td><td>5,478,786</td><td>100.00</td><td class="pos">968,544</td><td class="pos">17.68</td></tr>
+      <tr><td>進貨（銷貨成本）</td><td>69,026</td><td>1.07</td><td>60,465</td><td>1.10</td><td class="neg">8,561</td><td class="neg">14.16</td></tr>
+      <tr class="total"><td>營業毛利</td><td>6,378,304</td><td>98.93</td><td>5,418,321</td><td>98.90</td><td class="pos">959,983</td><td class="pos">17.72</td></tr>
+
+      <tr class="section"><td colspan="7">營業費用</td></tr>
+      <tr><td>薪資支出</td><td>4,605,187</td><td>71.43</td><td>3,725,902</td><td>68.01</td><td class="neg">879,285</td><td class="neg">23.60</td></tr>
+      <tr><td>薪資支出-公司提撥</td><td>64,987</td><td>1.01</td><td>55,307</td><td>1.01</td><td class="neg">9,680</td><td class="neg">17.50</td></tr>
+      <tr><td>租金支出</td><td>780,000</td><td>12.10</td><td>780,000</td><td>14.24</td><td>0</td><td>0.00</td></tr>
+      <tr><td>文具用品</td><td>121,986</td><td>1.89</td><td>55,201</td><td>1.01</td><td class="neg">66,785</td><td class="neg">120.99</td></tr>
+      <tr><td>郵電費</td><td>5,882</td><td>0.09</td><td>22,400</td><td>0.41</td><td class="pos">(16,518)</td><td class="pos">(73.74)</td></tr>
+      <tr><td>修繕費</td><td>152,494</td><td>2.37</td><td>52,047</td><td>0.95</td><td class="neg">100,447</td><td class="neg">192.99</td></tr>
+      <tr><td>廣告費</td><td>5,191</td><td>0.08</td><td>6,135</td><td>0.11</td><td class="pos">(944)</td><td class="pos">(15.39)</td></tr>
+      <tr><td>水電瓦斯費</td><td>471</td><td>0.01</td><td>48,721</td><td>0.89</td><td class="pos">(48,250)</td><td class="pos">(99.03)</td></tr>
+      <tr><td>保險費</td><td>162,624</td><td>2.52</td><td>123,442</td><td>2.25</td><td class="neg">39,182</td><td class="neg">31.74</td></tr>
+      <tr><td>交際費</td><td>26,997</td><td>0.42</td><td>0</td><td>0.00</td><td class="neg">26,997</td><td>—</td></tr>
+      <tr><td>捐贈</td><td>14,820</td><td>0.23</td><td>4,000</td><td>0.07</td><td class="neg">10,820</td><td class="neg">270.50</td></tr>
+      <tr><td>各項折舊</td><td>12,000</td><td>0.19</td><td>4,000</td><td>0.07</td><td class="neg">8,000</td><td class="neg">200.00</td></tr>
+      <tr><td>各項損耗及攤提</td><td>34,409</td><td>0.53</td><td>34,411</td><td>0.63</td><td class="pos">(2)</td><td class="pos">(0.01)</td></tr>
+      <tr><td>其他費用</td><td>101,799</td><td>1.58</td><td>0</td><td>0.00</td><td class="neg">101,799</td><td>—</td></tr>
+      <tr><td>書報雜誌</td><td>0</td><td>0.00</td><td>29,473</td><td>0.54</td><td class="pos">(29,473)</td><td class="pos">(100.00)</td></tr>
+      <tr><td>雜項購置</td><td>99,233</td><td>1.54</td><td>161,892</td><td>2.95</td><td class="pos">(62,659)</td><td class="pos">(38.70)</td></tr>
+      <tr><td>交通費</td><td>71,879</td><td>1.11</td><td>68,538</td><td>1.25</td><td class="neg">3,341</td><td class="neg">4.87</td></tr>
+      <tr><td>消耗費</td><td>21,758</td><td>0.34</td><td>0</td><td>0.00</td><td class="neg">21,758</td><td>—</td></tr>
+      <tr><td>勞務費</td><td>78,428</td><td>1.22</td><td>0</td><td>0.00</td><td class="neg">78,428</td><td>—</td></tr>
+      <tr><td>執行業務報酬</td><td>42,000</td><td>0.65</td><td>38,000</td><td>0.69</td><td class="neg">4,000</td><td class="neg">10.53</td></tr>
+      <tr class="total"><td>營業費用總額</td><td>6,402,145</td><td>99.30</td><td>5,210,012</td><td>95.09</td><td class="neg">1,192,133</td><td class="neg">22.88</td></tr>
+      <tr class="total"><td><b>營業利益（估，毛利−費用）</b></td><td class="neg"><b>(23,841)</b></td><td>—</td><td class="pos"><b>208,309</b></td><td>—</td><td class="neg">(232,150)</td><td class="neg">—</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--sub);font-size:12px;margin-top:10px;">
+  註：稅後淨利 34,954 元與上方「營業利益（估）」有 58,795 元落差，代表存在業外收支或所得稅調整項目，未出現在目前提供的頁面內，建議向會計師索取完整頁次核對。
+  </p>
+</section>
+
+<section>
+  <h2>五、重點觀察</h2>
+  <div class="findings">
+    <ul>
+      <li><b>本業獲利能力在惡化：</b>營收成長17.68%看似亮眼，但薪資支出成長23.60%、修繕費暴增192.99%、文具用品成長120.99%，多項費用增速都超過營收增速，導致營業利益由盈轉虧。</li>
+      <li><b>薪資是最大的成本槓桿：</b>薪資支出（含公司提撥）已占營收71.43%＋1.01%＝72.44%，是所有費用中占比最高、增幅也最大的項目，值得優先檢視是否有人力配置或加薪節奏的問題。</li>
+      <li><b>資金結構轉向股東：</b>銀行借款年減24.90%（減少196,787元），但「業主(股東)往來」新增200,000元——公司在減少對外融資，改用股東資金週轉，代表銀行授信可能收緊，或公司主動降低利息負擔。</li>
+      <li><b>體質有改善但速度放緩：</b>累積虧損從387,633元收斂到216,747元（改善44.08%），權益總額成長105.12%，方向正確；但本期稅後淨利年減79.55%，改善的速度明顯變慢。</li>
+      <li><b>流動性略微吃緊：</b>流動比率從85.06%降到80.27%，現金部位減少8.40%，加上多個銀行帳戶餘額同步下滑（玉山減58.45%、第一銀行減61.35%），建議留意短期周轉能力。</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  本報告依據使用者於 2026-07-30 上傳之會計師事務所報表照片（資產負債期間比較表、綜合損益期間比較表，第1頁）整理生成，
+  未取得完整全部頁次（業外收支明細、所得稅費用計算）。若需精確稅後淨利拆解，建議提供報表其餘頁次以完整核對。
+</footer>
+
+</div>
+</body>
+</html>
