@@ -434,10 +434,10 @@
 
     <div class="card" style="border-left: 4px solid #2f74b5; margin-bottom: 24px;">
       <div class="card-title">拆分邏輯：A／B 專屬 vs 共用最小值 vs 會計完整 vs 管理分析</div>
-      <p style="margin-bottom: 10px;"><strong>A 公司專屬（3 項，不可再砍）</strong>——工程專案建檔＋工程階段與請款設定＋施工報告管理。這三項合起來就是「進度＋文件＋請款聯動」，是工程專案系統的最小核心：拿掉任何一項，客戶最在意的「請款卡在哪、能不能進下一階段」就斷了，不是加值功能，是主流程本身。</p>
-      <p style="margin-bottom: 10px;"><strong>B 公司專屬（7 項，已是最小完整鏈路）</strong>——材料規格、拆圖需求、採購、入庫、出庫、裁切餘料、客戶訂單。這是材料公司對外銷售的既有主業務，7 項組成一條完整鏈路，沒有再砍的空間——砍掉任何一段，材料公司現有生意就做不下去，不是為了服務工程公司才新增的功能。</p>
-      <p style="margin-bottom: 10px;"><strong>雙公司共用・做到最小值（8 項，全數必要）</strong>——雙公司切換權限、客戶供應商主檔、基礎文件管理，加上人資四項（員工主檔、出勤、請假加班、基礎薪資、薪資單生成）；人事異動經確認不列入第一階段，已移出範圍。這些是兩家公司都要用，但先求堪用、不求完整。</p>
-      <p style="margin-bottom: 10px;">會計（10 項，唯一維持完整）——收支登錄到報稅匯出、含發票記錄管理，全數必要且不比照其他共用系統做最小值，因為客戶自己記帳、非外包，會計系統的完整度直接等於帳能不能對得上。</p>
+      <p style="margin-bottom: 10px;"><strong>A 公司專屬（3 項，不可再砍）</strong>——工程專案建檔＋工程階段與請款設定＋施工報告管理。這三項合起來就是「進度＋文件＋請款聯動」，是工程專案系統的最小核心。</p>
+      <p style="margin-bottom: 10px;"><strong>B 公司專屬（7 項，已是最小完整鏈路）</strong>——材料規格、拆圖需求、採購、入庫、出庫、裁切餘料、客戶訂單。</p>
+      <p style="margin-bottom: 10px;"><strong>雙公司共用・做到最小值（8 項，全數必要）</strong>——雙公司切換權限、客戶供應商主檔、基礎文件管理，加上人資四項（員工主檔、出勤、請假加班、基礎薪資、薪資單生成）。</p>
+      <p style="margin-bottom: 10px;">會計——收支登錄到報稅匯出、含發票記錄管理。</p>
       <p><strong>管理分析與整合（4 項，列為必要）</strong>——專案損益分析、管理儀表板、通知與提醒、報表優化，與核心模組同步建置。</p>
     </div>
 
@@ -538,7 +538,6 @@
   <!-- 6 -->
   <div class="section">
     <div class="section-header"><div class="section-num">6</div><div class="section-title">買斷制交付範圍</div></div>
-    <div class="section-lead">會議中客戶最關心的是「若廠商停止營運，系統是否仍可持續使用」。買斷不是口頭承諾，需在合約中明確列出以下交付項目。</div>
     <ol class="next-list">
       <li>原始碼完整交付（含版本控管紀錄）</li>
       <li>資料庫結構與資料字典</li>
@@ -559,7 +558,7 @@
     <div class="section-lead">本次系統規劃範圍之費用概算如下。</div>
     <div class="total-card">
       <div class="total-row grand"><span class="label">32 個承諾交付模組合計</span><span class="value">NT$1,100,000</span></div>
-      <div class="total-note">本報價涵蓋全部規劃模組（不排除任何項目），為完整交付版本；如需精簡範圍（會計改採外部 SaaS、共 24 模組），另有 NT$826,000 版本可供對照選擇。</div>
+      <div class="total-note">本報價涵蓋全部規劃模組（不排除任何項目），為完整交付版本。</div>
       <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2);">
         <div class="total-row"><span class="label">主機租賃費（年）</span><span class="value">NT$36,000</span></div>
         <div class="total-row"><span class="label">網域費（年）</span><span class="value">NT$1,500</span></div>
@@ -570,14 +569,13 @@
       <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2);">
         <div class="total-row"><span class="label">系統維護費（月，建議）</span><span class="value">NT$15,000</span></div>
       </div>
-      <div style="margin-top: 16px; font-size: 13px; opacity: 0.75;">建議值，涵蓋每月例行 bug 修復、小幅調整與勞基法法規異動追蹤，不含新功能開發；不計入五年營運成本小計，因其性質為委外維護服務費（本公司收入），非外部代收代付項目，正式金額與服務範圍（回應時效、涵蓋工時）需另立維護合約議定。</div>
+      <div style="margin-top: 16px; font-size: 13px; opacity: 0.75;">建議值，涵蓋每月例行 bug 修復、小幅調整與勞基法法規異動追蹤，不含新功能開發；不計入五年營運成本小計，因其性質為委外維護服務費，非外部代收代付項目，正式金額與服務範圍（回應時效、涵蓋工時）需另立維護合約議定。</div>
     </div>
   </div>
 
   <!-- 8 -->
   <div class="section">
     <div class="section-header"><div class="section-num">8</div><div class="section-title">風險與提醒</div></div>
-    <div class="section-lead">會議紀錄中客戶與廠商都已點出的風險，先攤開來，比事後補救便宜。</div>
     <ul class="risk-list">
       <li class="risk-item"><div class="risk-title">範圍反覆變動風險</div><div class="risk-desc">範圍歷經多次確認調整，目前定案為 32 個必要模組（含管理分析與整合 4 項）。建議雙方以本版模組清單為最終基準書面確認，避免報價與範圍再度脫鉤。</div></li>
       <li class="risk-item"><div class="risk-title">範圍過大風險</div><div class="risk-desc">目前需求已接近中型 ERP＋工程專案管理系統，一次全做容易時程失控、驗收困難。建議嚴守第一階段最小可用範圍。</div></li>
@@ -593,7 +591,6 @@
   <!-- 9 -->
   <div class="section">
     <div class="section-header"><div class="section-num">9</div><div class="section-title">尚待確認事項</div></div>
-    <div class="section-lead">正式報價前，以下事項需要客戶與廠商共同確認；標示「客戶方待提供」者為 07/29 會議紀錄中已列出的正式待辦事項編號。</div>
     <div class="confirm-grid">
       <div class="confirm-card"><div class="confirm-cat">範圍與報價（廠商方待辦）</div><ul><li>依本次會議重新拆分系統模組（A01）</li><li>將前次大型規劃縮減為第一階段版本（A02）</li><li>重新評估建置方式及價格（A03）</li><li>整理 A、B 公司共用與專屬功能對照（A04）</li></ul></div>
       <div class="confirm-card"><div class="confirm-cat">範本待客戶提供</div><ul><li>施工報告正式範本（A06）</li><li>工程合約範本（A07）</li><li>採購單及供應商回簽單範本（A08）</li><li>薪資表及內部請款單範本（A09）</li></ul></div>
@@ -606,7 +603,6 @@
   <!-- 10 -->
   <div class="section">
     <div class="section-header"><div class="section-num">10</div><div class="section-title">下一步</div></div>
-    <div class="section-lead">目前仍屬需求探索及廠商評估階段。本版（v2.3）「必要 32 模組・NT$1,100,000（不含稅）」作為本次正式提案基準，前次完整規劃可作為未來發展藍圖，但不作為第一階段全部開發範圍。</div>
     <ol class="next-list">
       <li>取得客戶方四份範本（施工報告、工程合約、採購單／供應商回簽單、薪資表／內部請款單）</li>
       <li>以一個真實鋼構工程案件走完整流程，驗證第 5 節四階段拆法是否成立</li>
