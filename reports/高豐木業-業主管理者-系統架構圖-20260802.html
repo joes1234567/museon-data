@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高豐木業 — 業主／管理者 系統架構圖</title>
+<style>
+  :root {
+    --jade: #1a6b3c;
+    --jade-light: #2d9a5c;
+    --teal: #2A7A6E;
+    --gold: #B8923A;
+    --plum: #7A4FA0;
+    --sky: #2A6A8A;
+    --ink: #0f1a12;
+    --slate: #4A5A4E;
+    --mist: #8898A0;
+    --border: #DDE4DC;
+    --parchment: #F5F8F5;
+    --snow: #FBFDFB;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .hero {
+    background: linear-gradient(135deg, #0a1a0e 0%, #12391e 60%, #1a5a30 100%);
+    color: #fff;
+    padding: 56px 40px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(26,107,60,0.28) 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 50%, rgba(42,122,110,0.15) 0%, transparent 70%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(45,154,92,0.25);
+    border: 1px solid rgba(45,154,92,0.5);
+    color: #5ecf85;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  .hero p {
+    margin-top: 12px;
+    color: rgba(255,255,255,0.75);
+    font-size: 14px;
+    position: relative;
+  }
+
+  .wrap { max-width: 1000px; margin: -28px auto 60px; padding: 0 24px; position: relative; }
+
+  .role-card {
+    background: linear-gradient(135deg, #1a2a3a 0%, #101c28 100%);
+    border-radius: 18px;
+    padding: 28px 32px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 12px 30px rgba(10,20,15,0.25);
+    margin-bottom: 30px;
+  }
+  .role-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, #2d9a5c, #1a6b3c);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; flex-shrink: 0;
+  }
+  .role-card h2 { font-size: 20px; font-weight: 700; }
+  .role-card .role-desc { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 4px; }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 720px) { .module-grid { grid-template-columns: 1fr; } }
+
+  .mcard {
+    background: var(--snow);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .mcard-head {
+    padding: 18px 20px;
+    display: flex; align-items: center; gap: 12px;
+    color: #fff;
+  }
+  .mcard-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: rgba(255,255,255,0.22);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .mcard-title { font-size: 15px; font-weight: 700; }
+  .mcard-sub { font-size: 11.5px; color: rgba(255,255,255,0.8); margin-top: 2px; }
+
+  .m-jade   { background: linear-gradient(135deg, var(--jade-light), var(--jade)); }
+  .m-plum   { background: linear-gradient(135deg, #9a6ec2, var(--plum)); }
+  .m-gold   { background: linear-gradient(135deg, #d1a850, var(--gold)); }
+  .m-sky    { background: linear-gradient(135deg, #3f8bb0, var(--sky)); }
+
+  .mcard-body { padding: 18px 20px 20px; }
+  .branch {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+  }
+  .branch:last-child { margin-bottom: 0; }
+  .branch::before {
+    content: '';
+    position: absolute; left: 0; top: 8px;
+    width: 10px; height: 1.5px;
+    background: var(--border);
+  }
+  .branch::after {
+    content: '';
+    position: absolute; left: 0; top: -4px; bottom: 8px;
+    width: 1.5px;
+    background: var(--border);
+  }
+  .branch:last-child::after { bottom: 8px; height: 12px; }
+  .branch-title { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+  .branch-desc { font-size: 12.5px; color: var(--slate); margin-top: 2px; line-height: 1.55; }
+
+  .foot-note {
+    margin-top: 30px;
+    background: linear-gradient(135deg, #E8F5EE 0%, #F0FAF4 100%);
+    border: 1px solid #a8d8bc;
+    border-radius: 14px;
+    padding: 18px 24px;
+    font-size: 12.5px;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+  .foot-note b { color: var(--jade); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-tag">高豐木業 · 系統架構圖</span>
+  <h1>業主／管理者</h1>
+  <p>掌握公司整體營運與決策 — 查看營運、成本、毛利、庫存與材料利用率；指派與自訂角色權限；核准年度結算</p>
+</div>
+
+<div class="wrap">
+  <div class="role-card">
+    <div class="role-icon">👑</div>
+    <div>
+      <h2>業主／管理者 系統角色架構</h2>
+      <div class="role-desc">高豐木業木料全流程營運管理系統 · 8 大角色之一</div>
+    </div>
+  </div>
+
+  <div class="module-grid">
+
+    <div class="mcard">
+      <div class="mcard-head m-plum">
+        <div class="mcard-icon">🔑</div>
+        <div>
+          <div class="mcard-title">權限管理</div>
+          <div class="mcard-sub">角色包裝與自訂</div>
+        </div>
+      </div>
+      <div class="mcard-body">
+        <div class="branch">
+          <div class="branch-title">細顆粒度後台包裝</div>
+          <div class="branch-desc">查看／新增／修改／作廢／調價／看成本／看薪資／跨據點等 8 種操作權限，包裝成預設角色</div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">指派預設角色</div>
+          <div class="branch-desc">門市人員／主管／老闆會計等，不需逐項勾選</div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">自訂新角色</div>
+          <div class="branch-desc">可在既有角色之外自行新增組合，兼顧簡便與彈性</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mcard">
+      <div class="mcard-head m-sky">
+        <div class="mcard-icon">📊</div>
+        <div>
+          <div class="mcard-title">營運報表</div>
+          <div class="mcard-sub">報表管理</div>
+        </div>
+      </div>
+      <div class="mcard-body">
+        <div class="branch">
+          <div class="branch-title">材料利用率報表</div>
+          <div class="branch-desc">掌握用料效率，追蹤損耗與餘料再利用狀況</div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">營收與成本報表</div>
+          <div class="branch-desc">建立在精準的前段資料輸入之上</div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">庫存空間規劃報表</div>
+          <div class="branch-desc">每月出貨量與空間規劃</div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">供應商採購分析報表</div>
+          <div class="branch-desc">採購批次、進價、品質趨勢</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mcard">
+      <div class="mcard-head m-gold">
+        <div class="mcard-icon">💰</div>
+        <div>
+          <div class="mcard-title">成本分析</div>
+          <div class="mcard-sub">成本與毛利分析</div>
+        </div>
+      </div>
+      <div class="mcard-body">
+        <div class="branch">
+          <div class="branch-title">訂單毛利試算</div>
+          <div class="branch-desc">每張訂單的實際毛利算得出來</div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">餘料價值認列</div>
+          <div class="branch-desc">工廠餘料／客戶餘料如何列入成本，待與會計以實際案例共同定案</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mcard">
+      <div class="mcard-head m-jade">
+        <div class="mcard-icon">🗓️</div>
+        <div>
+          <div class="mcard-title">年度管理</div>
+          <div class="mcard-sub">年度結算／期末盤點</div>
+        </div>
+      </div>
+      <div class="mcard-body">
+        <div class="branch">
+          <div class="branch-title">盤點確認鎖定</div>
+          <div class="branch-desc">確認後的資料鎖定成下一年度歷史紀錄</div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">鎖定後唯讀</div>
+          <div class="branch-desc">僅能查詢，修正需走調整單，不可直接更動</div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">跨模組同步鎖定</div>
+          <div class="branch-desc">牽動庫存、記帳、歷史資料一起鎖定為年度紀錄</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot-note">
+    <b>說明</b>：這是「業主／管理者」單一角色的功能架構示意，抓大方向呈現（樹狀分支＋色塊圖示），細節配色與圖示可再調整。其餘 7 個角色（業務／內勤、採購／倉儲、現場加工人員、生產主管、財務／記帳人員、系統管理員、門市人員）尚未製作，待這張確認方向後再擴充。
+  </div>
+</div>
+
+</body>
+</html>
