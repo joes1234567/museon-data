@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Together By Stella｜商業盡職調查與客群開發報告</title>
+<style>
+  :root{
+    --ink:#1c1d21; --sub:#5b5f6b; --line:#e4e6ea; --bg:#fafafa; --card:#ffffff;
+    --accent:#2f5c8a; --accent-soft:#e8f0f8; --warn:#a4581f; --warn-soft:#fbeee1;
+    --good:#2f7a52; --good-soft:#e7f4ec; --risk:#a13a3a; --risk-soft:#fbe9e9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",-apple-system,sans-serif;
+    line-height:1.75; font-size:15.5px;
+  }
+  .wrap{max-width:900px; margin:0 auto; padding:0 24px 80px;}
+  header.hero{
+    padding:56px 24px 40px; background:linear-gradient(135deg,#1c2b3a,#2f5c8a);
+    color:#fff; text-align:left;
+  }
+  header.hero .wrap{max-width:900px; padding:0;}
+  header.hero h1{font-size:26px; margin:0 0 8px; font-weight:700;}
+  header.hero p.sub{margin:0; opacity:.85; font-size:14px;}
+  header.hero .meta{margin-top:20px; display:flex; gap:24px; flex-wrap:wrap; font-size:13px; opacity:.9;}
+  .meta span b{font-weight:700; display:block; font-size:12px; opacity:.7; margin-bottom:2px;}
+
+  section{margin-top:40px;}
+  h2{
+    font-size:19px; margin:0 0 16px; padding-bottom:10px;
+    border-bottom:2px solid var(--ink); display:flex; align-items:center; gap:8px;
+  }
+  h2 .num{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:50%; background:var(--ink); color:#fff;
+    font-size:13px; font-weight:700;
+  }
+  h3{font-size:16px; margin:24px 0 10px; color:var(--accent);}
+  p{margin:0 0 12px; color:#333;}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:20px 22px; margin-bottom:16px;
+  }
+  .callout{border-radius:10px; padding:16px 18px; margin:16px 0; font-size:14.5px;}
+  .callout.note{background:var(--accent-soft); border-left:4px solid var(--accent);}
+  .callout.warn{background:var(--warn-soft); border-left:4px solid var(--warn); color:#5c3413;}
+  .callout.risk{background:var(--risk-soft); border-left:4px solid var(--risk); color:#5c1f1f;}
+  .callout.good{background:var(--good-soft); border-left:4px solid var(--good); color:#1f4a32;}
+  .callout b{display:block; margin-bottom:4px;}
+
+  .stat-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin:16px 0;}
+  .stat{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px;}
+  .stat .label{font-size:12px; color:var(--sub); margin-bottom:6px;}
+  .stat .value{font-size:22px; font-weight:700; color:var(--ink);}
+  .stat .tag{font-size:11px; color:var(--sub); margin-top:4px;}
+
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+  th,td{padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top;}
+  th{background:#f2f3f5; font-weight:700; font-size:13px; color:var(--sub);}
+  tr:last-child td{border-bottom:none;}
+  td.num, th.num{text-align:right; white-space:nowrap;}
+
+  .bar-row{display:flex; align-items:center; gap:10px; margin:8px 0;}
+  .bar-row .bar-label{width:130px; font-size:13px; color:var(--sub); flex-shrink:0;}
+  .bar-track{flex:1; background:#eee; border-radius:6px; height:22px; position:relative; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:6px; background:var(--accent); display:flex; align-items:center;}
+  .bar-fill.b2{background:#8aa9c4;}
+  .bar-fill span{color:#fff; font-size:11.5px; padding-left:8px; font-weight:600;}
+
+  ul{margin:0 0 12px; padding-left:22px;}
+  li{margin-bottom:6px;}
+  .tag-pill{display:inline-block; font-size:11px; padding:2px 8px; border-radius:20px; background:#eee; color:var(--sub); margin-left:6px;}
+  .tag-pill.priority{background:#2f5c8a; color:#fff;}
+
+  .budget-table td.num{font-variant-numeric:tabular-nums;}
+  .src{font-size:12.5px; color:var(--sub); margin-top:6px;}
+  .src a{color:var(--accent);}
+
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--sub);}
+  footer h4{font-size:13px; color:var(--ink); margin:0 0 8px;}
+  footer ol{padding-left:20px;}
+  footer li{margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Music Together By Stella</h1>
+    <p class="sub">商業盡職調查・產業定位・客群開發策略報告</p>
+    <div class="meta">
+      <span><b>報告對象</b>Stella（創辦人）</span>
+      <span><b>地點</b>台南市曼哈頓短期文理技藝補習班</span>
+      <span><b>日期</b>2026-08-03</span>
+      <span><b>版本</b>v1.0</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="callout warn">
+  <b>⚠ 報告性質說明（請先讀這段）</b>
+  本報告的營運數字（學員數、年營收、行銷預算）來自創辦人本人於對話中直接提供，屬於一手資訊，非審計財報。
+  產業與人口數據已標明來源。凡標示「方向性推估」的營收預測，代表沒有原始交易資料可交叉驗證，僅供策略排序參考，
+  請勿直接用於正式財務簡報或對外募資文件。若需要精算數字，下一步需要創辦人提供近 12 個月的月別營收與續班率原始數據。
+</div>
+
+<section id="s1">
+<h2><span class="num">1</span>公司概況快照</h2>
+
+<div class="stat-grid">
+  <div class="stat"><div class="label">現有學員數</div><div class="value">180 位</div><div class="tag">創辦人提供</div></div>
+  <div class="stat"><div class="label">年營收</div><div class="value">NT$ 600 萬</div><div class="tag">創辦人提供</div></div>
+  <div class="stat"><div class="label">推算平均客單價</div><div class="value">≈ NT$2,778 /月/生</div><div class="tag">600萬 ÷ 180 ÷ 12（推算值）</div></div>
+  <div class="stat"><div class="label">本輪行銷預算</div><div class="value">NT$ 50,000</div><div class="tag">創辦人設定上限</div></div>
+</div>
+
+<div class="callout note">
+  <b>一個需要創辦人核對的落差</b>
+  推算出的平均客單價（≈NT$2,778/月）明顯低於一般 Music Together 課程常見月費水準（早期溝通中曾提到約 NT$4,500/月，但這個數字未經本次確認，不可視為事實）。
+  可能原因：家庭優惠/手足折扣、學期制而非全年繳費、班別混合（含較低價體驗班或團體班）、或學員實際上課週期不到 12 個月。
+  <b style="margin-top:8px;">建議先確認</b>這個落差的成因，因為它直接影響「擴大招生」跟「拉高客單價」哪個槓桿更有效——這兩個是完全不同的成長路徑。
+</div>
+</section>
+
+<section id="s2">
+<h2><span class="num">2</span>產業定位分析</h2>
+
+<h3>品牌稀缺性是真實的，但不是無限期的護城河</h3>
+<p>Music Together 是 1987 年起源於美國的早期兒童音樂律動教育系統，目前於全球 40 多國、超過 2,000 個授權據點營運，採取「授權加盟」模式——中心經營者取得品牌訓練與課程系統支持，藉品牌知名度帶動招生。</p>
+<p>公開資訊顯示台灣至少已有台北「Music Together at Rainbowland」等授權據點，代表這個品牌並非台南獨佔的全球稀缺資源，而是「區域市場先佔」——Stella 目前在台南的優勢是**進入時間早、還沒有第二家同品牌競爭者**，但這個優勢會隨授權擴張而遞減，不是恆久的。</p>
+<div class="src">來源：<a href="https://www.musictogether.com/about" target="_blank">Music Together — About</a>、<a href="https://www.musictogether.com/offer/become-a-center-director/why-choose-music-together" target="_blank">Music Together — Why Start a Program</a>、<a href="https://www.music-together-at-rainbowland.com/" target="_blank">Music Together at Rainbowland（台北）</a></div>
+
+<h3>總體環境：少子化，但資源集中化</h3>
+<p>台灣去年新生兒僅 19.4 萬人，總生育率 1.13，全球倒數第三低，人口將從 2024 年 2,340 萬人持續下修。單看出生數，早期教育市場的「量」在萎縮。</p>
+<p>但政府同步大幅加碼 0-6 歲育兒支出（從 105 年 150 多億元成長到 115 年編列逾 1,400 億元），且政策目標是把托育費用控制在家庭可支配所得的 5-10%——這代表「單一孩子身上的資源投入密度」在上升，這正是精品化早期教育（如 Music Together）的生存空間：家庭數變少，但單一家庭在每個孩子身上願意花的錢變多。</p>
+<div class="src">來源：<a href="https://www.ndc.gov.tw/Content_List.aspx?n=F1A11260E1728490" target="_blank">國發會 — 少子女化</a>、<a href="https://www.ey.gov.tw/Page/5A8A0CB5B41DA11E/1edab400-96b1-479d-919d-8ee14340fd26" target="_blank">行政院 — 0-6歲國家一起養2.0</a></div>
+
+</section>
+
+<section id="s3">
+<h2><span class="num">3</span>客群分析</h2>
+
+<h3>核心客群：0-5 歲家庭（本輪優先擴張對象）</h3>
+<p>這是 Stella 明確指定本輪要優先擴張的客群。這群家長的決策邏輯是「教育投資報酬」+「陪伴體驗」的混合，比較敏感的是：課程效果看得見（有沒有明顯的發展/社交進步）、上課時間是否配合作息、是否有同齡社群感（其他家長社交圈）。</p>
+
+<h3>延伸客群：高資產長輩（祖父母世代）</h3>
+<p>這塊是次順位延伸，邏輯上跟核心客群共用同一堂課、同一位老師，屬於「同資源、多一個付費入口」——不需要新增師資就能測試。</p>
+<ul>
+  <li><b>決策心理不同</b>：長輩不是被「教育報酬率」說服，是被「陪伴孫輩的珍貴時光」說服。文案與接待話術要圍繞情感連結，不要用招生簡章式的教育數據轟炸。</li>
+  <li><b>開發管道</b>：長輩自己會參加的社交圈——醫師公會、扶輪社/獅子社、退休教師聯誼會——透過既有會員口碑推薦，比投廣告有效，而且大多是免費或低成本的合作邀約。</li>
+  <li><b>產品包裝</b>：獨立命名的「阿公阿嬤陪讀班」比把長輩塞進原本設計給年輕父母的班別，轉換率會更高——長輩需要一個「屬於自己」的入場理由，不是附屬品。</li>
+</ul>
+<div class="callout good">
+  <b>為什麼延伸客群現在還不急</b>
+  Stella 這輪明確表態行銷預算聚焦核心家長擴張、且師資是留人瓶頸。長輩客群屬於「錦上添花」的第二階段，建議等核心擴張的轉介機制跑順、且師資問題有解法後，再啟動——同時間做兩條線,對一個 5 萬預算跟緊繃的師資量能而言,风险是稀释資源、兩邊都做不深。
+</div>
+
+</section>
+
+<section id="s4">
+<h2><span class="num">4</span>區域客群地圖</h2>
+<p>台南幾個具體區域的人口/就業規模可以作為通路優先順序的參考（非全部代表高消費力,但代表「密集聚落」，適合做地緣型口碑經營）：</p>
+<table>
+  <tr><th>區域</th><th class="num">規模</th><th>對 Stella 的意義</th></tr>
+  <tr><td>永康區</td><td class="num">人口約 23.6 萬（台南人口最多行政區）</td><td>離校區近，密集雙薪家庭聚落，適合口碑+社區活動經營</td></tr>
+  <tr><td>永康科技工業區</td><td class="num">105 家廠商、就業 6,787 人</td><td>科技業從業家庭，教育投資意願通常較高</td></tr>
+  <tr><td>南科台南園區</td><td class="num">154 家廠商、從業員工 76,578 人</td><td>規模最大的科技就業聚落，適合企業福委會/HR 合作切入</td></tr>
+</table>
+<div class="src">來源：<a href="https://zh.wikipedia.org/zh-tw/%E6%B0%B8%E5%BA%B7%E5%8D%80" target="_blank">維基百科 — 永康區</a>、<a href="https://people.tainan.gov.tw/cp.aspx?n=31990" target="_blank">臺南人口政策資源網 — 產業園區開發</a></div>
+<div class="callout note">
+  <b>務實排序</b>
+  南科員工規模最大，但企業合作（走 HR/福委會）通常需要 3-6 個月的關係建立期，跟 5 萬預算、短期見效的訴求不完全匹配。
+  本輪 50,000 元預算建議先聚焦「永康區地緣型口碑」——啟動快、成本低、離校區近方便試課接送。南科企業合作可以列為下一輪（有預算再投入）的長線佈局，本輪先建立聯絡窗口即可，不編列預算。
+</div>
+</section>
+
+<section id="s5">
+<h2><span class="num">5</span>NT$50,000 核心家長擴張行動方案<span class="tag-pill priority">本輪優先</span></h2>
+
+<p>這個預算量級做不了大型廣告投放，唯一合理的槓桿是<b>把現有 180 位家長變成招生管道</b>——這是零邊際成本最高的資產，也是目前完全沒被系統化利用的資源。</p>
+
+<table class="budget-table">
+  <tr><th>項目</th><th>做法</th><th class="num">預估花費</th></tr>
+  <tr>
+    <td>現有家長轉介獎勵</td>
+    <td>介紹 1 位新生成功入班，介紹人抵扣下期學費（非現金支出，用學費折抵）。目標 20-25 組。</td>
+    <td class="num">學費讓利，非現金支出</td>
+  </tr>
+  <tr>
+    <td>永康社區體驗課 x 2 場</td>
+    <td>場地/茶點/簡易物料，鎖定永康區既有家長帶朋友來體驗</td>
+    <td class="num">NT$ 12,000</td>
+  </tr>
+  <tr>
+    <td>文宣/接待物料</td>
+    <td>體驗課邀請卡、簡易家長手冊、拍照打卡背板</td>
+    <td class="num">NT$ 6,000</td>
+  </tr>
+  <tr>
+    <td>Line 官方帳號/社群經營</td>
+    <td>主要靠人力時間經營，僅編列少量工具/圖片素材費用</td>
+    <td class="num">NT$ 4,000</td>
+  </tr>
+  <tr>
+    <td>機動預備金</td>
+    <td>因應體驗課實際報名超出預期、追加場次</td>
+    <td class="num">NT$ 8,000</td>
+  </tr>
+  <tr><td colspan="2" style="text-align:right; font-weight:700;">合計</td><td class="num" style="font-weight:700;">NT$ 30,000</td></tr>
+</table>
+<div class="callout note">
+  <b>刻意沒有花完 5 萬</b>
+  保留約 NT$20,000 未編列，原因是師資留任問題還沒解（見第 6 節）。如果轉介機制跑起來、體驗課轉換率不錯，招生量會在師資量能到頂前先撞牆——這筆錢建議留到確認師資量能後，再決定要不要追加第三場體驗課或加開班別。<b>先驗證轉換率，再加碼</b>，不要一次投完。
+</div>
+
+<h3>執行順序建議</h3>
+<ol>
+  <li><b>第 1-2 週</b>：設計轉介獎勵機制 + 跟現有家長宣布（成本最低、啟動最快）</li>
+  <li><b>第 3-4 週</b>：第一場永康社區體驗課，觀察轉介 vs 陌生開發的實際到場/轉換比例</li>
+  <li><b>第 5-6 週</b>：根據第一場數據調整,決定是否辦第二場、要不要動用預備金</li>
+</ol>
+</section>
+
+<section id="s6">
+<h2><span class="num">6</span>師資留任風險——必須先解，否則招生是白做</h2>
+<div class="callout risk">
+  <b>這是本次盤點中最關鍵的一個結構性瓶頸</b>
+  Stella 明確指出「老師的能力留不住學生」——這句話的意思是：教學品質跟老師的個人能力/風格強綁定,老師一旦流失,連帶學生也會流失。
+  這代表招生擴張的天花板不是行銷預算,是師資量能跟穩定度。如果現在衝招生但師資留任問題沒解,新增學員只是墊高了「未來流失的基數」,而不是墊高穩定營收。
+</div>
+<p>在啟動第 5 節的擴張行動前，建議先回答三個問題（不需要花錢,是內部盤點）：</p>
+<ul>
+  <li>目前每位老師的滿班量能還有多少餘裕？擴張 20-25 組新生,現有老師吃得下嗎？</li>
+  <li>過去一年老師流動率跟流動原因是什麼——是薪資、工時、還是缺乏成長空間？</li>
+  <li>教學品質是否能標準化（課程手冊、教學錄影、老師輪替交接機制）,降低對單一老師個人風格的依賴？這個如果沒有,品牌護城河其實立在「留得住的老師」身上,而不是「Music Together」這塊招牌上。</li>
+</ul>
+</section>
+
+<section id="s7">
+<h2><span class="num">7</span>待確認事項與下一步</h2>
+<table>
+  <tr><th>待確認項目</th><th>為什麼重要</th></tr>
+  <tr><td>近 12 個月月別營收與續班率原始數據</td><td>把「方向性推估」升級成可用於募資/正式簡報的精算數字</td></tr>
+  <tr><td>推算客單價 NT$2,778 vs 實際課程定價的落差原因</td><td>決定成長槓桿是「拉客單價」還是「衝人數」</td></tr>
+  <tr><td>老師滿班量能與流動率數據</td><td>決定第 5 節擴張方案的實際承載上限</td></tr>
+  <tr><td>是否已有 Line 官方帳號/家長群組等既有溝通管道</td><td>轉介機制與體驗課通知要用哪個管道推播</td></tr>
+</table>
+
+<div class="callout note">
+  <b>建議的最小下一步</b>
+  先不要五個方向同時做。從第 5 節「家長轉介獎勵機制」開始——啟動成本最低、跟師資瓶頸衝突最小、又是本輪明確定義的優先順序。跑完第一輪體驗課有實際轉換數字後，再回頭決定要不要往南科企業合作或長輩客群擴張。
+</div>
+</section>
+
+<footer>
+  <h4>參考來源</h4>
+  <ol>
+    <li>Music Together — About Our Early Childhood Music Program. musictogether.com</li>
+    <li>Music Together — Why Start a Music Together Program. musictogether.com</li>
+    <li>Music Together at Rainbowland（台北授權據點）. music-together-at-rainbowland.com</li>
+    <li>維基百科 — 永康區人口概況</li>
+    <li>臺南人口政策資源網 — 產業園區開發（永康科技工業區、南科台南園區就業數據）</li>
+    <li>國家發展委員會 — 少子女化人口推估</li>
+    <li>行政院 — 0-6 歲國家一起養 2.0 政策說明</li>
+    <li>學員數 180 位、年營收 NT$600 萬、行銷預算 NT$50,000、核心家長擴張優先順序、師資留任限制：Stella 本人於對話中提供（2026-08-03）</li>
+  </ol>
+</footer>
+
+</div>
+</body>
+</html>
