@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鋼構工程材料買賣營運管理系統｜合作提案</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    background: #f5f6fa;
+    color: #1a1a2e;
+    line-height: 1.7;
+  }
+  .cover {
+    background: linear-gradient(135deg, #050e18 0%, #0d2a44 55%, #1a4d75 100%);
+    color: white;
+    padding: 64px 48px 56px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.08);
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .cover-label { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #5aa6e0; margin-bottom: 16px; }
+  .cover h1 { font-size: 30px; font-weight: 700; line-height: 1.35; margin-bottom: 12px; }
+  .cover-sub { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 40px; }
+  .cover-meta { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
+  .cover-meta-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .cover-meta-label { font-size: 11px; letter-spacing: 1px; color: rgba(255,255,255,0.45); text-transform: uppercase; margin-bottom: 4px; }
+  .cover-meta-value { font-size: 15px; font-weight: 600; color: white; }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section { margin-bottom: 56px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .section-num { width: 32px; height: 32px; background: #163f66; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+  .section-lead { font-size: 14px; color: #888; margin-bottom: 24px; padding-left: 44px; }
+
+  .oneliner { background: #0c1c2c; border-radius: 16px; padding: 28px 32px; color: white; }
+  .oneliner p { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.88); }
+  .oneliner strong { color: #5aa6e0; }
+
+  .timeline { display: flex; gap: 16px; flex-wrap: wrap; }
+  .tl-card { flex: 1; min-width: 260px; background: white; border-radius: 16px; padding: 22px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-top: 4px solid #2f74b5; }
+  .tl-card.phase2 { border-top-color: #92400e; }
+  .tl-tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; background: #e8f0fe; color: #163f66; margin-bottom: 10px; }
+  .tl-tag.p2 { background: #fdf1e7; color: #92400e; }
+  .tl-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .tl-number { font-size: 22px; font-weight: 700; color: #163f66; margin-bottom: 4px; }
+  .tl-number .unit { font-size: 12px; font-weight: 500; color: #999; }
+  .tl-desc { font-size: 13px; color: #666; }
+
+  .anchor-card { background: white; border-radius: 16px; padding: 24px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .anchor-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+  .anchor-row:last-child { border: none; }
+  .anchor-row .label { color: #666; }
+  .anchor-row .value { font-weight: 700; color: #163f66; }
+
+  .clause-card { background: #0c1c2c; border-radius: 16px; padding: 26px 30px; color: white; margin-bottom: 16px; }
+  .clause-card .clause-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #5aa6e0; margin-bottom: 10px; }
+  .clause-card p { font-size: 14.5px; color: rgba(255,255,255,0.9); margin-bottom: 10px; }
+  .clause-card p:last-child { margin-bottom: 0; }
+  .clause-text { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 14px 18px; font-size: 13.5px; color: rgba(255,255,255,0.92); margin: 12px 0; font-style: italic; }
+
+  .confirm-list { list-style: none; counter-reset: cf; }
+  .confirm-list li { counter-increment: cf; background: white; border-radius: 12px; padding: 18px 24px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; align-items: flex-start; gap: 14px; font-size: 14px; color: #333; border-left: 4px solid #b3541e; }
+  .confirm-list li::before { content: counter(cf); width: 26px; height: 26px; background: #b3541e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  .footer { text-align: center; padding: 32px; font-size: 12px; color: #aaa; }
+  .divider { height: 1px; background: #eee; margin: 40px 0; }
+
+  .reading-flow-strip { background: white; border-bottom: 1px solid #eee; padding: 14px 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .reading-flow-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .rf-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #bbb; margin-right: 8px; white-space: nowrap; }
+  .rf-step { background: #efefef; border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: #666; white-space: nowrap; }
+  .rf-arrow { color: #ccc; font-size: 13px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-label">合作提案</div>
+  <h1>鋼構工程暨材料買賣營運管理系統<br>合作方式提案</h1>
+  <div class="cover-sub">第一年訂閱制建置與維護，到期後以抽成方式銜接，並附系統交接後之維護服務方案</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><span class="cover-meta-label">系統範疇</span><span class="cover-meta-value">v2.3・32 模組</span></div>
+    <div class="cover-meta-item"><span class="cover-meta-label">文件性質</span><span class="cover-meta-value">合作提案・待雙方確認</span></div>
+    <div class="cover-meta-item"><span class="cover-meta-label">日期</span><span class="cover-meta-value">2026 年 8 月 4 日</span></div>
+  </div>
+</div>
+
+<div class="reading-flow-strip">
+  <div class="reading-flow-inner">
+    <span class="rf-label">閱讀路線</span>
+    <span class="rf-step">1 合作架構</span><span class="rf-arrow">→</span>
+    <span class="rf-step">2 第一年訂閱</span><span class="rf-arrow">→</span>
+    <span class="rf-step">3 第二年起抽成</span><span class="rf-arrow">→</span>
+    <span class="rf-step">4 授權範圍</span><span class="rf-arrow">→</span>
+    <span class="rf-step">5 維護服務方案</span><span class="rf-arrow">→</span>
+    <span class="rf-step">6 待雙方確認</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 1 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">1</div><div class="section-title">合作架構總覽</div></div>
+    <div class="section-lead">合作分兩個階段：第一年為固定訂閱制，用於系統建置與範疇內維護；第一年期滿後，以抽成方式銜接，抽滿約定金額即停止抽成，系統完全歸貴公司所有。</div>
+    <div class="oneliner">
+      <p>
+        第一年訂閱費 <strong>新台幣 5 萬元 / 月，共 12 期</strong>，涵蓋系統建置（v2.3・32 模組範疇）及期間內既有模組之修正、修改、新增。
+        第一年期滿後轉為<strong>抽成制</strong>，依營運單量抽取一定比例，累積抽成金額達上限即停止抽成，系統所有權完整移轉予貴公司，後續可另行選擇是否簽署維護服務方案。
+      </p>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">2</div><div class="section-title">第一年：訂閱建置期</div></div>
+    <div class="section-lead">固定月費，涵蓋系統建置與範疇內維護，雙方權責清楚、現金流可預期。</div>
+    <div class="timeline">
+      <div class="tl-card">
+        <div class="tl-tag">建置＋維護</div>
+        <div class="tl-name">訂閱費用</div>
+        <div class="tl-number">NT$50,000<span class="unit"> / 月 × 12 期</span></div>
+        <div class="tl-desc">前 3-4 個月完成系統建置，其餘月份執行範疇內（v2.3・32 模組）之修正、修改、新增功能。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">3</div><div class="section-title">第二年起：抽成銜接期</div></div>
+    <div class="section-lead">第一年期滿後，不再收取固定月費，改依營運單量抽取比例費用，抽滿約定上限即停止，系統所有權移轉予貴公司。</div>
+    <div class="timeline">
+      <div class="tl-card phase2">
+        <div class="tl-tag p2">抽成期</div>
+        <div class="tl-name">依單量抽成，封頂即停</div>
+        <div class="tl-number">1–10%<span class="unit"> 依單量級距，上限 NT$500,000</span></div>
+        <div class="tl-desc">抽成金額累積達上限（系統總價 110 萬 － 第一年已收 60 萬 ＝ 50 萬）即停止抽成，系統完整歸貴公司所有。抽成期間可修正既有模組（既有流程下之修正、修改），新增功能則另行報價。抽成之訂單量以系統記錄為準，取代人工申報方式。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">4</div><div class="section-title">授權範圍</div></div>
+    <div class="section-lead">系統本身即依「一家公司、多案場」之營運型態設計，授權範圍以貴公司整體為單位。</div>
+    <div class="clause-card">
+      <div class="clause-label">授權條款</div>
+      <div class="clause-text">
+        本系統授權範圍為業主（貴公司）自身使用，含其名下所有案場，不限單一工地或案場數量。
+      </div>
+      <p>如貴公司之關係企業、子公司或其他法人未來需使用本系統或其模組，雙方另行議定專案報價。</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">5</div><div class="section-title">系統交接後・維護服務方案（三檔可選）</div></div>
+    <div class="section-lead">抽成期滿、系統所有權移轉後，維護服務屬選配項目，可簽可不簽。三檔皆採「申請次數＋回應時效」計費，不採工時計費，避免計算爭議。</div>
+    <div class="timeline">
+      <div class="tl-card">
+        <div class="tl-tag">低檔</div>
+        <div class="tl-name">NT$8,000<span class="unit"> / 月</span></div>
+        <div class="tl-desc">系統維運（備份、環境相容性更新）＋每月 5 次以內修正申請，逾額另計；回應時效 3 個工作天內。</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-tag">中檔</div>
+        <div class="tl-name">NT$11,500<span class="unit"> / 月</span></div>
+        <div class="tl-desc">低檔內容全含＋每月 8 次以內修正申請；回應時效 1-2 個工作天。</div>
+      </div>
+      <div class="tl-card phase2">
+        <div class="tl-tag p2">高檔</div>
+        <div class="tl-name">NT$15,000<span class="unit"> / 月</span></div>
+        <div class="tl-desc">中檔內容全含＋每月 15 次以內修正申請（仍限既有流程修正，不含新增功能）；回應時效 24 小時內＋季度系統健檢一次。</div>
+      </div>
+    </div>
+    <div class="clause-card" style="margin-top:16px;">
+      <div class="clause-label">申請次數認定</div>
+      <p>如單一問題涉及多項修正內容，或多項獨立問題合併提出申請，其申請次數之認定由系統維護方依實際工作範圍判斷。</p>
+    </div>
+    <div class="clause-card" style="margin-top:16px;">
+      <div class="clause-label">不續簽之影響</div>
+      <p>維護服務方案為選配項目，不續簽不影響系統所有權（仍完整歸貴公司所有），惟後續將不再提供安全更新與錯誤修正保障。</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6 -->
+  <div class="section">
+    <div class="section-header"><div class="section-num">6</div><div class="section-title">待雙方確認事項</div></div>
+    <div class="section-lead">以下事項尚待與貴公司當面討論定案，煩請就下列項目提供貴公司之意見或偏好。</div>
+    <ul class="confirm-list">
+      <li><strong>抽成結算頻率</strong>——每單結算，或每月彙總結算，請貴公司提出偏好方向。</li>
+      <li><strong>抽成級距對照表</strong>——抽成比例區間為 1-10%，依單筆訂單金額大小分級，具體級距表雙方尚待共同商定。</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">本文件為合作提案，非正式報價單或合約，最終條款以雙方書面簽署為準</div>
+
+</body>
+</html>
