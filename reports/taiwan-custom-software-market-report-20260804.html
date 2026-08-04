@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 台灣客製化軟體開發市場深度報告</title>
+<style>
+  :root {
+    --primary: #1a4b8b;
+    --primary-light: #2d6fc7;
+    --accent: #f0a500;
+    --bg: #f7f9fc;
+    --card: #ffffff;
+    --text: #1a2433;
+    --muted: #5a6b82;
+    --border: #d6e0ee;
+    --danger: #c0392b;
+    --warning: #e67e22;
+    --success: #27ae60;
+    --info: #2980b9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .cover {
+    background: linear-gradient(135deg, #0b2c5c 0%, #1a4b8b 50%, #2d6fc7 100%);
+    color: white;
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .cover .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .cover h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+  .cover .subtitle { font-size: 1.1rem; opacity: 0.85; margin-bottom: 40px; }
+  .cover-stats {
+    display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
+    margin-top: 40px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  .cover-stat { text-align: center; }
+  .cover-stat .num { font-size: 2rem; font-weight: 700; color: #8fc4ff; }
+  .cover-stat .label { font-size: 12px; opacity: 0.75; margin-top: 4px; }
+  .toc {
+    background: var(--card); border-bottom: 2px solid var(--border); padding: 20px 40px;
+    display: flex; gap: 8px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .toc a {
+    color: var(--primary); text-decoration: none; font-size: 13px; padding: 5px 14px;
+    border-radius: 16px; border: 1px solid var(--border); transition: all 0.2s; white-space: nowrap;
+  }
+  .toc a:hover { background: var(--primary); color: white; border-color: var(--primary); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+  .section { margin-bottom: 60px; }
+  .section-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+    padding-bottom: 16px; border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    background: var(--primary); color: white; width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .card h3 { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+  .card p { color: var(--muted); font-size: 14px; line-height: 1.8; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  @media(max-width:768px) { .grid-2,.grid-3 { grid-template-columns: 1fr; } }
+  .table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); }
+  thead tr { background: var(--primary); color: white; }
+  th, td { padding: 13px 18px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+  tr:nth-child(even) { background: #f2f6fc; }
+  tr:hover { background: #e6eefa; }
+  .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px; margin-bottom: 28px; }
+  .metric-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 22px 20px; text-align: center; border-top: 4px solid var(--primary);
+  }
+  .metric-card .value { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+  .metric-card .unit { font-size: 13px; color: var(--muted); }
+  .metric-card .label { font-size: 13px; margin-top: 6px; color: var(--text); font-weight: 600; }
+  .metric-card .trend { font-size: 12px; color: var(--success); margin-top: 4px; }
+  .trend-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px; border-left: 5px solid var(--primary-light); margin-bottom: 16px;
+  }
+  .trend-card .trend-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .trend-card .trend-body { font-size: 14px; color: var(--muted); line-height: 1.8; }
+  .trend-card .trend-kpi { display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
+  .kpi-chip {
+    background: #e6eefa; color: var(--primary); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 600;
+  }
+  .risk-card {
+    display: flex; gap: 16px; align-items: flex-start; background: var(--card);
+    border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; margin-bottom: 14px;
+  }
+  .risk-badge {
+    flex-shrink: 0; width: 52px; height: 52px; border-radius: 10px; display: flex;
+    align-items: center; justify-content: center; font-size: 10px; font-weight: 700; text-align: center; line-height: 1.3;
+  }
+  .risk-high { background: #fdecea; color: var(--danger); }
+  .risk-mid { background: #fef3e2; color: var(--warning); }
+  .risk-low { background: #e6eefa; color: var(--info); }
+  .risk-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .risk-content p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .highlight {
+    background: linear-gradient(135deg, #e6eefa, #f2f6fc); border: 1px solid var(--primary-light);
+    border-radius: 12px; padding: 22px 26px; margin: 24px 0;
+  }
+  .highlight h4 { color: var(--primary); font-weight: 700; margin-bottom: 8px; }
+  .highlight p { font-size: 14px; color: var(--text); line-height: 1.8; }
+  .subseg { background: var(--card); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 20px; }
+  .subseg-header {
+    background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white;
+    padding: 14px 22px; font-weight: 700; font-size: 15px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .subseg-header .tag { background: rgba(255,255,255,0.2); border-radius: 12px; padding: 3px 12px; font-size: 12px; }
+  .subseg-body { padding: 20px 22px; }
+  .subseg-body p { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 10px; }
+  .sub-list { list-style: none; }
+  .sub-list li {
+    padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .sub-list li:last-child { border-bottom: none; }
+  .sub-list li::before { content: '▸'; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+  footer {
+    background: #0b2c5c; color: rgba(255,255,255,0.75); text-align: center;
+    padding: 40px 24px; font-size: 13px; line-height: 2;
+  }
+  footer .sources { max-width: 800px; margin: 0 auto 20px; }
+  footer a { color: #8fc4ff; text-decoration: none; }
+  .opp-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 22px; border-top: 4px solid var(--accent); margin-bottom: 16px;
+  }
+  .opp-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .opp-card .score { font-size: 28px; font-weight: 700; color: var(--accent); }
+  .opp-card .score-label { font-size: 11px; color: var(--muted); }
+  .opp-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
+  @media print { .toc { display: none; } .cover { -webkit-print-color-adjust: exact; } }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="badge">MUSEON 市場研究 · 2026</div>
+  <h1>台灣客製化軟體開發<br>市場趨勢與商業模式深度報告</h1>
+  <div class="subtitle">計價模式全景 · 報價行情 · 需求驅動因子 · AI 對外包議價權的結構性衝擊</div>
+  <div class="cover-stats">
+    <div class="cover-stat">
+      <div class="num">4+1</div>
+      <div class="label">主流計價模式（含新興 SaaS 訂閱）</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">15–20%</div>
+      <div class="label">買斷制年維護費 / 開發費比例</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">52.6%</div>
+      <div class="label">台灣雲服務中 SaaS 佔比</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">NT$30K–500萬+</div>
+      <div class="label">客製系統報價區間</div>
+    </div>
+  </div>
+</div>
+
+<nav class="toc">
+  <a href="#pricing-models">計價模式</a>
+  <a href="#pricing-range">報價行情</a>
+  <a href="#demand">需求趨勢</a>
+  <a href="#ai-impact">AI 結構衝擊</a>
+  <a href="#comparison">模式選擇建議</a>
+  <a href="#risks">風險與留意點</a>
+  <a href="#conclusion">結論</a>
+</nav>
+
+<div class="container">
+
+  <section class="section" id="pricing-models">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">台灣客製化軟體四大計價模式</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>模式</th><th>運作方式</th><th>適合情境</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>固定總價（買斷+維護費）</strong></td><td>需求先談定、簽約交付，交付後另收年維護費（通常為開發費的 15–20%/年）</td><td>需求明確、範疇不太會變的案子</td></tr>
+          <tr><td><strong>工時計費（T&amp;M，專案制）</strong></td><td>按實際工時 × 時薪結算，工程師時薪約 NT$800–2,500</td><td>需求會滾動調整、邊做邊改的案子</td></tr>
+          <tr><td><strong>專屬團隊月費</strong></td><td>客戶包一組團隊，按月付費，長期穩定配合</td><td>長期陪跑、非單次專案</td></tr>
+          <tr><td><strong>混合制</strong></td><td>大範圍固定價 + 變動需求按工時另計</td><td>中大型專案，業界認為是目前最平衡的做法</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subseg">
+      <div class="subseg-header">
+        新興模式：SaaS 訂閱制
+        <span class="tag">成長最快</span>
+      </div>
+      <div class="subseg-body">
+        <p>不做完全客製，而是把系統做成可配置的產品，按月/年訂閱。台灣雲服務中 SaaS 佔比已超過 <strong>52.6%</strong>，是成長最快的一塊，中小企業特別買單，因為不用一次拿出大筆預算。這個模式正在從外部改寫客製軟體業的議價結構——當客戶有「訂閱可配置產品」這個選項時，純客製開發若無法證明差異化價值，就會被拿來跟訂閱制比價。</p>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <h4>四種模式的本質差異</h4>
+      <p>固定總價把「範疇風險」放在開發商身上——一旦需求跑掉，開發商要嘛加價、要嘛虧本做完；工時計費把「範疇風險」轉嫁給客戶——客戶要為每一次滾動調整買單，但拿到的是彈性；專屬團隊月費本質上是把「僱用」外包化；混合制則是業界目前公認風險分攤最平衡的折衷方案，也是中大型專案的主流選擇。</p>
+    </div>
+  </section>
+
+  <section class="section" id="pricing-range">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">報價行情（2026 資料）</div>
+    </div>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="value">NT$30,000–150萬</div>
+        <div class="unit">新台幣</div>
+        <div class="label">小型系統／MVP</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">NT$300萬+</div>
+        <div class="unit">新台幣</div>
+        <div class="label">中大型系統（含 AI 整合、高併發）</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">NT$50萬起</div>
+        <div class="unit">上不封頂至 500萬+</div>
+        <div class="label">客製系統開發起價</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">10–20%</div>
+        <div class="unit">佔總費用</div>
+        <div class="label">需求分析／設計階段</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="demand">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">需求面趨勢</div>
+    </div>
+
+    <div class="trend-card">
+      <div class="trend-title">政府補助是真實推力</div>
+      <div class="trend-body">
+        2026 年中小企業數位轉型／AI 補助多落在 <strong>30–200 萬</strong>區間（部分旗艦案到 500 萬以上），補助比例 <strong>30–50%</strong>。留意：政策明文規定不得使用中國大陸廠牌資通訊產品，這點在報價與技術選型時要提前納入考量，避免補助審核卡關。
+      </div>
+      <div class="trend-kpi">
+        <span class="kpi-chip">補助區間 30–200 萬</span>
+        <span class="kpi-chip">補助比例 30–50%</span>
+        <span class="kpi-chip">禁用中國大陸資通訊產品</span>
+      </div>
+    </div>
+
+    <div class="trend-card">
+      <div class="trend-title">「整套客製」正在被「積木式組裝」取代</div>
+      <div class="trend-body">
+        類似訂製家具轉向 IKEA 組裝家具的比喻——如果服務同質性高、差異化不夠，訂閱制或買斷模式都會被壓價。客戶越來越清楚「哪些是可以用現成模組堆出來的」，只有真正需要深度整合、特殊流程、或高度差異化邏輯的部分，才值得用客製開發的價格買單。
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ai-impact">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">AI 正在擠壓傳統報價邏輯</div>
+    </div>
+
+    <div class="highlight">
+      <h4>結構性錯位：工時計價 vs AI 效率提升</h4>
+      <p>AI 輔助開發縮短了實際工時，但客戶付費邏輯還停留在「按工時計價」。這造成一個結構性錯位——用工時計價的軟體外包商，議價空間可能被 AI 效率提升反過來壓縮：同樣的產出，工時變短，若還是照時薪算錢，開發商收入會被自己用的工具打折；但若不轉用 AI 提效，又會在競價上輸給用了 AI 的對手。</p>
+    </div>
+
+    <div class="card">
+      <h3>這對報價策略的實際含義</h3>
+      <p>純工時計價（T&amp;M）在 AI 提效的環境下，議價權會持續往客戶端傾斜——客戶會發現「你用 AI 做得更快，為什麼還照時薪算」。相對地，固定總價／買斷制、或以「成果與價值」為定價基礎的模式（而非投入工時），更能保住開發商因 AI 提效而增加的邊際利潤。換句話說，2026 年後的報價策略重心，可能要從「時薪 × 工時」逐步移向「範疇 × 價值」。</p>
+    </div>
+  </section>
+
+  <section class="section" id="comparison">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">模式選擇：對照你的案子屬性</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>什麼情境適合固定總價（買斷+維護費）</h3>
+        <ul class="sub-list">
+          <li>需求規格在簽約前就能完整定義，不太會變動</li>
+          <li>客戶希望總成本可預測，便於編列一次性預算或申請補助</li>
+          <li>系統交付後有明確的長期維護需求（bug 修復、小幅調整）</li>
+          <li>開發商對範疇有信心，能承擔「需求膨脹」的風險</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>什麼情境適合工時計費（專案制）</h3>
+        <ul class="sub-list">
+          <li>需求會隨業務發展滾動調整，範疇本來就模糊</li>
+          <li>客戶想要「邊做邊看」，保留隨時調整方向的彈性</li>
+          <li>雙方信任基礎穩固，客戶願意為彈性付費而非追求總價確定</li>
+          <li>開發商需要留意：AI 提效下，工時計價的議價權正在往客戶傾斜</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="risks">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">風險與留意點</div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-badge risk-high">高<br>風險</div>
+      <div class="risk-content">
+        <h4>同質化服務被壓價</h4>
+        <p>若服務內容跟市面上可組裝的現成模組沒有明顯差異，客戶會直接拿 SaaS 訂閱制或低價外包來比價，訂閱制與買斷制都會被壓縮利潤空間。</p>
+      </div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-badge risk-mid">中<br>風險</div>
+      <div class="risk-content">
+        <h4>AI 提效但收費邏輯未跟上</h4>
+        <p>持續用工時計價、卻已經用 AI 大幅縮短開發時間的開發商，會發現自己的營收成長跟不上效率提升，長期被自己的生產力工具反噬利潤。</p>
+      </div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-badge risk-mid">中<br>風險</div>
+      <div class="risk-content">
+        <h4>補助案的資通訊產品限制</h4>
+        <p>申請政府數位轉型／AI 補助的案子，若技術選型涉及中國大陸廠牌資通訊產品，可能導致審核卡關或補助資格喪失，建議在報價與選型階段就先確認客戶是否要申請補助。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="conclusion">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">結論</div>
+    </div>
+
+    <div class="card" style="border-left:5px solid var(--primary);padding:30px 32px;">
+      <h3 style="font-size:1.2rem;margin-bottom:20px;">計價模式的選擇，本質是「風險由誰承擔」的談判</h3>
+      <p style="color:var(--text);line-height:2;margin-bottom:16px;">
+        固定總價把範疇風險留給開發商，工時計費把範疇風險轉嫁給客戶，混合制是業界公認最平衡的折衷。但 2026 年的變數是 AI：它同時壓縮了工時計價的議價空間、也讓「積木式組裝」（訂閱制/現成模組）成為客製開發的直接替代品。
+      </p>
+      <p style="color:var(--muted);line-height:2;">
+        對客製軟體開發商而言，能長期保住利潤的路徑，是往「差異化程度高、無法被現成模組取代」的案子集中，並將報價邏輯從「時薪 × 工時」逐步轉向「範疇 × 價值」——這也是混合制與買斷制在 AI 時代相對更有韌性的原因。
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="sources">
+    <strong>資料來源</strong><br>
+    <a href="https://www.tasker.com.tw/price/fullstack-development" target="_blank">全端系統開發費用多少？2026 最新行情｜出任務</a> ·
+    <a href="https://www.nss.com.tw/maintenance-costs" target="_blank">程式開發維護費用大揭密：2026最新整理</a> ·
+    <a href="https://ai.com.tw/app-development-cost/" target="_blank">軟體開發報價2026全攻略｜AI.com.tw</a> ·
+    <a href="https://www.nss.com.tw/app-software-outsourcing-company-recommend-oct" target="_blank">台灣各家主要軟體外包公司推薦費用一覽表(2026)</a> ·
+    <a href="https://zonetech.tw/blogs/system-integrator-si-guide/" target="_blank">系統整合（SI）是什麼？SI 公司怎麼選、和 IT 委外差在哪（2026）</a> ·
+    <a href="https://case.unood.me/articles/software-outsourcing-cost.html" target="_blank">軟體外包費用怎麼算？2026 台灣接案行情完整指南</a> ·
+    <a href="https://metabiz.tw/smb-ai-digital-transformation-subsidy-guide-2026/" target="_blank">2026 中小微企業 AI 補助大補帖</a> ·
+    <a href="https://yotron-ai.com/blog/ai-implementation-subsidy-taiwan" target="_blank">2026台灣AI導入補助完整攻略</a> ·
+    <a href="https://finance.technews.tw/2026/01/30/ai-saas-business-model-transformation/" target="_blank">AI 加速軟體家具化，SaaS 商業模式正面臨結構性壓力｜TechNews</a> ·
+    <a href="https://blog.nextrek.co/%E5%8F%B0%E7%81%A3%E7%9A%84%E6%95%B8%E4%BD%8D%E8%BD%89%E5%9E%8B%E5%A4%A0saas%E5%8C%96%E4%BA%86%E5%97%8E-%E4%B8%80%E8%B5%B7%E4%BE%86%E4%BA%86%E8%A7%A3saas%E6%9C%8D%E5%8B%99%E7%9A%84%E9%AD%85%E5%8A%9B" target="_blank">台灣的數位轉型夠SaaS化了嗎？</a>
+  </div>
+  <div>
+    本報告由 MUSEON 生成 · 2026年8月 · 僅供策略參考，實際報價請依個案盤點
+  </div>
+</footer>
+
+</body>
+</html>
