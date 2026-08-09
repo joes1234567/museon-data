@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUSEON 專案經理職能規劃書</title>
+    <title>PM Agent 執行規格書</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -262,510 +262,528 @@
         .risk-low  { background:#e8f5e9; color:#2e7d32; font-weight:700; padding:2px 8px; border-radius:4px; }
         .src { font-size:0.82em; color:#7a7a8c; }
         .kpi-table td:first-child { white-space:nowrap; }
+        pre {
+            background:#1e2430; color:#e6e9ef; padding:18px 20px; border-radius:8px;
+            overflow-x:auto; margin:14px 0; font-size:0.86em; line-height:1.65;
+        }
+        pre code { background:none; color:inherit; padding:0; }
+        code {
+            background:#eef1f8; color:#3b4a6b; padding:2px 6px;
+            border-radius:4px; font-size:0.9em;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+        .comparison-table td:first-child { vertical-align: top; }
     </style>
 </head>
 <body>
     <div class="container">
+
         <div class="header">
-            <h1>MUSEON 專案經理（PM）職能規劃書</h1>
-            <p>敏捷/混合式方法論 × 軟體開發進度治理 × 誠實缺口盤點</p>
+            <h1>PM Agent 執行規格書</h1>
+            <p>給全新 Agent 的自足操作手冊 — 讀完本文件即可開始執行，無需其他背景知識</p>
         </div>
 
         <div class="content">
-            <!-- 方案概況 -->
+
+            <!-- 0. 你的角色 -->
             <div class="section">
-                <h2>方案概況</h2>
-                <div class="subsection">
-                    <h3>定位</h3>
-                    <p>
-                        本規劃書回答一個具體問題：<strong>MUSEON 要擔任「軟體開發專案經理」角色，需要什麼能力、技能、工具？</strong>
-                        範疇聚焦在<strong>掌握開發進度、風險、產出品質</strong>，不是行銷或業務職能（那份是另一份規劃書）。
-                        依 2026 年 PMP 考綱趨勢，約 60% 內容已轉向敏捷或混合式方法，僅 40% 為傳統瀑布式——
-                        代表現代 PM 職能的重心已經從「排甘特圖」轉向「跑 Sprint、管 Backlog、追 Burndown」。
-                    </p>
-                </div>
+                <h2>0. 你的角色與邊界</h2>
                 <div class="highlight">
-                    <strong>🎯 誠實原則：</strong> 這份文件會把「MUSEON 現有機制可直接對應」跟「目前完全沒有、需要新建」分開標示，不假裝缺口已經補上。
-                </div>
-            </div>
-
-            <!-- 五大核心職能 -->
-            <div class="section">
-                <h2>PMI 框架對照 MUSEON 現況</h2>
-
-                <div class="warning">
-                    <strong>⚠️ 前版修正：</strong> 前一版寫「PM 五大核心職能（PMBOK 第 8 版）」，此說法不正確。
-                    PMI 實際使用兩套並行框架：<strong>Talent Triangle 三面</strong>（Ways of Working／Power Skills／Business Acumen）
-                    與 <strong>PMP 考綱三大領域</strong>。下表保留原本五項白話拆解，但標明各自歸屬哪一面，避免對外引用時出錯。
+                    <strong>🎯 一句話定義：</strong>
+                    你負責讓「軟體開發的進度、品質、風險」隨時可被查證，
+                    並在偏離時<strong>提早提出</strong>，而不是事後解釋。
                 </div>
 
-                <div class="subsection">
-                    <h3>2026 PMP 考綱（ECO）實際結構</h3>
-                    <table class="comparison-table">
-                        <thead><tr><th>領域</th><th>權重</th><th>對 PM 的意義</th></tr></thead>
-                        <tbody>
-                            <tr><td><strong>Process 流程</strong></td><td>41%</td><td>最大宗：交付節奏、範疇、排程、品質</td></tr>
-                            <tr><td><strong>People 人</strong></td><td>33%</td><td>團隊帶領、衝突、利害關係人</td></tr>
-                            <tr><td><strong>Business Environment 商業環境</strong></td><td>26%</td><td>2026 大幅調升（原僅 8%）—— 價值、合規、外部變化</td></tr>
-                        </tbody>
-                    </table>
-                    <p class="src">
-                        考試型式：180 題／240 分鐘，新增圖表題與情境案例題。
-                        方法論分布：<strong>敏捷＋混合約 60%</strong>、預測式（瀑布）約 40%。
-                        商業環境權重從 8% 跳到 26%，是 2026 最大變化 —— 代表 PM 被期待要能講清楚「這個專案對生意的意義」，
-                        而不只是「進度到哪」。
-                    </p>
-                </div>
-
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>核心職能</th>
-                            <th>白話說明</th>
-                            <th>MUSEON 現況</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>社會覺察與責任</strong></td>
-                            <td>理解利害關係人、倫理判斷</td>
-                            <td><span class="status-partial">部分</span>：人格層有六大盲區自審，但未套用到「利害關係人管理」情境</td>
-                        </tr>
-                        <tr>
-                            <td><strong>執行力（Power Skills）</strong></td>
-                            <td>把決策變成行動、排除障礙</td>
-                            <td><span class="status-have">有</span>：L2 思考者 / Skill Worker spawn 機制、Agent 並行處理</td>
-                        </tr>
-                        <tr>
-                            <td><strong>商業敏銳度</strong></td>
-                            <td>懂成本、ROI、預算取捨</td>
-                            <td><span class="status-partial">部分</span>：報價/ROI 分析經驗有（如霏翔案），但無正式財務追蹤工具</td>
-                        </tr>
-                        <tr>
-                            <td><strong>工作方法（敏捷/混合）</strong></td>
-                            <td>Scrum、看板、迭代節奏</td>
-                            <td><span class="status-partial">部分</span>：有 iteration-protocol、M10 審計迴圈，但無 Sprint/Backlog 系統</td>
-                        </tr>
-                        <tr>
-                            <td><strong>成果與產出導向</strong></td>
-                            <td>盯緊 KPI、驗收標準</td>
-                            <td><span class="status-have">有</span>：七武海維度作為量化北極星，但目前對應「系統自身」非「專案任務」</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Scrum/Agile 工具箱 -->
-            <div class="section">
-                <h2>Scrum / Agile 必備工具與 Artifact</h2>
-
-                <div class="capability-grid">
-                    <div class="capability-card">
-                        <h4>📋 Product / Sprint Backlog</h4>
-                        <p>待辦事項清單，依優先級排序。目前 MUSEON 沒有正式 backlog，任務散落在 git commit 與對話紀錄裡。</p>
-                    </div>
-                    <div class="capability-card">
-                        <h4>🗂️ Kanban / Sprint Board</h4>
-                        <p>看板追蹤 To Do / In Progress / Done。可用 GitHub Projects 直接掛在既有 repo 上，成本最低。</p>
-                    </div>
-                    <div class="capability-card">
-                        <h4>📉 Burndown / Burnup Chart</h4>
-                        <p>追蹤剩餘工作量隨時間變化，判斷進度超前或落後。需要 backlog 有「點數」或「工時估算」才能畫。</p>
-                    </div>
-                    <div class="capability-card">
-                        <h4>🗣️ 每日站會摘要</h4>
-                        <p>「昨天做了什麼、今天要做什麼、卡在哪」。MUSEON 可用 L4 觀察者機制自動彙整成每日簡報，這塊技術上可行。</p>
-                    </div>
-                    <div class="capability-card">
-                        <h4>🔁 Sprint 回顧會議</h4>
-                        <p>每個週期結束檢討「哪裡做得好、哪裡卡住」。目前沒有固定 cadence，Breath Protocol 的週回望可以延伸涵蓋。</p>
-                    </div>
-                    <div class="capability-card">
-                        <h4>⚠️ 風險登錄表 + 機率-衝擊矩陣</h4>
-                        <p>PMP 考綱的高優先工具之一。MUSEON 目前完全沒有這個機制，是最大缺口之一。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 功能全景地圖 -->
-            <div class="section">
-                <h2>功能全景地圖：現況 vs 缺口</h2>
-
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>模塊</th>
-                            <th>核心功能</th>
-                            <th>MUSEON 現有基礎</th>
-                            <th>集成深度</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>進度追蹤</strong></td>
-                            <td>Commit 對應任務、完成度追蹤</td>
-                            <td>git log / commit message 可回溯</td>
-                            <td>⭐⭐⭐</td>
-                        </tr>
-                        <tr>
-                            <td><strong>品質驗收</strong></td>
-                            <td>測試通過率、審計閉環</td>
-                            <td>pytest + M10 Audit-Fix Loop + fix-verify skill</td>
-                            <td>⭐⭐⭐⭐</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Sprint 規劃</strong></td>
-                            <td>Backlog 排序、迭代範圍界定</td>
-                            <td>無正式系統，僅 iteration-protocol 文字協議</td>
-                            <td>⭐</td>
-                        </tr>
-                        <tr>
-                            <td><strong>站會/日報</strong></td>
-                            <td>每日進度摘要</td>
-                            <td>L4 觀察者可產出，但未接上「任務」語境</td>
-                            <td>⭐⭐</td>
-                        </tr>
-                        <tr>
-                            <td><strong>風險管理</strong></td>
-                            <td>風險登錄、機率-衝擊評估</td>
-                            <td>無此機制</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td><strong>回顧與改善</strong></td>
-                            <td>週期性檢討、行動項目追蹤</td>
-                            <td>Breath Protocol 週回望，但範疇是系統自身非專案任務</td>
-                            <td>⭐⭐</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- 三層能力矩陣 -->
-            <div class="section">
-                <h2>PM 角色三層能力矩陣</h2>
                 <div class="three-column">
                     <div class="subsection">
-                        <h3>硬技能</h3>
+                        <h3>你要做的</h3>
                         <ul class="feature-list">
-                            <li>WBS（工作分解結構）</li>
-                            <li>Sprint 規劃與估點</li>
-                            <li>Burndown/Burnup 判讀</li>
-                            <li>風險機率-衝擊矩陣</li>
-                            <li>甘特圖（混合式專案需要）</li>
+                            <li>維護待辦清單與其狀態</li>
+                            <li>把實際產出（commit）對應回待辦</li>
+                            <li>每日產出進度摘要</li>
+                            <li>維護風險登錄表並升級高分項</li>
+                            <li>週期性回顧並產出改善項</li>
+                            <li>量測交付效能指標</li>
                         </ul>
                     </div>
                     <div class="subsection">
-                        <h3>軟技能</h3>
-                        <ul class="feature-list">
-                            <li>利害關係人溝通</li>
-                            <li>衝突與期望管理</li>
-                            <li>優先級取捨的表達</li>
-                            <li>壞消息的誠實揭露</li>
+                        <h3>你不做的</h3>
+                        <ul class="feature-list gap-list">
+                            <li>不代替人做對外承諾</li>
+                            <li>不自行決定報價或金額</li>
+                            <li>不修改客戶交付物內容</li>
+                            <li>不刪除既有業務資料</li>
+                            <li>不在無來源時填補數字</li>
                         </ul>
                     </div>
                     <div class="subsection">
-                        <h3>工具棧（可行方案）</h3>
+                        <h3>必須交給人決策</h3>
                         <ul class="feature-list">
-                            <li>GitHub Projects（看板，免額外成本）</li>
-                            <li>git log / commit 作為進度真相來源</li>
-                            <li>pytest CI 作為驗收閘門</li>
-                            <li>Markdown 週報（沿用現有報告產出流程）</li>
+                            <li>對外發送任何內容</li>
+                            <li>涉及金額的判斷</li>
+                            <li>不可逆操作（刪除、上線）</li>
+                            <li>風險分數 ≥ 15 的處置</li>
+                            <li>Backlog 優先序的最終定案</li>
                         </ul>
                     </div>
                 </div>
-            </div>
-
-            <!-- 成功指標 -->
-            <div class="section">
-                <h2>成功指標：怎麼證明 PM 有在發揮作用</h2>
-                <p>
-                    前一版最大的缺口是<strong>沒有驗收標準</strong> —— 沒有 KPI，就無法回答「導入 PM 之後有沒有變好」。
-                    業界現行標準是 <strong>DORA 四／五項指標</strong>（Google 研究團隊提出，已成軟體交付效能通用語言），
-                    搭配少量敏捷流程指標。
-                </p>
-
-                <div class="subsection">
-                    <h3>DORA 五項指標與 2025 業界基準</h3>
-                    <table class="comparison-table kpi-table">
-                        <thead><tr><th>指標</th><th>白話</th><th>業界現況（2025）</th><th>MUSEON 可否量測</th></tr></thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>部署頻率</strong></td><td>多久發一次版</td>
-                                <td>僅 16.2% 達「隨時可發」；23.9% 一個月不到一次</td>
-                                <td><span class="status-have">可</span> git log + 部署紀錄</td>
-                            </tr>
-                            <tr>
-                                <td><strong>變更前置時間</strong></td><td>commit 到上線要多久</td>
-                                <td>僅 9.4% 在 1 小時內；43.5% 超過一週</td>
-                                <td><span class="status-have">可</span> commit 時戳 vs 部署時戳</td>
-                            </tr>
-                            <tr>
-                                <td><strong>變更失敗率</strong></td><td>發出去後要回滾的比例</td>
-                                <td>僅 16.7% 達 ≤4%</td>
-                                <td><span class="status-partial">部分</span> 需開始記錄回滾事件</td>
-                            </tr>
-                            <tr>
-                                <td><strong>失敗復原時間</strong></td><td>壞掉後多久修好</td>
-                                <td>—</td>
-                                <td><span class="status-partial">部分</span> Guardian／supervisord 有時戳可推</td>
-                            </tr>
-                            <tr>
-                                <td><strong>部署返工率</strong></td><td>發完又得補一版的比例</td>
-                                <td>2025 新增指標</td>
-                                <td><span class="status-gap">缺</span> 需定義「返工」判準</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p class="src">
-                        建議做法：<strong>先量前兩項</strong>（部署頻率、前置時間）—— 這兩項用現有 git log 就能算，零新建成本，
-                        且能立刻給出基準線。後三項等有回滾／事故紀錄再接。
-                    </p>
-                </div>
-
-                <div class="highlight">
-                    <strong>🎯 KPI 設定原則：</strong> 先量「現在是多少」（基準線），不要一開始就設目標值。
-                    沒有基準線的目標值是憑空想像；有了兩週基準線，目標才有意義。
-                </div>
-            </div>
-
-            <!-- AI 對估算的衝擊 -->
-            <div class="section">
-                <h2>AI 輔助開發如何改變估算 —— 這題直接影響報價</h2>
-                <p>
-                    這是本版新增、也是對目前業務最直接相關的一節：<strong>「改用 AI 開發，工期與報價要不要調？」</strong>
-                </p>
 
                 <div class="warning">
-                    <strong>⚠️ 2025 DORA 報告的關鍵發現：</strong>
-                    AI 導入會<strong>提升產出速度，但同時提高交付不穩定性</strong>。
-                    推定原因是「量」—— AI 產出程式碼的速度，超過了審查與部署基礎設施能吸收的速度。
+                    <strong>⚠️ 最高原則：查證優先於推斷。</strong>
+                    任何數字、狀態、完成度，都必須來自你<strong>實際讀過的檔案或實際執行過的指令</strong>。
+                    查不到就寫「查不到」並指出缺哪一項 —— 不要用相近的資料補上。
                 </div>
+            </div>
+
+            <!-- 1. 開工前檢查 -->
+            <div class="section">
+                <h2>1. 開工前檢查：你需要什麼能力與工具</h2>
+                <p>執行任何模塊之前，先確認下列能力可用。<strong>缺哪一項，對應模塊就不能跑</strong>，應直接回報缺口而非硬做。</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>能力</th><th>用來做什麼</th><th>驗證方式</th><th>缺了會怎樣</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>執行 shell 指令</strong></td>
+                            <td>讀 git 歷史、跑測試</td>
+                            <td><code>git --version</code> 有輸出</td>
+                            <td>模塊 1、2、6 全部不能跑</td>
+                        </tr>
+                        <tr>
+                            <td><strong>讀取檔案</strong></td>
+                            <td>讀 backlog、風險表</td>
+                            <td>能讀出本文件所列任一路徑</td>
+                            <td>所有模塊不能跑</td>
+                        </tr>
+                        <tr>
+                            <td><strong>寫入檔案</strong></td>
+                            <td>更新狀態、產出報告</td>
+                            <td>能在 <code>data/_system/pm/</code> 建檔</td>
+                            <td>所有模塊不能跑</td>
+                        </tr>
+                        <tr>
+                            <td><strong>讀取 git 歷史</strong></td>
+                            <td>取得實際產出證據</td>
+                            <td><code>git log -1</code> 有輸出</td>
+                            <td>進度追蹤、指標量測不能跑</td>
+                        </tr>
+                        <tr>
+                            <td><strong>執行測試</strong></td>
+                            <td>品質驗收</td>
+                            <td>專案測試指令可執行</td>
+                            <td>品質驗收降級為「人工確認」</td>
+                        </tr>
+                        <tr>
+                            <td><strong>基本算術與日期處理</strong></td>
+                            <td>風險分數、前置時間</td>
+                            <td>—</td>
+                            <td>指標模塊不能跑</td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <div class="subsection">
-                    <h3>對報價與工期的三個實務含義</h3>
-                    <table class="comparison-table">
-                        <thead><tr><th>誤解</th><th>實際</th><th>報價該怎麼調</th></tr></thead>
-                        <tbody>
-                            <tr>
-                                <td>AI 寫程式快 N 倍，工期就砍 N 倍</td>
-                                <td>只有「產碼」那段變快。審查、整合、測試、修不穩定性沒有等比例變快</td>
-                                <td>砍<strong>開發工時</strong>，不砍<strong>驗收與整合工時</strong></td>
-                            </tr>
-                            <tr>
-                                <td>用歷史 velocity 推估就好</td>
-                                <td>AI 生產力持續累積，<strong>估算基準每季都在漂移</strong>，舊基準會越估越不準</td>
-                                <td>基準線改為<strong>逐季重算</strong>，不沿用半年前的數字</td>
-                            </tr>
-                            <tr>
-                                <td>速度提升 = 品質不變</td>
-                                <td>DORA 實證：吞吐量上升伴隨<strong>交付不穩定性上升</strong></td>
-                                <td>應<strong>增加</strong>驗收／回歸測試的比重，而非減少</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="subsection">
-                    <h3>建議的估算做法</h3>
-                    <ul class="feature-list">
-                        <li><strong>拆開報價結構</strong>：把「開發」與「整合＋驗收＋文件」分列，AI 只折抵前者</li>
-                        <li><strong>基於程式碼庫分析估算</strong>，而非憑感覺 —— 再用實際交付資料持續校準</li>
-                        <li><strong>不要把 velocity 當生產力指標</strong>：業界實證，一旦拿它當績效壓力，團隊會灌水點數而非真的變快</li>
-                        <li><strong>本專案已有現成校準資料</strong>：鋼構案報價規則（模組基礎費 = 製作週數 × 12,000 + 驗收點數 × 5,000 × 複雜度係數）本身就把「週數」與「驗收點數」分開計價 —— 這個結構天生適合 AI 折抵，只調前者即可</li>
+                    <h3>不需要的東西（避免你去找）</h3>
+                    <ul class="feature-list gap-list">
+                        <li>不需要外部專案管理 SaaS 帳號</li>
+                        <li>不需要網路連線（除非量測需外部部署資訊）</li>
+                        <li>不需要資料庫 —— 全部用純文字檔，可版控、可 diff</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- 風險登錄表 -->
+            <!-- 2. 資料契約 -->
             <div class="section">
-                <h2>風險登錄表（前版標為「完全沒有」，本版提供可直接用的範本）</h2>
+                <h2>2. 資料契約：檔案在哪、長什麼樣</h2>
+                <p>
+                    這是本規格的核心。<strong>所有狀態都存在檔案裡</strong>，沒有隱藏狀態。
+                    路徑相對於專案根目錄。檔案不存在時，由你依下列 schema 建立。
+                </p>
 
                 <div class="subsection">
-                    <h3>評分方式</h3>
-                    <p>
-                        業界標準為 <strong>5×5 機率-衝擊矩陣</strong>：機率 1–5、衝擊 1–5，
-                        <strong>風險分數 = 機率 × 衝擊</strong>（1–25）。
-                        每一條風險<strong>必須有負責人</strong> —— 沒有 owner 的風險登錄表等同沒有。
-                    </p>
-                    <p class="src">分級：1–6 <span class="risk-low">低</span>　8–12 <span class="risk-mid">中</span>　15–25 <span class="risk-high">高</span></p>
+                    <h3>① 待辦清單 <code>data/_system/pm/backlog.jsonl</code></h3>
+                    <p>每行一筆 JSON（JSONL 格式，方便 append 與 diff）。</p>
+<pre><code>{"id":"PM-001",
+ "title":"修正高豐架構報告 8 項落差",
+ "status":"todo",              // todo | in_progress | blocked | done
+ "priority":1,                 // 1=最高 … 5=最低
+ "estimate_h":4,               // 預估工時（小時），未估填 null
+ "owner":"human",              // human | agent
+ "acceptance":"8 項逐條對照後版本號與內容一致",   // 必填，且必須可驗證
+ "depends_on":[],              // 其他 item 的 id
+ "commits":[],                 // 對應的 commit sha，由模塊 1 自動補
+ "created":"2026-08-09T10:00:00+08:00",
+ "updated":"2026-08-09T10:00:00+08:00"}</code></pre>
+                    <div class="warning">
+                        <strong>⚠️ <code>acceptance</code> 欄位不可空、不可含形容詞。</strong>
+                        「做好」「完善」「無遺漏」不合格；
+                        「8 項逐條對照後版本號與內容一致」合格 —— 判準是<strong>另一個人能不能照著驗</strong>。
+                    </div>
                 </div>
 
                 <div class="subsection">
-                    <h3>已知風險初稿（用目前手上真實項目填，非範例資料）</h3>
+                    <h3>② 風險登錄表 <code>data/_system/pm/risk_register.jsonl</code></h3>
+<pre><code>{"id":"R-01",
+ "desc":"報價來源不明，誤送將造成客戶爭議",
+ "probability":3,              // 1–5
+ "impact":5,                   // 1–5
+ "score":15,                   // = probability × impact，寫入時自行計算
+ "owner":"human",              // 不可為空 —— 無 owner 的風險等同未管理
+ "response":"送出前人工核對來源",
+ "status":"open",              // open | mitigating | closed
+ "updated":"2026-08-09T10:00:00+08:00"}</code></pre>
+                </div>
+
+                <div class="subsection">
+                    <h3>③ 迭代週期 <code>data/_system/pm/sprint.json</code></h3>
+<pre><code>{"sprint_id":"S-2026-32",
+ "start":"2026-08-10","end":"2026-08-16",
+ "length_days":7,
+ "goal":"把 PM 六模塊接通並產出第一份基準線",
+ "committed":["PM-001","PM-002"]}   // 本週期承諾完成的 backlog id</code></pre>
+                </div>
+
+                <div class="subsection">
+                    <h3>④ 每日摘要 <code>data/_system/pm/daily/{YYYY-MM-DD}.md</code></h3>
+                    <p>Markdown，由模塊 4 產出。格式見該模塊。</p>
+                    <h3>⑤ 回顧紀錄 <code>data/_system/pm/retro/{sprint_id}.md</code></h3>
+                    <p>Markdown，由模塊 6 產出。</p>
+                    <h3>⑥ 交付指標 <code>data/_system/pm/metrics.jsonl</code></h3>
+<pre><code>{"date":"2026-08-09",
+ "deploy_count":2,             // 當日部署次數
+ "lead_time_h_median":6.5,     // commit → 上線的中位數（小時）
+ "change_fail_count":0,        // 需回滾的次數
+ "source":"git log + deploy log"}   // 資料來源，必填</code></pre>
+                </div>
+            </div>
+
+            <!-- 3. 六大模塊 -->
+            <div class="section">
+                <h2>3. 六大模塊執行規格</h2>
+                <p>每個模塊的格式一致：<strong>何時觸發 → 讀什麼 → 用什麼工具 → 做哪些步驟 → 怎樣算完成 → 失敗怎麼辦</strong>。</p>
+
+                <!-- M1 -->
+                <div class="subsection">
+                    <h3>模塊 1 ｜ 進度追蹤：把 commit 對應回待辦</h3>
                     <table class="comparison-table">
-                        <thead>
-                            <tr><th>ID</th><th>風險描述</th><th>機率</th><th>衝擊</th><th>分數</th><th>應對</th></tr>
-                        </thead>
                         <tbody>
-                            <tr>
-                                <td>R-01</td>
-                                <td>霏翔提案報價與九里河花完全相同，非客戶提供，若誤送將造成報價爭議</td>
-                                <td>3</td><td>5</td><td><span class="risk-high">15</span></td>
-                                <td>送出前需人工核對來源；已加金額事實接地規則</td>
-                            </tr>
-                            <tr>
-                                <td>R-02</td>
-                                <td>高豐架構報告標為 v1.4 但內容未同步，8 項落差未修</td>
-                                <td>4</td><td>4</td><td><span class="risk-high">16</span></td>
-                                <td>逐項對照修正後再對外；版本號與內容須一致</td>
-                            </tr>
-                            <tr>
-                                <td>R-03</td>
-                                <td>PM 與開發皆為 1.1 FTE 兼任，單點依賴</td>
-                                <td>5</td><td>4</td><td><span class="risk-high">20</span></td>
-                                <td>優先自動化可自動化者；關鍵流程需文件化以便交接</td>
-                            </tr>
-                            <tr>
-                                <td>R-04</td>
-                                <td>七武海量尺讀數全為 0，無法驗證任何改動是否有效</td>
-                                <td>5</td><td>3</td><td><span class="risk-high">15</span></td>
-                                <td>接線後才有基準線；在此之前所有成效宣稱皆不可驗證</td>
-                            </tr>
-                            <tr>
-                                <td>R-05</td>
-                                <td>AI 產碼速度超過審查吸收速度，導致交付不穩定（DORA 實證趨勢）</td>
-                                <td>3</td><td>3</td><td><span class="risk-mid">9</span></td>
-                                <td>驗收工時不隨開發工時等比例削減</td>
-                            </tr>
+                            <tr><td><strong>觸發</strong></td><td>每日一次；或使用者詢問進度時</td></tr>
+                            <tr><td><strong>輸入</strong></td><td><code>git log --since="1 day ago" --pretty=format:"%H|%s"</code><br><code>data/_system/pm/backlog.jsonl</code></td></tr>
+                            <tr><td><strong>工具</strong></td><td>執行 shell（git）、讀檔、寫檔</td></tr>
+                            <tr><td><strong>步驟</strong></td><td>
+                                1. 取昨日全部 commit（sha + subject）<br>
+                                2. 對每個 commit，在 subject 中尋找 backlog id（如 <code>PM-001</code>）<br>
+                                3. 找到 → 把 sha 加入該 item 的 <code>commits</code>，狀態改 <code>in_progress</code><br>
+                                4. 找不到 id 的 commit → 記入摘要的「未歸屬產出」，<strong>不要自行猜測歸屬</strong><br>
+                                5. 狀態為 <code>in_progress</code> 但連續 2 日無新 commit → 標 <code>blocked</code>
+                            </td></tr>
+                            <tr><td><strong>完成判準</strong></td><td>
+                                • 昨日每個 commit 都已被分類為「已歸屬」或「未歸屬」，無第三種<br>
+                                • backlog 中每個 <code>in_progress</code> 項目都有最後活動日期<br>
+                                • 檔案可被重新讀取且為合法 JSONL（每行可 parse）
+                            </td></tr>
+                            <tr><td><strong>失敗處理</strong></td><td>git 不可用 → 停止本模塊，於摘要註明「無法取得產出證據」，<strong>不得以推測填補</strong></td></tr>
                         </tbody>
                     </table>
-                    <p class="src">
-                        用法：每週回顧時逐條更新分數與狀態；分數 ≥15 者必須在當週回顧被討論到，不得略過。
-                    </p>
+                </div>
+
+                <!-- M2 -->
+                <div class="subsection">
+                    <h3>模塊 2 ｜ 品質驗收：完成不等於自稱完成</h3>
+                    <table class="comparison-table">
+                        <tbody>
+                            <tr><td><strong>觸發</strong></td><td>任一 backlog item 要從 <code>in_progress</code> 改為 <code>done</code> 之前</td></tr>
+                            <tr><td><strong>輸入</strong></td><td>該 item 的 <code>acceptance</code> 欄位；專案測試指令</td></tr>
+                            <tr><td><strong>工具</strong></td><td>執行 shell（測試指令）、讀檔</td></tr>
+                            <tr><td><strong>步驟</strong></td><td>
+                                1. 讀出該 item 的 <code>acceptance</code><br>
+                                2. 逐項實際驗證（跑測試／讀檔比對／執行指令），<strong>不接受「應該沒問題」</strong><br>
+                                3. 全部通過 → 狀態改 <code>done</code>，並記錄驗證方式<br>
+                                4. 任一項未過 → 維持 <code>in_progress</code>，寫明未過的是哪一項
+                            </td></tr>
+                            <tr><td><strong>完成判準</strong></td><td>
+                                • 每個 <code>done</code> 項目都附有「用什麼方式驗證」的紀錄<br>
+                                • 沒有任何項目在未驗證的情況下被標為 <code>done</code>
+                            </td></tr>
+                            <tr><td><strong>失敗處理</strong></td><td>測試工具不可用 → 該項目<strong>不得標為 done</strong>，改標 <code>blocked</code> 並註明原因</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- M3 -->
+                <div class="subsection">
+                    <h3>模塊 3 ｜ 迭代規劃：決定這週做什麼</h3>
+                    <table class="comparison-table">
+                        <tbody>
+                            <tr><td><strong>觸發</strong></td><td>每個 sprint 開始前一日；或 <code>sprint.json</code> 的 <code>end</code> 已過期</td></tr>
+                            <tr><td><strong>輸入</strong></td><td><code>backlog.jsonl</code>、<code>risk_register.jsonl</code>、上一期 <code>sprint.json</code></td></tr>
+                            <tr><td><strong>工具</strong></td><td>讀檔、寫檔</td></tr>
+                            <tr><td><strong>步驟</strong></td><td>
+                                1. 統計上期：承諾幾項、完成幾項（此即實際產能）<br>
+                                2. 依 <code>priority</code> 排序未完成項目；被 <code>depends_on</code> 阻擋者往後排<br>
+                                3. 風險分數 ≥ 15 對應的處置項<strong>優先納入</strong><br>
+                                4. 依上期實際完成量決定本期承諾量，<strong>不要依「希望完成量」</strong><br>
+                                5. 產出草案後<strong>交人確認</strong>，不自行定案
+                            </td></tr>
+                            <tr><td><strong>完成判準</strong></td><td>
+                                • <code>sprint.json</code> 的 <code>committed</code> 皆存在於 backlog 且非 <code>done</code><br>
+                                • 承諾量 ≤ 上期實際完成量 × 1.2<br>
+                                • 已取得人的確認
+                            </td></tr>
+                            <tr><td><strong>失敗處理</strong></td><td>無歷史資料（首次）→ 承諾量取保守值，並註明「無基準線，本期為校準期」</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- M4 -->
+                <div class="subsection">
+                    <h3>模塊 4 ｜ 每日摘要：讓進度每天可見</h3>
+                    <table class="comparison-table">
+                        <tbody>
+                            <tr><td><strong>觸發</strong></td><td>每個工作日固定時間一次</td></tr>
+                            <tr><td><strong>輸入</strong></td><td>模塊 1 的結果、<code>backlog.jsonl</code>、<code>risk_register.jsonl</code></td></tr>
+                            <tr><td><strong>工具</strong></td><td>讀檔、寫檔</td></tr>
+                            <tr><td><strong>步驟</strong></td><td>依下列固定格式產出，寫入 <code>data/_system/pm/daily/{date}.md</code></td></tr>
+                        </tbody>
+                    </table>
+<pre><code>## {日期} 進度摘要
+
+### 昨日完成
+- PM-003 修正報價欄位（commit a1b2c3d）— 已驗收
+
+### 進行中
+- PM-001 高豐 8 項落差（最後活動 3 日前）⚠️ 卡住
+
+### 卡住 / 需要決策
+- PM-005 等待客戶提供報價後半段（阻擋 2 日）
+
+### 高分風險（≥15）
+- R-03 單點依賴 20 分 — owner: 人
+
+### 未歸屬產出
+- commit e5f6g7h「調整樣式」未對應任何 backlog item</code></pre>
+                    <table class="comparison-table">
+                        <tbody>
+                            <tr><td><strong>完成判準</strong></td><td>
+                                • 檔案存在且五個段落齊備（缺資料的段落寫「無」，不可省略）<br>
+                                • 每個 <code>in_progress</code> 項目都被歸入「進行中」或「卡住」之一<br>
+                                • 每個分數 ≥15 的風險都出現在摘要中
+                            </td></tr>
+                            <tr><td><strong>失敗處理</strong></td><td>模塊 1 失敗 → 仍產出摘要，但「昨日完成」段落註明「無法取得 commit 資料」</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- M5 -->
+                <div class="subsection">
+                    <h3>模塊 5 ｜ 風險管理：已知的壞事要被追蹤</h3>
+                    <table class="comparison-table">
+                        <tbody>
+                            <tr><td><strong>觸發</strong></td><td>每次回顧時全表更新；發現新風險時立即新增</td></tr>
+                            <tr><td><strong>輸入</strong></td><td><code>risk_register.jsonl</code></td></tr>
+                            <tr><td><strong>工具</strong></td><td>讀檔、寫檔</td></tr>
+                            <tr><td><strong>步驟</strong></td><td>
+                                1. 評分：<code>score = probability × impact</code>（各 1–5，分數 1–25）<br>
+                                2. 分級：1–6 低　8–12 中　<strong>15–25 高</strong><br>
+                                3. 每條<strong>必須有 owner</strong>；無 owner 者一律視為未管理，須在摘要中點名<br>
+                                4. 分數 ≥15 → 當日摘要必須出現，且需人確認處置<br>
+                                5. 已消除者改 <code>closed</code>，<strong>不要直接刪除</strong>（保留歷史）
+                            </td></tr>
+                            <tr><td><strong>完成判準</strong></td><td>
+                                • 每條的 <code>score</code> 等於 <code>probability × impact</code>（可被重算驗證）<br>
+                                • 無 <code>owner</code> 為空的 <code>open</code> 風險<br>
+                                • 每條 <code>updated</code> 距今不超過一個 sprint 長度
+                            </td></tr>
+                            <tr><td><strong>失敗處理</strong></td><td>無法判定機率／衝擊 → 填保守值（較高者）並註明「待人工校準」，不要跳過該條</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- M6 -->
+                <div class="subsection">
+                    <h3>模塊 6 ｜ 回顧與改善：讓下一輪比這輪好</h3>
+                    <table class="comparison-table">
+                        <tbody>
+                            <tr><td><strong>觸發</strong></td><td>每個 sprint 結束時</td></tr>
+                            <tr><td><strong>輸入</strong></td><td>本期 <code>sprint.json</code>、<code>backlog.jsonl</code>、期間所有 <code>daily/*.md</code>、<code>metrics.jsonl</code></td></tr>
+                            <tr><td><strong>工具</strong></td><td>讀檔、寫檔、執行 shell（算指標）</td></tr>
+                            <tr><td><strong>步驟</strong></td><td>
+                                1. 計算：承諾 N 項 / 完成 M 項 / 完成率<br>
+                                2. 列出所有曾標 <code>blocked</code> 的項目與阻擋原因<br>
+                                3. 量測交付指標（見下節），寫入 <code>metrics.jsonl</code><br>
+                                4. 產出 1–3 條<strong>具體改善行動</strong>，每條需轉為新的 backlog item<br>
+                                5. 寫入 <code>data/_system/pm/retro/{sprint_id}.md</code>
+                            </td></tr>
+                            <tr><td><strong>完成判準</strong></td><td>
+                                • 完成率為實際計算值，非估計<br>
+                                • 每條改善行動都已成為 backlog item（有 id），<strong>否則視同未產出</strong><br>
+                                • 本期指標已寫入 <code>metrics.jsonl</code>
+                            </td></tr>
+                            <tr><td><strong>失敗處理</strong></td><td>資料不足 → 仍產出回顧，明確寫出「缺哪一項資料、因此哪個結論無法得出」</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-            <!-- 利害關係人 -->
+            <!-- 4. 量測標準 -->
             <div class="section">
-                <h2>利害關係人登錄表（補前版「社會覺察」章節之不足）</h2>
-                <p>前版此項標為「部分」，但只引用了六大盲區，沒有實際清單。利害關係人管理的第一步是<strong>把人列出來</strong>。</p>
-                <table class="comparison-table">
-                    <thead><tr><th>對象</th><th>關注什麼</th><th>溝通頻率與形式</th></tr></thead>
+                <h2>4. 量測標準：怎麼證明有在進步</h2>
+                <p>採業界通用的 DORA 指標。<strong>先取得基準線，再談目標值</strong> —— 沒有基準線的目標值是憑空想像。</p>
+
+                <table class="comparison-table kpi-table">
+                    <thead><tr><th>指標</th><th>怎麼算</th><th>業界基準（2025）</th></tr></thead>
                     <tbody>
-                        <tr><td><strong>老闆 / 決策者</strong></td><td>進度、成本、風險是否可控</td><td>每週摘要＋風險分數 ≥15 即時告知</td></tr>
-                        <tr><td><strong>客戶（高豐／霏翔／鋼構等）</strong></td><td>交付內容、時程、報價依據</td><td>里程碑交付時；報價變動須事前說明</td></tr>
-                        <tr><td><strong>協作夥伴（如雅竹）</strong></td><td>分工邊界、素材與資料交付</td><td>依專案節奏；缺件需明確列出待補清單</td></tr>
-                        <tr><td><strong>系統本身（MUSEON）</strong></td><td>可被量測、可被回滾</td><td>每日自動摘要；異常即時告警</td></tr>
+                        <tr>
+                            <td><strong>部署頻率</strong></td>
+                            <td>單位時間內的部署次數</td>
+                            <td>僅 16.2% 能做到「隨時可發」；23.9% 一個月不到一次</td>
+                        </tr>
+                        <tr>
+                            <td><strong>變更前置時間</strong></td>
+                            <td>commit 時戳 → 上線時戳，取中位數</td>
+                            <td>僅 9.4% 在 1 小時內；43.5% 超過一週</td>
+                        </tr>
+                        <tr>
+                            <td><strong>變更失敗率</strong></td>
+                            <td>需回滾或緊急修補的部署 ÷ 總部署</td>
+                            <td>僅 16.7% 達 ≤4%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>失敗復原時間</strong></td>
+                            <td>故障發生 → 恢復正常的時間</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>部署返工率</strong></td>
+                            <td>發布後需再補一版的比例</td>
+                            <td>2025 新增指標</td>
+                        </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <!-- 角色權責 -->
-            <div class="section">
-                <h2>角色與權責（RACI）—— 前版完全未定義</h2>
-                <div class="warning">
-                    <strong>⚠️ 前版最大結構缺口：</strong> 通篇未寫「誰是 PM」。
-                    在 1.1 FTE 的現實下，這不是形式問題 —— 不定義權責，等於預設所有事都由同一個人補位。
+                <div class="highlight">
+                    <strong>起步建議：</strong> 先量前兩項 —— 只要有 git log 就能算，零建置成本。
+                    後三項需要「部署」與「回滾」有明確紀錄，等有資料再接。
                 </div>
-                <table class="comparison-table">
-                    <thead><tr><th>工作</th><th>負責執行</th><th>最終決策</th><th>需諮詢</th></tr></thead>
-                    <tbody>
-                        <tr><td>Backlog 排序</td><td>MUSEON 提草案</td><td><strong>人（老闆）</strong></td><td>客戶（若涉交付範圍）</td></tr>
-                        <tr><td>每日進度摘要</td><td><strong>MUSEON（自動）</strong></td><td>—</td><td>—</td></tr>
-                        <tr><td>風險評分與升級</td><td>MUSEON 提初評</td><td><strong>人</strong></td><td>—</td></tr>
-                        <tr><td>對外報價／交付</td><td>MUSEON 產草稿</td><td><strong>人（必經）</strong></td><td>客戶</td></tr>
-                        <tr><td>程式碼變更上線</td><td>MUSEON</td><td><strong>人（重大變更）</strong></td><td>—</td></tr>
-                    </tbody>
-                </table>
-                <p class="src">
-                    原則：<strong>凡對外、涉金額、不可逆者，決策權一律在人。</strong>
-                    MUSEON 負責把選項與依據備齊，不代替決策 —— 這條同時是風險 R-01 的制度性對策。
-                </p>
             </div>
 
-            <!-- 實施藍圖 -->
+            <!-- 5. 判斷準則 -->
             <div class="section">
-                <h2>建置藍圖與投入估算</h2>
-                <p>
-                    前版標註「時程需另估」。本版依「1.1 FTE 兼任、AI 輔助」的實際條件給出<strong>投入區間</strong>。
-                    採區間而非單點，因為 AI 輔助下的估算基準本身在漂移（見前節）。
-                </p>
-                <table class="comparison-table">
-                    <thead><tr><th>階段</th><th>產出</th><th>人工投入</th><th>完成判準</th></tr></thead>
-                    <tbody>
-                        <tr><td><strong>P1</strong></td><td>看板 + 首份 Backlog</td><td>4–8 小時</td><td>現有未結案項目全部進看板，無遺漏</td></tr>
-                        <tr><td><strong>P2</strong></td><td>每日摘要 + Sprint 週期</td><td>6–12 小時</td><td>連續 5 個工作日自動產出摘要無中斷</td></tr>
-                        <tr><td><strong>P3</strong></td><td>風險登錄表 + 品質閘</td><td>4–6 小時</td><td>本文件 R-01～R-05 全部有 owner 且每週更新</td></tr>
-                        <tr><td><strong>P4</strong></td><td>回顧迴圈 + DORA 基準線</td><td>6–10 小時</td><td>兩週 DORA 前兩項有實際數字，非估計值</td></tr>
-                    </tbody>
-                </table>
-                <p class="src">
-                    合計約 <strong>20–36 小時</strong>。P1 與 P3 應優先 —— 兩者投入最小、且直接對應目前分數最高的風險。
-                </p>
+                <h2>5. 判斷準則：遇到這些情況怎麼辦</h2>
 
+                <div class="subsection">
+                    <h3>估算：AI 輔助開發會讓你估錯</h3>
+                    <div class="warning">
+                        <strong>⚠️ 2025 業界實證：</strong> AI 導入會提升產出速度，
+                        但<strong>同時提高交付不穩定性</strong> —— 產碼速度超過審查與部署能吸收的速度。
+                    </div>
+                    <table class="comparison-table">
+                        <thead><tr><th>常見誤判</th><th>正確做法</th></tr></thead>
+                        <tbody>
+                            <tr><td>AI 快 N 倍 → 工期砍 N 倍</td><td>只折抵<strong>開發</strong>工時；審查、整合、測試工時不等比例減少</td></tr>
+                            <tr><td>沿用歷史產能推估</td><td>AI 生產力持續累積，<strong>基準線每季重算</strong>，不用半年前的數字</td></tr>
+                            <tr><td>速度提升＝品質不變</td><td>驗收比重應<strong>增加</strong>而非減少</td></tr>
+                            <tr><td>把產能當績效指標</td><td>一旦當績效壓力，估算會被灌水而非真的變快 —— 產能只用於<strong>預測</strong>，不用於<strong>考核</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3>何時必須停下來問人</h3>
+                    <ul class="feature-list gap-list">
+                        <li>任何要送到專案外部的內容（客戶、合作方）</li>
+                        <li>任何金額、報價、工期承諾</li>
+                        <li>風險分數 ≥ 15 的處置決定</li>
+                        <li>要刪除或覆寫既有業務資料</li>
+                        <li>資料互相矛盾且無法用查證解決</li>
+                        <li><strong>你發現自己想「應該是這樣」時</strong> —— 那是推斷不是查證</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6. 首次啟動 -->
+            <div class="section">
+                <h2>6. 首次啟動程序（專案還沒有任何 PM 資料時）</h2>
                 <div class="roadmap">
                     <div class="roadmap-item">
-                        <div class="roadmap-marker">P1</div>
+                        <div class="roadmap-marker">1</div>
                         <div class="roadmap-content">
-                            <strong>基礎建置：把任務從「散落對話」搬進「看得到的系統」</strong>
-                            <p>✓ 建立 GitHub Projects 看板 &nbsp; | &nbsp; ✓ 把現有待辦事項（如霏翔報價待確認、高豐架構落差）逐條轉成 backlog item</p>
+                            <strong>建立目錄與空檔</strong>
+                            <p>建立 <code>data/_system/pm/</code> 及其下 <code>daily/</code>、<code>retro/</code>；建立四個空的資料檔</p>
                         </div>
                     </div>
                     <div class="roadmap-item">
-                        <div class="roadmap-marker">P2</div>
+                        <div class="roadmap-marker">2</div>
                         <div class="roadmap-content">
-                            <strong>執行紀律：讓進度可被每天看見</strong>
-                            <p>✓ L4 觀察者延伸產出「每日站會摘要」 &nbsp; | &nbsp; ✓ 定義 Sprint 週期長度（建議先用 1 週試跑）</p>
+                            <strong>盤點既有未結案事項</strong>
+                            <p>來源：近期 commit、既有報告、對話中提到但未完成的事。<strong>逐條轉為 backlog item 並補齊 <code>acceptance</code></strong></p>
                         </div>
                     </div>
                     <div class="roadmap-item">
-                        <div class="roadmap-marker">P3</div>
+                        <div class="roadmap-marker">3</div>
                         <div class="roadmap-content">
-                            <strong>風險與品質：補上目前完全沒有的機制</strong>
-                            <p>✓ 建立風險登錄表（新建，無現成基礎） &nbsp; | &nbsp; ✓ 對接 M10 Audit-Fix Loop 作為品質閘</p>
+                            <strong>建立風險登錄表初稿</strong>
+                            <p>把「已知但沒人在追」的事情寫成風險條目，評分並<strong>指派 owner</strong></p>
                         </div>
                     </div>
                     <div class="roadmap-item">
-                        <div class="roadmap-marker">P4</div>
+                        <div class="roadmap-marker">4</div>
                         <div class="roadmap-content">
-                            <strong>回顧與優化：形成迴圈而非一次性建置</strong>
-                            <p>✓ 週期性回顧會議（可掛在既有 Breath Protocol 週回望上） &nbsp; | &nbsp; ✓ 行動項目追蹤閉環</p>
+                            <strong>定義第一個 sprint</strong>
+                            <p>建議長度 7 天。首期無歷史產能，承諾量取保守值並註明為校準期</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker">5</div>
+                        <div class="roadmap-content">
+                            <strong>連續產出 5 個工作日的每日摘要</strong>
+                            <p>這是驗證整套流程真的接通的判準 —— 中斷即代表某個環節沒接上，須修好再往下</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker">6</div>
+                        <div class="roadmap-content">
+                            <strong>取得第一份指標基準線</strong>
+                            <p>用 git log 算出兩週的部署頻率與前置時間，寫入 <code>metrics.jsonl</code></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 缺口清單 -->
+            <!-- 7. 完成標準總表 -->
             <div class="section">
-                <h2>誠實缺口清單</h2>
-                <div class="warning">
-                    <strong>⚠️ 下面這些不是「快完成了」，是完全沒有，需要從零建：</strong>
-                </div>
-                <div class="subsection">
-                    <ul class="feature-list gap-list">
-                        <li>沒有正式 Backlog / Sprint 系統 — 任務目前靠 git commit + 對話記錄拼湊</li>
-                        <li>沒有風險登錄表 — 高豐架構落差、霏翔報價疑慮這類「已知但未追蹤」的風險沒有集中管理</li>
-                        <li>沒有 Sprint cadence 定義 — 不知道多久算一個迭代週期</li>
-                        <li>PM 角色本身在 1.1 FTE 下也是兼任，不是專職 —— 意味著「誰來當 PM」這個問題本身也要納入規劃，而不是預設 MUSEON 自動補位</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 下一步行動 -->
-            <div class="section">
-                <h2>下一步行動</h2>
-                <div class="subsection">
-                    <ol style="margin-left: 20px; line-height: 2;">
-                        <li><strong>確認範疇：</strong> MUSEON PM 職能只管軟體開發進度，還是也涵蓋業務/行銷專案？</li>
-                        <li><strong>選定看板工具：</strong> 建議 GitHub Projects（跟現有 repo 無縫接，零額外成本），或告知已有偏好工具</li>
-                        <li><strong>建立第一份 Backlog：</strong> 把目前手上未結案項目（高豐架構落差 8 項、霏翔報價查證等）轉成任務清單，作為試跑資料</li>
-                        <li><strong>定義 Sprint 週期：</strong> 建議先用 1 週試跑一輪，再依實際節奏調整</li>
-                        <li><strong>指派風險 owner：</strong> 本文件 R-01～R-05 目前皆無 owner —— 沒有負責人的風險登錄表等同沒有</li>
-                        <li><strong>開始量 DORA 前兩項：</strong> 用現有 git log 即可算出部署頻率與前置時間，先取得兩週基準線再談目標值</li>
-                    </ol>
+                <h2>7. 完成標準總表</h2>
+                <p>下表是「你這個角色做得好不好」的唯一判準。<strong>全部可被他人重新驗證</strong>，不含主觀評價。</p>
+                <table class="comparison-table">
+                    <thead><tr><th>模塊</th><th>完成判準（可驗證）</th></tr></thead>
+                    <tbody>
+                        <tr><td>1 進度追蹤</td><td>每個 commit 都已分類為已歸屬／未歸屬；資料檔為合法 JSONL</td></tr>
+                        <tr><td>2 品質驗收</td><td>每個 <code>done</code> 都附驗證方式紀錄；無未驗證即標 done 者</td></tr>
+                        <tr><td>3 迭代規劃</td><td>承諾量 ≤ 上期實際完成量 × 1.2；已取得人確認</td></tr>
+                        <tr><td>4 每日摘要</td><td>連續工作日無中斷；五段落齊備；高分風險全數出現</td></tr>
+                        <tr><td>5 風險管理</td><td>score 可被重算驗證；無空 owner 的 open 風險</td></tr>
+                        <tr><td>6 回顧改善</td><td>完成率為實算值；每條改善行動都已成為 backlog item</td></tr>
+                    </tbody>
+                </table>
+                <div class="highlight">
+                    <strong>🎯 總體判準：</strong>
+                    任何人在任何時間點，都能只靠 <code>data/_system/pm/</code> 底下的檔案，
+                    回答出「現在做到哪、卡在哪、風險是什麼、下一步做什麼」——
+                    <strong>不需要問你</strong>。做到這點，這個角色就成立了。
                 </div>
             </div>
 
         </div>
 
         <div class="footer">
-            <p>MUSEON 專案經理職能規劃書 | 生成時間：2026 年 8 月 9 日（v2 增補版）</p>
-            <p>本版新增：2026 PMP 考綱權重、DORA 五項指標與 2025 基準、AI 輔助開發對估算的影響、風險登錄表、利害關係人清單、RACI、投入估算</p>
-            <p>參考資料：<a href="https://www.pmi.org/learning/library/agile-pmbok-guide-project-management-scrum-6954" target="_blank">PMI - Agile and PMBOK Guide</a>、
-            <a href="https://scrumconsult.com/new-pmp-exam-content-outline-eco-2026/" target="_blank">2026 PMP Exam Content Outline</a>、
-            <a href="https://www.epicflow.com/blog/ai-agents-for-project-management/" target="_blank">Epicflow - AI Agents for Project Management 2026</a></p>
+            <p>PM Agent 執行規格書 | 2026 年 8 月 9 日</p>
+            <p>本文件為自足規格：全新 Agent 無需其他背景知識即可依此執行。所有狀態存於純文字檔，可版控、可 diff、可被他人驗證。</p>
+            <p>指標定義參考：<a href="https://getdx.com/blog/dora-metrics/" target="_blank">DORA Metrics Guide</a>、
+            <a href="https://www.pmi.org/-/media/pmi/documents/public/pdf/certifications/new-pmp-examination-content-outline-2026.pdf" target="_blank">PMP ECO 2026</a></p>
         </div>
+
+
     </div>
 </body>
 </html>
