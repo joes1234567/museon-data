@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小型 AI Agent 服務商導入方法論深度報告</title>
+<style>
+  :root {
+    --bg: #0a0d14;
+    --bg2: #111520;
+    --bg3: #161b28;
+    --border: #1e2738;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --accent3: #10b981;
+    --accent4: #f59e0b;
+    --accent5: #ef4444;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --gold: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.75;
+    font-size: 15px;
+  }
+  .hero {
+    background: linear-gradient(135deg, #0a0d14 0%, #0f1629 50%, #080d1a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.3);
+    color: #60a5fa;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 5vw, 50px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    color: var(--text2);
+    font-size: 17px;
+    max-width: 680px;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--text3);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-meta b { color: var(--text2); }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+  .sec-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(59,130,246,0.12);
+    border: 1px solid rgba(59,130,246,0.25);
+    color: #60a5fa;
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 12px;
+  }
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #93c5fd;
+    margin: 28px 0 12px;
+  }
+  p { color: var(--text); margin-bottom: 14px; }
+  .lead {
+    font-size: 16px;
+    color: var(--text2);
+    margin-bottom: 22px;
+  }
+  strong { color: #fbbf24; font-weight: 700; }
+  ul, ol { margin: 12px 0 18px 20px; }
+  li { margin-bottom: 8px; color: var(--text); }
+  a { color: #60a5fa; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 13.5px;
+  }
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: var(--bg3);
+    color: var(--text2);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: #93c5fd; font-weight: 600; }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 20px 0 24px;
+  }
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fbbf24;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+  .stat-label { font-size: 13px; color: var(--text2); }
+  .callout {
+    background: rgba(59,130,246,0.07);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 18px 0;
+    color: var(--text2);
+    font-size: 14.5px;
+  }
+  .callout b { color: #e2e8f0; }
+  .callout.warn { background: rgba(239,68,68,0.07); border-color: rgba(239,68,68,0.25); border-left-color: var(--accent5); }
+  .callout.good { background: rgba(16,185,129,0.07); border-color: rgba(16,185,129,0.25); border-left-color: var(--accent3); }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 18px 0 24px;
+  }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .col-box {
+    border-radius: 12px;
+    padding: 20px 22px;
+    border: 1px solid var(--border);
+  }
+  .col-box.good { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.22); }
+  .col-box.bad { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.22); }
+  .col-box h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.03em;
+  }
+  .col-box.good h4 { color: #34d399; }
+  .col-box.bad h4 { color: #f87171; }
+  .col-box ul { margin: 0 0 0 18px; }
+  .col-box li { font-size: 13.5px; color: var(--text2); }
+  .timeline {
+    margin: 20px 0 24px;
+    border-left: 2px solid var(--border);
+    padding-left: 24px;
+  }
+  .timeline-item { position: relative; margin-bottom: 22px; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -29px; top: 4px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .timeline-item .tl-week { color: #60a5fa; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+  .timeline-item .tl-body { color: var(--text2); font-size: 14px; }
+  .sources {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+    font-size: 12px;
+    color: var(--text3);
+    line-height: 2;
+  }
+  .sources a { color: var(--text3); }
+  .sources a:hover { color: #60a5fa; }
+  footer {
+    padding: 40px;
+    text-align: center;
+    color: var(--text3);
+    font-size: 12.5px;
+  }
+  footer .disclaimer {
+    max-width: 640px;
+    margin: 0 auto 16px;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Methodology Report · 2026</span>
+    <h1>小型 AI Agent 服務商<br>如何導入自家 AI Agent</h1>
+    <p class="hero-sub">聚焦精品／小型服務商（非 Salesforce、ServiceNow 這類大廠）——他們用什麼方法論、多久時間、什麼定價，把「數位員工」真正交到中小企業手上並讓客戶敢放手用。</p>
+    <div class="hero-meta">
+      <span>📅 <b>日期</b>&nbsp;2026-08-25</span>
+      <span>🎯 <b>目的</b>&nbsp;拆解「送數位員工＋建工作流」在業界的實際操作方法</span>
+      <span>📚 <b>來源</b>&nbsp;arXiv・Decagon・Microsoft・Helium42・Taskip 等公開資料</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <h2><span class="sec-num">1</span>先定位：你在賣什麼角色</h2>
+    <p class="lead">2026 年一篇學術論文把這個角色取了名字，而且精準對到「送數位員工＋建工作流」的框架。</p>
+    <div class="callout good">
+      <b>Integrator（整合者）角色定義</b>（arXiv 2606.16649）：中小企業既不會自己養團隊做模型，也養不起大型顧問案，真正的市場機會落在「介於通用 AI 能力和一家企業亂糟糟的既有系統之間」——賣的不是模型本身，是<b>整合層＋治理層</b>。你不是在賣一個聊天機器人，是在賣「把這家公司的亂，變成可以交給 AI 做的」這件事本身。
+    </div>
+    <p>這跟大廠的打法完全不同。Salesforce Agentforce、ServiceNow 這類是「企業級座位授權＋長訂閱」，需要客戶自己有 IT 團隊配合導入；精品服務商反過來，賣點是<strong>單一登入、免技術設定、第一天就要看到一點成果</strong>——因為中小企業客戶等不起三個月才看到價值，也沒有 IT 部門可以幫忙搞定整合。</p>
+    <div class="sources">
+      來源：
+      <a href="https://arxiv.org/pdf/2606.16649" target="_blank">The Integrator Advantage: Controlled Agentic AI for SMEs (arXiv)</a> ·
+      <a href="https://www.jadasquad.com/blog/ai-automation-agencies" target="_blank">JADA Squad：AI Automation Agencies 2026 Guide</a>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="sec-num">2</span>導入方法論：不是「訓練期」，是五段式加速流程</h2>
+    <p class="lead">你原本設想的「2-3 個月讓數位員工在旁邊上班、慢慢學會企業標準」——業界精品服務商的實際做法快得多，而且順序不同：<strong>先萃取既有材料，不是等新流程跑出新資料才開始學</strong>。Helium42 的 SME 加速框架把傳統企業 6-18 個月的導入時程壓縮到 <strong>6-8 週</strong>，靠的是「教育、技術設置、試點交付」三線並行，而不是循序等待。</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-week">Week 1-2　探索與教育</div>
+        <div class="tl-body">跨部門 AI 素養工作坊、現況流程盤點、資料就緒度評估、利害關係人共識工作坊。<strong>產出：</strong>團隊具備基本 AI 判斷力、篩出 3 個高影響力候選場景。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-week">Week 3　資料整備</div>
+        <div class="tl-body">資料品質修復與盤點、AI 工具與既有系統的整合對照、治理框架建立（含 Agent Charter，見第 3 節）、法遵文件。<strong>產出：</strong>乾淨的資料管線，可供試點使用。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-week">Week 4-5　試點建置與測試</div>
+        <div class="tl-body">針對選定場景組態 AI 方案、使用者驗收測試、工作流整合。<strong>產出：</strong>可運作的試點，使用者採用率 &gt;70%。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-week">Week 6　正式上線與量測</div>
+        <div class="tl-body">推上生產環境、部署 ROI 追蹤儀表板、啟動密集支援期（hypercare）。<strong>產出：</strong>ROI 指標建立並每週追蹤。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-week">Week 7-8　優化與擴大</div>
+        <div class="tl-body">依生產數據調校效能、規劃第二個應用場景、訓練內部變革種子人員。<strong>產出：</strong>40% 的具體效率提升、下一階段擴大計畫拍板。</div>
+      </div>
+    </div>
+    <div class="callout">
+      <b>對比：複雜場景不是 6-8 週能搞定。</b>如果是涉及多套企業系統整合、法遵敏感（如金融 KYC）的場景，實際落地時程拉長到 <strong>12-20 週</strong>（含 4-8 週穩定期）。決定時程長短的關鍵不是模型能力，是<strong>整合層（對接既有系統的介面工程）和政策層（把法規/內規轉成可執行的護欄）</strong>——這兩塊通常吃掉 60-70% 的建置工時。
+    </div>
+    <p>McKinsey（2025）的數據佐證了「教育先行」這一步不能省：<strong>有投資文化轉型教育的專案，成功率是沒有投資的 5.3 倍</strong>——這跟你原本想的「先讓他上工、教育訓練」邏輯一致，只是受訓的主體不是數位員工本身，是<strong>組織裡的人要先懂怎麼跟這個新同事协作、怎麼定義好壞</strong>。</p>
+    <div class="sources">
+      來源：
+      <a href="https://helium42.com/blog/ai-implementation-roadmap" target="_blank">Helium42：AI Implementation Roadmap（週別拆解）</a> ·
+      <a href="https://decagon.ai/blog/from-sops-to-agent-operating-procedures" target="_blank">Decagon：From Manual SOPs to Agent Operating Procedures</a>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="sec-num">3</span>Agent Charter：業界怎麼把「企業標準」寫成數位員工看得懂的規則</h2>
+    <p class="lead">你問的「教育訓練期讓他明白企業真標準」，業界不是靠員工自己摸索記住，而是先產出一份固定文件——<strong>Agent Charter（代理人章程）</strong>——把隱性標準變成明確規則，這份文件不寫完不動工。</p>
+    <h3>三個核心組成</h3>
+    <table>
+      <tr><th>組成</th><th>內容</th><th>白話</th></tr>
+      <tr><td>決策點分類</td><td>把每個決策分成三類：確定性（AI 自主決定，如資料格式標準化）、機率性（AI 建議、人決定，如風險評分）、必須人工（如合約解釋、動用權限）</td><td>先劃線：哪些事讓數位員工自己做，哪些事他只能建議</td></tr>
+      <tr><td>核准門檻</td><td>具體觸發條件——例如差異低於 5% 自動放行，超過門檻要人工覆核，關鍵欄位不一致必須升級</td><td>寫死「什麼叫小事、什麼叫大事」，不靠員工自己判斷</td></tr>
+      <tr><td>人在迴路授權</td><td>明訂哪些決策的最終責任永遠在授權的人身上，AI 只負責分析和執行動作</td><td>出事誰負責，先講清楚</td></tr>
+    </table>
+    <p>這份章程延伸出來的完整治理框架（Microsoft 開源的 Agent Governance Toolkit 也採用類似結構）通常包含六件產出物：<strong>治理章程</strong>（決策權歸屬）、<strong>風險登記冊</strong>（按嚴重度／發生率分類）、<strong>稽核節奏</strong>（週/月/季不同層級的檢查）、<strong>模型更新審查</strong>（評估關卡＋回滾機制）、<strong>事故應變手冊</strong>（偵測與圍堵流程）、<strong>倫理審查論壇</strong>（處理灰色地帶案例）。</p>
+    <div class="callout">
+      <b>對小企業服務商的實務建議：</b>不用一次做齊六件——精品服務商普遍先做前兩件（章程 + 風險登記），其餘隨客戶規模擴大再補。這正好對應你原本問的「考核機制」——它不是一份文件，是「標準＋裁判＋回饋迴路」三件事疊起來的持續運作機制（詳見前一輪對話）。
+    </div>
+    <div class="sources">
+      來源：
+      <a href="https://www.iamagazine.com/2026/05/12/agent-charter-creating-an-ai-governance-framework-to-ensure-operational-reliance/" target="_blank">IA Magazine：Agent Charter governance framework</a> ·
+      <a href="https://github.com/microsoft/agent-governance-toolkit/blob/main/CHARTER.md" target="_blank">Microsoft Agent Governance Toolkit（GitHub）</a> ·
+      <a href="https://decagon.ai/glossary/what-is-an-agent-sop" target="_blank">Decagon：What is an agent SOP</a>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="sec-num">4</span>真實案例：多快看到效果、代價是什麼</h2>
+    <table>
+      <tr><th>案例</th><th>導入內容</th><th>時程</th><th>結果</th></tr>
+      <tr><td>HVAC 服務業（小型）</td><td>電話＋聊天 AI Agent，負責預約排程與基本故障排除</td><td>6 週見到可衡量成效</td><td>非上班時段預約明顯增加；原本接電話的行政人員轉去做維護方案加購推銷，<strong>沒有裁員</strong></td></tr>
+      <tr><td>電商零售商（12 人團隊）</td><td>AI Agent 接入客服信箱，處理退貨、物流查詢、訂單狀態</td><td>3 個月完整優化</td><td>首次回應時間從約 1 天降到分鐘級；第 1 個月滿意度因重新訓練期短暫下滑，第 3 個月滿意度超越原始基準</td></tr>
+      <tr><td>APAC 區域銀行 KYC（新加坡總部，MAS 監管）</td><td>垂直型 KYC 代理人，涵蓋新加坡／香港／印尼／越南分行</td><td>14 週分階段上線</td><td>分析師處理每筆中小企業開戶時間減少 55%；二線覆核的首次通過率明顯提升</td></tr>
+      <tr><td>Corvera（垂直 AI 新創）</td><td>目標明確的垂直解決方案</td><td>4 週</td><td>從零做到月經常性收入 $33,000</td></tr>
+    </table>
+    <div class="callout warn">
+      <b>共同關鍵洞察：</b>「贏的不是 Agent 最花俏的那家，是願意花時間做意圖訓練和人工升級路徑設計，而不是直接開關一按就上線的那家。」——不管時程 4 週還是 14 週，<strong>刻意設計的訓練期和升級路徑</strong>是所有成功案例的共同點，也對應第 3 節的 Agent Charter：沒有章程規則，就沒有「該升級給人」這件事的判斷依據。
+    </div>
+    <div class="sources">
+      來源：
+      <a href="https://successknocks.com/case-study-small-business-results-after-adopting-ai-agents/" target="_blank">SuccessKnocks：小企業 AI Agent 案例研究</a> ·
+      <a href="https://www.saasmag.com/vertical-ai-agents-eating-horizontal-saas/" target="_blank">SaaS Mag：垂直 AI Agent 案例（含 APAC 銀行 KYC）</a> ·
+      <a href="https://wearepresta.com/ai-agent-startup-ideas-2026-15-profitable-opportunities-to-launch-now/" target="_blank">Presta：15 AI Agent Startup Ideas（含 Corvera）</a>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="sec-num">5</span>精品服務商怎麼收費</h2>
+    <p class="lead">六種主流定價結構，都是拿真實市場價格區間，不是猜的：</p>
+    <table>
+      <tr><th>模式</th><th>價格區間</th><th>適用情境</th></tr>
+      <tr><td>固定價</td><td>$3,000–$20,000（一次性）</td><td>範圍明確、驗收標準清楚的單一工作流</td></tr>
+      <tr><td>用量計費</td><td>每單位 $80–$300</td><td>可清楚計件的產出，如「每篇 AI 輔助部落格文章 $180」</td></tr>
+      <tr><td>訂閱＋用量</td><td>每月 $1,500–$4,000 底價</td><td>底價含固定額度，超量另計，如「$1,800/月含 10 件產出，第 11 件起 $140/件」</td></tr>
+      <tr><td>結果計費</td><td>依成效浮動</td><td>基本費 + 每個合格結果收費，如「$1,200/月基本費 + 每個合格名單 $45」</td></tr>
+      <tr><td>產品化服務</td><td>每月 $1,500–$5,000</td><td>打包好、不客製化的固定方案</td></tr>
+      <tr><td>混合制</td><td>每月 $2,000–$6,000</td><td>固定底費 + 績效獎金或用量費並行</td></tr>
+    </table>
+    <h3>SMB 客戶的具體區間</h3>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">$500-1,500</div><div class="stat-label">小型企業每月維運費，另加 $1,500-5,000 建置費</div></div>
+      <div class="stat-card"><div class="stat-num">$1,500-4,000</div><div class="stat-label">中型市場每月維運費，另加 $5,000-20,000 建置費</div></div>
+      <div class="stat-card"><div class="stat-num">$5,000-25,000</div><div class="stat-label">單一場景 scoped workflow 的合理總價區間（優於做開放式長訂閱）</div></div>
+    </div>
+    <div class="callout good">
+      <b>對你的意義：</b>先做一個「範圍明確、驗收標準清楚」的單一工作流，用固定價或訂閱+用量的模式報價，比一開始就談長訂閱或大而全的方案更容易成交，也更貼近你原本想做的「先做內部行政作業」這個切入點——內部行政天生就是範圍明確、容易定義成敗標準的場景。
+    </div>
+    <div class="sources">
+      來源：
+      <a href="https://taskip.net/ai-automation-agency-pricing/" target="_blank">Taskip：AI Automation Agency Pricing 2026</a> ·
+      <a href="https://monetizebot.ai/blogs/ai-automation-agency-pricing-2026" target="_blank">MonetizeBot：AI Automation Agency Pricing 2026</a>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="sec-num">6</span>回到你的框架：甜頭 vs. 代價</h2>
+    <div class="two-col">
+      <div class="col-box good">
+        <h4>✓ 甜頭</h4>
+        <ul>
+          <li>精品服務商切入時程比想像中短——<strong>6-8 週可完成單一場景導入</strong>，不必等到 2-3 個月才交出第一個成果</li>
+          <li>Agent Charter 一旦寫出來，是<strong>可複製、可累積、不會離職的資產</strong>——跟你之前的判斷一致</li>
+          <li>成功案例都沒有裁員，是<strong>把人力重新分配到更高價值的事</strong>（如 HVAC 案例的行政轉做加購推銷）——比較容易說服客戶老闆點頭</li>
+          <li>結果計費模式可以把「不確定性風險」轉嫁給你自己，讓客戶更容易買單</li>
+        </ul>
+      </div>
+      <div class="col-box bad">
+        <h4>✗ 代價</h4>
+        <ul>
+          <li>時程壓縮到 6-8 週，代表<strong>教育、資料整備、試點三線並行</strong>——需要同時投入的人力比想像中密集，不是慢慢跑就好</li>
+          <li>每換一家企業，<strong>萃取標準這一步不會自動變輕</strong>——除非你先建立自己的「快速萃取企業標準」方法論（如標準化的訪談腳本、章程範本）</li>
+          <li>治理框架六件套如果做不齊，容易變成「有工具沒治理」——這正是前一份報告講的 88% 試點死掉的路徑之一</li>
+          <li>複雜整合場景（多系統對接、法遵敏感）時程會拉到 12-20 週，跟你原本估的 2-3 個月接近，代表<strong>不是所有場景都能套用 6-8 週的樂觀模板</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <b>白話總結：</b>你「送數位員工＋建工作流」的框架，業界的做法是把「訓練」拆成兩塊——<strong>萃取企業標準（一次性文件工程，可壓縮到數週）</strong>與<strong>持續運作的考核機制（章程+裁判+回饋迴路，長期維運）</strong>。前者可以快，後者本來就該是常態存在，不是「訓練完就結束」的一次性事件。
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="sec-num">7</span>給你的下一步</h2>
+    <p class="lead">三個可以馬上啟動的小動作，不用等全套方法論就位：</p>
+    <ol>
+      <li><strong>挑霏翔或高豐裡歷史紀錄最完整的那一家</strong>，用 1-2 週實測「萃取標準」到底要花多久——用既有的工單、對話紀錄、報價往來當原礦，而不是預設要重新觀察 2-3 個月</li>
+      <li><strong>先寫一頁版 Agent Charter</strong>，只做「決策點分類」跟「核准門檻」兩塊即可起步，不用一次做滿六件套治理文件</li>
+      <li><strong>選一個範圍明確的內部行政場景先跑</strong>（不是對客戶直接曝險的場景），用固定價或訂閱+用量報價，把它當成你自己「萃取標準方法論」的第一個練習案例</li>
+    </ol>
+    <div class="callout good">這三步做完，你會有一份可重複使用的「怎麼快速萃取一家企業標準」SOP——這正是你之前判斷「每個客戶都要重新來一次」這個代價的解法。</div>
+  </section>
+
+</div>
+
+<footer>
+  <p class="disclaimer">本報告由網路搜尋彙整（2026-08-25），資料來自 arXiv、Decagon、Microsoft、Helium42、Taskip、SaaS Mag 等公開報導及開源資源，非一手研究，實際導入時建議依個案再做交叉驗證。</p>
+  <p>MUSEON · 小型 AI Agent 服務商導入方法論深度報告 · 2026-08-25</p>
+</footer>
+
+</body>
+</html>
